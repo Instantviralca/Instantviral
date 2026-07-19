@@ -215,7 +215,13 @@ Buzzoid-style handoff: cart on the main site → checkout UI on a dedicated host
 6. Stripe success returns to `https://instantviral.ca/order-success?...`
 7. Keep webhook endpoint on the main site: `https://instantviral.ca/api/webhooks/stripe`
 
+**Host split (when both env URLs differ):**
+- `checkout.instantviral.ca` → only checkout (`/` / `/checkout` + APIs). Marketing/Learn/admin redirect to the main site.
+- Main site (`instantviral.ca` or Vercel preview URL) → full site. `/checkout` redirects to the checkout subdomain. Soft cart `/cart` stays on main.
+
 **Local without subdomain:** omit `NEXT_PUBLIC_CHECKOUT_URL` — checkout stays on `/checkout` of the main origin. Dev force: `?checkoutHost=1`.
+
+**Vercel test before custom main domain:** set `NEXT_PUBLIC_SITE_URL` to your `*.vercel.app` URL and `NEXT_PUBLIC_CHECKOUT_URL=https://checkout.instantviral.ca`, then add only the checkout domain in Vercel Domains.
 
 ### D. Database migrations on Vercel
 

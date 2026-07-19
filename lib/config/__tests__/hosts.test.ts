@@ -6,6 +6,7 @@ import {
   getCheckoutUrl,
   getSiteOrigin,
   isCheckoutHostname,
+  isDedicatedCheckoutConfigured,
 } from '@/lib/config/hosts';
 
 const prev = { ...process.env };
@@ -24,6 +25,7 @@ describe('Checkout host helpers', () => {
     expect(getSiteOrigin()).toBe('https://instantviral.ca');
     expect(getCheckoutOrigin()).toBe('https://instantviral.ca');
     expect(getCheckoutUrl('/')).toBe('https://instantviral.ca/checkout');
+    expect(isDedicatedCheckoutConfigured()).toBe(false);
     expect(isCheckoutHostname('instantviral.ca')).toBe(false);
   });
 
@@ -32,6 +34,7 @@ describe('Checkout host helpers', () => {
     process.env.NEXT_PUBLIC_CHECKOUT_URL = 'https://checkout.instantviral.ca';
     expect(getCheckoutOrigin()).toBe('https://checkout.instantviral.ca');
     expect(getCheckoutUrl('/')).toBe('https://checkout.instantviral.ca/');
+    expect(isDedicatedCheckoutConfigured()).toBe(true);
     expect(isCheckoutHostname('checkout.instantviral.ca')).toBe(true);
     expect(isCheckoutHostname('instantviral.ca')).toBe(false);
     expect(getCartCookieDomain()).toBe('.instantviral.ca');

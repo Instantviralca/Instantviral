@@ -84,14 +84,23 @@ export function getSiteHostname(): string {
   }
 }
 
+/**
+ * True when a separate checkout subdomain is configured
+ * (NEXT_PUBLIC_CHECKOUT_URL differs from the main site origin).
+ */
+export function isDedicatedCheckoutConfigured(): boolean {
+  const checkoutHost = getCheckoutHostname();
+  const siteHost = getSiteHostname();
+  return Boolean(checkoutHost && siteHost && checkoutHost !== siteHost);
+}
+
 /** True when this request Host is the dedicated checkout host. */
 export function isCheckoutHostname(host: string | null | undefined): boolean {
   const requestHost = normalizeHost(host);
   const checkoutHost = getCheckoutHostname();
-  const siteHost = getSiteHostname();
   if (!requestHost || !checkoutHost) return false;
   // Same-origin fallback (no dedicated subdomain configured).
-  if (checkoutHost === siteHost) return false;
+  if (!isDedicatedCheckoutConfigured()) return false;
   return requestHost === checkoutHost;
 }
 

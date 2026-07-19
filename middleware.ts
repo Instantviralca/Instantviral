@@ -5,15 +5,17 @@ import {
   verifyAdminSessionTokenEdge,
 } from '@/lib/admin/auth-edge';
 import {
+  getCheckoutOrigin,
   getSiteOrigin,
   isCheckoutHostForced,
   isCheckoutHostname,
+  isDedicatedCheckoutConfigured,
 } from '@/lib/config/hosts';
 
 /**
  * Middleware:
  * - Admin session gate
- * - Checkout host routing (checkout.instantviral.ca → checkout shell)
+ * - Host split: checkout subdomain ↔ main marketing site
  */
 export async function middleware(request: NextRequest) {
   const { pathname, searchParams } = request.nextUrl;
@@ -22,6 +24,7 @@ export async function middleware(request: NextRequest) {
     isCheckoutHostname(host) || isCheckoutHostForced(searchParams);
 
   // ── Checkout subdomain ────────────────────────────────────────────
+  // Only checkout (+ APIs). Everything else redirects to the main site.
   if (checkoutHost) {
     // Never serve admin from checkout host.
     if (pathname.startsWith('/admin')) {
@@ -53,18 +56,29 @@ export async function middleware(request: NextRequest) {
       return response;
     }
 
-    // Cart on checkout host → checkout
+    // Cart on checkout host → checkout root (same host)
     if (pathname === '/cart') {
       const url = request.nextUrl.clone();
-      url.pathname = '/checkout';
-      const response = NextResponse.redirect(url);
-      response.headers.set('x-iv-checkout-host', '1');
-      return response;
+      url.pathname = '/';
+      return NextResponse.redirect(url);
     }
 
-    // Everything else → main marketing site
+    // Marketing / Learn / legal / etc. → main site only
     const site = getSiteOrigin();
     return NextResponse.redirect(new URL(pathname + request.nextUrl.search, site));
+  }
+
+  // ── Main site: checkout lives on subdomain when configured ────────
+  // Soft cart (/cart) stays on the main site; /checkout redirects out.
+  if (
+    isDedicatedCheckoutConfigured() &&
+    (pathname === '/checkout' || pathname.startsWith('/checkout/'))
+  ) {
+    const url = new URL('/', getCheckoutOrigin());
+    request.nextUrl.searchParams.forEach((value, key) => {
+      url.searchParams.set(key, value);
+    });
+    return NextResponse.redirect(url);
   }
 
   // ── Admin gate (main site) ────────────────────────────────────────
