@@ -1,0 +1,40 @@
+---
+description: Phase 21 Learn MDX protection — never rewrite ChatGPT-approved article bodies; generate images only from MDX image instructions.
+alwaysApply: true
+---
+
+# Learn Center — Phase 21 Article Protection
+
+ChatGPT-provided Learn MDX is the **approved source of truth**.
+
+## Never modify editorial content
+
+Do **not** rewrite, expand, summarize, paraphrase, shorten, regenerate, or invent article body, headings, FAQs, stats, quotes, or references.
+
+## Allowed (technical only)
+
+Save MDX, parse frontmatter, reading time, TOC, slug, breadcrumbs, Article/Breadcrumb schema, OpenGraph/Twitter, canonical, author, last updated, related articles/services **only where MDX instructs**, register Learn record, sitemap/RSS/indexing, image generation/optimization from MDX instructions, TypeScript/ESLint/build verification, mobile responsiveness.
+
+## If FAQ, SEO, JSON-LD instructions, images, or internal links are missing
+
+**Stop.** Report exactly what is missing. Wait for a new MDX version. Do not invent them.
+
+## AI Image Production Instructions
+
+If the MDX contains an **AI Image Production Instructions** section:
+
+- Generate images **strictly from those instructions**
+- Do **not** redesign prompts, change art style away from InstantViral branding, or use stock photos
+- Use provided filenames, alt text, and placement cues as written
+
+## Public publish gate
+
+Only articles with `editorialApproved: true` **and** a live status (`published` | `updated`) may be public.
+
+Unapproved Instagram drafts must remain:
+
+- `status: 'draft'`
+- `seo.noindex: true` (`noindex, nofollow`)
+- excluded from sitemap, RSS, Learn listings, and internal search
+
+Do not expand or rewrite draft articles automatically. Preserve source files for future editorial rewriting.

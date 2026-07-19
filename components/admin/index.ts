@@ -1,0 +1,16 @@
+export { AdminLayout } from '@/components/admin/layout/admin-layout';
+export { AdminTopbar } from '@/components/admin/layout/admin-topbar';
+export { AdminPageHeader } from '@/components/admin/layout/admin-page-header';
+export { AdminSidebar } from '@/components/admin/navigation/admin-sidebar';
+export { AdminCard } from '@/components/admin/cards/admin-card';
+export { AdminStatCard } from '@/components/admin/cards/admin-stat-card';
+export { AdminTable, type AdminTableColumn } from '@/components/admin/tables/admin-table';
+export { AdminEmptyState } from '@/components/admin/common/admin-empty-state';
+export { AdminSearch } from '@/components/admin/common/admin-search';
+export { AdminFilterBar } from '@/components/admin/common/admin-filter-bar';
+export { ConfirmDialog } from '@/components/admin/common/confirm-dialog';
+export { OrdersPage } from '@/components/admin/orders';
+export { ServicesPage } from '@/components/admin/services';
+export { PricingPage } from '@/components/admin/pricing';
+export { CouponsPage } from '@/components/admin/coupons';
+export { ReviewsAdminPage } from '@/components/admin/reviews';

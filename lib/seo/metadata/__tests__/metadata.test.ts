@@ -1,0 +1,185 @@
+/**
+ * SEO Metadata & Canonical Engine tests — Document 14.07.
+ */
+
+import { describe, expect, it } from 'vitest';
+
+import { routes } from '@/config/routes';
+import { seoSiteConfig } from '@/config/seo';
+import {
+  buildCanonicalUrl,
+  buildPageMetadata,
+  buildPageMetadataForRoute,
+  findDuplicateCanonicals,
+  findDuplicateDescriptions,
+  findDuplicateTitles,
+  findMissingMetadata,
+  getMetadataByRoute,
+  isSkippedServiceRoute,
+  privateTrackOrderResultMetadata,
+  validateMetadataRegistry,
+  validateMetadataSchemaConsistency,
+  validateSocialImage,
+  youtubeMetadataIsSafe,
+} from '@/lib/seo/metadata';
+import { adminMetadata, cartMetadata, checkoutMetadata, homeMetadata, serviceMetadata } from '@/seo/metadata';
+import { absoluteUrl } from '@/seo/canonical';
+
+describe('SEO Metadata & Canonical Engine', () => {
+  it('builds homepage metadata with unique title and self-canonical', () => {
+    const meta = homeMetadata();
+    const entry = getMetadataByRoute('/');
+    expect(entry).toBeDefined();
+    expect(meta.alternates?.canonical).toBe(buildCanonicalUrl('/'));
+    expect(meta.alternates?.canonical).toBe('https://instantviral.ca');
+    expect(String((meta.title as { absolute?: string })?.absolute ?? '')).toContain(
+      'InstantViral',
+    );
+    expect(meta.robots).toMatchObject({ index: true });
+  });
+
+  it('builds approved service metadata and rejects skipped services', () => {
+    const ig = serviceMetadata('buy-instagram-followers');
+    expect(ig.alternates?.canonical).toBe(
+      'https://instantviral.ca/buy-instagram-followers',
+    );
+    expect(ig.robots).toMatchObject({ index: true });
+
+    const skipped = serviceMetadata('buy-instagram-reels-views');
+    expect(skipped.robots).toMatchObject({ index: false });
+    expect(isSkippedServiceRoute('/buy-instagram-reels-views')).toBe(true);
+    expect(getMetadataByRoute('/buy-instagram-reels-views')).toBeUndefined();
+  });
+
+  it('uses self-referencing canonicals without query or fragment', () => {
+    expect(buildCanonicalUrl('/faq?utm_source=x')).toBe('https://instantviral.ca/faq');
+    expect(buildCanonicalUrl('/about#team')).toBe('https://instantviral.ca/about');
+    expect(buildCanonicalUrl('/buy-tiktok-views/')).toBe(
+      'https://instantviral.ca/buy-tiktok-views',
+    );
+  });
+
+  it('detects duplicate titles, descriptions, and canonicals', () => {
+    const fixture = [
+      {
+        ...getMetadataByRoute('/')!,
+        id: 'a',
+        route: '/a',
+        canonicalPath: '/a',
+        title: 'Same Title',
+        description: 'Unique A',
+      },
+      {
+        ...getMetadataByRoute('/')!,
+        id: 'b',
+        route: '/b',
+        canonicalPath: '/b',
+        title: 'Same Title',
+        description: 'Unique B',
+      },
+      {
+        ...getMetadataByRoute('/')!,
+        id: 'c',
+        route: '/c',
+        canonicalPath: '/c',
+        title: 'Title C',
+        description: 'Same Description',
+      },
+      {
+        ...getMetadataByRoute('/')!,
+        id: 'd',
+        route: '/d',
+        canonicalPath: '/c',
+        title: 'Title D',
+        description: 'Same Description',
+      },
+    ];
+
+    expect(findDuplicateTitles(fixture).length).toBeGreaterThan(0);
+    expect(findDuplicateDescriptions(fixture).length).toBeGreaterThan(0);
+    expect(findDuplicateCanonicals(fixture).length).toBeGreaterThan(0);
+  });
+
+  it('reports missing metadata fields', () => {
+    const incomplete = [
+      {
+        ...getMetadataByRoute('/faq')!,
+        id: 'missing-test',
+        route: '/missing-test',
+        canonicalPath: '',
+        title: '',
+        description: '',
+        openGraphImage: '',
+        indexable: true,
+        active: true,
+      },
+    ];
+    const missing = findMissingMetadata(incomplete);
+    expect(missing.some((issue) => issue.kind === 'missing_title')).toBe(true);
+    expect(missing.some((issue) => issue.kind === 'missing_description')).toBe(true);
+    expect(missing.some((issue) => issue.kind === 'missing_canonical')).toBe(true);
+  });
+
+  it('applies noindex to cart, checkout, and admin', () => {
+    expect(cartMetadata().robots).toMatchObject({ index: false });
+    expect(checkoutMetadata().robots).toMatchObject({ index: false, follow: false });
+    expect(adminMetadata().robots).toMatchObject({ index: false, follow: false });
+  });
+
+  it('keeps private Track Order results noindex without PII', () => {
+    const meta = privateTrackOrderResultMetadata();
+    expect(meta.robots).toMatchObject({ index: false });
+    const description = String(meta.description ?? '');
+    expect(description).not.toMatch(/@/);
+    expect(description.toLowerCase()).not.toContain('email');
+    expect(description.toLowerCase()).not.toContain('order-');
+  });
+
+  it('validates social images exist', () => {
+    const ok = validateSocialImage(seoSiteConfig.defaultOpenGraphImage);
+    expect(ok.exists).toBe(true);
+    const missing = validateSocialImage('/og-does-not-exist.png');
+    expect(missing.exists).toBe(false);
+  });
+
+  it('keeps metadata and schema canonicals consistent', () => {
+    const route = '/buy-youtube-views';
+    const canonical = buildCanonicalUrl(route);
+    const issues = validateMetadataSchemaConsistency(route, absoluteUrl(route));
+    expect(issues.filter((issue) => issue.kind === 'schema_url_mismatch')).toHaveLength(0);
+    expect(canonical).toBe(absoluteUrl(route));
+  });
+
+  it('keeps YouTube metadata free of monetization claims', () => {
+    const entry = getMetadataByRoute('/buy-youtube-views');
+    expect(entry).toBeDefined();
+    expect(youtubeMetadataIsSafe(entry!.title)).toBe(true);
+    expect(youtubeMetadataIsSafe(entry!.description)).toBe(true);
+    expect(entry!.description.toLowerCase()).not.toContain('monetization');
+  });
+
+  it('registry validation has no duplicate titles among indexable pages', () => {
+    const report = validateMetadataRegistry();
+    expect(report.duplicateTitleCount).toBe(0);
+    expect(report.duplicateCanonicalCount).toBe(0);
+    expect(
+      report.issues.filter((issue) => issue.kind === 'skipped_service'),
+    ).toHaveLength(0);
+  });
+
+  it('buildPageMetadata sets metadataBase to production domain', () => {
+    const meta = buildPageMetadata({
+      title: 'Test',
+      description: 'Test description for metadata engine coverage.',
+      path: routes.about,
+    });
+    expect(meta.metadataBase?.toString()).toContain('instantviral.ca');
+  });
+
+  it('track order form metadata is indexable while result route is not', () => {
+    const form = buildPageMetadataForRoute(routes.trackOrder);
+    const result = buildPageMetadataForRoute('/track-order/result');
+    expect(form.robots).toMatchObject({ index: true });
+    expect(result.robots).toMatchObject({ index: false });
+  });
+});

@@ -1,0 +1,9 @@
+export { FAQSection } from '@/components/faq/FAQSection';
+export { FAQAccordion } from '@/components/faq/FAQAccordion';
+export { FAQItem } from '@/components/faq/FAQItem';
+export { FAQSearch } from '@/components/faq/FAQSearch';
+export { FAQCategoryNav } from '@/components/faq/FAQCategoryNav';
+export { FAQEmptyState } from '@/components/faq/FAQEmptyState';
+export { FAQRelatedLinks } from '@/components/faq/FAQRelatedLinks';
+export { FAQSupportCTA } from '@/components/faq/FAQSupportCTA';
+export { FAQSkeleton } from '@/components/faq/FAQSkeleton';

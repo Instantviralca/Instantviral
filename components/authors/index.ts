@@ -1,0 +1,9 @@
+export { AuthorAvatar } from '@/components/authors/AuthorAvatar';
+export { AuthorBio } from '@/components/authors/AuthorBio';
+export { AuthorCard } from '@/components/authors/AuthorCard';
+export { AuthorHero } from '@/components/authors/AuthorHero';
+export { AuthorSocialLinks } from '@/components/authors/AuthorSocialLinks';
+export { AuthorArticleList } from '@/components/authors/AuthorArticleList';
+export { AuthorSidebar } from '@/components/authors/AuthorSidebar';
+export { AuthorPageView } from '@/components/authors/AuthorPageView';
+export { AuthorsIndexView } from '@/components/authors/AuthorsIndexView';

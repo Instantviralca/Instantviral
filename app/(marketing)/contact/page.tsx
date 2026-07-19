@@ -1,0 +1,38 @@
+import type { Metadata } from 'next';
+
+import { JsonLdScript } from '@/components/common/json-ld';
+import { ContactPageView } from '@/components/sections/ContactPageView';
+import { routes } from '@/config/routes';
+import { getContactContent } from '@/data/content/company';
+import { asJsonLdGraph } from '@/lib/seo/schema';
+import { breadcrumbSchema } from '@/schemas/breadcrumb';
+import { contactPageSchema } from '@/schemas/contact-page';
+import { companyMetadata } from '@/seo/metadata';
+
+export function generateMetadata(): Metadata {
+  return companyMetadata('contact');
+}
+
+/** Contact Us production page — Document 13.02. */
+export default function ContactPage() {
+  const content = getContactContent();
+
+  const graph = asJsonLdGraph([
+    contactPageSchema({
+      title: content.seo.title,
+      description: content.seo.description,
+      path: routes.contact,
+    }),
+    breadcrumbSchema([
+      { label: 'Home', href: routes.home },
+      { label: 'Contact', href: routes.contact },
+    ]),
+  ]);
+
+  return (
+    <>
+      <JsonLdScript id="contact-jsonld" data={graph} />
+      <ContactPageView content={content} />
+    </>
+  );
+}

@@ -1,0 +1,4 @@
+- [x] Brief
+- [x] Draft
+- [ ] Final article
+- [ ] QA

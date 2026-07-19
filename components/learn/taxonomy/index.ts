@@ -1,0 +1,9 @@
+export { CategoryCard } from '@/components/learn/taxonomy/CategoryCard';
+export { CategoryGrid } from '@/components/learn/taxonomy/CategoryGrid';
+export { CategoryHero } from '@/components/learn/taxonomy/CategoryHero';
+export { CategorySidebar } from '@/components/learn/taxonomy/CategorySidebar';
+export { TagBadge } from '@/components/learn/taxonomy/TagBadge';
+export { TagList } from '@/components/learn/taxonomy/TagList';
+export { PopularTags } from '@/components/learn/taxonomy/PopularTags';
+export { EmptyCategoryState } from '@/components/learn/taxonomy/EmptyCategoryState';
+export { TagPageView } from '@/components/learn/taxonomy/TagPageView';

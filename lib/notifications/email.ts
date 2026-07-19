@@ -1,0 +1,173 @@
+/**
+ * Resend email provider + transactional templates (orders + contact).
+ * Disabled until RESEND_API_KEY and EMAIL_FROM are set.
+ */
+
+import { getEmailFrom, isEmailConfigured } from '@/lib/config/env';
+import { getPersistence } from '@/lib/persistence';
+import type { NotificationProvider } from '@/types/notification';
+
+export type ExtraTemplateId =
+  | 'admin_new_order'
+  | 'contact_admin'
+  | 'contact_acknowledgement';
+
+type ExtraSendInput = {
+  templateId: ExtraTemplateId;
+  to: string;
+  orderId?: string;
+  idempotencyKey: string;
+  variables: Record<string, string | undefined>;
+};
+
+function render(template: string, variables: Record<string, string | undefined>): string {
+  return template.replace(/\{\{(\w+)\}\}/g, (_, key: string) => variables[key] ?? '');
+}
+
+const EXTRA_TEMPLATES: Record<
+  ExtraTemplateId,
+  { subject: string; bodyHtml: string; bodyText: string }
+> = {
+  admin_new_order: {
+    subject: 'New paid order — {{orderId}}',
+    bodyHtml:
+      '<p>New paid order <strong>{{orderId}}</strong> for {{serviceName}}.</p><p>Customer: {{customerEmail}}</p><p>Total context: see admin panel.</p>',
+    bodyText:
+      'New paid order {{orderId}} for {{serviceName}}.\nCustomer: {{customerEmail}}\nReview in admin.',
+  },
+  contact_admin: {
+    subject: 'Contact form — {{subject}}',
+    bodyHtml:
+      '<p>New contact message from <strong>{{fullName}}</strong> ({{email}}).</p><p>Subject: {{subject}}</p><p>Order ID: {{orderId}}</p><pre>{{message}}</pre>',
+    bodyText:
+      'New contact message from {{fullName}} ({{email}}).\nSubject: {{subject}}\nOrder ID: {{orderId}}\n\n{{message}}',
+  },
+  contact_acknowledgement: {
+    subject: 'We received your message',
+    bodyHtml:
+      '<p>Hi {{fullName}},</p><p>Thanks for contacting {{companyName}}. We received your message and will reply soon.</p>',
+    bodyText:
+      'Hi {{fullName}},\n\nThanks for contacting {{companyName}}. We received your message and will reply soon.',
+  },
+};
+
+export const resendEmailProvider: NotificationProvider = {
+  id: 'resend',
+  channel: 'email',
+  async send({ to, subject, html, text }) {
+    if (!isEmailConfigured()) {
+      throw new Error('Email provider is not configured (RESEND_API_KEY / EMAIL_FROM).');
+    }
+    const apiKey = process.env.RESEND_API_KEY!.trim();
+    const from = getEmailFrom();
+    if (!from) {
+      throw new Error('EMAIL_FROM (or RESEND_FROM_EMAIL) is not configured.');
+    }
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from,
+        to: [to],
+        subject,
+        html,
+        text,
+      }),
+    });
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(`Resend error ${response.status}: ${body.slice(0, 200)}`);
+    }
+    const data = (await response.json()) as { id?: string };
+    return { messageId: data.id ?? `resend_${Date.now()}` };
+  },
+};
+
+export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise<{
+  id: string;
+  status: 'sent' | 'failed' | 'skipped';
+}> {
+  const store = getPersistence();
+  const existing = await store.findByIdempotencyKey(input.idempotencyKey);
+  if (existing) {
+    return { id: existing.id, status: existing.status === 'sent' ? 'sent' : 'failed' };
+  }
+
+  const template = EXTRA_TEMPLATES[input.templateId];
+  const subject = render(template.subject, input.variables);
+  const html = render(template.bodyHtml, input.variables);
+  const text = render(template.bodyText, input.variables);
+  const id = `ntf_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
+  const createdAt = new Date().toISOString();
+
+  if (!isEmailConfigured()) {
+    await store.saveNotification({
+      id,
+      orderId: input.orderId ?? '',
+      channel: 'email',
+      templateId: 'order_confirmation',
+      trigger: 'order_created',
+      recipient: input.to,
+      status: 'failed',
+      subject,
+      bodyPreview: text.slice(0, 180),
+      errorMessage: 'Email provider disabled — missing RESEND_API_KEY or EMAIL_FROM.',
+      createdAt,
+      immutable: true,
+      idempotencyKey: input.idempotencyKey,
+    });
+    return { id, status: 'skipped' };
+  }
+
+  try {
+    const result = await resendEmailProvider.send({
+      to: input.to,
+      subject,
+      html,
+      text,
+    });
+    await store.saveNotification({
+      id,
+      orderId: input.orderId ?? '',
+      channel: 'email',
+      templateId: 'order_confirmation',
+      trigger: 'order_created',
+      recipient: input.to,
+      status: 'sent',
+      subject,
+      bodyPreview: text.slice(0, 180),
+      providerId: 'resend',
+      providerMessageId: result.messageId,
+      createdAt,
+      sentAt: new Date().toISOString(),
+      immutable: true,
+      idempotencyKey: input.idempotencyKey,
+    });
+    return { id, status: 'sent' };
+  } catch (error) {
+    console.error('[email] send failed', {
+      templateId: input.templateId,
+      message: error instanceof Error ? error.message : 'unknown',
+    });
+    await store.saveNotification({
+      id,
+      orderId: input.orderId ?? '',
+      channel: 'email',
+      templateId: 'order_confirmation',
+      trigger: 'order_created',
+      recipient: input.to,
+      status: 'failed',
+      subject,
+      bodyPreview: text.slice(0, 180),
+      errorMessage: error instanceof Error ? error.message : 'Delivery failed',
+      providerId: 'resend',
+      createdAt,
+      immutable: true,
+      idempotencyKey: input.idempotencyKey,
+    });
+    return { id, status: 'failed' };
+  }
+}

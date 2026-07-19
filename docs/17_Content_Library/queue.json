@@ -1,0 +1,178 @@
+{
+  "phase": "17",
+  "title": "Production Content Library",
+  "totalPlanned": 50,
+  "starterCount": 10,
+  "slots": [
+    {
+      "slot": 1,
+      "articleId": "Article_01",
+      "title": "How to Get More Instagram Followers",
+      "slug": "how-to-get-more-instagram-followers",
+      "platform": "instagram",
+      "platformFolder": "instagram",
+      "packagePath": "content/instagram/how-to-get-more-instagram-followers",
+      "status": "In Progress",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 2,
+      "articleId": "Article_02",
+      "title": "How the Instagram Algorithm Works",
+      "slug": "how-the-instagram-algorithm-works",
+      "platform": "instagram",
+      "platformFolder": "instagram",
+      "packagePath": "content/instagram/how-the-instagram-algorithm-works",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 3,
+      "articleId": "Article_03",
+      "title": "How to Get More TikTok Followers",
+      "slug": "how-to-get-more-tiktok-followers",
+      "platform": "tiktok",
+      "platformFolder": "tiktok",
+      "packagePath": "content/tiktok/how-to-get-more-tiktok-followers",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 4,
+      "articleId": "Article_04",
+      "title": "How to Get More TikTok Views",
+      "slug": "how-to-get-more-views-on-tiktok",
+      "platform": "tiktok",
+      "platformFolder": "tiktok",
+      "packagePath": "content/tiktok/how-to-get-more-views-on-tiktok",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 5,
+      "articleId": "Article_05",
+      "title": "How to Get More Facebook Followers",
+      "slug": "how-to-get-more-facebook-followers",
+      "platform": "facebook",
+      "platformFolder": "facebook",
+      "packagePath": "content/facebook/how-to-get-more-facebook-followers",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 6,
+      "articleId": "Article_06",
+      "title": "Facebook Page Optimization Guide",
+      "slug": "facebook-page-optimization-guide",
+      "platform": "facebook",
+      "platformFolder": "facebook",
+      "packagePath": "content/facebook/facebook-page-optimization-guide",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 7,
+      "articleId": "Article_07",
+      "title": "How to Get More YouTube Subscribers",
+      "slug": "how-to-get-more-youtube-subscribers",
+      "platform": "youtube",
+      "platformFolder": "youtube",
+      "packagePath": "content/youtube/how-to-get-more-youtube-subscribers",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 8,
+      "articleId": "Article_08",
+      "title": "How to Get More YouTube Views",
+      "slug": "how-to-get-more-views-on-youtube",
+      "platform": "youtube",
+      "platformFolder": "youtube",
+      "packagePath": "content/youtube/how-to-get-more-views-on-youtube",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 9,
+      "articleId": "Article_09",
+      "title": "Social Media Growth Strategy for Beginners",
+      "slug": "social-media-growth-strategy-for-beginners",
+      "platform": "general",
+      "platformFolder": "marketing",
+      "packagePath": "content/marketing/social-media-growth-strategy-for-beginners",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    },
+    {
+      "slot": 10,
+      "articleId": "Article_10",
+      "title": "Social Media Metrics That Matter",
+      "slug": "social-media-metrics-that-matter",
+      "platform": "general",
+      "platformFolder": "marketing",
+      "packagePath": "content/marketing/social-media-metrics-that-matter",
+      "status": "Not Started",
+      "successCriteria": [
+        "Every article passes QA",
+        "SEO assets complete",
+        "Schema valid",
+        "Internal links complete",
+        "Ready to publish"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,515 @@
+[
+  {
+    "fileImported": "08_Article_Instagram_Content_Strategy.mdx",
+    "slug": "instagram-content-strategy",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Define Your Goals",
+      "Create Content Pillars",
+      "Build a Weekly Content Calendar",
+      "Repurpose Content",
+      "Measure Performance",
+      "Common Mistakes"
+    ],
+    "imagesGenerated": [
+      "instagram-content-strategy-hero.webp",
+      "instagram-content-pillars.webp",
+      "instagram-content-calendar.webp",
+      "instagram-performance-dashboard.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "how-to-get-more-instagram-followers",
+        "instagram-algorithm-explained",
+        "how-to-increase-instagram-engagement"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "09_Article_Best_Time_to_Post_on_Instagram.mdx",
+    "slug": "best-time-to-post-on-instagram",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Why Timing Matters",
+      "Use Instagram Insights",
+      "Build a Posting Schedule",
+      "Avoid Common Mistakes"
+    ],
+    "imagesGenerated": [
+      "best-time-post-instagram-hero.webp",
+      "instagram-audience-insights.webp",
+      "instagram-posting-calendar.webp",
+      "instagram-performance-report.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-content-strategy",
+        "instagram-algorithm-explained",
+        "how-to-increase-instagram-engagement"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "10_Article_Instagram_Reels_Strategy.mdx",
+    "slug": "instagram-reels-strategy",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Start With a Strong Hook",
+      "Focus on Audience Value",
+      "Keep Videos Easy to Watch",
+      "Encourage Engagement",
+      "Review Performance",
+      "Common Mistakes"
+    ],
+    "imagesGenerated": [
+      "instagram-reels-strategy-hero.webp",
+      "instagram-reels-hook.webp",
+      "instagram-reels-editing.webp",
+      "instagram-reels-analytics.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-algorithm-explained",
+        "instagram-content-strategy",
+        "best-time-to-post-on-instagram",
+        "how-to-increase-instagram-engagement"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "11_Article_Instagram_Hashtags_Guide.mdx",
+    "slug": "instagram-hashtags-guide",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Do Hashtags Still Work?",
+      "Choose Relevant Hashtags",
+      "Organise Your Hashtag Lists",
+      "Measure Performance",
+      "Common Mistakes"
+    ],
+    "imagesGenerated": [
+      "instagram-hashtags-guide-hero.webp",
+      "instagram-hashtag-research.webp",
+      "instagram-content-tagging.webp",
+      "instagram-hashtag-performance.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-content-strategy",
+        "instagram-algorithm-explained",
+        "best-time-to-post-on-instagram",
+        "instagram-reels-strategy"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "12_Article_Instagram_Bio_Optimization.mdx",
+    "slug": "instagram-bio-optimization",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Elements of a Great Instagram Bio",
+      "Choose a Recognizable Profile Photo",
+      "Write a Strong Call-to-Action",
+      "Organize Story Highlights",
+      "Review and Improve"
+    ],
+    "imagesGenerated": [
+      "instagram-bio-optimization-hero.webp",
+      "instagram-profile-elements.webp",
+      "instagram-story-highlights.webp",
+      "instagram-bio-checklist.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-content-strategy",
+        "how-to-get-more-instagram-followers",
+        "instagram-hashtags-guide"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "13_Article_Instagram_Stories_Strategy.mdx",
+    "slug": "instagram-stories-strategy",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Why Stories Matter",
+      "Story Ideas",
+      "Use Interactive Stickers",
+      "Measure Story Performance",
+      "Common Mistakes"
+    ],
+    "imagesGenerated": [
+      "instagram-stories-strategy-hero.webp",
+      "instagram-story-polls.webp",
+      "instagram-story-content.webp",
+      "instagram-story-insights.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-content-strategy",
+        "instagram-reels-strategy",
+        "how-to-increase-instagram-engagement"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "14_Article_Instagram_Analytics_Guide.mdx",
+    "slug": "instagram-analytics-guide",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Key Metrics to Track",
+      "Focus on Trends",
+      "Build Monthly Reports",
+      "Avoid Vanity Metrics",
+      "Recommended Workflow"
+    ],
+    "imagesGenerated": [
+      "instagram-analytics-guide-hero.webp",
+      "instagram-kpi-dashboard.webp",
+      "instagram-monthly-report.webp",
+      "instagram-growth-insights.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-content-strategy",
+        "instagram-algorithm-explained",
+        "best-time-to-post-on-instagram",
+        "how-to-increase-instagram-engagement"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "15_Article_Instagram_Growth_Mistakes.mdx",
+    "slug": "instagram-growth-mistakes",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Common Mistakes",
+      "1. Posting Without a Strategy",
+      "2. Ignoring Your Target Audience",
+      "3. Inconsistent Publishing",
+      "4. Weak Profile",
+      "5. Low-Quality Visuals",
+      "6. Ignoring Analytics",
+      "7. Not Replying to Comments",
+      "8. Copying Competitors",
+      "9. Chasing Every Trend",
+      "10. Focusing Only on Followers",
+      "Recovery Checklist"
+    ],
+    "imagesGenerated": [
+      "instagram-growth-mistakes-hero.webp",
+      "instagram-profile-audit.webp",
+      "instagram-content-errors.webp",
+      "instagram-growth-checklist.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-analytics-guide",
+        "instagram-content-strategy",
+        "instagram-algorithm-explained",
+        "how-to-increase-instagram-engagement"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "16_Article_Instagram_Content_Calendar.mdx",
+    "slug": "instagram-content-calendar",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Why Use a Content Calendar?",
+      "Build Monthly Content Pillars",
+      "Sample Weekly Calendar",
+      "Batch Your Content",
+      "Review Performance"
+    ],
+    "imagesGenerated": [
+      "instagram-content-calendar-hero.webp",
+      "instagram-monthly-planner.webp",
+      "instagram-content-pillars-calendar.webp",
+      "instagram-content-review-dashboard.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-content-strategy",
+        "best-time-to-post-on-instagram",
+        "instagram-analytics-guide",
+        "instagram-growth-mistakes"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "17_Article_Instagram_Business_Account_Guide.mdx",
+    "slug": "instagram-business-account-guide",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Why Choose a Business Account?",
+      "Optimize Your Business Profile",
+      "Create a Content Mix",
+      "Build Trust",
+      "Measure Results"
+    ],
+    "imagesGenerated": [
+      "instagram-business-account-hero.webp",
+      "instagram-business-profile.webp",
+      "instagram-business-insights.webp",
+      "instagram-business-content.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-bio-optimization",
+        "instagram-content-strategy",
+        "instagram-analytics-guide",
+        "instagram-content-calendar"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "18_Article_Instagram_Creator_Account_Guide.mdx",
+    "slug": "instagram-creator-account-guide",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Creator vs Personal vs Business",
+      "Key Creator Features",
+      "Content Strategy",
+      "Measure Growth"
+    ],
+    "imagesGenerated": [
+      "instagram-creator-account-hero.webp",
+      "creator-dashboard.webp",
+      "creator-analytics.webp",
+      "creator-content-workflow.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-business-account-guide",
+        "instagram-analytics-guide",
+        "instagram-reels-strategy",
+        "how-to-get-more-instagram-followers"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "19_Article_Instagram_Profile_Audit_Checklist.mdx",
+    "slug": "instagram-profile-audit-checklist",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Branding Checklist",
+      "Bio Checklist",
+      "Content Checklist",
+      "Engagement Checklist",
+      "Analytics Checklist",
+      "Monthly Audit Routine"
+    ],
+    "imagesGenerated": [
+      "instagram-profile-audit-hero.webp",
+      "instagram-brand-audit.webp",
+      "instagram-content-audit.webp",
+      "instagram-analytics-audit.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-bio-optimization",
+        "instagram-analytics-guide",
+        "instagram-content-strategy",
+        "instagram-growth-mistakes"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "20_Article_Instagram_Branding_Guide.mdx",
+    "slug": "instagram-branding-guide",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Define Your Brand",
+      "Create a Visual Style",
+      "Develop a Content Voice",
+      "Build Trust",
+      "Keep Branding Consistent"
+    ],
+    "imagesGenerated": [
+      "instagram-branding-guide-hero.webp",
+      "instagram-brand-identity.webp",
+      "instagram-visual-style.webp",
+      "instagram-brand-consistency.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-bio-optimization",
+        "instagram-content-strategy",
+        "instagram-profile-audit-checklist"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "21_Article_Instagram_Community_Building.mdx",
+    "slug": "instagram-community-building",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "Why Community Matters",
+      "Start Meaningful Conversations",
+      "Feature Your Audience",
+      "Be Consistent",
+      "Measure Community Health"
+    ],
+    "imagesGenerated": [
+      "instagram-community-building-hero.webp",
+      "instagram-community-conversations.webp",
+      "instagram-user-generated-content.webp",
+      "instagram-community-growth.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "how-to-increase-instagram-engagement",
+        "instagram-stories-strategy",
+        "instagram-branding-guide",
+        "instagram-content-strategy"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  },
+  {
+    "fileImported": "22_Article_Instagram_SEO_Guide.mdx",
+    "slug": "instagram-seo-guide",
+    "readingTime": "1 min",
+    "tocGenerated": [
+      "Introduction",
+      "What is Instagram SEO?",
+      "Optimize Your Profile",
+      "Write Search-Friendly Captions",
+      "Use Relevant Keywords",
+      "Improve Content Quality"
+    ],
+    "imagesGenerated": [
+      "instagram-seo-guide-hero.webp",
+      "instagram-keyword-optimization.webp",
+      "instagram-search-results.webp",
+      "instagram-profile-seo.webp"
+    ],
+    "internalLinksAdded": {
+      "learn": [
+        "instagram-hashtags-guide",
+        "instagram-content-strategy",
+        "instagram-algorithm-explained",
+        "instagram-analytics-guide"
+      ],
+      "services": [
+        "buy-instagram-followers",
+        "buy-instagram-likes"
+      ],
+      "category": "/learn/instagram"
+    },
+    "schemaGenerated": true,
+    "status": "IMPORTED"
+  }
+]

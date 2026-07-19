@@ -1,0 +1,115 @@
+import {
+  allowMockPayments,
+  isEmailConfigured,
+  isStripeConfigured,
+} from '@/lib/config/env';
+import { listOrders } from '@/lib/orders/store';
+import { isEligibleForFulfilmentQueue } from '@/lib/payments/mark-paid';
+import { formatMoney } from '@/lib/pricing/format';
+import type { DashboardViewModel } from '@/types/admin-dashboard';
+import type { CurrencyCode } from '@/types/pricing';
+
+/**
+ * Admin dashboard view model — Document 12.02.
+ */
+
+export async function getDashboardViewModel(): Promise<DashboardViewModel> {
+  const today = new Date();
+  const todayKey = today.toISOString().slice(0, 10);
+  const monthKey = todayKey.slice(0, 7);
+  const orders = (await listOrders()).filter(isEligibleForFulfilmentQueue);
+
+  const pending = orders.filter((o) => o.status === 'pending');
+  const processing = orders.filter((o) => o.status === 'processing');
+  const completedToday = orders.filter(
+    (o) => o.status === 'completed' && o.updatedAt.startsWith(todayKey),
+  );
+  const revenueToday = orders
+    .filter((o) => o.createdAt.startsWith(todayKey))
+    .reduce((sum, o) => sum + o.total.amount, 0);
+  const revenueMonth = orders
+    .filter((o) => o.createdAt.startsWith(monthKey))
+    .reduce((sum, o) => sum + o.total.amount, 0);
+
+  const money = (amount: number) => formatMoney(amount, 'USD' as CurrencyCode, 'en-CA');
+
+  const toOrderRow = (o: (typeof orders)[number]) => {
+    const item = o.items[0];
+    return {
+      id: o.id,
+      customer: o.guestEmail,
+      service: item?.serviceName ?? 'Service',
+      packageTitle: item?.packageTitle ?? 'Package',
+      status: o.status,
+      total: money(o.total.amount),
+      createdAt: o.createdAt,
+      href: '/admin/orders',
+    };
+  };
+
+  return {
+    greeting: 'Welcome back.',
+    pendingReviewCount: pending.length,
+    dateLabel: today.toLocaleDateString(undefined, {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+    kpis: [
+      { id: 'pending', label: 'Pending Orders', value: pending.length },
+      { id: 'processing', label: 'Processing Orders', value: processing.length },
+      { id: 'completed-today', label: 'Completed Today', value: completedToday.length },
+      { id: 'revenue-today', label: "Today's Revenue", value: money(revenueToday) },
+      { id: 'revenue-month', label: 'This Month Revenue', value: money(revenueMonth) },
+      { id: 'total-orders', label: 'Paid Orders', value: orders.length },
+    ],
+    quickActions: [
+      { id: 'orders', label: 'View Orders', href: '/admin/orders' },
+      { id: 'service', label: 'Add Service', href: '/admin/services' },
+      { id: 'pricing', label: 'Add Pricing Package', href: '/admin/pricing' },
+      { id: 'coupon', label: 'Create Coupon', href: '/admin/coupons' },
+      { id: 'learn', label: 'New Learn Article', href: '/admin/learn' },
+      { id: 'settings', label: 'Site Settings', href: '/admin/settings' },
+    ],
+    recentOrders: orders.slice(0, 5).map(toOrderRow),
+    pendingOrders: pending.slice(0, 5).map(toOrderRow),
+    activity: orders.slice(0, 8).map((o) => ({
+      id: o.id,
+      message: `Order ${o.id} · ${o.status}`,
+      at: o.updatedAt,
+    })),
+    revenue: {
+      today: money(revenueToday),
+      month: money(revenueMonth),
+      currency: 'USD',
+    },
+    systemStatus: [
+      { id: 'website', label: 'Website Status', status: 'operational' },
+      {
+        id: 'payments',
+        label: 'Payment Gateway',
+        status: isStripeConfigured() || allowMockPayments() ? 'operational' : 'degraded',
+        detail: isStripeConfigured()
+          ? 'Stripe configured'
+          : allowMockPayments()
+            ? 'Mock payments (dev)'
+            : 'Stripe credentials missing',
+      },
+      {
+        id: 'orders',
+        label: 'Order Store',
+        status: 'operational',
+        detail: `${orders.length} paid orders in queue`,
+      },
+      {
+        id: 'email',
+        label: 'Email Delivery',
+        status: isEmailConfigured() ? 'operational' : 'degraded',
+        detail: isEmailConfigured()
+          ? 'Resend configured'
+          : 'RESEND_API_KEY / EMAIL_FROM missing',
+      },
+    ],
+  };
+}

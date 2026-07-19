@@ -1,0 +1,80 @@
+import { BrandedHero } from '@/components/design-system/branded-hero';
+import { formatMoney } from '@/lib/pricing/format';
+import { findPackage } from '@/lib/pricing';
+import type { CtaProps } from '@/types/components';
+import type { HeroTrustLabel, HeroVisualContent } from '@/types/content';
+import type { BreadcrumbItem } from '@/types/shared';
+import type {
+  FacebookDashboardVariant,
+  InstagramDashboardVariant,
+  TikTokDashboardVariant,
+  YouTubeDashboardVariant,
+} from '@/components/illustrations/dashboards';
+import type { PlatformId } from '@/types/platform';
+
+export type ServiceHeroProps = {
+  eyebrow?: string;
+  title: string;
+  description?: string;
+  breadcrumbs?: BreadcrumbItem[];
+  primaryCta?: CtaProps;
+  secondaryCta?: CtaProps;
+  trustLabels?: HeroTrustLabel[];
+  visual?: HeroVisualContent;
+  platform?: PlatformId;
+  /** Optional real package id for hero preview card. */
+  previewPackageId?: string;
+  instagramVariant?: InstagramDashboardVariant;
+  tiktokVariant?: TikTokDashboardVariant;
+  youtubeVariant?: YouTubeDashboardVariant;
+  facebookVariant?: FacebookDashboardVariant;
+  className?: string;
+};
+
+export function ServiceHero({
+  eyebrow,
+  title,
+  description,
+  breadcrumbs,
+  primaryCta,
+  secondaryCta,
+  trustLabels,
+  visual,
+  platform,
+  previewPackageId,
+  instagramVariant,
+  tiktokVariant,
+  youtubeVariant,
+  facebookVariant,
+  className,
+}: ServiceHeroProps) {
+  const previewPkg = previewPackageId ? findPackage(previewPackageId) : undefined;
+  const packagePreview =
+    previewPkg && previewPkg.active
+      ? {
+          title: previewPkg.quantityLabel,
+          priceLabel: formatMoney(previewPkg.price, previewPkg.currency),
+        }
+      : null;
+
+  return (
+    <BrandedHero
+      eyebrow={eyebrow}
+      title={title}
+      description={description}
+      breadcrumbs={breadcrumbs}
+      primaryCta={primaryCta}
+      secondaryCta={secondaryCta}
+      trustLabels={trustLabels}
+      visual={visual}
+      platform={platform}
+      packagePreview={packagePreview}
+      instagramVariant={instagramVariant}
+      tiktokVariant={tiktokVariant}
+      youtubeVariant={youtubeVariant}
+      facebookVariant={facebookVariant}
+      className={className}
+      priorityImage
+    />
+  );
+}
