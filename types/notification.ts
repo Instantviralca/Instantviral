@@ -33,6 +33,7 @@ export type NotificationTemplateVariableMap = {
   serviceName: string;
   packageName?: string;
   quantity?: string;
+  orderTotal?: string;
   statusLabel: string;
   statusMessage: string;
   trackingUrl: string;

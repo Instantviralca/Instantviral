@@ -9,6 +9,8 @@ import type { NotificationProvider } from '@/types/notification';
 
 export type ExtraTemplateId =
   | 'admin_new_order'
+  | 'admin_order_paid'
+  | 'payment_confirmed'
   | 'contact_admin'
   | 'contact_acknowledgement';
 
@@ -29,11 +31,25 @@ const EXTRA_TEMPLATES: Record<
   { subject: string; bodyHtml: string; bodyText: string }
 > = {
   admin_new_order: {
-    subject: 'New paid order — {{orderId}}',
+    subject: 'New order — {{orderId}}',
     bodyHtml:
-      '<p>New paid order <strong>{{orderId}}</strong> for {{serviceName}}.</p><p>Customer: {{customerEmail}}</p><p>Total context: see admin panel.</p>',
+      '<p>New order <strong>{{orderId}}</strong>.</p><p><strong>Service:</strong> {{serviceName}} ({{packageName}})</p><p><strong>Total:</strong> {{orderTotal}}</p><p><strong>Customer:</strong> {{customerEmail}}</p><p>Open Admin → Orders to review.</p>',
     bodyText:
-      'New paid order {{orderId}} for {{serviceName}}.\nCustomer: {{customerEmail}}\nReview in admin.',
+      'New order {{orderId}}.\nService: {{serviceName}} ({{packageName}})\nTotal: {{orderTotal}}\nCustomer: {{customerEmail}}\nReview in Admin → Orders.',
+  },
+  admin_order_paid: {
+    subject: 'Order paid — {{orderId}}',
+    bodyHtml:
+      '<p>Payment confirmed for <strong>{{orderId}}</strong>.</p><p><strong>Service:</strong> {{serviceName}} ({{packageName}})</p><p><strong>Total:</strong> {{orderTotal}}</p><p><strong>Customer:</strong> {{customerEmail}}</p><p>Ready for fulfilment — open Admin → Orders.</p>',
+    bodyText:
+      'Payment confirmed for {{orderId}}.\nService: {{serviceName}} ({{packageName}})\nTotal: {{orderTotal}}\nCustomer: {{customerEmail}}\nReady for fulfilment.',
+  },
+  payment_confirmed: {
+    subject: 'Payment confirmed — {{orderId}}',
+    bodyHtml:
+      '<p>Hi {{customerName}},</p><p>We confirmed payment for order <strong>{{orderId}}</strong> ({{serviceName}}).</p><p><strong>Total:</strong> {{orderTotal}}</p><p><a href="{{trackingUrl}}">Track your order</a></p><p>Need help? {{supportEmail}}</p>',
+    bodyText:
+      'Hi {{customerName}},\n\nWe confirmed payment for order {{orderId}} ({{serviceName}}).\nTotal: {{orderTotal}}\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
   },
   contact_admin: {
     subject: 'Contact form — {{subject}}',
@@ -102,13 +118,15 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
   const text = render(template.bodyText, input.variables);
   const id = `ntf_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
   const createdAt = new Date().toISOString();
+  // Persist a known customer template id for DB typing; real template is in subject/body.
+  const storedTemplateId = 'order_confirmation' as const;
 
   if (!isEmailConfigured()) {
     await store.saveNotification({
       id,
       orderId: input.orderId ?? '',
       channel: 'email',
-      templateId: 'order_confirmation',
+      templateId: storedTemplateId,
       trigger: 'order_created',
       recipient: input.to,
       status: 'failed',
@@ -133,7 +151,7 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
       id,
       orderId: input.orderId ?? '',
       channel: 'email',
-      templateId: 'order_confirmation',
+      templateId: storedTemplateId,
       trigger: 'order_created',
       recipient: input.to,
       status: 'sent',
@@ -156,7 +174,7 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
       id,
       orderId: input.orderId ?? '',
       channel: 'email',
-      templateId: 'order_confirmation',
+      templateId: storedTemplateId,
       trigger: 'order_created',
       recipient: input.to,
       status: 'failed',

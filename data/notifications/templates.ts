@@ -95,13 +95,16 @@ function defaultHtml(title: string, summary: string): string {
 <html lang="en">
 <head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>${title}</title></head>
 <body style="font-family: system-ui, sans-serif; line-height: 1.5; color: #111; max-width: 560px; margin: 0 auto; padding: 24px;">
-  <header>
-    <img src="{{companyLogoUrl}}" alt="{{companyName}}" width="140" height="40" style="height:40px;width:auto;" />
+  <header style="margin-bottom: 16px;">
+    <div style="font-size: 18px; font-weight: 700;">{{companyName}}</div>
   </header>
   <main>
     <h1 style="font-size: 20px;">${title}</h1>
     <p>Hi {{customerName}},</p>
     <p>${summary}</p>
+    <p><strong>Package:</strong> {{packageName}}</p>
+    <p><strong>Quantity:</strong> {{quantity}}</p>
+    <p><strong>Total:</strong> {{orderTotal}}</p>
     <p><strong>Status:</strong> {{statusLabel}}</p>
     <p>{{statusMessage}}</p>
     <p><a href="{{trackingUrl}}">Track your order</a></p>

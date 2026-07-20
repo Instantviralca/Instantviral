@@ -4,6 +4,7 @@
 
 import { allowMockPayments, isProductionRuntime } from '@/lib/config/env';
 import { getCheckoutUrl, getSiteUrlPath } from '@/lib/config/hosts';
+import { notifyOrderPaid, notifyOrderPlaced } from '@/lib/notifications/order-hooks';
 import { placeOrder, type PlaceOrderInput } from '@/lib/orders/create';
 import { saveOrder } from '@/lib/orders/store';
 import { paymentGatewayManager } from '@/lib/payments/manager';
@@ -55,6 +56,16 @@ export async function executeCheckout(
     }
 
     const order = await placeOrder(input);
+
+    try {
+      await notifyOrderPlaced(order);
+    } catch (error) {
+      console.error('[checkout] order-placed notification failed', {
+        orderId: order.id,
+        message: error instanceof Error ? error.message : 'unknown',
+      });
+    }
+
     const successUrl = getSiteUrlPath(
       `/order-success?orderId=${encodeURIComponent(order.id)}&email=${encodeURIComponent(order.guestEmail)}`,
     );
@@ -135,6 +146,15 @@ export async function executeCheckout(
       updatedAt: now,
     };
     await saveOrder(mockPaid);
+
+    try {
+      await notifyOrderPaid(mockPaid);
+    } catch (error) {
+      console.error('[checkout] mock paid notification failed', {
+        orderId: mockPaid.id,
+        message: error instanceof Error ? error.message : 'unknown',
+      });
+    }
 
     return {
       ok: true,

@@ -6,8 +6,11 @@ import {
   requireAdminFromCookies,
   verifyCsrfToken,
 } from '@/lib/admin/auth';
+import { isEmailConfigured } from '@/lib/config/env';
 import {
+  getAdminNotificationEmail,
   getPaymentWebsiteUrl,
+  setAdminNotificationEmail,
   setPaymentWebsiteUrl,
 } from '@/lib/settings/site-settings';
 
@@ -30,11 +33,16 @@ export async function GET(request: Request) {
     return NextResponse.json({ ok: false, error: 'Unauthorized' }, { status: 401 });
   }
 
-  const paymentWebsite = await getPaymentWebsiteUrl();
+  const [paymentWebsite, adminEmail] = await Promise.all([
+    getPaymentWebsiteUrl(),
+    getAdminNotificationEmail(),
+  ]);
   return NextResponse.json({
     ok: true,
     settings: {
       paymentWebsite,
+      adminEmail,
+      emailConfigured: isEmailConfigured(),
     },
   });
 }
@@ -45,11 +53,22 @@ export async function POST(request: Request) {
   }
 
   try {
-    const body = (await request.json()) as { paymentWebsite?: string };
+    const body = (await request.json()) as {
+      paymentWebsite?: string;
+      adminEmail?: string;
+    };
     const paymentWebsite = await setPaymentWebsiteUrl(body.paymentWebsite ?? '');
+    const adminEmail =
+      typeof body.adminEmail === 'string'
+        ? await setAdminNotificationEmail(body.adminEmail)
+        : await getAdminNotificationEmail();
     return NextResponse.json({
       ok: true,
-      settings: { paymentWebsite },
+      settings: {
+        paymentWebsite,
+        adminEmail,
+        emailConfigured: isEmailConfigured(),
+      },
     });
   } catch (error) {
     return NextResponse.json(

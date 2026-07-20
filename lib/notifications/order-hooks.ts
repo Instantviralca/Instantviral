@@ -5,11 +5,12 @@
 import { getEmailFrom, getSiteUrl, isEmailConfigured } from '@/lib/config/env';
 import { dispatchNotification } from '@/lib/notifications/service';
 import { dispatchTransactionalEmail } from '@/lib/notifications/email';
+import { formatMoney } from '@/lib/pricing/format';
+import { getAdminNotificationEmail } from '@/lib/settings/site-settings';
 import type { Order } from '@/types/order';
 import { ORDER_STATUS_METADATA } from '@/lib/orders/status';
 
 function supportEmail(): string {
-  // Never invent a sender/domain — use configured addresses only.
   return process.env.EMAIL_SUPPORT?.trim() || getEmailFrom() || '';
 }
 
@@ -25,22 +26,27 @@ function trackingUrl(orderId: string, email: string): string {
 function baseVariables(order: Order) {
   const item = order.items[0];
   const meta = ORDER_STATUS_METADATA[order.status];
+  const year = new Date().getFullYear();
   return {
     companyName: companyName(),
     customerEmail: order.guestEmail,
-    customerName: order.guestEmail.split('@')[0],
+    customerName: order.guestEmail.split('@')[0] || 'there',
     orderId: order.id,
     serviceName: item?.serviceName ?? 'Service',
-    packageName: item?.packageTitle,
-    quantity: item?.quantityLabel,
+    packageName: item?.packageTitle ?? '',
+    quantity: item?.quantityLabel ?? '',
+    orderTotal: formatMoney(order.total.amount, order.total.currency),
+    itemCount: String(order.items.length),
     statusLabel: meta?.customerLabel ?? order.status,
     statusMessage: meta?.customerMessage ?? '',
     trackingUrl: trackingUrl(order.id, order.guestEmail),
     supportEmail: supportEmail(),
+    footerText: `© ${year} ${companyName()}. All rights reserved.`,
   };
 }
 
-export async function notifyOrderPaid(order: Order): Promise<void> {
+/** Fire when checkout creates the order (before / as payment starts). */
+export async function notifyOrderPlaced(order: Order): Promise<void> {
   const vars = baseVariables(order);
 
   await dispatchNotification({
@@ -51,7 +57,7 @@ export async function notifyOrderPaid(order: Order): Promise<void> {
     idempotencyKey: `order_confirmation:${order.id}`,
   });
 
-  const adminTo = process.env.EMAIL_ADMIN_TO?.trim() || getEmailFrom();
+  const adminTo = await getAdminNotificationEmail();
   if (adminTo && isEmailConfigured()) {
     await dispatchTransactionalEmail({
       templateId: 'admin_new_order',
@@ -60,7 +66,37 @@ export async function notifyOrderPaid(order: Order): Promise<void> {
       idempotencyKey: `admin_new_order:${order.id}`,
       variables: {
         ...vars,
-        subjectHint: `New paid order ${order.id}`,
+        subjectHint: `New order ${order.id}`,
+      },
+    });
+  }
+}
+
+/** Fire when payment is verified paid (remote callback / webhook). */
+export async function notifyOrderPaid(order: Order): Promise<void> {
+  const vars = baseVariables(order);
+
+  // Customer: payment confirmed (distinct from place-order confirmation).
+  if (isEmailConfigured()) {
+    await dispatchTransactionalEmail({
+      templateId: 'payment_confirmed',
+      to: order.guestEmail,
+      orderId: order.id,
+      idempotencyKey: `payment_confirmed:${order.id}`,
+      variables: vars,
+    });
+  }
+
+  const adminTo = await getAdminNotificationEmail();
+  if (adminTo && isEmailConfigured()) {
+    await dispatchTransactionalEmail({
+      templateId: 'admin_order_paid',
+      to: adminTo,
+      orderId: order.id,
+      idempotencyKey: `admin_order_paid:${order.id}`,
+      variables: {
+        ...vars,
+        subjectHint: `Paid order ${order.id}`,
       },
     });
   }

@@ -7,7 +7,8 @@ import {
   type ContactFormValues,
 } from '@/lib/contact/validation';
 import { dispatchTransactionalEmail } from '@/lib/notifications/email';
-import { getEmailFrom, isEmailConfigured } from '@/lib/config/env';
+import { isEmailConfigured } from '@/lib/config/env';
+import { getAdminNotificationEmail } from '@/lib/settings/site-settings';
 
 export const runtime = 'nodejs';
 
@@ -26,7 +27,7 @@ export async function POST(request: Request) {
     // Email failures must not fail the contact persistence response.
     try {
       const companyName = process.env.EMAIL_COMPANY_NAME?.trim() || 'InstantViral';
-      const adminTo = process.env.EMAIL_ADMIN_TO?.trim() || getEmailFrom();
+      const adminTo = await getAdminNotificationEmail();
       if (adminTo && isEmailConfigured()) {
         await dispatchTransactionalEmail({
           templateId: 'contact_admin',

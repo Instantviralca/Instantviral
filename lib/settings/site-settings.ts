@@ -10,11 +10,20 @@ import { getDb } from '@/lib/db/client';
 import * as tables from '@/lib/db/schema';
 
 export const SETTING_PAYMENT_WEBSITE = 'payment_website' as const;
+export const SETTING_ADMIN_EMAIL = 'admin_notification_email' as const;
 
 const memoryStore = new Map<string, string>();
 
 function trimUrl(value: string | undefined | null): string {
   return (value ?? '').trim().replace(/\/$/, '');
+}
+
+function trimEmail(value: string | undefined | null): string {
+  return (value ?? '').trim().toLowerCase();
+}
+
+function isValidEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
 }
 
 async function readFromDb(key: string): Promise<string | null> {
@@ -90,4 +99,41 @@ export async function setPaymentWebsiteUrl(url: string): Promise<string> {
 
 export async function isRemotePaymentConfigured(): Promise<boolean> {
   return Boolean(await getPaymentWebsiteUrl());
+}
+
+/** Admin inbox for new orders + contact form (settings override → env). */
+export async function getAdminNotificationEmail(): Promise<string> {
+  const fromMemory = memoryStore.get(SETTING_ADMIN_EMAIL);
+  if (fromMemory) return fromMemory;
+
+  const fromDb = await readFromDb(SETTING_ADMIN_EMAIL);
+  if (fromDb) {
+    const trimmed = trimEmail(fromDb);
+    if (trimmed) {
+      memoryStore.set(SETTING_ADMIN_EMAIL, trimmed);
+      return trimmed;
+    }
+  }
+
+  const fromEnv =
+    trimEmail(process.env.EMAIL_ADMIN_TO) ||
+    trimEmail(process.env.EMAIL_FROM) ||
+    trimEmail(process.env.RESEND_FROM_EMAIL);
+  if (fromEnv) {
+    memoryStore.set(SETTING_ADMIN_EMAIL, fromEnv);
+    return fromEnv;
+  }
+  return '';
+}
+
+export async function setAdminNotificationEmail(email: string): Promise<string> {
+  const trimmed = trimEmail(email);
+  if (!trimmed) {
+    throw new Error('Admin notification email is required.');
+  }
+  if (!isValidEmail(trimmed)) {
+    throw new Error('Enter a valid admin notification email.');
+  }
+  await writeToDb(SETTING_ADMIN_EMAIL, trimmed);
+  return trimmed;
 }
