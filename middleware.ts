@@ -51,7 +51,13 @@ export async function middleware(request: NextRequest) {
     if (pathname === '/' || pathname === '/checkout') {
       const url = request.nextUrl.clone();
       url.pathname = '/checkout';
-      const response = NextResponse.rewrite(url);
+      // Pass flag on the REQUEST so Server Components can read it via headers().
+      const requestHeaders = new Headers(request.headers);
+      requestHeaders.set('x-iv-checkout-host', '1');
+      const response = NextResponse.rewrite(url, {
+        request: { headers: requestHeaders },
+      });
+      // Also expose on the response for debugging / CDN visibility.
       response.headers.set('x-iv-checkout-host', '1');
       return response;
     }
