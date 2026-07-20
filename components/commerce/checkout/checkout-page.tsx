@@ -56,7 +56,7 @@ export function CheckoutPage() {
         id: provider.id as PaymentMethodId,
         label: provider.displayName,
         enabled: provider.enabled,
-        description: 'Secure card payment via Stripe Checkout.',
+        description: 'Secure card payment via our payment page.',
       })),
     [],
   );
@@ -237,7 +237,7 @@ export function CheckoutPage() {
             className="min-h-12 w-full rounded-xl bg-[var(--brand-primary)] font-semibold hover:bg-[var(--brand-primary-hover)]"
           />
           <p className="text-center text-[11px] text-[var(--text-secondary)]">
-            Secure Stripe Checkout · 30-Day Money-Back Guarantee
+            Secure checkout · 30-Day Money-Back Guarantee
           </p>
         </div>
       </div>

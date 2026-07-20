@@ -1,11 +1,8 @@
-import {
-  allowMockPayments,
-  isEmailConfigured,
-  isStripeConfigured,
-} from '@/lib/config/env';
+import { allowMockPayments, isEmailConfigured } from '@/lib/config/env';
 import { listOrders } from '@/lib/orders/store';
 import { isEligibleForFulfilmentQueue } from '@/lib/payments/mark-paid';
 import { formatMoney } from '@/lib/pricing/format';
+import { isRemotePaymentConfigured } from '@/lib/settings/site-settings';
 import type { DashboardViewModel } from '@/types/admin-dashboard';
 import type { CurrencyCode } from '@/types/pricing';
 
@@ -18,6 +15,7 @@ export async function getDashboardViewModel(): Promise<DashboardViewModel> {
   const todayKey = today.toISOString().slice(0, 10);
   const monthKey = todayKey.slice(0, 7);
   const orders = (await listOrders()).filter(isEligibleForFulfilmentQueue);
+  const remotePaymentsReady = await isRemotePaymentConfigured();
 
   const pending = orders.filter((o) => o.status === 'pending');
   const processing = orders.filter((o) => o.status === 'processing');
@@ -89,12 +87,12 @@ export async function getDashboardViewModel(): Promise<DashboardViewModel> {
       {
         id: 'payments',
         label: 'Payment Gateway',
-        status: isStripeConfigured() || allowMockPayments() ? 'operational' : 'degraded',
-        detail: isStripeConfigured()
-          ? 'Stripe configured'
+        status: remotePaymentsReady || allowMockPayments() ? 'operational' : 'degraded',
+        detail: remotePaymentsReady
+          ? 'Remote payment URL configured'
           : allowMockPayments()
             ? 'Mock payments (dev)'
-            : 'Stripe credentials missing',
+            : 'Set payment website URL in Settings',
       },
       {
         id: 'orders',

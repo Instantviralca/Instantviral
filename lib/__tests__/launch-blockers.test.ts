@@ -610,9 +610,11 @@ describe('Learn Center production content', () => {
 });
 
 describe('Env validation', () => {
-  it('never requires printing secrets and warns when providers missing', () => {
+  it('never requires printing secrets and does not require Stripe keys', () => {
     const result = validateEnv();
-    expect(result.issues.some((i) => i.key === 'STRIPE_SECRET_KEY')).toBe(true);
+    expect(result.issues.some((i) => i.key === 'STRIPE_SECRET_KEY' && i.level === 'error')).toBe(
+      false,
+    );
     expect(JSON.stringify(result)).not.toMatch(/sk_live|re_/);
   });
 
@@ -624,16 +626,12 @@ describe('Env validation', () => {
     process.env.SESSION_SECRET = 'alias-session-secret-32chars!!';
     process.env.RESEND_API_KEY = 're_test_key';
     process.env.RESEND_FROM_EMAIL = 'orders@example.com';
-    process.env.STRIPE_SECRET_KEY = 'sk_test_x';
-    process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY = 'pk_test_x';
-    process.env.STRIPE_WEBHOOK_SECRET = 'whsec_x';
     process.env.DATABASE_URL = 'postgresql://localhost/test';
     process.env.NEXT_PUBLIC_SITE_URL = 'https://instantviral.ca';
 
     const result = validateEnv({ forceProduction: true });
     expect(result.ok).toBe(true);
     expect(isEmailConfigured()).toBe(true);
-    expect(isStripeConfigured()).toBe(true);
   });
 
   it('throws in production when throwOnProductionErrors is enabled', () => {

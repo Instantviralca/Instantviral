@@ -63,10 +63,10 @@ export function PaymentMethods({
                 {method.description ? (
                   <p className="mt-1 text-xs text-muted-foreground">{method.description}</p>
                 ) : null}
-                {method.id === 'stripe' ? (
+                {method.id === 'remote-payment' || method.id === 'stripe' ? (
                   <div className="mt-3 space-y-2">
                     <p className="text-xs font-medium text-[var(--text-secondary)]">
-                      Card payments are processed securely by Stripe Checkout.
+                      Card payments are processed securely on our payment page.
                     </p>
                     <div className="flex flex-wrap gap-1.5">
                       {['Visa', 'Mastercard', 'Amex', 'Discover'].map((brand) => (
@@ -84,7 +84,7 @@ export function PaymentMethods({
                     </p>
                     <p className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)]">
                       <ShieldCheck className="size-3.5" aria-hidden="true" />
-                      Powered by Stripe
+                      Secure remote checkout
                     </p>
                   </div>
                 ) : null}

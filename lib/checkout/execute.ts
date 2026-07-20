@@ -1,17 +1,13 @@
 /**
- * Checkout orchestration — validate → persist pending order → Stripe session / mock.
+ * Checkout orchestration — validate → persist pending order → remote payment redirect.
  */
 
-import {
-  allowMockPayments,
-  getSiteUrl,
-  isProductionRuntime,
-  isStripeConfigured,
-} from '@/lib/config/env';
+import { allowMockPayments, isProductionRuntime } from '@/lib/config/env';
 import { getCheckoutUrl, getSiteUrlPath } from '@/lib/config/hosts';
 import { placeOrder, type PlaceOrderInput } from '@/lib/orders/create';
 import { saveOrder } from '@/lib/orders/store';
 import { paymentGatewayManager } from '@/lib/payments/manager';
+import { isRemotePaymentConfigured } from '@/lib/settings/site-settings';
 import type { Order } from '@/types/order';
 import type { PaymentProviderId } from '@/types/payment';
 
@@ -23,7 +19,7 @@ export type PlaceOrderResult = {
   paymentStatus: string;
   redirectUrl?: string;
   paymentConfigured: boolean;
-  mode: 'stripe' | 'mock' | 'disabled';
+  mode: 'remote-payment' | 'mock' | 'disabled';
   message?: string;
 };
 
@@ -37,36 +33,35 @@ export async function executeCheckout(
   input: PlaceOrderInput,
 ): Promise<PlaceOrderResult | PlaceOrderFailure> {
   try {
-    if (input.paymentMethodId !== 'stripe') {
+    if (input.paymentMethodId !== 'remote-payment') {
       return {
         ok: false,
-        error: 'Only Stripe is supported for live checkout at this time.',
+        error: 'Only remote card payment is supported at this time.',
         code: 'validation',
       };
     }
 
-    const stripeReady = isStripeConfigured();
+    const remoteReady = await isRemotePaymentConfigured();
     const mockOk = allowMockPayments();
 
-    if (!stripeReady && !mockOk) {
+    if (!remoteReady && !mockOk) {
       return {
         ok: false,
         error: isProductionRuntime()
-          ? 'Payments are not configured. Checkout is unavailable.'
-          : 'Stripe is not configured. Set Stripe keys, or IV_PAYMENTS_MODE=mock for local testing.',
+          ? 'Payments are not configured. Set the payment website URL in Admin → Settings.'
+          : 'Remote payment URL is not set. Configure Admin → Settings, or IV_PAYMENTS_MODE=mock for local testing.',
         code: 'payments_disabled',
       };
     }
 
     const order = await placeOrder(input);
-    const siteUrl = getSiteUrl();
     const successUrl = getSiteUrlPath(
-      `/order-success?orderId=${encodeURIComponent(order.id)}&email=${encodeURIComponent(order.guestEmail)}&session_id={CHECKOUT_SESSION_ID}`,
+      `/order-success?orderId=${encodeURIComponent(order.id)}&email=${encodeURIComponent(order.guestEmail)}`,
     );
     const cancelUrl = `${getCheckoutUrl('/')}?cancelled=1&orderId=${encodeURIComponent(order.id)}`;
 
-    if (stripeReady) {
-      const payment = await paymentGatewayManager.createPayment('stripe', {
+    if (remoteReady) {
+      const payment = await paymentGatewayManager.createPayment('remote-payment', {
         orderId: order.id,
         amount: order.total,
         customerEmail: order.guestEmail,
@@ -74,12 +69,20 @@ export async function executeCheckout(
         metadata: { orderId: order.id },
         successUrl,
         cancelUrl,
+        payload: {
+          customer: input.customer,
+          paymentMethodId: input.paymentMethodId,
+          items: input.items,
+          totals: input.totals,
+          coupon: input.coupon,
+          termsAccepted: input.termsAccepted,
+        },
       });
 
       const updated: Order = {
         ...order,
         payment: {
-          provider: 'stripe' as PaymentProviderId,
+          provider: 'remote-payment' as PaymentProviderId,
           paymentId: payment.paymentId,
           status: payment.status,
           amount: order.total,
@@ -96,7 +99,7 @@ export async function executeCheckout(
         paymentStatus: updated.payment?.status ?? 'pending',
         redirectUrl: payment.redirectUrl,
         paymentConfigured: true,
-        mode: 'stripe',
+        mode: 'remote-payment',
       };
     }
 
@@ -105,7 +108,7 @@ export async function executeCheckout(
     const mockPaid: Order = {
       ...order,
       payment: {
-        provider: 'stripe',
+        provider: 'remote-payment',
         paymentId: `mock_${order.id}`,
         status: 'paid',
         amount: order.total,
@@ -133,7 +136,7 @@ export async function executeCheckout(
       email: mockPaid.guestEmail,
       status: mockPaid.status,
       paymentStatus: 'paid',
-      redirectUrl: `${siteUrl}/order-success?orderId=${encodeURIComponent(mockPaid.id)}&email=${encodeURIComponent(mockPaid.guestEmail)}&verified=1`,
+      redirectUrl: `${successUrl}&verified=1`,
       paymentConfigured: false,
       mode: 'mock',
       message: 'Mock payment accepted for local development only.',
@@ -142,7 +145,7 @@ export async function executeCheckout(
     return {
       ok: false,
       error: error instanceof Error ? error.message : 'Unable to place order.',
-      code: 'validation',
+      code: 'provider_error',
     };
   }
 }

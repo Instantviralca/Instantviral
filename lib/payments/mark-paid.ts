@@ -56,7 +56,7 @@ export async function markOrderPaymentStatus(input: {
   const updated: Order = {
     ...existing,
     payment: {
-      provider: existing.payment?.provider ?? 'stripe',
+      provider: existing.payment?.provider ?? 'remote-payment',
       paymentId: input.paymentId,
       status: input.status,
       amount: existing.total,

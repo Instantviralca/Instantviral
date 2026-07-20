@@ -177,18 +177,25 @@ export function validateEnv(options: {
   }
 
   if (!isStripeConfigured()) {
-    issues.push({
-      key: 'STRIPE_SECRET_KEY',
-      level: production ? 'error' : 'warning',
-      message:
-        'Stripe requires STRIPE_SECRET_KEY, NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY (or STRIPE_PUBLISHABLE_KEY), and STRIPE_WEBHOOK_SECRET.',
-    });
+    // Stripe is disabled for checkout; keep as warning only if keys are partially present.
+    if (
+      present('STRIPE_SECRET_KEY') ||
+      present('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY') ||
+      present('STRIPE_WEBHOOK_SECRET')
+    ) {
+      issues.push({
+        key: 'STRIPE_SECRET_KEY',
+        level: 'warning',
+        message:
+          'Stripe keys are incomplete or unused. Checkout uses remote payment (Admin → Settings).',
+      });
+    }
   } else if (production && !present('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY')) {
     issues.push({
       key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
-      level: 'error',
+      level: 'warning',
       message:
-        'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY must be set for client-side Stripe (STRIPE_PUBLISHABLE_KEY alone is not exposed to the browser).',
+        'Stripe publishable key missing — ignored while remote payment is the checkout provider.',
     });
   }
 

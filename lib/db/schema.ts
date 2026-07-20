@@ -193,3 +193,10 @@ export const couponRedemptions = pgTable('coupon_redemptions', {
   currency: text('currency').notNull(),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
 });
+
+/** Admin-editable site settings (e.g. remote payment website URL). */
+export const siteSettings = pgTable('site_settings', {
+  key: text('key').primaryKey(),
+  value: text('value').notNull(),
+  updatedAt: timestamp('updated_at', { withTimezone: true }).notNull(),
+});

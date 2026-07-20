@@ -28,7 +28,7 @@ export function PaymentConfidence({
     >
       <li className="inline-flex items-center gap-2">
         <ShieldCheck className="size-3.5 shrink-0 text-[var(--brand-primary)]" aria-hidden />
-        <span>Secure Stripe Checkout · Encrypted payment</span>
+        <span>Secure checkout · Encrypted payment</span>
       </li>
       <li className="inline-flex items-center gap-2">
         <Lock className="size-3.5 shrink-0 text-[var(--brand-primary)]" aria-hidden />

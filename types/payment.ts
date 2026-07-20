@@ -6,7 +6,16 @@ import type { PlaceOrderPayload } from '@/types/checkout';
  * Provider-independent contracts. No secrets. No live API calls yet.
  */
 
-export type PaymentProviderId = 'stripe' | 'paypal' | 'jazzcash' | 'easypaisa' | 'paddle' | 'lemon-squeezy' | 'crypto' | 'bank-transfer';
+export type PaymentProviderId =
+  | 'remote-payment'
+  | 'stripe'
+  | 'paypal'
+  | 'jazzcash'
+  | 'easypaisa'
+  | 'paddle'
+  | 'lemon-squeezy'
+  | 'crypto'
+  | 'bank-transfer';
 
 export type PaymentStatus =
   | 'pending'

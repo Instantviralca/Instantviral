@@ -2,12 +2,18 @@ import type { PaymentProviderConfig } from '@/types/payment';
 
 /**
  * Public payment method configuration — Document 10.06.
- * Only Stripe is enabled for v1. Secret keys never appear here.
+ * Remote Payment (Woo-style collector URL) is the live checkout path.
+ * Secret keys never appear here.
  */
 export const paymentProviders: PaymentProviderConfig[] = [
   {
-    id: 'stripe',
+    id: 'remote-payment',
     enabled: true,
+    displayName: 'Card Payment',
+  },
+  {
+    id: 'stripe',
+    enabled: false,
     publicKeyEnv: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
     displayName: 'Stripe',
   },

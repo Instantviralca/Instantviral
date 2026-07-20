@@ -8,10 +8,8 @@ import { Heading } from '@/components/typography/heading';
 import { MutedText } from '@/components/typography/muted-text';
 import { Button } from '@/components/ui/button';
 import { routes } from '@/config/routes';
-import { allowMockPayments, isStripeConfigured } from '@/lib/config/env';
+import { allowMockPayments } from '@/lib/config/env';
 import { getOrderById } from '@/lib/orders/store';
-import { markOrderPaymentStatus } from '@/lib/payments/mark-paid';
-import { stripeProvider } from '@/lib/payments/providers/stripe';
 import { buildPageMetadataForRoute } from '@/lib/seo/metadata';
 
 export const metadata: Metadata = buildPageMetadataForRoute(routes.orderSuccess);
@@ -22,7 +20,6 @@ type OrderSuccessPageProps = {
   searchParams: Promise<{
     orderId?: string;
     email?: string;
-    session_id?: string;
     verified?: string;
   }>;
 };
@@ -31,7 +28,6 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
   const params = await searchParams;
   const orderId = params.orderId?.trim();
   const email = params.email?.trim();
-  const sessionId = params.session_id?.trim();
 
   let verified = false;
   let paymentPending = false;
@@ -39,31 +35,7 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
   let currency = 'USD';
 
   if (orderId) {
-    let order = await getOrderById(orderId);
-
-    if (sessionId && isStripeConfigured() && order) {
-      try {
-        const verifiedPayment = await stripeProvider.verifyPayment({
-          paymentId: sessionId,
-          provider: 'stripe',
-        });
-        const sessionBoundToOrder =
-          verifiedPayment.orderId === orderId ||
-          order.payment?.paymentId === sessionId;
-        // Only mark paid when Stripe session is bound to this order (prevents cross-order abuse).
-        if (verifiedPayment.status === 'paid' && sessionBoundToOrder) {
-          const result = await markOrderPaymentStatus({
-            paymentId: sessionId,
-            status: 'paid',
-            orderId,
-            amountMinor: verifiedPayment.amount?.amount,
-          });
-          order = result.order ?? order;
-        }
-      } catch {
-        // Keep success page safe — do not expose provider errors.
-      }
-    }
+    const order = await getOrderById(orderId);
 
     if (order && email && order.guestEmail.toLowerCase() === email.toLowerCase()) {
       verified = order.payment?.status === 'paid';

@@ -1,5 +1,9 @@
 import { getEnabledPaymentProviders } from '@/config/payments';
-import { paypalProvider, stripeProvider } from '@/lib/payments/providers';
+import {
+  paypalProvider,
+  remotePaymentProvider,
+  stripeProvider,
+} from '@/lib/payments/providers';
 import type {
   CancelPaymentInput,
   CreatePaymentInput,
@@ -11,6 +15,7 @@ import type {
 } from '@/types/payment';
 
 const registry: Partial<Record<PaymentProviderId, PaymentProvider>> = {
+  'remote-payment': remotePaymentProvider,
   stripe: stripeProvider,
   paypal: paypalProvider,
 };

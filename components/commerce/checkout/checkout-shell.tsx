@@ -29,7 +29,7 @@ export function CheckoutShell({ children }: CheckoutShellProps) {
       </header>
       <main className="flex-1">{children}</main>
       <footer className="border-t border-[var(--border-subtle)] bg-white/80 py-4 text-center text-xs text-[var(--text-secondary)]">
-        Secure checkout · Encrypted payment via Stripe
+        Secure checkout · Encrypted card payment
       </footer>
     </div>
   );
