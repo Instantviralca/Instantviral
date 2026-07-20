@@ -38,5 +38,8 @@ describe('Checkout host helpers', () => {
     expect(isCheckoutHostname('checkout.instantviral.ca')).toBe(true);
     expect(isCheckoutHostname('instantviral.ca')).toBe(false);
     expect(getCartCookieDomain()).toBe('.instantviral.ca');
+    expect(
+      (await import('@/lib/config/hosts')).getCartCookieDomainFromSiteOrigin(),
+    ).toBe('.instantviral.ca');
   });
 });

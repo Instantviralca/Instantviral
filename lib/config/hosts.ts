@@ -49,11 +49,39 @@ export function getSiteUrlPath(path: string): string {
 /** Parent cookie domain (e.g. .instantviral.ca). Null on localhost. */
 export function getCartCookieDomain(): string | null {
   try {
+    // Prefer the live browser host so cookies work even if SITE_URL env is wrong.
+    const host =
+      typeof window !== 'undefined'
+        ? window.location.hostname.toLowerCase()
+        : new URL(getSiteOrigin()).hostname.toLowerCase();
+    if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.localhost')) {
+      return null;
+    }
+    // Reject public-suffix style hosts where Domain= would be ignored (e.g. vercel.app).
+    if (host === 'vercel.app' || host.endsWith('.vercel.app')) {
+      return null;
+    }
+    // checkout.instantviral.ca + instantviral.ca → .instantviral.ca
+    const parts = host.split('.');
+    if (parts.length >= 2) {
+      return `.${parts.slice(-2).join('.')}`;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+/** Server-only cookie Domain from configured site origin. */
+export function getCartCookieDomainFromSiteOrigin(): string | null {
+  try {
     const host = new URL(getSiteOrigin()).hostname.toLowerCase();
     if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.localhost')) {
       return null;
     }
-    // checkout.instantviral.ca + instantviral.ca → .instantviral.ca
+    if (host === 'vercel.app' || host.endsWith('.vercel.app')) {
+      return null;
+    }
     const parts = host.split('.');
     if (parts.length >= 2) {
       return `.${parts.slice(-2).join('.')}`;

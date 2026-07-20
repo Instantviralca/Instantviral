@@ -39,9 +39,45 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    const stored = hydrateCartFromStores();
-    if (stored) setState(stored);
-    setIsHydrated(true);
+    let cancelled = false;
+
+    async function hydrate() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const handoffId = params.get('cartHandoff');
+        if (handoffId) {
+          const response = await fetch(
+            `/api/cart/handoff?id=${encodeURIComponent(handoffId)}`,
+          );
+          const data = (await response.json()) as {
+            ok?: boolean;
+            cart?: CartState;
+          };
+          if (!cancelled && response.ok && data.ok && data.cart) {
+            setState(data.cart);
+            writeCartCookie(data.cart);
+            // Drop handoff id from the URL without reloading.
+            params.delete('cartHandoff');
+            const next = `${window.location.pathname}${params.toString() ? `?${params}` : ''}${window.location.hash}`;
+            window.history.replaceState({}, '', next);
+            setIsHydrated(true);
+            return;
+          }
+        }
+      } catch {
+        // Fall through to cookie / sessionStorage.
+      }
+
+      if (cancelled) return;
+      const stored = hydrateCartFromStores();
+      if (stored) setState(stored);
+      setIsHydrated(true);
+    }
+
+    void hydrate();
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   useEffect(() => {

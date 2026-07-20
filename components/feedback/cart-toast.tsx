@@ -1,12 +1,11 @@
 'use client';
 
 import * as React from 'react';
-import Link from 'next/link';
 import { CheckCircle2, X } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { CheckoutButton } from '@/components/commerce/cart/checkout-button';
 import { routes } from '@/config/routes';
-import { getCheckoutUrl } from '@/lib/config/hosts';
 import { useCartUi } from '@/lib/cart/cart-ui-context';
 import { emitLegacyAnalyticsEvent } from '@/lib/analytics/core/bridge';
 import { cn } from '@/lib/utils';
@@ -128,7 +127,6 @@ function CartToast({
   onResume: () => void;
 }) {
   const { openCart } = useCartUi();
-  const checkoutHref = getCheckoutUrl('/');
 
   return (
     <div
@@ -155,17 +153,11 @@ function CartToast({
             <p className="mt-0.5 text-xs text-muted-foreground">{item.priceLabel}</p>
           ) : null}
           <div className="mt-2.5 flex flex-wrap gap-2">
-            <Button asChild size="sm" className="min-h-9 bg-[var(--brand-primary)]">
-              <Link
-                href={checkoutHref}
-                onClick={() => {
-                  emitLegacyAnalyticsEvent('checkout_click', { href: checkoutHref });
-                  onDismiss();
-                }}
-              >
-                Checkout
-              </Link>
-            </Button>
+            <CheckoutButton
+              label="Checkout"
+              className="min-h-9 w-auto px-3 text-sm"
+              onNavigate={onDismiss}
+            />
             <Button
               type="button"
               size="sm"

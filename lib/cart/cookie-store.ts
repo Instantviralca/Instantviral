@@ -1,5 +1,5 @@
 /**
- * Cross-subdomain cart cookie — Domain=.instantviral.ca when configured.
+ * Cross-subdomain cart cookie — Domain=.instantviral.ca when on brand hosts.
  * sessionStorage remains a local cache; cookie is the handoff to checkout host.
  */
 
@@ -42,8 +42,7 @@ export function writeCartCookie(state: CartState): boolean {
   if (typeof document === 'undefined') return false;
   const payload = serializeCart(state);
   if (payload.length > CART_COOKIE_MAX_CHARS) {
-    // Oversized — clear cookie so checkout host does not read a stale partial cart.
-    clearCartCookie();
+    // Oversized — keep sessionStorage; checkout uses server handoff instead.
     if (typeof window !== 'undefined') {
       window.sessionStorage.setItem(CART_STORAGE_KEY, payload);
     }
@@ -56,7 +55,12 @@ export function writeCartCookie(state: CartState): boolean {
 
 export function clearCartCookie(): void {
   if (typeof document === 'undefined') return;
-  document.cookie = `${CART_COOKIE_NAME}=; ${buildCookieAttributes(0)}`;
+  // Clear host-only and parent-domain variants.
+  document.cookie = `${CART_COOKIE_NAME}=; Path=/; Max-Age=0; SameSite=Lax`;
+  const domain = getCartCookieDomain();
+  if (domain) {
+    document.cookie = `${CART_COOKIE_NAME}=; Path=/; Max-Age=0; SameSite=Lax; Domain=${domain}`;
+  }
 }
 
 /** Prefer cookie (cross-host), then sessionStorage. */
