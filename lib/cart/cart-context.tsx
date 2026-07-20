@@ -5,6 +5,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useLayoutEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -12,8 +13,8 @@ import {
 
 import { getCouponByCode } from '@/data/pricing/discounts';
 import {
-  clearCartLocationHash,
-  readCartFromLocationHash,
+  clearCartLocationTransfer,
+  readCartFromLocationTransfer,
 } from '@/lib/cart/cart-hash';
 import {
   clearCartCookie,
@@ -45,19 +46,19 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isHydrated, setIsHydrated] = useState(false);
   const [isBootstrapping, setIsBootstrapping] = useState(true);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     let cancelled = false;
 
     async function hydrate() {
       setIsBootstrapping(true);
 
-      // 1) Instant hash transfer (preferred — no network).
-      const fromHash = readCartFromLocationHash();
-      if (fromHash) {
+      // 1) Instant URL transfer (?ivc= / hash) — no network. Layout effect = before paint.
+      const fromTransfer = readCartFromLocationTransfer();
+      if (fromTransfer) {
         if (!cancelled) {
-          setState(fromHash);
-          writeCartCookie(fromHash);
-          clearCartLocationHash();
+          setState(fromTransfer);
+          writeCartCookie(fromTransfer);
+          clearCartLocationTransfer();
           setIsHydrated(true);
           setIsBootstrapping(false);
         }

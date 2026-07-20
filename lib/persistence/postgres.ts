@@ -209,51 +209,34 @@ export function createPostgresPersistence(): AppPersistence {
           },
         });
 
+      const itemRows = order.items.map((item, index) => ({
+        // Never reuse cart line ids as PK — retries would collide across orders.
+        id: `oli_${order.id}_${index}`,
+        orderId: order.id,
+        platformId: item.platformId,
+        serviceId: item.serviceId,
+        serviceSlug: item.serviceSlug,
+        serviceName: item.serviceName,
+        packageId: item.packageId,
+        packageTitle: item.packageTitle,
+        quantity: item.quantity,
+        quantityLabel: item.quantityLabel,
+        unitPrice: item.unitPrice,
+        currency: item.currency,
+        configuration: item.configuration ?? {},
+        deliveryTime: item.deliveryTime?.trim() ? item.deliveryTime : null,
+        publicDestination: publicDestinationFromConfig(item.configuration ?? {}) ?? null,
+      }));
+
       if (!existing) {
-        if (order.items.length) {
-          await db.insert(tables.orderItems).values(
-            order.items.map((item) => ({
-              id: item.id,
-              orderId: order.id,
-              platformId: item.platformId,
-              serviceId: item.serviceId,
-              serviceSlug: item.serviceSlug,
-              serviceName: item.serviceName,
-              packageId: item.packageId,
-              packageTitle: item.packageTitle,
-              quantity: item.quantity,
-              quantityLabel: item.quantityLabel,
-              unitPrice: item.unitPrice,
-              currency: item.currency,
-              configuration: item.configuration,
-              deliveryTime: item.deliveryTime ?? null,
-              publicDestination: publicDestinationFromConfig(item.configuration) ?? null,
-            })),
-          );
+        if (itemRows.length) {
+          await db.insert(tables.orderItems).values(itemRows);
         }
       } else {
         // Replace items on update to keep sync simple for v1.
         await db.delete(tables.orderItems).where(eq(tables.orderItems.orderId, order.id));
-        if (order.items.length) {
-          await db.insert(tables.orderItems).values(
-            order.items.map((item) => ({
-              id: item.id,
-              orderId: order.id,
-              platformId: item.platformId,
-              serviceId: item.serviceId,
-              serviceSlug: item.serviceSlug,
-              serviceName: item.serviceName,
-              packageId: item.packageId,
-              packageTitle: item.packageTitle,
-              quantity: item.quantity,
-              quantityLabel: item.quantityLabel,
-              unitPrice: item.unitPrice,
-              currency: item.currency,
-              configuration: item.configuration,
-              deliveryTime: item.deliveryTime ?? null,
-              publicDestination: publicDestinationFromConfig(item.configuration) ?? null,
-            })),
-          );
+        if (itemRows.length) {
+          await db.insert(tables.orderItems).values(itemRows);
         }
       }
 

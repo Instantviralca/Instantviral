@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -21,7 +21,7 @@ import { Button } from '@/components/ui/button';
 import { getEnabledPaymentProviders } from '@/config/payments';
 import { routes } from '@/config/routes';
 import { useCart } from '@/lib/cart';
-import { locationHasCartHash } from '@/lib/cart/cart-hash';
+import { CART_QUERY_PARAM, locationHasCartTransfer } from '@/lib/cart/cart-hash';
 import { getSiteUrlPath } from '@/lib/config/hosts';
 import { formatMoney } from '@/lib/pricing/format';
 import type {
@@ -39,10 +39,15 @@ export function CheckoutPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const paymentCancelled = searchParams.get('cancelled') === '1';
-  const cartHandoffPending = Boolean(searchParams.get('cartHandoff'));
+  const cartTransferPending = Boolean(
+    searchParams.get(CART_QUERY_PARAM) || searchParams.get('cartHandoff'),
+  );
   const cartHref = getSiteUrlPath(routes.cart);
   const [customer, setCustomer] = useState<CustomerInformation>({ email: '' });
-  const [paymentMethodId, setPaymentMethodId] = useState<PaymentMethodId | null>(null);
+  const [paymentMethodId, setPaymentMethodId] = useState<PaymentMethodId | null>(() => {
+    const enabled = getEnabledPaymentProviders().filter((p) => p.enabled);
+    return enabled.length === 1 ? (enabled[0]!.id as PaymentMethodId) : null;
+  });
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [errors, setErrors] = useState<{
     email?: string;
@@ -58,17 +63,26 @@ export function CheckoutPage() {
         id: provider.id as PaymentMethodId,
         label: provider.displayName,
         enabled: provider.enabled,
-        description: 'Secure card payment via our payment page.',
+        description: 'Secure card payment.',
       })),
     [],
   );
 
-  // Never flash empty cart while hash/handoff/bootstrap is in progress.
+  // Sole enabled method — select by default so the user never has to tap it.
+  useEffect(() => {
+    if (paymentMethodId) return;
+    const enabled = paymentMethods.filter((m) => m.enabled);
+    if (enabled.length === 1 && enabled[0]) {
+      setPaymentMethodId(enabled[0].id);
+    }
+  }, [paymentMethods, paymentMethodId]);
+
+  // Never flash empty cart while transfer/bootstrap is in progress.
   const waitingForCart =
     !cart.isHydrated ||
     cart.isBootstrapping ||
-    (cartHandoffPending && cart.items.length === 0) ||
-    (locationHasCartHash() && cart.items.length === 0);
+    (cartTransferPending && cart.items.length === 0) ||
+    (locationHasCartTransfer() && cart.items.length === 0);
 
   if (waitingForCart) {
     return (

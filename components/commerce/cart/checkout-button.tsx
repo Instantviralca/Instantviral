@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cart';
-import { encodeCartHash } from '@/lib/cart/cart-hash';
+import { CART_QUERY_PARAM, encodeCartTransfer } from '@/lib/cart/cart-hash';
 import { writeCartCookie } from '@/lib/cart/cookie-store';
 import { getCheckoutUrl } from '@/lib/config/hosts';
 import { emitLegacyAnalyticsEvent } from '@/lib/analytics/core/bridge';
@@ -19,7 +19,7 @@ type CheckoutButtonProps = {
 };
 
 /**
- * Instant checkout navigation — cart rides in the URL hash (no prepare API wait).
+ * Instant checkout navigation — cart rides in `?ivc=` (no prepare API wait).
  */
 export function CheckoutButton({
   disabled,
@@ -35,7 +35,6 @@ export function CheckoutButton({
     if (busy || disabled || cart.items.length === 0) return;
     setBusy(true);
     setError(null);
-    onNavigate?.();
 
     const cartState = {
       items: cart.items,
@@ -44,26 +43,36 @@ export function CheckoutButton({
       updatedAt: cart.updatedAt,
     };
 
-    writeCartCookie(cartState);
+    try {
+      writeCartCookie(cartState);
+    } catch {
+      /* best effort */
+    }
 
-    const hash = encodeCartHash(cartState);
+    const transfer = encodeCartTransfer(cartState);
     const url = new URL(getCheckoutUrl('/'));
 
-    if (hash) {
-      url.hash = hash;
+    if (transfer) {
+      url.searchParams.set(CART_QUERY_PARAM, transfer);
       emitLegacyAnalyticsEvent('checkout_click', { href: url.toString() });
+      // Navigate first so drawer/toast unmount cannot cancel redirect.
       window.location.assign(url.toString());
+      onNavigate?.();
       return;
     }
 
-    // Oversized cart — fall back to server handoff (slower).
+    // Oversized cart — server handoff (rare).
     void (async () => {
       try {
+        const controller = new AbortController();
+        const timer = window.setTimeout(() => controller.abort(), 8000);
         const response = await fetch('/api/cart/prepare-checkout', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ cart: cartState }),
+          signal: controller.signal,
         });
+        window.clearTimeout(timer);
         const data = (await response.json()) as {
           ok?: boolean;
           checkoutUrl?: string;
@@ -74,8 +83,15 @@ export function CheckoutButton({
         }
         emitLegacyAnalyticsEvent('checkout_click', { href: data.checkoutUrl });
         window.location.assign(data.checkoutUrl);
+        onNavigate?.();
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'Unable to continue to checkout.');
+        setError(
+          err instanceof Error && err.name === 'AbortError'
+            ? 'Checkout is taking too long. Please try again.'
+            : err instanceof Error
+              ? err.message
+              : 'Unable to continue to checkout.',
+        );
         setBusy(false);
       }
     })();

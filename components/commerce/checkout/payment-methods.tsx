@@ -19,7 +19,6 @@ type PaymentMethodsProps = {
 
 /**
  * Payment method picker — accurate security copy only.
- * Stripe wordmark text only (no trademark misuse).
  */
 export function PaymentMethods({
   methods,
@@ -66,17 +65,19 @@ export function PaymentMethods({
                 {method.id === 'remote-payment' || method.id === 'stripe' ? (
                   <div className="mt-3 space-y-2">
                     <p className="text-xs font-medium text-[var(--text-secondary)]">
-                      Card payments are processed securely on our payment page.
+                      Card payments are processed securely
                     </p>
                     <div className="flex flex-wrap gap-1.5">
-                      {['Visa', 'Mastercard', 'Amex', 'Discover'].map((brand) => (
-                        <span
-                          key={brand}
-                          className="rounded-md border border-[var(--border-subtle)] bg-white px-2 py-1 text-[10px] font-semibold text-[var(--text-secondary)]"
-                        >
-                          {brand}
-                        </span>
-                      ))}
+                      {['Visa', 'Mastercard', 'Amex', 'Discover', 'Google Pay', 'Apple Pay'].map(
+                        (brand) => (
+                          <span
+                            key={brand}
+                            className="rounded-md border border-[var(--border-subtle)] bg-white px-2 py-1 text-[10px] font-semibold text-[var(--text-secondary)]"
+                          >
+                            {brand}
+                          </span>
+                        ),
+                      )}
                     </div>
                     <p className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)]">
                       <Lock className="size-3.5" aria-hidden="true" />
@@ -84,7 +85,7 @@ export function PaymentMethods({
                     </p>
                     <p className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)]">
                       <ShieldCheck className="size-3.5" aria-hidden="true" />
-                      Secure remote checkout
+                      Secure checkout
                     </p>
                   </div>
                 ) : null}
