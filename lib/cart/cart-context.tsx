@@ -42,30 +42,32 @@ export function CartProvider({ children }: { children: ReactNode }) {
     let cancelled = false;
 
     async function hydrate() {
-      try {
-        const params = new URLSearchParams(window.location.search);
-        const handoffId = params.get('cartHandoff');
-        if (handoffId) {
+      const params = new URLSearchParams(window.location.search);
+      const handoffId = params.get('cartHandoff');
+
+      if (handoffId) {
+        try {
           const response = await fetch(
             `/api/cart/handoff?id=${encodeURIComponent(handoffId)}`,
           );
           const data = (await response.json()) as {
             ok?: boolean;
             cart?: CartState;
+            error?: string;
           };
-          if (!cancelled && response.ok && data.ok && data.cart) {
+          if (!cancelled && response.ok && data.ok && data.cart?.items?.length) {
             setState(data.cart);
             writeCartCookie(data.cart);
-            // Drop handoff id from the URL without reloading.
             params.delete('cartHandoff');
             const next = `${window.location.pathname}${params.toString() ? `?${params}` : ''}${window.location.hash}`;
             window.history.replaceState({}, '', next);
             setIsHydrated(true);
             return;
           }
+          console.error('[cart] handoff failed', data.error ?? response.status);
+        } catch (error) {
+          console.error('[cart] handoff request failed', error);
         }
-      } catch {
-        // Fall through to cookie / sessionStorage.
       }
 
       if (cancelled) return;
@@ -83,9 +85,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!isHydrated || typeof window === 'undefined') return;
     window.sessionStorage.setItem(CART_STORAGE_KEY, serializeCart(state));
-    if (state.items.length === 0) {
-      clearCartCookie();
-    } else {
+    // Do not clear shared cookie on empty until user explicitly clears —
+    // avoids wiping a just-synced checkout cookie during hydrate races.
+    if (state.items.length > 0) {
       writeCartCookie(state);
     }
   }, [state, isHydrated]);
@@ -143,6 +145,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const clearCart = useCallback(() => {
+    clearCartCookie();
+    if (typeof window !== 'undefined') {
+      window.sessionStorage.removeItem(CART_STORAGE_KEY);
+    }
     setState(createEmptyCart(state.currency));
   }, [state.currency]);
 

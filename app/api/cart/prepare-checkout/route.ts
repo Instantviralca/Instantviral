@@ -3,14 +3,19 @@ import { NextResponse } from 'next/server';
 import { CART_COOKIE_MAX_CHARS, CART_COOKIE_NAME } from '@/lib/cart/cookie-store';
 import { createCartHandoff } from '@/lib/cart/handoff-store';
 import { serializeCart, deserializeCart } from '@/lib/cart/utils';
-import { getCartCookieDomainFromSiteOrigin, getCheckoutUrl } from '@/lib/config/hosts';
+import {
+  getCartCookieDomainFromSiteOrigin,
+  getCheckoutUrl,
+  isDedicatedCheckoutConfigured,
+} from '@/lib/config/hosts';
 import type { CartState } from '@/types/cart';
 
 export const runtime = 'nodejs';
 
 /**
- * Prepare cross-subdomain checkout: set shared cart cookie (or handoff id),
- * then return the checkout URL to navigate to.
+ * Prepare checkout navigation.
+ * Dedicated checkout subdomain: always use one-time cartHandoff query (reliable).
+ * Same-origin checkout: shared cookie is enough.
  */
 export async function POST(request: Request) {
   try {
@@ -21,11 +26,34 @@ export async function POST(request: Request) {
     }
 
     const payload = serializeCart(cart);
-    const checkoutUrl = getCheckoutUrl('/');
-    const domain = getCartCookieDomainFromSiteOrigin();
+    const checkoutBase = getCheckoutUrl('/');
+    const dedicated = isDedicatedCheckoutConfigured();
 
+    // Cross-subdomain: never rely on cookies alone (Domain / serverless issues).
+    if (dedicated) {
+      const handoffId = await createCartHandoff(payload);
+      const url = new URL(checkoutBase);
+      url.searchParams.set('cartHandoff', handoffId);
+
+      const response = NextResponse.json({ ok: true, checkoutUrl: url.toString() });
+      // Best-effort cookie as well (parent domain, no leading dot).
+      if (payload.length <= CART_COOKIE_MAX_CHARS) {
+        const domain = getCartCookieDomainFromSiteOrigin()?.replace(/^\./, '');
+        response.cookies.set({
+          name: CART_COOKIE_NAME,
+          value: encodeURIComponent(payload),
+          path: '/',
+          maxAge: 60 * 60 * 24 * 7,
+          sameSite: 'lax',
+          secure: true,
+          ...(domain ? { domain } : {}),
+        });
+      }
+      return response;
+    }
+
+    const response = NextResponse.json({ ok: true, checkoutUrl: checkoutBase });
     if (payload.length <= CART_COOKIE_MAX_CHARS) {
-      const response = NextResponse.json({ ok: true, checkoutUrl });
       response.cookies.set({
         name: CART_COOKIE_NAME,
         value: encodeURIComponent(payload),
@@ -33,15 +61,9 @@ export async function POST(request: Request) {
         maxAge: 60 * 60 * 24 * 7,
         sameSite: 'lax',
         secure: process.env.NODE_ENV === 'production',
-        ...(domain ? { domain } : {}),
       });
-      return response;
     }
-
-    const handoffId = await createCartHandoff(payload);
-    const url = new URL(checkoutUrl);
-    url.searchParams.set('cartHandoff', handoffId);
-    return NextResponse.json({ ok: true, checkoutUrl: url.toString() });
+    return response;
   } catch (error) {
     return NextResponse.json(
       {
