@@ -21,6 +21,7 @@ import { Button } from '@/components/ui/button';
 import { getEnabledPaymentProviders } from '@/config/payments';
 import { routes } from '@/config/routes';
 import { useCart } from '@/lib/cart';
+import { locationHasCartHash } from '@/lib/cart/cart-hash';
 import { getSiteUrlPath } from '@/lib/config/hosts';
 import { formatMoney } from '@/lib/pricing/format';
 import type {
@@ -62,12 +63,26 @@ export function CheckoutPage() {
     [],
   );
 
-  // Keep loading while cart hydrates or handoff token is still being applied.
-  if (!cart.isHydrated || (cartHandoffPending && cart.items.length === 0)) {
+  // Never flash empty cart while hash/handoff/bootstrap is in progress.
+  const waitingForCart =
+    !cart.isHydrated ||
+    cart.isBootstrapping ||
+    (cartHandoffPending && cart.items.length === 0) ||
+    (locationHasCartHash() && cart.items.length === 0);
+
+  if (waitingForCart) {
     return (
       <Section aria-label="Checkout" className="bg-hero-wash">
         <Container size="xl">
-          <p className="text-sm text-muted-foreground">Loading checkout…</p>
+          <div
+            className="flex min-h-[40vh] flex-col items-center justify-center gap-2"
+            role="status"
+            aria-live="polite"
+          >
+            <p className="text-sm font-medium text-muted-foreground">
+              Loading checkout…
+            </p>
+          </div>
         </Container>
       </Section>
     );

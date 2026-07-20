@@ -12,6 +12,10 @@ import {
 
 import { getCouponByCode } from '@/data/pricing/discounts';
 import {
+  clearCartLocationHash,
+  readCartFromLocationHash,
+} from '@/lib/cart/cart-hash';
+import {
   clearCartCookie,
   hydrateCartFromStores,
   writeCartCookie,
@@ -30,6 +34,8 @@ type CartContextValue = CartState &
   CartActions & {
     totals: CartTotals;
     isHydrated: boolean;
+    /** True while applying hash/handoff — checkout must show loading, never empty. */
+    isBootstrapping: boolean;
   };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -37,14 +43,30 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [state, setState] = useState<CartState>(() => createEmptyCart());
   const [isHydrated, setIsHydrated] = useState(false);
+  const [isBootstrapping, setIsBootstrapping] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
 
     async function hydrate() {
+      setIsBootstrapping(true);
+
+      // 1) Instant hash transfer (preferred — no network).
+      const fromHash = readCartFromLocationHash();
+      if (fromHash) {
+        if (!cancelled) {
+          setState(fromHash);
+          writeCartCookie(fromHash);
+          clearCartLocationHash();
+          setIsHydrated(true);
+          setIsBootstrapping(false);
+        }
+        return;
+      }
+
+      // 2) DB handoff token (oversized carts).
       const params = new URLSearchParams(window.location.search);
       const handoffId = params.get('cartHandoff');
-
       if (handoffId) {
         try {
           const response = await fetch(
@@ -59,9 +81,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
             setState(data.cart);
             writeCartCookie(data.cart);
             params.delete('cartHandoff');
-            const next = `${window.location.pathname}${params.toString() ? `?${params}` : ''}${window.location.hash}`;
+            const next = `${window.location.pathname}${params.toString() ? `?${params}` : ''}`;
             window.history.replaceState({}, '', next);
             setIsHydrated(true);
+            setIsBootstrapping(false);
             return;
           }
           console.error('[cart] handoff failed', data.error ?? response.status);
@@ -74,6 +97,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       const stored = hydrateCartFromStores();
       if (stored) setState(stored);
       setIsHydrated(true);
+      setIsBootstrapping(false);
     }
 
     void hydrate();
@@ -85,8 +109,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (!isHydrated || typeof window === 'undefined') return;
     window.sessionStorage.setItem(CART_STORAGE_KEY, serializeCart(state));
-    // Do not clear shared cookie on empty until user explicitly clears —
-    // avoids wiping a just-synced checkout cookie during hydrate races.
     if (state.items.length > 0) {
       writeCartCookie(state);
     }
@@ -162,6 +184,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       ...state,
       totals,
       isHydrated,
+      isBootstrapping,
       addItem,
       removeItem,
       updateItemConfiguration,
@@ -173,6 +196,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       state,
       totals,
       isHydrated,
+      isBootstrapping,
       addItem,
       removeItem,
       updateItemConfiguration,
