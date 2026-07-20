@@ -202,9 +202,9 @@ export function validateEnv(options: {
   if (!isEmailConfigured()) {
     issues.push({
       key: 'RESEND_API_KEY',
-      level: production ? 'error' : 'warning',
+      level: 'warning',
       message:
-        'Email requires RESEND_API_KEY and EMAIL_FROM (or RESEND_FROM_EMAIL).',
+        'Email requires RESEND_API_KEY and EMAIL_FROM (or RESEND_FROM_EMAIL). Order emails will be skipped until set.',
     });
   }
 
