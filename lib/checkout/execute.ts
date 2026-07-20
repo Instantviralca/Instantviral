@@ -61,6 +61,12 @@ export async function executeCheckout(
     const cancelUrl = `${getCheckoutUrl('/')}?cancelled=1&orderId=${encodeURIComponent(order.id)}`;
 
     if (remoteReady) {
+      const totals = input.totals ?? {
+        subtotal: order.subtotal,
+        discount: order.discount,
+        total: order.total,
+        itemCount: order.items.reduce((sum, item) => sum + item.quantity, 0),
+      };
       const payment = await paymentGatewayManager.createPayment('remote-payment', {
         orderId: order.id,
         amount: order.total,
@@ -73,7 +79,7 @@ export async function executeCheckout(
           customer: input.customer,
           paymentMethodId: input.paymentMethodId,
           items: input.items,
-          totals: input.totals,
+          totals,
           coupon: input.coupon,
           termsAccepted: input.termsAccepted,
         },
