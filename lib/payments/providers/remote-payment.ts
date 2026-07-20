@@ -28,9 +28,11 @@ function buildItems(input: CreatePaymentInput): RemoteLineItem[] {
     return payloadItems.map((item) => ({
       product_id: item.packageId || item.serviceId,
       name: item.packageTitle || item.serviceName,
-      qty: item.quantity,
-      // Woo plugin uses major units (line subtotal / qty), not minor cents.
-      price: item.unitPrice / 100,
+      // CartItem.quantity is package size (e.g. 1000 followers), NOT purchase qty.
+      // Remote/Woo line qty must be 1 per cart row or amount becomes price × followers.
+      qty: 1,
+      // Major currency units (e.g. 9.99), matching Woo get_subtotal()/qty.
+      price: Number((item.unitPrice / 100).toFixed(2)),
     }));
   }
 
@@ -39,7 +41,7 @@ function buildItems(input: CreatePaymentInput): RemoteLineItem[] {
       product_id: input.orderId,
       name: input.description ?? `Order ${input.orderId}`,
       qty: 1,
-      price: input.amount.amount / 100,
+      price: Number((input.amount.amount / 100).toFixed(2)),
     },
   ];
 }

@@ -38,6 +38,7 @@ export function CheckoutPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const paymentCancelled = searchParams.get('cancelled') === '1';
+  const cartHandoffPending = Boolean(searchParams.get('cartHandoff'));
   const cartHref = getSiteUrlPath(routes.cart);
   const [customer, setCustomer] = useState<CustomerInformation>({ email: '' });
   const [paymentMethodId, setPaymentMethodId] = useState<PaymentMethodId | null>(null);
@@ -61,7 +62,8 @@ export function CheckoutPage() {
     [],
   );
 
-  if (!cart.isHydrated) {
+  // Keep loading while cart hydrates or handoff token is still being applied.
+  if (!cart.isHydrated || (cartHandoffPending && cart.items.length === 0)) {
     return (
       <Section aria-label="Checkout" className="bg-hero-wash">
         <Container size="xl">
