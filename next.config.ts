@@ -55,6 +55,141 @@ const nextConfig: NextConfig = {
         destination: '/learn',
         permanent: true,
       },
+      {
+        source: '/buy-tiktok-followers-likes',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-100-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-250-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-500-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-1000-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-3000-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-5000-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-10000-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-15000-tiktok-followers',
+        destination: '/buy-tiktok-followers',
+        permanent: true,
+      },
+      {
+        source: '/instagram-services-prices',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-100-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-250-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-500-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-1000-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-2500-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-5000-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-10000-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-25000-instagram-followers',
+        destination: '/buy-instagram-followers',
+        permanent: true,
+      },
+      {
+        source: '/buy-youtube-subscribers-views',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-100-youtube-subscribers',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-200-youtube-subscribers',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-500-youtube-subscribers',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-1000-youtube-subscribers',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-2000-youtube-subscribers',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-3000-youtube-subscribers',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/product/buy-5000-youtube-subscribers',
+        destination: '/buy-youtube-subscribers',
+        permanent: true,
+      },
+      {
+        source: '/buy-facebook-likes-followers',
+        destination: '/buy-facebook-followers',
+        permanent: true,
+      },
     ];
   },
   async headers() {
