@@ -27,6 +27,7 @@ type ServiceCommerceBlocksProps = {
   };
   summaryBenefits?: readonly string[];
   infoPills?: readonly string[];
+  stickyCtaLabel?: string;
 };
 
 const USERNAME_ONLY_SLUGS = new Set(['buy-instagram-followers', 'buy-tiktok-followers']);
@@ -52,6 +53,7 @@ export function ServiceCommerceBlocks({
   pricing,
   summaryBenefits,
   infoPills,
+  stickyCtaLabel = 'Order Now',
 }: ServiceCommerceBlocksProps) {
   const [selectedPackage, setSelectedPackage] = useState<PricingPackage | null>(null);
   const [orderOpen, setOrderOpen] = useState(false);
@@ -117,7 +119,7 @@ export function ServiceCommerceBlocks({
       />
       <ServiceStickyOrderBar
         pricingSectionId={pricingSectionId}
-        ctaLabel="Order Now"
+        ctaLabel={stickyCtaLabel}
         priceLabel={stickyPrice}
         onOrder={() => {
           if (selectedPackage) {

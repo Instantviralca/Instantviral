@@ -40,7 +40,7 @@ const REVIEW_SEEDS: ReviewSeed[] = [
     featured: true,
     displayOrder: 1,
     reviewText:
-      "InstantViral exceeded my expectations! My Instagram followers grew quickly, and the accounts looked genuine. I'm very satisfied with the fast and reliable service.",
+      'The package options were easy to compare, and the checkout process was straightforward. I appreciated being able to see the order details before completing payment.',
   },
   {
     id: 'review-nina-hartley',
@@ -50,7 +50,7 @@ const REVIEW_SEEDS: ReviewSeed[] = [
     featured: true,
     displayOrder: 2,
     reviewText:
-      'I tried InstantViral for the first time, and the results were amazing. The followers and likes boosted my page engagement, and the ordering process was incredibly easy. Highly recommended!',
+      'I selected a smaller package for my creator account. The process was clear, the status updates were helpful, and everything worked as expected.',
   },
   {
     id: 'review-johnny',
@@ -60,7 +60,7 @@ const REVIEW_SEEDS: ReviewSeed[] = [
     featured: false,
     displayOrder: 3,
     reviewText:
-      "InstantViral made growing my page incredibly easy. I've been receiving more followers and likes consistently, and it's been great for my business. I highly recommend it to anyone serious about social media growth.",
+      'Choosing the right quantity was simple. The delivery information was easy to understand, and support answered my question quickly.',
   },
   {
     id: 'review-muntaha',
@@ -78,7 +78,7 @@ const REVIEW_SEEDS: ReviewSeed[] = [
     featured: false,
     displayOrder: 5,
     reviewText:
-      'Fantastic experience from start to finish. Fast delivery, authentic-looking followers, and a noticeable improvement in engagement.',
+      'Fantastic experience from start to finish. Delivery was clear, checkout was simple, and I could follow the order updates without confusion.',
   },
   {
     id: 'review-sherry',
@@ -88,7 +88,7 @@ const REVIEW_SEEDS: ReviewSeed[] = [
     featured: false,
     displayOrder: 6,
     reviewText:
-      "I can't believe how easy InstantViral made it to grow my Instagram. The followers and likes looked genuine, and my account has never performed better.",
+      "The package matched what I needed for my account. I liked that no password was requested and that I could follow the order status.",
   },
   {
     id: 'review-eva',
@@ -98,7 +98,7 @@ const REVIEW_SEEDS: ReviewSeed[] = [
     featured: true,
     displayOrder: 7,
     reviewText:
-      'I was pleasantly surprised by the quality of the premium likes. Seeing engagement from verified-looking accounts was impressive, and the pricing offered excellent value.',
+      'The pricing was clearly displayed, and the ordering process did not feel complicated. I would use the service again for a future campaign.',
   },
   {
     id: 'review-sheikh-hadi',
@@ -171,7 +171,7 @@ const REVIEW_SEEDS: ReviewSeed[] = [
     featured: false,
     displayOrder: 15,
     reviewText:
-      'The engagement arrived quickly, and everything looked authentic.',
+      'I had a good experience from package selection through delivery. The instructions were clear and the support team was responsive.',
   },
   {
     id: 'review-milka',

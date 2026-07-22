@@ -1,26 +1,19 @@
 import { FinalCTA } from '@/components/marketing/final-cta';
 import {
   RelatedServices,
-  ServiceRelatedArticles,
   ServiceFaq,
   ServiceHero,
-  ServiceReviews,
 } from '@/components/sections/service';
-import { ServiceEducationalGuide } from '@/components/sections/service/educational-guide';
 import { ServiceCommerceBlocks } from '@/components/sections/service/service-commerce-blocks';
 import { DeliveryProcessTimeline } from '@/components/marketing/packages/delivery-process-timeline';
-import { PackageComparisonTable } from '@/components/marketing/packages/package-comparison-table';
 import { PackageFitGuide } from '@/components/marketing/packages/package-fit-guide';
 import { PackagesFinalCtaAside } from '@/components/marketing/packages/packages-final-cta-aside';
-import { PackagesLearnMoreLink } from '@/components/marketing/packages/packages-learn-more-link';
-import { WhyOrderFromUs } from '@/components/marketing/packages/why-order-from-us';
-import { getEducationalGuideBySlug } from '@/data/content/instagram-educational-guides';
+import { PackagesTrustStrip } from '@/components/marketing/packages/packages-trust-strip';
 import { INSTAGRAM_FOLLOWERS_PACKAGES_CONFIG } from '@/data/content/packages-page-config';
 import { getServiceContentBySlug } from '@/data/content/services';
 import { mapServiceContent } from '@/lib/content/mappers';
 import { resolveRelatedServices } from '@/lib/content/linking';
 import { buildBreadcrumb } from '@/lib/linking';
-import { getRelatedArticles } from '@/lib/linking/related-articles';
 import type { Service } from '@/types/service';
 
 type InstagramFollowersPackagesViewProps = {
@@ -28,8 +21,8 @@ type InstagramFollowersPackagesViewProps = {
 };
 
 /**
- * Conversion-focused Instagram Followers Packages page.
- * Homepage remains the primary SEO surface for “Buy Instagram Followers”.
+ * Compact package-selection page for Instagram Followers.
+ * Homepage remains the primary commercial keyword surface.
  */
 export function InstagramFollowersPackagesView({ service }: InstagramFollowersPackagesViewProps) {
   const content = getServiceContentBySlug(service.slug);
@@ -38,34 +31,14 @@ export function InstagramFollowersPackagesView({ service }: InstagramFollowersPa
   const vm = mapServiceContent(content);
   const config = INSTAGRAM_FOLLOWERS_PACKAGES_CONFIG;
   const related = resolveRelatedServices(service, content.relatedServices.serviceSlugs, 3);
-  const relatedArticles = getRelatedArticles(service.slug, {
-    platform: service.platform,
-    limit: 6,
-  });
-  const relatedArticleHrefs = new Set(relatedArticles.map((item) => item.href));
-  const peopleAlsoRead = [
-    ...getRelatedArticles(service.slug, {
-      platform: service.platform,
-      limit: 12,
-    }).filter((item) => !relatedArticleHrefs.has(item.href)),
-  ];
-  if (peopleAlsoRead.length < 4) {
-    const extras = getRelatedArticles(service.slug, { limit: 16 }).filter(
-      (item) =>
-        !relatedArticleHrefs.has(item.href) &&
-        !peopleAlsoRead.some((existing) => existing.href === item.href),
-    );
-    for (const item of extras) {
-      peopleAlsoRead.push(item);
-      if (peopleAlsoRead.length >= 4) break;
-    }
-  }
-  const peopleAlsoReadFinal = peopleAlsoRead.slice(0, 4);
-  const breadcrumbs = buildBreadcrumb(service.slug);
+  const breadcrumbs = buildBreadcrumb(service.slug).map((item, index, items) =>
+    index === items.length - 1 ? { ...item, label: 'Followers Packages' } : item,
+  );
   const previewPackageId =
     vm.pricing.packages.find((p) => p.package.badge)?.package.id ??
     vm.pricing.packages[0]?.package.id;
-  const educationalGuide = getEducationalGuideBySlug(service.slug);
+  const primaryCtaLabel =
+    vm.pricing.packages[0]?.primaryCta.label ?? content.pricing.primaryCtaLabel;
 
   return (
     <div className="pb-24 lg:pb-0">
@@ -82,24 +55,14 @@ export function InstagramFollowersPackagesView({ service }: InstagramFollowersPa
         pricing={vm.pricing}
         summaryBenefits={config.summaryBenefits}
         infoPills={config.infoPills}
-      />
-
-      <ServiceReviews
-        title={vm.reviews.title}
-        description={vm.reviews.description}
-        serviceSlug={service.slug}
-        platform={service.platform}
+        stickyCtaLabel={primaryCtaLabel}
       />
 
       <PackageFitGuide config={config} />
 
       <DeliveryProcessTimeline config={config} />
 
-      <WhyOrderFromUs config={config} />
-
-      <PackageComparisonTable config={config} />
-
-      {educationalGuide ? <ServiceEducationalGuide guide={educationalGuide} /> : null}
+      <PackagesTrustStrip items={config.trustStrip ?? []} />
 
       <ServiceFaq
         id={vm.faq.id}
@@ -108,8 +71,6 @@ export function InstagramFollowersPackagesView({ service }: InstagramFollowersPa
         items={vm.faq.items}
         analyticsServiceSlug={service.slug}
       />
-
-      <PackagesLearnMoreLink config={config} />
 
       {related.length > 0 ? (
         <RelatedServices
@@ -121,14 +82,6 @@ export function InstagramFollowersPackagesView({ service }: InstagramFollowersPa
           analyticsServiceSlug={service.slug}
         />
       ) : null}
-
-      <ServiceRelatedArticles articles={relatedArticles} />
-      <ServiceRelatedArticles
-        id="people-also-read"
-        title="People Also Read"
-        description="More Learn Center guides readers explore alongside this service."
-        articles={peopleAlsoReadFinal}
-      />
 
       <FinalCTA
         id={content.finalCta.id}

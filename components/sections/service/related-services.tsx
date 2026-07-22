@@ -37,11 +37,11 @@ function relatedBlurb(service: Service): string {
     case 'buy-instagram-followers':
       return 'Grow a steadier public audience so future comment threads and posts reach more people who already know your brand.';
     case 'buy-instagram-likes':
-      return 'Warm launches with early hearts so comment threads start beside posts that already look active.';
+      return 'Compare like quantities for selected posts when you want to support visible reaction activity alongside your account presentation.';
     case 'buy-instagram-views':
-      return 'Give Reels stronger view volume so viewers stay long enough to read—and join—the discussion underneath.';
+      return 'Review view package sizes for Reels and videos when your content campaign needs additional visibility.';
     case 'buy-instagram-comments':
-      return 'Seed conversation under key posts so visitors see discussion, credibility, and community—not a silent feed.';
+      return 'Explore comment options for posts where visible discussion is relevant to the campaign.';
     case 'buy-tiktok-followers':
       return 'Build a stronger audience with follower packages.';
     case 'buy-tiktok-likes':
@@ -70,6 +70,12 @@ function relatedBlurb(service: Service): string {
 
 function relatedCardTitle(service: Service): string {
   switch (service.slug) {
+    case 'buy-instagram-likes':
+      return 'Instagram Likes Packages';
+    case 'buy-instagram-views':
+      return 'Instagram Views Packages';
+    case 'buy-instagram-comments':
+      return 'Instagram Comments Packages';
     case 'buy-tiktok-followers':
       return 'Buy TikTok Followers';
     case 'buy-tiktok-likes':
@@ -92,13 +98,13 @@ function relatedCardTitle(service: Service): string {
 function relatedCtaLabel(service: Service): string {
   switch (service.slug) {
     case 'buy-instagram-followers':
-      return 'View followers packages';
+      return 'View Followers Packages';
     case 'buy-instagram-likes':
-      return 'View likes packages';
+      return 'View Likes Packages';
     case 'buy-instagram-views':
-      return 'View views packages';
+      return 'View Views Packages';
     case 'buy-instagram-comments':
-      return 'View comments packages';
+      return 'View Comments Packages';
     case 'buy-tiktok-likes':
     case 'buy-tiktok-views':
       return 'View Packages';

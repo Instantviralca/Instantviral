@@ -3,43 +3,50 @@ import { resolveCta } from '@/data/content/cta';
 import type { HomepageContent } from '@/types/content';
 
 /**
- * Homepage content document — Document 08.11 (final authority).
- * Section components consume this via HomePageView / mappers (not hardcoded in UI).
+ * Homepage content — Buy Instagram Followers Canada commercial authority.
+ * Section components consume this via HomePageView / mappers.
  */
 export const homepageContent: HomepageContent = {
   hero: {
-    eyebrow:
-      'Instagram Growth Services for Creators, Businesses & Brands Across Canada',
-    title: 'Buy Instagram Followers with Confidence',
+    eyebrow: 'Instagram Growth Platform in Canada',
+    title: 'Buy Instagram Followers Canada',
     description:
-      'Grow your Instagram presence with a secure ordering experience designed for creators, businesses and brands across Canada. Choose the follower package that fits your goals, place your order using only your public Instagram username, and track every step from checkout to delivery—with dedicated support whenever you need it.',
+      'Build stronger social proof for your Instagram profile with package-based growth for Canadian creators, businesses, and brands. Compare real audience packages, likes, and views—then buy IG followers or buy followers for Instagram when you are ready.',
     primaryMessage:
-      'Choose an Instagram follower package, order with your public username, and track delivery — no password required.',
-    purpose: 'Explain value proposition',
-    primaryKeyword: 'buy instagram followers',
+      'The clear path to buy Instagram followers and grow brand presence across Canada.',
+    purpose: 'Convert visitors searching to buy Instagram followers in Canada',
+    primaryKeyword: 'buy instagram followers canada',
     supportingKeywords: [
-      'instagram growth services',
-      'instagram followers Canada',
-      'secure instagram ordering',
-      'instagram follower packages',
+      'buy instagram followers',
+      'buy followers instagram',
+      'buy ig followers',
+      'buy real instagram followers',
+      'buy followers for instagram',
+      'buy instagram likes',
+      'buy instagram views',
+      'instagram growth services canada',
     ],
-    suggestedWordCount: 90,
+    suggestedWordCount: 120,
     primaryCta: resolveCta('getStarted', {
-      label: 'Buy Instagram Followers',
+      label: 'View Instagram Followers Packages',
       href: '/buy-instagram-followers',
     }),
     secondaryCta: resolveCta('browseServices', {
-      label: 'Explore Platforms',
-      href: '#platform-selector',
+      label: 'Explore Growth Options',
+      href: '#instagram-growth-services',
     }),
+    microcopy: 'No password required · Secure checkout · Order tracking',
     visual: {
-      src: '/assets/images/illustrations/hero-growth-phone.png',
-      alt: 'InstantViral floating phone showing social profile growth with rising followers and live order updates',
+      src: '/assets/images/illustrations/buy-instagram-followers-canada-hero.webp',
+      alt: 'Buy Instagram Followers Canada dashboard showing follower growth and secure delivery',
+      title: 'Buy Instagram Followers Canada',
+      caption:
+        'Premium Instagram growth for creators and businesses across Canada.',
       width: 1536,
       height: 1024,
     },
   },
-  /** Hero trust labels (Document 08.11 §4) — not a separate homepage Trust Bar section. */
+  /** Hero trust labels — credibility signals under the hero CTAs (max 3). */
   trustBar: {
     id: 'home-hero-trust',
     title: 'Trust labels',
@@ -48,7 +55,7 @@ export const homepageContent: HomepageContent = {
       {
         id: 'trust-no-password',
         label: 'No Password Required',
-        description: 'Orders use your public username or content URL only.',
+        description: 'Orders use your public Instagram username only.',
         iconKey: 'ShieldCheck',
       },
       {
@@ -58,26 +65,26 @@ export const homepageContent: HomepageContent = {
         iconKey: 'ShieldCheck',
       },
       {
-        id: 'trust-since-2018',
-        label: 'Trusted Since 2018',
-        description: 'InstantViral has served customers since 2018.',
-        iconKey: 'CalendarCheck',
-      },
-      {
-        id: 'trust-support',
-        label: 'Canadian Support',
-        description: 'Support for creators and brands across Canada.',
-        iconKey: 'Headphones',
+        id: 'trust-tracking',
+        label: 'Order Tracking',
+        description: 'Monitor available status updates after checkout.',
+        iconKey: 'Layers3',
       },
     ],
+  },
+  heroStats: {
+    id: 'home-hero-stats',
+    title: 'Verified InstantViral metrics',
+    purpose: 'Hero trust statistics from approved claims only',
+    statIds: ['stat-founded', 'stat-customers', 'stat-delivered', 'stat-support'],
   },
   platformGrid: {
     id: 'platform-selector',
     title: 'Choose Your Platform',
     description:
-      'Choose the social platform that matches your goals. Explore available services for Instagram, TikTok, YouTube and Facebook, then view the packages available for your account or content.',
+      'Start with Instagram follower packages, or explore growth services for TikTok, YouTube and Facebook when you are ready.',
     purpose: 'Route users by platform',
-    primaryKeyword: 'social media growth',
+    primaryKeyword: 'instagram growth services canada',
     suggestedWordCount: 50,
     platformIds: ['instagram', 'tiktok', 'youtube', 'facebook'],
     internalLinks: [
@@ -90,9 +97,9 @@ export const homepageContent: HomepageContent = {
       {
         platformId: 'instagram',
         description:
-          'Explore Instagram services for followers, likes, views and comments. Choose packages that support creators, businesses and brands building an audience.',
+          'Buy Instagram followers, likes, views and comments with clear package options for creators, businesses and brands in Canada.',
         ctaLabel: 'View Instagram Packages',
-        href: '#featured-services-instagram',
+        href: '#instagram-growth-services',
         previewServiceSlugs: [
           'buy-instagram-followers',
           'buy-instagram-likes',
@@ -106,11 +113,7 @@ export const homepageContent: HomepageContent = {
           'Discover TikTok services for followers, likes and views. Select packages that help creators and businesses expand reach on short-form video.',
         ctaLabel: 'View TikTok Packages',
         href: '#featured-services-tiktok',
-        previewServiceSlugs: [
-          'buy-tiktok-followers',
-          'buy-tiktok-likes',
-          'buy-tiktok-views',
-        ],
+        previewServiceSlugs: ['buy-tiktok-followers', 'buy-tiktok-likes', 'buy-tiktok-views'],
       },
       {
         platformId: 'youtube',
@@ -136,139 +139,121 @@ export const homepageContent: HomepageContent = {
   },
   servicesGrid: {
     id: 'featured-services',
-    title: 'Popular Social Media Growth Services',
+    title: 'Popular Instagram Growth Services',
     description:
-      'Browse popular services for Instagram, TikTok, YouTube and Facebook. Compare available packages and choose the service that best matches your platform and growth goals.',
-    purpose: 'Highlight curated mixed-platform services',
+      'Compare Instagram follower, like, view and comment packages. Start with followers when profile-level social proof is the priority.',
+    purpose: 'Highlight curated Instagram services',
     suggestedWordCount: 30,
     ctaLabel: 'View Packages',
     serviceSlugs: [
       'buy-instagram-followers',
       'buy-instagram-likes',
-      'buy-tiktok-followers',
-      'buy-tiktok-views',
-      'buy-youtube-subscribers',
-      'buy-youtube-views',
-      'buy-facebook-followers',
-      'buy-facebook-page-likes',
+      'buy-instagram-views',
+      'buy-instagram-comments',
     ],
     descriptions: {
       'buy-instagram-followers':
-        'Build your Instagram audience with follower packages for creators, businesses and brands. Choose an option that matches your current goals.',
+        'Build stronger Instagram profile visibility with follower packages for creators, businesses and brands across Canada.',
       'buy-instagram-likes':
-        'Support engagement and social proof on Instagram posts with like packages available in several quantities.',
-      'buy-tiktok-followers':
-        'Grow your TikTok audience with follower packages designed for creators, businesses and developing accounts.',
-      'buy-tiktok-views':
-        'Increase visibility on TikTok videos with view packages that support wider content reach.',
-      'buy-youtube-subscribers':
-        'Support your YouTube channel with subscriber packages for creators, businesses and growing brands.',
-      'buy-youtube-views':
-        'Increase visibility on YouTube videos with view packages available for different channel and campaign needs.',
-      'buy-facebook-followers':
-        'Grow your Facebook audience with follower packages designed for businesses, creators and brands.',
-      'buy-facebook-page-likes':
-        'Strengthen your Facebook page presence with page-like packages available for different business and branding goals.',
+        'Add visible interaction to selected Instagram posts with like packages in several quantities.',
+      'buy-instagram-views':
+        'Increase the displayed view count on eligible Instagram videos or reels.',
+      'buy-instagram-comments':
+        'Support visible conversation on posts where added comment activity is part of the campaign goal.',
     },
     badges: {
       'buy-instagram-followers': 'Best Seller',
       'buy-instagram-likes': 'Popular',
-      'buy-tiktok-followers': 'Trending',
-      'buy-tiktok-views': 'Popular',
-      'buy-youtube-subscribers': 'Recommended',
-      'buy-youtube-views': 'Trending',
-      'buy-facebook-followers': 'Popular',
-      'buy-facebook-page-likes': 'Recommended',
+      'buy-instagram-views': 'Trending',
+      'buy-instagram-comments': 'Recommended',
     },
   },
   whyChooseUs: {
     id: 'home-why',
-    title: 'What Makes Ordering Simple',
+    title: 'Why Canadian Customers Choose InstantViral',
     description:
-      'InstantViral keeps the ordering process straightforward, from choosing a service to tracking delivery. Each feature below addresses a practical part of the customer journey.',
+      'InstantViral keeps Instagram ordering clear for Canadian customers — from package selection through checkout and delivery tracking.',
     purpose: 'Explain practical ordering features',
     suggestedWordCount: 200,
     cta: {
-      label: 'Learn How Ordering Works',
-      href: '#home-how',
+      label: 'View Instagram Followers Packages',
+      href: '/buy-instagram-followers',
     },
     items: [
       {
-        id: 'why-public-info',
-        title: 'Public Information Only',
+        id: 'why-no-password',
+        title: 'No Instagram Password Required',
         description:
-          'We only request the public username, profile URL or content link required for the selected service.',
+          'Orders use the public Instagram username supplied at checkout. Customers do not need to provide their Instagram password.',
       },
       {
-        id: 'why-delivery-options',
-        title: 'Clear Delivery Options',
+        id: 'why-gradual-delivery',
+        title: 'Gradual Delivery',
         description:
-          'Delivery information and available timing options are displayed on the relevant service page before checkout.',
+          'Orders are delivered according to the selected package details rather than appearing as one unexplained bulk action.',
       },
       {
-        id: 'why-support',
-        title: 'Customer Assistance',
+        id: 'why-secure-checkout',
+        title: 'Secure Checkout',
         description:
-          'Support is available for questions about packages, checkout, delivery and existing orders.',
+          'Payments are completed through the secure checkout process available on the website.',
       },
       {
-        id: 'why-money-back',
-        title: '30-Day Money-Back Guarantee',
-        description:
-          'Eligible purchases are covered according to the refund policy and terms displayed for the selected service.',
-      },
-      {
-        id: 'why-refill',
-        title: 'Refill Protection',
-        description:
-          'Selected services include refill coverage where stated. Eligibility and refill terms vary by package.',
-      },
-      {
-        id: 'why-tracking',
+        id: 'why-order-tracking',
         title: 'Order Tracking',
         description:
-          'Customers can use their order ID and email address to review available order status updates.',
+          'Customers can check their order status through the InstantViral tracking system.',
+      },
+      {
+        id: 'why-clear-packages',
+        title: 'Clear Package Options',
+        description:
+          'Follower, like and view packages are separated so customers can choose the Instagram service that matches their goal.',
+      },
+      {
+        id: 'why-customer-support',
+        title: 'Customer Support',
+        description:
+          'Support is available for package selection, order questions and delivery-related assistance.',
       },
     ],
   },
   howItWorks: {
     id: 'home-how',
-    title: 'Getting Started Is Simple',
+    title: 'How to Buy Instagram Followers in Canada',
     description:
-      'Follow five clear steps from choosing a service to tracking delivery after checkout.',
-    purpose: 'Explain ordering process',
+      'Buying Instagram followers should be simple, transparent, and secure. At InstantViral, complete an order in a few minutes without sharing your Instagram password.',
+    purpose: 'Explain how to buy Instagram followers',
+    primaryKeyword: 'how to buy Instagram followers',
     suggestedWordCount: 150,
-    cta: resolveCta('getStarted', { href: '#platform-selector' }),
+    cta: resolveCta('getStarted', {
+      label: 'Compare Packages',
+      href: '/buy-instagram-followers',
+    }),
     steps: [
       {
-        id: 'step-choose-service',
-        title: 'Choose a Service',
+        id: 'step-choose-package',
+        title: 'Choose Your Instagram Followers Package',
         description:
-          'Select Instagram, TikTok, YouTube or Facebook, then open the service that matches your goal.',
+          "Select the follower package that best matches your goals. Each package clearly displays what you'll receive before checkout.",
       },
       {
-        id: 'step-select-package',
-        title: 'Choose a Package',
+        id: 'step-enter-username',
+        title: 'Enter Your Public Instagram Username',
         description:
-          'Compare available packages and choose the option that matches your needs and budget.',
-      },
-      {
-        id: 'step-enter-info',
-        title: 'Enter Required Information',
-        description:
-          'Provide the public username or content link required for the selected service.',
+          "Provide the public Instagram username where you'd like the followers delivered. Your Instagram password is never required.",
       },
       {
         id: 'step-checkout',
-        title: 'Complete Checkout',
+        title: 'Complete Secure Checkout',
         description:
-          'Review your order, complete payment and receive an order confirmation.',
+          'Review your order details and complete payment. Once confirmed, your order moves into processing.',
       },
       {
         id: 'step-track',
         title: 'Track Your Order',
         description:
-          'Use your order ID and email address to review available tracking updates.',
+          'Use the order tracking page to monitor delivery progress from confirmation through delivery.',
       },
     ],
   },
@@ -280,45 +265,41 @@ export const homepageContent: HomepageContent = {
   },
   testimonials: {
     id: 'home-testimonials',
-    title: 'Trusted by Thousands of Happy Customers',
+    title: 'Customer Experiences with InstantViral',
     description:
-      'Creators, businesses, and brands trust InstantViral for secure ordering, transparent delivery, and reliable customer support.',
+      'Genuine customer feedback for InstantViral Instagram and social media growth services.',
     purpose: 'Social proof',
     testimonialIds: [],
   },
   faq: {
     id: 'home-faq',
-    title: 'Questions We Hear Most Often',
-    purpose: 'Answer buying questions',
-    primaryKeyword: 'social media growth services',
+    title: 'Frequently Asked Questions About Buying Instagram Followers',
+    purpose: 'Answer Instagram follower buying questions',
+    primaryKeyword: 'buy instagram followers canada',
     faqIds: [
-      'faq-home-how-works',
-      'faq-home-choose-package',
+      'faq-home-buy-canada',
+      'faq-home-how-buy-followers',
       'faq-home-password',
-      'faq-home-public-account',
-      'faq-home-multiple-services',
-      'faq-home-order-start',
+      'faq-home-where-buy',
+      'faq-home-likes-views',
+      'faq-home-engagement-guarantee',
+      'faq-home-check-before',
       'faq-home-track-order',
-      'faq-home-gradual-delivery',
-      'faq-home-refill',
-      'faq-home-money-back',
-      'faq-home-platforms',
-      'faq-home-need-help',
     ],
   },
   finalCta: {
     id: 'home-final-cta',
-    title: 'Ready to Grow Your Social Media Presence?',
+    title: 'Ready to Grow Your Instagram Presence?',
     description:
-      'Choose your platform, review the available packages and place your order through a clear, trackable process.',
-    purpose: 'Drive conversions',
+      "Whether you're building a personal brand, launching a new business, promoting an online store, or growing a creator account, InstantViral makes it easy to compare Instagram growth services and choose the package that matches your goals. Browse our Instagram Followers, Likes, Views, and Comments packages, complete your order through a secure checkout, and track your order every step of the way.",
+    purpose: 'Drive conversions to Instagram follower packages',
     primaryCta: {
-      label: 'Buy Instagram Followers',
+      label: 'Compare Instagram Followers Packages',
       href: '/buy-instagram-followers',
     },
     secondaryCta: {
-      label: 'Contact Support',
-      href: routes.contact,
+      label: 'Explore All Instagram Services',
+      href: '#instagram-growth-services',
     },
   },
 };

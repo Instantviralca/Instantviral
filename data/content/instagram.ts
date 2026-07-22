@@ -15,15 +15,15 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
     seo: {
       title: 'Instagram Followers Packages & Pricing | InstantViral',
       description:
-        'Compare Instagram Followers Packages, pricing and plans. Review delivery details, choose a package and place your order through a clear checkout flow.',
+        'Compare Instagram follower packages, pricing, delivery details and available plan sizes. Choose an option that matches your account and growth goals.',
     },
     hero: {
       eyebrow: 'INSTAGRAM FOLLOWERS PRICING',
       title: 'Instagram Followers Packages',
       description:
-        'Choose a Followers package that matches your audience goals. Compare quantities and pricing, read delivery details, then checkout with a public username only.',
-      purpose: 'Convert visitors choosing Instagram follower packages',
-      primaryKeyword: 'Instagram Followers Packages',
+        'Compare available package sizes, pricing and delivery details in one place. Select an option that matches your account goals, review the order information, and continue to secure checkout using only your public Instagram username.',
+      purpose: 'Convert visitors comparing Instagram follower packages',
+      primaryKeyword: 'instagram followers packages',
       supportingKeywords: [
         'Instagram Followers Pricing',
         'Instagram Followers Plans',
@@ -36,13 +36,13 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
-        label: 'View Delivery Information',
+        label: 'View Delivery Details',
         href: '#delivery-process',
       },
       trustLabels: [
         { id: 'ig-f-trust-password', label: 'No Password Required' },
         { id: 'ig-f-trust-public', label: 'Public Username Only' },
-        { id: 'ig-f-trust-track', label: 'Order Tracking' },
+        { id: 'ig-f-trust-checkout', label: 'Secure Checkout' },
         { id: 'ig-f-trust-support', label: 'Customer Support' },
       ],
       visual: {
@@ -56,12 +56,12 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Instagram Followers Pricing',
       description:
-        'Select a real package quantity and price. Delivery timing and refill eligibility are confirmed before checkout for the option you choose.',
+        'Select a package quantity to view its price and included order details. Delivery availability, estimated timing and refill eligibility are shown before checkout for the option you select.',
       purpose: 'Present real InstantViral.ca follower packages',
       primaryKeyword: 'Instagram Followers Pricing',
       suggestedWordCount: 40,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue with This Package',
       emptyMessage: 'Instagram follower packages are temporarily unavailable.',
     },
     benefits: {
@@ -69,7 +69,7 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
       title: 'Support the Presence You Are Already Building',
       description: '',
       purpose: 'Unused on packages conversion layout',
-      primaryKeyword: 'Instagram Followers Packages',
+      primaryKeyword: 'instagram followers packages',
       suggestedWordCount: 40,
       items: [],
     },
@@ -78,7 +78,7 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
       title: 'Why Order From InstantViral',
       description: '',
       purpose: 'Unused on packages conversion layout',
-      primaryKeyword: 'Instagram Followers Order',
+      primaryKeyword: 'instagram followers packages',
       suggestedWordCount: 40,
       items: [],
     },
@@ -96,7 +96,7 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
       description:
         'Choose a package, enter your public username, complete checkout and track available updates.',
       purpose: 'Explain ordering process',
-      primaryKeyword: 'Instagram Followers Order',
+      primaryKeyword: 'instagram followers packages',
       suggestedWordCount: 80,
       steps: [
         {
@@ -142,40 +142,33 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
     },
     reviews: {
       id: 'ig-followers-reviews',
-      title: 'Customer Reviews for Instagram Followers',
+      title: 'Recent Customer Experiences',
       description:
-        'Customer reviews for this InstantViral Instagram service.',
+        'Read feedback from customers who used our Instagram package service and completed their orders through InstantViral.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
     faq: {
       id: 'ig-followers-faq',
-      title: 'Instagram Followers Packages FAQs',
-      description: 'Answers about choosing packages, delivery and placing an order.',
+      title: 'Instagram Followers Package FAQs',
+      description: 'Quick answers about packages, delivery and checkout.',
       purpose: 'Package and ordering FAQs with FAQPage schema',
-      primaryKeyword: 'Instagram Followers Packages',
+      primaryKeyword: 'instagram followers packages',
       faqIds: [
         'faq-ig-pkg-choose',
-        'faq-ig-pkg-order-again',
-        'faq-ig-pkg-split',
         'faq-ig-pkg-delivery-start',
         'faq-ig-pkg-gradual',
         'faq-ig-pkg-track',
-        'faq-ig-pkg-after-checkout',
-        'faq-ig-pkg-upgrade',
+        'faq-ig-pkg-order-again',
+        'faq-ig-pkg-password',
       ],
     },
     relatedServices: {
       id: 'related-instagram-services',
-      title: 'Related Instagram Services',
-      description:
-        'Looking for more than followers? Explore likes, views and comments packages when you need broader profile support.',
+      title: 'Related Instagram Packages',
+      description: 'Add likes, views or comments when your campaign also needs post-level support.',
       purpose: 'Internal links to sibling Instagram offers',
-      serviceSlugs: [
-        'buy-instagram-likes',
-        'buy-instagram-views',
-        'buy-instagram-comments',
-      ],
+      serviceSlugs: ['buy-instagram-likes', 'buy-instagram-views', 'buy-instagram-comments'],
       cta: {
         label: 'Explore Instagram Services',
         href: '/buy-instagram-followers',
@@ -183,12 +176,12 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
     },
     finalCta: {
       id: 'ig-followers-final-cta',
-      title: 'Start Growing Your Audience',
+      title: 'Choose a Package That Fits Your Account',
       description:
-        'Pick an Instagram Followers package that matches your creator growth or brand credibility goals, then checkout with a public username only.',
+        'Select a quantity, review delivery details and continue to secure checkout.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Start Growing Your Audience',
+        label: 'Compare Packages',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
@@ -207,17 +200,17 @@ function buildBuyInstagramLikesContent(): ServiceContent {
     slug: 'buy-instagram-likes',
     platformId: 'instagram',
     seo: {
-      title: 'Instagram Likes Packages & Pricing | InstantViral',
+      title: 'Buy Instagram Likes | InstantViral',
       description:
-        'Compare Instagram Likes Packages, pricing and plans. Review delivery details, choose a package and place your order with a public post URL only.',
+        'Buy Instagram likes through InstantViral with clear package options, delivery details, secure checkout, order tracking and a public post URL only.',
     },
     hero: {
       eyebrow: 'INSTAGRAM LIKES PRICING',
       title: 'Instagram Likes Packages',
       description:
         'Pick a Likes package that supports stronger first impressions on posts or Reels. Compare pricing, check delivery, and order with a public Instagram post URL only.',
-      purpose: 'Convert visitors choosing Instagram likes packages',
-      primaryKeyword: 'Instagram Likes Packages',
+      purpose: 'Convert visitors looking to buy Instagram likes',
+      primaryKeyword: 'buy instagram likes',
       supportingKeywords: [
         'Buy Instagram Likes',
         'Buy Real Instagram Likes',
@@ -266,7 +259,7 @@ function buildBuyInstagramLikesContent(): ServiceContent {
       title: 'Support the Content You Are Already Publishing',
       description: '',
       purpose: 'Unused on packages conversion layout',
-      primaryKeyword: 'Instagram Likes Packages',
+      primaryKeyword: 'buy instagram likes',
       suggestedWordCount: 40,
       items: [],
     },
@@ -275,7 +268,7 @@ function buildBuyInstagramLikesContent(): ServiceContent {
       title: 'Why Order From InstantViral',
       description: '',
       purpose: 'Unused on packages conversion layout',
-      primaryKeyword: 'Instagram Likes Order',
+      primaryKeyword: 'buy instagram likes',
       suggestedWordCount: 40,
       items: [],
     },
@@ -292,7 +285,7 @@ function buildBuyInstagramLikesContent(): ServiceContent {
       description:
         'Choose a package, enter your public post URL, complete checkout and track available updates.',
       purpose: 'Explain ordering process',
-      primaryKeyword: 'Instagram Likes Order',
+      primaryKeyword: 'buy instagram likes',
       suggestedWordCount: 80,
       steps: [
         {
@@ -338,60 +331,45 @@ function buildBuyInstagramLikesContent(): ServiceContent {
     },
     reviews: {
       id: 'ig-likes-reviews',
-      title: 'Customer Reviews for Instagram Likes',
-      description:
-        'Customer reviews for this InstantViral Instagram service.',
+      title: 'Customer Reviews',
+      description: 'Feedback from customers who completed an order on our platform.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
     faq: {
       id: 'ig-likes-faq',
-      title: 'Instagram Likes Packages FAQs',
-      description: 'Answers about choosing likes packages, delivery and placing an order.',
+      title: 'Common Questions',
+      description: 'Quick answers about packages, delivery and checkout.',
       purpose: 'Package and ordering FAQs with FAQPage schema',
-      primaryKeyword: 'Instagram Likes Packages',
+      primaryKeyword: 'buy instagram likes',
       faqIds: [
         'faq-ig-likes-pkg-choose',
-        'faq-ig-likes-pkg-order-again',
-        'faq-ig-likes-pkg-split',
         'faq-ig-likes-pkg-delivery-start',
         'faq-ig-likes-pkg-gradual',
         'faq-ig-likes-pkg-track',
-        'faq-ig-likes-pkg-after-checkout',
-        'faq-ig-likes-pkg-upgrade',
         'faq-ig-likes-pkg-password',
         'faq-ig-likes-pkg-any-post',
       ],
     },
     relatedServices: {
       id: 'related-instagram-services-likes',
-      title: 'Related Instagram Services',
-      description:
-        'Looking for more than likes? Explore followers, views and comments packages when you need broader Instagram support.',
+      title: 'Explore More Services',
+      description: 'Add audience growth, views or comments when your campaign needs more support.',
       purpose: 'Internal links to sibling Instagram offers',
-      serviceSlugs: [
-        'buy-instagram-followers',
-        'buy-instagram-views',
-        'buy-instagram-comments',
-      ],
+      serviceSlugs: ['buy-instagram-followers', 'buy-instagram-views', 'buy-instagram-comments'],
       cta: {
-        label: 'Explore Instagram Services',
+        label: 'Explore More Services',
         href: '/buy-instagram-followers',
       },
     },
     finalCta: {
       id: 'ig-likes-final-cta',
-      title: 'Boost Your Instagram Engagement',
-      description:
-        'Choose an Instagram Likes package that supports stronger post performance and first impressions, then checkout with a public post URL.',
+      title: 'Ready to Get Started?',
+      description: 'Choose a package and continue to secure checkout.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Boost Your Instagram Engagement',
+        label: 'Choose a Package',
         href: PRICING_ANCHOR,
-      },
-      secondaryCta: {
-        label: 'Contact Support',
-        href: routes.contact,
       },
     },
   };
@@ -405,9 +383,9 @@ function buildBuyInstagramViewsContent(): ServiceContent {
     slug: 'buy-instagram-views',
     platformId: 'instagram',
     seo: {
-      title: 'Buy Instagram Views for Reels & Video Reach | InstantViral',
+      title: 'Buy Instagram Views Canada | InstantViral',
       description:
-        'Support Instagram Reel and video discoverability with real views packages, clear delivery estimates, no password required, and secure checkout on InstantViral.ca.',
+        'Buy Instagram views in Canada with clear Reel and video package options, delivery estimates, secure checkout, order tracking and no password required.',
     },
     hero: {
       eyebrow: 'INSTAGRAM VIDEO GROWTH SERVICES FOR CANADA',
@@ -431,15 +409,13 @@ function buildBuyInstagramViewsContent(): ServiceContent {
       },
       secondaryCta: {
         label: 'How It Works',
-        href: HOW_IT_WORKS_ANCHOR,
+        href: '#delivery-process',
       },
       trustLabels: [
-        { id: 'ig-v-trust-2018', label: 'Trusted Since 2018' },
-        { id: 'ig-v-trust-customers', label: '50,000+ Customers' },
         { id: 'ig-v-trust-password', label: 'No Password Required' },
-        { id: 'ig-v-trust-support', label: '24/7 Support' },
-        { id: 'ig-v-trust-refund', label: '30-Day Money-Back Guarantee' },
-        { id: 'ig-v-trust-refill', label: 'Refill Protection on Eligible Packages' },
+        { id: 'ig-v-trust-public', label: 'Public URL Only' },
+        { id: 'ig-v-trust-checkout', label: 'Secure Checkout' },
+        { id: 'ig-v-trust-track', label: 'Order Tracking' },
       ],
       visual: {
         src: '/assets/images/illustrations/instagram-dashboard.svg',
@@ -452,197 +428,69 @@ function buildBuyInstagramViewsContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your Instagram Views Package',
       description:
-        'Select from the existing Instagram Views packages already imported from InstantViral.ca. Quantities, prices, delivery estimates, package features, badges, and availability come from the real pricing data layer.',
+        'Select a package quantity and price. Delivery estimates and package details are shown before checkout.',
       purpose: 'Present real InstantViral.ca views packages',
       primaryKeyword: 'Instagram views packages',
       suggestedWordCount: 40,
       packageIds: [],
       primaryCtaLabel: 'Order Now',
-      emptyMessage: 'Instagram Views packages are temporarily unavailable.',
+      emptyMessage: 'Packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-instagram-views',
       title: 'Support the Videos and Reels You Want More People to See',
-      description:
-        'Instagram views are a visible signal of how often a video or Reel has been watched. For creators, they can help strengthen the presentation of tutorials, entertainment, behind-the-scenes clips, or campaign content. For businesses, views can support product demonstrations, promotions, customer stories, and branded video content.\n\nBuying views should not replace creative ideas, strong hooks, useful storytelling, or consistent publishing. It works best as one part of a wider strategy that includes quality content, relevant captions, audience interaction, and thoughtful promotion.',
-      purpose: 'Explain informed use of views packages',
+      description: '',
+      purpose: 'Unused on packages ecommerce layout',
       primaryKeyword: 'buy Instagram views',
-      suggestedWordCount: 180,
-      items: [
-        {
-          id: 'ig-v-audience-creators',
-          title: 'Creators',
-          description:
-            'Creators can use views packages to support tutorials, entertainment, behind-the-scenes clips, and campaign videos that deserve more visibility alongside strong hooks and consistent publishing.',
-        },
-        {
-          id: 'ig-v-audience-ecommerce',
-          title: 'E-commerce Brands',
-          description:
-            'E-commerce brands can help product demonstrations, promotions, and launch videos present more strongly to shoppers discovering the brand through Instagram video content.',
-        },
-        {
-          id: 'ig-v-audience-local',
-          title: 'Local Businesses',
-          description:
-            'Local businesses can support customer stories, service walkthroughs, and community updates so new viewers see video content that reflects the care behind the brand.',
-        },
-        {
-          id: 'ig-v-audience-agencies',
-          title: 'Agencies',
-          description:
-            'Agencies may use views packages to support client campaigns, launches, and branded video pushes while pairing promotion with clear creative direction and publishing plans.',
-        },
-      ],
+      suggestedWordCount: 40,
+      items: [],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-views',
       title: 'A Clearer Way to Buy Instagram Views',
-      purpose: 'Build trust with conditional policy wording',
+      description: '',
+      purpose: 'Unused on packages ecommerce layout',
       primaryKeyword: 'Instagram video promotion Canada',
-      suggestedWordCount: 150,
-      items: [
-        {
-          id: 'ig-v-why-password',
-          title: 'No Password Required',
-          description:
-            'The order form only needs the public URL of the Instagram video or Reel receiving the views.',
-        },
-        {
-          id: 'ig-v-why-packages',
-          title: 'Real Package Options',
-          description:
-            'Use the genuine Instagram Views packages already maintained for InstantViral.ca. Frontend prices and quantities are not invented.',
-        },
-        {
-          id: 'ig-v-why-delivery',
-          title: 'Package-Specific Delivery',
-          description:
-            'Each package should display its actual processing or delivery estimate from the pricing data.',
-        },
-        {
-          id: 'ig-v-why-refill',
-          title: 'Refill Protection',
-          description:
-            'Eligible packages may include refill coverage. Display the applicable terms clearly before checkout.',
-        },
-        {
-          id: 'ig-v-why-refund',
-          title: '30-Day Money-Back Guarantee',
-          description:
-            'Eligible purchases are covered under the Refund Policy and the service-specific conditions.',
-        },
-        {
-          id: 'ig-v-why-support',
-          title: '24/7 Support',
-          description:
-            'Support is available for package questions, order updates, and processing assistance.',
-        },
-      ],
-      cta: {
-        label: 'View Instagram Views Packages',
-        href: PRICING_ANCHOR,
-      },
+      suggestedWordCount: 40,
+      items: [],
     },
     features: {
       id: 'buy-instagram-views-features',
       title: 'Features',
       description: '',
-      purpose: 'Unused on 09.13 — Video Link and Delivery Requirements is separate',
+      purpose: 'Unused on packages ecommerce layout',
       items: [],
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How to Buy Instagram Views',
-      description:
-        'The ordering process is designed to be simple, transparent, and easy to complete on mobile or desktop.',
-      purpose: 'Explain the five-step ordering process',
+      title: 'How Ordering Works',
+      description: '',
+      purpose: 'Unused on packages ecommerce layout',
       primaryKeyword: 'buy Instagram views',
-      suggestedWordCount: 140,
-      steps: [
-        {
-          id: 'ig-v-step-1',
-          title: 'Choose a Package',
-          description:
-            'Review the real quantities, prices, package features, and delivery estimates available for Instagram Views.',
-        },
-        {
-          id: 'ig-v-step-2',
-          title: 'Add the Video or Reel URL',
-          description:
-            'Provide the public Instagram link for the content receiving the views.',
-        },
-        {
-          id: 'ig-v-step-3',
-          title: 'Review the Details',
-          description:
-            'Confirm the selected package, content URL, price, delivery estimate, and any applicable refill terms.',
-        },
-        {
-          id: 'ig-v-step-4',
-          title: 'Complete Checkout',
-          description:
-            'Enter your email address, choose an available payment method, accept the terms, and place the order.',
-        },
-        {
-          id: 'ig-v-step-5',
-          title: 'Track the Order',
-          description:
-            'Use the order ID and checkout email on the Track Order page to view progress.',
-        },
-      ],
-      cta: {
-        label: 'Select a Package',
-        href: PRICING_ANCHOR,
-      },
+      suggestedWordCount: 40,
+      steps: [],
     },
     deliveryAndSafety: {
       id: 'video-link-and-delivery',
       title: 'What We Need to Process Your Order',
-      description:
-        'The order form should request the public URL of the Instagram video or Reel receiving the views. No Instagram password is required. The content must remain publicly accessible while the order is being processed.\n\nDelivery estimates depend on the package selected and should be read directly from the real pricing data. Do not promise instant delivery unless the package itself explicitly supports that claim.',
-      purpose: 'Explain video/Reel URL and delivery requirements',
+      description: '',
+      purpose: 'Unused on packages ecommerce layout',
       primaryKeyword: 'Instagram views delivery',
-      suggestedWordCount: 120,
-      items: [
-        {
-          id: 'ig-v-req-url',
-          title: 'Public Video or Reel URL',
-          description:
-            'Orders use the public Instagram video or Reel URL only. Keep the content publicly accessible while processing.',
-        },
-        {
-          id: 'ig-v-req-password',
-          title: 'No Password Required',
-          description:
-            'InstantViral never asks for your Instagram password. Only the public content link is needed to fulfill views.',
-        },
-        {
-          id: 'ig-v-req-delivery',
-          title: 'Package-Specific Delivery Estimate',
-          description:
-            'Start and delivery estimates come from the real package data shown on each pricing card before you order.',
-        },
-        {
-          id: 'ig-v-req-tracking',
-          title: 'Customer-Safe Order Tracking',
-          description:
-            'Track progress with your order ID and checkout email on the Track Order page without internal processing notes.',
-        },
-      ],
+      suggestedWordCount: 40,
+      items: [],
     },
     reviews: {
       id: 'ig-views-reviews',
-      title: 'What Customers Say About InstantViral',
+      title: 'Customer Reviews',
       description:
-        'Customer reviews for this InstantViral service.',
+        'See what customers say about package selection, checkout, delivery updates, and support.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
     faq: {
       id: 'ig-views-faq',
-      title: 'Frequently Asked Questions About Buying Instagram Views',
-      description: 'Answers to common questions before you choose a package.',
+      title: 'Common Questions',
+      description: 'Quick answers about packages, delivery and checkout.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy Instagram views Canada',
       faqIds: [
@@ -658,28 +506,23 @@ function buildBuyInstagramViewsContent(): ServiceContent {
     },
     relatedServices: {
       id: 'related-instagram-services-views',
-      title: 'Explore More Instagram Growth Services',
-      description:
-        'Views help video visibility. Pair them with followers, likes, or comments when your content strategy needs a broader boost — or return to the InstantViral homepage to browse every platform.',
+      title: 'Explore More Services',
+      description: 'Add audience growth, reactions or comments when your campaign needs more support.',
       purpose: 'Internal links to sibling Instagram offers',
-      serviceSlugs: [
-        'buy-instagram-followers',
-        'buy-instagram-likes',
-        'buy-instagram-comments',
-      ],
+      serviceSlugs: ['buy-instagram-followers', 'buy-instagram-likes', 'buy-instagram-comments'],
       cta: {
-        label: 'Back to InstantViral homepage',
-        href: '/',
+        label: 'Explore More Services',
+        href: '/buy-instagram-followers',
       },
     },
     finalCta: {
       id: 'ig-views-final-cta',
-      title: 'Increase Your Video Reach',
+      title: 'Ready to Get Started?',
       description:
-        'Select an Instagram Views package that fits the Reel or video you want more people to discover, then review delivery details before checkout.',
+        'Choose your package, complete checkout securely, and track your order from start to finish.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Increase Your Video Reach',
+        label: 'View Packages',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
@@ -698,9 +541,9 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
     slug: 'buy-instagram-comments',
     platformId: 'instagram',
     seo: {
-      title: 'Buy Instagram Comments Packages | InstantViral Canada',
+      title: 'Buy Instagram Comments Canada | InstantViral',
       description:
-        'Increase meaningful Instagram engagement with comments packages that support conversation, credibility, and community trust. Public post URL only, secure checkout, and order tracking.',
+        'Buy Instagram comments in Canada with clear package options, a public post URL, secure checkout, delivery details and order tracking through InstantViral.',
     },
     hero: {
       eyebrow: 'INSTAGRAM COMMENT SERVICE FOR CANADA',
@@ -708,7 +551,7 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
       description:
         'Increase meaningful engagement with comments that help your posts look more active and encourage genuine conversations. Choose a package, place your order using only your public post URL, and monitor delivery through secure order tracking.',
       purpose: 'Convert visitors searching for Instagram comments packages',
-      primaryKeyword: 'buy Instagram comments',
+      primaryKeyword: 'buy Instagram comments Canada',
       supportingKeywords: [
         'Instagram comments packages',
         'Increase Instagram comments',
@@ -901,8 +744,7 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
         {
           id: 'ig-c-req-public-post',
           title: 'Public post',
-          description:
-            'The post or Reel must stay publicly viewable while comments are delivered.',
+          description: 'The post or Reel must stay publicly viewable while comments are delivered.',
         },
         {
           id: 'ig-c-req-correct-url',
@@ -927,8 +769,7 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
     reviews: {
       id: 'ig-comments-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
+      description: 'Customer reviews for this InstantViral service.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
@@ -956,11 +797,7 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
       description:
         'Comments start the conversation. Pair likes for first reactions, views for Reel stay-time, or followers when you need a larger audience reading future threads.',
       purpose: 'Internal links to sibling Instagram offers',
-      serviceSlugs: [
-        'buy-instagram-followers',
-        'buy-instagram-likes',
-        'buy-instagram-views',
-      ],
+      serviceSlugs: ['buy-instagram-followers', 'buy-instagram-likes', 'buy-instagram-views'],
       cta: {
         label: 'Back to InstantViral homepage',
         href: '/',

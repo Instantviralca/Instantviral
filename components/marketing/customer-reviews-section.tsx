@@ -93,6 +93,7 @@ export type CustomerReviewsSectionProps = {
   reviews: PublicReview[];
   aggregate: AggregateRatingResult;
   className?: string;
+  title?: string;
 };
 
 /**
@@ -103,6 +104,7 @@ export function CustomerReviewsSection({
   reviews,
   aggregate,
   className,
+  title = 'Customer Reviews',
 }: CustomerReviewsSectionProps) {
   const listId = useId();
   const headingId = 'home-customer-reviews-heading';
@@ -151,7 +153,7 @@ export function CustomerReviewsSection({
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-2xl space-y-2">
             <Heading as="h2" size="h2" id={headingId}>
-              Customer Reviews
+              {title}
             </Heading>
             <MutedText>
               {aggregate.ratingValue.toFixed(1)} out of {aggregate.bestRating} based on{' '}
@@ -191,7 +193,7 @@ export function CustomerReviewsSection({
           ref={scrollerRef}
           className={cn(
             'flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2',
-            'scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden',
+            '[scrollbar-width:none] scroll-smooth [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden',
           )}
           role="region"
           aria-roledescription="carousel"
@@ -232,7 +234,7 @@ export function CustomerReviewsSection({
           </div>
           <Link
             href={routes.reviews}
-            className="min-h-11 inline-flex items-center text-sm font-semibold text-[var(--brand-primary)] underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex min-h-11 items-center text-sm font-semibold text-[var(--brand-primary)] underline-offset-4 hover:underline focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none"
           >
             Read All Reviews
           </Link>

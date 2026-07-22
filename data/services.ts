@@ -7,6 +7,8 @@ type ServiceInput = {
   platform: PlatformId;
   shortName: string;
   slug: string;
+  /** Optional display name override (defaults to `Buy {Platform} {shortName}`). */
+  name?: string;
   primaryKeyword: string;
   secondaryKeywords: string[];
   category: ServiceCategory;
@@ -17,10 +19,7 @@ type ServiceInput = {
   comingSoon?: boolean;
 };
 
-const PLATFORM_META: Record<
-  PlatformId,
-  { name: string; slug: string; color: string }
-> = {
+const PLATFORM_META: Record<PlatformId, { name: string; slug: string; color: string }> = {
   instagram: { name: 'Instagram', slug: 'instagram', color: '#E1306C' },
   tiktok: { name: 'TikTok', slug: 'tiktok', color: '#000000' },
   youtube: { name: 'YouTube', slug: 'youtube', color: '#FF0000' },
@@ -29,7 +28,7 @@ const PLATFORM_META: Record<
 
 function buildService(input: ServiceInput): Service {
   const platform = PLATFORM_META[input.platform];
-  const name = `Buy ${platform.name} ${input.shortName}`;
+  const name = input.name ?? `Buy ${platform.name} ${input.shortName}`;
   const url = `/${input.slug}`;
 
   return {
@@ -67,8 +66,14 @@ const SERVICE_INPUTS: ServiceInput[] = [
     platform: 'instagram',
     shortName: 'Followers',
     slug: 'buy-instagram-followers',
-    primaryKeyword: 'buy instagram followers',
-    secondaryKeywords: ['instagram followers', 'ig followers'],
+    name: 'Instagram Followers Packages',
+    primaryKeyword: 'instagram followers packages',
+    secondaryKeywords: [
+      'instagram followers',
+      'instagram followers pricing',
+      'instagram followers plans',
+      'ig followers',
+    ],
     category: 'followers',
     icon: 'users',
     showInFooter: true,
@@ -229,13 +234,13 @@ export function getFooterServices(): Service[] {
   return services.filter((service) => service.showInFooter && !service.comingSoon);
 }
 
-export function getRelatedServices(service: Service, limit: number = CONSTANTS.maxRelatedServices): Service[] {
+export function getRelatedServices(
+  service: Service,
+  limit: number = CONSTANTS.maxRelatedServices,
+): Service[] {
   return getPlatformServices(service.platform)
     .filter(
-      (item) =>
-        item.id !== service.id &&
-        isApprovedServiceSlug(item.slug) &&
-        !item.comingSoon,
+      (item) => item.id !== service.id && isApprovedServiceSlug(item.slug) && !item.comingSoon,
     )
     .slice(0, Math.min(limit, 3));
 }

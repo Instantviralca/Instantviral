@@ -18,18 +18,18 @@ function clampDescription(text: string, min = 140, max = 160): string {
 export const descriptions = {
   home: () =>
     clampDescription(
-      `InstantViral helps creators, businesses, and brands grow on Instagram, TikTok, YouTube, and Facebook with clear packages, secure checkout, and 24/7 support since 2018.`,
+      'Buy Instagram followers in Canada with secure checkout, no password required, gradual delivery and clear packages. Explore likes and views — InstantViral.',
     ),
 
   service: (service: Service) => {
     if (service.slug === 'buy-instagram-followers') {
       return clampDescription(
-        'Compare Instagram Followers Packages, pricing and plans. Review delivery details, choose a package, and place your order with a public username only.',
+        'Compare Instagram follower packages, pricing, delivery details and available plan sizes. Choose an option that matches your account and growth goals.',
       );
     }
     if (service.slug === 'buy-instagram-likes') {
       return clampDescription(
-        'Compare Instagram Likes Packages, pricing and plans. Review delivery details, choose a package, and place your order with a public post URL only.',
+        'Buy Instagram likes through InstantViral with clear package options, delivery details, secure checkout, order tracking, and a public post URL only.',
       );
     }
     if (service.slug === 'buy-instagram-views') {
@@ -39,7 +39,7 @@ export const descriptions = {
     }
     if (service.slug === 'buy-instagram-comments') {
       return clampDescription(
-        'Increase Instagram engagement with comments packages that support conversation, credibility, and community trust. Public post URL only, secure checkout, and order tracking.',
+        'Buy Instagram comments in Canada with clear package options, a public post URL, secure checkout, delivery details and order tracking through InstantViral.',
       );
     }
     if (service.slug === 'buy-tiktok-followers') {
@@ -74,7 +74,7 @@ export const descriptions = {
     }
     if (service.slug === 'buy-youtube-subscribers') {
       return clampDescription(
-        'Compare YouTube subscriber packages, review pricing and delivery information, and order using your public channel URL with checkout and order tracking.',
+        'Buy YouTube subscribers in Canada with clear package options, delivery information, secure checkout and order tracking using your public channel URL.',
       );
     }
     if (service.slug === 'buy-youtube-views') {

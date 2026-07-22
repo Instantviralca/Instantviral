@@ -18,8 +18,7 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
         'Buy Facebook Followers Canada with clear package options, public page URL checkout, gradual delivery details and order tracking. No password required.',
     },
     hero: {
-      eyebrow:
-        'FACEBOOK FOLLOWER PACKAGES FOR CANADIAN BUSINESSES, CREATORS & BRANDS',
+      eyebrow: 'FACEBOOK FOLLOWER PACKAGES FOR CANADIAN BUSINESSES, CREATORS & BRANDS',
       title: 'Buy Facebook Followers Canada',
       description:
         'Grow your Facebook presence with follower packages designed for creators, businesses and brands across Canada. Choose the package that fits your goals, submit your public Facebook page URL and complete your order through our secure checkout. Track your order from confirmation through delivery without ever sharing your Facebook password.',
@@ -79,20 +78,17 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
         {
           id: 'fb-f-credibility',
           title: 'Build Credibility',
-          description:
-            'A larger follower base creates a stronger first impression.',
+          description: 'A larger follower base creates a stronger first impression.',
         },
         {
           id: 'fb-f-community',
           title: 'Support Community Growth',
-          description:
-            'Suitable for businesses, creators, organisations and brands.',
+          description: 'Suitable for businesses, creators, organisations and brands.',
         },
         {
           id: 'fb-f-flexible',
           title: 'Flexible Packages',
-          description:
-            'Choose a package that matches your current audience and objectives.',
+          description: 'Choose a package that matches your current audience and objectives.',
         },
         {
           id: 'fb-f-secure',
@@ -138,8 +134,7 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
         {
           id: 'fb-f-why-support',
           title: 'Canadian Support',
-          description:
-            'Our support team is available whenever assistance is required.',
+          description: 'Our support team is available whenever assistance is required.',
         },
       ],
     },
@@ -221,8 +216,7 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
         {
           id: 'fb-f-req-url',
           title: 'Public Facebook Page URL',
-          description:
-            'Submit the public URL of the page receiving followers.',
+          description: 'Submit the public URL of the page receiving followers.',
         },
         {
           id: 'fb-f-req-package',
@@ -244,8 +238,7 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
     reviews: {
       id: 'fb-followers-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
+      description: 'Customer reviews for this InstantViral service.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
@@ -300,24 +293,23 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
     slug: 'buy-facebook-page-likes',
     platformId: 'facebook',
     seo: {
-      title: 'Buy Facebook Likes Canada | Packages & Pricing',
+      title: 'Buy Facebook Page Likes Canada | Packages & Pricing',
       description:
-        'Buy Facebook Likes Canada with clear page like packages, public page URL checkout, gradual delivery details and order tracking. No password required.',
+        'Buy Facebook Page Likes Canada with clear package options, public page URL checkout, gradual delivery details and order tracking. No password required.',
     },
     hero: {
-      eyebrow:
-        'FACEBOOK PAGE LIKE PACKAGES FOR CANADIAN BUSINESSES, BRANDS & CREATORS',
-      title: 'Buy Facebook Likes Canada',
+      eyebrow: 'FACEBOOK PAGE LIKE PACKAGES FOR CANADIAN BUSINESSES, BRANDS & CREATORS',
+      title: 'Buy Facebook Page Likes Canada',
       description:
         'Build a stronger Facebook presence with page like packages designed for businesses, creators and brands across Canada. Choose the package that fits your goals, submit your public Facebook page URL and complete your secure order in just a few steps. Track your order from confirmation through delivery without ever sharing your Facebook password.',
       purpose: 'Convert for Facebook page likes packages in Canada',
-      primaryKeyword: 'buy Facebook likes Canada',
+      primaryKeyword: 'buy Facebook page likes Canada',
       supportingKeywords: [
-        'Buy Facebook Likes',
+        'Buy Facebook Page Likes',
         'Facebook Page Likes',
-        'Real Facebook Likes',
+        'Real Facebook Page Likes',
         'Increase Facebook Page Likes',
-        'Facebook Likes Packages',
+        'Facebook Page Likes Packages',
       ],
       suggestedWordCount: 120,
       primaryCta: {
@@ -348,7 +340,7 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
       description:
         'Select the page like package that matches your business goals. Every package includes secure checkout, delivery updates and order tracking from start to finish.',
       purpose: 'Present real InstantViral.ca Facebook page likes packages',
-      primaryKeyword: 'Facebook likes packages',
+      primaryKeyword: 'Facebook page likes packages',
       suggestedWordCount: 40,
       packageIds: [],
       primaryCtaLabel: 'Order Now',
@@ -360,20 +352,18 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
       description:
         "Page likes help strengthen your Facebook page's credibility and create a stronger first impression for visitors. Combined with regular posting and valuable content, page likes can support long-term brand visibility and community growth.",
       purpose: 'Explain informed use of Facebook page likes packages',
-      primaryKeyword: 'buy Facebook likes',
+      primaryKeyword: 'buy Facebook page likes',
       suggestedWordCount: 180,
       items: [
         {
           id: 'fb-pl-credibility',
           title: 'Increase Page Credibility',
-          description:
-            'A stronger page like count helps build trust with new visitors.',
+          description: 'A stronger page like count helps build trust with new visitors.',
         },
         {
           id: 'fb-pl-presence',
           title: 'Strengthen Brand Presence',
-          description:
-            'Suitable for businesses, creators, organisations and brands.',
+          description: 'Suitable for businesses, creators, organisations and brands.',
         },
         {
           id: 'fb-pl-flexible',
@@ -440,14 +430,12 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
         {
           id: 'fb-pl-del-review',
           title: 'Order Review',
-          description:
-            'Your page URL and selected package are verified before processing.',
+          description: 'Your page URL and selected package are verified before processing.',
         },
         {
           id: 'fb-pl-del-begins',
           title: 'Delivery Begins',
-          description:
-            'Page likes begin according to the estimated delivery schedule.',
+          description: 'Page likes begin according to the estimated delivery schedule.',
         },
         {
           id: 'fb-pl-del-progress',
@@ -518,8 +506,7 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
         {
           id: 'fb-pl-req-public',
           title: 'Public Facebook Page',
-          description:
-            'Keep your page publicly accessible while delivery is in progress.',
+          description: 'Keep your page publicly accessible while delivery is in progress.',
         },
         {
           id: 'fb-pl-req-email',
@@ -531,8 +518,7 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
     reviews: {
       id: 'fb-page-likes-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
+      description: 'Customer reviews for this InstantViral service.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
@@ -541,7 +527,7 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
       title: 'Frequently Asked Questions About Buying Facebook Page Likes',
       description: 'Answers to common questions before you choose a package.',
       purpose: 'Answer buying questions with FAQPage schema',
-      primaryKeyword: 'buy Facebook likes Canada',
+      primaryKeyword: 'buy Facebook page likes Canada',
       faqIds: [
         'faq-fb-page-likes-password',
         'faq-fb-page-likes-links',
@@ -587,8 +573,7 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
         'Buy Facebook Post Likes Canada with clear post like packages, public post URL checkout, gradual delivery details and order tracking. No password required.',
     },
     hero: {
-      eyebrow:
-        'FACEBOOK POST LIKE PACKAGES FOR CANADIAN BUSINESSES, BRANDS & CREATORS',
+      eyebrow: 'FACEBOOK POST LIKE PACKAGES FOR CANADIAN BUSINESSES, BRANDS & CREATORS',
       title: 'Buy Facebook Post Likes Canada',
       description:
         'Increase engagement on your Facebook posts with post like packages designed for businesses, creators and brands across Canada. Choose the package that matches your campaign, submit your public Facebook post URL and complete checkout securely. Track your order from confirmation through delivery without sharing your Facebook password.',
@@ -796,8 +781,7 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
         {
           id: 'fb-post-req-public',
           title: 'Public Facebook Post',
-          description:
-            'Keep the post publicly available while delivery is in progress.',
+          description: 'Keep the post publicly available while delivery is in progress.',
         },
         {
           id: 'fb-post-req-email',
@@ -809,8 +793,7 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
     reviews: {
       id: 'fb-post-likes-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
+      description: 'Customer reviews for this InstantViral service.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
@@ -838,10 +821,7 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
       id: 'related-facebook-services-post-likes',
       title: 'Explore More Facebook Growth Services',
       purpose: 'Internal links to sibling Facebook offers (no skipped services)',
-      serviceSlugs: [
-        'buy-facebook-followers',
-        'buy-facebook-page-likes',
-      ],
+      serviceSlugs: ['buy-facebook-followers', 'buy-facebook-page-likes'],
     },
     finalCta: {
       id: 'fb-post-likes-final-cta',

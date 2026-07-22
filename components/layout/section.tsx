@@ -6,10 +6,12 @@ import { cn } from '@/lib/utils';
 const sectionVariants = cva('w-full', {
   variants: {
     spacing: {
-      sm: 'py-8 md:py-10',
-      /** Tighter launch rhythm — premium density without feeling cramped */
-      md: 'py-10 md:py-14 lg:py-16',
-      lg: 'py-12 md:py-16 lg:py-20',
+      sm: 'py-6 md:py-8',
+      /** Tighter homepage / dense marketing rhythm (~25% less than prior) */
+      md: 'py-8 md:py-11 lg:py-12',
+      lg: 'py-9 md:py-12 lg:py-14',
+      /** Alias used by homepage supporting blocks */
+      compact: 'py-7 md:py-9 lg:py-11',
     },
   },
   defaultVariants: {

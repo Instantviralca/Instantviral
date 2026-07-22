@@ -308,14 +308,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-search-list',
     type: 'bulleted_list',
     order: 37,
-    items: [
-      'Username',
-      'Display name',
-      'Bio',
-      'Captions',
-      'Relevant keywords',
-      'Hashtags',
-    ],
+    items: ['Username', 'Display name', 'Bio', 'Captions', 'Relevant keywords', 'Hashtags'],
   },
   {
     id: 'b-search-3',
@@ -438,14 +431,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-analytics-list',
     type: 'bulleted_list',
     order: 54,
-    items: [
-      'Reach',
-      'Profile visits',
-      'Saves',
-      'Shares',
-      'Comments',
-      'Follower growth',
-    ],
+    items: ['Reach', 'Profile visits', 'Saves', 'Shares', 'Comments', 'Follower growth'],
   },
   {
     id: 'b-analytics-3',
@@ -683,8 +669,7 @@ const READING_TIME = Math.max(1, Math.ceil(WORD_COUNT / 200));
 export const COMPLETE_INSTAGRAM_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
   id: 'learn-complete-instagram-growth-guide',
   slug: SLUG,
-  title:
-    'The Complete Instagram Growth Guide: From Your First 100 to Your First 10,000 Followers',
+  title: 'The Complete Instagram Growth Guide: From Your First 100 to Your First 10,000 Followers',
   excerpt:
     'Learn how to grow your Instagram account with a complete step-by-step guide covering profile optimization, content strategy, engagement, Instagram SEO, analytics and long-term audience growth.',
   content: PLAIN_CONTENT,
@@ -709,12 +694,12 @@ export const COMPLETE_INSTAGRAM_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
       'Learn how to grow your Instagram account with a complete step-by-step guide covering profile optimization, content strategy, engagement, Instagram SEO, analytics and long-term audience growth.',
     canonicalPath: `/learn/${SLUG}`,
     keywords: [
-      'Instagram Growth Guide',
+      'Complete Instagram Growth Guide',
       'How to Grow on Instagram',
       'Instagram Growth Strategy',
       'Instagram Marketing Guide',
-      'Grow Instagram Followers',
       'Instagram Content Strategy',
+      'Long-Term Instagram Growth',
     ],
     ogImage: `${IMG}/complete-instagram-growth-guide.png`,
   },

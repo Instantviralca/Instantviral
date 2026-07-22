@@ -1,4 +1,4 @@
-export type PackagesPageMetric = 'followers' | 'likes';
+export type PackagesPageMetric = 'followers' | 'likes' | 'views';
 
 /** Serializable Lucide icon keys — resolved in UI components (RSC-safe). */
 export type PackagesIconKey =
@@ -27,6 +27,8 @@ export type PackagesFitCard = {
 export type PackagesTimelineStep = {
   id: string;
   label: string;
+  /** Optional supporting copy under the step label. */
+  description?: string;
 };
 
 export type PackagesWhyFeature = {
@@ -51,6 +53,8 @@ export type PackagesPageConfig = {
     title: string;
     description: string;
     cards: PackagesFitCard[];
+    /** `cards` (default): tall recommendation cards. `compact`: two-column table. */
+    layout?: 'cards' | 'compact';
   };
   timeline: {
     title: string;
@@ -66,11 +70,44 @@ export type PackagesPageConfig = {
     title: string;
     description: string;
     rows: PackagesComparisonRow[];
+    /**
+     * `competitor` (default): Package / Delivery / Recommended / InstantViral / Typical Providers.
+     * `approach`: Package / Recommended For / Package Approach.
+     */
+    layout?: 'competitor' | 'approach';
   };
   learnMore: {
     title: string;
     description: string;
     ctaLabel: string;
+  };
+  /** Optional compact trust strip (package-selection pages). */
+  trustStrip?: readonly {
+    id: string;
+    label: string;
+    icon: PackagesIconKey;
+  }[];
+  /** Package-size option cards (Starter → Large Scale). */
+  optionTiers?: {
+    title: string;
+    description?: string;
+    cards: Array<{
+      id: string;
+      name: string;
+      quantity: string;
+      detail: string;
+    }>;
+  };
+  /** Short helpful tips cards. */
+  tips?: {
+    title: string;
+    description?: string;
+    items: Array<{
+      id: string;
+      title: string;
+      description: string;
+      icon: PackagesIconKey;
+    }>;
   };
   summaryBenefits: readonly string[];
   /** Premium info pills shown under package price. */
@@ -81,341 +118,459 @@ export const INSTAGRAM_FOLLOWERS_PACKAGES_CONFIG: PackagesPageConfig = {
   metric: 'followers',
   fit: {
     title: 'Which Package Is Right for You?',
-    description:
-      'Use these quick guides to match Instagram Followers Packages to your current goals, then confirm quantity and price in the grid above.',
+    description: 'Match quantity to your current account size and goal.',
+    layout: 'compact',
     cards: [
+      {
+        id: '100-250',
+        quantity: '100–250',
+        title: 'First order',
+        description: 'First order or small profile',
+        bestFor: 'First order or small profile',
+        icon: 'sparkles',
+      },
       {
         id: '500',
         quantity: '500',
-        title: 'Growing creators',
-        description:
-          'A practical step when you want a clearer profile presence and steady momentum.',
-        bestFor: 'Creators',
+        title: 'Active creator',
+        description: 'Active creator',
+        bestFor: 'Active creator',
         icon: 'clapperboard',
       },
       {
         id: '1000',
-        quantity: '1000',
-        title: 'Clear first impression',
-        description:
-          'A common choice for businesses that want a stronger profile starting point.',
-        bestFor: 'Businesses',
+        quantity: '1,000',
+        title: 'Small business',
+        description: 'Small business',
+        bestFor: 'Small business',
         icon: 'briefcase',
       },
       {
         id: '2500',
-        quantity: '2500+',
-        title: 'Campaign-ready profiles',
-        description:
-          'Suited to brand profiles preparing for launches, campaigns and wider visibility.',
-        bestFor: 'Brands',
+        quantity: '2,500',
+        title: 'Established brand',
+        description: 'Established brand',
+        bestFor: 'Established brand',
         icon: 'megaphone',
       },
       {
-        id: '2500-inf',
-        quantity: '2500+',
-        title: 'Audience acceleration',
-        description:
-          'A strong fit when influencers need more visible social proof before promotions.',
-        bestFor: 'Influencers',
-        icon: 'users',
-      },
-      {
         id: '5000',
-        quantity: '5000+',
-        title: 'Large campaigns',
-        description:
-          'Built for larger campaign goals where higher package volume is required.',
-        bestFor: 'Agencies',
-        icon: 'sparkles',
+        quantity: '5,000+',
+        title: 'Larger campaign',
+        description: 'Larger campaign',
+        bestFor: 'Larger campaign',
+        icon: 'users',
       },
     ],
   },
   timeline: {
-    title: 'Instagram Followers Delivery',
+    title: 'Package Delivery Process',
     description:
-      'After checkout, orders move through a clear sequence from review to delivery. Exact timing depends on the package you select and is confirmed before you pay.',
+      'After checkout, each order moves through review and delivery. Timing depends on the selected package.',
     steps: [
-      { id: 'place', label: 'Place Order' },
-      { id: 'review', label: 'Order Review' },
-      { id: 'delivery', label: 'Gradual Delivery' },
-      { id: 'completed', label: 'Completed' },
+      {
+        id: 'place',
+        label: 'Place Your Order',
+        description: 'Choose a package, enter your public username and complete checkout.',
+      },
+      {
+        id: 'review',
+        label: 'Order Review',
+        description: 'Your order details are checked before delivery begins.',
+      },
+      {
+        id: 'delivery',
+        label: 'Delivery Begins',
+        description: 'The selected package is processed per the delivery details shown.',
+      },
+      {
+        id: 'completed',
+        label: 'Order Completed',
+        description: 'Status updates after the selected quantity has been processed.',
+      },
     ],
   },
   whyOrder: {
-    title: 'Why Order From Us?',
-    description:
-      'A straightforward ordering experience focused on package clarity, account safety and trackable delivery.',
-    features: [
-      {
-        id: 'public',
-        title: 'Public username only',
-        description: 'Orders use your public Instagram username or profile URL.',
-        icon: 'lock',
-      },
-      {
-        id: 'checkout',
-        title: 'Secure checkout',
-        description: 'Review package details and complete payment through a clear checkout flow.',
-        icon: 'credit-card',
-      },
-      {
-        id: 'gradual',
-        title: 'Gradual delivery',
-        description: 'Eligible packages may deliver gradually instead of all at once.',
-        icon: 'truck',
-      },
-      {
-        id: 'tracking',
-        title: 'Order tracking',
-        description: 'Monitor available status updates with your order ID and email.',
-        icon: 'map-pin',
-      },
-      {
-        id: 'support',
-        title: 'Professional support',
-        description: 'Get help with packages, checkout, delivery and existing orders.',
-        icon: 'headphones',
-      },
-      {
-        id: 'password',
-        title: 'No password required',
-        description: 'Your Instagram login credentials are never requested.',
-        icon: 'shield-check',
-      },
-    ],
+    title: '',
+    description: '',
+    features: [],
   },
   comparison: {
-    title: 'Instagram Followers Plans Comparison',
-    description:
-      'Compare package sizes side by side — InstantViral packages stay clear and trackable, while typical providers often leave delivery and pricing vague.',
-    rows: [
-      {
-        id: '100',
-        packageLabel: '100 Followers',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Testing the process',
-        popularity: 'Light',
-      },
-      {
-        id: '500',
-        packageLabel: '500 Followers',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Growing creators',
-        popularity: 'Steady',
-      },
-      {
-        id: '1000',
-        packageLabel: '1000 Followers',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Businesses',
-        popularity: 'Most popular',
-        highlighted: true,
-      },
-      {
-        id: '2500',
-        packageLabel: '2500 Followers',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Brands',
-        popularity: 'High demand',
-      },
-      {
-        id: '5000',
-        packageLabel: '5000+ Followers',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Large campaigns',
-        popularity: 'Campaign scale',
-      },
-    ],
+    title: '',
+    description: '',
+    rows: [],
   },
   learnMore: {
-    title: 'Want to learn more before ordering?',
-    description:
-      'Visit our homepage to learn how our ordering process works, why customers choose InstantViral and how delivery works.',
-    ctaLabel: 'Go to homepage',
+    title: '',
+    description: '',
+    ctaLabel: '',
   },
+  trustStrip: [
+    { id: 'password', label: 'No Password Required', icon: 'shield-check' },
+    { id: 'public', label: 'Public Username Only', icon: 'lock' },
+    { id: 'checkout', label: 'Secure Checkout', icon: 'credit-card' },
+    { id: 'support', label: 'Customer Support', icon: 'headphones' },
+  ],
   summaryBenefits: [
-    'Public Username Only',
     'No Password Required',
+    'Public Username Only',
     'Secure Checkout',
-    '30-Day Money-Back Guarantee',
-    'Live Order Tracking',
+    'Customer Support',
   ],
   infoPills: [
     'Estimated Delivery',
     'Gradual Delivery',
-    'Live Order Tracking',
     'Secure Checkout',
     'Public Username Only',
-    'Professional Support',
   ],
 };
 
 export const INSTAGRAM_LIKES_PACKAGES_CONFIG: PackagesPageConfig = {
   metric: 'likes',
   fit: {
-    title: 'Which Package Is Right for You?',
-    description:
-      'Match Instagram Likes Packages to your content goals, then confirm quantity and price in the pricing grid above.',
+    title: 'Choose the Right Package',
+    description: 'Match quantity to your goal, then confirm price above.',
     cards: [
       {
         id: '100',
         quantity: '100',
-        title: 'Perfect for testing',
-        description: 'A lightweight option when you want to try likes delivery on a public post first.',
+        title: 'Try it first',
+        description: 'Light option for a first order.',
         bestFor: 'Testing',
         icon: 'sparkles',
       },
       {
         id: '500',
         quantity: '500',
-        title: 'Small creators',
-        description: 'A practical boost for creators supporting everyday posts and early momentum.',
-        bestFor: 'Small creators',
+        title: 'Everyday posts',
+        description: 'Steady support for regular content.',
+        bestFor: 'Creators',
         icon: 'clapperboard',
       },
       {
         id: '1000',
-        quantity: '1000',
-        title: 'Growing creators',
-        description: 'A common choice for creators who want stronger engagement on important posts.',
-        bestFor: 'Growing creators',
+        quantity: '1,000',
+        title: 'Key posts',
+        description: 'Stronger signal on important uploads.',
+        bestFor: 'Growing accounts',
         icon: 'heart',
       },
       {
         id: '2500',
-        quantity: '2500',
-        title: 'Businesses',
-        description: 'Suited to business posts that need a clearer engagement first impression.',
+        quantity: '2,500',
+        title: 'Business posts',
+        description: 'Clearer engagement on offers and launches.',
         bestFor: 'Businesses',
         icon: 'briefcase',
       },
       {
         id: '5000',
-        quantity: '5000+',
-        title: 'High engagement campaigns',
-        description: 'Built for launches and campaigns where higher like volume supports visibility.',
+        quantity: '5,000+',
+        title: 'Campaign peaks',
+        description: 'Higher volume for major pushes.',
         bestFor: 'Campaigns',
         icon: 'megaphone',
       },
     ],
   },
   timeline: {
-    title: 'Instagram Likes Delivery',
-    description:
-      'After checkout, likes orders move through a clear sequence from review to delivery. Exact timing depends on the package you select and is confirmed before you pay.',
+    title: 'How Ordering Works',
+    description: 'Four clear steps from selection to delivery.',
     steps: [
-      { id: 'place', label: 'Place Order' },
-      { id: 'review', label: 'Order Review' },
-      { id: 'likes', label: 'Likes Begin' },
-      { id: 'completed', label: 'Delivery Complete' },
+      { id: 'place', label: 'Select a package' },
+      { id: 'review', label: 'Enter your post URL' },
+      { id: 'likes', label: 'Complete checkout' },
+      { id: 'completed', label: 'Track delivery' },
     ],
   },
   whyOrder: {
-    title: 'Why Order From Us?',
-    description:
-      'A straightforward likes ordering experience focused on post URL clarity, secure checkout and trackable delivery.',
+    title: 'Why Customers Choose Us',
+    description: 'Built for a clear, secure ordering experience.',
     features: [
-      {
-        id: 'public',
-        title: 'Public Post URL Only',
-        description: 'Orders use the public Instagram post or Reel URL — no login credentials.',
-        icon: 'lock',
-      },
       {
         id: 'checkout',
         title: 'Secure Checkout',
-        description: 'Review package details and complete payment through a clear checkout flow.',
+        description: 'Review details and pay through a protected flow.',
         icon: 'credit-card',
       },
       {
-        id: 'gradual',
-        title: 'Gradual Delivery',
-        description: 'Eligible packages may deliver likes gradually instead of all at once.',
-        icon: 'truck',
+        id: 'public',
+        title: 'Public URL Only',
+        description: 'Orders use a public post or Reel link only.',
+        icon: 'lock',
       },
       {
         id: 'tracking',
         title: 'Order Tracking',
-        description: 'Monitor available status updates with your order ID and email.',
+        description: 'Check status with your order ID and email.',
         icon: 'map-pin',
       },
       {
-        id: 'support',
-        title: 'Professional Support',
-        description: 'Get help with packages, checkout, delivery and existing likes orders.',
-        icon: 'headphones',
+        id: 'gradual',
+        title: 'Gradual Delivery',
+        description: 'Eligible options can deliver over time.',
+        icon: 'truck',
       },
       {
         id: 'password',
         title: 'No Password Required',
-        description: 'Your Instagram login credentials are never requested.',
+        description: 'Login credentials are never requested.',
         icon: 'shield-check',
+      },
+      {
+        id: 'support',
+        title: 'Professional Support',
+        description: 'Help with packages, checkout and delivery.',
+        icon: 'headphones',
       },
     ],
   },
   comparison: {
-    title: 'Instagram Likes Plans Comparison',
-    description:
-      'Compare likes package sizes side by side — InstantViral packages stay clear and trackable, while typical providers often leave delivery and pricing vague.',
-    rows: [
+    title: '',
+    description: '',
+    rows: [],
+  },
+  learnMore: {
+    title: '',
+    description: '',
+    ctaLabel: '',
+  },
+  optionTiers: {
+    title: 'Compare Your Options',
+    description: 'Pick the scale that fits your post.',
+    cards: [
+      { id: 'starter', name: 'Starter', quantity: '100–250', detail: 'First tests and lighter posts' },
+      { id: 'growing', name: 'Growing', quantity: '500–1,000', detail: 'Steady support for active feeds' },
       {
-        id: '100',
-        packageLabel: '100 Likes',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Testing the process',
-        popularity: 'Light',
+        id: 'business',
+        name: 'Business',
+        quantity: '2,500',
+        detail: 'Offers, launches and brand posts',
       },
       {
-        id: '500',
-        packageLabel: '500 Likes',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Small creators',
-        popularity: 'Steady',
+        id: 'campaign',
+        name: 'Campaign',
+        quantity: '5,000',
+        detail: 'Higher volume for promotions',
       },
       {
-        id: '1000',
-        packageLabel: '1000 Likes',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Growing creators',
-        popularity: 'Most popular',
-        highlighted: true,
-      },
-      {
-        id: '2500',
-        packageLabel: '2500 Likes',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'Businesses',
-        popularity: 'High demand',
-      },
-      {
-        id: '5000',
-        packageLabel: '5000 Likes',
-        delivery: 'Gradual on eligible packages',
-        recommended: 'High engagement campaigns',
-        popularity: 'Campaign scale',
+        id: 'large',
+        name: 'Large Scale',
+        quantity: '10,000+',
+        detail: 'Major pushes and peak moments',
       },
     ],
   },
-  learnMore: {
-    title: 'Want to learn more before ordering likes?',
-    description:
-      'Visit our homepage to see how InstantViral ordering works, how delivery is tracked, and how Instagram engagement services fit together.',
-    ctaLabel: 'Go to homepage',
+  tips: {
+    title: 'Helpful Tips',
+    items: [
+      {
+        id: 'fit',
+        title: 'Match your goal',
+        description: 'Choose the package that fits your goals.',
+        icon: 'sparkles',
+      },
+      {
+        id: 'public',
+        title: 'Keep content public',
+        description: 'Keep your content public during delivery.',
+        icon: 'lock',
+      },
+      {
+        id: 'review',
+        title: 'Review before paying',
+        description: 'Review package details before checkout.',
+        icon: 'credit-card',
+      },
+      {
+        id: 'confirm',
+        title: 'Save confirmation',
+        description: 'Save your order confirmation.',
+        icon: 'map-pin',
+      },
+    ],
   },
   summaryBenefits: [
-    'Public Post URL Only',
+    'Public URL Only',
     'No Password Required',
     'Secure Checkout',
-    '30-Day Money-Back Guarantee',
     'Order Tracking',
   ],
   infoPills: [
     'Estimated Delivery',
     'Gradual Delivery',
-    'Live Order Tracking',
+    'Order Tracking',
     'Secure Checkout',
-    'Public Post URL Only',
-    'Professional Support',
+    'Public URL Only',
+  ],
+};
+
+export const INSTAGRAM_VIEWS_PACKAGES_CONFIG: PackagesPageConfig = {
+  metric: 'views',
+  fit: {
+    title: 'Choose the Right Package',
+    description: 'Select an option based on the size of your current campaign.',
+    cards: [
+      {
+        id: 'starter',
+        quantity: 'Starter',
+        title: 'Starter',
+        description: 'For testing the ordering process.',
+        bestFor: 'First orders',
+        icon: 'sparkles',
+      },
+      {
+        id: 'creator',
+        quantity: 'Creator',
+        title: 'Creator',
+        description: 'For individual posts and smaller campaigns.',
+        bestFor: 'Creators',
+        icon: 'clapperboard',
+      },
+      {
+        id: 'growth',
+        quantity: 'Growth',
+        title: 'Growth',
+        description: 'For regular content and growing accounts.',
+        bestFor: 'Growing accounts',
+        icon: 'users',
+      },
+      {
+        id: 'business',
+        quantity: 'Business',
+        title: 'Business',
+        description: 'For brand, product, or service campaigns.',
+        bestFor: 'Businesses',
+        icon: 'briefcase',
+      },
+      {
+        id: 'high-volume',
+        quantity: 'High Volume',
+        title: 'High Volume',
+        description: 'For larger launches and ongoing promotion.',
+        bestFor: 'Campaigns',
+        icon: 'megaphone',
+      },
+    ],
+  },
+  timeline: {
+    title: 'How Ordering Works',
+    description: '',
+    steps: [
+      {
+        id: 'place',
+        label: 'Choose a Package',
+        description: 'Select the quantity that matches your needs.',
+      },
+      {
+        id: 'review',
+        label: 'Add Your Link',
+        description: 'Enter the public content URL during checkout.',
+      },
+      {
+        id: 'delivery',
+        label: 'Review and Pay',
+        description: 'Confirm the details and complete secure payment.',
+      },
+      {
+        id: 'completed',
+        label: 'Track Your Order',
+        description: 'Use your order ID and email to follow progress.',
+      },
+    ],
+  },
+  whyOrder: {
+    title: 'Why Customers Choose Us',
+    description: '',
+    features: [
+      {
+        id: 'public',
+        title: 'Public URL Only',
+        description: 'No login credentials are requested.',
+        icon: 'lock',
+      },
+      {
+        id: 'password',
+        title: 'No Password Required',
+        description: 'Your account access remains private.',
+        icon: 'shield-check',
+      },
+      {
+        id: 'checkout',
+        title: 'Secure Checkout',
+        description: 'Complete payment through a protected checkout.',
+        icon: 'credit-card',
+      },
+      {
+        id: 'tracking',
+        title: 'Order Tracking',
+        description: 'Follow progress using your order details.',
+        icon: 'map-pin',
+      },
+      {
+        id: 'delivery',
+        title: 'Clear Delivery Information',
+        description: 'Review timing before placing the order.',
+        icon: 'truck',
+      },
+      {
+        id: 'support',
+        title: 'Professional Support',
+        description: 'Get help with packages, checkout, and delivery.',
+        icon: 'headphones',
+      },
+    ],
+  },
+  comparison: {
+    title: '',
+    description: '',
+    rows: [],
+  },
+  learnMore: {
+    title: '',
+    description: '',
+    ctaLabel: '',
+  },
+  tips: {
+    title: 'Before You Order',
+    items: [
+      {
+        id: 'goal',
+        title: 'Fit your goal',
+        description: 'Choose a package that fits your current goal.',
+        icon: 'sparkles',
+      },
+      {
+        id: 'public',
+        title: 'Keep the link public',
+        description: 'Make sure the content link is public.',
+        icon: 'lock',
+      },
+      {
+        id: 'delivery',
+        title: 'Review delivery',
+        description: 'Review delivery details before checkout.',
+        icon: 'truck',
+      },
+      {
+        id: 'confirm',
+        title: 'Save confirmation',
+        description: 'Save the confirmation email for tracking.',
+        icon: 'map-pin',
+      },
+    ],
+  },
+  summaryBenefits: [
+    'Public URL Only',
+    'No Password Required',
+    'Secure Checkout',
+    'Order Tracking',
+  ],
+  infoPills: [
+    'Estimated Delivery',
+    'Gradual Delivery',
+    'Order Tracking',
+    'Secure Checkout',
+    'Public URL Only',
   ],
 };

@@ -209,7 +209,7 @@ function renderBlock(block: EducationalGuideBlock, index: number) {
         <FadeUp key={block.id}>
           <aside className="rounded-2xl border border-[color-mix(in_srgb,var(--brand-primary)_28%,var(--border-subtle))] bg-[linear-gradient(135deg,#fffdfb_0%,#fff7ed_55%,#ffffff_100%)] p-5 shadow-[0_14px_32px_-24px_rgba(249,115,22,0.35)] sm:p-7">
             <p className="text-sm font-bold tracking-tight text-[var(--brand-primary)] uppercase">
-              Key insight
+              {block.eyebrow ?? 'Key insight'}
             </p>
             <Heading as="h3" size="h4" className="mt-2">
               {block.title}

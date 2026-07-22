@@ -8,30 +8,78 @@ import { faqHubItems } from '@/data/content/faq-hub';
  * FAQ hub (/faq): Document 13.03 entries from faq-hub.ts.
  */
 export const faqItems: FAQItem[] = [
-  // Homepage FAQ set — UI filters via homepageFilter (not FAQ hub category)
+  // Homepage FAQ set — Instagram followers commercial cluster
+  {
+    id: 'faq-home-buy-canada',
+    question: 'Can I buy Instagram followers in Canada?',
+    answer:
+      'Yes. InstantViral offers Instagram follower packages through its Canadian website. Select a package, provide the public username and complete checkout to place an order. Review package details on [Instagram Followers Packages](/buy-instagram-followers).',
+    homepageFilter: 'General',
+    order: 1,
+  },
+  {
+    id: 'faq-home-how-buy-followers',
+    question: 'How do I buy Instagram followers?',
+    answer:
+      'Choose a follower package, enter the correct public Instagram username, review the order and complete checkout. No Instagram password should be required. Start on the [Instagram Followers Packages](/buy-instagram-followers) page.',
+    homepageFilter: 'Orders',
+    order: 2,
+  },
   {
     id: 'faq-home-how-works',
     question: 'How does InstantViral work?',
     answer:
-      'Choose a service for Instagram, TikTok, YouTube or Facebook, compare packages on the service page, enter the public username or content URL required, and complete checkout. After payment is confirmed, monitor available updates on the [Track Order](/track-order) page with your order ID and email. Start with a popular option such as [Buy Instagram Followers](/buy-instagram-followers) when you know which platform to grow first.',
+      'Choose a service for Instagram, TikTok, YouTube or Facebook, compare packages on the service page, enter the public username or content URL required, and complete checkout. After payment is confirmed, monitor available updates on the [Track Order](/track-order) page with your order ID and email. Start with a popular option such as [Instagram Followers Packages](/buy-instagram-followers) when you know which platform to grow first.',
     homepageFilter: 'General',
-    order: 1,
+    order: 3,
   },
   {
     id: 'faq-home-choose-package',
     question: 'How do I choose the right package?',
     answer:
-      'Pick a package that matches your platform, goals and budget. Each service page lists quantities, prices, delivery estimates and eligibility details before you buy. Review refill or gradual delivery terms when they are shown for that package. Compare options on pages such as [Buy Instagram Likes](/buy-instagram-likes) or [Buy Instagram Followers](/buy-instagram-followers), or [Contact](/contact) support if you need help deciding.',
+      'Pick a package that matches your platform, goals and budget. Each service page lists quantities, prices, delivery estimates and eligibility details before you buy. Review refill or gradual delivery terms when they are shown for that package. Compare options on pages such as [Buy Instagram Likes](/buy-instagram-likes) or [Instagram Followers Packages](/buy-instagram-followers), or [Contact](/contact) support if you need help deciding.',
     homepageFilter: 'General',
-    order: 2,
+    order: 4,
   },
   {
     id: 'faq-home-password',
-    question: 'Do I need to share my social media password?',
+    question: 'Do I need to provide my Instagram password?',
     answer:
-      'No. InstantViral never requires your social media password. Provide only the public username, profile URL or content link needed for the selected service. Never share login credentials, recovery codes or two-factor codes with anyone claiming to process your order.',
+      'No. InstantViral only requires the public username needed to process the selected service. Never share login credentials, recovery codes or two-factor codes with anyone claiming to process your order.',
     homepageFilter: 'Safety',
-    order: 3,
+    order: 5,
+  },
+  {
+    id: 'faq-home-where-buy',
+    question: 'Where can I buy Instagram followers?',
+    answer:
+      'Instagram follower packages can be purchased from social media service websites such as InstantViral. Compare the package details, policies, delivery information and support before ordering. Review available options on [Instagram Followers Packages](/buy-instagram-followers).',
+    homepageFilter: 'General',
+    order: 6,
+  },
+  {
+    id: 'faq-home-likes-views',
+    question: 'Can I buy Instagram likes and views as well?',
+    answer:
+      'Yes. InstantViral also provides dedicated package pages for [Instagram likes](/buy-instagram-likes) and [Instagram views](/buy-instagram-views).',
+    homepageFilter: 'Platforms',
+    order: 7,
+  },
+  {
+    id: 'faq-home-engagement-guarantee',
+    question: 'Will buying followers guarantee engagement or sales?',
+    answer:
+      'No. Follower count alone cannot guarantee engagement, reach, leads or sales. Content quality and genuine audience interaction remain important.',
+    homepageFilter: 'General',
+    order: 8,
+  },
+  {
+    id: 'faq-home-check-before',
+    question: 'What should I check before buying followers?',
+    answer:
+      'Review the provider’s package details, account-access requirements, delivery explanation, support options and refund or refill terms. InstantViral publishes ordering steps and policy links before checkout.',
+    homepageFilter: 'Safety',
+    order: 9,
   },
   {
     id: 'faq-home-public-account',
@@ -39,7 +87,7 @@ export const faqItems: FAQItem[] = [
     answer:
       'Many services need the relevant profile or content to remain public during delivery. Exact requirements appear on the service page before checkout. Private or restricted profiles may delay or prevent delivery. Keep the username or URL accurate, and contact support before ordering if you are unsure whether your account qualifies.',
     homepageFilter: 'Safety',
-    order: 4,
+    order: 10,
   },
   {
     id: 'faq-home-multiple-services',
@@ -47,7 +95,7 @@ export const faqItems: FAQItem[] = [
     answer:
       'Yes. You can place separate orders across Instagram, TikTok, YouTube and Facebook. Complete checkout for each purchase and provide the correct public username or content URL for every service. Track each order independently with its own order ID and email on the [Track Order](/track-order) page.',
     homepageFilter: 'Orders',
-    order: 5,
+    order: 11,
   },
   {
     id: 'faq-home-order-start',
@@ -55,15 +103,15 @@ export const faqItems: FAQItem[] = [
     answer:
       'Start times depend on the selected service and package. Delivery estimates are shown on the service page before checkout. After purchase, use the [Track Order](/track-order) page with your order ID and email to review available status updates. Timing can also differ when gradual delivery applies.',
     homepageFilter: 'Delivery',
-    order: 6,
+    order: 12,
   },
   {
     id: 'faq-home-track-order',
-    question: 'How can I track my order?',
+    question: 'Can I track my order?',
     answer:
-      'Open the [Track Order](/track-order) page and enter the order ID and email from your confirmation. Tracking shows available status updates from confirmation through delivery. If your order does not load, check the spelling of those details and contact support for help.',
+      'Yes. Customers can use the order-tracking function provided by InstantViral to check the current order status. Open the [Track Order](/track-order) page and enter the order ID and email from your confirmation.',
     homepageFilter: 'Delivery',
-    order: 7,
+    order: 13,
   },
   {
     id: 'faq-home-gradual-delivery',
@@ -71,7 +119,7 @@ export const faqItems: FAQItem[] = [
     answer:
       'Gradual delivery is available for eligible services where it is clearly stated on the service page. When it applies, delivery is spread over time instead of completing at once. Availability and timing depend on the platform, service and package. If gradual delivery is not listed, that package uses the standard method shown on the page.',
     homepageFilter: 'Delivery',
-    order: 8,
+    order: 14,
   },
   {
     id: 'faq-home-refill',
@@ -79,7 +127,7 @@ export const faqItems: FAQItem[] = [
     answer:
       'Selected services include refill protection where it is stated on the service page. Eligibility, the refill window and other conditions vary by package. If you believe an eligible drop occurred, contact support with your order ID and checkout email so the team can review the request against the package terms.',
     homepageFilter: 'Delivery',
-    order: 9,
+    order: 15,
   },
   {
     id: 'faq-home-money-back',
@@ -87,15 +135,15 @@ export const faqItems: FAQItem[] = [
     answer:
       "Eligible purchases are covered by InstantViral's 30-day money-back guarantee under the [refund policy](/refund-policy) and the terms shown for the selected service. Review those conditions before checkout. Contact support with your order ID and checkout email if you need help with an eligible purchase.",
     homepageFilter: 'Delivery',
-    order: 10,
+    order: 16,
   },
   {
     id: 'faq-home-platforms',
     question: 'Which social media platforms do you support?',
     answer:
-      'InstantViral supports Instagram, TikTok, YouTube and Facebook. Examples include [Buy Instagram Followers](/buy-instagram-followers), [Buy Instagram Likes](/buy-instagram-likes), [Buy TikTok Followers](/buy-tiktok-followers), [Buy TikTok Views](/buy-tiktok-views), [Buy YouTube Subscribers](/buy-youtube-subscribers), [Buy YouTube Views](/buy-youtube-views), [Buy Facebook Followers](/buy-facebook-followers) and [Buy Facebook Page Likes](/buy-facebook-page-likes). YouTube packages currently focus on subscribers and views.',
+      'InstantViral supports Instagram, TikTok, YouTube and Facebook. Examples include [Instagram Followers Packages](/buy-instagram-followers), [Buy Instagram Likes](/buy-instagram-likes), [Buy TikTok Followers](/buy-tiktok-followers), [Buy TikTok Views](/buy-tiktok-views), [Buy YouTube Subscribers](/buy-youtube-subscribers), [Buy YouTube Views](/buy-youtube-views), [Buy Facebook Followers](/buy-facebook-followers) and [Buy Facebook Page Likes](/buy-facebook-page-likes). YouTube packages currently focus on subscribers and views.',
     homepageFilter: 'Platforms',
-    order: 11,
+    order: 17,
   },
   {
     id: 'faq-home-need-help',
@@ -103,7 +151,7 @@ export const faqItems: FAQItem[] = [
     answer:
       'Visit the [Contact](/contact) page for help with packages, checkout, delivery, tracking or an existing purchase. Include your order ID and checkout email when asking about an order. For pre-purchase questions, share the platform and service you are considering so support can respond with clearer guidance.',
     homepageFilter: 'General',
-    order: 12,
+    order: 18,
   },
   {
     id: 'faq-password',
@@ -256,110 +304,122 @@ export const faqItems: FAQItem[] = [
     id: 'faq-ig-pkg-choose',
     question: 'How do I choose a package?',
     answer:
-      'Compare quantities and prices in the Instagram Followers Pricing grid, then match the size to your goal using the package guide. Smaller packages work well for testing; larger packages suit businesses, brands and campaigns.',
+      'Consider your current audience size, account activity and the reason for placing the order. Smaller quantities are useful for first orders, while larger options may better suit established and active profiles.',
+  },
+  {
+    id: 'faq-ig-pkg-new-account',
+    question: 'Which package is suitable for a new account?',
+    answer:
+      'A smaller package is generally a more proportionate starting point for a new account. Make sure the profile has a complete bio, profile image and some recent content before ordering.',
   },
   {
     id: 'faq-ig-pkg-order-again',
-    question: 'Can I order again later?',
+    question: 'Can I place another order later?',
     answer:
-      'Yes. You can place another Instagram Followers Order at any time for the same or a different package. Each purchase uses a separate checkout and generates its own order ID for tracking.',
+      'Yes. You can place another order after reviewing the status of your previous one. Waiting until an active order is completed helps prevent overlapping delivery.',
   },
   {
     id: 'faq-ig-pkg-split',
-    question: 'Can I split my order?',
+    question: 'Can I split one package between multiple accounts?',
     answer:
-      'Packages are ordered as individual units. If you want multiple quantities or services, complete separate checkouts for each package so delivery and tracking stay clear for every order.',
+      'A standard package is assigned to the username entered during checkout. Separate accounts normally require separate orders.',
   },
   {
     id: 'faq-ig-pkg-delivery-start',
     question: 'When does delivery begin?',
     answer:
-      'Delivery start times depend on the selected package and are confirmed before checkout. After payment is confirmed, you can monitor available updates on the Track Order page.',
+      'Processing begins after the order and payment details have been confirmed. Any available timing estimate will be shown with the selected package or during checkout.',
   },
   {
     id: 'faq-ig-pkg-gradual',
     question: 'Will delivery be gradual?',
     answer:
-      'Gradual delivery is available on eligible packages. When it applies, the delivery method and expectations are shown before you complete payment for that Instagram Followers Package.',
+      'Gradual delivery may be available for eligible packages. Review the delivery information shown for your selected option before completing payment.',
   },
   {
     id: 'faq-ig-pkg-track',
-    question: 'Can I track delivery?',
+    question: 'How do I track my order?',
     answer:
-      'Yes. Use your order ID and checkout email on the [Track Order](/track-order) page to review available status updates from confirmation through delivery.',
+      'Use the order reference and email associated with your purchase to view available status updates through the [Track Order](/track-order) page.',
   },
   {
     id: 'faq-ig-pkg-after-checkout',
     question: 'What happens after checkout?',
     answer:
-      'You receive an order confirmation by email. The order then moves through review and delivery according to the selected package. Tracking remains available with your order ID and email.',
+      'Your order details are reviewed, the package enters processing and the available status information is updated as delivery progresses.',
   },
   {
     id: 'faq-ig-pkg-upgrade',
-    question: 'Can I upgrade later?',
+    question: 'Can I change the package after payment?',
     answer:
-      'You cannot change a completed package after checkout. To increase quantity, place a new order for an additional Instagram Followers Package that matches your updated goal.',
+      'Changes may not be possible once processing has started. Contact support as soon as possible when you notice an error in the package or username.',
+  },
+  {
+    id: 'faq-ig-pkg-password',
+    question: 'Do you need my Instagram password?',
+    answer:
+      'No. Your password is not required. The order uses the public username entered during checkout.',
   },
   // Instagram Likes Packages conversion FAQs
   {
     id: 'faq-ig-likes-pkg-choose',
-    question: 'How do I choose a Likes package?',
+    question: 'How do I choose a package?',
     answer:
-      'Compare quantities and prices in the Instagram Likes Pricing grid, then match the size to your goal using the package guide. Smaller packages work well for testing; larger packages suit businesses and high-engagement campaigns.',
+      'Compare quantities and prices in the pricing grid, then match the size to your goal. Smaller options work well for testing; larger ones suit active campaigns.',
   },
   {
     id: 'faq-ig-likes-pkg-order-again',
     question: 'Can I order again later?',
     answer:
-      'Yes. You can place another Instagram Likes order at any time for the same or a different package. Each purchase uses a separate checkout and generates its own order ID for tracking.',
+      'Yes. You can place another order at any time for the same or a different package. Each purchase uses a separate checkout and its own tracking details.',
   },
   {
     id: 'faq-ig-likes-pkg-split',
     question: 'Can I split my order?',
     answer:
-      'Packages are ordered as individual units. If you want likes on multiple posts or additional quantities, complete separate checkouts so delivery and tracking stay clear for every order.',
+      'Packages are ordered as individual units. For multiple posts or quantities, complete separate checkouts so delivery and tracking stay clear.',
   },
   {
     id: 'faq-ig-likes-pkg-delivery-start',
     question: 'When does delivery begin?',
     answer:
-      'Delivery start times depend on the selected likes package and are confirmed before checkout. After payment is confirmed, you can monitor available updates on the Track Order page.',
+      'Processing begins after payment is confirmed. Any available timing estimate is shown with the selected option before checkout.',
   },
   {
     id: 'faq-ig-likes-pkg-gradual',
     question: 'Will delivery be gradual?',
     answer:
-      'Gradual delivery is available on eligible packages. When it applies, the delivery method and expectations are shown before you complete payment for that Instagram Likes Package.',
+      'Gradual delivery may be available on eligible options. Review the delivery details shown for your selection before payment.',
   },
   {
     id: 'faq-ig-likes-pkg-track',
-    question: 'Can I track delivery?',
+    question: 'How do I track my order?',
     answer:
-      'Yes. Use your order ID and checkout email on the [Track Order](/track-order) page to review available status updates from confirmation through delivery.',
+      'Use your order ID and checkout email on the [Track Order](/track-order) page to view available status updates.',
   },
   {
     id: 'faq-ig-likes-pkg-after-checkout',
     question: 'What happens after checkout?',
     answer:
-      'You receive an order confirmation by email. The order then moves through review and likes delivery according to the selected package. Tracking remains available with your order ID and email.',
+      'You receive a confirmation by email. Your order then moves through review and delivery, with tracking available using your order details.',
   },
   {
     id: 'faq-ig-likes-pkg-upgrade',
-    question: 'Can I upgrade later?',
+    question: 'Can I change my package after payment?',
     answer:
-      'You cannot change a completed package after checkout. To increase quantity, place a new order for an additional Instagram Likes Package that matches your updated goal.',
+      'Changes may not be possible once processing has started. Contact support quickly if you notice an error in the package or URL.',
   },
   {
     id: 'faq-ig-likes-pkg-password',
-    question: 'Do I need to share my Instagram password?',
+    question: 'Do you need my password?',
     answer:
-      'No. InstantViral never asks for your Instagram password. Orders only need the public URL of the Instagram post or Reel receiving the likes.',
+      'No. Login credentials are never requested. Your order only needs the public URL of the post or Reel.',
   },
   {
     id: 'faq-ig-likes-pkg-any-post',
-    question: 'Can I order Likes for any public post?',
+    question: 'Can I order for any public post?',
     answer:
-      'Yes, as long as the Instagram post or Reel remains public and accessible while the order is processed. Private or restricted content cannot be fulfilled.',
+      'Yes, as long as the post or Reel stays public and accessible while delivery is in progress.',
   },
   // Buy Instagram Likes Canada — Document 09.12 §15
   {
@@ -410,54 +470,54 @@ export const faqItems: FAQItem[] = [
     answer:
       'Use the Track Order page with the order ID and email address entered during checkout. The page will display the latest customer-facing status.',
   },
-  // Buy Instagram Views — intent: reels, reach, watch time
+  // Buy Instagram Views — package/checkout FAQs (mid-page copy stays generic)
   {
     id: 'faq-ig-views-password',
-    question: 'Do views help Instagram Reel reach?',
+    question: 'Do you need my password?',
     answer:
-      'Views support discoverability by showing that people started watching a Reel or video. They work best beside strong hooks and clear creative. Watch time and saves still matter for longer circulation.',
+      'No. Login credentials are never requested. Your order only needs the public content URL entered at checkout.',
   },
   {
     id: 'faq-ig-views-links',
-    question: 'Will Reel views increase after I order?',
+    question: 'What link should I provide?',
     answer:
-      'Delivery adds views to the public video or Reel URL you provide. Keep the content public while the order processes so progress can continue as estimated on the package card.',
+      'Use the public URL for the content receiving the order. Keep that content public while delivery is in progress.',
   },
   {
     id: 'faq-ig-views-delivery-speed',
-    question: 'How fast do Instagram views start?',
+    question: 'When does delivery begin?',
     answer:
-      'Start timing depends on the selected package. Review the delivery estimate shown with each Instagram Views package before checkout.',
+      'Processing begins after payment is confirmed. Any available timing estimate is shown with the selected option before checkout.',
   },
   {
     id: 'faq-ig-views-reels',
-    question: 'Can I buy views specifically for Instagram Reels?',
+    question: 'Can I order for a Reel?',
     answer:
-      'Yes, where the package supports Reels. Use the public Reel URL during configuration. If you also want reactions or conversation, compare [Instagram likes](/buy-instagram-likes) and [Instagram comments](/buy-instagram-comments).',
+      'Yes, when the selected option supports that content type. Enter the public Reel URL during checkout.',
   },
   {
     id: 'faq-ig-views-gradual-delivery',
-    question: 'Do views arrive all at once or gradually?',
+    question: 'Will delivery be gradual?',
     answer:
-      'Eligible packages may deliver gradually. The package details should describe the delivery style or timeframe before you pay.',
+      'Eligible options may deliver gradually. Review the delivery details shown for your selection before payment.',
   },
   {
     id: 'faq-ig-views-refill',
-    question: 'Do Instagram Views packages include refill protection?',
+    question: 'Is refill protection included?',
     answer:
-      'Some packages include refill coverage. Terms, limits, and eligibility appear with the package before purchase.',
+      'Some packages include refill coverage. Terms and eligibility appear with the selected option before purchase.',
   },
   {
     id: 'faq-ig-views-money-back',
-    question: 'Is there a money-back guarantee on views orders?',
+    question: 'Is there a money-back guarantee?',
     answer:
       'Eligible purchases follow the 30-day money-back guarantee under the Refund Policy and service-specific conditions.',
   },
   {
     id: 'faq-ig-views-track',
-    question: 'How do I track video view delivery?',
+    question: 'How do I track my order?',
     answer:
-      'Use the Track Order page with your order ID and checkout email to see the latest customer-facing status.',
+      'Use your order ID and checkout email on the [Track Order](/track-order) page to view available status updates.',
   },
   // Buy Instagram Comments — community, conversation, trust intent
   {
@@ -662,7 +722,7 @@ export const faqItems: FAQItem[] = [
   // Buy Facebook Followers Canada — Document 09.31
   {
     id: 'faq-fb-followers-choose-package',
-    question: 'How do I choose the right package?',
+    question: 'How do I choose the right Facebook Followers package?',
     answer:
       'Compare available [Facebook Followers Packages](/buy-facebook-followers#pricing-packages) with your page size and growth goals. Review quantity, price and delivery details before checkout.',
     homepageFilter: 'Packages',
@@ -748,9 +808,9 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-fb-page-likes-gradual-delivery',
-    question: 'Is gradual delivery available?',
+    question: 'Is gradual delivery available for Facebook Page Likes?',
     answer:
-      'It may be available on eligible packages and must be shown in the package data.',
+      'It may be available on eligible Facebook Page Likes packages and must be shown in the package data.',
   },
   {
     id: 'faq-fb-page-likes-refill',
@@ -761,20 +821,18 @@ export const faqItems: FAQItem[] = [
   {
     id: 'faq-fb-page-likes-businesses',
     question: 'Can businesses buy Facebook Page Likes?',
-    answer:
-      'Yes, provided the page is public and meets the service requirements.',
+    answer: 'Yes, provided the page is public and meets the service requirements.',
   },
   {
     id: 'faq-fb-page-likes-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Is there a money-back guarantee on Facebook Page Likes?',
     answer:
-      'Eligible purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service conditions.',
+      'Eligible Facebook Page Likes purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service conditions.',
   },
   {
     id: 'faq-fb-page-likes-track',
     question: 'How can I track the order?',
-    answer:
-      'Use the Track Order page with the order ID and checkout email.',
+    answer: 'Use the Track Order page with the order ID and checkout email.',
   },
   // Buy Facebook Post Likes Canada — Document 09.33
   {
@@ -921,7 +979,7 @@ export const faqItems: FAQItem[] = [
   // Buy YouTube Views Canada — Document 09.42
   {
     id: 'faq-yt-views-choose-package',
-    question: 'How do I choose the right package?',
+    question: 'How do I choose the right YouTube Views package?',
     answer:
       'Compare available [YouTube Views Packages](/buy-youtube-views#pricing-packages) against your campaign goals, current audience and promotion plan. Review quantity, price and delivery information before checkout.',
     homepageFilter: 'Packages',
@@ -1005,9 +1063,7 @@ export function getFaqItemById(id: string): FAQItem | undefined {
 }
 
 export function getFaqItemsByIds(ids: string[]): FAQItem[] {
-  return ids
-    .map((id) => getFaqItemById(id))
-    .filter((item): item is FAQItem => Boolean(item));
+  return ids.map((id) => getFaqItemById(id)).filter((item): item is FAQItem => Boolean(item));
 }
 
 /** Active FAQ hub entries for /faq (Document 13.03). */

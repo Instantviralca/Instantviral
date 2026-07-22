@@ -2,6 +2,7 @@ export { HeroSection } from '@/components/marketing/hero/hero-section';
 export { HeroContent } from '@/components/marketing/hero/hero-content';
 export { HeroActions } from '@/components/marketing/hero/hero-actions';
 export { HeroTrustBar } from '@/components/marketing/hero/hero-trust-bar';
+export { HeroStats } from '@/components/marketing/hero/hero-stats';
 export { HeroVisual } from '@/components/marketing/hero/hero-visual';
 export { PlatformBadge } from '@/components/marketing/hero/platform-badge';
 

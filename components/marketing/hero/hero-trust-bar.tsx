@@ -24,6 +24,8 @@ const TRUST_ICONS: Record<string, LucideIcon> = {
   'trust-customers': Users,
   'trust-millions': Layers3,
   'trust-no-password': ShieldCheck,
+  'trust-gradual': ListChecks,
+  'trust-tracking': Layers3,
 };
 
 /**

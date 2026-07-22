@@ -46,7 +46,8 @@ function buildServiceEntries(): MetadataEntry[] {
     const service = getServiceBySlug(slug);
     const content = getServiceContentBySlug(slug);
     const route = `/${slug}`;
-    const title = content?.seo?.title ?? (service ? titles.service(service) : `${slug} | InstantViral`);
+    const title =
+      content?.seo?.title ?? (service ? titles.service(service) : `${slug} | InstantViral`);
     const description =
       content?.seo?.description ??
       (service ? descriptions.service(service) : seoSiteConfig.defaultDescription);
@@ -64,9 +65,7 @@ function buildServiceEntries(): MetadataEntry[] {
       twitterDescription: description,
       twitterImage: OG,
       robots: { index: true, follow: true },
-      keywords: service
-        ? [service.primaryKeyword, ...service.secondaryKeywords]
-        : undefined,
+      keywords: service ? [service.primaryKeyword, ...service.secondaryKeywords] : undefined,
       active: true,
       indexable: true,
     });
@@ -109,11 +108,13 @@ function buildLearnEntries(): MetadataEntry[] {
     (article) => isPublicLiveArticle(article) && !article.seo?.noindex,
   ).map((article) => {
     const route = `${routes.learn}/${article.slug}`;
-    const title = article.seo.title || titles.learnArticle({
-      slug: article.slug,
-      title: article.title,
-      relatedServiceSlugs: [...article.relatedServices],
-    });
+    const title =
+      article.seo.title ||
+      titles.learnArticle({
+        slug: article.slug,
+        title: article.title,
+        relatedServiceSlugs: [...article.relatedServices],
+      });
     const description =
       article.seo.description ||
       descriptions.learnArticle({
@@ -184,9 +185,7 @@ function buildTagEntries(): MetadataEntry[] {
 
   return LEARN_TAGS.filter((tag) => tag.active)
     .map((tag) => {
-      const articleCount = liveArticles.filter((article) =>
-        article.tags.includes(tag.slug),
-      ).length;
+      const articleCount = liveArticles.filter((article) => article.tags.includes(tag.slug)).length;
       if (articleCount < 1) return null;
       const route = `${LEARN_TAG_PATH_PREFIX}/${tag.slug}`;
       const title = `${tag.name} Guides | InstantViral Learn`;
@@ -221,7 +220,17 @@ export const metadataRegistry: MetadataEntry[] = [
     description: descriptions.home(),
     canonicalPath: '/',
     robots: { index: true, follow: true },
-    keywords: ['social media growth', 'buy followers', 'InstantViral'],
+    keywords: [
+      'buy instagram followers canada',
+      'buy instagram followers',
+      'buy followers instagram',
+      'buy ig followers',
+      'buy real instagram followers',
+      'buy instagram likes',
+      'buy instagram views',
+      'instagram growth services canada',
+      'InstantViral',
+    ],
     active: true,
     indexable: true,
   }),

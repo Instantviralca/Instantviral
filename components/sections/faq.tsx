@@ -301,7 +301,8 @@ export function Faq({
             <div>
               <p className="text-sm font-bold text-[var(--text-primary)]">Still Have Questions?</p>
               <p className="text-sm text-[var(--text-secondary)]">
-                Our support team can help with packages, orders, delivery and general questions.
+                Our support team can help with package selection, checkout, delivery and order
+                details.
               </p>
             </div>
           </div>

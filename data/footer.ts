@@ -1,20 +1,11 @@
-import { routes, learnCategoryPath } from '@/config/routes';
+import { routes, learnArticlePath, learnCategoryPath } from '@/config/routes';
 import { getActiveLearnCategories } from '@/data/learn';
-import { getFooterServices, getPlatformServices } from '@/data/services';
-import type { FooterColumn, PlatformId } from '@/types';
-
-function platformServiceLinks(platformId: PlatformId) {
-  return getPlatformServices(platformId)
-    .filter((service) => service.showInFooter)
-    .map((service) => ({
-      label: service.navigationLabel,
-      href: service.url,
-    }));
-}
+import { getFooterServices } from '@/data/services';
+import type { FooterColumn } from '@/types';
 
 function learnCategoryFooterLinks() {
   const labels: Record<string, string> = {
-    instagram: 'Instagram Guide',
+    instagram: 'Creator Guides',
     facebook: 'Facebook Guide',
     tiktok: 'TikTok Guide',
     youtube: 'YouTube Guide',
@@ -31,48 +22,73 @@ function learnCategoryFooterLinks() {
 }
 
 /**
- * Footer columns — company/resources/legal use config routes;
- * platform columns are generated from the Service Registry.
+ * Global footer columns — Explore InstantViral structure (sitewide).
+ * Resources keeps Learn category crawl paths for internal linking SEO.
  */
 export function getFooterColumns(): FooterColumn[] {
+  const learnLinks = learnCategoryFooterLinks();
+  const instagramGuides = learnLinks.find((link) => link.href === '/learn/instagram');
+  const otherLearnLinks = learnLinks.filter((link) => link.href !== '/learn/instagram');
+
   return [
     {
-      id: 'company',
-      title: 'Company',
+      id: 'services',
+      title: 'Popular Services',
       links: [
-        { label: 'About', href: routes.about },
-        { label: 'Reviews', href: routes.reviews },
-        { label: 'Contact', href: routes.contact },
+        { label: 'Buy Instagram Followers', href: '/buy-instagram-followers' },
+        { label: 'Buy Instagram Likes', href: '/buy-instagram-likes' },
+        { label: 'Buy Instagram Views', href: '/buy-instagram-views' },
+        { label: 'Buy Instagram Comments', href: '/buy-instagram-comments' },
       ],
-    },
-    {
-      id: 'instagram',
-      title: 'Instagram',
-      links: platformServiceLinks('instagram'),
-    },
-    {
-      id: 'tiktok',
-      title: 'TikTok',
-      links: platformServiceLinks('tiktok'),
-    },
-    {
-      id: 'youtube',
-      title: 'YouTube',
-      links: platformServiceLinks('youtube'),
-    },
-    {
-      id: 'facebook',
-      title: 'Facebook',
-      links: platformServiceLinks('facebook'),
     },
     {
       id: 'resources',
       title: 'Resources',
       links: [
-        { label: 'Learn', href: routes.learn },
-        ...learnCategoryFooterLinks(),
+        {
+          label: 'How to Place an Order',
+          href: '/#how-to-buy-instagram-followers',
+        },
+        { label: 'Learn Center', href: routes.learn },
+        {
+          label: 'Grow Followers Organically',
+          href: learnArticlePath('how-to-grow-instagram-followers-organically'),
+        },
+        {
+          label: 'Get More Likes',
+          href: learnArticlePath('how-to-get-more-instagram-likes'),
+        },
+        {
+          label: 'Increase Engagement',
+          href: learnArticlePath('how-to-increase-instagram-engagement'),
+        },
+        {
+          label: 'Complete Growth Guide',
+          href: learnArticlePath('complete-instagram-growth-guide'),
+        },
+        ...(instagramGuides
+          ? [instagramGuides]
+          : [{ label: 'Creator Guides', href: '/learn/instagram' }]),
+        ...otherLearnLinks,
         { label: 'FAQ', href: routes.faq },
+      ],
+    },
+    {
+      id: 'company',
+      title: 'Company',
+      links: [
+        { label: 'About InstantViral', href: routes.about },
+        { label: 'Reviews', href: routes.reviews },
+        { label: 'Contact', href: routes.contact },
+      ],
+    },
+    {
+      id: 'support',
+      title: 'Support',
+      links: [
         { label: 'Track Order', href: routes.trackOrder },
+        { label: 'Contact Support', href: routes.contact },
+        { label: 'FAQ', href: routes.faq },
       ],
     },
     {
@@ -80,9 +96,9 @@ export function getFooterColumns(): FooterColumn[] {
       title: 'Legal',
       links: [
         { label: 'Privacy Policy', href: routes.privacyPolicy },
-        { label: 'Cookie Policy', href: routes.cookiePolicy },
         { label: 'Refund Policy', href: routes.refundPolicy },
         { label: 'Terms & Conditions', href: routes.termsAndConditions },
+        { label: 'Cookie Policy', href: routes.cookiePolicy },
         { label: 'Disclaimer', href: routes.disclaimer },
       ],
     },
@@ -92,3 +108,13 @@ export function getFooterColumns(): FooterColumn[] {
 export function getFooterRegistryServices() {
   return getFooterServices();
 }
+
+export const footerMeta = {
+  title: 'Explore InstantViral',
+  paymentCopy: 'Secure checkout · Common card and digital payment options at checkout',
+  socialLinks: [
+    { label: 'Creator Guides', href: '/learn/instagram' },
+    { label: 'Reviews', href: routes.reviews },
+    { label: 'Contact', href: routes.contact },
+  ],
+} as const;

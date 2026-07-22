@@ -16,18 +16,14 @@ import { routes } from '@/config/routes';
 
 /** Homepage featured FAQ ids — homepage content faqIds. */
 export const HOMEPAGE_FEATURED_FAQ_IDS = [
-  'faq-home-how-works',
-  'faq-home-choose-package',
+  'faq-home-buy-canada',
+  'faq-home-how-buy-followers',
   'faq-home-password',
-  'faq-home-public-account',
-  'faq-home-multiple-services',
-  'faq-home-order-start',
+  'faq-home-where-buy',
+  'faq-home-likes-views',
+  'faq-home-engagement-guarantee',
+  'faq-home-check-before',
   'faq-home-track-order',
-  'faq-home-gradual-delivery',
-  'faq-home-refill',
-  'faq-home-money-back',
-  'faq-home-platforms',
-  'faq-home-need-help',
 ] as const;
 
 const SERVICE_PREFIX_TO_SLUG: Array<{ prefix: string; slug: string; platform: PlatformId }> = [
@@ -86,7 +82,12 @@ function inferCategory(item: FAQItem, platform?: PlatformId): FAQCategoryId {
   if (id.includes('support') || id.includes('help') || id.includes('contact')) {
     return 'contact_support';
   }
-  if (id.includes('privacy') || id.includes('legal') || id.includes('terms') || id.includes('cookie')) {
+  if (
+    id.includes('privacy') ||
+    id.includes('legal') ||
+    id.includes('terms') ||
+    id.includes('cookie')
+  ) {
     return 'privacy_legal';
   }
   return 'general';
@@ -112,7 +113,12 @@ function inferRelatedLinks(item: FAQItem, category: FAQCategoryId): FaqRelatedLi
   const id = item.id.toLowerCase();
   const answer = item.answer.toLowerCase();
 
-  if (category === 'refunds' || id.includes('refund') || id.includes('money-back') || answer.includes('refund policy')) {
+  if (
+    category === 'refunds' ||
+    id.includes('refund') ||
+    id.includes('money-back') ||
+    answer.includes('refund policy')
+  ) {
     links.push({
       id: `${item.id}-refund-policy`,
       label: 'Refund Policy',
@@ -126,7 +132,12 @@ function inferRelatedLinks(item: FAQItem, category: FAQCategoryId): FaqRelatedLi
       href: routes.trackOrder,
     });
   }
-  if (category === 'contact_support' || id.includes('support') || id.includes('help') || answer.includes('contact page')) {
+  if (
+    category === 'contact_support' ||
+    id.includes('support') ||
+    id.includes('help') ||
+    answer.includes('contact page')
+  ) {
     links.push({
       id: `${item.id}-contact`,
       label: 'Contact Support',

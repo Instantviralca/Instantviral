@@ -37,16 +37,19 @@ const EmptyVisual: ComponentType<Record<string, unknown>> = () => null;
  */
 export async function ServicePageView({ service }: ServicePageViewProps) {
   if (service.slug === 'buy-instagram-followers') {
-    const { InstagramFollowersPackagesView } = await import(
-      '@/components/sections/instagram-followers-packages-view'
-    );
+    const { InstagramFollowersPackagesView } =
+      await import('@/components/sections/instagram-followers-packages-view');
     return <InstagramFollowersPackagesView service={service} />;
   }
   if (service.slug === 'buy-instagram-likes') {
-    const { InstagramLikesPackagesView } = await import(
-      '@/components/sections/instagram-likes-packages-view'
-    );
+    const { InstagramLikesPackagesView } =
+      await import('@/components/sections/instagram-likes-packages-view');
     return <InstagramLikesPackagesView service={service} />;
+  }
+  if (service.slug === 'buy-instagram-views') {
+    const { InstagramViewsPackagesView } =
+      await import('@/components/sections/instagram-views-packages-view');
+    return <InstagramViewsPackagesView service={service} />;
   }
 
   const content = getServiceContentBySlug(service.slug);
@@ -69,46 +72,38 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
   const TikTokFollowersFinalCtaAside = visuals.TikTokFollowersFinalCtaAside ?? EmptyVisual;
   const TikTokLikesFinalCtaAside = visuals.TikTokLikesFinalCtaAside ?? EmptyVisual;
   const TikTokViewsFinalCtaAside = visuals.TikTokViewsFinalCtaAside ?? EmptyVisual;
-  const YouTubeSubscribersFinalCtaAside =
-    visuals.YouTubeSubscribersFinalCtaAside ?? EmptyVisual;
+  const YouTubeSubscribersFinalCtaAside = visuals.YouTubeSubscribersFinalCtaAside ?? EmptyVisual;
   const YouTubeSubscribersLearnMore = visuals.YouTubeSubscribersLearnMore ?? EmptyVisual;
   const YouTubeViewsFinalCtaAside = visuals.YouTubeViewsFinalCtaAside ?? EmptyVisual;
-  const FacebookFollowersFinalCtaAside =
-    visuals.FacebookFollowersFinalCtaAside ?? EmptyVisual;
-  const FacebookPostLikesFinalCtaAside =
-    visuals.FacebookPostLikesFinalCtaAside ?? EmptyVisual;
+  const FacebookFollowersFinalCtaAside = visuals.FacebookFollowersFinalCtaAside ?? EmptyVisual;
+  const FacebookPostLikesFinalCtaAside = visuals.FacebookPostLikesFinalCtaAside ?? EmptyVisual;
   const FacebookFollowersOrderStatusDashboard =
     visuals.FacebookFollowersOrderStatusDashboard ?? EmptyVisual;
   const FacebookFollowersOrderSummaryDashboard =
     visuals.FacebookFollowersOrderSummaryDashboard ?? EmptyVisual;
-  const FacebookFollowersProcessTimeline =
-    visuals.FacebookFollowersProcessTimeline ?? EmptyVisual;
+  const FacebookFollowersProcessTimeline = visuals.FacebookFollowersProcessTimeline ?? EmptyVisual;
   const FacebookFollowersDeliveryTimeline =
     visuals.FacebookFollowersDeliveryTimeline ?? EmptyVisual;
   const FacebookPageLikesOrderStatusDashboard =
     visuals.FacebookPageLikesOrderStatusDashboard ?? EmptyVisual;
   const FacebookPageLikesOrderSummaryDashboard =
     visuals.FacebookPageLikesOrderSummaryDashboard ?? EmptyVisual;
-  const FacebookPageLikesProcessTimeline =
-    visuals.FacebookPageLikesProcessTimeline ?? EmptyVisual;
+  const FacebookPageLikesProcessTimeline = visuals.FacebookPageLikesProcessTimeline ?? EmptyVisual;
   const FacebookPageLikesDeliveryTimeline =
     visuals.FacebookPageLikesDeliveryTimeline ?? EmptyVisual;
   const FacebookPostLikesOrderStatusDashboard =
     visuals.FacebookPostLikesOrderStatusDashboard ?? EmptyVisual;
   const FacebookPostLikesOrderSummaryDashboard =
     visuals.FacebookPostLikesOrderSummaryDashboard ?? EmptyVisual;
-  const FacebookPostLikesProcessTimeline =
-    visuals.FacebookPostLikesProcessTimeline ?? EmptyVisual;
+  const FacebookPostLikesProcessTimeline = visuals.FacebookPostLikesProcessTimeline ?? EmptyVisual;
   const FacebookPostLikesDeliveryTimeline =
     visuals.FacebookPostLikesDeliveryTimeline ?? EmptyVisual;
-  const TikTokLikesOrderSummaryDashboard =
-    visuals.TikTokLikesOrderSummaryDashboard ?? EmptyVisual;
+  const TikTokLikesOrderSummaryDashboard = visuals.TikTokLikesOrderSummaryDashboard ?? EmptyVisual;
   const TikTokLikesSecureOrderingDashboard =
     visuals.TikTokLikesSecureOrderingDashboard ?? EmptyVisual;
   const TikTokOrderStatusDashboard = visuals.TikTokOrderStatusDashboard ?? EmptyVisual;
   const TikTokOrderSummaryDashboard = visuals.TikTokOrderSummaryDashboard ?? EmptyVisual;
-  const TikTokViewsOrderSummaryDashboard =
-    visuals.TikTokViewsOrderSummaryDashboard ?? EmptyVisual;
+  const TikTokViewsOrderSummaryDashboard = visuals.TikTokViewsOrderSummaryDashboard ?? EmptyVisual;
   const TikTokViewsSecureCheckoutDashboard =
     visuals.TikTokViewsSecureCheckoutDashboard ?? EmptyVisual;
   const YouTubeSubscribersOrderStatusDashboard =
@@ -118,8 +113,7 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
   const YouTubeSubscribersProcessTimeline =
     visuals.YouTubeSubscribersProcessTimeline ?? EmptyVisual;
   const YouTubeViewsDeliveryTimeline = visuals.YouTubeViewsDeliveryTimeline ?? EmptyVisual;
-  const YouTubeViewsOrderStatusDashboard =
-    visuals.YouTubeViewsOrderStatusDashboard ?? EmptyVisual;
+  const YouTubeViewsOrderStatusDashboard = visuals.YouTubeViewsOrderStatusDashboard ?? EmptyVisual;
   const YouTubeViewsOrderSummaryDashboard =
     visuals.YouTubeViewsOrderSummaryDashboard ?? EmptyVisual;
   const YouTubeViewsProcessTimeline = visuals.YouTubeViewsProcessTimeline ?? EmptyVisual;
@@ -166,11 +160,7 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
   const breadcrumbs = buildBreadcrumb(service.slug);
   const previewPackageId = vm.pricing.packages[0]?.package.id;
   const educationalGuide = getEducationalGuideBySlug(service.slug);
-  const heroInstagramVariant = isIgViews
-    ? 'views'
-    : isIgComments
-      ? 'comments'
-      : undefined;
+  const heroInstagramVariant = isIgViews ? 'views' : isIgComments ? 'comments' : undefined;
   const heroTikTokVariant = isTtFollowers
     ? 'followers'
     : isTtLikes
@@ -178,11 +168,7 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
       : isTtViews
         ? 'views'
         : undefined;
-  const heroYouTubeVariant = isYtSubscribers
-    ? 'subscribers'
-    : isYtViews
-      ? 'views'
-      : undefined;
+  const heroYouTubeVariant = isYtSubscribers ? 'subscribers' : isYtViews ? 'views' : undefined;
   const heroFacebookVariant = isFbFollowers
     ? 'followers'
     : isFbPageLikes
@@ -262,7 +248,7 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
                   ? [
                       { label: 'Homepage', href: routes.home },
                       {
-                        label: 'Buy Facebook Likes Canada',
+                        label: 'Buy Facebook Page Likes Canada',
                         href: '/buy-facebook-page-likes',
                       },
                       {
@@ -292,9 +278,7 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
       }
     />
   );
-  const relatedArticlesBlock = (
-    <ServiceRelatedArticles articles={relatedArticles} />
-  );
+  const relatedArticlesBlock = <ServiceRelatedArticles articles={relatedArticles} />;
   const peopleAlsoReadBlock = (
     <ServiceRelatedArticles
       id="people-also-read"
@@ -413,22 +397,22 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
           isFbPostLikes
             ? 'Ordering Facebook post likes is simple and transparent. Submit your public Facebook post URL, choose the package that matches your engagement goals and complete checkout securely. After your order is confirmed, you can monitor delivery progress using your order details.'
             : isFbPageLikes
-            ? 'Ordering Facebook page likes is designed to be straightforward and transparent. Simply provide your public Facebook page URL, choose the package that matches your goals and complete checkout securely. After your order is confirmed, you can monitor delivery updates using your order information.'
-            : isFbFollowers
-              ? 'Growing your Facebook page should be simple and transparent. Submit your public Facebook page URL, choose the package that matches your goals and complete checkout securely. After your order is confirmed, you can monitor available delivery updates using your order information.'
-              : isYtViews
-                ? 'Buying YouTube views is straightforward. Submit your public video URL, review your selected package and complete checkout without sharing your account password. Once your order is confirmed, you can monitor delivery progress using your order information.'
-                : isYtSubscribers
-                  ? 'Every subscriber order follows a clear process from package selection to delivery. You provide your public YouTube channel URL, review the order details and complete checkout without sharing login credentials. After confirmation, use your order information to monitor available delivery updates.'
-                  : isIgComments
-                    ? 'Checkout stays simple and secure. Review transparent delivery details, place the order with public post information only, then track progress with professional support available if you need help.'
-                    : isTtFollowers
-                      ? "Every order follows a clear process from package selection to delivery. You'll know exactly what information is required, when your order has been confirmed, and how to monitor its progress through order tracking."
-                      : isTtLikes
-                        ? 'Buying TikTok likes should be simple and transparent. We only require your public TikTok video URL, never your account password. Every order includes secure checkout, progress tracking and dedicated support from purchase through delivery.'
-                        : isTtViews
-                          ? 'Buying TikTok views should be simple, transparent and secure. We only require your public TikTok video URL, never your account password. Every order includes secure checkout, gradual delivery and live order tracking from purchase to completion.'
-                          : undefined
+              ? 'Ordering Facebook page likes is designed to be straightforward and transparent. Simply provide your public Facebook page URL, choose the package that matches your goals and complete checkout securely. After your order is confirmed, you can monitor delivery updates using your order information.'
+              : isFbFollowers
+                ? 'Growing your Facebook page should be simple and transparent. Submit your public Facebook page URL, choose the package that matches your goals and complete checkout securely. After your order is confirmed, you can monitor available delivery updates using your order information.'
+                : isYtViews
+                  ? 'Buying YouTube views is straightforward. Submit your public video URL, review your selected package and complete checkout without sharing your account password. Once your order is confirmed, you can monitor delivery progress using your order information.'
+                  : isYtSubscribers
+                    ? 'Every subscriber order follows a clear process from package selection to delivery. You provide your public YouTube channel URL, review the order details and complete checkout without sharing login credentials. After confirmation, use your order information to monitor available delivery updates.'
+                    : isIgComments
+                      ? 'Checkout stays simple and secure. Review transparent delivery details, place the order with public post information only, then track progress with professional support available if you need help.'
+                      : isTtFollowers
+                        ? "Every order follows a clear process from package selection to delivery. You'll know exactly what information is required, when your order has been confirmed, and how to monitor its progress through order tracking."
+                        : isTtLikes
+                          ? 'Buying TikTok likes should be simple and transparent. We only require your public TikTok video URL, never your account password. Every order includes secure checkout, progress tracking and dedicated support from purchase through delivery.'
+                          : isTtViews
+                            ? 'Buying TikTok views should be simple, transparent and secure. We only require your public TikTok video URL, never your account password. Every order includes secure checkout, gradual delivery and live order tracking from purchase to completion.'
+                            : undefined
         }
         items={
           isFbPostLikes
@@ -444,117 +428,117 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
                 { id: 'fb-post-gradual', label: 'Gradual Delivery', icon: 'check' },
               ]
             : isFbPageLikes
-            ? [
-                {
-                  id: 'fb-pl-public',
-                  label: 'Public Facebook Page URL Only',
-                  icon: 'check',
-                },
-                { id: 'fb-pl-password', label: 'No Password Required', icon: 'check' },
-                { id: 'fb-pl-checkout', label: 'Secure Checkout', icon: 'check' },
-                { id: 'fb-pl-track', label: 'Order Tracking', icon: 'track' },
-                { id: 'fb-pl-gradual', label: 'Gradual Delivery', icon: 'check' },
-              ]
-            : isFbFollowers
               ? [
                   {
-                    id: 'fb-f-public',
+                    id: 'fb-pl-public',
                     label: 'Public Facebook Page URL Only',
                     icon: 'check',
                   },
-                  { id: 'fb-f-password', label: 'No Password Required', icon: 'check' },
-                  { id: 'fb-f-checkout', label: 'Secure Checkout', icon: 'check' },
-                  { id: 'fb-f-track', label: 'Order Tracking', icon: 'track' },
-                  { id: 'fb-f-gradual', label: 'Gradual Delivery', icon: 'check' },
+                  { id: 'fb-pl-password', label: 'No Password Required', icon: 'check' },
+                  { id: 'fb-pl-checkout', label: 'Secure Checkout', icon: 'check' },
+                  { id: 'fb-pl-track', label: 'Order Tracking', icon: 'track' },
+                  { id: 'fb-pl-gradual', label: 'Gradual Delivery', icon: 'check' },
                 ]
-              : isYtViews
+              : isFbFollowers
                 ? [
-                    { id: 'yt-v-public', label: 'Public Video URL Only', icon: 'check' },
-                    { id: 'yt-v-password', label: 'No Password Required', icon: 'check' },
-                    { id: 'yt-v-checkout', label: 'Secure Checkout', icon: 'check' },
-                    { id: 'yt-v-track', label: 'Order Tracking', icon: 'track' },
-                    { id: 'yt-v-gradual', label: 'Gradual Delivery', icon: 'check' },
+                    {
+                      id: 'fb-f-public',
+                      label: 'Public Facebook Page URL Only',
+                      icon: 'check',
+                    },
+                    { id: 'fb-f-password', label: 'No Password Required', icon: 'check' },
+                    { id: 'fb-f-checkout', label: 'Secure Checkout', icon: 'check' },
+                    { id: 'fb-f-track', label: 'Order Tracking', icon: 'track' },
+                    { id: 'fb-f-gradual', label: 'Gradual Delivery', icon: 'check' },
                   ]
-                : isYtSubscribers
+                : isYtViews
                   ? [
-                      { id: 'yt-s-public', label: 'Public Channel URL Only', icon: 'check' },
-                      { id: 'yt-s-password', label: 'No Password Required', icon: 'check' },
-                      { id: 'yt-s-details', label: 'Clear Package Details', icon: 'check' },
-                      { id: 'yt-s-confirm', label: 'Order Confirmation', icon: 'check' },
-                      { id: 'yt-s-track', label: 'Delivery Tracking', icon: 'track' },
+                      { id: 'yt-v-public', label: 'Public Video URL Only', icon: 'check' },
+                      { id: 'yt-v-password', label: 'No Password Required', icon: 'check' },
+                      { id: 'yt-v-checkout', label: 'Secure Checkout', icon: 'check' },
+                      { id: 'yt-v-track', label: 'Order Tracking', icon: 'track' },
+                      { id: 'yt-v-gradual', label: 'Gradual Delivery', icon: 'check' },
                     ]
-                  : isIgComments
+                  : isYtSubscribers
                     ? [
-                        { id: 'simple', label: 'Simple checkout', icon: 'check' },
-                        { id: 'secure', label: 'Secure ordering', icon: 'check' },
-                        { id: 'delivery', label: 'Transparent delivery', icon: 'check' },
-                        { id: 'track', label: 'Order tracking', icon: 'track' },
-                        { id: 'support', label: 'Professional support', icon: 'support' },
+                        { id: 'yt-s-public', label: 'Public Channel URL Only', icon: 'check' },
+                        { id: 'yt-s-password', label: 'No Password Required', icon: 'check' },
+                        { id: 'yt-s-details', label: 'Clear Package Details', icon: 'check' },
+                        { id: 'yt-s-confirm', label: 'Order Confirmation', icon: 'check' },
+                        { id: 'yt-s-track', label: 'Delivery Tracking', icon: 'track' },
                       ]
-                    : isTtFollowers
+                    : isIgComments
                       ? [
-                          { id: 'tt-username', label: 'Public Username Only', icon: 'check' },
-                          { id: 'tt-checkout', label: 'Secure Checkout', icon: 'check' },
-                          { id: 'tt-confirm', label: 'Order Confirmation', icon: 'check' },
-                          { id: 'tt-track', label: 'Order Tracking', icon: 'track' },
-                          {
-                            id: 'tt-support',
-                            label: 'Dedicated Customer Support',
-                            icon: 'support',
-                          },
+                          { id: 'simple', label: 'Simple checkout', icon: 'check' },
+                          { id: 'secure', label: 'Secure ordering', icon: 'check' },
+                          { id: 'delivery', label: 'Transparent delivery', icon: 'check' },
+                          { id: 'track', label: 'Order tracking', icon: 'track' },
+                          { id: 'support', label: 'Professional support', icon: 'support' },
                         ]
-                      : isTtLikes
+                      : isTtFollowers
                         ? [
+                            { id: 'tt-username', label: 'Public Username Only', icon: 'check' },
+                            { id: 'tt-checkout', label: 'Secure Checkout', icon: 'check' },
+                            { id: 'tt-confirm', label: 'Order Confirmation', icon: 'check' },
+                            { id: 'tt-track', label: 'Order Tracking', icon: 'track' },
                             {
-                              id: 'tt-l-public-url',
-                              label: 'Public video URL only',
-                              icon: 'check',
-                            },
-                            {
-                              id: 'tt-l-no-password',
-                              label: 'No password required',
-                              icon: 'check',
-                            },
-                            {
-                              id: 'tt-l-secure-checkout',
-                              label: 'Secure checkout',
-                              icon: 'check',
-                            },
-                            {
-                              id: 'tt-l-order-tracking',
-                              label: 'Order tracking',
-                              icon: 'track',
+                              id: 'tt-support',
+                              label: 'Dedicated Customer Support',
+                              icon: 'support',
                             },
                           ]
-                        : isTtViews
+                        : isTtLikes
                           ? [
                               {
-                                id: 'tt-v-public-url',
+                                id: 'tt-l-public-url',
                                 label: 'Public video URL only',
                                 icon: 'check',
                               },
                               {
-                                id: 'tt-v-no-password',
+                                id: 'tt-l-no-password',
                                 label: 'No password required',
                                 icon: 'check',
                               },
                               {
-                                id: 'tt-v-secure-checkout',
+                                id: 'tt-l-secure-checkout',
                                 label: 'Secure checkout',
                                 icon: 'check',
                               },
                               {
-                                id: 'tt-v-gradual',
-                                label: 'Gradual delivery',
-                                icon: 'check',
-                              },
-                              {
-                                id: 'tt-v-live-tracking',
-                                label: 'Live order tracking',
+                                id: 'tt-l-order-tracking',
+                                label: 'Order tracking',
                                 icon: 'track',
                               },
                             ]
-                          : undefined
+                          : isTtViews
+                            ? [
+                                {
+                                  id: 'tt-v-public-url',
+                                  label: 'Public video URL only',
+                                  icon: 'check',
+                                },
+                                {
+                                  id: 'tt-v-no-password',
+                                  label: 'No password required',
+                                  icon: 'check',
+                                },
+                                {
+                                  id: 'tt-v-secure-checkout',
+                                  label: 'Secure checkout',
+                                  icon: 'check',
+                                },
+                                {
+                                  id: 'tt-v-gradual',
+                                  label: 'Gradual delivery',
+                                  icon: 'check',
+                                },
+                                {
+                                  id: 'tt-v-live-tracking',
+                                  label: 'Live order tracking',
+                                  icon: 'track',
+                                },
+                              ]
+                            : undefined
         }
         illustration={
           isFbPostLikes ? (
@@ -743,9 +727,9 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
         }
         className={
           isTtLikes || isTtViews || isYtSubscribers || isYtViews || isFbFollowers || isFbPostLikes
-            ? '[&_a]:min-h-12 [&_a]:px-8 [&_a]:text-base [&_a]:sm:min-h-[3.25rem] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_80%_20%,rgba(249,115,22,0.1),transparent_55%)] before:content-[""] [&_section]:overflow-visible [&_[aria-hidden]]:mt-1 sm:[&_[aria-hidden]]:mt-2'
+            ? 'before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_80%_20%,rgba(249,115,22,0.1),transparent_55%)] before:content-[""] [&_[aria-hidden]]:mt-1 sm:[&_[aria-hidden]]:mt-2 [&_a]:min-h-12 [&_a]:px-8 [&_a]:text-base [&_a]:sm:min-h-[3.25rem] [&_section]:overflow-visible'
             : isIgViews || isIgComments || isTtFollowers
-              ? '[&_a]:min-h-12 [&_a]:px-8 [&_a]:text-base [&_a]:sm:min-h-[3.25rem] before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_80%_20%,rgba(249,115,22,0.1),transparent_55%)] before:content-[""] [&_[aria-hidden]]:mt-1 sm:[&_[aria-hidden]]:mt-2'
+              ? 'before:pointer-events-none before:absolute before:inset-0 before:bg-[radial-gradient(ellipse_at_80%_20%,rgba(249,115,22,0.1),transparent_55%)] before:content-[""] [&_[aria-hidden]]:mt-1 sm:[&_[aria-hidden]]:mt-2 [&_a]:min-h-12 [&_a]:px-8 [&_a]:text-base [&_a]:sm:min-h-[3.25rem]'
               : undefined
         }
       />

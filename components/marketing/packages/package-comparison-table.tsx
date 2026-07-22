@@ -17,7 +17,15 @@ type PackageComparisonTableProps = {
   config?: PackagesPageConfig;
 };
 
-const HEADERS = ['Package', 'Delivery', 'Recommended For', 'InstantViral', 'Typical Providers'] as const;
+const COMPETITOR_HEADERS = [
+  'Package',
+  'Delivery',
+  'Recommended For',
+  'InstantViral',
+  'Typical Providers',
+] as const;
+
+const APPROACH_HEADERS = ['Package', 'Recommended For', 'Package Approach'] as const;
 
 export function PackageComparisonTable({
   id = 'package-comparison',
@@ -26,6 +34,8 @@ export function PackageComparisonTable({
 }: PackageComparisonTableProps) {
   const { comparison } = config;
   const rows = comparison.rows;
+  const isApproach = comparison.layout === 'approach';
+  const headers = isApproach ? APPROACH_HEADERS : COMPETITOR_HEADERS;
 
   return (
     <Section
@@ -49,22 +59,32 @@ export function PackageComparisonTable({
             aria-label="Package comparison"
           >
             <div className="w-full overflow-x-auto overscroll-x-contain [-webkit-overflow-scrolling:touch]">
-              <table className="w-full min-w-[40rem] border-collapse text-left lg:min-w-0">
+              <table
+                className={cn(
+                  'w-full border-collapse text-left',
+                  isApproach ? 'min-w-[28rem] lg:min-w-0' : 'min-w-[40rem] lg:min-w-0',
+                )}
+              >
                 <thead>
                   <tr className="border-b border-[var(--border-subtle)]">
-                    {HEADERS.map((header, index) => (
+                    {headers.map((header, index) => (
                       <th
                         key={header}
                         scope="col"
                         className={cn(
                           'px-4 py-4 text-[11px] font-bold tracking-[0.08em] whitespace-nowrap uppercase lg:px-5 lg:py-5',
                           index === 0 &&
-                            'sticky left-0 z-20 bg-[var(--surface-muted)] shadow-[4px_0_12px_-8px_rgba(28,25,23,0.28)]',
-                          index === 3 &&
+                            'sticky left-0 z-20 bg-[var(--surface-muted)] text-[var(--text-muted)] shadow-[4px_0_12px_-8px_rgba(28,25,23,0.28)]',
+                          !isApproach &&
+                            index === 3 &&
                             'bg-[color-mix(in_srgb,var(--brand-primary)_18%,white)] text-[var(--brand-primary)] shadow-[inset_0_1px_0_rgba(255,255,255,0.7)]',
-                          index === 4 && 'bg-stone-100 text-stone-500',
-                          index > 0 && index < 3 && 'bg-[var(--surface-muted)] text-[var(--text-muted)]',
-                          index === 0 && 'text-[var(--text-muted)]',
+                          !isApproach && index === 4 && 'bg-stone-100 text-stone-500',
+                          index > 0 &&
+                            (isApproach || index < 3) &&
+                            'bg-[var(--surface-muted)] text-[var(--text-muted)]',
+                          isApproach &&
+                            index === 2 &&
+                            'bg-[color-mix(in_srgb,var(--brand-primary)_18%,white)] text-[var(--brand-primary)]',
                         )}
                       >
                         {header}
@@ -110,28 +130,41 @@ export function PackageComparisonTable({
                             {row.packageLabel}
                           </span>
                         </th>
-                        <td className="px-4 py-4 text-sm leading-relaxed text-[var(--text-secondary)] lg:px-5 lg:py-5">
-                          {row.delivery}
-                        </td>
-                        <td className="px-4 py-4 text-sm leading-relaxed text-[var(--text-secondary)] lg:px-5 lg:py-5">
-                          {row.recommended}
-                        </td>
-                        <td className="bg-[color-mix(in_srgb,var(--brand-primary)_12%,white)] px-4 py-4 text-sm font-semibold text-[var(--brand-primary)] lg:px-5 lg:py-5">
-                          <span className="inline-flex items-center gap-2">
-                            <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
-                              <Check className="size-3.5" strokeWidth={2.5} aria-hidden />
-                            </span>
-                            {row.popularity}
-                          </span>
-                        </td>
-                        <td className="bg-stone-50 px-4 py-4 text-sm text-stone-500 lg:px-5 lg:py-5">
-                          <span className="inline-flex items-center gap-2">
-                            <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-stone-200/80 text-stone-500">
-                              <X className="size-3.5" strokeWidth={2.5} aria-hidden />
-                            </span>
-                            Often unclear
-                          </span>
-                        </td>
+                        {isApproach ? (
+                          <>
+                            <td className="px-4 py-4 text-sm leading-relaxed text-[var(--text-secondary)] lg:px-5 lg:py-5">
+                              {row.recommended}
+                            </td>
+                            <td className="bg-[color-mix(in_srgb,var(--brand-primary)_12%,white)] px-4 py-4 text-sm font-semibold text-[var(--brand-primary)] lg:px-5 lg:py-5">
+                              {row.popularity}
+                            </td>
+                          </>
+                        ) : (
+                          <>
+                            <td className="px-4 py-4 text-sm leading-relaxed text-[var(--text-secondary)] lg:px-5 lg:py-5">
+                              {row.delivery}
+                            </td>
+                            <td className="px-4 py-4 text-sm leading-relaxed text-[var(--text-secondary)] lg:px-5 lg:py-5">
+                              {row.recommended}
+                            </td>
+                            <td className="bg-[color-mix(in_srgb,var(--brand-primary)_12%,white)] px-4 py-4 text-sm font-semibold text-[var(--brand-primary)] lg:px-5 lg:py-5">
+                              <span className="inline-flex items-center gap-2">
+                                <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
+                                  <Check className="size-3.5" strokeWidth={2.5} aria-hidden />
+                                </span>
+                                {row.popularity}
+                              </span>
+                            </td>
+                            <td className="bg-stone-50 px-4 py-4 text-sm text-stone-500 lg:px-5 lg:py-5">
+                              <span className="inline-flex items-center gap-2">
+                                <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-stone-200/80 text-stone-500">
+                                  <X className="size-3.5" strokeWidth={2.5} aria-hidden />
+                                </span>
+                                Often unclear
+                              </span>
+                            </td>
+                          </>
+                        )}
                       </tr>
                     );
                   })}

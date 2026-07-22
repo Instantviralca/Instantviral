@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import { HeroActions } from '@/components/marketing/hero/hero-actions';
 import { HeroContent } from '@/components/marketing/hero/hero-content';
+import { HeroStats } from '@/components/marketing/hero/hero-stats';
 import { HeroTrustBar } from '@/components/marketing/hero/hero-trust-bar';
 import { HeroVisual } from '@/components/marketing/hero/hero-visual';
 import type { HeroSectionProps, PlatformBadgeProps } from '@/components/marketing/hero/types';
@@ -10,17 +11,19 @@ import { Section } from '@/components/layout/section';
 import { Stack } from '@/components/layout/stack';
 import { routes } from '@/config/routes';
 import { getHomepageContent } from '@/data/content/homepage';
+import { getStatsByIds } from '@/data/content/stats';
 import { getSafePublicReviews, summarizePublicReviews } from '@/lib/reviews';
 import { cn } from '@/lib/utils';
 
 /**
- * Homepage Hero (Documents 08.01 + 08.01.1).
+ * Homepage Hero — Buy Instagram Followers Canada.
  * Every string comes from data/content/homepage.ts.
  */
 export function HeroSection({ className, visualSlot }: HeroSectionProps) {
   const content = getHomepageContent();
-  const { hero, trustBar, platformGrid } = content;
+  const { hero, trustBar, platformGrid, heroStats } = content;
   const aggregate = summarizePublicReviews(getSafePublicReviews());
+  const stats = getStatsByIds(heroStats?.statIds ?? []);
 
   const platforms: PlatformBadgeProps[] = (platformGrid.internalLinks ?? []).map((link, index) => ({
     id: platformGrid.platformIds[index] ?? link.label.toLowerCase(),
@@ -34,6 +37,7 @@ export function HeroSection({ className, visualSlot }: HeroSectionProps) {
 
   return (
     <Section
+      id="homepage-hero"
       spacing="lg"
       className={cn('relative overflow-hidden bg-hero-wash', className)}
       aria-labelledby="homepage-hero-heading"
@@ -71,6 +75,7 @@ export function HeroSection({ className, visualSlot }: HeroSectionProps) {
               </p>
             ) : null}
             <HeroTrustBar items={trustBar.items} className="mt-1" />
+            <HeroStats items={stats} className="mt-1" />
           </Stack>
 
           <div className="min-w-0">

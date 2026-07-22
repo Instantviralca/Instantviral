@@ -2,7 +2,9 @@ import Link from 'next/link';
 import {
   FileText,
   Headphones,
+  Layers3,
   Link2,
+  Lock,
   RefreshCw,
   ShieldCheck,
   Truck,
@@ -37,6 +39,12 @@ const WHY_ICONS: Record<string, LucideIcon> = {
   'why-money-back': ShieldCheck,
   'why-refill': RefreshCw,
   'why-tracking': FileText,
+  'why-no-password': Lock,
+  'why-gradual-delivery': Truck,
+  'why-secure-checkout': ShieldCheck,
+  'why-order-tracking': FileText,
+  'why-clear-packages': Layers3,
+  'why-customer-support': Headphones,
 };
 
 export function WhyChooseUs({ title, description, items, cta, className }: WhyChooseUsProps) {
@@ -84,10 +92,7 @@ export function WhyChooseUs({ title, description, items, cta, className }: WhyCh
         {cta ? (
           <div className="mt-10 flex justify-start">
             <Button asChild size="lg" variant="outline" className="min-h-11 rounded-xl">
-              <Link
-                href={cta.href}
-                data-analytics={homepageAnalyticsEvents.home_about_click}
-              >
+              <Link href={cta.href} data-analytics={homepageAnalyticsEvents.home_about_click}>
                 {cta.label}
               </Link>
             </Button>

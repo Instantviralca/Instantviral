@@ -126,6 +126,18 @@ export function DeliveryProcessTimeline({
                       >
                         {step.label}
                       </p>
+                      {step.description ? (
+                        <p
+                          className={cn(
+                            'mt-2 max-w-[14rem] text-xs leading-relaxed transition-colors duration-300',
+                            isActive && 'text-[var(--text-secondary)]',
+                            isDone && 'text-emerald-700/80',
+                            !isDone && !isActive && 'text-stone-400',
+                          )}
+                        >
+                          {step.description}
+                        </p>
+                      ) : null}
                       {index < steps.length - 1 ? (
                         <span className="mt-3 text-[var(--brand-primary)] sm:hidden" aria-hidden>
                           ↓

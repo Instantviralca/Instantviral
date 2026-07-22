@@ -57,8 +57,7 @@ export const FACEBOOK_FOLLOWERS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
         {
           id: 'fb-f-bp-valuable',
           title: 'Share Valuable Content',
-          description:
-            'Focus on content that informs, entertains or helps your audience.',
+          description: 'Focus on content that informs, entertains or helps your audience.',
           icon: 'spark',
         },
         {
@@ -70,8 +69,7 @@ export const FACEBOOK_FOLLOWERS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
         {
           id: 'fb-f-bp-comments',
           title: 'Respond To Comments',
-          description:
-            'Build stronger relationships by interacting with followers.',
+          description: 'Build stronger relationships by interacting with followers.',
           icon: 'message',
         },
         {
@@ -83,8 +81,7 @@ export const FACEBOOK_FOLLOWERS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
         {
           id: 'fb-f-bp-brand',
           title: 'Maintain Brand Consistency',
-          description:
-            'Keep your branding, messaging and visuals consistent across every post.',
+          description: 'Keep your branding, messaging and visuals consistent across every post.',
           icon: 'layers',
         },
       ],
@@ -177,7 +174,7 @@ export const FACEBOOK_FOLLOWERS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       links: [
         { label: 'Homepage', href: '/' },
         {
-          label: 'Buy Facebook Likes Canada',
+          label: 'Buy Facebook Page Likes Canada',
           href: '/buy-facebook-page-likes',
         },
         { label: 'Contact', href: '/contact' },

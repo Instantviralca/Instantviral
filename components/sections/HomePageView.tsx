@@ -1,27 +1,23 @@
+import { HeroSection } from '@/components/marketing';
 import {
-  FeaturedServicesSection,
-  HeroSection,
-  HowItWorks,
-  MarketingFaq,
-  PlatformSelectorSection,
-  Stats,
-  WhyChooseUs,
-} from '@/components/marketing';
-import { ComparisonSection } from '@/components/marketing/comparison-section';
-import { CustomerReviewsSection } from '@/components/marketing/customer-reviews-section';
-import { FinalCTA } from '@/components/marketing/final-cta';
+  HomepageCommercialSection,
+  HomepageDirectAnswerSection,
+  HomepageFaqSection,
+  HomepageFinalCtaSection,
+  HomepageHowToBuySection,
+  HomepageInstagramHubSection,
+  HomepageTrustedReviewsSection,
+  HomepageWhyInstantViralSection,
+} from '@/components/marketing/homepage-editorial-sections';
+import {
+  HomepageBuyingResponsiblySection,
+  HomepageWhoWeHelpSection,
+} from '@/components/marketing/homepage-extended-sections';
 import { HomepageLearnSections } from '@/components/marketing/homepage-learn-sections';
-import { ImageTextSplit } from '@/components/design-system/image-text-split';
-import { TrustPanel } from '@/components/design-system/trust-panel';
-import { OrderTrackingDashboard } from '@/components/illustrations';
+import { HomepageStickyCta } from '@/components/marketing/homepage-sticky-cta';
 import { getHomepageContent } from '@/data/content/homepage';
 import { getPublishedLearnArticleRecords } from '@/data/learn/articles';
-import { mapHomepageContent } from '@/lib/content/mappers';
-import {
-  getHomepageReviews,
-  getSafePublicReviews,
-  summarizePublicReviews,
-} from '@/lib/reviews';
+import { getHomepageReviews } from '@/lib/reviews';
 import type { HomepageContent } from '@/types/content';
 
 type HomePageViewProps = {
@@ -29,53 +25,30 @@ type HomePageViewProps = {
 };
 
 /**
- * Production homepage composition (Document 08.11) — visual redesign pass.
- * Extension sections append without changing approved commerce behaviour.
+ * Homepage composition — Buy Instagram Followers Canada commercial authority.
+ * Order: Hero → Quick Answer → Social Proof → Trust → How It Works → Services →
+ * Who We Help → Reviews → Articles → Educational → FAQ → Final CTA.
+ * Footer is global (SiteLayout).
  */
-export function HomePageView({ content = getHomepageContent() }: HomePageViewProps) {
-  const vm = mapHomepageContent(content);
+export function HomePageView({ content: _content = getHomepageContent() }: HomePageViewProps) {
   const hasPublishedGuides = getPublishedLearnArticleRecords().length > 0;
-  const featuredReviews = getHomepageReviews(6);
-  const aggregate = summarizePublicReviews(getSafePublicReviews());
+  const featuredReviews = getHomepageReviews(7);
 
   return (
-    <>
+    <div className="pb-[4.75rem] lg:pb-0">
       <HeroSection />
-      <PlatformSelectorSection />
-      <FeaturedServicesSection />
-      {featuredReviews.length > 0 && aggregate ? (
-        <CustomerReviewsSection reviews={featuredReviews} aggregate={aggregate} />
-      ) : null}
-      <WhyChooseUs {...vm.whyChooseUs} />
-      <HowItWorks {...vm.howItWorks} />
-      <ImageTextSplit
-        title="Track Every Step of Your Order"
-        description="Receive an order confirmation after checkout and use the public tracking page to monitor available status updates from processing through delivery."
-        visual={<OrderTrackingDashboard />}
-        reverse
-        className="bg-hero-wash bg-mesh-soft"
-      />
-      <Stats {...vm.stats} />
-      <TrustPanel
-        title="Order With Clarity"
-        description="Place an order using the public username or content URL required for the selected service. Review the details, complete checkout and track available updates from purchase to delivery."
-        items={[
-          { id: 'public', label: 'Public information only', icon: 'check' },
-          { id: 'track', label: 'Order tracking', icon: 'track' },
-          { id: 'support', label: 'Customer support', icon: 'support' },
-        ]}
-      />
-      <ComparisonSection />
+      <HomepageDirectAnswerSection />
+      <HomepageCommercialSection />
+      <HomepageWhyInstantViralSection />
+      <HomepageHowToBuySection />
+      <HomepageInstagramHubSection />
+      <HomepageWhoWeHelpSection />
+      <HomepageTrustedReviewsSection reviews={featuredReviews} />
       {hasPublishedGuides ? <HomepageLearnSections /> : null}
-      {vm.faq.items.length > 0 ? <MarketingFaq {...vm.faq} /> : null}
-      <FinalCTA
-        id={content.finalCta.id}
-        title={vm.finalCta.title}
-        description={vm.finalCta.description}
-        primaryCta={vm.finalCta.primaryCta}
-        secondaryCta={vm.finalCta.secondaryCta}
-        surface="homepage"
-      />
-    </>
+      <HomepageBuyingResponsiblySection />
+      <HomepageFaqSection />
+      <HomepageFinalCtaSection />
+      <HomepageStickyCta />
+    </div>
   );
 }

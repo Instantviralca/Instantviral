@@ -4,20 +4,20 @@ import type { Service } from '@/types/service';
 
 /** Title formulas from Document 05 / 09.11. */
 export const titles = {
-  home: () => `${site.name} | Social Media Growth Services`,
+  home: () => `Buy Instagram Followers Canada | Real Followers – ${site.name}`,
 
   service: (service: Service) => {
     if (service.slug === 'buy-instagram-followers') {
       return `Instagram Followers Packages & Pricing | ${site.name}`;
     }
     if (service.slug === 'buy-instagram-likes') {
-      return `Instagram Likes Packages & Pricing | ${site.name}`;
+      return `Buy Instagram Likes | ${site.name}`;
     }
     if (service.slug === 'buy-instagram-views') {
       return `Buy Instagram Views Canada | ${site.name}`;
     }
     if (service.slug === 'buy-instagram-comments') {
-      return `Buy Instagram Comments Packages | ${site.name}`;
+      return `Buy Instagram Comments Canada | ${site.name}`;
     }
     if (service.slug === 'buy-tiktok-followers') {
       return `Buy TikTok Followers Canada | ${site.name}`;

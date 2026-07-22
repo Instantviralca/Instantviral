@@ -14,11 +14,10 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
     seo: {
       title: 'Buy YouTube Subscribers Canada | Packages & Pricing',
       description:
-        'Compare YouTube subscriber packages, review pricing and delivery information, and order using your public channel URL with checkout and order tracking.',
+        'Buy YouTube subscribers in Canada with clear package options, delivery information, secure checkout and order tracking using your public channel URL.',
     },
     hero: {
-      eyebrow:
-        'YOUTUBE SUBSCRIBER PACKAGES FOR CANADIAN CREATORS, BRANDS & BUSINESSES',
+      eyebrow: 'YOUTUBE SUBSCRIBER PACKAGES FOR CANADIAN CREATORS, BRANDS & BUSINESSES',
       title: 'Buy YouTube Subscribers Canada',
       description:
         'Grow your YouTube channel with subscriber packages created for creators, businesses and brands across Canada. Choose the package that matches your goals, place your order securely using your public YouTube channel URL and follow every stage of delivery with transparent order tracking. We never ask for your YouTube password, making the ordering process simple, secure and straightforward.',
@@ -172,8 +171,7 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
         {
           id: 'yt-s-del-progress',
           title: 'Progress Updates',
-          description:
-            'Use the tracking page to review the latest available order status.',
+          description: 'Use the tracking page to review the latest available order status.',
         },
         {
           id: 'yt-s-del-completed',
@@ -247,8 +245,7 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
         {
           id: 'yt-s-req-public',
           title: 'Publicly Accessible Channel',
-          description:
-            'Keep the channel publicly accessible while delivery is being processed.',
+          description: 'Keep the channel publicly accessible while delivery is being processed.',
         },
         {
           id: 'yt-s-req-email',
@@ -261,8 +258,7 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
     reviews: {
       id: 'yt-subscribers-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
+      description: 'Customer reviews for this InstantViral service.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },
@@ -325,8 +321,7 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
         'Buy YouTube Views Canada with clear package options, public video URL checkout, gradual delivery details and order tracking. No password required.',
     },
     hero: {
-      eyebrow:
-        'YOUTUBE VIDEO VIEW PACKAGES FOR CANADIAN CREATORS, BRANDS & BUSINESSES',
+      eyebrow: 'YOUTUBE VIDEO VIEW PACKAGES FOR CANADIAN CREATORS, BRANDS & BUSINESSES',
       title: 'Buy YouTube Views Canada',
       description:
         'Increase the visibility of your YouTube videos with view packages designed for creators, businesses and brands across Canada. Choose the package that matches your campaign, submit your public YouTube video URL and follow your order from checkout to delivery with transparent tracking. We never ask for your YouTube password, making the process simple and secure.',
@@ -442,8 +437,7 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
         {
           id: 'yt-v-why-support',
           title: 'Canadian Support',
-          description:
-            'Our support team is available whenever assistance is required.',
+          description: 'Our support team is available whenever assistance is required.',
         },
       ],
     },
@@ -459,14 +453,12 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
         {
           id: 'yt-v-del-review',
           title: 'Order Review',
-          description:
-            'Your video URL and package are verified before processing.',
+          description: 'Your video URL and package are verified before processing.',
         },
         {
           id: 'yt-v-del-begins',
           title: 'Delivery Begins',
-          description:
-            'Views begin according to the estimated delivery schedule.',
+          description: 'Views begin according to the estimated delivery schedule.',
         },
         {
           id: 'yt-v-del-progress',
@@ -476,8 +468,7 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
         {
           id: 'yt-v-del-complete',
           title: 'Order Complete',
-          description:
-            'The order is completed once the selected quantity has been delivered.',
+          description: 'The order is completed once the selected quantity has been delivered.',
         },
       ],
     },
@@ -528,8 +519,7 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
         {
           id: 'yt-v-req-url',
           title: 'Public YouTube Video URL',
-          description:
-            'Submit the public URL of the video receiving the selected package.',
+          description: 'Submit the public URL of the video receiving the selected package.',
         },
         {
           id: 'yt-v-req-package',
@@ -551,8 +541,7 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
     reviews: {
       id: 'yt-views-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
+      description: 'Customer reviews for this InstantViral service.',
       purpose: 'Social proof from approved customer reviews',
       testimonialIds: [],
     },

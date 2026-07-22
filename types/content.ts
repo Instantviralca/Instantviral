@@ -42,6 +42,10 @@ export type HeroVisualContent = {
   alt: string;
   width: number;
   height: number;
+  /** Optional figure title for SEO / figcaption context. */
+  title?: string;
+  /** Optional visible caption under the hero image. */
+  caption?: string;
 };
 
 /** Section shell = SectionCopy + architecture fields. */
@@ -106,6 +110,8 @@ export type PlatformSelectorCardContent = {
 export type HomepageContent = {
   hero: HeroContent;
   trustBar: SectionContent & { items: TrustBarItemContent[] };
+  /** Compact verified metrics shown in the hero (approved claims only). */
+  heroStats?: SectionContent & { statIds: string[] };
   platformGrid: SectionContent & {
     platformIds: PlatformId[];
     /** Document 08.02 card content — names/icons still come from data/platforms.ts. */

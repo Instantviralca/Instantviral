@@ -54,7 +54,7 @@ export type EducationalGuideBlock =
       heading: string;
       paragraphs: string[];
     }
-  | { type: 'callout'; id: string; title: string; body: string }
+  | { type: 'callout'; id: string; title: string; body: string; eyebrow?: string }
   | {
       type: 'cards';
       id: string;
@@ -127,134 +127,117 @@ export type EducationalGuideContent = {
 };
 
 export const INSTAGRAM_FOLLOWERS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
-  id: 'ig-followers-growth-guide',
+  id: 'ig-followers-package-guide',
   serviceSlug: 'buy-instagram-followers',
-  title: 'How Instagram Followers Help Build Long-Term Growth',
+  title: 'How to Choose a Suitable Package',
   description:
-    'A practical guide to audience size, social proof, and choosing a package that fits how you publish.',
+    'A package should fit the current condition of your account rather than being selected only because it offers the largest quantity. Consider your existing audience, recent activity and immediate campaign goal before placing an order.',
   blocks: [
     {
-      type: 'intro',
-      paragraphs: [
-        'Most people skim a profile before they read a caption. Instagram followers help that first glance feel established—especially when the feed already shows a clear niche.',
-        'Audience size will not write your offers for you. It does make collaborations, launches, and cold DMs easier when visitors believe the account is active.',
-        'Use this guide for social-proof planning. Skip vanity spikes that leave a hollow grid behind them.',
-      ],
-    },
-    {
-      type: 'split',
-      id: 'why-followers',
-      heading: 'Why follower growth matters',
+      type: 'prose-split',
+      id: 'choose-guidance',
       illustration: 'followers-growth',
-      paragraphs: [
-        'A clearer follower count often keeps new visitors on the profile longer: Highlights get taps, Story rings get opens, and the bio finally gets read. That matters if you sell services, drop products, or pitch brand work.',
-        'Growth sticks when the bio, pinned posts, and posting rhythm already answer “what does this account do?” Empty brands that buy speed without a story usually look inconsistent a month later.',
-      ],
-      bullets: [
-        'Align quantity with a launch, a new niche, or steady creator growth',
-        'Keep the username exact and the account public during delivery',
-        'Track the order so you know when growth landed',
-      ],
-    },
-    {
-      type: 'cards',
-      id: 'follower-benefits',
-      heading: 'Benefits worth aiming for',
-      items: [
+      sections: [
         {
-          id: 'proof',
-          title: 'Social proof',
-          description:
-            'New visitors feel safer liking, sharing, or booking when the audience already looks real and active.',
-          icon: 'shield',
+          id: 'account-size',
+          heading: 'Start With Your Current Account Size',
+          paragraphs: [
+            'Smaller or newer profiles may be better suited to a lighter package. Established accounts with an active posting history can consider a larger option that feels more consistent with their current presentation.',
+          ],
         },
         {
-          id: 'authority',
-          title: 'Brand authority',
-          description:
-            'Creators use audience size when they ask for partnerships, speaking invites, or newsletter signups.',
-          icon: 'award',
+          id: 'match-goal',
+          heading: 'Match the Package to a Specific Goal',
+          paragraphs: [
+            'Decide whether the order supports a new profile, an upcoming promotion, a product launch or ongoing account activity. A clear goal makes package selection easier and reduces unnecessary ordering.',
+          ],
         },
         {
-          id: 'growth',
-          title: 'Creator growth',
-          description:
-            'A wider following gives future Reels and carousels a larger starting base than a silent profile.',
-          icon: 'trending',
+          id: 'publishing',
+          heading: 'Consider Your Publishing Activity',
+          paragraphs: [
+            'Your profile should have a complete bio, recent content and a clear purpose. Package size alone cannot replace regular posts, useful content or communication with your audience.',
+          ],
         },
         {
-          id: 'trust',
-          title: 'Business trust',
-          description:
-            'Local shops get compared quickly—visible growth can tip who gets the first inquiry.',
-          icon: 'building',
+          id: 'review-delivery',
+          heading: 'Review Delivery Before Payment',
+          paragraphs: [
+            'Check the delivery information, package quantity, username and any eligibility conditions before checkout. Contact support when an order detail is unclear.',
+          ],
         },
       ],
     },
     {
       type: 'checklist',
-      id: 'prep-checklist',
-      heading: 'Checklist before you buy followers',
-      intro: 'Spend ten minutes on these items; they prevent the most common disappointed orders.',
+      id: 'before-checkout',
+      heading: 'Before You Continue to Checkout',
+      intro:
+        'Take a moment to confirm the following details. Correct information helps prevent avoidable order delays.',
       items: [
-        'Bio states what you sell or publish in one plain sentence',
-        'Pinned or recent posts match the niche you want to grow',
-        'Username spelling matches the one you will enter at checkout',
-        'You know whether this is a launch push or steady growth',
+        'Your Instagram account is public during delivery.',
+        'The username is entered exactly as it appears on Instagram.',
+        'The selected quantity is appropriate for your account size.',
+        'Your profile has a clear photo, bio and recent content.',
+        'You have reviewed the available delivery information.',
+        'You understand that the package supports profile presentation but does not replace organic content or engagement.',
       ],
     },
     {
       type: 'timeline',
-      id: 'choose-package',
-      heading: 'Practical tips for choosing a package',
+      id: 'decision-guide',
+      heading: 'Three-Step Decision Guide',
       steps: [
         {
-          id: 'goal',
-          title: 'Name the goal',
+          id: 'purpose',
+          title: 'Define the Purpose',
           description:
-            'Early social proof, a product launch, or year-long creator growth need different package sizes and pacing.',
+            'Identify whether the package is for a new account, a brand campaign, a launch or regular profile development.',
         },
         {
-          id: 'pace',
-          title: 'Match your publishing pace',
+          id: 'quantity',
+          title: 'Select a Proportionate Quantity',
           description:
-            'If you post twice a week, choose volumes that sit beside that rhythm so the timeline still looks natural.',
+            'Choose a package that feels reasonable in relation to your current account size and posting activity.',
         },
         {
-          id: 'terms',
-          title: 'Read delivery details',
+          id: 'confirm',
+          title: 'Confirm the Order Details',
           description:
-            'Confirm start windows, features, and any refill language on the package card before you pay.',
+            'Review the username, quantity, price, delivery information and checkout details before payment.',
         },
       ],
     },
     {
       type: 'checklist',
       id: 'mistakes',
-      heading: 'Common mistakes to avoid',
+      heading: 'Common Package Selection Mistakes',
       items: [
-        'Jumping to huge quantities before the niche or offer is clear',
-        'Expecting followers to replace hooks, captions, or consistency',
-        'Ignoring gradual delivery when you publish slowly',
-        'Skipping order tracking and assuming nothing started',
+        'Selecting a very large quantity for a new or inactive account.',
+        'Entering an incorrect or misspelled Instagram username.',
+        'Keeping the profile private while delivery is in progress.',
+        'Choosing a package without reviewing the delivery information.',
+        'Expecting a package to replace regular posting or audience interaction.',
+        'Placing duplicate orders before the first order has been completed.',
       ],
     },
     {
       type: 'callout',
-      id: 'wrap',
-      title: 'Before you order',
+      id: 'before-order',
+      eyebrow: 'Before you order',
+      title: 'Confirm Your Account and Package Details',
       body:
-        'Keep the account public and confirm the username. For Reel discoverability, compare [Instagram views](/buy-instagram-views). If selected posts also need reaction volume or discussion, pair carefully with [Instagram likes](/buy-instagram-likes) or [Instagram comments](/buy-instagram-comments) after the profile story already makes sense.',
+        'Keep your profile public, verify the username and choose a quantity that matches your current account activity. For additional post-level support, you can also compare our [Instagram likes packages](/buy-instagram-likes), [Instagram views packages](/buy-instagram-views) and [Instagram comments packages](/buy-instagram-comments).',
     },
     {
       type: 'links',
       id: 'related',
-      heading: 'Related InstantViral options',
+      heading: 'Related InstantViral Options',
       links: [
-        { label: 'Instagram likes packages', href: '/buy-instagram-likes' },
-        { label: 'Instagram views packages', href: '/buy-instagram-views' },
-        { label: 'Instagram comments packages', href: '/buy-instagram-comments' },
-        { label: 'InstantViral homepage', href: '/' },
+        { label: 'Instagram Likes Packages', href: '/buy-instagram-likes' },
+        { label: 'Instagram Views Packages', href: '/buy-instagram-views' },
+        { label: 'Instagram Comments Packages', href: '/buy-instagram-comments' },
+        { label: 'InstantViral Homepage', href: '/' },
       ],
     },
   ],
