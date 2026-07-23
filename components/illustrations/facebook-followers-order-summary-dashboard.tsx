@@ -16,7 +16,7 @@ export function FacebookFollowersOrderSummaryDashboard({
   return (
     <div
       className={cn(
-        'relative mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-white p-5 shadow-[0_22px_48px_-28px_rgba(28,25,23,0.34)] motion-safe:animate-iv-float-card sm:p-6',
+        'relative mx-auto w-full max-w-md overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-white p-5 shadow-[0_28px_56px_-22px_rgba(24,119,242,0.42),0_18px_40px_-24px_rgba(28,25,23,0.28)] motion-safe:animate-iv-float-card sm:p-6',
         className,
       )}
       aria-hidden

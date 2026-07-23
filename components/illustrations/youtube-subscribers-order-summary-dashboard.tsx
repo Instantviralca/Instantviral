@@ -40,36 +40,19 @@ export function YouTubeSubscribersOrderSummaryDashboard({
               YT
             </span>
             <div>
-              <p className="text-sm font-bold text-stone-900">Order Summary</p>
-              <p className="text-xs text-stone-500">YouTube Subscribers</p>
+              <p className="text-sm font-bold text-stone-900">Creator Studio</p>
+              <p className="text-xs text-stone-500">Order Information</p>
             </div>
           </div>
           <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
-            Confirmed
+            Ready
           </span>
-        </div>
-
-        <div className="rounded-xl border border-stone-100 bg-[var(--surface-muted)]/80 px-3.5 py-3">
-          <div className="flex items-center gap-3">
-            <span
-              className="flex size-10 shrink-0 items-center justify-center rounded-full text-[10px] font-black text-white"
-              style={{ background: ytRed }}
-            >
-              ▶
-            </span>
-            <div className="min-w-0">
-              <p className="text-[9px] font-semibold tracking-wide text-stone-400 uppercase">
-                Channel thumbnail
-              </p>
-              <p className="truncate text-sm font-bold text-stone-800">@channel.ca</p>
-            </div>
-          </div>
         </div>
 
         <ul className="space-y-2" role="list">
           <li className="rounded-xl border border-stone-100 bg-white/90 px-3.5 py-2.5">
             <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-              Public channel URL
+              Public Channel URL
             </p>
             <p className="mt-0.5 truncate text-sm font-semibold text-stone-800">
               youtube.com/@channel.ca
@@ -77,13 +60,13 @@ export function YouTubeSubscribersOrderSummaryDashboard({
           </li>
           <li className="rounded-xl border border-stone-100 bg-white/90 px-3.5 py-2.5">
             <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-              Package quantity
+              Package Selected
             </p>
             <p className="mt-0.5 text-sm font-semibold text-stone-800">500 Subscribers</p>
           </li>
           <li className="rounded-xl border border-stone-100 bg-white/90 px-3.5 py-2.5">
             <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-              Confirmation email
+              Email Confirmation
             </p>
             <p className="mt-0.5 truncate text-sm font-semibold text-stone-800">
               you@email.com
@@ -93,19 +76,19 @@ export function YouTubeSubscribersOrderSummaryDashboard({
             <div className="flex items-center justify-between gap-2">
               <div>
                 <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-                  Delivery status
+                  Secure Checkout
                 </p>
-                <p className="mt-0.5 text-sm font-semibold text-stone-800">In progress</p>
+                <p className="mt-0.5 text-sm font-semibold text-stone-800">No password required</p>
               </div>
               <span className="text-xs font-bold" style={{ color: ytRed }}>
-                58%
+                Ready
               </span>
             </div>
             <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-stone-200/90">
               <div
                 className="h-full rounded-full"
                 style={{
-                  width: '58%',
+                  width: '100%',
                   background: `linear-gradient(90deg, ${ytRed}, ${brand})`,
                 }}
               />
@@ -115,13 +98,13 @@ export function YouTubeSubscribersOrderSummaryDashboard({
 
         <div className="flex items-center justify-between gap-3">
           <span className="rounded-lg border border-emerald-100 bg-emerald-50 px-2.5 py-1.5 text-[10px] font-bold text-emerald-700">
-            No Password Required
+            Public URL Only
           </span>
           <span
             className="rounded-xl px-3.5 py-2 text-xs font-bold text-white shadow-sm"
             style={{ background: brand }}
           >
-            Track Order
+            Place Order
           </span>
         </div>
       </div>

@@ -14,11 +14,13 @@ export function TikTokFollowersCreatorDashboard({ className }: { className?: str
   return (
     <div
       className={cn(
-        'relative mx-auto aspect-[4/3] w-full max-w-[22rem] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-white p-4 shadow-[0_18px_40px_-28px_rgba(28,25,23,0.28)] motion-safe:animate-iv-float-card',
+        'relative mx-auto aspect-[16/10] w-full max-w-[28rem] overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-white p-4 shadow-[0_18px_40px_-28px_rgba(28,25,23,0.28)]',
         className,
       )}
       aria-hidden
     >
+      <div className="pointer-events-none absolute -top-6 -right-4 size-28 rounded-full bg-[var(--brand-primary)]/15 blur-2xl" />
+      <div className="pointer-events-none absolute -bottom-8 -left-4 size-24 rounded-full bg-[#25F4EE]/12 blur-2xl" />
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_22%_0%,rgba(249,115,22,0.14),transparent_55%)]" />
       <div className="relative flex h-full flex-col gap-2.5">
         <div className="flex items-center justify-between gap-2">

@@ -18,38 +18,39 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
         'Buy Facebook Followers Canada with clear package options, public page URL checkout, gradual delivery details and order tracking. No password required.',
     },
     hero: {
-      eyebrow: 'FACEBOOK FOLLOWER PACKAGES FOR CANADIAN BUSINESSES, CREATORS & BRANDS',
-      title: 'Buy Facebook Followers Canada',
+      eyebrow: 'FACEBOOK FOLLOWER PACKAGES FOR BUSINESSES, CREATORS & BRANDS',
+      title: 'Buy Facebook Followers in Canada',
       description:
-        'Grow your Facebook presence with follower packages designed for creators, businesses and brands across Canada. Choose the package that fits your goals, submit your public Facebook page URL and complete your order through our secure checkout. Track your order from confirmation through delivery without ever sharing your Facebook password.',
+        'Build a stronger Facebook presence with follower packages designed for businesses, creators and brands across Canada. Compare transparent package options, choose the quantity that fits your goals and complete your order using only your public Facebook Page URL. Whether you\'re building a business page, creator profile or community, our ordering process is designed to be simple, secure and easy to follow.',
       purpose: 'Convert for Facebook follower packages in Canada',
       primaryKeyword: 'buy Facebook followers Canada',
       supportingKeywords: [
         'Buy Facebook Followers',
-        'Real Facebook Followers',
-        'Facebook Followers Packages',
-        'Increase Facebook Followers',
-        'Facebook Page Followers',
+        'Buy Followers On Facebook',
+        'Buying Facebook Followers',
+        'Facebook Followers Buy',
+        'Buy Facebook Page Followers',
+        'Buy Facebook Business Page Followers',
       ],
-      suggestedWordCount: 120,
+      suggestedWordCount: 110,
       primaryCta: {
         label: 'Choose Followers Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
         label: 'View Delivery Information',
-        href: '#what-we-need-from-you',
+        href: '#page-link-and-delivery',
       },
       trustLabels: [
         { id: 'fb-f-trust-url', label: 'Public Facebook Page URL Only' },
+        { id: 'fb-f-trust-password', label: 'No Password Required' },
         { id: 'fb-f-trust-checkout', label: 'Secure Checkout' },
         { id: 'fb-f-trust-track', label: 'Order Tracking' },
-        { id: 'fb-f-trust-gradual', label: 'Gradual Delivery' },
         { id: 'fb-f-trust-ca', label: 'Canadian Support' },
       ],
       visual: {
         src: '/assets/images/illustrations/facebook-dashboard.svg',
-        alt: 'Facebook Business Suite page followers analytics dashboard illustration',
+        alt: 'Facebook Business Page followers and Meta Business Suite dashboard illustration',
         width: 1000,
         height: 800,
       },
@@ -58,85 +59,62 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your Facebook Followers Package',
       description:
-        'Select the follower package that matches your business or community goals. Every package includes secure checkout, transparent delivery updates and order tracking from start to finish.',
+        'Select the follower package that best matches your Facebook page goals. Compare available quantities, review package details and complete your order with confidence before checkout.',
       purpose: 'Present real InstantViral.ca Facebook followers packages',
       primaryKeyword: 'Facebook follower packages',
       suggestedWordCount: 40,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue With This Package',
       emptyMessage: 'Facebook Followers packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-facebook-followers',
-      title: 'Build A Stronger Facebook Community',
+      title: 'Why Do People Buy Facebook Followers?',
       description:
-        "A growing follower count can help strengthen your Facebook page's credibility and encourage more visitors to explore your content. Combined with consistent posting and valuable updates, follower growth supports long-term community building and brand visibility.",
+        'People buy Facebook followers to strengthen the visible audience on their Facebook page, improve credibility for new visitors and support long-term community building. A larger follower count can make a page appear more established, but it does not guarantee engagement, sales or organic reach.',
       purpose: 'Explain informed use of Facebook followers packages',
       primaryKeyword: 'buy Facebook followers',
+      supportingKeywords: [
+        'buy followers on Facebook',
+        'buying Facebook followers',
+        'Facebook followers buy',
+      ],
       suggestedWordCount: 180,
       items: [
         {
-          id: 'fb-f-credibility',
-          title: 'Build Credibility',
-          description: 'A larger follower base creates a stronger first impression.',
+          id: 'fb-f-community',
+          title: 'Build Community',
+          description:
+            'A larger follower base can make your Facebook page look more established while encouraging new visitors to explore your content, products or services.',
         },
         {
-          id: 'fb-f-community',
-          title: 'Support Community Growth',
-          description: 'Suitable for businesses, creators, organisations and brands.',
+          id: 'fb-f-first-impression',
+          title: 'Stronger First Impression',
+          description:
+            'When people discover a Facebook page, one of the first things they notice is the size of its audience. A healthy follower count can help build confidence in your brand.',
+        },
+        {
+          id: 'fb-f-business-pages',
+          title: 'Support Business Pages',
+          description:
+            'Businesses often use follower packages alongside regular posting, advertising and customer engagement to strengthen their online presence.',
         },
         {
           id: 'fb-f-flexible',
-          title: 'Flexible Packages',
-          description: 'Choose a package that matches your current audience and objectives.',
-        },
-        {
-          id: 'fb-f-secure',
-          title: 'Private & Secure',
-          description: 'Only your public Facebook page URL is required.',
+          title: 'Flexible Package Sizes',
+          description:
+            'Choose a package that matches your existing page size and current marketing goals instead of selecting more followers than your page naturally supports.',
         },
       ],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-facebook-followers',
-      title: 'Why Buy Facebook Followers From InstantViral?',
-      description:
-        "A larger follower base can strengthen your Facebook page's credibility and help create a stronger first impression for new visitors. Combined with regular posting and valuable content, follower growth supports long-term community building and brand awareness.",
-      purpose: 'Build trust with clear ordering benefits',
-      primaryKeyword: 'Facebook growth service Canada',
-      suggestedWordCount: 150,
-      items: [
-        {
-          id: 'fb-f-why-community',
-          title: 'Build Community',
-          description: 'Grow a stronger audience around your Facebook page.',
-        },
-        {
-          id: 'fb-f-why-credibility',
-          title: 'Improve Credibility',
-          description: 'A larger follower count can help establish trust.',
-        },
-        {
-          id: 'fb-f-why-checkout',
-          title: 'Secure Checkout',
-          description: 'Protected ordering with secure payment processing.',
-        },
-        {
-          id: 'fb-f-why-password',
-          title: 'No Password Required',
-          description: 'Only your public Facebook page URL is needed.',
-        },
-        {
-          id: 'fb-f-why-track',
-          title: 'Track Every Order',
-          description: 'Monitor delivery progress using your order details.',
-        },
-        {
-          id: 'fb-f-why-support',
-          title: 'Canadian Support',
-          description: 'Our support team is available whenever assistance is required.',
-        },
-      ],
+      title: 'Why Choose Facebook Followers From InstantViral?',
+      description: '',
+      purpose: 'Unused on lean authority layout — trust lives in hero and Can You Buy',
+      primaryKeyword: 'buy Facebook followers',
+      suggestedWordCount: 0,
+      items: [],
     },
     features: {
       id: 'facebook-followers-delivery',
@@ -171,67 +149,86 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How To Buy Facebook Followers',
-      description: 'Ordering Facebook followers only takes a few simple steps.',
+      title: 'How to Buy Facebook Followers',
+      description:
+        "Buying Facebook followers is a simple process. Choose a follower package, enter your public Facebook Page URL, review the order details and complete secure checkout. You don't need to provide your Facebook password, and you can follow your order status after purchase.",
       purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'buy Facebook followers',
+      primaryKeyword: 'how to buy Facebook followers',
+      supportingKeywords: [
+        'buy followers on Facebook',
+        'buying Facebook followers',
+        'can you buy followers on Facebook',
+      ],
       suggestedWordCount: 140,
       steps: [
         {
           id: 'fb-f-step-1',
-          title: 'Choose Your Followers Package',
-          description: 'Select the package that best suits your page.',
+          title: 'Choose a Followers Package',
+          description:
+            'Compare available package sizes and select the quantity that best fits your Facebook page, audience size and growth objectives.',
         },
         {
           id: 'fb-f-step-2',
-          title: 'Paste Your Public Facebook Page URL',
-          description: 'Enter the public URL of your Facebook page.',
+          title: 'Enter Your Public Facebook Page URL',
+          description:
+            'Copy the public link to your Facebook page and paste it into the order form so the followers are assigned to the correct page.',
         },
         {
           id: 'fb-f-step-3',
           title: 'Review Your Order',
-          description: 'Confirm the selected package and page details.',
+          description:
+            'Confirm your selected package, page URL, pricing and delivery information before completing payment.',
         },
         {
           id: 'fb-f-step-4',
           title: 'Complete Secure Checkout',
-          description: 'Finish payment using the secure ordering system.',
+          description:
+            'Finish your purchase through secure checkout without sharing your Facebook login credentials.',
         },
         {
           id: 'fb-f-step-5',
-          title: 'Track Delivery',
-          description: 'Use your order details to monitor delivery progress.',
+          title: 'Track Your Order',
+          description:
+            'After checkout, follow the available order updates so you can monitor the progress of your purchase.',
         },
       ],
+      cta: {
+        label: 'Select Your Followers Package',
+        href: PRICING_ANCHOR,
+      },
     },
     deliveryAndSafety: {
       id: 'page-link-and-delivery',
-      title: 'What We Need To Process Your Order',
+      title: 'What Do You Need to Place an Order?',
       description:
-        'We only require the information necessary to identify your Facebook page and complete your order. Private login information is never requested.',
+        'Ordering Facebook followers only requires a few public details. You do not need to provide your Facebook password, private account access or verification codes.',
       purpose: 'Explain page URL and order requirements',
-      primaryKeyword: 'Facebook followers delivery',
+      primaryKeyword: 'Facebook followers packages',
       suggestedWordCount: 120,
       items: [
         {
           id: 'fb-f-req-url',
           title: 'Public Facebook Page URL',
-          description: 'Submit the public URL of the page receiving followers.',
+          description:
+            'Provide the public URL of the Facebook page that should receive the selected follower package.',
         },
         {
           id: 'fb-f-req-package',
-          title: 'Selected Followers Package',
-          description: 'Choose the quantity that matches your growth goals.',
+          title: 'Selected Package',
+          description:
+            'Choose the follower quantity that best fits your page and current marketing objectives.',
         },
         {
           id: 'fb-f-req-public',
-          title: 'Public Facebook Page',
-          description: 'Keep your page publicly accessible during delivery.',
+          title: 'Public Page Access',
+          description:
+            'The selected Facebook page should remain publicly accessible while your order is being processed.',
         },
         {
           id: 'fb-f-req-email',
-          title: 'Valid Email Address',
-          description: 'Used for confirmation and order tracking.',
+          title: 'Email Address',
+          description:
+            'Use a valid email address so you can receive order confirmations, updates and customer support if needed.',
         },
       ],
     },
@@ -239,42 +236,45 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
       id: 'fb-followers-reviews',
       title: 'What Customers Say About InstantViral',
       description: 'Customer reviews for this InstantViral service.',
-      purpose: 'Social proof from approved customer reviews',
+      purpose: 'Unused on lean authority layout — no customer reviews section',
       testimonialIds: [],
     },
     faq: {
       id: 'fb-followers-faq',
-      title: 'Frequently Asked Questions About Facebook Followers',
-      description: 'Answers to common questions before you choose a package.',
+      title: 'Frequently Asked Questions About Buying Facebook Followers',
+      description:
+        'These answers cover the questions customers most frequently ask before purchasing Facebook follower packages.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy Facebook followers Canada',
       faqIds: [
-        'faq-fb-followers-choose-package',
+        'faq-fb-followers-can-buy',
+        'faq-fb-followers-how-buy',
+        'faq-fb-followers-does-help',
+        'faq-fb-followers-can-people-tell',
+        'faq-fb-followers-are-real',
+        'faq-fb-followers-should-buy',
+        'faq-fb-followers-monetization',
         'faq-fb-followers-password',
-        'faq-fb-followers-public',
-        'faq-fb-followers-delivery-begin',
-        'faq-fb-followers-track',
         'faq-fb-followers-order-again',
-        'faq-fb-followers-change-url',
-        'faq-fb-followers-after-checkout',
-        'faq-fb-followers-gradual',
-        'faq-fb-followers-support',
+        'faq-fb-followers-which-package',
       ],
     },
     relatedServices: {
       id: 'related-facebook-services-followers',
       title: 'Explore More Facebook Growth Services',
+      description:
+        'Growing a Facebook presence often involves more than one service. Explore our Facebook solutions designed to support different marketing objectives.',
       purpose: 'Internal links to sibling Facebook offers (no skipped services)',
       serviceSlugs: ['buy-facebook-page-likes', 'buy-facebook-post-likes'],
     },
     finalCta: {
       id: 'fb-followers-final-cta',
-      title: 'Ready To Grow Your Facebook Community?',
+      title: 'Choose the Facebook Followers Package That Fits Your Goals',
       description:
-        'Choose the Facebook followers package that matches your goals, submit your public page URL and complete your secure order. Track every stage from confirmation through delivery.',
+        'Compare available Facebook follower packages, review pricing and delivery information, and place your order using your public Facebook Page URL. Select the option that best supports your business, creator or community growth objectives.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Choose Facebook Followers Package',
+        label: 'Choose Your Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
@@ -286,50 +286,49 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
 }
 
 /**
- * Buy Facebook Page Likes Canada — Document 09.32 production content.
+ * Buy Facebook Page Likes Canada — lean authority content (Sections 1–5 live).
  */
 function buildBuyFacebookPageLikesContent(): ServiceContent {
   return {
     slug: 'buy-facebook-page-likes',
     platformId: 'facebook',
     seo: {
-      title: 'Buy Facebook Page Likes Canada | Packages & Pricing',
+      title: 'Buy Facebook Page Likes Canada | InstantViral',
       description:
-        'Buy Facebook Page Likes Canada with clear package options, public page URL checkout, gradual delivery details and order tracking. No password required.',
+        'Buy Facebook Page Likes Canada with transparent packages for businesses and creators. Public Page URL only, secure checkout and order tracking. No password required.',
     },
     hero: {
       eyebrow: 'FACEBOOK PAGE LIKE PACKAGES FOR CANADIAN BUSINESSES, BRANDS & CREATORS',
-      title: 'Buy Facebook Page Likes Canada',
+      title: 'Buy Facebook Page Likes in Canada',
       description:
-        'Build a stronger Facebook presence with page like packages designed for businesses, creators and brands across Canada. Choose the package that fits your goals, submit your public Facebook page URL and complete your secure order in just a few steps. Track your order from confirmation through delivery without ever sharing your Facebook password.',
+        'Build a stronger first impression for your Facebook page with transparent Page Like packages for businesses, creators and organizations across Canada. Compare available quantities, choose the package that matches your goals and place your order using only your public Facebook Page URL. No password or private account access is required, and you can track available delivery updates after checkout.',
       purpose: 'Convert for Facebook page likes packages in Canada',
       primaryKeyword: 'buy Facebook page likes Canada',
       supportingKeywords: [
         'Buy Facebook Page Likes',
-        'Facebook Page Likes',
-        'Real Facebook Page Likes',
-        'Increase Facebook Page Likes',
-        'Facebook Page Likes Packages',
+        'Buy Facebook Business Page Likes',
+        'Buy Likes for Facebook Page',
+        'Facebook Page Likes Buy',
+        'Can You Buy Facebook Page Likes',
       ],
-      suggestedWordCount: 120,
+      suggestedWordCount: 110,
       primaryCta: {
-        label: 'Choose Page Likes Package',
+        label: 'Choose Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
         label: 'View Delivery Information',
-        href: '#what-we-need-from-you',
+        href: '#page-link-and-delivery',
       },
       trustLabels: [
         { id: 'fb-pl-trust-url', label: 'Public Facebook Page URL Only' },
+        { id: 'fb-pl-trust-password', label: 'No Password Required' },
         { id: 'fb-pl-trust-checkout', label: 'Secure Checkout' },
-        { id: 'fb-pl-trust-track', label: 'Order Tracking' },
-        { id: 'fb-pl-trust-gradual', label: 'Gradual Delivery' },
         { id: 'fb-pl-trust-ca', label: 'Canadian Support' },
       ],
       visual: {
         src: '/assets/images/illustrations/facebook-dashboard.svg',
-        alt: 'Facebook Business Suite page likes analytics dashboard illustration',
+        alt: 'Facebook Business Page likes and Meta Business Suite analytics illustration',
         width: 1000,
         height: 800,
       },
@@ -338,180 +337,158 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your Facebook Page Likes Package',
       description:
-        'Select the page like package that matches your business goals. Every package includes secure checkout, delivery updates and order tracking from start to finish.',
+        'Compare available Page Like packages and select the quantity that best matches your current page size, campaign goals and budget. Each package includes secure checkout, order tracking and processing through your public Facebook Page URL.',
       purpose: 'Present real InstantViral.ca Facebook page likes packages',
       primaryKeyword: 'Facebook page likes packages',
-      suggestedWordCount: 40,
+      suggestedWordCount: 45,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue With Package',
       emptyMessage: 'Facebook Page Likes packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-facebook-page-likes',
-      title: 'Build A More Trusted Facebook Page',
+      title: 'Why Do People Buy Facebook Page Likes?',
       description:
-        "Page likes help strengthen your Facebook page's credibility and create a stronger first impression for visitors. Combined with regular posting and valuable content, page likes can support long-term brand visibility and community growth.",
-      purpose: 'Explain informed use of Facebook page likes packages',
+        'People buy Facebook Page Likes for different marketing motivations — from launching a new business page to supporting brand campaigns. The common goal is stronger visible social proof when visitors first discover the page.',
+      purpose: 'Explain motivations for buying Facebook page likes',
       primaryKeyword: 'buy Facebook page likes',
+      supportingKeywords: [
+        'buy likes for Facebook page',
+        'buy Facebook business page likes',
+        'Facebook page likes buy',
+      ],
       suggestedWordCount: 180,
       items: [
         {
-          id: 'fb-pl-credibility',
-          title: 'Increase Page Credibility',
-          description: 'A stronger page like count helps build trust with new visitors.',
+          id: 'fb-pl-new-business',
+          title: 'Launch a New Business Page',
+          description:
+            'New restaurants, agencies, retail stores and service businesses often want their Facebook page to look more established from day one.',
         },
         {
-          id: 'fb-pl-presence',
-          title: 'Strengthen Brand Presence',
-          description: 'Suitable for businesses, creators, organisations and brands.',
+          id: 'fb-pl-launch',
+          title: 'Support a Product or Brand Launch',
+          description:
+            'Teams running launches and awareness campaigns use Page Like packages to strengthen the page that promotes the offer.',
         },
         {
-          id: 'fb-pl-flexible',
-          title: 'Flexible Packages',
-          description: 'Choose a package that matches your current page size.',
+          id: 'fb-pl-brand-image',
+          title: 'Strengthen Brand Image',
+          description:
+            'Brands buy Page Likes when they want the public Page Like count to better match how established their business already feels offline.',
         },
         {
-          id: 'fb-pl-secure',
-          title: 'Private & Secure',
-          description: 'Only your public Facebook page URL is required.',
+          id: 'fb-pl-social-proof',
+          title: 'Add Visible Social Proof',
+          description:
+            'Creators and organizations use Page Likes as one more public signal that visitors may notice before reading posts or contacting the page.',
+        },
+        {
+          id: 'fb-pl-campaigns',
+          title: 'Support Marketing Campaigns',
+          description:
+            'Page Like packages are often ordered alongside Facebook ads, content calendars and community engagement rather than as a standalone growth plan.',
         },
       ],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-facebook-page-likes',
-      title: 'Why Buy Facebook Page Likes From InstantViral?',
-      description:
-        'Page likes are one of the first trust signals visitors notice when they discover a Facebook page. A stronger page like count can support brand credibility, encourage more visitors to explore your content and help create a more established online presence when combined with consistent posting.',
-      purpose: 'Build trust with clear ordering benefits',
-      primaryKeyword: 'Facebook growth service Canada',
-      suggestedWordCount: 150,
-      items: [
-        {
-          id: 'fb-pl-why-trust',
-          title: 'Build Trust',
-          description: 'A stronger page like count creates a positive first impression.',
-        },
-        {
-          id: 'fb-pl-why-presence',
-          title: 'Improve Brand Presence',
-          description: 'Help your page appear more established.',
-        },
-        {
-          id: 'fb-pl-why-checkout',
-          title: 'Secure Checkout',
-          description: 'Protected ordering with encrypted payment processing.',
-        },
-        {
-          id: 'fb-pl-why-password',
-          title: 'No Password Required',
-          description: 'Only your public Facebook page URL is required.',
-        },
-        {
-          id: 'fb-pl-why-track',
-          title: 'Track Every Order',
-          description: 'Follow your order through every stage of delivery.',
-        },
-        {
-          id: 'fb-pl-why-support',
-          title: 'Canadian Support',
-          description: 'Helpful assistance whenever you need it.',
-        },
-      ],
+      title: 'Why Choose InstantViral for Facebook Page Likes?',
+      description: '',
+      purpose: 'Unused on lean authority layout — trust lives in Why Choose section',
+      primaryKeyword: 'buy Facebook page likes',
+      suggestedWordCount: 0,
+      items: [],
     },
     features: {
       id: 'facebook-page-likes-delivery',
-      title: 'Facebook Page Likes Delivery',
-      description:
-        'Delivery begins after your order has been confirmed and reviewed. Processing time depends on the selected package and current demand. You can review available progress updates through the order tracking page until delivery is complete.',
-      purpose: 'Explain Facebook page likes delivery stages',
-      primaryKeyword: 'Facebook page likes delivery',
-      suggestedWordCount: 120,
-      items: [
-        {
-          id: 'fb-pl-del-review',
-          title: 'Order Review',
-          description: 'Your page URL and selected package are verified before processing.',
-        },
-        {
-          id: 'fb-pl-del-begins',
-          title: 'Delivery Begins',
-          description: 'Page likes begin according to the estimated delivery schedule.',
-        },
-        {
-          id: 'fb-pl-del-progress',
-          title: 'Progress Tracking',
-          description: 'Monitor your order using the tracking page.',
-        },
-        {
-          id: 'fb-pl-del-complete',
-          title: 'Delivery Complete',
-          description: 'The selected page likes package has been delivered.',
-        },
-      ],
+      title: 'Features',
+      description: '',
+      purpose: 'Unused on lean authority layout',
+      items: [],
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How To Buy Facebook Page Likes',
-      description: 'Ordering Facebook page likes only takes a few simple steps.',
-      purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'buy Facebook page likes',
+      title: 'How to Buy Facebook Page Likes',
+      description:
+        'Buying Facebook Page Likes is a straightforward process. Select the Page Like package that matches your goals, enter your public Facebook Page URL, review your order details and complete secure checkout. You never need to provide your Facebook password, and you can follow available order updates after your purchase.',
+      purpose: 'Explain the five-step Facebook Page Likes ordering process',
+      primaryKeyword: 'how to buy Facebook page likes',
+      supportingKeywords: [
+        'Buy Page Likes on Facebook',
+        'Buying Page Likes on Facebook',
+        'Buy Facebook Business Page Likes',
+      ],
       suggestedWordCount: 140,
       steps: [
         {
           id: 'fb-pl-step-1',
-          title: 'Choose Your Package',
-          description: 'Select the package that matches your page goals.',
+          title: 'Choose a Page Likes Package',
+          description:
+            'Compare available Page Like packages and select the quantity that best fits your Facebook page, marketing campaign and current audience size.',
         },
         {
           id: 'fb-pl-step-2',
-          title: 'Paste Your Public Facebook Page URL',
-          description: 'Provide the public URL of your page.',
+          title: 'Enter Your Public Facebook Page URL',
+          description:
+            'Paste the public URL of the Facebook page that should receive the selected Page Likes package. This helps ensure your order is assigned to the correct page.',
         },
         {
           id: 'fb-pl-step-3',
           title: 'Review Your Order',
-          description: 'Verify the selected package and page details.',
+          description:
+            'Confirm your selected package, page URL, pricing and order details before completing checkout.',
         },
         {
           id: 'fb-pl-step-4',
           title: 'Complete Secure Checkout',
-          description: 'Finish payment through our secure checkout process.',
+          description:
+            'Finish your purchase using our protected checkout process without sharing your Facebook login credentials.',
         },
         {
           id: 'fb-pl-step-5',
-          title: 'Track Delivery',
-          description: 'Monitor delivery progress using your order details.',
+          title: 'Track Your Order',
+          description:
+            'After checkout, monitor your available order updates so you can follow the delivery progress from start to finish.',
         },
       ],
+      cta: {
+        label: 'Choose Your Page Likes Package',
+        href: PRICING_ANCHOR,
+      },
     },
     deliveryAndSafety: {
       id: 'page-link-and-delivery',
-      title: 'What We Need To Process Your Order',
+      title: 'What Do You Need to Place an Order?',
       description:
-        'Only the information required to identify your Facebook page and complete your purchase is needed. Private account information is never requested.',
+        'Ordering Facebook Page Likes only requires a few public details. Private account information, passwords and account verification codes are never requested.',
       purpose: 'Explain page URL and order requirements',
-      primaryKeyword: 'Facebook page likes delivery',
+      primaryKeyword: 'Facebook page likes packages',
       suggestedWordCount: 120,
       items: [
         {
           id: 'fb-pl-req-url',
           title: 'Public Facebook Page URL',
-          description: 'Submit the public URL of the page receiving likes.',
+          description:
+            'Provide the public URL of the Facebook page receiving the selected Page Likes package.',
         },
         {
           id: 'fb-pl-req-package',
-          title: 'Selected Page Likes Package',
-          description: 'Choose the quantity that matches your goals.',
+          title: 'Selected Package',
+          description:
+            'Choose the quantity that best matches your business goals and current Facebook page size.',
         },
         {
           id: 'fb-pl-req-public',
-          title: 'Public Facebook Page',
-          description: 'Keep your page publicly accessible while delivery is in progress.',
+          title: 'Public Page Access',
+          description:
+            'Keep your Facebook page publicly accessible while your order is being processed.',
         },
         {
           id: 'fb-pl-req-email',
           title: 'Valid Email Address',
-          description: 'Used for order confirmation and tracking.',
+          description:
+            'Use a working email address to receive order confirmations, progress updates and customer support if needed.',
         },
       ],
     },
@@ -519,40 +496,45 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
       id: 'fb-page-likes-reviews',
       title: 'What Customers Say About InstantViral',
       description: 'Customer reviews for this InstantViral service.',
-      purpose: 'Social proof from approved customer reviews',
+      purpose: 'Unused on lean authority layout — no customer reviews section',
       testimonialIds: [],
     },
     faq: {
       id: 'fb-page-likes-faq',
       title: 'Frequently Asked Questions About Buying Facebook Page Likes',
-      description: 'Answers to common questions before you choose a package.',
+      description:
+        'These answers cover the most common questions customers ask before purchasing Facebook Page Like packages.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy Facebook page likes Canada',
       faqIds: [
-        'faq-fb-page-likes-password',
-        'faq-fb-page-likes-links',
-        'faq-fb-page-likes-delivery-speed',
-        'faq-fb-page-likes-gradual-delivery',
-        'faq-fb-page-likes-refill',
+        'faq-fb-page-likes-can-buy',
+        'faq-fb-page-likes-how-buy',
+        'faq-fb-page-likes-does-help',
         'faq-fb-page-likes-businesses',
-        'faq-fb-page-likes-money-back',
-        'faq-fb-page-likes-track',
+        'faq-fb-page-likes-password',
+        'faq-fb-page-likes-delivery',
+        'faq-fb-page-likes-order-again',
+        'faq-fb-page-likes-vs-followers',
+        'faq-fb-page-likes-which-package',
+        'faq-fb-page-likes-requirements',
       ],
     },
     relatedServices: {
       id: 'related-facebook-services-page-likes',
-      title: 'Explore Related Facebook Services',
-      purpose: 'Internal links to sibling Facebook offers (no skipped services)',
+      title: 'Explore More Facebook Growth Services',
+      description:
+        'Facebook Page Likes are only one part of building a stronger Facebook presence. Explore our additional Facebook services designed to support different growth objectives.',
+      purpose: 'Internal links to sibling Facebook offers',
       serviceSlugs: ['buy-facebook-followers', 'buy-facebook-post-likes'],
     },
     finalCta: {
       id: 'fb-page-likes-final-cta',
-      title: 'Choose Your Facebook Page Likes Package',
+      title: 'Choose the Facebook Page Likes Package That Fits Your Goals',
       description:
-        'Review the available quantities, prices, delivery estimates, package features, and eligible refill terms, then select the package that fits your Facebook page.',
+        'Compare available Facebook Page Like packages, review pricing and delivery information, and complete your purchase using only your public Facebook Page URL. Select the package that best matches your business, creator or brand objectives.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'View Packages',
+        label: 'Get Started Today',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
@@ -568,39 +550,38 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
     slug: 'buy-facebook-post-likes',
     platformId: 'facebook',
     seo: {
-      title: 'Buy Facebook Post Likes Canada | Packages & Pricing',
+      title: 'Buy Facebook Post Likes Canada | InstantViral',
       description:
-        'Buy Facebook Post Likes Canada with clear post like packages, public post URL checkout, gradual delivery details and order tracking. No password required.',
+        'Buy Facebook Post Likes Canada with transparent packages for businesses, creators and brands. Public Facebook post URL only, secure checkout and order tracking. No password required.',
     },
     hero: {
-      eyebrow: 'FACEBOOK POST LIKE PACKAGES FOR CANADIAN BUSINESSES, BRANDS & CREATORS',
-      title: 'Buy Facebook Post Likes Canada',
+      eyebrow: 'FACEBOOK POST LIKE PACKAGES FOR BUSINESSES, CREATORS & BRANDS',
+      title: 'Buy Facebook Post Likes in Canada',
       description:
-        'Increase engagement on your Facebook posts with post like packages designed for businesses, creators and brands across Canada. Choose the package that matches your campaign, submit your public Facebook post URL and complete checkout securely. Track your order from confirmation through delivery without sharing your Facebook password.',
+        'Increase post engagement on your Facebook updates with transparent Post Like packages for businesses, creators and brands across Canada. Select the package that matches your campaign, provide your public Facebook post URL and complete secure checkout in just a few steps. No password is required, and order tracking is available after confirmation.',
       purpose: 'Convert for Facebook post likes packages in Canada',
       primaryKeyword: 'buy Facebook Post Likes Canada',
       supportingKeywords: [
         'Buy Facebook Post Likes',
-        'Facebook Post Likes',
-        'Real Facebook Post Likes',
-        'Increase Facebook Post Likes',
-        'Facebook Engagement Canada',
+        'Buy Likes for Facebook Post',
+        'Buy Facebook Likes for Post',
+        'Buy Likes on Facebook Post',
+        'Can You Buy Facebook Post Likes',
       ],
-      suggestedWordCount: 120,
+      suggestedWordCount: 110,
       primaryCta: {
         label: 'Choose Post Likes Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
         label: 'View Delivery Information',
-        href: '#what-we-need-from-you',
+        href: '#post-link-and-delivery',
       },
       trustLabels: [
-        { id: 'fb-post-trust-url', label: 'Public Facebook Post URL Only' },
+        { id: 'fb-post-trust-url', label: 'Public Facebook Post URL' },
         { id: 'fb-post-trust-checkout', label: 'Secure Checkout' },
-        { id: 'fb-post-trust-track', label: 'Order Tracking' },
-        { id: 'fb-post-trust-gradual', label: 'Gradual Delivery' },
         { id: 'fb-post-trust-ca', label: 'Canadian Support' },
+        { id: 'fb-post-trust-password', label: 'No Password Required' },
       ],
       visual: {
         src: '/assets/images/illustrations/facebook-dashboard.svg',
@@ -613,180 +594,152 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your Facebook Post Likes Package',
       description:
-        'Choose the package that matches your engagement goals. Every package includes secure checkout, transparent delivery updates and order tracking.',
+        'Compare available Post Like packages and choose the quantity that best matches your campaign, content strategy and engagement goals. Every package includes secure checkout, transparent ordering and progress tracking.',
       purpose: 'Present real InstantViral.ca Facebook post likes packages',
       primaryKeyword: 'Facebook Post Likes',
-      suggestedWordCount: 40,
+      suggestedWordCount: 45,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue With This Package',
       emptyMessage: 'Facebook Post Likes packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-facebook-post-likes',
-      title: 'Strengthen Engagement On Your Facebook Posts',
+      title: 'Why Do People Buy Facebook Post Likes?',
       description:
-        'Visible engagement can help individual Facebook posts appear more active and encourage additional interaction. Combined with valuable content and consistent publishing, post likes support stronger social proof around important updates, campaigns and announcements.',
-      purpose: 'Explain informed use of Facebook post likes packages',
+        'People buy Facebook Post Likes to strengthen social proof on individual posts and create a stronger first impression for new viewers. Higher Like counts can make posts appear more active and encourage additional interactions, but they do not guarantee increased reach, sales or organic performance.',
+      purpose: 'Explain motivations for buying Facebook post likes',
       primaryKeyword: 'Increase Facebook Post Likes',
+      supportingKeywords: [
+        'Buy Facebook Post Likes',
+        'Buy Likes for Facebook Post',
+        'Buy Facebook Post Engagement',
+      ],
       suggestedWordCount: 180,
       items: [
         {
-          id: 'fb-post-engagement',
-          title: 'Increase Post Engagement',
-          description: 'Help individual posts appear more active.',
+          id: 'fb-post-product-launch',
+          title: 'Product Launches',
+          description:
+            'Businesses often use Post Like packages to strengthen engagement around product launches and promotional announcements.',
         },
         {
           id: 'fb-post-social-proof',
-          title: 'Support Social Proof',
-          description: 'Visible engagement encourages more interaction.',
+          title: 'Build Social Proof',
+          description:
+            'Public interaction can help a Facebook post appear more active when people first discover it.',
+        },
+        {
+          id: 'fb-post-campaign',
+          title: 'Campaign Support',
+          description:
+            'Marketing campaigns often use Post Likes alongside paid advertising and regular publishing.',
         },
         {
           id: 'fb-post-flexible',
           title: 'Flexible Packages',
-          description: 'Choose the package that fits your campaign.',
-        },
-        {
-          id: 'fb-post-secure',
-          title: 'Private & Secure',
-          description: 'Only your public Facebook post URL is required.',
+          description:
+            'Choose the quantity that matches your campaign instead of selecting more engagement signals than your content naturally supports.',
         },
       ],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-facebook-post-likes',
-      title: 'Why Buy Facebook Post Likes From InstantViral?',
-      description:
-        "Post likes help create stronger engagement signals around individual Facebook posts. Whether you're promoting a product, announcing an event or sharing important updates, visible engagement can strengthen social proof and encourage more people to interact with your content.",
-      purpose: 'Build trust with clear ordering benefits',
-      primaryKeyword: 'Facebook Engagement Canada',
-      suggestedWordCount: 150,
-      items: [
-        {
-          id: 'fb-post-why-engagement',
-          title: 'Increase Engagement',
-          description: 'Help important posts appear more active.',
-        },
-        {
-          id: 'fb-post-why-proof',
-          title: 'Improve Social Proof',
-          description: 'Visible likes create stronger first impressions.',
-        },
-        {
-          id: 'fb-post-why-checkout',
-          title: 'Secure Checkout',
-          description: 'Protected ordering with secure payment processing.',
-        },
-        {
-          id: 'fb-post-why-password',
-          title: 'No Password Required',
-          description: 'Only your public Facebook post URL is required.',
-        },
-        {
-          id: 'fb-post-why-track',
-          title: 'Track Every Order',
-          description: 'Monitor progress from confirmation to completion.',
-        },
-        {
-          id: 'fb-post-why-support',
-          title: 'Canadian Support',
-          description: 'Friendly assistance whenever you need help.',
-        },
-      ],
+      title: 'Why Choose InstantViral for Facebook Post Likes?',
+      description: '',
+      purpose: 'Unused on lean authority layout — trust lives in Why Choose section',
+      primaryKeyword: 'buy Facebook Post Likes',
+      suggestedWordCount: 0,
+      items: [],
     },
     features: {
       id: 'facebook-post-likes-delivery',
-      title: 'Facebook Post Likes Delivery',
-      description:
-        'Delivery begins after your order has been reviewed and confirmed. Processing time depends on the selected package and current demand. Progress updates remain available through order tracking until delivery is complete.',
-      purpose: 'Explain Facebook post likes delivery stages',
-      primaryKeyword: 'Facebook Post Likes',
-      suggestedWordCount: 120,
-      items: [
-        {
-          id: 'fb-post-del-review',
-          title: 'Order Review',
-          description: 'Your post URL and selected package are verified.',
-        },
-        {
-          id: 'fb-post-del-begins',
-          title: 'Delivery Begins',
-          description: 'Post likes begin according to the delivery estimate.',
-        },
-        {
-          id: 'fb-post-del-progress',
-          title: 'Likes Increasing',
-          description: 'Review your order status through the tracking page.',
-        },
-        {
-          id: 'fb-post-del-complete',
-          title: 'Order Complete',
-          description: 'The selected post likes package has been delivered.',
-        },
-      ],
+      title: 'Features',
+      description: '',
+      purpose: 'Unused on lean authority layout',
+      items: [],
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How To Buy Facebook Post Likes',
-      description: 'Ordering Facebook post likes only takes a few simple steps.',
-      purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'Buy Facebook Post Likes',
+      title: 'How to Buy Facebook Post Likes',
+      description:
+        'Buying Facebook Post Likes is a simple process. Select the package that fits your campaign, copy the public URL of your Facebook post, review your order details and complete secure checkout. You do not need to provide your Facebook password, and you can track your order after confirmation.',
+      purpose: 'Explain the five-step Facebook Post Likes ordering process',
+      primaryKeyword: 'how to buy Facebook Post Likes',
+      supportingKeywords: [
+        'Buy Facebook Post Likes',
+        'Buy Likes for Facebook Post',
+        'Buy Facebook Likes for Post',
+      ],
       suggestedWordCount: 140,
       steps: [
         {
           id: 'fb-post-step-1',
           title: 'Choose Your Package',
-          description: 'Select the package that matches your campaign.',
+          description:
+            'Compare available Post Like packages and choose the quantity that best matches your content, campaign goals and existing engagement.',
         },
         {
           id: 'fb-post-step-2',
           title: 'Paste Your Public Facebook Post URL',
-          description: 'Enter the exact public post URL.',
+          description:
+            'Copy the public URL of the Facebook post that should receive the selected Like package. Make sure the post remains publicly accessible during processing.',
         },
         {
           id: 'fb-post-step-3',
           title: 'Review Your Order',
-          description: 'Verify your package and post information.',
+          description:
+            'Verify your selected package, Facebook post URL and pricing before completing checkout.',
         },
         {
           id: 'fb-post-step-4',
           title: 'Complete Secure Checkout',
-          description: 'Finish payment securely.',
+          description:
+            'Finish your purchase using secure checkout without sharing your Facebook login credentials.',
         },
         {
           id: 'fb-post-step-5',
           title: 'Track Delivery',
-          description: 'Review delivery progress using your order details.',
+          description:
+            'Follow your available order updates to monitor the progress of your Facebook Post Like package from confirmation through completion.',
         },
       ],
+      cta: {
+        label: 'Choose Your Post Likes Package',
+        href: PRICING_ANCHOR,
+      },
     },
     deliveryAndSafety: {
       id: 'post-link-and-delivery',
-      title: 'What We Need To Process Your Order',
+      title: 'What Do You Need to Place an Order?',
       description:
-        'Only the information required to identify your Facebook post and complete your purchase is needed. Private account information is never requested.',
+        'Ordering Facebook Post Likes only requires a few public details. Private account information, passwords and verification codes are never requested during checkout.',
       purpose: 'Explain post URL and order requirements',
-      primaryKeyword: 'Real Facebook Post Likes',
+      primaryKeyword: 'Facebook Post Likes packages',
       suggestedWordCount: 120,
       items: [
         {
           id: 'fb-post-req-url',
           title: 'Public Facebook Post URL',
-          description: 'Submit the public URL of the post receiving likes.',
+          description:
+            'Provide the public URL of the Facebook post receiving the selected Like package.',
         },
         {
           id: 'fb-post-req-package',
           title: 'Selected Package',
-          description: 'Choose the quantity that matches your campaign.',
+          description:
+            'Choose the quantity that best matches your campaign objectives and current engagement level.',
         },
         {
           id: 'fb-post-req-public',
-          title: 'Public Facebook Post',
-          description: 'Keep the post publicly available while delivery is in progress.',
+          title: 'Public Post Access',
+          description:
+            'Keep the selected Facebook post publicly available while your order is being processed.',
         },
         {
           id: 'fb-post-req-email',
           title: 'Valid Email Address',
-          description: 'Used for confirmation and order tracking.',
+          description:
+            'Use a working email address to receive order confirmations, delivery updates and customer support if required.',
         },
       ],
     },
@@ -794,48 +747,52 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
       id: 'fb-post-likes-reviews',
       title: 'What Customers Say About InstantViral',
       description: 'Customer reviews for this InstantViral service.',
-      purpose: 'Social proof from approved customer reviews',
+      purpose: 'Unused on lean authority layout — no customer reviews section',
       testimonialIds: [],
     },
     faq: {
       id: 'fb-post-likes-faq',
-      title: 'Facebook Post Likes Package FAQs',
+      title: 'Frequently Asked Questions About Facebook Post Likes',
       description:
-        'Review common questions about eligible posts, package selection, checkout, delivery and tracking before placing an order.',
+        'These answers cover the most common questions customers ask before purchasing Facebook Post Like packages.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy Facebook Post Likes Canada',
       faqIds: [
-        'faq-fb-post-likes-choose-package',
+        'faq-fb-post-likes-can-buy',
         'faq-fb-post-likes-password',
+        'faq-fb-post-likes-does-help',
+        'faq-fb-post-likes-old-post',
+        'faq-fb-post-likes-existing-post',
+        'faq-fb-post-likes-order-again',
+        'faq-fb-post-likes-vs-page-likes',
         'faq-fb-post-likes-public',
-        'faq-fb-post-likes-page-url',
-        'faq-fb-post-likes-video',
-        'faq-fb-post-likes-delivery-begin',
+        'faq-fb-post-likes-comments-shares',
         'faq-fb-post-likes-track',
-        'faq-fb-post-likes-another-post',
-        'faq-fb-post-likes-change-url',
-        'faq-fb-post-likes-support',
+        'faq-fb-post-likes-requirements',
+        'faq-fb-post-likes-which-package',
       ],
     },
     relatedServices: {
       id: 'related-facebook-services-post-likes',
       title: 'Explore More Facebook Growth Services',
-      purpose: 'Internal links to sibling Facebook offers (no skipped services)',
+      description:
+        'Facebook Post Likes are only one part of building a stronger Facebook presence. Explore our additional Facebook services designed to support different growth objectives.',
+      purpose: 'Internal links to sibling Facebook offers',
       serviceSlugs: ['buy-facebook-followers', 'buy-facebook-page-likes'],
     },
     finalCta: {
       id: 'fb-post-likes-final-cta',
-      title: 'Ready to Increase Engagement on Your Facebook Post?',
+      title: 'Choose the Facebook Post Likes Package That Fits Your Campaign',
       description:
-        'Choose the Facebook post likes package that matches your campaign, submit the correct public post URL and complete checkout securely. Use your order information to monitor available delivery updates after confirmation.',
+        'Compare available Facebook Post Like packages, review pricing and delivery information, then complete your purchase using only your public Facebook Post URL. Choose the option that best supports your campaign and audience interaction goals.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Choose Facebook Post Likes Package',
+        label: 'Choose Your Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
-        label: 'Contact Support',
-        href: routes.contact,
+        label: 'Track an Order',
+        href: routes.trackOrder,
       },
     },
   };

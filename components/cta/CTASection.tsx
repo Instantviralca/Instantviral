@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, type ReactNode } from 'react';
+import { Check } from 'lucide-react';
 
 import { CTAButtonGroup } from '@/components/cta/CTAButtonGroup';
 import { Container } from '@/components/layout/container';
@@ -25,6 +26,10 @@ export type CTASectionProps = {
   className?: string;
   /** Optional side visual for conversion surfaces. */
   aside?: ReactNode;
+  /** Compact trust line under buttons (e.g. No password · Secure checkout). */
+  trustLine?: string;
+  /** Optional checklist-style trust badges under the CTA buttons. */
+  trustBadges?: string[];
 };
 
 /**
@@ -41,6 +46,8 @@ export function CTASection({
   id,
   className,
   aside,
+  trustLine,
+  trustBadges,
 }: CTASectionProps) {
   const viewed = useRef(false);
   const headingId = id ? `${id}-heading` : 'cta-section-heading';
@@ -61,44 +68,56 @@ export function CTASection({
   return (
     <Section
       id={id}
-      spacing="lg"
-      className={cn('relative overflow-hidden bg-dark-band text-white', className)}
+      spacing={aside ? 'none' : 'lg'}
+      className={cn(
+        'relative overflow-hidden bg-dark-band text-white',
+        aside && 'py-16 md:py-20',
+        className,
+      )}
       aria-labelledby={headingId}
     >
       <div
-        className="pointer-events-none absolute -right-16 -bottom-20 size-72 rounded-full bg-[var(--brand-primary)] opacity-25 blur-3xl motion-safe:animate-[cta-glow_8s_ease-in-out_infinite]"
+        className="pointer-events-none absolute -right-10 bottom-0 size-[28rem] rounded-full bg-[var(--brand-primary)]/30 blur-[100px] motion-safe:animate-[cta-glow_8s_ease-in-out_infinite]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute top-1/2 right-1/4 size-64 -translate-y-1/2 rounded-full bg-[var(--brand-primary)]/20 blur-[80px] motion-safe:animate-[cta-glow_10s_ease-in-out_infinite]"
+        className="pointer-events-none absolute top-1/3 right-[18%] size-72 rounded-full bg-[#25F4EE]/15 blur-[90px]"
         aria-hidden="true"
       />
       <div
-        className="pointer-events-none absolute -top-20 -left-10 size-56 rounded-full bg-white/10 blur-3xl"
+        className="pointer-events-none absolute -top-24 -left-16 size-64 rounded-full bg-white/[0.08] blur-3xl"
         aria-hidden="true"
       />
       <Container size="xl" className="relative">
         <div
           className={cn(
             aside &&
-              'grid items-center gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-14 lg:items-center',
+              'grid items-center gap-12 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-16 lg:items-center',
           )}
         >
           <Stack
             gap="lg"
             className={cn(
-              'px-1 sm:gap-8',
+              'px-1 sm:gap-7',
               aside
-                ? 'max-w-xl items-start justify-center self-center text-left'
+                ? 'max-w-[35rem] items-start justify-center self-center text-left'
                 : 'mx-auto max-w-2xl items-center text-center',
             )}
           >
-            <Heading as="h2" size="h2" id={headingId} className="text-white">
+            <Heading
+              as="h2"
+              size="h2"
+              id={headingId}
+              className={cn('text-white tracking-tight', aside && 'max-w-[560px]')}
+            >
               {title ?? primary.title}
             </Heading>
             {(description ?? primary.description) ? (
               <MutedText
-                className={cn('text-base text-white/75', aside ? 'max-w-lg' : 'max-w-xl')}
+                className={cn(
+                  'text-base leading-relaxed text-white/80',
+                  aside ? 'max-w-[520px]' : 'max-w-xl',
+                )}
               >
                 {description ?? primary.description}
               </MutedText>
@@ -110,15 +129,29 @@ export function CTASection({
               surface={surface}
               serviceSlug={serviceSlug}
               align={aside ? 'start' : 'center'}
-              className="w-full gap-4 pt-2 sm:w-auto"
+              className="w-full gap-3 pt-1 sm:w-auto sm:flex-nowrap sm:gap-4"
             />
+            {trustBadges && trustBadges.length > 0 ? (
+              <ul className="flex max-w-[34rem] flex-wrap gap-2.5 pt-1">
+                {trustBadges.map((badge) => (
+                  <li
+                    key={badge}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-medium text-white/85"
+                  >
+                    <Check className="size-3.5 shrink-0 text-emerald-300" strokeWidth={2.75} aria-hidden />
+                    {badge}
+                  </li>
+                ))}
+              </ul>
+            ) : trustLine ? (
+              <p className="max-w-[520px] text-sm leading-relaxed text-white/55">
+                {trustLine}
+              </p>
+            ) : null}
           </Stack>
           {aside ? (
             <div
-              className={cn(
-                'mx-auto flex w-full max-w-sm items-center justify-self-center lg:max-w-md lg:justify-self-end',
-                'overflow-visible',
-              )}
+              className="relative mx-auto flex w-full max-w-[26rem] items-center justify-center justify-self-center overflow-visible lg:max-w-none lg:justify-self-end"
               aria-hidden
             >
               {aside}

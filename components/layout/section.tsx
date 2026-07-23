@@ -12,6 +12,8 @@ const sectionVariants = cva('w-full', {
       lg: 'py-9 md:py-12 lg:py-14',
       /** Alias used by homepage supporting blocks */
       compact: 'py-7 md:py-9 lg:py-11',
+      /** Caller supplies padding via className (e.g. service page rhythm). */
+      none: '',
     },
   },
   defaultVariants: {

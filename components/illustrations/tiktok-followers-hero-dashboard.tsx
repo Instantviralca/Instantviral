@@ -101,33 +101,28 @@ export function TikTokFollowersHeroDashboard({
       <div className="pointer-events-none absolute bottom-[18%] left-[4%] size-28 rounded-full bg-[#25F4EE]/18 blur-3xl" />
       <div className="pointer-events-none absolute top-[42%] -right-2 size-20 rounded-full bg-[#FE2C55]/12 blur-2xl" />
 
-      {/* Floating engagement widgets */}
-      <div className="pointer-events-none absolute top-[6%] -left-1 z-[5] max-w-[10.5rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_18px_36px_-16px_rgba(28,25,23,0.5)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.2s_ease-in-out_infinite] sm:left-0">
-        <div className="flex items-center gap-2">
-          <span className="flex size-6 items-center justify-center rounded-full bg-emerald-50 text-[10px] font-bold text-emerald-600">
-            ♪
-          </span>
-          <div className="min-w-0">
-            <p className="text-[8px] font-semibold tracking-wide text-emerald-600 uppercase">
-              Live
-            </p>
-            <p className="truncate text-[11px] font-bold text-stone-800">
-              {toast.name} {toast.delta}
-            </p>
-          </div>
-        </div>
+      {/* Floating UI cards — InstantViral trust + growth signals */}
+      <div className="pointer-events-none absolute top-[4%] -left-1 z-[5] max-w-[9.5rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_18px_36px_-16px_rgba(28,25,23,0.5)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.2s_ease-in-out_infinite] sm:left-0">
+        <p className="text-[8px] font-semibold tracking-wide text-emerald-600 uppercase">Growth</p>
+        <p className="text-[11px] font-bold text-stone-800">+1K Followers</p>
       </div>
-      <div className="pointer-events-none absolute top-[24%] -right-1 z-[5] max-w-[8.75rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.2s_ease-in-out_infinite] sm:right-0">
-        <p className="text-[8px] font-semibold text-stone-400 uppercase">Engagement</p>
-        <p className="text-[11px] font-bold text-stone-800">❤ 2.4K · 💬 318</p>
-      </div>
-      <div className="pointer-events-none absolute top-[46%] -left-2 z-[5] hidden max-w-[8.5rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.9s_ease-in-out_infinite] sm:block">
-        <p className="text-[8px] font-semibold text-stone-400 uppercase">Secure</p>
-        <p className="text-[11px] font-bold text-stone-800">🔒 Checkout</p>
-      </div>
-      <div className="pointer-events-none absolute bottom-[20%] -right-1 z-[5] max-w-[8.75rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_7.4s_ease-in-out_infinite] sm:right-0">
+      <div className="pointer-events-none absolute top-[22%] -right-1 z-[5] max-w-[9rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.2s_ease-in-out_infinite] sm:right-0">
         <p className="text-[8px] font-semibold text-stone-400 uppercase">Status</p>
         <p className="text-[11px] font-bold text-stone-800">Order Tracking</p>
+      </div>
+      <div className="pointer-events-none absolute top-[44%] -left-2 z-[5] hidden max-w-[9.25rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.9s_ease-in-out_infinite] sm:block">
+        <p className="text-[8px] font-semibold text-[var(--brand-primary)] uppercase">Package</p>
+        <p className="text-[11px] font-bold text-stone-800">Package Confirmed</p>
+      </div>
+      <div className="pointer-events-none absolute bottom-[28%] -right-1 z-[5] max-w-[8.75rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_7.4s_ease-in-out_infinite] sm:right-0">
+        <p className="text-[8px] font-semibold text-sky-600 uppercase">Verified</p>
+        <p className="text-[11px] font-bold text-stone-800">Profile Verified</p>
+      </div>
+      <div className="pointer-events-none absolute bottom-[8%] left-[2%] z-[5] hidden max-w-[8rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.8s_ease-in-out_infinite] sm:block">
+        <p className="text-[8px] font-semibold text-stone-400 uppercase">Analytics</p>
+        <p className="text-[11px] font-bold tabular-nums text-stone-800">
+          {toast.name.replace('@', '')} {toast.delta}
+        </p>
       </div>
 
       {/* Phone */}

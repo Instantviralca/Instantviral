@@ -102,28 +102,28 @@ const TIKTOK_LIKES_STEPS: Array<{
     icon: Link2,
     title: 'Public TikTok Video URL',
     description:
-      'Share the public link for the TikTok video that should receive likes.',
+      'Paste the exact public link to the TikTok video that should receive the selected likes.',
   },
   {
     id: 'tt-l-package',
     icon: Package,
     title: 'Selected Package',
     description:
-      'Pick the likes package that matches your campaign before completing checkout.',
+      'Choose the quantity that fits your video, account activity and current campaign.',
+  },
+  {
+    id: 'tt-l-public',
+    icon: Eye,
+    title: 'Public Video Access',
+    description:
+      'The selected video must remain publicly viewable while the order is being processed.',
   },
   {
     id: 'tt-l-email',
     icon: Mail,
     title: 'Valid Email Address',
     description:
-      'Use a reachable email for order confirmation and tracking updates.',
-  },
-  {
-    id: 'tt-l-checkout',
-    icon: ShieldCheck,
-    title: 'Secure Checkout',
-    description:
-      'Finish payment through secure checkout once your order details are confirmed.',
+      'Use a working email address to receive your order confirmation, tracking details and support updates.',
   },
 ];
 
@@ -138,28 +138,28 @@ const TIKTOK_VIEWS_STEPS: Array<{
     icon: Link2,
     title: 'Public TikTok Video URL',
     description:
-      'Share the public link for the TikTok video that should receive views.',
+      'Paste the exact public link to the video that should receive the selected views.',
   },
   {
     id: 'tt-v-package',
     icon: Package,
     title: 'Selected Package',
     description:
-      'Pick the views package that matches your campaign before completing checkout.',
+      'Choose the quantity that fits your video, account activity and current campaign.',
+  },
+  {
+    id: 'tt-v-public',
+    icon: Eye,
+    title: 'Public Video Access',
+    description:
+      'The selected video must remain publicly viewable while the order is being processed.',
   },
   {
     id: 'tt-v-email',
     icon: Mail,
     title: 'Valid Email Address',
     description:
-      'Use a reachable email for order confirmation and tracking updates.',
-  },
-  {
-    id: 'tt-v-checkout',
-    icon: ShieldCheck,
-    title: 'Secure Checkout',
-    description:
-      'Finish payment through secure checkout once your order details are confirmed.',
+      'Use a working email address to receive confirmation, tracking details and support updates.',
   },
 ];
 
@@ -173,25 +173,29 @@ const YOUTUBE_SUBSCRIBERS_STEPS: Array<{
     id: 'yt-s-channel-url',
     icon: Link2,
     title: 'Public YouTube Channel URL',
-    description: '',
+    description:
+      'Provide the public URL of the YouTube channel receiving the selected subscriber package.',
   },
   {
     id: 'yt-s-package',
     icon: Package,
-    title: 'Selected Subscriber Package',
-    description: '',
+    title: 'Selected Package',
+    description:
+      'Choose the subscriber quantity that best fits your current audience and channel objectives.',
+  },
+  {
+    id: 'yt-s-public',
+    icon: Eye,
+    title: 'Public Channel Access',
+    description:
+      'Keep your YouTube channel publicly accessible while your subscriber order is being processed.',
   },
   {
     id: 'yt-s-email',
     icon: Mail,
     title: 'Valid Email Address',
-    description: '',
-  },
-  {
-    id: 'yt-s-checkout',
-    icon: ShieldCheck,
-    title: 'Secure Checkout',
-    description: '',
+    description:
+      'Use a working email address to receive order confirmations, delivery updates and customer support when required.',
   },
 ];
 
@@ -205,25 +209,29 @@ const YOUTUBE_VIEWS_STEPS: Array<{
     id: 'yt-v-video-url',
     icon: Link2,
     title: 'Public YouTube Video URL',
-    description: '',
+    description:
+      'Provide the public URL of the YouTube video receiving the selected View package.',
   },
   {
     id: 'yt-v-package',
     icon: Package,
     title: 'Selected Views Package',
-    description: '',
+    description:
+      'Choose the view quantity that best fits your campaign objectives and current video performance.',
+  },
+  {
+    id: 'yt-v-public',
+    icon: Eye,
+    title: 'Public Video Access',
+    description:
+      'Keep the selected YouTube video publicly accessible while your order is being processed.',
   },
   {
     id: 'yt-v-email',
     icon: Mail,
     title: 'Valid Email Address',
-    description: '',
-  },
-  {
-    id: 'yt-v-checkout',
-    icon: ShieldCheck,
-    title: 'Secure Checkout',
-    description: '',
+    description:
+      'Use a working email address to receive order confirmation, delivery updates and customer support when required.',
   },
 ];
 
@@ -237,25 +245,29 @@ const FACEBOOK_FOLLOWERS_STEPS: Array<{
     id: 'fb-f-page-url',
     icon: Link2,
     title: 'Public Facebook Page URL',
-    description: '',
+    description:
+      'Provide the public URL of the Facebook page that should receive the selected follower package.',
   },
   {
     id: 'fb-f-package',
     icon: Package,
-    title: 'Selected Followers Package',
-    description: '',
+    title: 'Selected Package',
+    description:
+      'Choose the follower quantity that best fits your page and current marketing objectives.',
+  },
+  {
+    id: 'fb-f-public',
+    icon: Eye,
+    title: 'Public Page Access',
+    description:
+      'The selected Facebook page should remain publicly accessible while your order is being processed.',
   },
   {
     id: 'fb-f-email',
     icon: Mail,
-    title: 'Valid Email Address',
-    description: '',
-  },
-  {
-    id: 'fb-f-checkout',
-    icon: ShieldCheck,
-    title: 'Secure Checkout',
-    description: '',
+    title: 'Email Address',
+    description:
+      'Use a valid email address so you can receive order confirmations, updates and customer support if needed.',
   },
 ];
 
@@ -269,25 +281,29 @@ const FACEBOOK_PAGE_LIKES_STEPS: Array<{
     id: 'fb-pl-page-url',
     icon: Link2,
     title: 'Public Facebook Page URL',
-    description: '',
+    description:
+      'Provide the public URL of the Facebook page receiving the selected Page Likes package.',
   },
   {
     id: 'fb-pl-package',
     icon: Package,
-    title: 'Selected Page Likes Package',
-    description: '',
+    title: 'Selected Package',
+    description:
+      'Choose the quantity that best matches your business goals and current Facebook page size.',
+  },
+  {
+    id: 'fb-pl-public',
+    icon: Eye,
+    title: 'Public Page Access',
+    description:
+      'Keep your Facebook page publicly accessible while your order is being processed.',
   },
   {
     id: 'fb-pl-email',
     icon: Mail,
     title: 'Valid Email Address',
-    description: '',
-  },
-  {
-    id: 'fb-pl-checkout',
-    icon: ShieldCheck,
-    title: 'Secure Checkout',
-    description: '',
+    description:
+      'Use a working email address to receive order confirmations, progress updates and customer support if needed.',
   },
 ];
 
@@ -301,25 +317,29 @@ const FACEBOOK_POST_LIKES_STEPS: Array<{
     id: 'fb-post-url',
     icon: Link2,
     title: 'Public Facebook Post URL',
-    description: '',
+    description:
+      'Provide the public URL of the Facebook post receiving the selected Like package.',
   },
   {
     id: 'fb-post-package',
     icon: Package,
-    title: 'Selected Post Likes Package',
-    description: '',
+    title: 'Selected Package',
+    description:
+      'Choose the quantity that best matches your campaign objectives and current engagement level.',
+  },
+  {
+    id: 'fb-post-public',
+    icon: Eye,
+    title: 'Public Post Access',
+    description:
+      'Keep the selected Facebook post publicly available while your order is being processed.',
   },
   {
     id: 'fb-post-email',
     icon: Mail,
     title: 'Valid Email Address',
-    description: '',
-  },
-  {
-    id: 'fb-post-checkout',
-    icon: ShieldCheck,
-    title: 'Secure Checkout',
-    description: '',
+    description:
+      'Use a working email address to receive order confirmations, delivery updates and customer support if required.',
   },
 ];
 
@@ -414,6 +434,10 @@ export type RequirementGuideProps = {
     | 'facebook-followers'
     | 'facebook-page-likes'
     | 'facebook-post-likes';
+  /** Image left / text right by default; set true for text left / image right. */
+  reverse?: boolean;
+  /** Optional trust notice under requirement cards. */
+  notice?: string;
   className?: string;
 };
 
@@ -429,6 +453,8 @@ export function RequirementGuide({
   imageAlt = 'Public profile requirements — no password needed',
   visual,
   visualVariant = 'default',
+  reverse = false,
+  notice,
   className,
 }: RequirementGuideProps) {
   const resolvedVisual =
@@ -485,6 +511,7 @@ export function RequirementGuide({
       imageSrc={resolvedVisual ? undefined : imageSrc}
       imageAlt={imageAlt}
       visual={resolvedVisual}
+      reverse={reverse}
       unoptimized={!resolvedVisual}
       className={cn('bg-hero-wash', className)}
     >
@@ -512,6 +539,23 @@ export function RequirementGuide({
           );
         })}
       </ul>
+      {notice ? (
+        <p
+          role="note"
+          className={cn(
+            'mt-4 rounded-xl border border-[color-mix(in_srgb,var(--brand-primary)_28%,var(--border-subtle))] px-4 py-3.5 text-sm leading-relaxed text-[var(--text-secondary)]',
+            visualVariant === 'facebook-followers' ||
+              visualVariant === 'facebook-page-likes' ||
+              visualVariant === 'facebook-post-likes' ||
+              visualVariant === 'youtube-subscribers' ||
+              visualVariant === 'youtube-views'
+              ? 'bg-[#FFE8D6]'
+              : 'bg-[var(--brand-accent-soft)]/70',
+          )}
+        >
+          {notice}
+        </p>
+      ) : null}
     </ImageTextSplit>
   );
 }

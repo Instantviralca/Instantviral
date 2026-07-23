@@ -41,7 +41,7 @@ export function ImageTextSplit({
   unoptimized,
 }: ImageTextSplitProps) {
   return (
-    <Section id={id} spacing="lg" className={cn(className)} aria-label={title}>
+    <Section id={id} spacing="md" className={cn(className)} aria-label={title}>
       <Container size="xl">
         <div
           className={cn(

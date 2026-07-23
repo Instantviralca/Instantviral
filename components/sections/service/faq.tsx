@@ -14,6 +14,8 @@ export type ServiceFaqProps = {
   items: FaqItem[];
   analyticsServiceSlug?: string;
   className?: string;
+  defaultOpenIds?: string[];
+  pinnedOpenIds?: string[];
 };
 
 export function ServiceFaq({
@@ -23,6 +25,8 @@ export function ServiceFaq({
   items,
   analyticsServiceSlug,
   className,
+  defaultOpenIds,
+  pinnedOpenIds,
 }: ServiceFaqProps) {
   if (items.length === 0) return null;
 
@@ -37,6 +41,8 @@ export function ServiceFaq({
           title={title}
           description={description}
           items={items}
+          defaultOpenIds={defaultOpenIds}
+          pinnedOpenIds={pinnedOpenIds}
           onItemOpen={
             analytics
               ? (faqId) => {

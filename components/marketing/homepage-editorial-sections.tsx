@@ -318,14 +318,14 @@ export function HomepageCommercialSection() {
           </FadeUp>
 
           <FadeUp delay={0.08} className="lg:sticky lg:top-28">
-            <figure className="overflow-hidden rounded-[1.75rem] border border-white/70 bg-gradient-to-br from-white/95 via-[#fffaf5]/80 to-[#f5ebe0]/70 p-2.5 shadow-[0_28px_60px_-36px_rgba(28,25,23,0.4)] sm:p-3">
+            <figure className="rounded-[1.75rem] border border-white/70 bg-gradient-to-br from-white/95 via-[#fffaf5]/80 to-[#f5ebe0]/70 p-2.5 shadow-[0_28px_60px_-36px_rgba(28,25,23,0.4)] sm:p-3">
               <Image
                 src={media.src}
                 alt={media.alt}
                 title={media.title}
                 width={media.width}
                 height={media.height}
-                className="h-auto max-h-[11rem] w-full rounded-[1.35rem] object-cover lg:max-h-[16rem]"
+                className="h-auto w-full rounded-[1.35rem]"
                 sizes="(max-width: 1024px) 100vw, 46vw"
                 loading="lazy"
               />

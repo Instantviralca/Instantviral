@@ -9,6 +9,8 @@ import { selectFinalCtaPair } from '@/lib/ctas';
 export type ServiceCTAProps = FinalCTAProps & {
   className?: string;
   aside?: ReactNode;
+  trustLine?: string;
+  trustBadges?: string[];
 };
 
 /**
@@ -32,6 +34,8 @@ export function ServiceCTA(props: ServiceCTAProps) {
         surface="service_page"
         serviceSlug={props.analyticsServiceSlug}
         aside={props.aside}
+        trustLine={props.trustLine}
+        trustBadges={props.trustBadges}
         className={props.className}
       />
     );

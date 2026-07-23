@@ -51,6 +51,46 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
       await import('@/components/sections/instagram-views-packages-view');
     return <InstagramViewsPackagesView service={service} />;
   }
+  if (service.slug === 'buy-tiktok-followers') {
+    const { TikTokFollowersAuthorityView } =
+      await import('@/components/sections/tiktok-followers-authority-view');
+    return <TikTokFollowersAuthorityView service={service} />;
+  }
+  if (service.slug === 'buy-tiktok-likes') {
+    const { TikTokLikesAuthorityView } =
+      await import('@/components/sections/tiktok-likes-authority-view');
+    return <TikTokLikesAuthorityView service={service} />;
+  }
+  if (service.slug === 'buy-tiktok-views') {
+    const { TikTokViewsAuthorityView } =
+      await import('@/components/sections/tiktok-views-authority-view');
+    return <TikTokViewsAuthorityView service={service} />;
+  }
+  if (service.slug === 'buy-facebook-followers') {
+    const { FacebookFollowersAuthorityView } =
+      await import('@/components/sections/facebook-followers-authority-view');
+    return <FacebookFollowersAuthorityView service={service} />;
+  }
+  if (service.slug === 'buy-facebook-page-likes') {
+    const { FacebookPageLikesAuthorityView } =
+      await import('@/components/sections/facebook-page-likes-authority-view');
+    return <FacebookPageLikesAuthorityView service={service} />;
+  }
+  if (service.slug === 'buy-facebook-post-likes') {
+    const { FacebookPostLikesAuthorityView } =
+      await import('@/components/sections/facebook-post-likes-authority-view');
+    return <FacebookPostLikesAuthorityView service={service} />;
+  }
+  if (service.slug === 'buy-youtube-subscribers') {
+    const { YouTubeSubscribersAuthorityView } =
+      await import('@/components/sections/youtube-subscribers-authority-view');
+    return <YouTubeSubscribersAuthorityView service={service} />;
+  }
+  if (service.slug === 'buy-youtube-views') {
+    const { YouTubeViewsAuthorityView } =
+      await import('@/components/sections/youtube-views-authority-view');
+    return <YouTubeViewsAuthorityView service={service} />;
+  }
 
   const content = getServiceContentBySlug(service.slug);
 

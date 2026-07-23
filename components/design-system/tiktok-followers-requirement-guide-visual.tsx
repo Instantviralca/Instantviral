@@ -11,7 +11,7 @@ const TikTokFollowersRequirementVisual = dynamic(
     ssr: false,
     loading: () => (
       <div
-        className="mx-auto aspect-[4/5] w-full max-w-[18.5rem] animate-pulse rounded-2xl bg-stone-100 sm:max-w-[19.5rem]"
+        className="mx-auto aspect-[16/9] w-full max-w-[36rem] animate-pulse rounded-2xl bg-stone-100"
         aria-hidden
       />
     ),
@@ -20,5 +20,9 @@ const TikTokFollowersRequirementVisual = dynamic(
 
 /** Client boundary for lazy TikTok Followers section illustration. */
 export function TikTokFollowersRequirementGuideVisual() {
-  return <TikTokFollowersRequirementVisual />;
+  return (
+    <div className="relative [transform:perspective(1200px)_rotateX(2deg)_rotateY(3deg)] motion-reduce:[transform:none]">
+      <TikTokFollowersRequirementVisual />
+    </div>
+  );
 }

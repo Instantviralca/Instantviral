@@ -20,6 +20,8 @@ import { HoverLift } from '@/components/motion/hover-lift';
 import { Heading } from '@/components/typography/heading';
 import { MutedText } from '@/components/typography/muted-text';
 import { cn } from '@/lib/utils';
+import type { ReactNode } from 'react';
+
 import type { BenefitItem } from '@/types/components';
 
 export type BenefitsProps = {
@@ -27,6 +29,8 @@ export type BenefitsProps = {
   title?: string;
   description?: string;
   items: BenefitItem[];
+  /** Optional section visual (e.g. analytics illustration). */
+  visual?: ReactNode;
   className?: string;
 };
 
@@ -43,7 +47,7 @@ function resolveBenefitIcon(title: string, fallback: LucideIcon): LucideIcon {
   return fallback;
 }
 
-export function Benefits({ id, title, description, items, className }: BenefitsProps) {
+export function Benefits({ id, title, description, items, visual, className }: BenefitsProps) {
   if (items.length === 0 && !title && !description) return null;
 
   const cols = items.length >= 4 ? 4 : 3;
@@ -51,17 +55,31 @@ export function Benefits({ id, title, description, items, className }: BenefitsP
   return (
     <Section id={id} className={cn('bg-white', className)} aria-label="Benefits">
       <Container>
-        {(title || description) && (
-          <div className="mb-10 max-w-2xl space-y-4 sm:mb-12 sm:space-y-5 md:mb-14">
-            {title ? (
-              <Heading as="h2" size="h2">
-                {title}
-              </Heading>
-            ) : null}
-            {description ? (
-              <MutedText className="max-w-xl whitespace-pre-line text-base leading-relaxed">
-                {description}
-              </MutedText>
+        {(title || description || visual) && (
+          <div
+            className={cn(
+              'mb-10 sm:mb-12 md:mb-14',
+              visual
+                ? 'grid items-center gap-8 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:gap-10'
+                : undefined,
+            )}
+          >
+            <div className="max-w-2xl space-y-4 sm:space-y-5">
+              {title ? (
+                <Heading as="h2" size="h2">
+                  {title}
+                </Heading>
+              ) : null}
+              {description ? (
+                <MutedText className="max-w-xl whitespace-pre-line text-base leading-relaxed">
+                  {description}
+                </MutedText>
+              ) : null}
+            </div>
+            {visual ? (
+              <FadeUp delay={0.06} className="mx-auto w-full max-w-[22rem] lg:mx-0 lg:justify-self-end">
+                {visual}
+              </FadeUp>
             ) : null}
           </div>
         )}

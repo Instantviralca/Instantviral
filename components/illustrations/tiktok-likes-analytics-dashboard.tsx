@@ -46,14 +46,14 @@ export function TikTokLikesAnalyticsDashboard({ className }: { className?: strin
         <div className="grid grid-cols-2 gap-2">
           <div className="rounded-xl border border-stone-100 bg-[var(--surface-muted)]/80 p-2.5">
             <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
-              Increasing likes
+              Like count
             </p>
             <p className="mt-0.5 text-lg font-black tabular-nums text-stone-900">2,640</p>
             <p className="text-[10px] font-semibold text-emerald-600">+18% this week</p>
           </div>
           <div className="rounded-xl border border-stone-100 bg-[var(--surface-muted)]/80 p-2.5">
             <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
-              Engagement score
+              Engagement
             </p>
             <p className="mt-0.5 text-lg font-black tabular-nums text-stone-900">8.4</p>
             <p className="text-[10px] font-semibold" style={{ color: brand }}>
@@ -65,7 +65,7 @@ export function TikTokLikesAnalyticsDashboard({ className }: { className?: strin
         <div className="rounded-xl border border-stone-100 bg-white p-2.5 shadow-sm">
           <div className="flex items-center justify-between">
             <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
-              Video performance
+              Growth graph
             </p>
             <p className="text-[9px] font-bold text-stone-600">7-day trend</p>
           </div>
@@ -89,9 +89,9 @@ export function TikTokLikesAnalyticsDashboard({ className }: { className?: strin
         <div className="mt-auto flex items-center justify-between rounded-xl border border-stone-100 bg-[linear-gradient(145deg,#fffdfb,#fff7ed)] px-3 py-2">
           <div>
             <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
-              Audience activity
+              Engagement rate
             </p>
-            <p className="text-[12px] font-bold text-stone-800">Peak hours active</p>
+            <p className="text-[12px] font-bold tabular-nums text-stone-800">6.8%</p>
           </div>
           <span
             className="rounded-full px-2 py-0.5 text-[9px] font-bold text-white"

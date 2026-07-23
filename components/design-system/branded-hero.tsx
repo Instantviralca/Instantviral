@@ -66,7 +66,12 @@ export function BrandedHero({
     instagramVariant === 'comments' ||
     youtubeVariant === 'subscribers' ||
     youtubeVariant === 'views' ||
-    facebookVariant === 'followers' || facebookVariant === 'page-likes' || facebookVariant === 'post-likes';
+    facebookVariant === 'followers' ||
+    facebookVariant === 'page-likes' ||
+    facebookVariant === 'post-likes' ||
+    tiktokVariant === 'followers' ||
+    tiktokVariant === 'likes' ||
+    tiktokVariant === 'views';
   return (
     <Section
       spacing="lg"
@@ -85,23 +90,32 @@ export function BrandedHero({
         <div
           className={cn(
             'grid items-center gap-8 lg:gap-10',
-            instagramVariant === 'views' ||
-              instagramVariant === 'comments' ||
-              youtubeVariant === 'subscribers' ||
-              youtubeVariant === 'views' ||
-              facebookVariant === 'followers' || facebookVariant === 'page-likes' || facebookVariant === 'post-likes'
+            isPremiumDashboardHero
               ? 'lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.95fr)] lg:gap-6'
               : instagramVariant === 'likes'
                 ? 'lg:grid-cols-[minmax(0,1.22fr)_minmax(0,1fr)]'
                 : 'lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)]',
           )}
         >
-          <div className="space-y-4">
+          <div
+            className={cn(
+              isPremiumDashboardHero
+                ? 'flex flex-col gap-0'
+                : 'space-y-4',
+            )}
+          >
             {breadcrumbs && breadcrumbs.length > 0 ? (
               <Breadcrumb items={breadcrumbs} variant="subtle" />
             ) : null}
             {eyebrow ? (
-              <Eyebrow className="text-[var(--brand-primary)]">{eyebrow}</Eyebrow>
+              <Eyebrow
+                className={cn(
+                  'text-[var(--brand-primary)]',
+                  isPremiumDashboardHero && 'mt-5 sm:mt-6',
+                )}
+              >
+                {eyebrow}
+              </Eyebrow>
             ) : null}
             <Heading
               as="h1"
@@ -109,7 +123,7 @@ export function BrandedHero({
               className={cn(
                 'text-balance tracking-tight',
                 isPremiumDashboardHero
-                  ? 'max-w-[22ch] lg:text-[clamp(2.85rem,4.4vw,3.65rem)]'
+                  ? 'mt-4 max-w-[22ch] sm:mt-5 lg:text-[clamp(2.85rem,4.4vw,3.65rem)]'
                   : 'max-w-[16ch]',
               )}
             >
@@ -120,7 +134,7 @@ export function BrandedHero({
                 className={cn(
                   'text-pretty text-[var(--text-secondary)]',
                   isPremiumDashboardHero
-                    ? 'max-w-[40rem] text-lg leading-relaxed'
+                    ? 'mt-5 max-w-[40rem] text-lg leading-relaxed sm:mt-6'
                     : 'max-w-md',
                 )}
               >
@@ -131,7 +145,7 @@ export function BrandedHero({
               <div
                 className={cn(
                   'flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap',
-                  isPremiumDashboardHero ? 'pt-5' : 'pt-2',
+                  isPremiumDashboardHero ? 'mt-6 sm:mt-7' : 'pt-2',
                 )}
               >
                 {primaryCta ? (
@@ -157,11 +171,25 @@ export function BrandedHero({
             )}
             {trustLabels && trustLabels.length > 0 ? (
               <TrustStrip
-                className="pt-2 [&_svg]:size-5"
+                className={cn(
+                  '[&_svg]:size-5',
+                  isPremiumDashboardHero
+                    ? 'mt-6 gap-x-4 gap-y-2.5 rounded-2xl border border-white/80 bg-white/80 px-4 py-4 shadow-[0_16px_36px_-22px_rgba(28,25,23,0.38)] backdrop-blur-md sm:mt-7 sm:gap-x-5 sm:px-5'
+                    : 'pt-2',
+                )}
                 items={trustLabels.map((t) => ({
                   id: t.id,
                   label: t.label,
-                  icon: 'check',
+                  icon:
+                    t.id.includes('password') || t.id.includes('lock')
+                      ? 'lock'
+                      : t.id.includes('checkout') || t.id.includes('secure')
+                        ? 'shield'
+                        : t.id.includes('track')
+                          ? 'track'
+                          : t.id.includes('2018') || t.id.includes('trusted')
+                            ? 'star'
+                            : 'check',
                 }))}
               />
             ) : (

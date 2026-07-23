@@ -5,11 +5,11 @@ import { useEffect, useState } from 'react';
 import { cn } from '@/lib/utils';
 
 const FLOW = [
-  'Channel Selected',
-  'Package Confirmed',
-  'Checkout Completed',
-  'Subscribers Delivering',
-  'Order Completed',
+  'Choose Package',
+  'Paste Channel URL',
+  'Review Order',
+  'Secure Checkout',
+  'Track Delivery',
 ] as const;
 
 /**

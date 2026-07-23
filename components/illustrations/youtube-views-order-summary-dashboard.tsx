@@ -38,12 +38,12 @@ export function YouTubeViewsOrderSummaryDashboard({
               ▶
             </span>
             <div>
-              <p className="text-sm font-bold text-stone-900">Order Summary</p>
-              <p className="text-xs text-stone-500">YouTube Views</p>
+              <p className="text-sm font-bold text-stone-900">Creator Studio</p>
+              <p className="text-xs text-stone-500">Order Information</p>
             </div>
           </div>
           <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-emerald-700">
-            Confirmed
+            Ready
           </span>
         </div>
 
@@ -64,7 +64,7 @@ export function YouTubeViewsOrderSummaryDashboard({
         <ul className="space-y-2" role="list">
           <li className="rounded-xl border border-stone-100 bg-white/90 px-3.5 py-2.5">
             <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-              Public video URL
+              Public Video URL
             </p>
             <p className="mt-0.5 truncate text-sm font-semibold text-stone-800">
               youtube.com/watch?v=demo
@@ -72,13 +72,13 @@ export function YouTubeViewsOrderSummaryDashboard({
           </li>
           <li className="rounded-xl border border-stone-100 bg-white/90 px-3.5 py-2.5">
             <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-              Selected package
+              Selected Views Package
             </p>
             <p className="mt-0.5 text-sm font-semibold text-stone-800">5,000 Views</p>
           </li>
           <li className="rounded-xl border border-stone-100 bg-white/90 px-3.5 py-2.5">
             <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-              Confirmation email
+              Valid Email Address
             </p>
             <p className="mt-0.5 truncate text-sm font-semibold text-stone-800">
               you@email.com
@@ -88,19 +88,30 @@ export function YouTubeViewsOrderSummaryDashboard({
             <div className="flex items-center justify-between gap-2">
               <div>
                 <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
-                  Delivery status
+                  Public Video Status
                 </p>
-                <p className="mt-0.5 text-sm font-semibold text-stone-800">In progress</p>
+                <p className="mt-0.5 text-sm font-semibold text-stone-800">Publicly accessible</p>
+              </div>
+              <span className="text-xs font-bold text-emerald-600">Live</span>
+            </div>
+          </li>
+          <li className="rounded-xl border border-stone-100 bg-white/90 px-3.5 py-2.5">
+            <div className="flex items-center justify-between gap-2">
+              <div>
+                <p className="text-[10px] font-semibold tracking-wide text-stone-400 uppercase">
+                  Secure Checkout
+                </p>
+                <p className="mt-0.5 text-sm font-semibold text-stone-800">No password required</p>
               </div>
               <span className="text-xs font-bold" style={{ color: ytRed }}>
-                64%
+                Ready
               </span>
             </div>
             <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-stone-200/90">
               <div
                 className="h-full rounded-full"
                 style={{
-                  width: '64%',
+                  width: '100%',
                   background: `linear-gradient(90deg, ${ytRed}, ${brand})`,
                 }}
               />
@@ -108,12 +119,15 @@ export function YouTubeViewsOrderSummaryDashboard({
           </li>
         </ul>
 
-        <div className="flex justify-end">
+        <div className="flex items-center justify-between gap-3">
+          <span className="rounded-lg border border-emerald-100 bg-emerald-50 px-2.5 py-1.5 text-[10px] font-bold text-emerald-700">
+            Public URL Only
+          </span>
           <span
             className="rounded-xl px-3.5 py-2 text-xs font-bold text-white shadow-sm"
             style={{ background: brand }}
           >
-            Track Order
+            Place Order
           </span>
         </div>
       </div>

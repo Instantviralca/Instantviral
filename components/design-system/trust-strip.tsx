@@ -1,11 +1,11 @@
-import { CheckCircle2, Lock, MapPin, RefreshCw, Shield, Users } from 'lucide-react';
+import { CheckCircle2, Lock, MapPin, RefreshCw, Shield, Star, Users } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
 export type TrustItem = {
   id: string;
   label: string;
-  icon?: 'shield' | 'lock' | 'check' | 'track' | 'support' | 'refund';
+  icon?: 'shield' | 'lock' | 'check' | 'track' | 'support' | 'refund' | 'star';
 };
 
 const ICONS = {
@@ -15,6 +15,7 @@ const ICONS = {
   track: MapPin,
   support: Users,
   refund: RefreshCw,
+  star: Star,
 } as const;
 
 /** Default cart/checkout trust — includes risk reversal. */

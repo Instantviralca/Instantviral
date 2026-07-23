@@ -43,21 +43,21 @@ function relatedBlurb(service: Service): string {
     case 'buy-instagram-comments':
       return 'Explore comment options for posts where visible discussion is relevant to the campaign.';
     case 'buy-tiktok-followers':
-      return 'Build a stronger audience with follower packages.';
+      return "Strengthen your profile's visible audience with TikTok follower packages.";
     case 'buy-tiktok-likes':
-      return 'Increase engagement on your public videos.';
+      return 'Increase the visible engagement on your public videos with TikTok like packages.';
     case 'buy-tiktok-views':
-      return 'Support short-form reach with view packages that help more people find your clips.';
+      return 'Increase the visible watch count on public videos with TikTok view packages.';
     case 'buy-youtube-views':
       return 'Choose a views package for a public YouTube video and review pricing, delivery information and tracking before ordering.';
     case 'buy-youtube-subscribers':
       return 'Build a stronger YouTube audience alongside increased video visibility with subscriber packages designed for Canadian creators and businesses.';
     case 'buy-facebook-followers':
-      return 'Build a wider audience around your public Facebook page with follower packages and order tracking.';
+      return 'Increase the visible audience connected to your Facebook page and strengthen your overall community presence.';
     case 'buy-facebook-page-likes':
-      return 'Strengthen the visible support around your public Facebook page with dedicated page like packages.';
+      return "Increase the visible Page Like count to strengthen your brand's overall social proof.";
     case 'buy-facebook-post-likes':
-      return 'Post Likes are one of the most visible engagement signals on Facebook.';
+      return 'Support engagement on individual Facebook posts with targeted Post Like packages for campaigns and promotions.';
     default:
       break;
   }
@@ -77,19 +77,21 @@ function relatedCardTitle(service: Service): string {
     case 'buy-instagram-comments':
       return 'Instagram Comments Packages';
     case 'buy-tiktok-followers':
-      return 'Buy TikTok Followers';
+      return 'TikTok Followers';
     case 'buy-tiktok-likes':
-      return 'Buy TikTok Likes';
+      return 'TikTok Likes';
     case 'buy-tiktok-views':
-      return 'Buy TikTok Views';
+      return 'TikTok Views';
     case 'buy-youtube-views':
       return 'YouTube Views Packages';
     case 'buy-youtube-subscribers':
       return 'Buy YouTube Subscribers Canada';
     case 'buy-facebook-followers':
-      return 'Facebook Followers Packages';
+      return 'Facebook Followers';
     case 'buy-facebook-page-likes':
-      return 'Facebook Page Likes Packages';
+      return 'Facebook Page Likes';
+    case 'buy-facebook-post-likes':
+      return 'Facebook Post Likes';
     default:
       return service.navigationLabel;
   }
@@ -105,17 +107,22 @@ function relatedCtaLabel(service: Service): string {
       return 'View Views Packages';
     case 'buy-instagram-comments':
       return 'View Comments Packages';
+    case 'buy-tiktok-followers':
+      return 'View TikTok Followers';
     case 'buy-tiktok-likes':
+      return 'View TikTok Likes';
     case 'buy-tiktok-views':
-      return 'View Packages';
+      return 'View TikTok Views';
     case 'buy-youtube-views':
       return 'View YouTube Views Packages';
     case 'buy-youtube-subscribers':
       return 'View Subscriber Packages';
     case 'buy-facebook-followers':
-      return 'View Followers Packages';
+      return 'Explore Service';
     case 'buy-facebook-page-likes':
-      return 'View Page Likes Packages';
+      return 'Explore Service';
+    case 'buy-facebook-post-likes':
+      return 'Explore Service';
     default:
       return `View ${service.navigationLabel.toLowerCase()} packages`;
   }
@@ -261,17 +268,17 @@ function RelatedMiniIllustration({ service }: { service: Service }) {
 
   return (
     <div
-      className="relative flex size-16 items-center justify-center overflow-hidden rounded-2xl border border-stone-100 bg-white shadow-[0_12px_24px_-16px_rgba(28,25,23,0.35)] transition-transform duration-300 group-hover:scale-[1.06] motion-reduce:group-hover:scale-100"
+      className="relative flex size-[4.75rem] items-center justify-center overflow-hidden rounded-2xl border border-stone-100 bg-white shadow-[0_14px_28px_-14px_rgba(28,25,23,0.4)] transition-transform duration-300 group-hover:scale-[1.08] motion-reduce:group-hover:scale-100 sm:size-20"
       aria-hidden
     >
       <div
-        className="absolute inset-0 opacity-90"
+        className="absolute inset-0"
         style={{
-          background: `linear-gradient(145deg, ${tiktokCyan}22, ${tiktokRed}18)`,
+          background: `radial-gradient(circle at 28% 18%, ${tiktokCyan}40, transparent 55%), radial-gradient(circle at 78% 82%, ${tiktokRed}32, transparent 50%), linear-gradient(145deg, ${tiktokCyan}18, ${tiktokRed}14)`,
         }}
       />
       <div className="relative flex w-full flex-col items-center gap-1 px-2">
-        <Icon className="size-5" style={{ color: accent }} strokeWidth={2.25} />
+        <Icon className="size-6 drop-shadow-sm" style={{ color: accent }} strokeWidth={2.25} />
         <div className="flex h-3.5 w-full items-end justify-center gap-0.5">
           {[40, 62, 48, 78].map((h, i) => (
             <span
@@ -312,6 +319,7 @@ export function RelatedServices({
     ? getServicePageAnalytics(analyticsServiceSlug)
     : null;
   const isSingleWide = services.length === 1;
+  const isTwoCol = services.length === 2;
   const isYtSubscribersFeature =
     isSingleWide && services[0]?.slug === 'buy-youtube-subscribers';
 
@@ -321,16 +329,20 @@ export function RelatedServices({
         {(title || description) && (
           <FadeUp className="mb-10 max-w-2xl space-y-3">
             {title ? (
-              <Heading as="h2" size="h2">
+              <Heading as="h2" size="h2" className="tracking-tight">
                 {title}
               </Heading>
             ) : null}
-            {description ? <MutedText>{description}</MutedText> : null}
+            {description ? <MutedText className="leading-relaxed">{description}</MutedText> : null}
           </FadeUp>
         )}
         <Grid
-          cols={isSingleWide ? 1 : 3}
-          className={cn('auto-rows-fr gap-5 sm:gap-6 lg:gap-7', isSingleWide && 'max-w-4xl')}
+          cols={isSingleWide ? 1 : isTwoCol ? 2 : 3}
+          className={cn(
+            'auto-rows-fr gap-5 sm:gap-6 lg:gap-7',
+            isSingleWide && 'max-w-4xl',
+            isTwoCol && 'max-w-4xl',
+          )}
         >
           {services.map((service, index) => (
             <FadeUp key={service.id} delay={0.04 * index} className="h-full">
@@ -338,10 +350,12 @@ export function RelatedServices({
                 <Link
                   href={service.url}
                   className={cn(
-                    'group flex h-full cursor-pointer flex-col rounded-2xl border border-[var(--border-subtle)] bg-white p-6 shadow-[0_14px_32px_-22px_rgba(28,25,23,0.28)] transition-[border-color,box-shadow,transform,background-color] duration-300 hover:-translate-y-2 hover:border-[color-mix(in_srgb,var(--brand-primary)_42%,var(--border-subtle))] hover:bg-[color-mix(in_srgb,var(--brand-accent-soft)_32%,white)] hover:shadow-[0_28px_56px_-24px_rgba(28,25,23,0.46)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0',
+                    'group flex h-full cursor-pointer flex-col rounded-2xl border border-[var(--border-subtle)] bg-white p-7 shadow-[0_18px_40px_-24px_rgba(28,25,23,0.32)] transition-[border-color,box-shadow,transform,background-color] duration-300 hover:-translate-y-2.5 hover:border-[color-mix(in_srgb,var(--brand-primary)_42%,var(--border-subtle))] hover:bg-[color-mix(in_srgb,var(--brand-accent-soft)_32%,white)] hover:shadow-[0_32px_60px_-24px_rgba(28,25,23,0.48)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 motion-reduce:hover:translate-y-0',
                     isSingleWide
-                      ? 'min-h-[12rem] sm:flex-row sm:items-center sm:gap-6 sm:p-7'
-                      : 'min-h-[16rem]',
+                      ? 'min-h-[13rem] sm:flex-row sm:items-center sm:gap-6 sm:p-8'
+                      : isTwoCol
+                        ? 'min-h-[20rem]'
+                        : 'min-h-[18.5rem]',
                     isYtSubscribersFeature &&
                       'border-red-100 bg-[linear-gradient(135deg,#fffdfb_0%,#fff5f5_45%,#ffffff_100%)] hover:border-red-200 hover:bg-[linear-gradient(135deg,#fff7f7_0%,#ffecec_50%,#ffffff_100%)] hover:shadow-[0_28px_56px_-24px_rgba(185,28,28,0.35)]',
                   )}
@@ -365,29 +379,31 @@ export function RelatedServices({
                       isSingleWide && 'sm:shrink-0',
                     )}
                   >
-                    <RelatedMiniIllustration service={service} />
+                    <span className="[&>div]:!size-[5.25rem] sm:[&>div]:!size-24 [&>div]:rounded-[1.25rem]">
+                      <RelatedMiniIllustration service={service} />
+                    </span>
                     {!isSingleWide ? (
                       <span
-                        className="flex size-8 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-white text-[var(--text-muted)] opacity-80 transition-[background-color,color,border-color,transform,opacity] duration-200 group-hover:border-[color-mix(in_srgb,var(--brand-primary)_35%,var(--border-subtle))] group-hover:bg-[var(--brand-accent-soft)] group-hover:text-[var(--brand-primary)] group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
+                        className="flex size-9 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-white text-[var(--text-muted)] opacity-85 transition-[background-color,color,border-color,transform,opacity] duration-200 group-hover:border-[color-mix(in_srgb,var(--brand-primary)_35%,var(--border-subtle))] group-hover:bg-[var(--brand-accent-soft)] group-hover:text-[var(--brand-primary)] group-hover:opacity-100 group-hover:translate-x-1 group-hover:-translate-y-1 motion-reduce:group-hover:translate-x-0 motion-reduce:group-hover:translate-y-0"
                         aria-hidden
                       >
-                        <ArrowUpRight className="size-3.5" strokeWidth={2.25} />
+                        <ArrowUpRight className="size-4" strokeWidth={2.25} />
                       </span>
                     ) : null}
                   </div>
                   <div className={cn('flex min-w-0 flex-1 flex-col', isSingleWide && 'sm:mt-0')}>
                     <h3
                       className={cn(
-                        'text-base font-semibold tracking-tight text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--brand-primary)]',
-                        isSingleWide ? 'mt-0 sm:mt-0' : 'mt-5',
+                        'text-lg font-semibold tracking-tight text-[var(--text-primary)] transition-colors duration-200 group-hover:text-[var(--brand-primary)]',
+                        isSingleWide ? 'mt-0 sm:mt-0' : 'mt-6',
                       )}
                     >
                       {relatedCardTitle(service)}
                     </h3>
-                    <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
+                    <p className="mt-2.5 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
                       {relatedBlurb(service)}
                     </p>
-                    <p className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand-primary)] transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0">
+                    <p className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--brand-primary)] transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:group-hover:translate-x-0">
                       {relatedCtaLabel(service)}
                       <ArrowRight
                         className="size-3.5 transition-transform duration-200 group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"

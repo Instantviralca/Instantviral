@@ -246,21 +246,23 @@ export function PricingGrid({
               onClick={() => onSelect?.(pkg.id)}
               style={selected ? SELECTED_CHIP_STYLE : undefined}
               className={cn(
-                'group relative flex min-h-[5.25rem] flex-col items-center justify-center rounded-xl border px-2 py-3 text-center transition-[transform,box-shadow,border-color,background-color,filter] duration-300 ease-out',
+                'group relative flex min-h-[5.75rem] flex-col items-center justify-center rounded-2xl border px-2.5 py-3.5 text-center transition-[transform,box-shadow,border-color,background-color,filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
                 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2',
-                swipeable && 'w-[5.25rem] shrink-0 snap-start sm:w-auto sm:shrink',
+                swipeable && 'w-[5.5rem] shrink-0 snap-start sm:w-auto sm:shrink',
                 selected
-                  ? 'z-[1] scale-105 border-2 border-orange-400 text-white shadow-[0_20px_40px_-12px_rgba(249,115,22,0.95)] ring-2 ring-orange-300/90 brightness-105 motion-reduce:scale-100'
-                  : 'border-[var(--border-subtle)] bg-white text-[var(--text-primary)] shadow-sm hover:-translate-y-1.5 hover:border-[color-mix(in_srgb,var(--brand-primary)_40%,var(--border-subtle))] hover:bg-[var(--brand-accent-soft)] hover:shadow-[0_14px_28px_-14px_rgba(249,115,22,0.35)] motion-reduce:hover:translate-y-0',
+                  ? 'z-[1] scale-[1.12] border-2 border-orange-200/90 text-white shadow-[0_22px_44px_-10px_rgba(249,115,22,0.72),0_0_0_1px_rgba(255,255,255,0.35)_inset] ring-4 ring-orange-200/50 brightness-105 motion-reduce:scale-100 motion-safe:animate-[iv-glow-pulse_3.2s_ease-in-out_infinite]'
+                  : 'border-[var(--border-subtle)] bg-white text-[var(--text-primary)] shadow-[0_8px_20px_-14px_rgba(28,25,23,0.28)] hover:-translate-y-2 hover:scale-[1.03] hover:border-[color-mix(in_srgb,var(--brand-primary)_45%,var(--border-subtle))] hover:bg-[var(--brand-accent-soft)] hover:shadow-[0_18px_36px_-14px_rgba(249,115,22,0.42)] motion-reduce:hover:translate-y-0 motion-reduce:hover:scale-100',
               )}
             >
               {badge ? (
                 <span
                   className={cn(
-                    'absolute -top-2.5 left-1/2 z-10 max-w-[calc(100%-2px)] -translate-x-1/2 truncate rounded-full px-1.5 py-0.5 text-[8px] font-bold tracking-wide uppercase shadow-sm',
+                    'absolute -top-2.5 left-1/2 z-10 max-w-[calc(100%-2px)] -translate-x-1/2 truncate rounded-full px-2.5 py-1 text-[9px] font-bold tracking-wide uppercase shadow-[0_10px_18px_-8px_rgba(249,115,22,0.8)]',
                     selected
                       ? 'bg-white text-[var(--brand-primary)]'
-                      : 'bg-[var(--brand-primary)] text-white',
+                      : badge === 'most-popular' || badge === 'recommended'
+                        ? 'bg-[linear-gradient(145deg,var(--brand-primary)_0%,#ea580c_100%)] text-white ring-2 ring-orange-200/80'
+                        : 'bg-[var(--brand-primary)] text-white',
                   )}
                 >
                   {getBadgeLabel(badge)}
@@ -273,7 +275,7 @@ export function PricingGrid({
               ) : null}
               <span
                 className={cn(
-                  'text-lg font-bold tracking-tight sm:text-xl',
+                  'text-xl font-bold tracking-tight sm:text-2xl',
                   selected ? 'text-white' : 'text-[var(--text-primary)]',
                 )}
               >
@@ -281,8 +283,8 @@ export function PricingGrid({
               </span>
               <span
                 className={cn(
-                  'mt-0.5 max-w-full truncate text-[11px] font-semibold',
-                  selected ? 'text-white/90' : 'text-[var(--text-secondary)]',
+                  'mt-1 max-w-full truncate text-sm font-bold tabular-nums sm:text-[15px]',
+                  selected ? 'text-white/95' : 'text-[var(--brand-primary)]',
                 )}
               >
                 {formatMoney(pkg.price, pkg.currency)}
@@ -305,8 +307,8 @@ export function PricingGrid({
             'bg-[linear-gradient(165deg,#ffffff_0%,#fffdfb_45%,#fff7ed_100%)]',
             'hover:-translate-y-0.5 hover:shadow-[0_28px_56px_-26px_rgba(28,25,23,0.4)] motion-reduce:hover:translate-y-0',
             active.package.badge === 'most-popular' || active.package.badge === 'recommended'
-              ? 'border-[color-mix(in_srgb,var(--brand-primary)_48%,var(--border-subtle))] shadow-[0_24px_52px_-22px_rgba(249,115,22,0.5)]'
-              : 'border-[var(--border-subtle)] shadow-[0_18px_40px_-24px_rgba(28,25,23,0.32)]',
+              ? 'border-[color-mix(in_srgb,var(--brand-primary)_55%,var(--border-subtle))] shadow-[0_28px_56px_-20px_rgba(249,115,22,0.55)] ring-1 ring-orange-200/60'
+              : 'border-[var(--border-subtle)] shadow-[0_20px_44px_-24px_rgba(28,25,23,0.34)]',
           )}
           data-analytics="package-summary"
         >
@@ -319,7 +321,7 @@ export function PricingGrid({
             aria-hidden
           />
           {active.package.badge === 'most-popular' || active.package.badge === 'recommended' ? (
-            <span className="absolute -top-2.5 left-5 z-[1] rounded-full bg-[linear-gradient(145deg,var(--brand-primary)_0%,#ea580c_100%)] px-2.5 py-1 text-[10px] font-bold tracking-wide text-white uppercase shadow-sm">
+            <span className="absolute -top-3 left-5 z-[1] rounded-full bg-[linear-gradient(145deg,var(--brand-primary)_0%,#ea580c_100%)] px-3.5 py-1.5 text-[11px] font-bold tracking-wide text-white uppercase shadow-[0_12px_24px_-10px_rgba(249,115,22,0.85)] ring-2 ring-white">
               {active.package.badge === 'recommended' ? 'Recommended' : 'Most Popular'}
             </span>
           ) : null}
@@ -368,7 +370,7 @@ export function PricingGrid({
             <div className="flex flex-wrap items-baseline gap-2 sm:justify-end">
               <p
                 key={`price-${priceAnimKey}`}
-                className="text-4xl font-bold tracking-tight text-[var(--brand-primary)] motion-safe:animate-iv-price-pop"
+                className="text-5xl font-bold tracking-tight text-[var(--brand-primary)] motion-safe:animate-iv-price-pop sm:text-6xl"
                 aria-live="polite"
               >
                 {formatMoney(active.package.price, active.package.currency)}
@@ -413,7 +415,7 @@ export function PricingGrid({
               packageId={active.package.id}
               emphasized
               onSelect={(id) => (onContinue ?? onSelect)?.(id)}
-              className="min-h-[3.65rem] w-full rounded-xl bg-[linear-gradient(145deg,var(--brand-primary)_0%,#ea580c_100%)] text-sm font-bold tracking-wide text-white shadow-[0_14px_30px_-14px_rgba(249,115,22,0.8)] transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_36px_-14px_rgba(249,115,22,0.95)] active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
+              className="min-h-[3.65rem] w-full rounded-xl bg-[linear-gradient(145deg,var(--brand-primary)_0%,#ea580c_100%)] text-sm font-bold tracking-wide text-white shadow-[0_14px_30px_-14px_rgba(249,115,22,0.8)] transition-[transform,box-shadow] duration-200 hover:-translate-y-1.5 hover:shadow-[0_22px_44px_-12px_rgba(249,115,22,1)] active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100"
             />
           </div>
         </div>

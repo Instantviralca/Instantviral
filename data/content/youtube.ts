@@ -4,23 +4,22 @@ import type { ServiceContent } from '@/types/content';
 const PRICING_ANCHOR = '#pricing-packages';
 
 /**
- * Buy YouTube Subscribers Canada — Document 09.41 production content.
- * Other YouTube services remain factory placeholders until their production docs land.
+ * Buy YouTube Subscribers Canada — full authority layout (Sections 1–18).
  */
 function buildBuyYouTubeSubscribersContent(): ServiceContent {
   return {
     slug: 'buy-youtube-subscribers',
     platformId: 'youtube',
     seo: {
-      title: 'Buy YouTube Subscribers Canada | Packages & Pricing',
+      title: 'Buy YouTube Subscribers Canada | InstantViral',
       description:
-        'Buy YouTube subscribers in Canada with clear package options, delivery information, secure checkout and order tracking using your public channel URL.',
+        'Buy YouTube subscribers in Canada using your public channel URL. Compare transparent packages, complete secure checkout with no password required, and monitor available order updates.',
     },
     hero: {
-      eyebrow: 'YOUTUBE SUBSCRIBER PACKAGES FOR CANADIAN CREATORS, BRANDS & BUSINESSES',
+      eyebrow: 'YOUTUBE SUBSCRIBER PACKAGES FOR CREATORS, BRANDS & BUSINESSES',
       title: 'Buy YouTube Subscribers Canada',
       description:
-        'Grow your YouTube channel with subscriber packages created for creators, businesses and brands across Canada. Choose the package that matches your goals, place your order securely using your public YouTube channel URL and follow every stage of delivery with transparent order tracking. We never ask for your YouTube password, making the ordering process simple, secure and straightforward.',
+        'Grow your YouTube channel with subscriber packages designed for creators, brands and businesses across Canada. Compare transparent package options, choose the quantity that matches your channel goals and place your order using only your public YouTube channel URL. No password is required, secure checkout is included and you can monitor available order updates after confirmation.',
       purpose: 'Convert for YouTube subscriber packages in Canada',
       primaryKeyword: 'buy YouTube subscribers Canada',
       supportingKeywords: [
@@ -41,10 +40,10 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
       },
       trustLabels: [
         { id: 'yt-s-trust-url', label: 'Public Channel URL Only' },
+        { id: 'yt-s-trust-password', label: 'No Password Required' },
         { id: 'yt-s-trust-checkout', label: 'Secure Checkout' },
         { id: 'yt-s-trust-track', label: 'Order Tracking' },
         { id: 'yt-s-trust-ca', label: 'Canadian Support' },
-        { id: 'yt-s-trust-password', label: 'No Password Required' },
       ],
       visual: {
         src: '/assets/images/illustrations/youtube-dashboard.svg',
@@ -57,201 +56,151 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your YouTube Subscribers Package',
       description:
-        "Whether you're launching your first YouTube channel or growing an established audience, choose the subscriber package that best fits your goals. Every package includes secure checkout, transparent delivery updates and dedicated customer support throughout your order.",
+        "Whether you're launching a new YouTube channel or growing an established audience, compare subscriber packages and select the quantity that best matches your publishing strategy and channel goals. Every package includes secure checkout, transparent ordering and available delivery tracking.",
       purpose: 'Present real InstantViral.ca YouTube subscribers packages',
       primaryKeyword: 'YouTube subscribers packages',
       suggestedWordCount: 40,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue With This Package',
       emptyMessage: 'YouTube Subscribers packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-youtube-subscribers',
-      title: 'Build A More Credible YouTube Channel',
+      title: 'Why Do People Buy YouTube Subscribers?',
       description:
-        "A growing subscriber count helps create stronger first impressions and encourages new visitors to explore more of your content. Combined with valuable videos and consistent uploads, subscriber growth can support your long-term YouTube strategy and strengthen your channel's overall credibility.",
+        'People buy YouTube subscribers to grow the visible audience of a YouTube channel, strengthen first impressions for new visitors and support long-term channel growth. A higher subscriber count can reinforce audience confidence, but it does not guarantee additional video views, watch time or YouTube recommendations.',
       purpose: 'Explain informed use of YouTube subscribers packages',
       primaryKeyword: 'buy YouTube subscribers',
       suggestedWordCount: 180,
       items: [
         {
           id: 'yt-s-build-credibility',
-          title: 'Build Credibility',
+          title: 'Build Channel Credibility',
           description:
-            'A larger subscriber base helps your channel appear more established to first-time visitors.',
+            'A larger subscriber count can create a stronger first impression for viewers discovering your YouTube channel.',
         },
         {
-          id: 'yt-s-long-term-growth',
-          title: 'Support Long-Term Growth',
+          id: 'yt-s-support-new',
+          title: 'Support New Channels',
           description:
-            'Designed for creators, educators, businesses and brands building a lasting YouTube presence.',
+            'Creators launching new channels often use subscriber packages alongside regular publishing and audience-building strategies.',
+        },
+        {
+          id: 'yt-s-brand-presence',
+          title: 'Strengthen Brand Presence',
+          description:
+            'Businesses and personal brands may use subscriber packages to present a more established YouTube presence while continuing to publish valuable content.',
         },
         {
           id: 'yt-s-flexible-packages',
-          title: 'Flexible Packages',
+          title: 'Flexible Package Sizes',
           description:
-            'Choose a subscriber package that matches your current audience size and growth objectives.',
-        },
-        {
-          id: 'yt-s-private-secure',
-          title: 'Private & Secure',
-          description:
-            'Only your public YouTube channel URL is required. Your account password is never requested.',
+            'Choose a package that reflects your current audience size and channel objectives instead of automatically selecting the largest quantity.',
         },
       ],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-youtube-subscribers',
-      title: 'A Straightforward Way to Order YouTube Subscribers',
+      title: 'Why Choose InstantViral for YouTube Subscribers?',
       description:
-        'The ordering experience is designed to remove unnecessary steps. Package details are available before checkout, only public channel information is required and delivery progress can be reviewed after the purchase is confirmed.',
-      purpose: 'Build trust with conditional policy wording',
+        'InstantViral provides a straightforward ordering experience with transparent subscriber packages, secure checkout and support throughout your purchase.',
+      purpose: 'Reserved for future authority batch (rendered via page-config)',
       primaryKeyword: 'YouTube growth service Canada',
       suggestedWordCount: 150,
-      items: [
-        {
-          id: 'yt-s-why-channel',
-          title: 'Public Channel Information',
-          description:
-            'We only need the public URL of the YouTube channel receiving the selected subscriber package.',
-        },
-        {
-          id: 'yt-s-why-package',
-          title: 'Clear Package Selection',
-          description:
-            'Compare the available quantities and choose an option suited to your current channel size and objectives.',
-        },
-        {
-          id: 'yt-s-why-checkout',
-          title: 'Secure Checkout',
-          description:
-            'Review your channel and package details before completing payment through the existing checkout process.',
-        },
-        {
-          id: 'yt-s-why-delivery-info',
-          title: 'Delivery Information',
-          description:
-            'The current delivery estimate and relevant package details are displayed before the order is placed.',
-        },
-        {
-          id: 'yt-s-why-tracking',
-          title: 'Order Tracking',
-          description:
-            'Use your order ID and checkout email to review available progress updates after confirmation.',
-        },
-        {
-          id: 'yt-s-why-assistance',
-          title: 'Customer Assistance',
-          description:
-            'Contact support for help with package selection, checkout, delivery or an existing subscriber order.',
-        },
-      ],
+      items: [],
     },
     features: {
       id: 'youtube-subscriber-delivery',
       title: 'YouTube Subscriber Delivery',
       description:
-        'Delivery begins after the order has been confirmed and follows the timing displayed for the selected package. Processing speed may vary by quantity and current demand, while available updates can be reviewed through the order tracking page.',
-      purpose: 'Explain subscriber delivery stages without unsupported guarantees',
+        'Delivery begins after the order has been confirmed and follows the timing displayed for the selected package.',
+      purpose: 'Reserved for future authority batch',
       primaryKeyword: 'YouTube subscriber delivery',
       suggestedWordCount: 120,
-      items: [
-        {
-          id: 'yt-s-del-review',
-          title: 'Order Review',
-          description:
-            'The channel URL, package and checkout details are checked before processing begins.',
-        },
-        {
-          id: 'yt-s-del-begins',
-          title: 'Delivery Begins',
-          description:
-            'Subscribers begin arriving according to the current estimate shown for the selected package.',
-        },
-        {
-          id: 'yt-s-del-progress',
-          title: 'Progress Updates',
-          description: 'Use the tracking page to review the latest available order status.',
-        },
-        {
-          id: 'yt-s-del-completed',
-          title: 'Delivery Completed',
-          description:
-            'The order is marked complete after the full selected quantity has been processed.',
-        },
-      ],
+      items: [],
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How to Order YouTube Subscribers',
-      description: 'Choose a package and complete your order in five straightforward steps.',
-      purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'buy YouTube subscribers',
+      title: 'How to Buy YouTube Subscribers',
+      description:
+        'Buying YouTube subscribers is a straightforward process. Choose the subscriber package that fits your channel goals, enter your public YouTube channel URL, review your order details and complete secure checkout. You never need to provide your YouTube password, and available delivery updates can be tracked after your order is confirmed.',
+      purpose: 'Explain the five-step YouTube subscribers ordering process',
+      primaryKeyword: 'how to buy YouTube subscribers',
+      supportingKeywords: [
+        'Buy YouTube Subscribers',
+        'Buy Subscribers for YouTube',
+        'Buy YouTube Channel Subscribers',
+      ],
       suggestedWordCount: 140,
       steps: [
         {
           id: 'yt-s-step-1',
           title: 'Choose a Subscriber Package',
           description:
-            'Review the available quantities and select the package that matches your channel goals.',
+            'Compare available subscriber packages and select the quantity that best matches your current audience, publishing schedule and channel growth objectives.',
         },
         {
           id: 'yt-s-step-2',
-          title: 'Provide Your Channel URL',
+          title: 'Enter Your Public YouTube Channel URL',
           description:
-            'Enter the exact public URL of the YouTube channel receiving the subscribers.',
+            'Copy the public URL of your YouTube channel and paste it into the order form. This allows the selected subscriber package to be assigned to the correct channel.',
         },
         {
           id: 'yt-s-step-3',
-          title: 'Review the Details',
+          title: 'Review Your Order',
           description:
-            'Confirm the selected package, channel URL and order information before continuing.',
+            'Confirm your selected package, channel URL and pricing before proceeding to secure checkout.',
         },
         {
           id: 'yt-s-step-4',
-          title: 'Complete Checkout',
+          title: 'Complete Secure Checkout',
           description:
-            'Finish payment through the existing secure checkout and receive your order confirmation.',
+            'Finish your purchase through secure checkout without providing your YouTube login credentials or account password.',
         },
         {
           id: 'yt-s-step-5',
-          title: 'Track Delivery',
+          title: 'Track Your Order',
           description:
-            'Use your order ID and email address to review available status updates until completion.',
+            'Monitor available delivery updates after confirmation and follow the progress of your subscriber package until completion.',
         },
       ],
+      cta: {
+        label: 'Choose Your Subscriber Package',
+        href: PRICING_ANCHOR,
+      },
     },
     deliveryAndSafety: {
       id: 'channel-link-and-delivery',
-      title: 'What We Need to Process Your Order',
+      title: 'What Do You Need to Place an Order?',
       description:
-        'Only the details required to identify your channel and confirm the purchase are needed. Private login information, passwords and recovery codes are never part of the ordering process.',
+        'Ordering YouTube subscribers only requires a few public details. Private account information, passwords and verification codes are never requested during checkout.',
       purpose: 'Explain channel URL and order requirements',
-      primaryKeyword: 'YouTube subscribers delivery',
+      primaryKeyword: 'YouTube subscribers packages',
       suggestedWordCount: 140,
       items: [
         {
           id: 'yt-s-req-url',
           title: 'Public YouTube Channel URL',
           description:
-            'Submit the exact public channel URL so the selected package reaches the correct destination.',
+            'Provide the public URL of the YouTube channel receiving the selected subscriber package.',
         },
         {
           id: 'yt-s-req-package',
-          title: 'Selected Subscriber Package',
+          title: 'Selected Package',
           description:
-            'Choose a quantity that suits your present audience size, campaign and channel objectives.',
+            'Choose the subscriber quantity that best fits your current audience and channel objectives.',
         },
         {
           id: 'yt-s-req-public',
-          title: 'Publicly Accessible Channel',
-          description: 'Keep the channel publicly accessible while delivery is being processed.',
+          title: 'Public Channel Access',
+          description:
+            'Keep your YouTube channel publicly accessible while your subscriber order is being processed.',
         },
         {
           id: 'yt-s-req-email',
           title: 'Valid Email Address',
           description:
-            'Use an active email address to receive confirmation and access order tracking.',
+            'Use a working email address to receive order confirmations, delivery updates and customer support when required.',
         },
       ],
     },
@@ -259,80 +208,83 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
       id: 'yt-subscribers-reviews',
       title: 'What Customers Say About InstantViral',
       description: 'Customer reviews for this InstantViral service.',
-      purpose: 'Social proof from approved customer reviews',
+      purpose: 'Unused on lean authority view — reserved for a future batch',
       testimonialIds: [],
     },
     faq: {
       id: 'yt-subscribers-faq',
-      title: 'YouTube Subscriber Package FAQs',
+      title: 'Frequently Asked Questions About Buying YouTube Subscribers',
       description:
-        'Review common questions about package selection, channel requirements, checkout, delivery and tracking before placing an order.',
+        'Answers to common questions about buying YouTube subscribers, channel requirements, packages, delivery and tracking.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy YouTube subscribers Canada',
       faqIds: [
-        'faq-yt-subscribers-choose-package',
+        'faq-yt-subscribers-can-you-buy',
         'faq-yt-subscribers-password',
-        'faq-yt-subscribers-public',
-        'faq-yt-subscribers-delivery-begin',
-        'faq-yt-subscribers-track',
+        'faq-yt-subscribers-does-help',
+        'faq-yt-subscribers-new-channel',
+        'faq-yt-subscribers-existing-channel',
+        'faq-yt-subscribers-how-many',
+        'faq-yt-subscribers-increase-views',
+        'faq-yt-subscribers-vs-views',
         'faq-yt-subscribers-another-order',
-        'faq-yt-subscribers-change-url',
-        'faq-yt-subscribers-after-checkout',
-        'faq-yt-subscribers-gradual',
-        'faq-yt-subscribers-support',
+        'faq-yt-subscribers-track',
+        'faq-yt-subscribers-what-required',
+        'faq-yt-subscribers-choose-package',
       ],
     },
     relatedServices: {
       id: 'related-youtube-services-subscribers',
       title: 'Explore More YouTube Growth Services',
       description:
-        'Combine subscriber growth with video visibility by reviewing the available YouTube views packages.',
+        'Support the visibility of individual videos with YouTube View packages alongside subscriber growth.',
       purpose: 'Internal links to sibling YouTube offers (no skipped services)',
       serviceSlugs: ['buy-youtube-views'],
     },
     finalCta: {
       id: 'yt-subscribers-final-cta',
-      title: 'Ready to Grow Your YouTube Audience?',
+      title: 'Choose the YouTube Subscriber Package That Fits Your Channel',
       description:
-        'Choose the YouTube subscriber package that matches your channel goals, submit your public channel URL and complete the existing checkout process. After confirmation, use order tracking to review available delivery updates.',
+        'Compare available YouTube Subscriber packages, review delivery information and complete your purchase using only your public YouTube channel URL. Choose the package that best supports your channel goals and long-term publishing strategy.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Choose YouTube Subscribers Package',
+        label: 'Choose Your Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
-        label: 'Contact Support',
-        href: routes.contact,
+        label: 'Track an Order',
+        href: routes.trackOrder,
       },
     },
   };
 }
 
 /**
- * Buy YouTube Views Canada — Document 09.42 production content.
+ * Buy YouTube Views Canada — full authority layout (Sections 1–18).
+ * Rebuild follows YouTube Subscribers winning architecture; video-views intent only.
  */
 function buildBuyYouTubeViewsContent(): ServiceContent {
   return {
     slug: 'buy-youtube-views',
     platformId: 'youtube',
     seo: {
-      title: 'Buy YouTube Views Canada | Packages & Pricing',
+      title: 'Buy YouTube Views Canada | InstantViral',
       description:
-        'Buy YouTube Views Canada with clear package options, public video URL checkout, gradual delivery details and order tracking. No password required.',
+        'Buy YouTube views in Canada using your public video URL. Compare transparent packages, complete secure checkout with no password required, and monitor available order updates.',
     },
     hero: {
-      eyebrow: 'YOUTUBE VIDEO VIEW PACKAGES FOR CANADIAN CREATORS, BRANDS & BUSINESSES',
+      eyebrow: 'YOUTUBE VIDEO VIEW PACKAGES FOR CREATORS, BRANDS & BUSINESSES',
       title: 'Buy YouTube Views Canada',
       description:
-        'Increase the visibility of your YouTube videos with view packages designed for creators, businesses and brands across Canada. Choose the package that matches your campaign, submit your public YouTube video URL and follow your order from checkout to delivery with transparent tracking. We never ask for your YouTube password, making the process simple and secure.',
+        'Increase the visibility of your YouTube videos with view packages designed for creators, businesses and brands across Canada. Compare transparent package options, choose the quantity that matches your promotion plan and place your order using only your public YouTube video URL. No password is required, secure checkout is included and you can monitor available order updates after confirmation.',
       purpose: 'Convert for YouTube views packages in Canada',
       primaryKeyword: 'buy YouTube views Canada',
       supportingKeywords: [
         'Buy YouTube Views',
-        'Real YouTube Views',
-        'Increase YouTube Views',
-        'YouTube Video Views',
-        'YouTube Views Packages',
+        'Buy YouTube Video Views',
+        'Buy Views for YouTube',
+        'Buy Real YouTube Views',
+        'Buy YouTube Views Online',
       ],
       suggestedWordCount: 120,
       primaryCta: {
@@ -345,14 +297,14 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
       },
       trustLabels: [
         { id: 'yt-v-trust-url', label: 'Public Video URL Only' },
+        { id: 'yt-v-trust-password', label: 'No Password Required' },
         { id: 'yt-v-trust-checkout', label: 'Secure Checkout' },
         { id: 'yt-v-trust-track', label: 'Order Tracking' },
-        { id: 'yt-v-trust-gradual', label: 'Gradual Delivery' },
         { id: 'yt-v-trust-ca', label: 'Canadian Support' },
       ],
       visual: {
         src: '/assets/images/illustrations/youtube-dashboard.svg',
-        alt: 'YouTube Creator Studio video views analytics dashboard illustration',
+        alt: 'YouTube Studio video analytics dashboard with views, CTR and traffic sources',
         width: 1000,
         height: 800,
       },
@@ -361,180 +313,151 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your YouTube Views Package',
       description:
-        'Choose the number of video views that matches your campaign goals. Every package includes secure checkout, transparent delivery updates and order tracking.',
+        "Whether you're promoting a newly published video or increasing content visibility for existing uploads, compare available view packages and choose the quantity that best supports your promotional objectives. Every package includes secure checkout, transparent ordering and available delivery tracking.",
       purpose: 'Present real InstantViral.ca YouTube views packages',
       primaryKeyword: 'YouTube views packages',
       suggestedWordCount: 40,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue With This Package',
       emptyMessage: 'YouTube Views packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-youtube-views',
-      title: 'Help More People Discover Your Videos',
+      title: 'Why Do People Buy YouTube Views?',
       description:
-        'Video views are one of the first metrics viewers notice when evaluating content. Higher view counts can improve social proof, encourage additional viewers to watch and support the visibility of your videos alongside consistent publishing and quality content.',
+        'People buy YouTube views to increase the public view count on individual videos, strengthen social proof and encourage more people to watch their content. Higher view counts can improve first impressions for new viewers, but they do not guarantee higher audience retention, watch time, subscriber growth or YouTube recommendations.',
       purpose: 'Explain informed use of YouTube views packages',
       primaryKeyword: 'buy YouTube views',
       suggestedWordCount: 180,
       items: [
         {
           id: 'yt-v-increase-visibility',
-          title: 'Increase Visibility',
-          description: 'Higher view counts can make videos appear more active.',
+          title: 'Increase Video Visibility',
+          description:
+            'Stronger viewing activity can help videos appear more active when new viewers discover your content.',
         },
         {
           id: 'yt-v-social-proof',
           title: 'Strengthen Social Proof',
-          description: 'An active video can encourage more people to press play.',
+          description:
+            'Clear audience reach signals can encourage additional viewers to press play and explore your content.',
+        },
+        {
+          id: 'yt-v-support-launches',
+          title: 'Support New Video Launches',
+          description:
+            'Creators often use view packages alongside regular publishing and promotional strategies for newly released videos.',
         },
         {
           id: 'yt-v-flexible-packages',
-          title: 'Flexible Packages',
-          description: 'Select a package that suits your campaign objectives.',
-        },
-        {
-          id: 'yt-v-private-secure',
-          title: 'Private & Secure',
-          description: 'Only your public YouTube video URL is required.',
+          title: 'Flexible Package Sizes',
+          description:
+            'Choose a package that matches your current video goals instead of automatically selecting the highest quantity.',
         },
       ],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-youtube-views',
-      title: 'Why Buy YouTube Views From InstantViral?',
+      title: 'Why Choose InstantViral for YouTube Views?',
       description:
-        'Video views help demonstrate that content is being watched and discovered. Combined with valuable videos, strong thumbnails and consistent publishing, additional views can improve social proof and encourage more people to explore your content.',
-      purpose: 'Build trust with conditional policy wording',
+        'InstantViral provides transparent YouTube View packages with secure checkout, straightforward ordering and customer support throughout your purchase.',
+      purpose: 'Reserved for authority page-config (Why Choose)',
       primaryKeyword: 'YouTube promotion service Canada',
       suggestedWordCount: 150,
-      items: [
-        {
-          id: 'yt-v-why-visibility',
-          title: 'Improve Video Visibility',
-          description: 'Higher view counts help videos appear more active.',
-        },
-        {
-          id: 'yt-v-why-social-proof',
-          title: 'Support Social Proof',
-          description: 'Visible engagement can encourage additional viewers.',
-        },
-        {
-          id: 'yt-v-why-checkout',
-          title: 'Secure Checkout',
-          description: 'Protected ordering with secure payment processing.',
-        },
-        {
-          id: 'yt-v-why-password',
-          title: 'No Password Required',
-          description: 'Only your public YouTube video URL is needed.',
-        },
-        {
-          id: 'yt-v-why-track',
-          title: 'Track Every Order',
-          description: 'Review delivery progress using your order details.',
-        },
-        {
-          id: 'yt-v-why-support',
-          title: 'Canadian Support',
-          description: 'Our support team is available whenever assistance is required.',
-        },
-      ],
+      items: [],
     },
     features: {
       id: 'youtube-views-delivery',
       title: 'YouTube Views Delivery',
       description:
-        'Delivery begins after your order has been reviewed and confirmed. Processing time varies depending on the selected package and current demand. Progress updates remain available through order tracking until delivery is complete.',
-      purpose: 'Explain views delivery stages without unsupported guarantees',
+        'Delivery begins after your order has been reviewed and confirmed. Processing time varies depending on the selected package and current demand.',
+      purpose: 'Reserved for future authority batch',
       primaryKeyword: 'YouTube views delivery',
       suggestedWordCount: 120,
-      items: [
-        {
-          id: 'yt-v-del-review',
-          title: 'Order Review',
-          description: 'Your video URL and package are verified before processing.',
-        },
-        {
-          id: 'yt-v-del-begins',
-          title: 'Delivery Begins',
-          description: 'Views begin according to the estimated delivery schedule.',
-        },
-        {
-          id: 'yt-v-del-progress',
-          title: 'Views Increasing',
-          description: 'Monitor your order using the tracking page.',
-        },
-        {
-          id: 'yt-v-del-complete',
-          title: 'Order Complete',
-          description: 'The order is completed once the selected quantity has been delivered.',
-        },
-      ],
+      items: [],
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How To Buy YouTube Views',
-      description: 'Ordering YouTube views only takes a few simple steps.',
-      purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'buy YouTube views',
+      title: 'How to Buy YouTube Views',
+      description:
+        'Buying YouTube views is a straightforward process. Choose the view package that fits your campaign, enter the public URL of the YouTube video you want to promote, review your order details and complete secure checkout. You never need to provide your YouTube password, and available delivery updates can be tracked after confirmation.',
+      purpose: 'Explain the five-step YouTube views ordering process',
+      primaryKeyword: 'how to buy YouTube views',
+      supportingKeywords: [
+        'Buy YouTube Views',
+        'Buy YouTube Video Views',
+        'Buy Views for YouTube',
+      ],
       suggestedWordCount: 140,
       steps: [
         {
           id: 'yt-v-step-1',
-          title: 'Choose Your Views Package',
-          description: 'Select the package that best suits your campaign.',
+          title: 'Choose a Views Package',
+          description:
+            'Compare the available YouTube View packages and select the quantity that best matches your video, campaign objectives and current audience size.',
         },
         {
           id: 'yt-v-step-2',
-          title: 'Paste Your Public Video URL',
-          description: 'Enter the public URL of the YouTube video.',
+          title: 'Enter Your Public YouTube Video URL',
+          description:
+            'Copy the public URL of the YouTube video receiving the selected View package and paste it into the order form.',
         },
         {
           id: 'yt-v-step-3',
           title: 'Review Your Order',
-          description: 'Confirm the package and destination before checkout.',
+          description:
+            'Confirm the selected package, video URL and pricing before proceeding to checkout.',
         },
         {
           id: 'yt-v-step-4',
           title: 'Complete Secure Checkout',
-          description: 'Finish payment through the secure ordering system.',
+          description:
+            'Finish your purchase through secure checkout without sharing your YouTube password, login credentials or verification codes.',
         },
         {
           id: 'yt-v-step-5',
-          title: 'Track Delivery',
-          description: 'Use your order ID to review delivery progress.',
+          title: 'Track Your Order',
+          description:
+            'Monitor available delivery updates after confirmation and follow the progress of your YouTube View package until completion.',
         },
       ],
+      cta: {
+        label: 'Choose Your Views Package',
+        href: PRICING_ANCHOR,
+      },
     },
     deliveryAndSafety: {
       id: 'video-link-and-delivery',
-      title: 'What We Need To Process Your Order',
+      title: 'What Do You Need to Place an Order?',
       description:
-        'We only require the information necessary to identify your video and complete the purchase. Private account access is never requested.',
+        'Ordering YouTube Views only requires a few public details. Private account information, passwords and verification codes are never requested during checkout.',
       purpose: 'Explain video URL and order requirements',
-      primaryKeyword: 'YouTube views delivery',
+      primaryKeyword: 'YouTube View Packages',
       suggestedWordCount: 140,
       items: [
         {
           id: 'yt-v-req-url',
           title: 'Public YouTube Video URL',
-          description: 'Submit the public URL of the video receiving the selected package.',
+          description:
+            'Provide the public URL of the YouTube video receiving the selected View package.',
         },
         {
           id: 'yt-v-req-package',
           title: 'Selected Views Package',
-          description: 'Choose the quantity that matches your promotion goals.',
+          description:
+            'Choose the view quantity that best fits your promotional objectives and existing video performance.',
         },
         {
           id: 'yt-v-req-public',
-          title: 'Public Video',
-          description: 'Keep the video publicly available during delivery.',
+          title: 'Public Video Access',
+          description:
+            'Keep the selected YouTube video publicly accessible while your order is being processed.',
         },
         {
           id: 'yt-v-req-email',
           title: 'Valid Email Address',
-          description: 'Used for confirmation and order tracking.',
+          description:
+            'Use a working email address to receive order confirmation, delivery updates and customer support when required.',
         },
       ],
     },
@@ -542,46 +465,51 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
       id: 'yt-views-reviews',
       title: 'What Customers Say About InstantViral',
       description: 'Customer reviews for this InstantViral service.',
-      purpose: 'Social proof from approved customer reviews',
+      purpose: 'Unused on lean authority view — reserved for a future batch',
       testimonialIds: [],
     },
     faq: {
       id: 'yt-views-faq',
-      title: 'Frequently Asked Questions About YouTube Views',
+      title: 'Frequently Asked Questions About Buying YouTube Views',
+      description:
+        'Answers to common questions about buying YouTube views, video requirements, packages, delivery and tracking.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy YouTube views Canada',
       faqIds: [
-        'faq-yt-views-choose-package',
+        'faq-yt-views-can-you-buy',
         'faq-yt-views-password',
-        'faq-yt-views-public',
-        'faq-yt-views-delivery-begin',
+        'faq-yt-views-does-help',
+        'faq-yt-views-existing-video',
+        'faq-yt-views-multiple-videos',
+        'faq-yt-views-how-many',
+        'faq-yt-views-increase-subscribers',
+        'faq-yt-views-vs-watch-time',
+        'faq-yt-views-another-order',
         'faq-yt-views-track',
-        'faq-yt-views-order-again',
-        'faq-yt-views-change-url',
-        'faq-yt-views-after-checkout',
-        'faq-yt-views-gradual',
-        'faq-yt-views-support',
+        'faq-yt-views-what-required',
       ],
     },
     relatedServices: {
       id: 'related-youtube-services-views',
       title: 'Explore More YouTube Growth Services',
-      purpose: 'Internal links to sibling YouTube offers (no skipped services)',
+      description:
+        'Build a stronger channel audience alongside your video promotion strategy with YouTube subscriber packages.',
+      purpose: 'Internal links to sibling YouTube offers (authority Explore More uses page-config)',
       serviceSlugs: ['buy-youtube-subscribers'],
     },
     finalCta: {
       id: 'yt-views-final-cta',
-      title: 'Ready To Increase Your YouTube Video Reach?',
+      title: 'Choose the YouTube Views Package That Fits Your Campaign',
       description:
-        'Choose the YouTube views package that matches your campaign, submit your public video URL and complete your secure order. Track your delivery from confirmation to completion.',
+        'Compare available YouTube View packages, review delivery information and complete your purchase using only your public YouTube video URL. Choose the package that best supports your growth strategy, video promotion plan and long-term content growth.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Choose YouTube Views Package',
+        label: 'Choose Your Views Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
-        label: 'Contact Support',
-        href: routes.contact,
+        label: 'Track an Order',
+        href: routes.trackOrder,
       },
     },
   };

@@ -7,10 +7,20 @@ import { cn } from '@/lib/utils';
 const LIKE_KEYS = [2180, 2260, 2380, 2510, 2640] as const;
 const LOOP_MS = 7800;
 
-const HEART_TOASTS = [
-  { id: 'a', label: 'New like', detail: '+12 this minute' },
-  { id: 'b', label: 'Engagement up', detail: '+8% vs last hour' },
-  { id: 'c', label: 'Gradual delivery', detail: 'Batch 2 of 4 live' },
+const FLOAT_BADGES = [
+  { id: 'likes', emoji: '❤️', label: '+2,500 Likes', position: 'top-[6%] -left-3 sm:-left-5' },
+  {
+    id: 'engagement',
+    emoji: '📈',
+    label: 'Engagement Increasing',
+    position: 'top-[22%] -right-3 sm:-right-5',
+  },
+  {
+    id: 'trending',
+    emoji: '🔥',
+    label: 'Trending Video',
+    position: 'bottom-[14%] -left-2 sm:-left-4',
+  },
 ] as const;
 
 function formatLikes(n: number) {
@@ -38,7 +48,6 @@ export function TikTokLikesHeroDashboard({
   const tiktokCyan = '#25F4EE';
   const tiktokRed = '#FE2C55';
   const [likes, setLikes] = useState<number>(LIKE_KEYS[0]);
-  const [toastIndex, setToastIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
   const [progress, setProgress] = useState(0.36);
 
@@ -74,174 +83,55 @@ export function TikTokLikesHeroDashboard({
     return () => cancelAnimationFrame(frame);
   }, [reduceMotion]);
 
-  useEffect(() => {
-    if (reduceMotion) return;
-    const timer = window.setInterval(() => {
-      setToastIndex((i) => (i + 1) % HEART_TOASTS.length);
-    }, 2600);
-    return () => window.clearInterval(timer);
-  }, [reduceMotion]);
-
-  const toast = HEART_TOASTS[toastIndex];
-  const bars = [28, 40, 36, 52, 64, 58, 78] as const;
-
   return (
     <div
       className={cn(
-        'relative mx-auto w-full max-w-[21.5rem] overflow-visible sm:max-w-[23rem] lg:max-w-[24.5rem]',
+        'relative mx-auto w-full max-w-[23.5rem] overflow-visible sm:max-w-[25.5rem] lg:max-w-[27rem]',
         className,
       )}
       aria-hidden="true"
     >
+      {/* Soft gradient mesh */}
+      <div className="pointer-events-none absolute inset-[-8%] -z-0 overflow-hidden rounded-[2.5rem]">
+        <div className="absolute top-[-10%] left-[-5%] size-56 rounded-full bg-[radial-gradient(circle,rgba(249,115,22,0.28)_0%,transparent_70%)] blur-2xl" />
+        <div className="absolute top-[35%] right-[-8%] size-48 rounded-full bg-[radial-gradient(circle,rgba(37,244,238,0.18)_0%,transparent_70%)] blur-2xl" />
+        <div className="absolute bottom-[-5%] left-[20%] size-52 rounded-full bg-[radial-gradient(circle,rgba(254,44,85,0.16)_0%,transparent_70%)] blur-2xl" />
+      </div>
+
+      {/* Stronger orange glow behind phone */}
       <div
         className={cn(
-          'pointer-events-none absolute top-[12%] right-[8%] size-48 rounded-full bg-[var(--brand-primary)]/26 blur-3xl sm:size-56',
+          'pointer-events-none absolute top-[18%] left-1/2 size-64 -translate-x-1/2 rounded-full bg-[var(--brand-primary)]/40 blur-[64px] sm:size-72 sm:blur-[72px]',
           !reduceMotion && 'animate-iv-glow-pulse',
         )}
       />
-      <div className="pointer-events-none absolute bottom-[16%] left-[2%] size-28 rounded-full bg-[#FE2C55]/16 blur-3xl" />
-      <div className="pointer-events-none absolute top-[48%] -right-1 size-20 rounded-full bg-[#25F4EE]/14 blur-2xl" />
+      <div className="pointer-events-none absolute bottom-[12%] left-[8%] size-36 rounded-full bg-[#FE2C55]/22 blur-3xl" />
+      <div className="pointer-events-none absolute top-[42%] right-[4%] size-28 rounded-full bg-[#25F4EE]/20 blur-3xl" />
 
-      {/* Engagement toast */}
-      <div className="pointer-events-none absolute top-[4%] -left-4 z-[5] max-w-[10.75rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_18px_36px_-16px_rgba(28,25,23,0.5)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.4s_ease-in-out_infinite] sm:-left-5">
-        <div className="flex items-center gap-2">
-          <span
-            className="flex size-6 items-center justify-center rounded-full text-[10px] font-bold text-white"
-            style={{ background: tiktokRed }}
-          >
-            ♥
-          </span>
-          <div className="min-w-0">
-            <p className="text-[8px] font-semibold tracking-wide text-[var(--brand-primary)] uppercase">
-              {toast.label}
-            </p>
-            <p className="truncate text-[11px] font-bold text-stone-800">{toast.detail}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Secondary engagement notification — hidden on very small screens */}
-      <div className="pointer-events-none absolute top-[18%] -left-3 z-[5] hidden max-w-[9.5rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_14px_28px_-16px_rgba(28,25,23,0.42)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.8s_ease-in-out_infinite] sm:block sm:-left-4">
-        <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
-          Hearts live
-        </p>
-        <p className="text-[11px] font-bold text-stone-800">+{formatLikes(likes)} likes</p>
-      </div>
-
-      {/* Trending badge */}
-      <div className="pointer-events-none absolute top-[8%] -right-3 z-[6] flex items-center gap-1 rounded-full border border-white/95 bg-white/95 px-2.5 py-1 shadow-[0_14px_28px_-14px_rgba(28,25,23,0.45)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.1s_ease-in-out_infinite] sm:-right-4">
-        <span
-          className="flex size-4 items-center justify-center rounded-full text-[8px] font-black text-white"
-          style={{ background: `linear-gradient(135deg, ${tiktokCyan}, ${tiktokRed})` }}
-        >
-          ↑
-        </span>
-        <span className="text-[9px] font-bold tracking-wide text-stone-800 uppercase">
-          Trending
-        </span>
-      </div>
-
-      {/* Analytics widget */}
-      <div className="pointer-events-none absolute top-[28%] -right-4 z-[5] w-[8.25rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-2 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.4s_ease-in-out_infinite] sm:-right-5">
-        <div className="flex items-center justify-between gap-1">
-          <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
-            Analytics
-          </p>
-          <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[7px] font-bold text-emerald-700">
-            Live
-          </span>
-        </div>
-        <p className="mt-0.5 text-[13px] font-black tabular-nums text-stone-900">
-          {formatLikes(likes)}
-        </p>
-        <p className="text-[9px] font-semibold text-stone-500">Like pace</p>
-        <div className="mt-1.5 flex h-8 items-end gap-0.5">
-          {bars.map((h, i) => (
-            <span
-              key={i}
-              className="w-full max-w-[8px] rounded-sm"
-              style={{
-                height: `${h}%`,
-                background:
-                  i === bars.length - 1
-                    ? `linear-gradient(180deg, ${brand}, ${tiktokRed})`
-                    : 'linear-gradient(180deg, #fed7aa, #fdba74)',
-              }}
-            />
-          ))}
-        </div>
-      </div>
-
-      {/* Gradual growth indicator */}
-      <div className="pointer-events-none absolute bottom-[9%] -left-3 z-[5] w-[9.75rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-2 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.45)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.8s_ease-in-out_infinite] sm:-left-4">
-        <div className="flex items-center justify-between gap-2">
-          <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
-            Gradual delivery
-          </p>
-          <span className="rounded-full bg-emerald-50 px-1.5 py-0.5 text-[8px] font-bold text-emerald-700">
-            Active
-          </span>
-        </div>
-        <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-stone-100">
-          <div
-            className="h-full rounded-full transition-[width] duration-300 ease-out"
-            style={{
-              width: `${Math.round(progress * 100)}%`,
-              background: `linear-gradient(90deg, ${tiktokCyan}, ${brand})`,
-            }}
-          />
-        </div>
-        <p className="mt-1 text-[10px] font-semibold text-stone-600">
-          {Math.round(progress * 100)}% paced growth
-        </p>
-      </div>
-
-      {/* Floating TikTok hearts */}
-      <>
-        <span
+      {/* Outer floating badges — exactly 3 */}
+      {FLOAT_BADGES.map((badge, index) => (
+        <div
+          key={badge.id}
           className={cn(
-            'pointer-events-none absolute top-[36%] left-[6%] z-[4] text-lg text-[#FE2C55]/85',
-            !reduceMotion && 'motion-safe:animate-[iv-float-card_4.2s_ease-in-out_infinite]',
-          )}
-        >
-          ♥
-        </span>
-        <span
-          className={cn(
-            'pointer-events-none absolute top-[48%] right-[8%] z-[4] text-base text-[#FE2C55]/65',
-            !reduceMotion && 'motion-safe:animate-[iv-float-card_5.6s_ease-in-out_infinite]',
-          )}
-        >
-          ♥
-        </span>
-        <span
-          className={cn(
-            'pointer-events-none absolute top-[58%] left-[12%] z-[4] hidden text-sm text-[#F97316]/75 sm:inline',
-            !reduceMotion && 'motion-safe:animate-[iv-float-card_4.8s_ease-in-out_infinite]',
-          )}
-        >
-          ♥
-        </span>
-        <span
-          className={cn(
-            'pointer-events-none absolute bottom-[32%] right-[14%] z-[4] text-xs text-[#FE2C55]/50',
+            'pointer-events-none absolute z-[5] flex max-w-[11.5rem] items-center gap-2 rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_18px_36px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md',
+            badge.position,
             !reduceMotion && 'motion-safe:animate-[iv-float-card_6.2s_ease-in-out_infinite]',
           )}
+          style={
+            !reduceMotion
+              ? { animationDelay: `${index * 0.85}s`, animationDuration: `${5.8 + index * 0.7}s` }
+              : undefined
+          }
         >
-          ♥
-        </span>
-        <span
-          className={cn(
-            'pointer-events-none absolute bottom-[22%] left-[22%] z-[4] hidden text-[10px] text-[#25F4EE]/70 sm:inline',
-            !reduceMotion && 'motion-safe:animate-[iv-float-card_5.3s_ease-in-out_infinite]',
-          )}
-        >
-          ♥
-        </span>
-      </>
+          <span className="text-sm leading-none" aria-hidden>
+            {badge.emoji}
+          </span>
+          <span className="truncate text-[11px] font-bold text-stone-800">{badge.label}</span>
+        </div>
+      ))}
 
       {/* Phone frame — TikTok video UI */}
-      <div className="relative mx-auto w-[62%] max-w-[12.75rem] motion-safe:animate-iv-float-card sm:max-w-[13.5rem]">
+      <div className="relative mx-auto w-[62%] max-w-[13.5rem] motion-safe:animate-iv-float-card sm:max-w-[14.5rem]">
         <div className="relative z-[2] rounded-[2rem] border border-stone-900 bg-stone-950 p-1.5 shadow-[0_28px_56px_-28px_rgba(28,25,23,0.72)]">
           <div className="relative aspect-[9/16] overflow-hidden rounded-[1.55rem] bg-stone-900">
             {/* Video backdrop */}

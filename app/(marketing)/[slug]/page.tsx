@@ -54,11 +54,20 @@ export default async function ServicePage({ params }: ServicePageProps) {
   const description = content?.seo?.description ?? descriptions.service(service);
   const canonical = buildCanonicalUrl(service.url);
 
-  const visibleReviews = getServicePageReviews({
-    serviceSlug: service.slug,
-    platform: service.platform,
-    limit: 6,
-  });
+  const visibleReviews =
+    service.slug === 'buy-tiktok-followers' ||
+    service.slug === 'buy-tiktok-views' ||
+    service.slug === 'buy-facebook-followers' ||
+    service.slug === 'buy-facebook-page-likes' ||
+    service.slug === 'buy-facebook-post-likes' ||
+    service.slug === 'buy-youtube-subscribers' ||
+    service.slug === 'buy-youtube-views'
+    ? []
+    : getServicePageReviews({
+          serviceSlug: service.slug,
+          platform: service.platform,
+          limit: 6,
+        });
   const reviewBundle = buildReviewSchemaBundle(getApprovedReviews(), {
     entity: {
       kind: 'service',

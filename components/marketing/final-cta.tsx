@@ -10,7 +10,6 @@ import {
   trackHomepageEvent,
 } from '@/lib/analytics';
 import { ctaAnalyticsEvents, trackCtaEvent } from '@/lib/analytics/cta-events';
-import { cn } from '@/lib/utils';
 import type { CtaProps } from '@/types/components';
 import type { PublicCta } from '@/types/cta';
 
@@ -28,6 +27,10 @@ export type FinalCTAProps = {
   id?: string;
   className?: string;
   aside?: ReactNode;
+  /** Compact trust line under buttons. */
+  trustLine?: string;
+  /** Checklist-style trust badges under the CTA buttons. */
+  trustBadges?: string[];
 };
 
 function toPublicCta(
@@ -67,6 +70,8 @@ export function FinalCTA({
   id,
   className,
   aside,
+  trustLine,
+  trustBadges,
 }: FinalCTAProps) {
   const resolvedPrimary =
     primary ??
@@ -100,7 +105,7 @@ export function FinalCTA({
 
   return (
     <div
-      className={cn('relative', className)}
+      className="relative"
       onClickCapture={(event) => {
         const target = event.target as HTMLElement | null;
         const anchor = target?.closest('a');
@@ -143,6 +148,9 @@ export function FinalCTA({
         surface={surface}
         serviceSlug={analyticsServiceSlug}
         aside={aside}
+        trustLine={trustLine}
+        trustBadges={trustBadges}
+        className={className}
       />
     </div>
   );

@@ -568,66 +568,129 @@ export const faqItems: FAQItem[] = [
     answer:
       'No. InstantViral never asks for your Instagram password. Orders use your public post URL and checkout email only. Track status with your order ID after purchase.',
   },
-  // Buy TikTok Followers Canada — production FAQ
+  // Buy TikTok Followers Canada — production FAQ (authority page)
   {
-    id: 'faq-tt-followers-choose',
-    question: 'How do I choose the right TikTok followers package?',
+    id: 'faq-tt-followers-can-buy',
+    question: 'Can you buy TikTok followers?',
     answer:
-      'Choose a package that matches your current audience size and growth goals. Smaller packages are often suitable for newer creators, while larger packages may be a better fit for established businesses, influencers and brands.',
+      "Yes. TikTok follower packages are available through online providers that allow you to choose a package size, enter your public TikTok username, and complete your order. Before purchasing, review the provider's pricing, delivery information, support options, and service policies so you understand exactly what is included.",
+  },
+  {
+    id: 'faq-tt-followers-how-buy',
+    question: 'How do you buy TikTok followers?',
+    answer:
+      'The process is simple. Choose a follower package, enter your public TikTok username, review your order details, complete secure checkout, and track your order as it progresses. Your TikTok password is not required.',
+  },
+  {
+    id: 'faq-tt-followers-does-work',
+    question: 'Does buying TikTok followers work?',
+    answer:
+      'Buying TikTok followers increases the visible follower count on your profile, which may improve how your account appears to new visitors. However, follower packages do not guarantee viral videos, higher engagement, or business growth. Consistent content remains the most important factor for long-term success.',
+  },
+  {
+    id: 'faq-tt-followers-are-real',
+    question: 'Are bought TikTok followers real?',
+    answer:
+      'Different providers offer different types of follower packages. Before ordering, review the package description, delivery details, and published policies so you understand exactly what is being offered. Look for clear information rather than vague claims about real, genuine, or legit followers.',
+  },
+  {
+    id: 'faq-tt-followers-safe',
+    question: 'Is it safe to buy TikTok followers?',
+    answer:
+      "A safer ordering process starts with choosing a provider that does not request your TikTok password, clearly explains its pricing and delivery process, and provides customer support if questions arise. Always review the provider's policies before placing an order.",
+  },
+  {
+    id: 'faq-tt-followers-banned',
+    question: 'Will buying TikTok followers get my account banned?',
+    answer:
+      "No provider can guarantee how TikTok may evaluate account activity. Follow TikTok's policies, avoid sharing your password, and choose services that clearly explain how their ordering process works rather than making unrealistic promises.",
+  },
+  {
+    id: 'faq-tt-followers-delivery-begin',
+    question: 'How quickly does delivery begin?',
+    answer:
+      'Delivery timing depends on the package you choose. Estimated delivery information is displayed before checkout so you know what to expect before placing your order.',
   },
   {
     id: 'faq-tt-followers-password',
     question: 'Do I need to provide my TikTok password?',
     answer:
-      'No. We never ask for your TikTok password. Orders only require your public TikTok username so the selected package can be delivered to the correct profile.',
-  },
-  {
-    id: 'faq-tt-followers-public',
-    question: 'Should my TikTok profile be public?',
-    answer:
-      'Yes. Your TikTok profile should remain public while your order is being processed and delivered. A private account may prevent successful delivery.',
-  },
-  {
-    id: 'faq-tt-followers-delivery-begin',
-    question: 'When does delivery begin?',
-    answer:
-      'Delivery begins after your order has been confirmed. The estimated delivery timeframe depends on the package you choose and current processing times.',
-  },
-  {
-    id: 'faq-tt-followers-track',
-    question: 'Can I track my order?',
-    answer:
-      "Yes. After checkout you'll receive the information needed to monitor your order through [our tracking system](/track-order) until delivery is complete.",
+      'No. InstantViral only requires your public TikTok username to process an order. Your password and login credentials are never requested.',
   },
   {
     id: 'faq-tt-followers-another-order',
-    question: 'Can I place another order later?',
+    question: 'Can I order another package later?',
     answer:
-      'Yes. Many customers return to order [additional packages](/buy-tiktok-followers#pricing-packages) as their TikTok audience continues to grow. You can place another order whenever you feel it matches your growth strategy.',
+      'Yes. Many customers place additional orders after their previous order has been completed. Reviewing your order status before placing another package helps keep the process organized.',
   },
   {
-    id: 'faq-tt-followers-required-info',
-    question: 'What information is required to place an order?',
+    id: 'faq-tt-followers-which-package',
+    question: 'Which package should I choose?',
     answer:
-      "You'll need your public TikTok username, the package you wish to purchase and a valid email address for order confirmation and tracking updates.",
+      'The best package depends on your current follower count, content activity, and overall goals. Smaller packages are suitable for testing the service. Many customers choose to buy 500 TikTok followers or buy 1,000 TikTok followers for steady growth, while larger campaigns may buy 10,000 TikTok followers or more.',
+  },
+  // Buy TikTok Likes Canada — production FAQ (authority page)
+  {
+    id: 'faq-tt-likes-can-buy',
+    question: 'Can you buy TikTok likes?',
+    answer:
+      "Yes. You can purchase TikTok like packages by selecting a quantity, providing the public video link and completing checkout. Before ordering, review the provider's pricing, delivery information and support policies.",
   },
   {
-    id: 'faq-tt-followers-who-for',
-    question: 'Who are these packages designed for?',
+    id: 'faq-tt-likes-how-buy',
+    question: 'How do you buy TikTok likes?',
     answer:
-      'TikTok follower packages are suitable for creators, influencers, businesses, agencies and brands looking to strengthen their profile presence while continuing to publish original content.',
+      'Choose a package, paste the public TikTok video URL, review your order details and complete secure checkout. No TikTok password is required.',
   },
-  // Buy TikTok Likes Canada — Things To Know Before Ordering
+  {
+    id: 'faq-tt-likes-does-help',
+    question: 'Does buying TikTok likes help?',
+    answer:
+      'TikTok likes increase the visible engagement count on a selected video, which may improve its presentation to new viewers. They do not guarantee additional views, followers or viral reach.',
+  },
+  {
+    id: 'faq-tt-likes-any-video',
+    question: 'Can I buy TikTok likes for any video?',
+    answer:
+      'You can order likes for public TikTok videos by providing the correct video URL during checkout.',
+  },
   {
     id: 'faq-tt-likes-password',
-    question: 'Do I need to share my TikTok password?',
-    answer: 'No. We only require your public TikTok video URL.',
+    question: 'Do you need my TikTok password?',
+    answer:
+      'No. InstantViral only requires the public TikTok video link to process your order.',
   },
   {
     id: 'faq-tt-likes-repeat',
-    question: 'Can I order more than once?',
-    answer: 'Yes. Many customers place additional orders for new videos.',
+    question: 'Can I order more likes later?',
+    answer:
+      'Yes. Additional packages can be ordered after your previous order has been completed.',
   },
+  {
+    id: 'faq-tt-likes-instant',
+    question: 'Are TikTok likes delivered instantly?',
+    answer:
+      'Delivery times vary depending on the selected package. Review the delivery information before completing your purchase.',
+  },
+  {
+    id: 'faq-tt-likes-safe',
+    question: 'Is it safe to buy TikTok likes?',
+    answer:
+      'Choose providers that clearly explain their ordering process, pricing and support. Never share your TikTok password or account login credentials.',
+  },
+  {
+    id: 'faq-tt-likes-where',
+    question: 'Where can I buy TikTok likes?',
+    answer:
+      'Compare providers based on transparent pricing, delivery information, support quality and published policies rather than marketing claims alone.',
+  },
+  {
+    id: 'faq-tt-likes-which-package',
+    question: 'What package should I choose?',
+    answer:
+      'Select a package that matches your current engagement level and campaign goals. Smaller packages suit newer videos, while larger packages may be more appropriate for established creators and brands.',
+  },
+  // Legacy TikTok Likes FAQ IDs retained for schema stability
   {
     id: 'faq-tt-likes-packages',
     question: 'Can I choose different package sizes?',
@@ -643,7 +706,6 @@ export const faqItems: FAQItem[] = [
     question: 'Can I track my order?',
     answer: 'Yes. Order tracking is available after checkout.',
   },
-  // Legacy TikTok Likes FAQ IDs retained for schema stability
   {
     id: 'faq-tt-likes-links',
     question: 'Which TikTok link should I use?',
@@ -668,16 +730,73 @@ export const faqItems: FAQItem[] = [
     answer:
       'Eligible purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service-specific conditions.',
   },
-  // Buy TikTok Views Canada — Things To Know Before Ordering
+  // Buy TikTok Views Canada — production FAQ (authority page)
   {
-    id: 'faq-tt-views-password',
-    question: 'Do I need my TikTok password?',
-    answer: 'No. We only require your public TikTok video URL.',
+    id: 'faq-tt-views-can-buy',
+    question: 'Can you buy TikTok views?',
+    answer:
+      "Yes. TikTok view packages can be purchased by selecting a package, providing the public video URL and completing checkout. Before placing an order, review the provider's pricing, delivery information and customer support.",
   },
   {
+    id: 'faq-tt-views-how-buy',
+    question: 'How do you buy TikTok views?',
+    answer:
+      'Choose a package, paste the public TikTok video link, review your order details and complete secure checkout. Your TikTok password is not required.',
+  },
+  {
+    id: 'faq-tt-views-does-work',
+    question: 'Does buying TikTok views work?',
+    answer:
+      "Buying TikTok views increases the visible watch count on a selected public video. It can improve the video's presentation but does not guarantee additional likes, followers, engagement or viral reach.",
+  },
+  {
+    id: 'faq-tt-views-can-people-see',
+    question: 'Can people see if you buy TikTok views?',
+    answer:
+      'TikTok displays the public view count on videos, but it does not label whether views were obtained through a purchased package. No provider can make claims about how TikTok internally evaluates account activity.',
+  },
+  {
+    id: 'faq-tt-views-are-real',
+    question: 'Are purchased TikTok views real?',
+    answer:
+      'Different providers offer different types of view packages. Before placing an order, review the package description, delivery information and published policies so you understand what is included.',
+  },
+  {
+    id: 'faq-tt-views-worth-it',
+    question: 'Is buying TikTok views worth it?',
+    answer:
+      'That depends on your goals. View packages can support the visible activity of a public video, but sustainable growth still depends on creating engaging content and maintaining consistent posting.',
+  },
+  {
+    id: 'faq-tt-views-what-happens',
+    question: 'What happens when you buy TikTok views?',
+    answer:
+      "When you buy TikTok views, the selected public video receives the purchased view package according to the provider's delivery process. The visible watch count increases, but likes, comments, followers and viral reach are not guaranteed. Available tracking updates help you monitor order progress after checkout.",
+  },
+  {
+    id: 'faq-tt-views-password',
+    question: 'Do I need to provide my TikTok password?',
+    answer:
+      'No. InstantViral only requires the public TikTok video URL to process your order.',
+  },
+  {
+    id: 'faq-tt-views-should-buy',
+    question: 'Should you buy TikTok views?',
+    answer:
+      'Buy TikTok views when a higher visible watch count supports your campaign goal and you plan to keep publishing strong content. Avoid packages if you expect guaranteed followers, sales or viral reach — views are a support tool for first impressions, not a replacement for hooks and consistency.',
+  },
+  {
+    id: 'faq-tt-views-which-package',
+    question: 'Which TikTok view package should I choose?',
+    answer:
+      "Choose a quantity that matches your video's current performance and campaign goals. Smaller packages suit newer videos, while larger packages are often more appropriate for established creators and brands.",
+  },
+  // Legacy TikTok Views FAQ IDs retained for schema stability
+  {
     id: 'faq-tt-views-repeat',
-    question: 'Can I order more than once?',
-    answer: 'Yes. Many customers purchase views for multiple videos.',
+    question: 'Can I order another package later?',
+    answer:
+      'Yes. Additional packages can be placed after your previous order has been completed.',
   },
   {
     id: 'faq-tt-views-packages',
@@ -694,7 +813,6 @@ export const faqItems: FAQItem[] = [
     question: 'Can I track my order?',
     answer: 'Yes. Every order includes progress tracking.',
   },
-  // Legacy IDs retained for any older references
   {
     id: 'faq-tt-views-links',
     question: 'Which TikTok link should I use?',
@@ -719,20 +837,76 @@ export const faqItems: FAQItem[] = [
     answer:
       'Eligible purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service-specific conditions.',
   },
-  // Buy Facebook Followers Canada — Document 09.31
+  // Buy Facebook Followers Canada — production FAQ (authority page)
+  {
+    id: 'faq-fb-followers-can-buy',
+    question: 'Can you buy Facebook followers?',
+    answer:
+      'Yes. Facebook follower packages can be purchased by selecting a package, providing your public Facebook Page URL and completing checkout. Your Facebook password is not required.',
+  },
+  {
+    id: 'faq-fb-followers-how-buy',
+    question: 'How do you buy Facebook followers?',
+    answer:
+      'Choose a follower package, enter your public Facebook Page URL, review your order details and complete secure checkout.',
+  },
+  {
+    id: 'faq-fb-followers-does-help',
+    question: 'Does buying Facebook followers help?',
+    answer:
+      'Follower packages increase the visible audience displayed on your page, but they do not guarantee engagement, leads, sales or improved organic reach.',
+  },
+  {
+    id: 'faq-fb-followers-can-people-tell',
+    question: 'Can people tell if you buy Facebook followers?',
+    answer:
+      'Visitors can see the public follower count on a Facebook page, but Facebook does not label whether followers were obtained through a purchased package. No provider can guarantee how Facebook evaluates account activity.',
+  },
+  {
+    id: 'faq-fb-followers-are-real',
+    question: 'Are Facebook followers real?',
+    answer:
+      'Package details vary between providers. Review the service description, delivery information and published policies before placing your order so you understand what is included.',
+  },
+  {
+    id: 'faq-fb-followers-should-buy',
+    question: 'Should I buy Facebook followers?',
+    answer:
+      'That depends on your marketing goals. Follower packages can support the visible audience of a Facebook page, but long-term success still depends on consistent publishing and community engagement.',
+  },
+  {
+    id: 'faq-fb-followers-monetization',
+    question: 'Does buying Facebook followers affect monetization?',
+    answer:
+      "Facebook's monetization programs are based on multiple eligibility requirements. Purchasing follower packages does not guarantee approval or automatically affect monetization outcomes.",
+  },
+  {
+    id: 'faq-fb-followers-password',
+    question: 'Do I need my Facebook password?',
+    answer:
+      'No. InstantViral only requires your public Facebook Page URL to process an order.',
+    homepageFilter: 'Page Requirements',
+  },
+  {
+    id: 'faq-fb-followers-order-again',
+    question: 'Can I order more followers later?',
+    answer:
+      'Yes. Additional follower packages can be purchased after your previous order has been completed.',
+    homepageFilter: 'Orders',
+  },
+  {
+    id: 'faq-fb-followers-which-package',
+    question: 'Which Facebook follower package should I choose?',
+    answer:
+      "Choose a quantity that matches your page's current audience and business objectives. Smaller packages are suitable for newer pages, while larger packages may better support established businesses and brands.",
+  },
+  // Legacy Facebook Followers FAQ IDs retained for schema stability
   {
     id: 'faq-fb-followers-choose-package',
     question: 'How do I choose the right Facebook Followers package?',
     answer:
       'Compare available [Facebook Followers Packages](/buy-facebook-followers#pricing-packages) with your page size and growth goals. Review quantity, price and delivery details before checkout.',
     homepageFilter: 'Packages',
-  },
-  {
-    id: 'faq-fb-followers-password',
-    question: 'Do I need my Facebook password?',
-    answer:
-      'No. Your Facebook password is never required. Orders use only your public Facebook page URL, the selected package and a valid email address.',
-    homepageFilter: 'Page Requirements',
   },
   {
     id: 'faq-fb-followers-public',
@@ -753,13 +927,6 @@ export const faqItems: FAQItem[] = [
     question: 'Can I track my order?',
     answer:
       'Yes. Use your order ID and checkout email on the [Order Tracking](/track-order) page to review available delivery updates.',
-    homepageFilter: 'Orders',
-  },
-  {
-    id: 'faq-fb-followers-order-again',
-    question: 'Can I order again later?',
-    answer:
-      'Yes. You can place another followers order when a different package better matches future page goals. Confirm the correct public page URL before each checkout.',
     homepageFilter: 'Orders',
   },
   {
@@ -790,262 +957,296 @@ export const faqItems: FAQItem[] = [
       'Visit the [Contact](/contact) page or open the [FAQ](/faq) hub with your order ID and checkout email. Do not send passwords or private Facebook account details.',
     homepageFilter: 'Support',
   },
-  // Buy Facebook Page Likes Canada — Document 09.32
+  // Buy Facebook Page Likes Canada — AI Overview FAQs
   {
-    id: 'faq-fb-page-likes-password',
-    question: 'Do I need to share my Facebook password?',
-    answer: 'No. InstantViral only needs the public Facebook page URL.',
-  },
-  {
-    id: 'faq-fb-page-likes-links',
-    question: 'Which Facebook link should I use?',
-    answer: 'Use the public URL of the page receiving the likes.',
-  },
-  {
-    id: 'faq-fb-page-likes-delivery-speed',
-    question: 'How quickly will the Page Likes begin arriving?',
-    answer: 'Start and delivery times depend on the selected real package.',
-  },
-  {
-    id: 'faq-fb-page-likes-gradual-delivery',
-    question: 'Is gradual delivery available for Facebook Page Likes?',
+    id: 'faq-fb-page-likes-can-buy',
+    question: 'Can you buy Facebook Page Likes?',
     answer:
-      'It may be available on eligible Facebook Page Likes packages and must be shown in the package data.',
+      'Yes. You can purchase Facebook Page Like packages by selecting a package, entering your public Facebook Page URL and completing secure checkout. Your Facebook password is not required.',
   },
   {
-    id: 'faq-fb-page-likes-refill',
-    question: 'Do Facebook Page Likes packages include refill protection?',
+    id: 'faq-fb-page-likes-how-buy',
+    question: 'How do you buy Facebook Page Likes?',
     answer:
-      'Eligible packages may include refill coverage. Display the real terms before checkout.',
+      'Choose your preferred package, provide your public Facebook Page URL, review your order details and complete checkout.',
+  },
+  {
+    id: 'faq-fb-page-likes-does-help',
+    question: 'Does buying Facebook Page Likes help?',
+    answer:
+      'Page Likes can strengthen the visible popularity of a Facebook page and improve first impressions for visitors, but they do not guarantee engagement, sales or organic reach.',
   },
   {
     id: 'faq-fb-page-likes-businesses',
     question: 'Can businesses buy Facebook Page Likes?',
-    answer: 'Yes, provided the page is public and meets the service requirements.',
-  },
-  {
-    id: 'faq-fb-page-likes-money-back',
-    question: 'Is there a money-back guarantee on Facebook Page Likes?',
     answer:
-      'Eligible Facebook Page Likes purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service conditions.',
+      'Businesses, creators, organizations and public brands can purchase Page Like packages for publicly accessible Facebook pages.',
   },
   {
-    id: 'faq-fb-page-likes-track',
-    question: 'How can I track the order?',
-    answer: 'Use the Track Order page with the order ID and checkout email.',
-  },
-  // Buy Facebook Post Likes Canada — Document 09.33
-  {
-    id: 'faq-fb-post-likes-choose-package',
-    question: 'How do I choose the right Facebook post likes package?',
+    id: 'faq-fb-page-likes-password',
+    question: 'Do I need my Facebook password?',
     answer:
-      'Review the post’s current engagement, campaign purpose and expected audience before choosing a package. Smaller quantities may suit routine updates, while important promotions, launches and announcements may need a larger option.',
-    homepageFilter: 'Packages',
+      'No. Orders are processed using only your public Facebook Page URL. Your Facebook password is never requested.',
+  },
+  {
+    id: 'faq-fb-page-likes-delivery',
+    question: 'How long does delivery take?',
+    answer:
+      'Delivery timing depends on the selected package and current processing volume. Estimated delivery information is displayed before checkout.',
+  },
+  {
+    id: 'faq-fb-page-likes-order-again',
+    question: 'Can I order another package later?',
+    answer:
+      'Yes. Additional Page Like packages can be purchased after your previous order has been completed.',
+  },
+  {
+    id: 'faq-fb-page-likes-vs-followers',
+    question: 'Are Page Likes the same as Followers?',
+    answer:
+      'No. Page Likes and Followers are different Facebook metrics. Page Likes strengthen the visible popularity of a page, while Followers represent the audience receiving future updates.',
+  },
+  {
+    id: 'faq-fb-page-likes-which-package',
+    question: 'Which Page Like package should I choose?',
+    answer:
+      'Choose a package that aligns with your current page size, marketing goals and overall Facebook strategy rather than simply selecting the largest quantity.',
+  },
+  {
+    id: 'faq-fb-page-likes-requirements',
+    question: 'What information is required to place an order?',
+    answer:
+      'You only need your public Facebook Page URL, the selected package and a valid email address for order confirmation and tracking.',
+  },
+  // Buy Facebook Post Likes Canada — AI Overview FAQs
+  {
+    id: 'faq-fb-post-likes-can-buy',
+    question: 'Can you buy Facebook Post Likes?',
+    answer:
+      'Yes. You can purchase Post Like packages by selecting a package, providing the public URL of your Facebook post and completing secure checkout.',
   },
   {
     id: 'faq-fb-post-likes-password',
-    question: 'Do I need to provide my Facebook password?',
+    question: 'Do I need my Facebook password?',
+    answer: 'No. InstantViral only requires the public URL of your Facebook post.',
+  },
+  {
+    id: 'faq-fb-post-likes-does-help',
+    question: 'Does buying Facebook Post Likes help?',
     answer:
-      'No. Your Facebook password and private account access are never required. The order only needs the exact public Facebook post URL, the selected package and a valid email address.',
-    homepageFilter: 'Post Requirements',
+      'Post Likes can strengthen the visible engagement on a specific Facebook post, but they do not guarantee additional reach, comments or sales.',
+  },
+  {
+    id: 'faq-fb-post-likes-old-post',
+    question: 'Can I buy Likes for an older Facebook post?',
+    answer:
+      'Yes, provided the post is still publicly accessible and eligible for processing.',
+  },
+  {
+    id: 'faq-fb-post-likes-existing-post',
+    question: 'Can I buy Likes for an existing Facebook post?',
+    answer:
+      'Yes. You can order Post Likes for an existing public Facebook post by submitting that post’s public URL and completing checkout.',
+  },
+  {
+    id: 'faq-fb-post-likes-order-again',
+    question: 'Can I order another package later?',
+    answer:
+      'Yes. You can place another order after your previous delivery has been completed.',
+  },
+  {
+    id: 'faq-fb-post-likes-vs-page-likes',
+    question: 'What is the difference between Post Likes and Page Likes?',
+    answer:
+      'Post Likes apply to a single Facebook post, while Page Likes increase the visible Like count of your Facebook Business Page.',
   },
   {
     id: 'faq-fb-post-likes-public',
-    question: 'Does the Facebook post need to be public?',
-    answer:
-      'Yes. The selected post must remain publicly accessible while the order is being processed. Restricted visibility, deletion or an incorrect URL may prevent delivery.',
-    homepageFilter: 'Post Requirements',
+    question: 'Do I need a public Facebook post?',
+    answer: 'Yes. The selected Facebook post must remain public during processing.',
   },
   {
-    id: 'faq-fb-post-likes-page-url',
-    question: 'Can I submit my Facebook page URL instead of a post URL?',
+    id: 'faq-fb-post-likes-comments-shares',
+    question: 'Will buying Post Likes increase comments or shares?',
     answer:
-      'No. This service requires the direct public URL of the individual Facebook post receiving likes. A page homepage or profile link does not identify the correct post.',
-    homepageFilter: 'Post Requirements',
-  },
-  {
-    id: 'faq-fb-post-likes-video',
-    question: 'Can I order likes for a Facebook video post?',
-    answer:
-      'You may submit an eligible public Facebook post when it matches the requirements shown for the selected package. Review the service information before checkout or contact support if the post type is unclear.',
-    homepageFilter: 'Post Requirements',
-  },
-  {
-    id: 'faq-fb-post-likes-delivery-begin',
-    question: 'When will delivery begin?',
-    answer:
-      'Delivery begins after the order has been confirmed and reviewed. Timing depends on the selected package and current processing conditions. Review the delivery estimate before placing the order.',
-    homepageFilter: 'Delivery',
+      'No. Post Like packages increase the visible Like count on the selected post. They do not guarantee additional comments, shares, reach or sales.',
   },
   {
     id: 'faq-fb-post-likes-track',
-    question: 'Can I track my post likes order?',
-    answer:
-      'Yes. Use your order ID and checkout email address to access the available tracking information after confirmation.',
-    homepageFilter: 'Orders',
+    question: 'Can I track my order?',
+    answer: 'Yes. Order tracking is available after your purchase has been confirmed.',
   },
   {
-    id: 'faq-fb-post-likes-another-post',
-    question: 'Can I place another order for a different post?',
+    id: 'faq-fb-post-likes-requirements',
+    question: 'What information is required to place an order?',
     answer:
-      'Yes. You can place a separate order for another eligible public Facebook post. Check each URL carefully so every package reaches the intended content.',
-    homepageFilter: 'Orders',
+      'You only need the public Facebook Post URL, your selected package and a valid email address.',
   },
   {
-    id: 'faq-fb-post-likes-change-url',
-    question: 'Can I change the post URL after checkout?',
+    id: 'faq-fb-post-likes-which-package',
+    question: 'Which package should I choose?',
     answer:
-      'Contact support immediately if the wrong URL was submitted. A change may only be possible before processing or delivery begins.',
-    homepageFilter: 'Orders',
+      'Choose the quantity that best matches the importance of your post, your campaign objectives and its current engagement level.',
   },
+  // Buy YouTube Subscribers Canada — authority FAQs
   {
-    id: 'faq-fb-post-likes-support',
-    question: 'What should I include when contacting support?',
+    id: 'faq-yt-subscribers-can-you-buy',
+    question: 'Can you buy YouTube subscribers?',
     answer:
-      'Provide your order ID, checkout email address and a clear explanation of the issue. Never send your Facebook password or private login details.',
-    homepageFilter: 'Support',
-  },
-  // Buy YouTube Subscribers Canada — Document 09.41
-  {
-    id: 'faq-yt-subscribers-choose-package',
-    question: 'How do I choose the right YouTube subscriber package?',
-    answer:
-      'Review your current subscriber count, upload activity and channel goals before choosing a package. Smaller quantities may suit newer channels, while larger options can be considered for established creators, businesses and media teams. The available package details and delivery estimate should be reviewed before checkout.',
+      'Yes. You can purchase subscriber packages by selecting a package, providing your public YouTube channel URL and completing secure checkout.',
     homepageFilter: 'Packages',
   },
   {
     id: 'faq-yt-subscribers-password',
-    question: 'Do I need to provide my YouTube password?',
-    answer:
-      'No. Your YouTube password, recovery codes and private account access are never required. The order only needs the exact public channel URL, the selected package and a valid email address for confirmation and tracking.',
+    question: 'Do I need my YouTube password?',
+    answer: 'No. Orders only require your public YouTube channel URL.',
     homepageFilter: 'Channel Requirements',
   },
   {
-    id: 'faq-yt-subscribers-public',
-    question: 'Does my YouTube channel need to be public?',
+    id: 'faq-yt-subscribers-does-help',
+    question: 'Does buying YouTube subscribers help?',
     answer:
-      'Yes. The submitted channel must remain publicly accessible while the order is being processed. If the channel is hidden, removed or otherwise unavailable, delivery may be delayed or prevented until the issue is corrected.',
+      'Subscriber packages can strengthen the visible audience of your channel, but they do not guarantee more views, watch time or revenue.',
+    homepageFilter: 'Packages',
+  },
+  {
+    id: 'faq-yt-subscribers-new-channel',
+    question: 'Can I buy subscribers for a new YouTube channel?',
+    answer:
+      'Yes. Subscriber packages can be ordered for both new and established public YouTube channels.',
     homepageFilter: 'Channel Requirements',
   },
   {
-    id: 'faq-yt-subscribers-delivery-begin',
-    question: 'When will subscriber delivery begin?',
+    id: 'faq-yt-subscribers-existing-channel',
+    question: 'Can You Buy Subscribers for an Existing YouTube Channel?',
     answer:
-      'Delivery begins after the order has been confirmed and reviewed. The estimated timing depends on the selected package and current processing conditions. Review the package information before checkout and use order tracking for available progress updates.',
-    homepageFilter: 'Delivery',
+      'Yes. Subscriber packages can be ordered for existing public YouTube channels by providing the public channel URL during checkout.',
+    homepageFilter: 'Channel Requirements',
   },
   {
-    id: 'faq-yt-subscribers-track',
-    question: 'Can I track my subscriber order?',
+    id: 'faq-yt-subscribers-how-many',
+    question: 'How Many YouTube Subscribers Should I Buy?',
     answer:
-      'Yes. Use the order ID and email address associated with the purchase to access the public tracking page. Keep your confirmation email because it contains the information required to review the latest available order status.',
-    homepageFilter: 'Orders',
+      'Choose a package that matches your current subscriber base, upload frequency and channel goals rather than automatically selecting the largest available quantity.',
+    homepageFilter: 'Packages',
+  },
+  {
+    id: 'faq-yt-subscribers-increase-views',
+    question: 'Will subscribers increase my video views?',
+    answer:
+      'No. Subscribers and Views are different YouTube metrics. More subscribers do not automatically increase video views.',
+    homepageFilter: 'Packages',
+  },
+  {
+    id: 'faq-yt-subscribers-vs-views',
+    question: "What's the difference between Subscribers and Views?",
+    answer:
+      'Subscribers represent your channel audience, while Views measure how many times individual videos have been watched.',
+    homepageFilter: 'Packages',
   },
   {
     id: 'faq-yt-subscribers-another-order',
-    question: 'Can I place another subscriber order later?',
+    question: 'Can I place another order later?',
     answer:
-      'Yes. You can place another order when a different package better matches your future channel goals. Review the current subscriber count and any active delivery before submitting an additional order.',
+      'Yes. You can purchase another subscriber package after your current order has been completed.',
     homepageFilter: 'Orders',
   },
   {
-    id: 'faq-yt-subscribers-change-url',
-    question: 'Can I change the channel URL after checkout?',
-    answer:
-      'Contact customer support as soon as possible if the wrong channel URL was submitted. A change may only be possible before processing or delivery begins, so always verify the destination carefully before completing checkout.',
+    id: 'faq-yt-subscribers-track',
+    question: 'Can I track my order?',
+    answer: 'Yes. Order tracking is available after your purchase has been confirmed.',
     homepageFilter: 'Orders',
   },
   {
-    id: 'faq-yt-subscribers-after-checkout',
-    question: 'What happens after I complete checkout?',
+    id: 'faq-yt-subscribers-what-required',
+    question: 'What information is required?',
     answer:
-      'You receive an order confirmation after successful checkout. The submitted channel and package details are then reviewed, delivery is scheduled and available status information can be monitored through the order tracking page.',
-    homepageFilter: 'Delivery',
+      'You only need your public YouTube channel URL, the selected package and a valid email address.',
+    homepageFilter: 'Channel Requirements',
   },
   {
-    id: 'faq-yt-subscribers-gradual',
-    question: 'Can subscriber delivery be gradual?',
+    id: 'faq-yt-subscribers-choose-package',
+    question: 'Which subscriber package should I choose?',
     answer:
-      'Gradual delivery may be available where it is listed for the selected package. Availability and timing depend on the actual package configuration, so review the delivery information shown before ordering.',
-    homepageFilter: 'Delivery',
+      'Choose a package that aligns with your current audience size, upload frequency and long-term channel goals.',
+    homepageFilter: 'Packages',
   },
+  // Buy YouTube Views Canada — authority FAQs
   {
-    id: 'faq-yt-subscribers-support',
-    question: 'What should I include when contacting support?',
+    id: 'faq-yt-views-can-you-buy',
+    question: 'Can you buy YouTube views?',
     answer:
-      'Include your order ID, checkout email address and a clear description of the issue. Do not send passwords, recovery codes or private YouTube account information. Providing the correct order details helps the support team review the request efficiently.',
-    homepageFilter: 'Support',
-  },
-  // Buy YouTube Views Canada — Document 09.42
-  {
-    id: 'faq-yt-views-choose-package',
-    question: 'How do I choose the right YouTube Views package?',
-    answer:
-      'Compare available [YouTube Views Packages](/buy-youtube-views#pricing-packages) against your campaign goals, current audience and promotion plan. Review quantity, price and delivery information before checkout.',
+      'Yes. You can purchase YouTube View packages by selecting a package, providing the public URL of your YouTube video and completing secure checkout. Your YouTube password is never required.',
     homepageFilter: 'Packages',
   },
   {
     id: 'faq-yt-views-password',
     question: 'Do I need my YouTube password?',
     answer:
-      'No. Your YouTube password is never required. Orders use only the public video URL, the selected package and a valid email address.',
+      'No. Orders only require the public URL of your YouTube video. Private login credentials and verification codes are never requested.',
     homepageFilter: 'Video Requirements',
   },
   {
-    id: 'faq-yt-views-public',
-    question: 'Does my video need to be public?',
+    id: 'faq-yt-views-does-help',
+    question: 'Does buying YouTube views help?',
     answer:
-      'Yes. Keep the video publicly accessible while the order is processed. If the video is private, removed or unavailable, delivery may be delayed until access is restored.',
+      'View packages increase the public view count on your video, which may strengthen social proof and improve first impressions. They do not guarantee more subscribers, watch time or higher rankings in YouTube recommendations.',
+    homepageFilter: 'Packages',
+  },
+  {
+    id: 'faq-yt-views-existing-video',
+    question: 'Can I buy views for an existing YouTube video?',
+    answer:
+      'Yes. You can order View packages for both newly published and existing public YouTube videos.',
     homepageFilter: 'Video Requirements',
   },
   {
-    id: 'faq-yt-views-delivery-begin',
-    question: 'When does delivery begin?',
+    id: 'faq-yt-views-multiple-videos',
+    question: 'Can I buy YouTube views for multiple videos?',
     answer:
-      'Delivery begins after the order is reviewed and confirmed. Timing depends on the selected package and current demand. Check the package details before ordering.',
-    homepageFilter: 'Delivery',
+      'Yes. Place a separate order for each public YouTube video you want to promote, using that video\'s public URL during checkout.',
+    homepageFilter: 'Orders',
+  },
+  {
+    id: 'faq-yt-views-how-many',
+    question: 'How many YouTube views should I buy?',
+    answer:
+      "Choose a package that reflects your video's existing performance, promotional objectives and audience size instead of automatically selecting the largest quantity.",
+    homepageFilter: 'Packages',
+  },
+  {
+    id: 'faq-yt-views-increase-subscribers',
+    question: 'Will YouTube views increase subscribers?',
+    answer:
+      'Views and Subscribers are different YouTube metrics. Higher view counts do not automatically increase your subscriber count.',
+    homepageFilter: 'Packages',
+  },
+  {
+    id: 'faq-yt-views-vs-watch-time',
+    question: "What's the difference between YouTube Views and Watch Time?",
+    answer:
+      'Views count how many times a video has been watched, while Watch Time measures how long viewers spend watching the content.',
+    homepageFilter: 'Packages',
+  },
+  {
+    id: 'faq-yt-views-another-order',
+    question: 'Can I place another order later?',
+    answer:
+      'Yes. Additional View packages can be purchased whenever you want to promote another public YouTube video.',
+    homepageFilter: 'Orders',
   },
   {
     id: 'faq-yt-views-track',
     question: 'Can I track my order?',
-    answer:
-      'Yes. Use your order ID and checkout email on the [Order Tracking](/track-order) page to review available delivery updates.',
+    answer: 'Yes. Order tracking is available after your purchase has been confirmed.',
     homepageFilter: 'Orders',
   },
   {
-    id: 'faq-yt-views-order-again',
-    question: 'Can I order again later?',
+    id: 'faq-yt-views-what-required',
+    question: 'What information is required?',
     answer:
-      'Yes. You can place another views order when a different package better matches a future campaign. Confirm the correct public video URL before submitting each order.',
-    homepageFilter: 'Orders',
-  },
-  {
-    id: 'faq-yt-views-change-url',
-    question: 'Can I change my video URL after checkout?',
-    answer:
-      'Contact [support](/contact) as soon as possible if the wrong video URL was submitted. A change may only be possible before processing or delivery begins.',
-    homepageFilter: 'Orders',
-  },
-  {
-    id: 'faq-yt-views-after-checkout',
-    question: 'What happens after checkout?',
-    answer:
-      'You receive order confirmation after successful payment. The video URL and package are reviewed, delivery is scheduled and progress remains available through order tracking.',
-    homepageFilter: 'Delivery',
-  },
-  {
-    id: 'faq-yt-views-gradual',
-    question: 'Are views delivered gradually?',
-    answer:
-      'Gradual delivery may be available where it is listed for the selected package. Review the delivery information shown before checkout.',
-    homepageFilter: 'Delivery',
-  },
-  {
-    id: 'faq-yt-views-support',
-    question: 'How do I contact support?',
-    answer:
-      'Visit the [Contact](/contact) page or open the [FAQ](/faq) hub with your order ID and checkout email. Do not send passwords or private account details.',
-    homepageFilter: 'Support',
+      'You only need the public URL of your YouTube video, the selected View package and a valid email address.',
+    homepageFilter: 'Video Requirements',
   },
   ...faqHubItems,
 ];

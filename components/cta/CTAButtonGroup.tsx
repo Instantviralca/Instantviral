@@ -60,12 +60,12 @@ export function CTAButtonGroup({
             size="lg"
             variant={usePrimary ? 'default' : 'outline'}
             className={cn(
-              'min-h-12 w-full rounded-xl transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:min-w-[11rem] sm:w-auto',
+              'min-h-12 w-full rounded-xl transition-[transform,box-shadow] duration-200 hover:-translate-y-1 active:scale-[0.99] motion-reduce:hover:translate-y-0 motion-reduce:active:scale-100 sm:min-h-[3.25rem] sm:min-w-[11rem] sm:w-auto',
               usePrimary &&
-                'bg-[linear-gradient(145deg,var(--brand-primary)_0%,#ea580c_100%)] px-7 font-semibold shadow-[0_14px_32px_-14px_rgba(249,115,22,0.9)] hover:shadow-[0_18px_36px_-14px_rgba(249,115,22,1)]',
+                'bg-[linear-gradient(145deg,var(--brand-primary)_0%,#ea580c_100%)] px-7 font-semibold shadow-[0_16px_36px_-12px_rgba(249,115,22,0.95)] hover:shadow-[0_22px_44px_-12px_rgba(249,115,22,1)]',
               // Dark CTA bands set text-white on the section; keep outline labels readable.
               !usePrimary &&
-                'bg-white px-6 font-medium text-[var(--text-primary)] shadow-[0_10px_24px_-18px_rgba(0,0,0,0.35)] hover:bg-white/95 hover:text-[var(--text-primary)]',
+                'border border-white/25 bg-white px-6 font-semibold text-[var(--text-primary)] shadow-[0_10px_24px_-18px_rgba(0,0,0,0.35)] hover:border-white/40 hover:bg-white hover:text-[var(--text-primary)]',
             )}
           >
             <Link

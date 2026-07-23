@@ -18,21 +18,20 @@ function buildBuyTikTokFollowersContent(): ServiceContent {
     },
     hero: {
       eyebrow:
-        'TIKTOK FOLLOWER SERVICES FOR CREATORS, BRANDS & BUSINESSES ACROSS CANADA',
+        'TRUSTED TIKTOK FOLLOWER SERVICE FOR CREATORS, BRANDS & BUSINESSES',
       title: 'Buy TikTok Followers Canada',
       description:
-        'Grow your TikTok audience with a secure follower service designed for creators, businesses and brands across Canada. Choose the follower package that fits your goals, place your order using only your public TikTok username, and track every stage from checkout to delivery. With secure ordering, transparent updates and dedicated customer support, growing your TikTok profile is simple, safe and straightforward.',
+        'Buy TikTok followers in Canada with packages for creators, businesses, and brands. Choose a quantity that fits your goals, enter your public TikTok username, and complete checkout when you are ready.',
       purpose: 'Convert for TikTok follower packages in Canada',
       primaryKeyword: 'buy TikTok followers Canada',
       supportingKeywords: [
-        'TikTok followers Canada',
-        'Buy real TikTok followers',
-        'Canadian TikTok followers',
+        'Buy TikTok Followers',
+        'Buying TikTok Followers',
+        'Buy Followers on TikTok',
         'TikTok follower packages',
-        'TikTok growth service Canada',
-        'Buy TikTok followers online',
+        'Buy Real TikTok Followers',
       ],
-      suggestedWordCount: 120,
+      suggestedWordCount: 70,
       primaryCta: {
         label: 'Choose TikTok Package',
         href: PRICING_ANCHOR,
@@ -42,10 +41,10 @@ function buildBuyTikTokFollowersContent(): ServiceContent {
         href: '#username-and-delivery',
       },
       trustLabels: [
-        { id: 'tt-f-trust-public', label: 'Public Username Only' },
+        { id: 'tt-f-trust-2018', label: 'Trusted Since 2018' },
+        { id: 'tt-f-trust-password', label: 'No Password Required' },
         { id: 'tt-f-trust-checkout', label: 'Secure Checkout' },
         { id: 'tt-f-trust-track', label: 'Order Tracking' },
-        { id: 'tt-f-trust-support', label: 'Dedicated Support' },
       ],
       visual: {
         src: '/assets/images/illustrations/tiktok-dashboard.svg',
@@ -58,137 +57,98 @@ function buildBuyTikTokFollowersContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your TikTok Followers Package',
       description:
-        "Whether you're growing a new TikTok profile or expanding an established audience, choose the follower package that best matches your goals. Every package includes secure ordering, transparent delivery updates and dedicated customer support throughout the process.",
+        'Compare package sizes before you buy followers on TikTok. Start with a smaller test order, choose 500 or 1,000 followers for steady growth, or select larger options such as 10,000 followers for bigger campaigns.',
       purpose: 'Present real InstantViral.ca TikTok follower packages',
       primaryKeyword: 'TikTok follower packages',
-      suggestedWordCount: 40,
+      suggestedWordCount: 45,
       packageIds: [],
       primaryCtaLabel: 'Order Now',
       emptyMessage: 'TikTok Followers packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-tiktok-followers',
-      title: 'Support the TikTok Presence You Are Building',
+      title: 'Why Do People Buy TikTok Followers?',
       description:
-        'A stronger follower count helps create a better first impression, improves profile credibility and supports long-term growth on TikTok. Our follower packages are designed for creators, influencers, businesses and brands looking for a simple, secure and transparent ordering experience.',
+        'People buy TikTok followers to increase the visible follower count on their profile, strengthen first impressions, and support creator or business branding. Follower packages do not guarantee engagement or viral reach. Across Canada, creators and brands often use packages alongside consistent posting to present a more established profile.',
       purpose: 'Explain informed use of TikTok follower packages',
       primaryKeyword: 'buy TikTok followers',
-      suggestedWordCount: 180,
+      suggestedWordCount: 90,
       items: [
         {
           id: 'tt-f-social-proof',
-          title: 'Build Social Proof',
+          title: 'Stronger First Impressions',
           description:
-            'A larger audience helps your profile appear more established and creates stronger first impressions for new visitors.',
+            'A larger visible audience can make your profile look more established when someone discovers your content.',
         },
         {
           id: 'tt-f-creator-friendly',
-          title: 'Creator Friendly',
+          title: 'Creator and Business Branding',
           description:
-            'Suitable for creators, influencers, businesses and brands looking to grow their TikTok presence.',
+            'Creators, local businesses, and brands use follower packages to support campaigns while continuing to publish original videos.',
         },
         {
           id: 'tt-f-flexible',
-          title: 'Flexible Packages',
+          title: 'Quantity Options That Fit Your Goals',
           description:
-            'Choose from multiple package sizes that match your goals, audience and budget.',
+            'Choose smaller packages to test the process, or larger sizes when your profile and posting activity are already established.',
         },
         {
-          id: 'tt-f-private-secure',
-          title: 'Private & Secure',
+          id: 'tt-f-content-first',
+          title: 'Works Best With Content',
           description:
-            'Ordering only requires your public TikTok username. Your password is never requested.',
+            'Buying followers on TikTok supports profile presentation; long-term growth still depends on quality videos and regular posting.',
         },
       ],
     },
     whyInstantViral: {
-      id: 'why-choose-instantviral-tiktok-followers',
-      title: 'A Clearer Way to Buy TikTok Followers',
-      description:
-        "We've designed our ordering process to be straightforward and transparent. Every step is explained clearly so you can choose a package, complete checkout and monitor delivery with confidence.",
-      purpose: 'Build trust with conditional policy wording',
+      id: 'why-instantviral-tiktok-followers-legacy',
+      title: 'Why InstantViral?',
+      description: '',
+      purpose: 'Unused on lean authority layout — trust lives in hero, packages, and FAQ',
       primaryKeyword: 'TikTok growth service Canada',
-      suggestedWordCount: 150,
-      items: [
-        {
-          id: 'tt-f-why-username',
-          title: 'Public Username Only',
-          description: 'We only require your public TikTok username to process your order.',
-        },
-        {
-          id: 'tt-f-why-payments',
-          title: 'Secure Payments',
-          description: 'Your order is completed through a secure checkout process.',
-        },
-        {
-          id: 'tt-f-why-gradual',
-          title: 'Gradual Delivery',
-          description:
-            'Delivery begins according to the selected package and current delivery schedule.',
-        },
-        {
-          id: 'tt-f-why-tracking',
-          title: 'Order Tracking',
-          description: 'Monitor available progress updates using your order information.',
-        },
-        {
-          id: 'tt-f-why-support',
-          title: 'Dedicated Support',
-          description:
-            'Our support team is available if you need assistance before or after placing an order.',
-        },
-        {
-          id: 'tt-f-why-creators',
-          title: 'Designed For Creators',
-          description:
-            'Suitable for creators, influencers, businesses and brands looking to grow their TikTok presence.',
-        },
-      ],
-      cta: {
-        label: 'View TikTok Followers Packages',
-        href: PRICING_ANCHOR,
-      },
+      suggestedWordCount: 0,
+      items: [],
     },
     features: {
       id: 'buy-tiktok-followers-features',
       title: 'Features',
       description: '',
-      purpose: 'Unused on 09.21 — Username and Delivery Requirements is separate',
+      purpose: 'Unused — requirements handled by What We Need section',
       items: [],
     },
     howItWorks: {
       id: 'how-it-works',
       title: 'How to Buy TikTok Followers',
-      description: 'Placing an order is simple and takes just a few steps.',
+      description:
+        'How to buy TikTok followers is straightforward: choose a package, enter your public TikTok username, review your order, complete checkout, and track delivery. You do not need to share your password to buy followers on TikTok.',
       purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'buy TikTok followers',
-      suggestedWordCount: 140,
+      primaryKeyword: 'how to buy TikTok followers',
+      suggestedWordCount: 60,
       steps: [
         {
           id: 'tt-f-step-1',
           title: 'Choose a Package',
-          description: 'Select the follower package that matches your goals.',
+          description: 'Select the follower quantity that matches your profile and goals.',
         },
         {
           id: 'tt-f-step-2',
           title: 'Enter Your Username',
-          description: 'Provide your public TikTok username.',
+          description: 'Provide the public TikTok username where followers should be delivered.',
         },
         {
           id: 'tt-f-step-3',
           title: 'Review Your Order',
-          description: 'Confirm your package and account information.',
+          description: 'Confirm the package size and account details before payment.',
         },
         {
           id: 'tt-f-step-4',
           title: 'Complete Checkout',
-          description: 'Finish your purchase using our secure checkout.',
+          description: 'Finish purchasing through checkout when your order details look correct.',
         },
         {
           id: 'tt-f-step-5',
           title: 'Track Delivery',
-          description:
-            'Use your order details to monitor progress until delivery is complete.',
+          description: 'Monitor progress with your order information until delivery finishes.',
         },
       ],
       cta: {
@@ -198,12 +158,12 @@ function buildBuyTikTokFollowersContent(): ServiceContent {
     },
     deliveryAndSafety: {
       id: 'username-and-delivery',
-      title: 'What We Need to Process Your Order',
+      title: 'What We Need From You',
       description:
-        "We keep the ordering process simple by requesting only the information needed to deliver your selected package. There is no need to share sensitive account details or login credentials. Once your order is confirmed, you'll be able to follow its progress using your order information.",
+        'To process a TikTok follower order, we only need your public TikTok username, your selected package, a public profile, and a valid email for confirmation. No password or private login access is required.',
       purpose: 'Explain username and delivery requirements',
       primaryKeyword: 'TikTok followers delivery',
-      suggestedWordCount: 120,
+      suggestedWordCount: 55,
       items: [
         {
           id: 'tt-f-req-username',
@@ -234,48 +194,46 @@ function buildBuyTikTokFollowersContent(): ServiceContent {
     reviews: {
       id: 'tt-followers-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
-      purpose: 'Social proof from approved customer reviews',
+      description: 'Customer reviews for this InstantViral service.',
+      purpose: 'Omitted on lean commercial layout to avoid homepage duplication',
       testimonialIds: [],
     },
     faq: {
       id: 'tt-followers-faq',
-      title: 'TikTok Followers Packages FAQs',
+      title: 'Frequently Asked Questions About Buying TikTok Followers',
       description:
-        'Find answers to the most common questions about choosing a TikTok followers package, placing an order, delivery and account requirements.',
+        'Direct answers to common questions about whether you can buy TikTok followers, how buying followers on TikTok works, and which package size to choose.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy TikTok followers Canada',
       faqIds: [
-        'faq-tt-followers-choose',
-        'faq-tt-followers-password',
-        'faq-tt-followers-public',
+        'faq-tt-followers-can-buy',
+        'faq-tt-followers-how-buy',
+        'faq-tt-followers-does-work',
+        'faq-tt-followers-are-real',
+        'faq-tt-followers-safe',
+        'faq-tt-followers-banned',
         'faq-tt-followers-delivery-begin',
-        'faq-tt-followers-track',
+        'faq-tt-followers-password',
         'faq-tt-followers-another-order',
-        'faq-tt-followers-required-info',
-        'faq-tt-followers-who-for',
+        'faq-tt-followers-which-package',
       ],
     },
     relatedServices: {
       id: 'related-tiktok-services-followers',
       title: 'Explore More TikTok Growth Services',
       description:
-        'Combine different TikTok services to support your overall content strategy and create a stronger profile experience.',
+        'If you also want more video engagement or reach, compare TikTok Likes and TikTok Views packages alongside followers.',
       purpose: 'Internal links to sibling TikTok offers',
-      serviceSlugs: [
-        'buy-tiktok-likes',
-        'buy-tiktok-views',
-      ],
+      serviceSlugs: ['buy-tiktok-likes', 'buy-tiktok-views'],
     },
     finalCta: {
       id: 'tt-followers-final-cta',
-      title: 'Ready to Grow Your TikTok Audience?',
+      title: 'Choose the TikTok Followers Package That Fits Your Goals',
       description:
-        'Choose the TikTok followers package that matches your goals, complete your order securely and track every stage from confirmation to delivery. Our streamlined ordering process makes it simple to get started.',
+        'Compare package sizes, review delivery details, and place your order when you are ready. Pick the quantity that best matches your current growth strategy.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Choose TikTok Followers Package',
+        label: 'Choose Your Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
@@ -299,33 +257,32 @@ function buildBuyTikTokLikesContent(): ServiceContent {
         'Buy TikTok likes Canada with real packages for creators and businesses. Public video URL only, secure checkout, gradual delivery options, and order tracking.',
     },
     hero: {
-      eyebrow: 'REAL TIKTOK LIKES FOR CANADIAN CREATORS & BUSINESSES',
-      title: 'Buy TikTok Likes Canada',
+      eyebrow: 'TIKTOK LIKE PACKAGES FOR CREATORS, BRANDS & BUSINESSES',
+      title: 'Buy TikTok Likes in Canada',
       description:
-        'Increase engagement on your TikTok videos with real likes delivered through a secure ordering process. Choose the package that matches your content, place your order using only your public video link, and follow your order from checkout to completion. Designed for creators, brands and businesses across Canada.',
+        'Buy TikTok likes for public videos with clear package pricing, secure checkout and visible order updates. Choose the quantity that fits your content, paste your public TikTok video link and review the delivery information before completing your order. No password or private account access is required.',
       purpose: 'Convert for TikTok likes packages in Canada',
       primaryKeyword: 'buy TikTok likes Canada',
       supportingKeywords: [
-        'Buy Real TikTok Likes',
+        'Buy TikTok Likes',
         'TikTok Likes Packages',
-        'Increase TikTok Likes',
+        'Buy Real TikTok Likes',
         'TikTok Engagement Canada',
       ],
-      suggestedWordCount: 120,
+      suggestedWordCount: 90,
       primaryCta: {
-        label: 'Choose TikTok Likes Package',
+        label: 'Choose a Likes Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
-        label: 'View Delivery Information',
+        label: 'View Delivery Details',
         href: '#video-link-and-delivery',
       },
       trustLabels: [
-        { id: 'tt-l-trust-url', label: 'Public Video URL Only' },
+        { id: 'tt-l-trust-url', label: 'Public Video Link Only' },
+        { id: 'tt-l-trust-password', label: 'No Password Required' },
         { id: 'tt-l-trust-checkout', label: 'Secure Checkout' },
-        { id: 'tt-l-trust-gradual', label: 'Gradual Delivery' },
         { id: 'tt-l-trust-track', label: 'Order Tracking' },
-        { id: 'tt-l-trust-ca', label: 'Canadian Support' },
       ],
       visual: {
         src: '/assets/images/illustrations/tiktok-dashboard.svg',
@@ -338,94 +295,57 @@ function buildBuyTikTokLikesContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your TikTok Likes Package',
       description:
-        'Select the number of likes that fits your campaign. Every package includes secure checkout, gradual delivery options and order tracking.',
+        'Compare available package sizes and select the number of likes that matches your video and campaign goals. Each option displays its price and order details before checkout, allowing you to confirm the quantity and public video link before payment.',
       purpose: 'Present real InstantViral.ca TikTok likes packages',
       primaryKeyword: 'TikTok likes packages',
-      suggestedWordCount: 40,
+      suggestedWordCount: 55,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue With This Package',
       emptyMessage: 'TikTok Likes packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-tiktok-likes',
-      title: 'Support Better TikTok Engagement',
+      title: 'Why Do People Buy TikTok Likes?',
       description:
-        "Likes help strengthen the appearance of active content and encourage stronger engagement signals. Whether you're promoting a product, growing a creator account or increasing visibility for a campaign, choosing the right package can support your overall TikTok strategy.",
+        'People buy TikTok likes to strengthen the visible engagement on a public video, improve its first impression and support creator or business campaigns. Likes can make active content appear more established, but they do not guarantee additional views, followers, sales or algorithmic promotion.',
       purpose: 'Explain informed use of TikTok likes packages',
       primaryKeyword: 'buy TikTok likes',
       suggestedWordCount: 180,
       items: [
         {
-          id: 'tt-l-higher-engagement',
-          title: 'Higher Engagement',
-          description: 'Likes help create stronger social proof on public videos.',
-        },
-        {
-          id: 'tt-l-natural-appearance',
-          title: 'Natural Appearance',
+          id: 'tt-l-first-impressions',
+          title: 'Stronger First Impressions',
           description:
-            'Gradual delivery helps maintain a realistic engagement pattern.',
+            'A visible reaction count can make a video appear more active when new viewers discover it through a profile, shared link or TikTok feed.',
         },
         {
-          id: 'tt-l-creator-friendly',
-          title: 'Creator Friendly',
-          description: 'Suitable for influencers, brands and businesses.',
+          id: 'tt-l-campaign-support',
+          title: 'Campaign Support',
+          description:
+            'Creators and businesses may use like packages alongside product launches, promotions and other short-form video campaigns.',
         },
         {
-          id: 'tt-l-public-video',
-          title: 'Public Video Only',
-          description: 'No login credentials are ever required.',
+          id: 'tt-l-flexible-quantities',
+          title: 'Flexible Quantities',
+          description:
+            'Smaller options can support individual posts, while larger packages may better suit videos from established and consistently active accounts.',
+        },
+        {
+          id: 'tt-l-alongside-content',
+          title: 'Works Alongside Content',
+          description:
+            'Purchased likes work best as support for original videos, clear captions, consistent posting and ongoing audience engagement.',
         },
       ],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-tiktok-likes',
       title: 'Why Choose TikTok Likes From InstantViral?',
-      description:
-        "Whether you're launching a new video, promoting a product or building a creator profile, increasing engagement can help strengthen the first impression your content makes. Our service focuses on gradual delivery, secure ordering and a straightforward buying experience.",
-      purpose: 'Build trust with unique TikTok likes value props',
+      description: '',
+      purpose: 'Unused on lean authority layout — trust lives in hero, FAQ, and checklist sections',
       primaryKeyword: 'buy real TikTok likes',
-      suggestedWordCount: 150,
-      items: [
-        {
-          id: 'tt-l-why-engagement',
-          title: 'Real Engagement Support',
-          description:
-            'Likes help reinforce visible engagement on your public videos.',
-        },
-        {
-          id: 'tt-l-why-gradual',
-          title: 'Gradual Delivery',
-          description:
-            'Packages can be delivered naturally for a balanced appearance.',
-        },
-        {
-          id: 'tt-l-why-checkout',
-          title: 'Secure Checkout',
-          description: 'Safe ordering process with encrypted payment.',
-        },
-        {
-          id: 'tt-l-why-password',
-          title: 'No Password Needed',
-          description: 'Only your public TikTok video link is required.',
-        },
-        {
-          id: 'tt-l-why-support',
-          title: 'Canadian Support',
-          description:
-            'Friendly customer support whenever you need assistance.',
-        },
-        {
-          id: 'tt-l-why-track',
-          title: 'Track Your Order',
-          description:
-            'Follow your order status from confirmation through delivery.',
-        },
-      ],
-      cta: {
-        label: 'View TikTok Likes Packages',
-        href: PRICING_ANCHOR,
-      },
+      suggestedWordCount: 0,
+      items: [],
     },
     features: {
       id: 'buy-tiktok-likes-features',
@@ -436,41 +356,48 @@ function buildBuyTikTokLikesContent(): ServiceContent {
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How To Buy TikTok Likes',
-      description: '',
+      title: 'How to Buy TikTok Likes',
+      description:
+        'To buy TikTok likes, choose a package, paste the public link to the video you want to promote, review the order details and complete secure checkout. No TikTok password is required, and you can follow the available order updates after payment.',
       purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'buy TikTok likes',
-      suggestedWordCount: 140,
+      primaryKeyword: 'how to buy TikTok likes',
+      supportingKeywords: [
+        'how to buy likes on TikTok',
+        'how do you buy likes on TikTok',
+        'how to buy likes on a TikTok video',
+        'buying TikTok likes',
+      ],
+      suggestedWordCount: 90,
       steps: [
         {
           id: 'tt-l-step-1',
-          title: 'Choose Your Package',
+          title: 'Choose a Package',
           description:
-            'Select the likes quantity that fits your video and campaign goals.',
+            'Select the number of likes that best matches the current size, activity and purpose of your video.',
         },
         {
           id: 'tt-l-step-2',
-          title: 'Paste Your Public TikTok Video URL',
+          title: 'Paste Your Public Video Link',
           description:
-            'Add the public link for the TikTok video that should receive likes.',
+            'Copy the public TikTok video URL and paste it into the order field so the likes are delivered to the correct post.',
         },
         {
           id: 'tt-l-step-3',
           title: 'Review Your Order',
           description:
-            'Confirm the package, video URL and checkout details before paying.',
+            'Confirm the selected quantity, video link, price and any delivery information before continuing.',
         },
         {
           id: 'tt-l-step-4',
           title: 'Complete Secure Checkout',
           description:
-            'Finish payment through encrypted checkout without sharing account credentials.',
+            'Finish your order through secure checkout without sharing your TikTok password or private login details.',
         },
         {
           id: 'tt-l-step-5',
-          title: 'Track Delivery Progress',
+          title: 'Track Delivery',
           description:
-            'Monitor available updates from confirmation through completed delivery.',
+            'Use your order details to view available status updates as the package moves through processing and delivery.',
         },
       ],
       cta: {
@@ -480,33 +407,36 @@ function buildBuyTikTokLikesContent(): ServiceContent {
     },
     deliveryAndSafety: {
       id: 'video-link-and-delivery',
-      title: 'What We Need To Process Your Order',
+      title: 'What Do You Need to Place an Order?',
       description:
-        'To begin processing your order quickly, we only need a few public details.',
+        'A TikTok likes order only requires a few public details. You do not need to provide your account password, verification code or private profile access.',
       purpose: 'Explain video URL and processing requirements',
       primaryKeyword: 'TikTok likes packages',
       suggestedWordCount: 120,
       items: [
         {
           id: 'tt-l-req-url',
-          title: 'Public Video URL',
-          description: 'The public TikTok video you want to promote.',
+          title: 'Public TikTok Video URL',
+          description:
+            'Paste the exact public link to the TikTok video that should receive the selected likes.',
         },
         {
           id: 'tt-l-req-package',
-          title: 'Package Selection',
-          description: 'Choose the number of likes that matches your campaign.',
+          title: 'Selected Package',
+          description:
+            'Choose the quantity that fits your video, account activity and current campaign.',
+        },
+        {
+          id: 'tt-l-req-public',
+          title: 'Public Video Access',
+          description:
+            'The selected video must remain publicly viewable while the order is being processed.',
         },
         {
           id: 'tt-l-req-email',
           title: 'Valid Email Address',
-          description: 'Used for order updates and tracking.',
-        },
-        {
-          id: 'tt-l-req-payment',
-          title: 'Secure Payment',
           description:
-            'Complete checkout safely without sharing account credentials.',
+            'Use a working email address to receive your order confirmation, tracking details and support updates.',
         },
       ],
     },
@@ -520,36 +450,40 @@ function buildBuyTikTokLikesContent(): ServiceContent {
     },
     faq: {
       id: 'tt-likes-faq',
-      title: 'Things To Know Before Ordering',
-      description: '',
+      title: 'Frequently Asked Questions About Buying TikTok Likes',
+      description:
+        'These are the most common questions customers ask before purchasing TikTok likes.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy TikTok likes Canada',
       faqIds: [
+        'faq-tt-likes-can-buy',
+        'faq-tt-likes-how-buy',
+        'faq-tt-likes-does-help',
+        'faq-tt-likes-any-video',
         'faq-tt-likes-password',
         'faq-tt-likes-repeat',
-        'faq-tt-likes-packages',
-        'faq-tt-likes-delivery-speed',
-        'faq-tt-likes-track',
+        'faq-tt-likes-instant',
+        'faq-tt-likes-safe',
+        'faq-tt-likes-where',
+        'faq-tt-likes-which-package',
       ],
     },
     relatedServices: {
       id: 'related-tiktok-services-likes',
-      title: 'Explore More TikTok Growth Services',
-      description: '',
+      title: 'Related TikTok Services',
+      description:
+        'Explore additional TikTok services to support different parts of your content strategy.',
       purpose: 'Internal links to sibling TikTok offers',
-      serviceSlugs: [
-        'buy-tiktok-followers',
-        'buy-tiktok-views',
-      ],
+      serviceSlugs: ['buy-tiktok-followers', 'buy-tiktok-views'],
     },
     finalCta: {
       id: 'tt-likes-final-cta',
-      title: 'Ready To Increase Your TikTok Engagement?',
+      title: 'Choose the TikTok Likes Package That Fits Your Goals',
       description:
-        'Choose the TikTok Likes package that fits your goals, complete your secure order and start building stronger engagement on your public videos.',
+        'Compare available package sizes, review pricing and delivery information, and complete your order using your public TikTok video link. Choose the package that best matches your content and campaign objectives.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Choose TikTok Likes Package',
+        label: 'Choose Your Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
@@ -561,7 +495,7 @@ function buildBuyTikTokLikesContent(): ServiceContent {
 }
 
 /**
- * Buy TikTok Views Canada — Document 09.23 production content.
+ * Buy TikTok Views Canada — lean authority content (mirrors Likes pattern).
  * Packages resolved from InstantViral catalog (Buzzoid-synced HQ + Premium tiers).
  */
 function buildBuyTikTokViewsContent(): ServiceContent {
@@ -571,37 +505,36 @@ function buildBuyTikTokViewsContent(): ServiceContent {
     seo: {
       title: 'Buy TikTok Views Canada | InstantViral',
       description:
-        'Buy TikTok Views Canada with real video views packages. Public video URL only, secure checkout, gradual delivery and order tracking for creators and businesses.',
+        'Buy TikTok views Canada with clear package pricing for public videos. Public video URL only, secure checkout and order tracking for creators and businesses.',
     },
     hero: {
-      eyebrow: 'REAL TIKTOK VIDEO VIEWS FOR CANADIAN CREATORS & BUSINESSES',
-      title: 'Buy TikTok Views Canada',
+      eyebrow: 'TIKTOK VIEW PACKAGES FOR CREATORS, BRANDS & BUSINESSES',
+      title: 'Buy TikTok Views in Canada',
       description:
-        'Increase visibility for your TikTok videos with real views delivered through a secure ordering process. Choose the package that fits your campaign, submit your public TikTok video link and monitor every stage of your order. Built for creators, brands and businesses across Canada.',
+        'Buy TikTok views for public videos with clear package pricing, secure checkout and visible order updates. Choose the quantity that fits your campaign, paste the public TikTok video link and review delivery details before completing your order. No password or private account access is required.',
       purpose: 'Convert for TikTok views packages in Canada',
       primaryKeyword: 'buy TikTok views Canada',
       supportingKeywords: [
         'Buy TikTok Views',
-        'Real TikTok Views',
-        'Increase TikTok Video Views',
+        'Buy Views on TikTok',
+        'Buy Views for TikTok',
         'TikTok Views Packages',
-        'TikTok Video Promotion',
+        'Buying TikTok Views',
       ],
-      suggestedWordCount: 120,
+      suggestedWordCount: 90,
       primaryCta: {
-        label: 'Choose TikTok Views Package',
+        label: 'Choose a Views Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {
-        label: 'View Delivery Information',
+        label: 'View Delivery Details',
         href: '#video-link-and-delivery',
       },
       trustLabels: [
-        { id: 'tt-v-trust-url', label: 'Public Video URL Only' },
+        { id: 'tt-v-trust-url', label: 'Public Video Link Only' },
+        { id: 'tt-v-trust-password', label: 'No Password Required' },
         { id: 'tt-v-trust-checkout', label: 'Secure Checkout' },
-        { id: 'tt-v-trust-gradual', label: 'Gradual Delivery' },
         { id: 'tt-v-trust-track', label: 'Order Tracking' },
-        { id: 'tt-v-trust-ca', label: 'Canadian Support' },
       ],
       visual: {
         src: '/assets/images/illustrations/tiktok-dashboard.svg',
@@ -614,129 +547,108 @@ function buildBuyTikTokViewsContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Choose Your TikTok Views Package',
       description:
-        'Select the number of video views that matches your campaign goals. Every package includes secure checkout, gradual delivery and order tracking.',
+        'Compare available package sizes and select the number of views that matches your video, audience and campaign goals. Each option displays its price and order details before checkout so you can confirm the quantity and public video link before payment.',
       purpose: 'Present real InstantViral.ca TikTok views packages',
       primaryKeyword: 'TikTok views packages',
-      suggestedWordCount: 40,
+      suggestedWordCount: 55,
       packageIds: [],
-      primaryCtaLabel: 'Order Now',
+      primaryCtaLabel: 'Continue With This Package',
       emptyMessage: 'TikTok Views packages are temporarily unavailable.',
     },
     benefits: {
       id: 'why-buy-tiktok-views',
-      title: 'Help More People Discover Your Videos',
+      title: 'Why Do People Buy TikTok Views?',
       description:
-        'Video views are one of the first engagement signals on TikTok. A healthy view count can strengthen first impressions, make videos appear more active and support your overall content strategy when combined with quality videos.',
+        'People buy TikTok views to increase the visible watch count on a public video, strengthen its first impression and support creator or business campaigns. A higher view count can make active content appear more established, but it does not guarantee likes, followers, sales or algorithmic promotion.',
       purpose: 'Explain informed use of TikTok views packages',
       primaryKeyword: 'buy TikTok views',
       suggestedWordCount: 180,
       items: [
         {
-          id: 'tt-v-increase-visibility',
-          title: 'Increase Visibility',
-          description: 'Higher view counts create stronger social proof.',
+          id: 'tt-v-first-impressions',
+          title: 'Stronger First Impressions',
+          description:
+            'A visible watch count can make a video appear more active when viewers discover it through a profile, shared link or TikTok feed.',
         },
         {
-          id: 'tt-v-support-campaigns',
-          title: 'Support Campaigns',
-          description: 'Useful for product launches and promotions.',
+          id: 'tt-v-campaign-visibility',
+          title: 'Campaign Visibility',
+          description:
+            'Creators and businesses may use view packages alongside launches, promotions and other short-form video campaigns.',
         },
         {
-          id: 'tt-v-natural-delivery',
-          title: 'Natural Delivery',
-          description: 'Gradual delivery helps maintain realistic activity.',
+          id: 'tt-v-flexible-quantities',
+          title: 'Flexible Quantities',
+          description:
+            'Smaller packages can support individual posts, while larger options may better suit established and consistently active accounts.',
         },
         {
-          id: 'tt-v-creator-friendly',
-          title: 'Creator Friendly',
-          description: 'Suitable for influencers, brands and businesses.',
+          id: 'tt-v-alongside-content',
+          title: 'Works Alongside Content',
+          description:
+            'Purchased views work best when they support original videos, clear hooks, consistent posting and genuine audience interaction.',
         },
       ],
     },
     whyInstantViral: {
       id: 'why-choose-instantviral-tiktok-views',
-      title: 'Why Buy TikTok Views From InstantViral?',
-      description:
-        "Whether you're launching a new video, promoting a product or growing your creator profile, video views help create stronger first impressions. Our service focuses on secure ordering, gradual delivery and a smooth customer experience.",
-      purpose: 'Build trust with unique TikTok views value props',
+      title: 'Why Choose TikTok Views From InstantViral?',
+      description: '',
+      purpose: 'Unused on lean authority layout — trust lives in hero, FAQ, and checklist sections',
       primaryKeyword: 'buy TikTok views',
-      suggestedWordCount: 150,
-      items: [
-        {
-          id: 'tt-v-why-real',
-          title: 'Real Video Views',
-          description: 'Packages designed for public TikTok videos.',
-        },
-        {
-          id: 'tt-v-why-checkout',
-          title: 'Secure Checkout',
-          description: 'Encrypted payment process with safe ordering.',
-        },
-        {
-          id: 'tt-v-why-gradual',
-          title: 'Gradual Delivery',
-          description: 'Views delivered naturally over time.',
-        },
-        {
-          id: 'tt-v-why-password',
-          title: 'No Password Needed',
-          description: 'Only your public video URL is required.',
-        },
-        {
-          id: 'tt-v-why-track',
-          title: 'Order Tracking',
-          description: 'Track your order from checkout until delivery.',
-        },
-        {
-          id: 'tt-v-why-support',
-          title: 'Canadian Support',
-          description: 'Friendly support whenever assistance is needed.',
-        },
-      ],
-      cta: {
-        label: 'View TikTok Views Packages',
-        href: PRICING_ANCHOR,
-      },
+      suggestedWordCount: 0,
+      items: [],
     },
     features: {
       id: 'buy-tiktok-views-features',
       title: 'Features',
       description: '',
-      purpose: 'Unused on 09.23 — Video Link and Delivery Requirements is separate',
+      purpose: 'Unused on lean authority layout — requirements section is separate',
       items: [],
     },
     howItWorks: {
       id: 'how-it-works',
-      title: 'How To Buy TikTok Views',
-      description: '',
+      title: 'How to Buy TikTok Views',
+      description:
+        'To buy TikTok views, choose a package, paste the public link to the video you want to promote, review the order information and complete secure checkout. No TikTok password is required, and available status updates can be followed after payment.',
       purpose: 'Explain the five-step ordering process',
-      primaryKeyword: 'buy TikTok views',
-      suggestedWordCount: 140,
+      primaryKeyword: 'how to buy TikTok views',
+      supportingKeywords: [
+        'how to buy views on TikTok',
+        'buy views for TikTok',
+        'buying TikTok views',
+        'TikTok views buy',
+      ],
+      suggestedWordCount: 90,
       steps: [
         {
           id: 'tt-v-step-1',
-          title: 'Choose Your Package',
-          description: 'Select the view package that matches your campaign.',
+          title: 'Choose a Package',
+          description:
+            'Select the view quantity that matches the video and campaign goal.',
         },
         {
           id: 'tt-v-step-2',
-          title: 'Paste Your Public TikTok Video URL',
-          description: 'No login credentials are required.',
+          title: 'Paste the Public Video Link',
+          description:
+            'Copy the exact TikTok URL so the views are delivered to the correct post.',
         },
         {
           id: 'tt-v-step-3',
-          title: 'Review Your Order',
-          description: 'Confirm package details before checkout.',
+          title: 'Review the Order',
+          description:
+            'Confirm the quantity, link, price and delivery information.',
         },
         {
           id: 'tt-v-step-4',
           title: 'Complete Secure Checkout',
-          description: 'Finish payment through our secure ordering system.',
+          description: 'Finish payment without sharing login credentials.',
         },
         {
           id: 'tt-v-step-5',
           title: 'Track Delivery',
-          description: 'Monitor your order until delivery is complete.',
+          description:
+            'Use your order details to check available progress updates.',
         },
       ],
       cta: {
@@ -746,81 +658,82 @@ function buildBuyTikTokViewsContent(): ServiceContent {
     },
     deliveryAndSafety: {
       id: 'video-link-and-delivery',
-      title: 'What We Need To Process Your Order',
+      title: 'What Do You Need to Place an Order?',
       description:
-        'To begin processing your order quickly, we only need a few public details.',
+        'A TikTok views order only requires a few public details. You do not need to provide your password, verification code or private account access.',
       purpose: 'Explain video URL and processing requirements',
       primaryKeyword: 'TikTok views packages',
       suggestedWordCount: 120,
       items: [
         {
           id: 'tt-v-req-url',
-          title: 'Public Video URL',
-          description: 'The TikTok video you want to promote.',
+          title: 'Public TikTok Video URL',
+          description:
+            'Paste the exact public link to the video that should receive the selected views.',
         },
         {
           id: 'tt-v-req-package',
           title: 'Selected Package',
-          description: 'Choose the number of views you need.',
+          description:
+            'Choose the quantity that fits your video, account activity and current campaign.',
+        },
+        {
+          id: 'tt-v-req-public',
+          title: 'Public Video Access',
+          description:
+            'The selected video must remain publicly viewable while the order is being processed.',
         },
         {
           id: 'tt-v-req-email',
-          title: 'Email Address',
-          description: 'Receive delivery updates and tracking information.',
-        },
-        {
-          id: 'tt-v-req-payment',
-          title: 'Secure Payment',
+          title: 'Valid Email Address',
           description:
-            'Complete checkout safely without sharing account credentials.',
+            'Use a working email address to receive confirmation, tracking details and support updates.',
         },
       ],
     },
     reviews: {
       id: 'tt-views-reviews',
       title: 'What Customers Say About InstantViral',
-      description:
-        'Customer reviews for this InstantViral service.',
-      purpose: 'Social proof from approved customer reviews',
+      description: 'Customer reviews for this InstantViral service.',
+      purpose: 'Unused on lean authority layout — no customer reviews section',
       testimonialIds: [],
     },
     faq: {
       id: 'tt-views-faq',
-      title: 'Things To Know Before Ordering',
-      description: 'Clear answers before you choose a TikTok Views package.',
+      title: 'Frequently Asked Questions About Buying TikTok Views',
+      description:
+        'Below are answers to the most common questions customers ask before purchasing TikTok view packages.',
       purpose: 'Answer buying questions with FAQPage schema',
       primaryKeyword: 'buy TikTok views Canada',
       faqIds: [
+        'faq-tt-views-can-buy',
+        'faq-tt-views-how-buy',
+        'faq-tt-views-does-work',
+        'faq-tt-views-can-people-see',
+        'faq-tt-views-are-real',
+        'faq-tt-views-worth-it',
+        'faq-tt-views-should-buy',
+        'faq-tt-views-what-happens',
         'faq-tt-views-password',
-        'faq-tt-views-repeat',
-        'faq-tt-views-packages',
-        'faq-tt-views-delivery-speed',
-        'faq-tt-views-track',
+        'faq-tt-views-which-package',
       ],
     },
     relatedServices: {
       id: 'related-tiktok-services-views',
-      title: 'Explore More TikTok Growth Services',
+      title: 'Related TikTok Services',
       description:
-        'Views are one part of TikTok video promotion. Explore follower and likes packages that can support the same campaign.',
+        'Video views are one part of building a stronger TikTok presence. Explore additional TikTok services to support different growth objectives.',
       purpose: 'Internal links to sibling TikTok offers',
-      serviceSlugs: [
-        'buy-tiktok-followers',
-        'buy-tiktok-likes',
-      ],
-      cta: {
-        label: 'Explore TikTok Services',
-        href: PRICING_ANCHOR,
-      },
+      serviceSlugs: ['buy-tiktok-followers', 'buy-tiktok-likes'],
     },
     finalCta: {
       id: 'tt-views-final-cta',
-      title: 'Ready To Increase Your TikTok Video Reach?',
+      title: 'Choose the TikTok Views Package That Fits Your Goals',
       description:
-        'Choose the TikTok Views package that fits your campaign, complete your secure order and start building stronger visibility for your public videos.',
+        'Compare available view packages, review pricing and delivery information, and complete your order using only your public TikTok video link. Select the package that best supports your content strategy and campaign objectives.',
       purpose: 'Drive conversion to pricing packages',
       primaryCta: {
-        label: 'Choose TikTok Views Package',
+        label: 'Choose Your Package',
         href: PRICING_ANCHOR,
       },
       secondaryCta: {

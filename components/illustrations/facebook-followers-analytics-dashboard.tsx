@@ -55,11 +55,29 @@ export function FacebookFollowersAnalyticsDashboard({
         className="pointer-events-none absolute -top-2 -right-2 z-[3] max-w-[8.5rem] rounded-xl border border-white bg-white px-2.5 py-1.5 shadow-[0_14px_28px_-16px_rgba(24,119,242,0.35)] motion-safe:animate-[iv-float-card_5.8s_ease-in-out_infinite]"
       >
         <p className="text-[8px] font-semibold uppercase" style={{ color: fbBlue }}>
-          Followers trend
+          Followers growth
         </p>
         <p className="text-[12px] font-black tabular-nums text-stone-900">
           {(followers / 1000).toFixed(1)}K
         </p>
+      </div>
+
+      <div
+        className="pointer-events-none absolute top-16 -left-2 z-[3] max-w-[8.2rem] rounded-xl border border-white bg-white px-2.5 py-1.5 shadow-[0_14px_28px_-16px_rgba(249,115,22,0.28)] motion-safe:animate-[iv-float-card_6.4s_ease-in-out_infinite]"
+      >
+        <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
+          Audience Insights
+        </p>
+        <p className="text-[11px] font-bold text-stone-900">Canada · Active</p>
+      </div>
+
+      <div
+        className="pointer-events-none absolute -bottom-1 right-4 z-[3] max-w-[7.8rem] rounded-xl border border-white bg-white px-2.5 py-1.5 shadow-[0_14px_28px_-16px_rgba(24,119,242,0.3)] motion-safe:animate-[iv-float-card_7s_ease-in-out_infinite]"
+      >
+        <p className="text-[8px] font-semibold tracking-wide text-stone-400 uppercase">
+          Community Score
+        </p>
+        <p className="text-[12px] font-black tabular-nums text-stone-900">92</p>
       </div>
 
       <div
