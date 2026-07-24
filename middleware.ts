@@ -11,9 +11,11 @@ import {
   isCheckoutHostname,
   isDedicatedCheckoutConfigured,
 } from '@/lib/config/hosts';
+import { shouldBlockRequest } from '@/lib/geo/blocked-countries';
 
 /**
  * Middleware:
+ * - Geo block for unsupported countries (public storefront)
  * - Admin session gate
  * - Host split: checkout subdomain ↔ main marketing site
  */
@@ -22,6 +24,17 @@ export async function middleware(request: NextRequest) {
   const host = request.headers.get('host');
   const checkoutHost =
     isCheckoutHostname(host) || isCheckoutHostForced(searchParams);
+
+  // ── Geo availability (public site only) ───────────────────────────
+  if (shouldBlockRequest({ pathname, headers: request.headers })) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/unavailable';
+    url.search = '';
+    const response = NextResponse.rewrite(url);
+    response.headers.set('x-robots-tag', 'noindex, nofollow');
+    response.headers.set('cache-control', 'private, no-store');
+    return response;
+  }
 
   // ── Checkout subdomain ────────────────────────────────────────────
   // Only checkout (+ APIs). Everything else redirects to the main site.
