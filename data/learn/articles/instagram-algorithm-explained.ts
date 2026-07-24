@@ -15,7 +15,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: "Many people believe the Instagram algorithm is designed to limit the reach of smaller accounts. In reality, Instagram's recommendation systems aim to show users the content they are most likely to enjoy based on their interests and behavior.",
+    text: "Instagram recommendations are built around predicted interest, not a penalty for small accounts. Knowing the main ranking signals helps you improve visibility with clearer creative and engagement habits.",
   },
   {
     id: 'b-intro-2',
@@ -209,7 +209,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 28,
     image: {
       src: `${IMG}/instagram-feed-ranking.png`,
-      alt: 'Instagram Feed ranking illustration showing engagement signals, user relationships and content freshness.',
+      alt: 'Instagram Feed ranking with engagement signals, user relationships and content freshness.',
       width: 1536,
       height: 1024,
     },
@@ -554,7 +554,7 @@ export const INSTAGRAM_ALGORITHM_EXPLAINED_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/instagram-algorithm-explained.png`,
-    alt: 'Illustration explaining how the Instagram algorithm ranks content using engagement, reach, audience interest and content discovery signals.',
+    alt: 'Illustration explaining how the Instagram algorithm ranks content using engagement, reach, audience interest and content.',
     width: 1536,
     height: 1024,
     priority: true,
@@ -630,9 +630,9 @@ export const INSTAGRAM_ALGORITHM_EXPLAINED_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-hashtags-useful',
-      question: 'Are hashtags still useful?',
+      question: 'Do hashtags still help Instagram categorize posts for recommendations?',
       answer:
-        'Relevant hashtags can still help categorize content, especially when combined with valuable posts.',
+        'Relevant hashtags can still help classify content, especially when the post already earns saves, shares and meaningful comments.',
       schemaEligible: true,
     },
     {

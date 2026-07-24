@@ -138,7 +138,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/youtube-keyword-research.png`,
-      alt: 'Illustration showing YouTube keyword research with search intent analysis, content planning, topic clusters and video optimization.',
+      alt: 'YouTube keyword research with search intent analysis, content planning, topic clusters and video optimization.',
       width: 1600,
       height: 900,
     },
@@ -235,7 +235,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 28,
     image: {
       src: `${IMG}/youtube-video-optimization.png`,
-      alt: 'Illustration showing YouTube video optimization including title creation, thumbnail design, video description, playlists and publishing workflow.',
+      alt: 'YouTube video optimization including title creation, thumbnail design, video description, playlists and publishing workflow.',
       width: 1600,
       height: 900,
     },
@@ -594,7 +594,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 72,
     image: {
       src: `${IMG}/youtube-seo-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying YouTube search traffic, organic views, click-through rate, watch time, audience retention and keyword performance.',
+      alt: 'Business analytics dashboard displaying YouTube search traffic, organic views, click-through rate, watch time, audience.',
       width: 1600,
       height: 900,
     },
@@ -704,7 +704,7 @@ export const YOUTUBE_SEO_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/youtube-seo-guide.png`,
-    alt: 'Illustration showing YouTube SEO optimization with video metadata, keyword research, channel optimization, search visibility and long-term organic growth.',
+    alt: 'YouTube SEO optimization with video metadata, keyword research, channel optimization, search visibility and long-term.',
     width: 1920,
     height: 1080,
     priority: true,

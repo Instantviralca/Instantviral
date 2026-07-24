@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Many businesses create social media accounts with enthusiasm but quickly become frustrated when they fail to see meaningful results. They post whenever they have time, copy trending content or focus entirely on increasing follower numbers. While these activities may create occasional engagement, they rarely produce sustainable business growth.',
+    text: 'Random posting rarely produces business results. A social media marketing strategy turns platforms into a planned system with audience targets, content pillars, cadence and review loops.',
     order: 1,
   },
   {
@@ -36,7 +36,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-4',
     type: 'paragraph',
-    text: 'This guide explains how to build a practical social media marketing strategy that supports sustainable growth across platforms such as Instagram, Facebook, TikTok and YouTube.',
+    text: 'This guide explains how to build a practical social media marketing strategy with goals, KPIs, content calendars, review cycles and optimization steps across Instagram, Facebook, TikTok and YouTube. For platform basics and terminology, start with the Complete Social Media Marketing Guide.',
     order: 4,
   },
   {
@@ -134,7 +134,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 16,
     image: {
       src: `${IMG}/audience-research-social-media.png`,
-      alt: 'Illustration showing audience research for social media marketing with customer personas, demographics, interests, behaviour analysis and platform selection.',
+      alt: 'Audience research for social media marketing with customer personas, demographics, interests, behaviour analysis and.',
       width: 1600,
       height: 900,
     },
@@ -275,7 +275,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 34,
     image: {
       src: `${IMG}/content-pillars-strategy.png`,
-      alt: 'Illustration showing content pillars for a social media marketing strategy with educational content, promotional content, customer stories, industry news and planning workflow.',
+      alt: 'Content pillars for a social media marketing strategy with educational content, promotional content, customer stories.',
       width: 1600,
       height: 900,
     },
@@ -640,7 +640,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 80,
     image: {
       src: `${IMG}/social-media-strategy-dashboard.png`,
-      alt: 'Business analytics dashboard displaying campaign goals, audience growth, engagement rate, website traffic, conversions and overall social media strategy performance.',
+      alt: 'Business analytics dashboard displaying campaign goals, audience growth, engagement rate, website traffic, conversions and.',
       width: 1600,
       height: 900,
     },
@@ -749,7 +749,7 @@ export const SOCIAL_MEDIA_MARKETING_STRATEGY_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/social-media-marketing-strategy.png`,
-    alt: 'Illustration showing a business creating a social media marketing strategy with audience research, content pillars, platform selection, goal planning and performance analytics.',
+    alt: 'Business creating a social media marketing strategy with audience research, content pillars, platform selection, goal.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -765,11 +765,11 @@ export const SOCIAL_MEDIA_MARKETING_STRATEGY_ARTICLE: LearnArticleRecord = {
     canonicalPath: `/learn/${SLUG}`,
     keywords: [
       'Social Media Marketing Strategy',
-      'Social Media Strategy',
       'Social Media Planning',
       'Social Media Marketing Plan',
+      'Social Media KPIs',
+      'Content Calendar Strategy',
       'Digital Marketing Strategy',
-      'Business Marketing Strategy',
     ],
     ogImage: `${IMG}/social-media-marketing-strategy.png`,
   },
@@ -793,9 +793,9 @@ export const SOCIAL_MEDIA_MARKETING_STRATEGY_ARTICLE: LearnArticleRecord = {
   contentReviewed: true,
   seoReviewed: true,
   keyTakeaways: [
-    'A successful social media marketing strategy provides direction, consistency and measurable objectives.',
-    'Businesses that understand their audience, publish valuable content and regularly review performance are more likely to build sustainable growth than those posting without a clear plan.',
-    "Rather than reacting to every trend, focus on creating a strategy that reflects your business goals and your customers' needs.",
+    'A social media marketing strategy defines goals, KPIs, content pillars, cadence and review cycles.',
+    'Use monthly performance reviews and quarterly plan adjustments instead of reactive trend-chasing.',
+    'Pair this execution framework with the educational platform guide when your team needs terminology or channel basics.',
   ],
   faqs: [
     {
@@ -828,9 +828,9 @@ export const SOCIAL_MEDIA_MARKETING_STRATEGY_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-content-pillars',
-      question: 'What are content pillars?',
+      question: 'What role do content pillars play in a social media marketing strategy?',
       answer:
-        'Content pillars are the main topics your business consistently creates content around, helping maintain focus and brand consistency.',
+        'They define the topic lanes your brand owns, which keeps campaigns, briefs and measurement aligned across platforms.',
       schemaEligible: true,
     },
   ],

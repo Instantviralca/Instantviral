@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Every business eventually asks the same question: Should we focus on organic TikTok growth, invest in paid promotion, or combine both?',
+    text: 'On TikTok, organic distribution runs through the For You Page while paid options include In-Feed ads, Spark Ads and creator partnerships. This guide compares both using TikTok-native metrics—not generic social advice.',
     order: 1,
   },
   {
@@ -36,13 +36,16 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-4',
     type: 'paragraph',
-    text: 'Instead of treating organic and paid growth as competing methods, businesses should understand how each contributes to different stages of the customer journey.',
+    text: 'For cross-platform budget allocation and marketing mix decisions, start with Organic vs Paid Social Media Growth. This article focuses on FYP distribution, watch-time signals and TikTok ad formats.',
     order: 4,
   },
   {
-    id: 'b-intro-5',
-    type: 'paragraph',
-    text: 'This guide explains the strengths, limitations and best use cases for both approaches so you can choose the strategy that fits your business objectives.',
+    id: 'b-related-hub',
+    type: 'related_article_card',
+    articleSlug: 'organic-vs-paid-social-media-growth',
+    label: 'Organic vs Paid Social Media Growth',
+    description:
+      'Cross-platform comparison for budget allocation, decision frameworks and marketing mix planning.',
     order: 5,
   },
   {
@@ -142,7 +145,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/organic-tiktok-growth-strategy.png`,
-      alt: 'Illustration showing an organic TikTok growth strategy using educational content, audience engagement, search visibility and long-term community building.',
+      alt: 'Organic TikTok growth strategy using educational content, audience engagement, search visibility and long-term community.',
       width: 1600,
       height: 900,
     },
@@ -280,7 +283,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 34,
     image: {
       src: `${IMG}/paid-tiktok-marketing-dashboard.png`,
-      alt: 'Illustration showing a TikTok paid marketing dashboard with advertising campaigns, audience targeting, campaign budget and performance metrics.',
+      alt: 'TikTok paid marketing dashboard with advertising campaigns, audience targeting, campaign budget and performance metrics.',
       width: 1600,
       height: 900,
     },
@@ -596,7 +599,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 72,
     image: {
       src: `${IMG}/tiktok-growth-comparison-dashboard.png`,
-      alt: 'TikTok growth comparison dashboard displaying organic performance, paid campaign metrics, audience growth and marketing insights.',
+      alt: 'TikTok growth comparison dashboard displaying organic performance, paid campaign metrics, audience growth and marketing.',
       width: 1600,
       height: 900,
     },
@@ -724,7 +727,7 @@ export const ORGANIC_VS_PAID_TIKTOK_GROWTH_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/organic-vs-paid-tiktok-growth.png`,
-    alt: 'Illustration comparing organic and paid TikTok growth strategies with educational content, advertising campaigns, audience growth and marketing analytics.',
+    alt: 'Illustration comparing organic and paid TikTok growth strategies with educational content, advertising campaigns, audience.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -742,8 +745,8 @@ export const ORGANIC_VS_PAID_TIKTOK_GROWTH_ARTICLE: LearnArticleRecord = {
       'Organic vs Paid TikTok Growth',
       'Organic TikTok Growth',
       'Paid TikTok Growth',
-      'TikTok Marketing Strategy',
-      'TikTok Business Growth',
+      'TikTok For You Page',
+      'TikTok Spark Ads',
       'TikTok Advertising',
     ],
     ogImage: `${IMG}/organic-vs-paid-tiktok-growth.png`,
@@ -754,6 +757,8 @@ export const ORGANIC_VS_PAID_TIKTOK_GROWTH_ARTICLE: LearnArticleRecord = {
     'buy-tiktok-views',
   ],
   relatedArticles: [
+    'organic-vs-paid-social-media-growth',
+    'complete-tiktok-growth-guide',
     'tiktok-for-business',
     'tiktok-marketing-for-small-businesses',
     'tiktok-seo-guide',
@@ -769,41 +774,35 @@ export const ORGANIC_VS_PAID_TIKTOK_GROWTH_ARTICLE: LearnArticleRecord = {
   contentReviewed: true,
   seoReviewed: true,
   keyTakeaways: [
-    'Organic growth and paid promotion solve different marketing problems.',
-    'Organic content builds trust, authority and long-term visibility. Paid promotion increases short-term reach and supports important campaigns.',
-    'Businesses that combine both strategies thoughtfully often achieve more balanced and sustainable results.',
+    'TikTok organic reach hinges on FYP watch time, completion rate and rewatch signals; paid adds Spark Ads and targeted in-feed campaigns.',
+    'Promote videos that already show strong retention—TikTok often rewards paid spend on proven creative.',
+    'Use the cross-platform hub when allocating budget across Instagram, TikTok and other channels.',
   ],
   faqs: [
     {
-      id: 'faq-organic-better',
-      question: 'Is organic TikTok growth better than paid growth?',
+      id: 'faq-fyp-organic',
+      question: 'Can new TikTok accounts reach the For You Page organically?',
       answer:
-        'Organic growth is generally better for long-term brand authority, while paid promotion is useful for faster visibility and specific campaigns.',
+        'Yes. TikTok tests new videos with small audiences regardless of follower count. Strong watch time and completion rate drive further FYP distribution.',
       schemaEligible: true,
     },
     {
-      id: 'faq-small-business-paid',
-      question: 'Should small businesses use paid TikTok advertising?',
+      id: 'faq-spark-ads',
+      question: 'What are TikTok Spark Ads and when should businesses use them?',
       answer:
-        'It depends on the business goals and budget. Many small businesses begin with organic content and add paid campaigns as they grow.',
-      schemaEligible: true,
-    },
-    {
-      id: 'faq-combine',
-      question: 'Can I combine both strategies?',
-      answer: 'Yes. A hybrid strategy is often the most sustainable approach.',
+        'Spark Ads boost existing organic posts or creator content with paid reach. They work well when a video already shows strong retention and you want faster scale.',
       schemaEligible: true,
     },
     {
       id: 'faq-paid-replace-quality',
-      question: 'Does paid promotion replace content quality?',
+      question: 'Does paid promotion replace content quality on TikTok?',
       answer:
         'No. Strong creative content remains essential even when using advertising.',
       schemaEligible: true,
     },
     {
       id: 'faq-when-promote',
-      question: 'How do I know when to promote a video?',
+      question: 'How do I know when to promote a TikTok video with paid spend?',
       answer:
         'Videos that already perform well organically are often better candidates for paid promotion because they have demonstrated audience interest.',
       schemaEligible: true,

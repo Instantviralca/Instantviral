@@ -16,7 +16,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'Growing an Instagram account often leads to an important question: should you focus entirely on organic growth, invest in paid promotion or combine both approaches? There is no universal answer because every business has different goals, budgets and timelines.',
+    text: 'On Instagram, organic reach flows through Reels, Explore and search while paid options include Boost posts, story ads and shopping campaigns. This guide compares both paths using IG-native signals—not generic social advice.',
   },
   {
     id: 'b-intro-2',
@@ -28,12 +28,21 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-3',
     type: 'paragraph',
     order: 3,
-    text: 'This guide explains how each approach works, where they differ and how to decide which strategy best fits your business.',
+    text: 'For cross-platform budget allocation and marketing mix decisions, start with Organic vs Paid Social Media Growth. This article focuses on Instagram algorithm behaviour, Reels distribution and ad formats.',
+  },
+  {
+    id: 'b-related-hub',
+    type: 'related_article_card',
+    order: 4,
+    articleSlug: 'organic-vs-paid-social-media-growth',
+    label: 'Organic vs Paid Social Media Growth',
+    description:
+      'Cross-platform comparison for budget allocation, decision frameworks and marketing mix planning.',
   },
   {
     id: 'b-related-pillar',
     type: 'related_article_card',
-    order: 4,
+    order: 5,
     articleSlug: 'complete-instagram-growth-guide',
     label: 'The Complete Instagram Growth Guide',
     description:
@@ -180,7 +189,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 22,
     image: {
       src: `${IMG}/organic-instagram-growth-strategy.png`,
-      alt: 'Organic Instagram growth strategy illustration showing valuable content, audience engagement, profile optimization and long-term community building.',
+      alt: 'Organic Instagram growth strategy with valuable content, audience engagement, profile optimization and long-term community.',
       width: 1600,
       height: 900,
     },
@@ -238,7 +247,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 28,
     image: {
       src: `${IMG}/paid-instagram-marketing-dashboard.png`,
-      alt: 'Instagram paid marketing dashboard displaying advertising campaigns, audience targeting, campaign budget and performance metrics.',
+      alt: 'Instagram paid marketing dashboard displaying advertising campaigns, audience targeting, campaign budget and performance.',
       width: 1600,
       height: 900,
     },
@@ -552,7 +561,7 @@ export const ORGANIC_VS_PAID_INSTAGRAM_GROWTH_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/organic-vs-paid-instagram-growth.png`,
-    alt: 'Illustration comparing organic and paid Instagram growth strategies with content marketing, advertising dashboard and audience growth analytics.',
+    alt: 'Illustration comparing organic and paid Instagram growth strategies with content marketing, advertising dashboard and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -570,14 +579,15 @@ export const ORGANIC_VS_PAID_INSTAGRAM_GROWTH_ARTICLE: LearnArticleRecord = {
       'Organic vs Paid Instagram Growth',
       'Organic Instagram Growth',
       'Paid Instagram Growth',
-      'Instagram Marketing Strategy',
-      'Instagram Business Growth',
-      'Instagram Growth Guide',
+      'Instagram Reels Reach',
+      'Instagram Explore Algorithm',
+      'Instagram Boost Posts',
     ],
     ogImage: `${IMG}/organic-vs-paid-instagram-growth.png`,
   },
   relatedServices: ['buy-instagram-followers'],
   relatedArticles: [
+    'organic-vs-paid-social-media-growth',
     'complete-instagram-growth-guide',
     'instagram-marketing-for-small-businesses',
     'how-to-use-instagram-for-business',
@@ -593,37 +603,37 @@ export const ORGANIC_VS_PAID_INSTAGRAM_GROWTH_ARTICLE: LearnArticleRecord = {
   contentReviewed: true,
   seoReviewed: true,
   keyTakeaways: [
-    'Organic growth and paid promotion are different tools that serve different purposes—not competitors.',
-    'Focus on valuable content, audience trust and continuous improvement for more sustainable results.',
-    'Many businesses get the strongest results by combining consistent content with carefully planned promotion.',
+    'Instagram organic reach depends on Reels retention, saves and Explore signals; paid adds Boost and targeted ad placements.',
+    'Strong organic content usually improves paid efficiency because ads amplify posts that already resonate.',
+    'Return to the cross-platform hub when you need budget allocation guidance across multiple channels.',
   ],
   faqs: [
     {
-      id: 'faq-organic-better',
-      question: 'Is organic Instagram growth better than paid growth?',
+      id: 'faq-reels-organic',
+      question: 'Do Instagram Reels still drive organic reach without paid spend?',
       answer:
-        'Neither is universally better. Organic growth supports long-term trust, while paid promotion can help increase visibility more quickly.',
+        'Yes, when retention and saves are strong. Reels that keep viewers watching often earn Explore distribution even on accounts with modest follower counts.',
       schemaEligible: true,
     },
     {
-      id: 'faq-small-businesses-pay',
-      question: 'Should small businesses pay for Instagram promotion?',
+      id: 'faq-boost-vs-ads',
+      question: 'When should a business use Boost posts vs Ads Manager on Instagram?',
       answer:
-        'It depends on their goals and budget. Many small businesses begin with strong organic content and use paid campaigns selectively.',
+        'Boost works for quick post amplification. Ads Manager suits structured campaigns with custom audiences, retargeting and conversion objectives.',
       schemaEligible: true,
     },
     {
       id: 'faq-paid-replace-content',
-      question: 'Can paid promotion replace quality content?',
+      question: 'Can paid promotion replace quality Instagram content?',
       answer:
         'No. Even successful advertising campaigns perform better when supported by valuable and relevant content.',
       schemaEligible: true,
     },
     {
-      id: 'faq-combine-both',
-      question: 'Is it possible to combine both strategies?',
+      id: 'faq-explore-paid',
+      question: 'Can paid Instagram ads help content reach Explore?',
       answer:
-        'Yes. Many businesses combine organic content with carefully planned paid campaigns to achieve balanced long-term growth.',
+        'Ads increase impressions directly, but Explore placement still favours organic engagement signals. Combine both when launching new creative.',
       schemaEligible: true,
     },
   ],

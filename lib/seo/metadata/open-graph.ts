@@ -63,6 +63,6 @@ export function buildOpenGraphFromEntry(
     path: entry.canonicalPath,
     type: isLearnArticleRoute(entry.route) ? 'article' : 'website',
     image: entry.openGraphImage,
-    imageAlt: entry.openGraphTitle ?? entry.title,
+    imageAlt: entry.openGraphImageAlt ?? entry.openGraphTitle ?? entry.title,
   });
 }

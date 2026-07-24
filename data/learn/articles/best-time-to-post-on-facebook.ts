@@ -182,7 +182,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 23,
     image: {
       src: `${IMG}/facebook-audience-activity.png`,
-      alt: 'Illustration showing Facebook audience activity throughout the day with peak engagement periods, user activity graphs and content scheduling insights.',
+      alt: 'Facebook audience activity throughout the day with peak engagement periods, user activity graphs and content scheduling.',
       width: 1600,
       height: 900,
     },
@@ -396,7 +396,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 50,
     image: {
       src: `${IMG}/facebook-posting-schedule.png`,
-      alt: 'Illustration showing a weekly Facebook posting schedule with publishing times, content planning, audience activity and marketing workflow.',
+      alt: 'Weekly Facebook posting schedule with publishing times, content planning, audience activity and marketing workflow.',
       width: 1600,
       height: 900,
     },
@@ -633,7 +633,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 79,
     image: {
       src: `${IMG}/facebook-post-performance-dashboard.png`,
-      alt: 'Business analytics dashboard displaying Facebook post reach, engagement rate, posting times, audience insights and content performance trends.',
+      alt: 'Business analytics dashboard displaying Facebook post reach, engagement rate, posting times, audience insights and content.',
       width: 1600,
       height: 900,
     },
@@ -743,7 +743,7 @@ export const BEST_TIME_TO_POST_ON_FACEBOOK_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/best-time-to-post-on-facebook.png`,
-    alt: 'Illustration showing the best time to post on Facebook using a weekly content calendar, audience activity, scheduling tools, analytics and engagement insights.',
+    alt: 'Best time to post on Facebook using a weekly content calendar, audience activity, scheduling tools, analytics and engagement.',
     width: 1920,
     height: 1080,
     priority: true,

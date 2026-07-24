@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'Many creators assume that slow growth on TikTok is caused by the algorithm. In reality, the algorithm is often reacting to the quality of the content and how viewers interact with it. Even accounts that publish regularly can struggle if they repeatedly make small strategic mistakes.',
+    text: 'Slow TikTok results are often blamed on the algorithm when creators really face weak hooks, low retention or unclear topics. This guide is for creators and personal brands fixing viewer-response problems—not brand campaign ROI.',
   },
   {
     id: 'b-intro-2',
@@ -131,7 +131,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/tiktok-content-strategy-mistakes.png`,
-      alt: 'Illustration comparing random TikTok posting with a structured content strategy, publishing schedule and audience-focused planning.',
+      alt: 'Illustration comparing random TikTok posting with a structured content strategy, publishing schedule and audience-focused.',
       width: 1600,
       height: 900,
     },
@@ -253,7 +253,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 33,
     image: {
       src: `${IMG}/tiktok-retention-mistakes.png`,
-      alt: 'Illustration showing low audience retention versus improved watch time with stronger hooks, faster pacing and engaging video structure.',
+      alt: 'Low audience retention versus improved watch time with stronger hooks, faster pacing and engaging video structure.',
       width: 1600,
       height: 900,
     },
@@ -749,7 +749,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 100,
     image: {
       src: `${IMG}/tiktok-growth-improvement-dashboard.png`,
-      alt: 'TikTok analytics dashboard displaying audience growth, engagement improvements, watch time, retention and content performance trends.',
+      alt: 'TikTok analytics dashboard displaying audience growth, engagement improvements, watch time, retention and content.',
       width: 1600,
       height: 900,
     },
@@ -827,7 +827,7 @@ export const COMMON_TIKTOK_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/common-tiktok-growth-mistakes.png`,
-    alt: 'Illustration showing common TikTok growth mistakes compared with best practices including content strategy, audience retention, engagement and analytics.',
+    alt: 'Common TikTok growth mistakes compared with best practices including content strategy, audience retention, engagement and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -843,11 +843,11 @@ export const COMMON_TIKTOK_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
     canonicalPath: `/learn/${SLUG}`,
     keywords: [
       'Common TikTok Growth Mistakes',
-      'TikTok Growth Tips',
-      'TikTok Strategy Mistakes',
-      'TikTok Engagement Tips',
-      'Grow on TikTok',
-      'TikTok Marketing Guide',
+      'TikTok Creator Mistakes',
+      'TikTok Retention Mistakes',
+      'TikTok Hook Mistakes',
+      'TikTok Algorithm Mistakes',
+      'Creator TikTok Growth Tips',
     ],
     ogImage: `${IMG}/common-tiktok-growth-mistakes.png`,
   },
@@ -855,15 +855,11 @@ export const COMMON_TIKTOK_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
   relatedArticles: [
     'complete-tiktok-growth-guide',
     'how-the-tiktok-algorithm-works',
-    'tiktok-seo-guide',
     'how-to-increase-tiktok-engagement',
+    'tiktok-seo-guide',
     'best-time-to-post-on-tiktok',
-    'tiktok-for-business',
-    'tiktok-marketing-for-small-businesses',
-    'how-to-create-a-tiktok-content-calendar',
-    'tiktok-content-ideas-for-businesses',
-    'organic-vs-paid-tiktok-growth',
-    'how-to-build-trust-on-tiktok',
+    'tiktok-marketing-mistakes-businesses-should-avoid',
+    'how-to-get-more-tiktok-followers',
   ],
   featured: true,
   published: true,
@@ -879,37 +875,37 @@ export const COMMON_TIKTOK_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
   faqs: [
     {
       id: 'faq-biggest-mistake',
-      question: 'What is the biggest TikTok growth mistake?',
+      question: 'What TikTok mistake hurts creator retention the most?',
       answer:
-        'Publishing without a clear strategy or understanding your audience is one of the most common reasons accounts struggle to grow.',
+        'Weak openings that lose viewers in the first seconds. Creators who rewrite hooks and tighten topics usually recover faster than those who only post more often.',
       schemaEligible: true,
     },
     {
       id: 'faq-delete-videos',
-      question: 'Does deleting poorly performing videos help?',
+      question: 'Should creators delete TikToks with low completion rates?',
       answer:
-        'In most cases, it is more beneficial to learn from underperforming videos than to remove them immediately.',
+        'Usually keep them and study retention graphs instead. Deleting removes learning signals you need to improve the next hook.',
       schemaEligible: true,
     },
     {
       id: 'faq-copy-trends',
-      question: 'Should I copy trending videos?',
+      question: 'Should creators copy trending sounds without a unique angle?',
       answer:
-        'You can participate in trends, but adding your own perspective or expertise usually creates more memorable content.',
+        'Trends help discovery, but generic copies rarely build a loyal audience. Add your niche expertise so the video still feels like your channel.',
       schemaEligible: true,
     },
     {
       id: 'faq-review-analytics',
-      question: 'How often should I review TikTok analytics?',
+      question: 'Which TikTok analytics should creators review for growth mistakes?',
       answer:
-        'A monthly review is a good starting point, with weekly checks if you publish frequently.',
+        'Prioritise average watch time, completion rate, rewatches and traffic sources weekly so you can fix retention before chasing follower count.',
       schemaEligible: true,
     },
     {
       id: 'faq-consistency-vs-virality',
-      question: 'Is consistency more important than virality?',
+      question: 'Is posting consistency more important than one viral TikTok for creators?',
       answer:
-        'For long-term growth, consistent quality generally delivers stronger results than relying on occasional viral videos.',
+        'Yes for durable growth. A steady cadence of strong retention videos compounds better than waiting for a single viral hit.',
       schemaEligible: true,
     },
   ],

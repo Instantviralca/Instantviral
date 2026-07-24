@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'One of the most common questions businesses and content creators ask is why some posts receive thousands of views while others struggle to reach even a small audience. Many assume social media algorithms are unpredictable or designed to limit visibility. In reality, algorithms exist to improve the user experience by showing people content they are most likely to find valuable, relevant and engaging.',
+    text: 'Platform ranking systems exist to surface content people are likely to finish and interact with. Understanding those shared signals helps creators and businesses plan across Instagram, TikTok, Facebook and YouTube.',
     order: 1,
   },
   {
@@ -290,7 +290,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 37,
     image: {
       src: `${IMG}/social-media-ranking-signals.png`,
-      alt: 'Illustration showing the primary ranking signals used by social media algorithms, including engagement, watch time, saves, shares, comments and content relevance.',
+      alt: 'Primary ranking signals used by social media algorithms, including engagement, watch time, saves, shares, comments and.',
       width: 1600,
       height: 900,
     },
@@ -503,7 +503,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 61,
     image: {
       src: `${IMG}/algorithm-content-discovery.png`,
-      alt: 'Illustration showing content discovery through social media algorithms with personalized feeds, audience interests, recommendation pathways and organic reach.',
+      alt: 'Content discovery through social media algorithms with personalized feeds, audience interests, recommendation pathways and.',
       width: 1600,
       height: 900,
     },
@@ -802,7 +802,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 98,
     image: {
       src: `${IMG}/algorithm-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying reach, engagement, audience retention, click-through rate, watch time, content performance and algorithm insights.',
+      alt: 'Business analytics dashboard displaying reach, engagement, audience retention, click-through rate, watch time, content.',
       width: 1600,
       height: 900,
     },
@@ -912,7 +912,7 @@ export const HOW_SOCIAL_MEDIA_ALGORITHMS_WORK_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-social-media-algorithms-work.png`,
-    alt: 'Illustration showing how social media algorithms recommend content based on engagement, user interests, watch time, relevance and audience behaviour across major social platforms.',
+    alt: 'How social media algorithms recommend content based on engagement, user interests, watch time, relevance and audience.',
     width: 1920,
     height: 1080,
     priority: true,

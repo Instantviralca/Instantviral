@@ -393,6 +393,11 @@ export type AppliedInlineLink = {
   label: string;
 };
 
+/** Soft target for natural phrase matches — never force links to reach this. */
+export const CONTEXTUAL_MIN_LINKS = 3;
+/** Hard cap on auto-injected contextual inline links per article body. */
+export const CONTEXTUAL_MAX_LINKS = 5;
+
 /**
  * Find non-overlapping phrase matches in text for the given targets.
  */
@@ -401,7 +406,7 @@ export function matchContextualLinksInText(
   targets: ContextualLinkTarget[],
   options?: { limit?: number; usedHrefs?: Set<string> },
 ): AppliedInlineLink[] {
-  const limit = options?.limit ?? 8;
+  const limit = options?.limit ?? 1;
   const usedHrefs = options?.usedHrefs ?? new Set<string>();
   const applied: AppliedInlineLink[] = [];
   const occupied: Array<{ start: number; end: number }> = [];
@@ -443,29 +448,106 @@ export function matchContextualLinksInText(
 }
 
 /**
+ * Collect destinations already linked by authored cards / CTAs / existing inline
+ * annotations so auto-injection does not duplicate them.
+ */
+function collectAuthoredDestinationHrefs(
+  article: PublicLearnArticle,
+  blocks: ArticleContentBlock[],
+): Set<string> {
+  const hrefs = new Set<string>();
+  const selfHref = article.href;
+
+  for (const block of blocks) {
+    if (block.type === 'related_article_card') {
+      const href = learnArticlePath(block.articleSlug);
+      if (href !== selfHref) hrefs.add(href);
+    }
+    if (block.type === 'related_service_card') {
+      hrefs.add(`/${block.serviceSlug}`);
+    }
+    if (block.type === 'internal_cta' && block.href.startsWith('/')) {
+      hrefs.add(block.href.split('#')[0] || block.href);
+    }
+    if (block.type === 'paragraph' && Array.isArray(block.inlineLinks)) {
+      for (const link of block.inlineLinks) {
+        const href = link.href.split('#')[0] || link.href;
+        if (href !== selfHref) hrefs.add(href);
+      }
+    }
+    if (
+      (block.type === 'bulleted_list' || block.type === 'numbered_list') &&
+      Array.isArray(block.inlineItemLinks)
+    ) {
+      for (const link of block.inlineItemLinks) {
+        const href = link.href.split('#')[0] || link.href;
+        if (href !== selfHref) hrefs.add(href);
+      }
+    }
+  }
+
+  // Skip destinations already covered by in-body cards / CTAs.
+  // Do not seed the full footer relatedArticles list — that would suppress
+  // almost all natural in-body phrase links.
+  if (article.serviceCta?.serviceSlug) {
+    hrefs.add(`/${article.serviceCta.serviceSlug}`);
+  }
+
+  return hrefs;
+}
+
+/**
  * Annotate paragraph/list blocks with inline link metadata for rendering.
  * Preserves original text strings unchanged.
- * When natural phrase matches fall short of `minLinks`, inserts compact
- * mid-body paragraphs whose text is an existing public article/service title
- * (no new marketing copy) with the full title linked.
+ *
+ * Natural phrase matches only — never injects synthetic bridge paragraphs.
+ * Soft target: CONTEXTUAL_MIN_LINKS. Hard cap: CONTEXTUAL_MAX_LINKS.
  */
 export function applyContextualLinksToBlocks(
   article: PublicLearnArticle,
   blocks: ArticleContentBlock[],
-  minLinks = 8,
+  minLinks: number = CONTEXTUAL_MIN_LINKS,
+  maxLinks: number = CONTEXTUAL_MAX_LINKS,
 ): { blocks: ArticleContentBlock[]; appliedCount: number } {
-  const targets = buildContextualLinkTargets(article);
-  const usedHrefs = new Set<string>();
+  const softTarget = Math.max(0, Math.min(minLinks, maxLinks));
+  const hardCap = Math.max(0, maxLinks);
+  const targets = buildContextualLinkTargets(article).filter(
+    (target) =>
+      target.href !== article.href &&
+      !target.href.endsWith(`/${article.slug}`) &&
+      target.href !== `/learn/${article.slug}`,
+  );
+
+  const usedHrefs = collectAuthoredDestinationHrefs(article, blocks);
+  // Never allow self-link even if present in authored data by mistake.
+  usedHrefs.add(article.href);
+  usedHrefs.add(`/learn/${article.slug}`);
+  usedHrefs.add(learnArticlePath(article.slug));
+
   let appliedCount = 0;
+  let previousBlockReceivedLink = false;
 
   const next: ArticleContentBlock[] = blocks.map((block) => {
+    if (appliedCount >= hardCap) return block;
+
     if (block.type === 'paragraph') {
+      // Prefer skipping consecutive paragraphs when soft target already met.
+      if (previousBlockReceivedLink && appliedCount >= softTarget) {
+        previousBlockReceivedLink = false;
+        return block;
+      }
+
       const matches = matchContextualLinksInText(block.text, targets, {
-        limit: Math.max(3, minLinks),
+        limit: 1,
         usedHrefs,
       });
-      if (matches.length === 0) return block;
+      if (matches.length === 0) {
+        previousBlockReceivedLink = false;
+        return block;
+      }
+
       appliedCount += matches.length;
+      previousBlockReceivedLink = true;
       return {
         ...block,
         inlineLinks: matches.map((match) => ({
@@ -476,9 +558,20 @@ export function applyContextualLinksToBlocks(
     }
 
     if (block.type === 'bulleted_list' || block.type === 'numbered_list') {
+      if (appliedCount >= hardCap) {
+        previousBlockReceivedLink = false;
+        return block;
+      }
+      if (previousBlockReceivedLink && appliedCount >= softTarget) {
+        previousBlockReceivedLink = false;
+        return block;
+      }
+
       const itemLinks: Array<{ itemIndex: number; href: string; label: string }> =
         [];
-      block.items.forEach((item, itemIndex) => {
+      for (let itemIndex = 0; itemIndex < block.items.length; itemIndex++) {
+        if (appliedCount + itemLinks.length >= hardCap) break;
+        const item = block.items[itemIndex];
         const matches = matchContextualLinksInText(item, targets, {
           limit: 1,
           usedHrefs,
@@ -490,55 +583,28 @@ export function applyContextualLinksToBlocks(
             label: matches[0].label,
           });
         }
-      });
-      if (itemLinks.length === 0) return block;
+        // At most one auto-link per list block to keep density low.
+        if (itemLinks.length >= 1) break;
+      }
+
+      if (itemLinks.length === 0) {
+        previousBlockReceivedLink = false;
+        return block;
+      }
+
       appliedCount += itemLinks.length;
+      previousBlockReceivedLink = true;
       return {
         ...block,
         inlineItemLinks: itemLinks,
       };
     }
 
+    previousBlockReceivedLink = false;
     return block;
   });
 
-  if (appliedCount >= minLinks) {
-    return { blocks: next, appliedCount };
-  }
-
-  // Title-only bridge paragraphs for remaining quota (uses existing public titles).
-  const remaining = targets.filter((target) => !usedHrefs.has(target.href));
-  const insertions: ArticleContentBlock[] = [];
-  let orderBase = 10_000;
-  for (const target of remaining) {
-    if (appliedCount >= minLinks) break;
-    const label = target.phrases[0];
-    if (!label) continue;
-    insertions.push({
-      id: `ctx-bridge-${appliedCount}-${orderBase}`,
-      type: 'paragraph',
-      order: orderBase,
-      text: label,
-      inlineLinks: [{ href: target.href, label }],
-    });
-    usedHrefs.add(target.href);
-    appliedCount += 1;
-    orderBase += 1;
-  }
-
-  if (insertions.length === 0) {
-    return { blocks: next, appliedCount };
-  }
-
-  // Spread bridge paragraphs after early body content (after ~3 content blocks).
-  const insertAt = Math.min(Math.max(next.length - 1, 3), Math.max(next.length, 3));
-  const merged = [
-    ...next.slice(0, insertAt),
-    ...insertions,
-    ...next.slice(insertAt),
-  ];
-
-  return { blocks: merged, appliedCount };
+  return { blocks: next, appliedCount };
 }
 
 /** Count contextual inline links annotated on blocks. */
@@ -561,6 +627,15 @@ export function countContextualInlineLinks(blocks: ArticleContentBlock[]): numbe
     }
   }
   return count;
+}
+
+/** True when any block is a synthetic contextual bridge paragraph. */
+export function countContextualBridgeParagraphs(
+  blocks: ArticleContentBlock[],
+): number {
+  return blocks.filter((block) =>
+    String(block.id || '').startsWith('ctx-bridge-'),
+  ).length;
 }
 
 export function getLatestPublicArticles(limit = 6): PublicLearnArticle[] {

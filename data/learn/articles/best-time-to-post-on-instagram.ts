@@ -14,7 +14,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'Many Instagram users ask the same question: What is the best time to post? While there isn\'t one universal answer that works for every account, posting when your audience is active can improve early engagement and give your content a better opportunity to reach more people.',
+    text: 'Timing is only one lever in Instagram engagement, but early interactions still help distribution. Use Insights to learn when your followers are active instead of copying a generic best-hour chart.',
   },
   {
     id: 'b-intro-2',
@@ -524,7 +524,7 @@ export const BEST_TIME_TO_POST_ON_INSTAGRAM_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/best-time-to-post-on-instagram.png`,
-    alt: 'Illustration showing the best time to post on Instagram using audience activity insights, posting schedule and engagement analytics.',
+    alt: 'Best time to post on Instagram using audience activity insights, posting schedule and engagement analytics.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -593,9 +593,9 @@ export const BEST_TIME_TO_POST_ON_INSTAGRAM_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-post-every-day',
-      question: 'Should I post every day?',
+      question: 'What is the ideal Instagram posting frequency for better engagement?',
       answer:
-        'Choose a schedule that you can maintain consistently while keeping content quality high.',
+        'There is no single ideal number. Match posting times to when your followers are online, then publish only as often as you can keep quality steady.',
       schemaEligible: true,
     },
     {

@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: "One of the biggest reasons businesses struggle on TikTok isn't a lack of creativity—it's inconsistency. Many brands publish several videos one week, disappear for two weeks and then return without a clear plan. This makes it difficult to build audience expectations, measure performance or improve future content.",
+    text: "TikTok rewards rhythm as much as creativity. A business content calendar reduces feast-or-famine publishing and makes testing hooks and formats measurable.",
   },
   {
     id: 'b-intro-2',
@@ -247,7 +247,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 32,
     image: {
       src: `${IMG}/tiktok-content-pillars.png`,
-      alt: 'Illustration showing TikTok content pillars for businesses including educational videos, product demonstrations, customer stories, behind-the-scenes content and industry updates.',
+      alt: 'TikTok content pillars for businesses including educational videos, product demonstrations, customer stories.',
       width: 1600,
       height: 900,
     },
@@ -349,7 +349,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 46,
     image: {
       src: `${IMG}/tiktok-weekly-content-calendar.png`,
-      alt: 'Illustration showing a weekly TikTok content calendar with scheduled videos, publishing workflow, campaign planning and marketing organization.',
+      alt: 'Weekly TikTok content calendar with scheduled videos, publishing workflow, campaign planning and marketing organization.',
       width: 1600,
       height: 900,
     },
@@ -669,7 +669,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 86,
     image: {
       src: `${IMG}/tiktok-content-planning-dashboard.png`,
-      alt: 'TikTok content planning dashboard displaying publishing consistency, campaign performance, engagement metrics and monthly planning insights.',
+      alt: 'TikTok content planning dashboard displaying publishing consistency, campaign performance, engagement metrics and monthly.',
       width: 1600,
       height: 900,
     },
@@ -748,7 +748,7 @@ export const HOW_TO_CREATE_A_TIKTOK_CONTENT_CALENDAR_ARTICLE: LearnArticleRecord
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/how-to-create-a-tiktok-content-calendar.png`,
-      alt: 'Illustration showing a TikTok content calendar for businesses with weekly planning, content pillars, publishing schedule, analytics and campaign management.',
+      alt: 'TikTok content calendar for businesses with weekly planning, content pillars, publishing schedule, analytics and campaign.',
       width: 1920,
       height: 1080,
       priority: true,

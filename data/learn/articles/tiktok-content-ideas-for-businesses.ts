@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: "One of the biggest challenges businesses face on TikTok isn't creating videos—it's deciding what to post next. Many brands start with enthusiasm, publish a handful of videos and then run out of ideas. As a result, posting becomes inconsistent, engagement slows and marketing momentum is lost.",
+    text: "TikTok marketing momentum fades when brands cannot decide the next video. A deep idea bank keeps publishing consistent after the first burst of enthusiasm.",
     order: 1,
   },
   {
@@ -145,7 +145,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/tiktok-business-content-pillars.png`,
-      alt: 'Illustration showing TikTok business content pillars including educational videos, product demonstrations, customer stories, behind-the-scenes content and industry insights.',
+      alt: 'TikTok business content pillars including educational videos, product demonstrations, customer stories, behind-the-scenes.',
       width: 1600,
       height: 900,
     },
@@ -411,7 +411,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 48,
     image: {
       src: `${IMG}/tiktok-video-idea-bank.png`,
-      alt: 'Illustration showing a TikTok content idea bank with customer questions, video concepts, publishing schedule and content planning workflow.',
+      alt: 'TikTok content idea bank with customer questions, video concepts, publishing schedule and content planning workflow.',
       width: 1600,
       height: 900,
     },
@@ -541,7 +541,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 64,
     image: {
       src: `${IMG}/tiktok-business-content-dashboard.png`,
-      alt: 'TikTok business content dashboard displaying content performance, engagement, publishing consistency, audience growth and campaign analytics.',
+      alt: 'TikTok business content dashboard displaying content performance, engagement, publishing consistency, audience growth and.',
       width: 1600,
       height: 900,
     },
@@ -652,7 +652,7 @@ export const TIKTOK_CONTENT_IDEAS_FOR_BUSINESSES_ARTICLE: LearnArticleRecord =
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/tiktok-content-ideas-for-businesses.png`,
-      alt: 'Illustration showing a business brainstorming TikTok content ideas using content pillars, marketing planning, video production and audience engagement.',
+      alt: 'Business brainstorming TikTok content ideas using content pillars, marketing planning, video production and audience.',
       width: 1920,
       height: 1080,
       priority: true,
@@ -718,9 +718,9 @@ export const TIKTOK_CONTENT_IDEAS_FOR_BUSINESSES_ARTICLE: LearnArticleRecord =
       },
       {
         id: 'faq-every-video-promote',
-        question: 'Should every TikTok video promote a product?',
+        question: 'Should product pitches appear in every TikTok content idea?',
         answer:
-          'No. Educational and community-focused content often performs better and builds trust before selling.',
+          'No. Idea banks work better when tutorials, stories and community prompts outnumber hard sells.',
         schemaEligible: true,
       },
       {

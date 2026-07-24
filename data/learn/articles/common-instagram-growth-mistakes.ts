@@ -14,13 +14,13 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'Growing on Instagram is rarely about finding one secret strategy. In many cases, improving your results comes from avoiding the mistakes that prevent your content from reaching the right audience. Even accounts that publish regularly can struggle if they overlook profile optimization, audience engagement or content quality.',
+    text: 'Avoidable profile, content and engagement errors often hold Instagram creators, influencers and personal brands back more than missing a single growth tactic. Fixing reach and retention patterns usually beats chasing one secret formula.',
   },
   {
     id: 'b-intro-2',
     type: 'paragraph',
     order: 2,
-    text: 'Whether you manage a personal account, a business profile or a creator page, recognizing these common mistakes can help you build a stronger and more consistent Instagram presence.',
+    text: 'This guide is written for creators and personal brands optimizing Discoverability and engagement—not for ecommerce campaign calendars or local-business offer funnels.',
   },
   {
     id: 'b-related-organic',
@@ -510,7 +510,7 @@ export const COMMON_INSTAGRAM_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/common-instagram-growth-mistakes.png`,
-    alt: 'Illustration showing common Instagram growth mistakes including inconsistent posting, poor profile optimization and weak audience engagement.',
+    alt: 'Common Instagram growth mistakes including inconsistent posting, poor profile optimization and weak audience engagement.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -526,11 +526,11 @@ export const COMMON_INSTAGRAM_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
     canonicalPath: `/learn/${SLUG}`,
     keywords: [
       'Common Instagram Growth Mistakes',
-      'Instagram Growth Tips',
-      'Instagram Mistakes',
-      'Instagram Engagement',
-      'Instagram Marketing',
-      'Grow Instagram Followers',
+      'Instagram Creator Mistakes',
+      'Instagram Reach Mistakes',
+      'Instagram Engagement Mistakes',
+      'Personal Brand Instagram Tips',
+      'Creator Instagram Growth Tips',
     ],
     ogImage: `${IMG}/common-instagram-growth-mistakes.png`,
   },
@@ -542,6 +542,7 @@ export const COMMON_INSTAGRAM_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
   ],
   relatedArticles: [
     'how-to-grow-instagram-followers-organically',
+    'complete-instagram-growth-guide',
     'instagram-algorithm-explained',
     'how-to-get-more-instagram-followers-without-ads',
     'best-time-to-post-on-instagram',
@@ -549,12 +550,6 @@ export const COMMON_INSTAGRAM_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
     'how-to-use-instagram-hashtags-effectively',
     'how-to-increase-instagram-engagement',
     'how-to-get-more-instagram-likes',
-    'complete-instagram-growth-guide',
-    'how-to-use-instagram-for-business',
-    'instagram-marketing-for-small-businesses',
-    'how-to-create-an-instagram-content-calendar',
-    'instagram-content-ideas-for-businesses',
-    'organic-vs-paid-instagram-growth',
     'how-to-build-trust-on-instagram',
     'instagram-marketing-mistakes-businesses-should-avoid',
   ],
@@ -572,30 +567,30 @@ export const COMMON_INSTAGRAM_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
   faqs: [
     {
       id: 'faq-biggest-mistake',
-      question: 'What is the biggest Instagram growth mistake?',
+      question: 'What Instagram mistake hurts creator reach the most?',
       answer:
-        'Publishing content without understanding your audience or providing clear value is one of the most common mistakes.',
+        'Posting without a clear audience niche usually wastes reach. Creators who define who they help earn stronger saves and follows than trend-chasing accounts.',
       schemaEligible: true,
     },
     {
       id: 'faq-post-more',
-      question: 'Does posting more often guarantee growth?',
+      question: 'Does posting more Reels guarantee creator growth on Instagram?',
       answer:
-        'No. Consistency is important, but high-quality content is generally more effective than posting frequently without a strategy.',
+        'No. Volume without hooks, retention and replies rarely compounds. A steady cadence of stronger Reels beats spammy daily uploads.',
       schemaEligible: true,
     },
     {
       id: 'faq-follow-trends',
-      question: 'Should I always follow Instagram trends?',
+      question: 'Should influencers copy every Instagram trend for growth?',
       answer:
-        'Only when they are relevant to your audience and support your overall content strategy.',
+        'Only when the trend fits your niche voice. Irrelevant trends can confuse your audience and weaken personal-brand positioning.',
       schemaEligible: true,
     },
     {
       id: 'faq-review-analytics',
-      question: 'Why should I review Instagram analytics?',
+      question: 'Which Instagram Insights should creators review for growth mistakes?',
       answer:
-        'Analytics help you understand which content performs well so you can make informed decisions about future posts.',
+        'Check reach, saves, shares and profile visits weekly. Those signals show whether content quality—not just posting frequency—is improving.',
       schemaEligible: true,
     },
   ],

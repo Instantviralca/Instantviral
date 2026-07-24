@@ -249,7 +249,7 @@ export const homepageExtendedSections = {
     ],
     primaryCta: {
       label: 'Compare Packages',
-      href: '/buy-instagram-followers',
+      href: '/buy-youtube-subscribers',
     },
     secondaryCta: {
       label: 'Contact Support',

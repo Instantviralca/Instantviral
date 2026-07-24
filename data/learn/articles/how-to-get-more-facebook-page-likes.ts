@@ -16,7 +16,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'A Facebook Page often serves as the first impression people have of a business. Before contacting a company, visiting its website or making a purchase, many users check its Facebook Page to learn more about its products, services and reputation. One of the first things they notice is the number of people who have liked the Page.',
+    text: 'Facebook Page Likes signal credibility before a visitor reads a single post. For local shops, clinics and service brands, that first impression often decides whether someone trusts the business enough to message, call or visit.',
     order: 1,
   },
   {
@@ -28,7 +28,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-3',
     type: 'paragraph',
-    text: 'The goal is not simply to collect Likes but to attract people who genuinely want to follow your business. This guide explains practical strategies that help businesses grow their Facebook Page Likes while building a stronger and more engaged community.',
+    text: 'This guide focuses on Page credibility, trust signals and first impressions. For ongoing audience growth and community reach, see How to Get More Facebook Followers.',
     order: 3,
   },
   {
@@ -135,7 +135,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 16,
     image: {
       src: `${IMG}/facebook-page-brand-optimization.png`,
-      alt: 'Illustration showing Facebook Business Page optimization with profile photo, cover image, branding, business information and call-to-action button.',
+      alt: 'Facebook Business Page optimization with profile photo, cover image, branding, business information and call-to-action.',
       width: 1600,
       height: 900,
     },
@@ -329,7 +329,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 39,
     image: {
       src: `${IMG}/facebook-page-community-growth.png`,
-      alt: 'Illustration showing Facebook community growth through discussions, customer engagement, Groups, educational posts and meaningful interactions.',
+      alt: 'Facebook community growth through discussions, customer engagement, Groups, educational posts and meaningful interactions.',
       width: 1600,
       height: 900,
     },
@@ -591,7 +591,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 71,
     image: {
       src: `${IMG}/facebook-page-likes-dashboard.png`,
-      alt: 'Business analytics dashboard displaying Facebook Page Likes, audience growth, profile visits, engagement rate and monthly Page performance.',
+      alt: 'Business analytics dashboard displaying Facebook Page Likes, audience growth, profile visits, engagement rate and monthly.',
       width: 1600,
       height: 900,
     },
@@ -701,7 +701,7 @@ export const HOW_TO_GET_MORE_FACEBOOK_PAGE_LIKES_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-get-more-facebook-page-likes.png`,
-    alt: 'Illustration showing a business growing Facebook Page Likes through valuable content, Page optimization, community engagement, branding and audience growth.',
+    alt: 'Business growing Facebook Page Likes through valuable content, Page optimization, community engagement, branding and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -719,9 +719,9 @@ export const HOW_TO_GET_MORE_FACEBOOK_PAGE_LIKES_ARTICLE: LearnArticleRecord = {
       'How to Get More Facebook Page Likes',
       'Facebook Page Likes',
       'Get More Facebook Likes',
-      'Facebook Business Page',
-      'Facebook Marketing',
-      'Grow Facebook Page',
+      'Facebook Page Credibility',
+      'Facebook Social Proof',
+      'Facebook Business Page Trust',
     ],
     ogImage: `${IMG}/how-to-get-more-facebook-page-likes.png`,
   },
@@ -740,9 +740,9 @@ export const HOW_TO_GET_MORE_FACEBOOK_PAGE_LIKES_ARTICLE: LearnArticleRecord = {
   contentReviewed: true,
   seoReviewed: true,
   keyTakeaways: [
-    'Growing Facebook Page Likes is about earning attention rather than requesting it.',
-    'Businesses that consistently publish valuable content, maintain professional branding and actively engage with their audience often build stronger Pages over time.',
-    'Instead of chasing numbers, focus on creating a Page that people genuinely want to follow.',
+    'Page Likes act as social proof that helps new visitors trust a business before they enquire or buy.',
+    'Complete profiles, reviews, recent posts and professional visuals strengthen first impressions for local Pages.',
+    'Earn Likes from real customers and partners—not vanity totals—so credibility matches actual community size.',
   ],
   faqs: [
     {
@@ -753,10 +753,10 @@ export const HOW_TO_GET_MORE_FACEBOOK_PAGE_LIKES_ARTICLE: LearnArticleRecord = {
       schemaEligible: true,
     },
     {
-      id: 'faq-encourage-likes',
-      question: 'How can I encourage more people to like my Page?',
+      id: 'faq-local-trust',
+      question: 'How do Page Likes help local businesses build trust?',
       answer:
-        'Publish valuable content, optimise your Page, engage with your audience and promote your Facebook Page through your existing marketing channels.',
+        'Visitors often compare Like counts, reviews and recent activity before messaging or visiting. A credible Page reduces hesitation for first-time customers.',
       schemaEligible: true,
     },
     {
@@ -767,10 +767,10 @@ export const HOW_TO_GET_MORE_FACEBOOK_PAGE_LIKES_ARTICLE: LearnArticleRecord = {
       schemaEligible: true,
     },
     {
-      id: 'faq-post-more',
-      question: 'Does posting more often increase Page Likes?',
+      id: 'faq-profile-complete',
+      question: 'Does a complete Facebook Page get more Likes?',
       answer:
-        'Consistent, high-quality content is generally more effective than posting frequently without providing value.',
+        'Usually yes. Cover photo, About section, contact buttons and recent posts make the Page look active and trustworthy before someone clicks Like.',
       schemaEligible: true,
     },
     {

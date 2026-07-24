@@ -164,7 +164,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 21,
     image: {
       src: `${IMG}/social-media-platform-selection.png`,
-      alt: 'Illustration showing platform selection for beginners by comparing different social media content types, audiences and marketing goals.',
+      alt: 'Platform selection for beginners by comparing different social media content types, audiences and marketing goals.',
       width: 1600,
       height: 900,
     },
@@ -328,7 +328,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 40,
     image: {
       src: `${IMG}/social-media-growth-workflow.png`,
-      alt: "Illustration showing a beginner's social media growth workflow from content planning to publishing, engagement, analytics and long-term audience growth.",
+      alt: "Beginner's social media growth workflow from content planning to publishing, engagement, analytics and long-term audience.",
       width: 1600,
       height: 900,
     },
@@ -681,7 +681,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 84,
     image: {
       src: `${IMG}/social-media-learning-dashboard.png`,
-      alt: 'Business dashboard displaying audience growth, engagement, reach, website traffic, publishing consistency and social media learning progress.',
+      alt: 'Business dashboard displaying audience growth, engagement, reach, website traffic, publishing consistency and social media.',
       width: 1600,
       height: 900,
     },
@@ -796,7 +796,7 @@ export const BEGINNERS_GUIDE_TO_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord 
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/beginners-guide-to-social-media-growth.png`,
-      alt: 'Illustration showing a beginner learning social media growth using Instagram, Facebook, TikTok and YouTube through content creation, audience engagement, analytics and consistent publishing.',
+      alt: 'Beginner learning social media growth using Instagram, Facebook, TikTok and YouTube through content creation, audience.',
       width: 1920,
       height: 1080,
       priority: true,
@@ -816,7 +816,9 @@ export const BEGINNERS_GUIDE_TO_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord 
         'Social Media for Beginners',
         'Grow on Social Media',
         'Social Media Tips',
-        'Social Media Marketing Guide',
+        'Social Media First Steps',
+        'Beginner Social Media Roadmap',
+        'Starting Social Media Fundamentals',
       ],
       ogImage: `${IMG}/beginners-guide-to-social-media-growth.png`,
     },
@@ -863,9 +865,9 @@ export const BEGINNERS_GUIDE_TO_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord 
       },
       {
         id: 'faq-post-every-day',
-        question: 'Should I post every day?',
+        question: 'Is posting daily necessary when you are just starting out?',
         answer:
-          'Not necessarily. A realistic and consistent posting schedule is more effective than publishing daily without maintaining quality.',
+          'No. Beginners usually grow faster with a realistic weekly cadence they can sustain than with forced daily posts that lower quality.',
         schemaEligible: true,
       },
       {

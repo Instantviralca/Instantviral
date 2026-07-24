@@ -17,13 +17,13 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: "Instagram can be an excellent marketing channel for businesses, but simply publishing posts isn't enough to achieve consistent results. Many companies invest time and resources into content creation only to discover that engagement remains low, audience growth slows down or sales never improve.",
+    text: "Local shops, ecommerce brands and service businesses often waste Instagram budget on promo-heavy calendars that never convert. Marketing mistakes around offers, branding and ROI tracking matter more here than creator reach tips.",
   },
   {
     id: 'b-intro-2',
     type: 'paragraph',
     order: 2,
-    text: "In many cases, the problem isn't the platform itself—it's the marketing strategy. Small mistakes made repeatedly can reduce visibility, weaken customer trust and make even high-quality content less effective.",
+    text: "This article speaks to business marketers: product pitches, customer journeys and campaign measurement—not influencer growth hacks. Fix strategy errors before you add more posts.",
   },
   {
     id: 'b-intro-3',
@@ -256,7 +256,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 32,
     image: {
       src: `${IMG}/instagram-branding-mistakes.png`,
-      alt: 'Illustration showing inconsistent Instagram branding compared with a professional and visually consistent business profile.',
+      alt: 'Inconsistent Instagram branding compared with a professional and visually consistent business profile.',
       width: 1600,
       height: 900,
     },
@@ -620,7 +620,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 80,
     image: {
       src: `${IMG}/instagram-business-improvement-dashboard.png`,
-      alt: 'Instagram business improvement dashboard displaying engagement trends, audience growth, content performance and marketing analytics.',
+      alt: 'Instagram business improvement dashboard displaying engagement trends, audience growth, content performance and marketing.',
       width: 1600,
       height: 900,
     },
@@ -711,7 +711,7 @@ export const INSTAGRAM_MARKETING_MISTAKES_BUSINESSES_SHOULD_AVOID_ARTICLE: Learn
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/instagram-marketing-mistakes-businesses-should-avoid.png`,
-      alt: 'Illustration showing common Instagram marketing mistakes alongside best practices including content strategy, branding, engagement and analytics for businesses.',
+      alt: 'Common Instagram marketing mistakes alongside best practices including content strategy, branding, engagement and analytics.',
       width: 1920,
       height: 1080,
       priority: true,
@@ -728,21 +728,22 @@ export const INSTAGRAM_MARKETING_MISTAKES_BUSINESSES_SHOULD_AVOID_ARTICLE: Learn
       canonicalPath: `/learn/${SLUG}`,
       keywords: [
         'Instagram Marketing Mistakes',
-        'Instagram Marketing Tips',
         'Instagram Business Mistakes',
-        'Instagram Growth Strategy',
-        'Instagram Content Strategy',
-        'Instagram for Business',
+        'Ecommerce Instagram Mistakes',
+        'Local Business Instagram Marketing',
+        'Instagram Offer and Promo Mistakes',
+        'Instagram ROI Mistakes',
       ],
       ogImage: `${IMG}/instagram-marketing-mistakes-businesses-should-avoid.png`,
     },
     relatedServices: ['buy-instagram-followers'],
     relatedArticles: [
-      'complete-instagram-growth-guide',
-      'how-to-build-trust-on-instagram',
-      'how-to-create-an-instagram-content-calendar',
       'instagram-marketing-for-small-businesses',
-      'how-to-increase-instagram-engagement',
+      'how-to-use-instagram-for-business',
+      'complete-instagram-growth-guide',
+      'how-to-create-an-instagram-content-calendar',
+      'how-to-build-trust-on-instagram',
+      'common-instagram-growth-mistakes',
     ],
     featured: true,
     published: true,
@@ -758,30 +759,30 @@ export const INSTAGRAM_MARKETING_MISTAKES_BUSINESSES_SHOULD_AVOID_ARTICLE: Learn
     faqs: [
       {
         id: 'faq-biggest-mistake',
-        question: 'What is the biggest Instagram marketing mistake?',
+        question: 'What Instagram marketing mistake costs businesses the most revenue?',
         answer:
-          'Publishing content without a clear strategy is one of the most common problems because it makes long-term growth difficult to measure.',
+          'Selling in every post without education or proof usually lowers trust and enquiry quality. Balance offers with helpful content tied to your product or service.',
         schemaEligible: true,
       },
       {
         id: 'faq-promo-every-day',
-        question: 'Should businesses post promotional content every day?',
+        question: 'Should ecommerce brands run promotional Instagram posts every day?',
         answer:
-          'No. A balanced mix of educational, community-focused and promotional content generally creates a better experience for your audience.',
+          'No. Daily hard sells train people to ignore you. Alternate product proofs, FAQs and community posts with a lighter promo cadence.',
         schemaEligible: true,
       },
       {
         id: 'faq-review-analytics',
-        question: 'How often should businesses review analytics?',
+        question: 'How often should a business review Instagram Insights for marketing ROI?',
         answer:
-          'A monthly review is a good starting point, with weekly checks for active campaigns.',
+          'Review weekly during campaigns and monthly for evergreen content so you can connect posts to enquiries, clicks and sales—not vanity likes alone.',
         schemaEligible: true,
       },
       {
         id: 'faq-small-improvements',
-        question: 'Can small improvements really make a difference?',
+        question: 'Can small Instagram marketing fixes improve lead quality for service businesses?',
         answer:
-          'Yes. Consistent improvements in content quality, branding and audience engagement often produce significant long-term benefits.',
+          'Yes. Clearer offers, stronger profile CTAs and better reply habits often improve lead quality faster than doubling posting volume.',
         schemaEligible: true,
       },
     ],

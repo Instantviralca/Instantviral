@@ -33,9 +33,12 @@ export type MetadataEntry = {
   openGraphTitle?: string;
   openGraphDescription?: string;
   openGraphImage: string;
+  /** Natural alt text for the OG image (page-specific when set). */
+  openGraphImageAlt?: string;
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
+  twitterImageAlt?: string;
   robots: SeoRobotsPolicy;
   keywords?: string[];
   locale: string;

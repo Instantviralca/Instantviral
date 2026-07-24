@@ -16,7 +16,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: "Growing an Instagram account is only part of building a successful online presence. The real challenge is earning the trust of the people who visit your profile. A large follower count may attract attention, but trust is what encourages someone to engage with your content, recommend your brand or become a customer.",
+    text: 'Follower count can attract attention, but Instagram trust is what turns visits into follows, replies and customers. Credible profiles earn that trust through clarity, consistency and useful content.',
   },
   {
     id: 'b-intro-2',
@@ -202,7 +202,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 25,
     image: {
       src: `${IMG}/instagram-brand-consistency.png`,
-      alt: 'Instagram branding illustration showing consistent colours, profile identity, visual style and content branding across multiple posts.',
+      alt: 'Instagram branding with consistent colours, profile identity, visual style and content branding across multiple posts.',
       width: 1600,
       height: 900,
     },
@@ -390,7 +390,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 48,
     image: {
       src: `${IMG}/instagram-customer-trust.png`,
-      alt: 'Illustration showing customer trust on Instagram through conversations, testimonials, community engagement and positive feedback.',
+      alt: 'Customer trust on Instagram through conversations, testimonials, community engagement and positive feedback.',
       width: 1600,
       height: 900,
     },
@@ -577,7 +577,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 70,
     image: {
       src: `${IMG}/instagram-business-credibility-dashboard.png`,
-      alt: 'Instagram business credibility dashboard displaying audience engagement, customer satisfaction, profile performance and long-term growth metrics.',
+      alt: 'Instagram business credibility dashboard displaying audience engagement, customer satisfaction, profile performance and.',
       width: 1600,
       height: 900,
     },
@@ -667,7 +667,7 @@ export const HOW_TO_BUILD_TRUST_ON_INSTAGRAM_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-build-trust-on-instagram.png`,
-    alt: 'Illustration showing how businesses build trust on Instagram through authentic content, customer engagement, consistent branding and social proof.',
+    alt: 'How businesses build trust on Instagram through authentic content, customer engagement, consistent branding and social proof.',
     width: 1920,
     height: 1080,
     priority: true,

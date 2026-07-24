@@ -17,19 +17,19 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: "TikTok has become one of the world's fastest-growing social media platforms, giving creators, businesses and brands the opportunity to reach millions of people through short-form video content. Unlike many other social platforms, TikTok allows new accounts to gain visibility quickly when they consistently publish engaging and relevant videos.",
+    text: "This complete TikTok growth guide is your roadmap: profile setup, content planning, optimization loops and scaling systems. Metric-specific tactics live in the follower, views, likes and engagement spokes linked below.",
   },
   {
     id: 'b-intro-2',
     type: 'paragraph',
     order: 2,
-    text: 'However, long-term success on TikTok is not based on luck alone. Sustainable growth comes from understanding how the platform works, creating valuable content, engaging with your audience and continuously improving your strategy based on real performance data.',
+    text: 'Sustainable growth is not luck. It comes from understanding how TikTok works, planning content, reviewing performance and improving each loop before you scale spend or posting volume.',
   },
   {
     id: 'b-intro-3',
     type: 'paragraph',
     order: 3,
-    text: "Whether you're launching a brand-new account or trying to improve an existing one, this guide provides a complete roadmap to help you build a stronger TikTok presence over time.",
+    text: "Whether you're launching a brand-new account or improving an existing one, use this hub for the full roadmap—then open the followers, views, likes or engagement guides when one metric needs focused work.",
   },
   {
     id: 'b-h2-algorithm',
@@ -124,7 +124,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 15,
     image: {
       src: `${IMG}/tiktok-growth-roadmap.png`,
-      alt: 'TikTok growth roadmap illustration showing profile setup, content creation, publishing consistency, audience engagement and performance analysis.',
+      alt: 'TikTok growth roadmap with profile setup, content creation, publishing consistency, audience engagement and performance.',
       width: 1600,
       height: 900,
     },
@@ -183,7 +183,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 21,
     image: {
       src: `${IMG}/tiktok-content-strategy-framework.png`,
-      alt: 'TikTok content strategy framework showing short-form videos, content planning, publishing schedule and engagement optimization.',
+      alt: 'TikTok content strategy framework showing short-form videos, content planning, publishing schedule and engagement.',
       width: 1600,
       height: 900,
     },
@@ -508,7 +508,7 @@ export const COMPLETE_TIKTOK_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/complete-tiktok-growth-guide.png`,
-    alt: 'Illustration showing a complete TikTok growth strategy with profile optimization, video content planning, audience growth, engagement analytics and performance dashboard.',
+    alt: 'Complete TikTok growth strategy with profile optimization, video content planning, audience growth, engagement analytics and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -524,11 +524,11 @@ export const COMPLETE_TIKTOK_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
     canonicalPath: `/learn/${SLUG}`,
     keywords: [
       'TikTok Growth Guide',
+      'Complete TikTok Roadmap',
+      'TikTok Growth Plan',
       'How to Grow on TikTok',
-      'TikTok Growth Strategy',
-      'TikTok Marketing',
-      'Grow TikTok Followers',
       'TikTok Content Strategy',
+      'TikTok Account Optimization',
     ],
     ogImage: `${IMG}/complete-tiktok-growth-guide.png`,
   },
@@ -556,23 +556,23 @@ export const COMPLETE_TIKTOK_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
   contentReviewed: true,
   seoReviewed: true,
   keyTakeaways: [
-    'TikTok growth depends on consistency, creativity and understanding your audience.',
-    'Create videos that provide value rather than chasing every trend.',
-    'As your content library grows, performance insights help you build a stronger, more engaged audience.',
+    'Use this hub as a full TikTok roadmap—profile, content systems, analytics reviews and scaling habits.',
+    'Drill into metric spokes when followers, views, likes or engagement need targeted improvement.',
+    'Consistency and iterative optimization beat one-off viral attempts for sustainable growth.',
   ],
   faqs: [
     {
       id: 'faq-how-long-tiktok',
-      question: 'How long does it take to grow on TikTok?',
+      question: 'How long does it typically take to build momentum on TikTok?',
       answer:
-        'Growth varies depending on your content quality, consistency and audience, but regular publishing and continuous improvement generally produce better long-term results.',
+        'Results vary by niche and publishing quality, but accounts that improve hooks and retention each week usually see clearer progress over several months.',
       schemaEligible: true,
     },
     {
       id: 'faq-new-accounts',
-      question: 'Does TikTok favour new accounts?',
+      question: 'Does TikTok give early distribution tests to newer creators?',
       answer:
-        'New accounts can gain visibility if their videos perform well, but consistent quality remains the most important factor.',
+        'TikTok can test new videos with fresh audiences regardless of account age, but sustained growth still depends on retention and engagement quality.',
       schemaEligible: true,
     },
     {
@@ -584,9 +584,9 @@ export const COMPLETE_TIKTOK_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-post-every-day',
-      question: 'Should I post every day?',
+      question: 'How often should I publish new TikTok content for long-term growth?',
       answer:
-        'Choose a publishing schedule that you can maintain consistently while producing quality content.',
+        'Aim for a cadence you can keep for months—often several times a week—while still improving hooks, retention and topic clarity.',
       schemaEligible: true,
     },
   ],

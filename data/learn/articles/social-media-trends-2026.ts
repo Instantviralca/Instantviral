@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Social media continues to evolve faster than almost any other area of digital marketing. New technologies, changing consumer behaviour and platform updates constantly reshape the way businesses connect with audiences. Strategies that delivered strong results only a few years ago may no longer produce the same level of engagement today, making it essential for brands to stay informed about emerging trends.',
+    text: 'Short-form video, community formats and AI-assisted workflows are reshaping social media in 2026. Brands that adapt early protect attention while outdated playbooks quietly lose reach.',
     order: 1,
   },
   {
@@ -102,7 +102,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 12,
     image: {
       src: `${IMG}/ai-assisted-social-media-content.png`,
-      alt: 'Illustration showing AI-assisted social media content creation with brainstorming, content planning, scheduling, analytics and creative workflow.',
+      alt: 'AI-assisted social media content creation with brainstorming, content planning, scheduling, analytics and creative workflow.',
       width: 1600,
       height: 900,
     },
@@ -339,7 +339,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 41,
     image: {
       src: `${IMG}/short-form-video-and-social-commerce.png`,
-      alt: 'Illustration showing short-form video marketing combined with social commerce, creator content, product discovery, mobile shopping and customer engagement.',
+      alt: 'Short-form video marketing combined with social commerce, creator content, product discovery, mobile shopping and customer.',
       width: 1600,
       height: 900,
     },
@@ -656,7 +656,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 80,
     image: {
       src: `${IMG}/future-social-media-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying AI insights, audience growth, engagement trends, website traffic, campaign ROI and future social media performance.',
+      alt: 'Business analytics dashboard displaying AI insights, audience growth, engagement trends, website traffic, campaign ROI and.',
       width: 1600,
       height: 900,
     },
@@ -793,7 +793,7 @@ export const SOCIAL_MEDIA_TRENDS_2026_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/social-media-trends-2026.png`,
-    alt: 'Illustration showing the biggest social media marketing trends of 2026, including AI-assisted content creation, short-form video, creator partnerships, analytics, social commerce and community-first marketing.',
+    alt: 'Biggest social media marketing trends of 2026, including AI-assisted content creation, short-form video, creator.',
     width: 1920,
     height: 1080,
     priority: true,

@@ -17,7 +17,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: "Many creators believe the YouTube algorithm is unpredictable or that it randomly decides which videos become successful. In reality, YouTube's recommendation system is designed to help viewers discover content they are most likely to enjoy. Its goal is not to promote the biggest channels automatically but to recommend videos that keep people watching and satisfied with their viewing experience.",
+    text: "YouTube recommendations are built to keep viewers watching content they are likely to enjoy. The system is not a lottery for big channels—it rewards packaging, retention and viewer satisfaction signals.",
     order: 1,
   },
   {
@@ -139,7 +139,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/youtube-ranking-signals.png`,
-      alt: 'Illustration showing YouTube ranking signals including click-through rate, audience retention, watch time, viewer satisfaction and engagement metrics.',
+      alt: 'YouTube ranking signals including click-through rate, audience retention, watch time, viewer satisfaction and engagement.',
       width: 1600,
       height: 900,
     },
@@ -237,7 +237,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 29,
     image: {
       src: `${IMG}/youtube-audience-retention.png`,
-      alt: 'Illustration showing YouTube audience retention with viewer watch progression, engagement milestones, video timeline and watch time analytics.',
+      alt: 'YouTube audience retention with viewer watch progression, engagement milestones, video timeline and watch time analytics.',
       width: 1600,
       height: 900,
     },
@@ -613,7 +613,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 76,
     image: {
       src: `${IMG}/youtube-algorithm-dashboard.png`,
-      alt: 'Business analytics dashboard displaying YouTube recommendations, watch time, audience retention, click-through rate, traffic sources and overall channel performance.',
+      alt: 'Business analytics dashboard displaying YouTube recommendations, watch time, audience retention, click-through rate, traffic.',
       width: 1600,
       height: 900,
     },
@@ -723,7 +723,7 @@ export const HOW_THE_YOUTUBE_ALGORITHM_WORKS_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-the-youtube-algorithm-works.png`,
-    alt: 'Illustration showing how the YouTube algorithm recommends videos using audience retention, watch time, click-through rate, viewer satisfaction and recommendation analytics.',
+    alt: 'How the YouTube algorithm recommends videos using audience retention, watch time, click-through rate, viewer satisfaction.',
     width: 1920,
     height: 1080,
     priority: true,

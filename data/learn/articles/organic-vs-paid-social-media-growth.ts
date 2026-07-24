@@ -18,13 +18,13 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'One of the first decisions businesses face when building a social media presence is whether to focus on organic growth, invest in paid advertising or combine both approaches. This question has become increasingly important as social media platforms evolve and competition for audience attention continues to grow. While some brands rely almost entirely on organic content, others invest heavily in advertising campaigns to accelerate their results.',
+    text: 'Every brand eventually weighs organic social media growth against paid amplification. This cross-platform guide helps you allocate budget, compare trade-offs and build a marketing mix—not pick a single winner.',
     order: 1,
   },
   {
     id: 'b-intro-2',
     type: 'paragraph',
-    text: 'The truth is that neither strategy is universally better. Organic growth helps businesses build trust, establish long-term relationships and create a loyal community. Paid promotion provides faster visibility, allows precise audience targeting and can support specific marketing objectives such as product launches or lead generation. The most effective strategy depends on your goals, budget, industry and stage of business growth.',
+    text: 'Organic growth builds trust, community and long-term visibility across Instagram, Facebook, TikTok and YouTube. Paid promotion adds speed, targeting and campaign control. The right blend depends on goals, budget, industry and growth stage—not platform hype.',
     order: 2,
   },
   {
@@ -36,8 +36,26 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-4',
     type: 'paragraph',
-    text: 'This guide explains the differences between organic and paid social media growth, highlights the benefits of each approach and provides practical advice for deciding how to use them within your overall marketing plan.',
+    text: 'Use this hub for budget allocation and decision frameworks. For platform-native algorithm details, see Organic vs Paid Instagram Growth and Organic vs Paid TikTok Growth.',
     order: 4,
+  },
+  {
+    id: 'b-related-instagram-spoke',
+    type: 'related_article_card',
+    articleSlug: 'organic-vs-paid-instagram-growth',
+    label: 'Organic vs Paid Instagram Growth',
+    description:
+      'Instagram-native comparison covering Reels reach, Explore distribution, Boost posts and ad formats.',
+    order: 5,
+  },
+  {
+    id: 'b-related-tiktok-spoke',
+    type: 'related_article_card',
+    articleSlug: 'organic-vs-paid-tiktok-growth',
+    label: 'Organic vs Paid TikTok Growth',
+    description:
+      'TikTok-native comparison covering For You Page distribution, Spark Ads and creative testing.',
+    order: 6,
   },
   {
     id: 'b-related-beginners',
@@ -142,7 +160,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/organic-social-media-growth.png`,
-      alt: 'Illustration showing organic social media growth through consistent content creation, audience engagement, community building and long-term brand trust.',
+      alt: 'Organic social media growth through consistent content creation, audience engagement, community building and long-term brand.',
       width: 1600,
       height: 900,
     },
@@ -294,7 +312,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 35,
     image: {
       src: `${IMG}/paid-social-media-advertising.png`,
-      alt: 'Illustration showing paid social media advertising with audience targeting, campaign management, advertising budget, lead generation and marketing optimization.',
+      alt: 'Paid social media advertising with audience targeting, campaign management, advertising budget, lead generation and.',
       width: 1600,
       height: 900,
     },
@@ -672,7 +690,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 80,
     image: {
       src: `${IMG}/organic-vs-paid-performance-dashboard.png`,
-      alt: 'Business analytics dashboard comparing organic reach, paid reach, engagement, website traffic, conversions and overall marketing performance.',
+      alt: 'Business analytics dashboard comparing organic reach, paid reach, engagement, website traffic, conversions and overall.',
       width: 1600,
       height: 900,
     },
@@ -787,7 +805,7 @@ export const ORGANIC_VS_PAID_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/organic-vs-paid-social-media-growth.png`,
-    alt: 'Illustration comparing organic and paid social media growth strategies with content creation, advertising campaigns, audience engagement, analytics and long-term business growth.',
+    alt: 'Illustration comparing organic and paid social media growth strategies with content creation, advertising campaigns.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -805,9 +823,9 @@ export const ORGANIC_VS_PAID_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord = {
       'Organic vs Paid Social Media Growth',
       'Organic Social Media Growth',
       'Paid Social Media Growth',
-      'Social Media Marketing Strategy',
+      'Social Media Budget Allocation',
+      'Marketing Mix Strategy',
       'Social Media Advertising',
-      'Business Growth',
     ],
     ogImage: `${IMG}/organic-vs-paid-social-media-growth.png`,
   },
@@ -818,6 +836,8 @@ export const ORGANIC_VS_PAID_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord = {
     'buy-youtube-subscribers',
   ],
   relatedArticles: [
+    'organic-vs-paid-instagram-growth',
+    'organic-vs-paid-tiktok-growth',
     'beginners-guide-to-social-media-growth',
     'social-media-marketing-guide',
     'how-to-measure-social-media-success',
@@ -832,23 +852,23 @@ export const ORGANIC_VS_PAID_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord = {
   contentReviewed: true,
   seoReviewed: true,
   keyTakeaways: [
-    'Organic and paid social media growth are not competing strategies—they are complementary tools.',
-    'Organic marketing builds trust, credibility and community over time, while paid advertising increases visibility and supports specific business objectives.',
-    'Businesses that combine both approaches thoughtfully often achieve stronger long-term results than those relying exclusively on one method.',
+    'Use this cross-platform guide to decide budget split, campaign roles and when organic vs paid should lead.',
+    'Organic builds trust and community; paid accelerates reach for launches, retargeting and prospecting.',
+    'Platform-specific algorithm details live in the Instagram and TikTok organic-vs-paid spokes linked from this hub.',
   ],
   faqs: [
+    {
+      id: 'faq-budget-split',
+      question: 'How should businesses split budget between organic and paid social media?',
+      answer:
+        'Many brands fund consistent organic content first, then allocate paid budget to prospecting, retargeting and time-sensitive campaigns. Adjust the split quarterly based on CAC and ROAS.',
+      schemaEligible: true,
+    },
     {
       id: 'faq-organic-vs-paid',
       question: 'Is organic social media better than paid advertising?',
       answer:
         'Neither is universally better. Organic growth builds long-term trust, while paid advertising provides faster visibility and targeted reach.',
-      schemaEligible: true,
-    },
-    {
-      id: 'faq-without-ads',
-      question: 'Can small businesses succeed without paid advertising?',
-      answer:
-        'Yes. Consistent, valuable organic content can help small businesses build engaged communities over time.',
       schemaEligible: true,
     },
     {
@@ -866,10 +886,10 @@ export const ORGANIC_VS_PAID_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord = {
       schemaEligible: true,
     },
     {
-      id: 'faq-best-strategy',
-      question: 'What is the best strategy?',
+      id: 'faq-platform-specific',
+      question: 'Do Instagram and TikTok need different organic vs paid approaches?',
       answer:
-        'For most businesses, a balanced combination of organic content and strategic paid advertising delivers the strongest long-term results.',
+        'Yes. Reels/Explore and For You Page distribution behave differently. Use the Instagram and TikTok comparison guides for platform-native tactics.',
       schemaEligible: true,
     },
   ],

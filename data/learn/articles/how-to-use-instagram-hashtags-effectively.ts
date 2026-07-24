@@ -165,7 +165,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 20,
     image: {
       src: `${IMG}/instagram-hashtag-categories.png`,
-      alt: 'Instagram hashtag categories illustration showing niche hashtags, industry hashtags and community hashtags used to organize content.',
+      alt: 'Instagram hashtag categories with niche hashtags, industry hashtags and community hashtags used to organize content.',
       width: 1600,
       height: 900,
     },
@@ -432,7 +432,7 @@ export const HOW_TO_USE_INSTAGRAM_HASHTAGS_EFFECTIVELY_ARTICLE: LearnArticleReco
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/how-to-use-instagram-hashtags-effectively.png`,
-      alt: 'Illustration showing an Instagram hashtag strategy with content categorization, keyword organization and post discoverability analytics.',
+      alt: 'Instagram hashtag strategy with content categorization, keyword organization and post discoverability analytics.',
       width: 1920,
       height: 1080,
       priority: true,

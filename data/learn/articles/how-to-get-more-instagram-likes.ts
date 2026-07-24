@@ -260,7 +260,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 32,
     image: {
       src: `${IMG}/instagram-caption-strategy.png`,
-      alt: 'Instagram caption strategy illustration showing engaging captions, audience interaction and content planning.',
+      alt: 'Instagram caption strategy with engaging captions, audience interaction and content planning.',
       width: 1600,
       height: 900,
     },
@@ -698,7 +698,7 @@ export const HOW_TO_GET_MORE_INSTAGRAM_LIKES_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-get-more-instagram-likes.png`,
-    alt: 'Illustration showing strategies to get more Instagram likes through quality content, audience engagement and performance analytics.',
+    alt: 'Strategies to get more Instagram likes through quality content, audience engagement and performance analytics.',
     width: 1920,
     height: 1080,
     priority: true,

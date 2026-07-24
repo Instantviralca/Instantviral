@@ -234,7 +234,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 29,
     image: {
       src: `${IMG}/youtube-click-worthy-thumbnails.png`,
-      alt: 'Illustration showing YouTube thumbnail optimization with attractive visuals, consistent branding, higher click-through rate and improved video discoverability.',
+      alt: 'YouTube thumbnail optimization with attractive visuals, consistent branding, higher click-through rate and improved video.',
       width: 1600,
       height: 900,
     },
@@ -289,7 +289,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 35,
     image: {
       src: `${IMG}/youtube-watch-time-retention.png`,
-      alt: 'Illustration showing YouTube audience retention with watch time graphs, viewer journey, video timeline and engagement improvements.',
+      alt: 'YouTube audience retention with watch time graphs, viewer journey, video timeline and engagement improvements.',
       width: 1600,
       height: 900,
     },
@@ -594,7 +594,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 72,
     image: {
       src: `${IMG}/youtube-views-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying YouTube views, traffic sources, click-through rate, audience retention, watch time and video performance trends.',
+      alt: 'Business analytics dashboard displaying YouTube views, traffic sources, click-through rate, audience retention, watch time.',
       width: 1600,
       height: 900,
     },
@@ -704,7 +704,7 @@ export const HOW_TO_GET_MORE_YOUTUBE_VIEWS_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-get-more-youtube-views.png`,
-    alt: 'Illustration showing a YouTube creator increasing video views through SEO, engaging thumbnails, audience retention, content optimization and analytics.',
+    alt: 'YouTube creator increasing video views through SEO, engaging thumbnails, audience retention, content optimization and.',
     width: 1920,
     height: 1080,
     priority: true,

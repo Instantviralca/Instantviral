@@ -17,19 +17,19 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: "Growing an Instagram account is no longer about posting random photos and hoping they go viral. Today's platform rewards creators, businesses and brands that consistently publish valuable content, understand their audience and adapt their strategy over time.",
+    text: "This pillar guide maps Instagram growth from your first hundred followers to your first ten thousand. It covers planning, SEO, analytics and scaling—use the organic spoke guides for beginner habit loops and zero-budget tactics.",
   },
   {
     id: 'b-intro-2',
     type: 'paragraph',
     order: 2,
-    text: 'Many people focus only on follower numbers, but sustainable Instagram growth is built through a combination of profile optimization, content planning, engagement, search visibility and continuous improvement. Every successful account follows the same basic principle: create content that people genuinely want to see and make it easy for the right audience to discover it.',
+    text: "Advanced growth is a roadmap: clarify positioning, design a content strategy, earn engagement, improve Instagram search visibility and review performance before you scale volume or paid tests.",
   },
   {
     id: 'b-intro-3',
     type: 'paragraph',
     order: 3,
-    text: "Whether you're just starting your first Instagram account or trying to grow an established profile, this guide brings together the most important strategies covered throughout our Instagram learning resources. Think of it as your roadmap for building a stronger presence over the long term.",
+    text: "Whether you are launching a new account or scaling an established profile, use this hub for planning and optimization—then open the organic habit guide or the without-ads tactics guide when you need a focused spoke.",
   },
   {
     id: 'b-h2-foundation',
@@ -86,7 +86,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 10,
     image: {
       src: `${IMG}/instagram-growth-roadmap.png`,
-      alt: 'Instagram growth roadmap illustration showing profile setup, content strategy, audience engagement and analytics workflow.',
+      alt: 'Instagram growth roadmap with profile setup, content strategy, audience engagement and analytics workflow.',
       width: 1600,
       height: 900,
     },
@@ -679,7 +679,7 @@ export const COMPLETE_INSTAGRAM_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/complete-instagram-growth-guide.png`,
-    alt: 'Complete Instagram growth guide illustration showing profile optimization, content strategy, audience growth, analytics and engagement dashboard.',
+    alt: 'Complete Instagram growth guide with profile optimization, content strategy, audience growth, analytics and engagement.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -695,10 +695,10 @@ export const COMPLETE_INSTAGRAM_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
     canonicalPath: `/learn/${SLUG}`,
     keywords: [
       'Complete Instagram Growth Guide',
-      'How to Grow on Instagram',
+      'Instagram Growth Roadmap',
       'Instagram Growth Strategy',
-      'Instagram Marketing Guide',
       'Instagram Content Strategy',
+      'Instagram SEO and Analytics',
       'Long-Term Instagram Growth',
     ],
     ogImage: `${IMG}/complete-instagram-growth-guide.png`,
@@ -736,30 +736,30 @@ export const COMPLETE_INSTAGRAM_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
   faqs: [
     {
       id: 'faq-how-long-growth',
-      question: 'How long does it take to grow on Instagram?',
+      question: 'How long does a full Instagram growth roadmap usually take from 100 to 10,000 followers?',
       answer:
-        'Growth depends on your niche, content quality, consistency and audience. Building a loyal community usually takes time and regular effort.',
+        'Timelines vary by niche, but accounts that follow a planned system—profile, content, SEO and analytics—typically need months of consistent improvement rather than one viral week.',
       schemaEligible: true,
     },
     {
       id: 'faq-post-every-day',
-      question: 'Do I need to post every day?',
+      question: 'Should an advanced Instagram plan require daily posting?',
       answer:
-        'Not necessarily. A consistent schedule that you can maintain is generally more effective than posting frequently without a clear strategy.',
+        'Not by default. Pillar planning favors a sustainable cadence plus Reels and SEO tests, not forced daily volume that weakens quality.',
       schemaEligible: true,
     },
     {
       id: 'faq-instagram-seo-important',
-      question: 'Is Instagram SEO important?',
+      question: 'Where does Instagram SEO fit in a complete growth guide?',
       answer:
-        'Yes. Optimizing your profile, captions and keywords can improve discoverability and help the right audience find your content.',
+        'SEO sits after foundations: optimize name, bio, captions and keywords so search and Explore can scale the audience you already serve well.',
       schemaEligible: true,
     },
     {
       id: 'faq-followers-vs-engagement',
-      question: 'Should I focus on followers or engagement?',
+      question: 'When scaling Instagram, should you optimize for followers or engagement first?',
       answer:
-        'Both matter, but meaningful engagement often indicates that your audience genuinely values your content.',
+        'Optimize for meaningful engagement and retention signals first, then scale follower acquisition so growth stays qualified.',
       schemaEligible: true,
     },
   ],

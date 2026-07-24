@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'One of the biggest challenges businesses face with social media is maintaining consistency. Many teams start with enthusiasm, publish content regularly for a few weeks and then gradually become less active as other priorities take over. Without a structured planning process, social media often becomes reactive rather than strategic.',
+    text: 'Reactive social posting burns teams out. Monthly content planning gives marketers a clear inventory of themes, formats and deadlines before the week starts.',
     order: 1,
   },
   {
@@ -264,7 +264,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 32,
     image: {
       src: `${IMG}/monthly-content-calendar.png`,
-      alt: 'Illustration showing a monthly social media content calendar with scheduled posts, campaign planning, publishing dates and organized marketing workflow.',
+      alt: 'Monthly social media content calendar with scheduled posts, campaign planning, publishing dates and organized marketing.',
       width: 1600,
       height: 900,
     },
@@ -362,7 +362,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 43,
     image: {
       src: `${IMG}/content-repurposing-workflow.png`,
-      alt: 'Illustration showing content repurposing from one piece of content into blog posts, short videos, carousels, newsletters and multiple social media formats.',
+      alt: 'Content repurposing from one piece of content into blog posts, short videos, carousels, newsletters and multiple social.',
       width: 1600,
       height: 900,
     },
@@ -611,7 +611,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 72,
     image: {
       src: `${IMG}/content-performance-dashboard.png`,
-      alt: 'Business analytics dashboard displaying content performance, engagement rate, publishing consistency, audience growth, website traffic and campaign results.',
+      alt: 'Business analytics dashboard displaying content performance, engagement rate, publishing consistency, audience growth.',
       width: 1600,
       height: 900,
     },
@@ -720,7 +720,7 @@ export const SOCIAL_MEDIA_CONTENT_PLANNING_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/social-media-content-planning.png`,
-    alt: 'Illustration showing a monthly social media content calendar with content planning, scheduling, creative workflow, multi-platform publishing and team collaboration.',
+    alt: 'Monthly social media content calendar with content planning, scheduling, creative workflow, multi-platform publishing and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -785,9 +785,9 @@ export const SOCIAL_MEDIA_CONTENT_PLANNING_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-content-pillars',
-      question: 'What are content pillars?',
+      question: 'How do content pillars support a monthly social media calendar?',
       answer:
-        'Content pillars are the core themes your business consistently publishes, such as education, customer stories and product updates.',
+        'Pillars are the recurring themes you schedule each month—such as education, proof and offers—so the calendar stays focused instead of random.',
       schemaEligible: true,
     },
     {

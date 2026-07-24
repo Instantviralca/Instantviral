@@ -112,7 +112,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 14,
     image: {
       src: `${IMG}/instagram-profile-seo.png`,
-      alt: 'Instagram profile SEO illustration showing optimized username, display name, bio, profile photo and website link.',
+      alt: 'Instagram profile SEO with optimized username, display name, bio, profile photo and website link.',
       width: 1600,
       height: 900,
     },
@@ -512,7 +512,7 @@ export const INSTAGRAM_SEO_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/instagram-seo-guide.png`,
-    alt: 'Illustration showing Instagram SEO with profile optimization, keyword strategy, search visibility and content discovery analytics.',
+    alt: 'Instagram SEO with profile optimization, keyword strategy, search visibility and content discovery analytics.',
     width: 1920,
     height: 1080,
     priority: true,

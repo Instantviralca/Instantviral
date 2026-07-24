@@ -41,7 +41,7 @@ export {
   getPlatformNavItems,
   isMegaMenuItem,
 } from '@/data/navigation';
-export { getFooterColumns, getFooterRegistryServices } from '@/data/footer';
+export { getFooterColumns } from '@/data/footer';
 export {
   learnArticles,
   getAllLearnArticles,

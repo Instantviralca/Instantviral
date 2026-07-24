@@ -137,7 +137,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/facebook-page-seo-optimization.png`,
-      alt: 'Illustration showing Facebook Page SEO optimization including profile setup, About section, business information, keywords and branding.',
+      alt: 'Facebook Page SEO optimization including profile setup, About section, business information, keywords and branding.',
       width: 1600,
       height: 900,
     },
@@ -320,7 +320,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 39,
     image: {
       src: `${IMG}/facebook-content-seo-strategy.png`,
-      alt: 'Illustration showing a Facebook content SEO strategy with educational posts, videos, keyword optimization, audience engagement and content planning.',
+      alt: 'Facebook content SEO strategy with educational posts, videos, keyword optimization, audience engagement and content planning.',
       width: 1600,
       height: 900,
     },
@@ -592,7 +592,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 71,
     image: {
       src: `${IMG}/facebook-seo-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying Facebook search visibility, organic reach, Page performance, audience growth, engagement rate and SEO insights.',
+      alt: 'Business analytics dashboard displaying Facebook search visibility, organic reach, Page performance, audience growth.',
       width: 1600,
       height: 900,
     },
@@ -702,7 +702,7 @@ export const FACEBOOK_SEO_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/facebook-seo-guide.png`,
-    alt: 'Illustration showing Facebook SEO optimization with a business page, search visibility, content optimization, analytics dashboard and long-term organic growth.',
+    alt: 'Facebook SEO optimization with a business page, search visibility, content optimization, analytics dashboard and long-term.',
     width: 1920,
     height: 1080,
     priority: true,

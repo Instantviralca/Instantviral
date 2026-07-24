@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'One of the biggest mistakes businesses make is judging social media success by follower count alone. While having a large audience may create a positive first impression, follower numbers rarely tell the complete story. A page with fewer followers but higher engagement often delivers better business results than a page with a much larger but inactive audience.',
+    text: 'Follower count is a weak scorecard on its own. Meaningful social media measurement tracks reach, engagement quality, traffic and conversions that map to business outcomes.',
     order: 1,
   },
   {
@@ -204,7 +204,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 25,
     image: {
       src: `${IMG}/social-media-kpis-dashboard.png`,
-      alt: 'Illustration showing key social media KPIs including reach, engagement, impressions, audience growth, click-through rate and conversion tracking.',
+      alt: 'Key social media KPIs including reach, engagement, impressions, audience growth, click-through rate and conversion tracking.',
       width: 1600,
       height: 900,
     },
@@ -385,7 +385,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 47,
     image: {
       src: `${IMG}/social-media-conversion-funnel.png`,
-      alt: 'Illustration showing a social media conversion funnel from audience reach to engagement, website visits, lead generation and customer conversions.',
+      alt: 'Social media conversion funnel from audience reach to engagement, website visits, lead generation and customer conversions.',
       width: 1600,
       height: 900,
     },
@@ -692,7 +692,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 84,
     image: {
       src: `${IMG}/social-media-roi-dashboard.png`,
-      alt: 'Business analytics dashboard displaying campaign ROI, audience growth, engagement trends, conversion rate, website traffic and overall marketing performance.',
+      alt: 'Business analytics dashboard displaying campaign ROI, audience growth, engagement trends, conversion rate, website traffic.',
       width: 1600,
       height: 900,
     },
@@ -807,7 +807,7 @@ export const HOW_TO_MEASURE_SOCIAL_MEDIA_SUCCESS_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-measure-social-media-success.png`,
-    alt: 'Illustration showing a business measuring social media success through analytics dashboards, engagement metrics, audience growth, website traffic, conversions and marketing performance.',
+    alt: 'Business measuring social media success through analytics dashboards, engagement metrics, audience growth, website traffic.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -879,9 +879,9 @@ export const HOW_TO_MEASURE_SOCIAL_MEDIA_SUCCESS_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-why-engagement',
-      question: 'Why is engagement important?',
+      question: 'Why should marketers track engagement when measuring social media success?',
       answer:
-        'Engagement indicates that audiences are interacting with your content, making it a strong indicator of relevance and quality.',
+        'Engagement shows whether people interact with your content, so it is a stronger quality and relevance signal than follower count alone.',
       schemaEligible: true,
     },
     {

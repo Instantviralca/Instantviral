@@ -19,7 +19,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Building an audience on TikTok is important, but earning trust is what turns viewers into loyal customers. A business may receive thousands of video views, yet still struggle to generate enquiries or sales if people do not feel confident about the brand behind the content.',
+    text: 'Views without credibility rarely convert. Trust on TikTok comes from transparent storytelling, useful teaching and consistent replies that make a brand feel safe to buy from.',
     order: 1,
   },
   {
@@ -136,7 +136,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 16,
     image: {
       src: `${IMG}/tiktok-brand-authenticity.png`,
-      alt: 'Illustration showing authentic TikTok business content with team members, behind-the-scenes videos, transparent communication and customer interaction.',
+      alt: 'Authentic TikTok business content with team members, behind-the-scenes videos, transparent communication and customer.',
       width: 1600,
       height: 900,
     },
@@ -337,7 +337,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 41,
     image: {
       src: `${IMG}/tiktok-social-proof.png`,
-      alt: 'Illustration showing social proof on TikTok through customer reviews, testimonials, user-generated content and positive community engagement.',
+      alt: 'Social proof on TikTok through customer reviews, testimonials, user-generated content and positive community engagement.',
       width: 1600,
       height: 900,
     },
@@ -602,7 +602,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 74,
     image: {
       src: `${IMG}/tiktok-brand-trust-dashboard.png`,
-      alt: 'Business analytics dashboard showing customer engagement, audience loyalty, returning viewers, profile visits and trust-related performance metrics.',
+      alt: 'Business analytics dashboard showing customer engagement, audience loyalty, returning viewers, profile visits and.',
       width: 1600,
       height: 900,
     },
@@ -735,7 +735,7 @@ export const HOW_TO_BUILD_TRUST_ON_TIKTOK_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-build-trust-on-tiktok.png`,
-    alt: 'Illustration showing a business building trust on TikTok through authentic content, customer engagement, transparency, social proof and brand credibility.',
+    alt: 'Business building trust on TikTok through authentic content, customer engagement, transparency, social proof and brand.',
     width: 1920,
     height: 1080,
     priority: true,

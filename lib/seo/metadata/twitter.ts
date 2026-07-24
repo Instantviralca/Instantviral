@@ -24,11 +24,12 @@ export function buildTwitterMetadata(
     ? imagePath
     : absoluteUrl(imagePath);
 
+  const imageAlt = sanitizeMetadataText(input.imageAlt ?? input.title);
   const base: NonNullable<Metadata['twitter']> = {
     card: seoSiteConfig.twitterCard,
     title: sanitizeMetadataText(input.title),
     description: sanitizeMetadataText(input.description),
-    images: [imageUrl],
+    images: [{ url: imageUrl, alt: imageAlt }],
   };
 
   if (seoSiteConfig.twitterHandle) {
@@ -48,6 +49,10 @@ export function buildTwitterFromEntry(
     title: entry.twitterTitle ?? entry.title,
     description: entry.twitterDescription ?? entry.description,
     image: entry.twitterImage ?? entry.openGraphImage,
-    imageAlt: entry.twitterTitle ?? entry.title,
+    imageAlt:
+      entry.twitterImageAlt ??
+      entry.openGraphImageAlt ??
+      entry.twitterTitle ??
+      entry.title,
   });
 }

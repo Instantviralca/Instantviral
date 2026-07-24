@@ -1,6 +1,5 @@
 import { routes, learnArticlePath, learnCategoryPath } from '@/config/routes';
 import { getActiveLearnCategories } from '@/data/learn';
-import { getFooterServices } from '@/data/services';
 import type { FooterColumn } from '@/types';
 
 function learnCategoryFooterLinks() {
@@ -36,9 +35,13 @@ export function getFooterColumns(): FooterColumn[] {
       title: 'Popular Services',
       links: [
         { label: 'Buy Instagram Followers', href: '/buy-instagram-followers' },
-        { label: 'Buy Instagram Likes', href: '/buy-instagram-likes' },
         { label: 'Buy Instagram Views', href: '/buy-instagram-views' },
-        { label: 'Buy Instagram Comments', href: '/buy-instagram-comments' },
+        { label: 'Buy TikTok Followers', href: '/buy-tiktok-followers' },
+        { label: 'Buy TikTok Likes', href: '/buy-tiktok-likes' },
+        { label: 'Buy YouTube Subscribers', href: '/buy-youtube-subscribers' },
+        { label: 'Buy YouTube Views', href: '/buy-youtube-views' },
+        { label: 'Buy Facebook Followers', href: '/buy-facebook-followers' },
+        { label: 'Buy Facebook Page Likes', href: '/buy-facebook-page-likes' },
       ],
     },
     {
@@ -103,10 +106,6 @@ export function getFooterColumns(): FooterColumn[] {
       ],
     },
   ];
-}
-
-export function getFooterRegistryServices() {
-  return getFooterServices();
 }
 
 export const footerMeta = {

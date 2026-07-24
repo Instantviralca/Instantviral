@@ -224,7 +224,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 27,
     image: {
       src: `${IMG}/instagram-community-engagement.png`,
-      alt: 'Illustration showing a creator responding to Instagram comments and building community engagement.',
+      alt: 'Creator responding to Instagram comments and building community engagement.',
       width: 1600,
       height: 900,
     },
@@ -495,7 +495,7 @@ export const HOW_TO_INCREASE_INSTAGRAM_ENGAGEMENT_ARTICLE: LearnArticleRecord = 
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-increase-instagram-engagement.png`,
-    alt: 'Illustration showing Instagram engagement growth through quality content, audience interaction, comments, shares, saves and analytics.',
+    alt: 'Instagram engagement growth through quality content, audience interaction, comments, shares, saves and analytics.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -556,9 +556,9 @@ export const HOW_TO_INCREASE_INSTAGRAM_ENGAGEMENT_ARTICLE: LearnArticleRecord = 
     },
     {
       id: 'faq-why-engagement-important',
-      question: 'Why is engagement important?',
+      question: 'How does engagement influence Instagram content performance?',
       answer:
-        'Engagement helps measure how your audience responds to your content and provides valuable insights for improving future posts.',
+        'Likes, comments, saves and shares help Instagram understand which posts deserve more distribution and give you clearer feedback for the next creative test.',
       schemaEligible: true,
     },
     {

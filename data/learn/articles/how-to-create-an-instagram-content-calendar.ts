@@ -17,7 +17,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'One of the biggest challenges for creators and businesses on Instagram is staying consistent. Many accounts begin with enthusiasm, publish regularly for a few weeks and then slowly become inactive because they run out of ideas or don\'t have enough time to create content.',
+    text: 'Instagram consistency collapses without a plan. A simple content calendar turns last-minute posting into a reusable weekly workflow with themes, formats and buffer posts ready to go.',
   },
   {
     id: 'b-intro-2',
@@ -189,7 +189,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 23,
     image: {
       src: `${IMG}/instagram-content-pillars.png`,
-      alt: 'Instagram content pillars illustration showing educational content, product posts, customer stories, behind-the-scenes content and promotional campaigns.',
+      alt: 'Instagram content pillars with educational content, product posts, customer stories, behind-the-scenes content and.',
       width: 1600,
       height: 900,
     },
@@ -669,7 +669,7 @@ export const HOW_TO_CREATE_AN_INSTAGRAM_CONTENT_CALENDAR_ARTICLE: LearnArticleRe
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/how-to-create-an-instagram-content-calendar.png`,
-      alt: 'Illustration showing an Instagram content calendar with monthly planning, scheduled posts, content pillars and performance analytics.',
+      alt: 'Instagram content calendar with monthly planning, scheduled posts, content pillars and performance analytics.',
       width: 1920,
       height: 1080,
       priority: true,

@@ -17,13 +17,13 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Social media has evolved from a communication tool into one of the most powerful marketing channels available to businesses of every size. Whether you operate a local company, an eCommerce store or an international brand, platforms such as Instagram, Facebook, TikTok and YouTube allow you to connect directly with your audience, build trust and create long-term customer relationships.',
+    text: 'New to social media marketing? This educational guide explains what SMM is, core terminology and how major platforms differ—before you build a formal plan.',
     order: 1,
   },
   {
     id: 'b-intro-2',
     type: 'paragraph',
-    text: 'However, simply creating accounts and publishing content is no longer enough. Every day, millions of posts compete for attention, making strategy more important than frequency. Businesses that understand their audience, publish valuable content consistently and measure performance carefully are far more likely to achieve sustainable growth than those that post without a clear plan.',
+    text: 'Instagram, Facebook, TikTok and YouTube each have distinct formats, audiences and discovery systems. Understanding those basics helps you choose where to invest time instead of copying tactics that do not fit your business.',
     order: 2,
   },
   {
@@ -35,8 +35,17 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-4',
     type: 'paragraph',
-    text: 'This guide explains the foundations of social media marketing and provides practical strategies that businesses can use to build stronger communities, improve engagement and support long-term growth.',
+    text: 'This guide covers foundations, platform overviews and common terminology. When you are ready to set goals, KPIs and a content calendar, continue with How to Build a Social Media Marketing Strategy.',
     order: 4,
+  },
+  {
+    id: 'b-related-strategy',
+    type: 'related_article_card',
+    articleSlug: 'social-media-marketing-strategy',
+    label: 'How to Build a Social Media Marketing Strategy',
+    description:
+      'Turn platform basics into a structured plan with goals, KPIs, content pillars, calendars and review loops.',
+    order: 5,
   },
   {
     id: 'b-h2-what',
@@ -215,7 +224,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 28,
     image: {
       src: `${IMG}/social-media-strategy-planning.png`,
-      alt: 'Illustration showing a social media strategy planning session with business goals, audience research, platform selection, content pillars and marketing workflow.',
+      alt: 'Social media strategy planning session with business goals, audience research, platform selection, content pillars and.',
       width: 1600,
       height: 900,
     },
@@ -373,7 +382,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 46,
     image: {
       src: `${IMG}/social-media-content-planning.png`,
-      alt: 'Illustration showing social media content planning with a monthly content calendar, scheduling workflow, creative assets and multi-platform publishing.',
+      alt: 'Social media content planning with a monthly content calendar, scheduling workflow, creative assets and multi-platform.',
       width: 1600,
       height: 900,
     },
@@ -703,7 +712,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 86,
     image: {
       src: `${IMG}/social-media-marketing-dashboard.png`,
-      alt: 'Business analytics dashboard displaying social media reach, engagement, audience growth, website traffic, conversions and overall marketing performance.',
+      alt: 'Business analytics dashboard displaying social media reach, engagement, audience growth, website traffic, conversions and.',
       width: 1600,
       height: 900,
     },
@@ -806,7 +815,7 @@ export const SOCIAL_MEDIA_MARKETING_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/social-media-marketing-guide.png`,
-    alt: 'Illustration showing a complete social media marketing strategy across Instagram, Facebook, TikTok and YouTube with content planning, audience engagement, analytics and business growth.',
+    alt: 'Complete social media marketing strategy across Instagram, Facebook, TikTok and YouTube with content planning, audience.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -822,11 +831,11 @@ export const SOCIAL_MEDIA_MARKETING_GUIDE_ARTICLE: LearnArticleRecord = {
     canonicalPath: `/learn/${SLUG}`,
     keywords: [
       'Social Media Marketing Guide',
-      'Social Media Marketing',
-      'Social Media Strategy',
+      'What Is Social Media Marketing',
+      'Social Media Marketing Basics',
+      'Social Media Platforms Overview',
       'Business Social Media',
-      'Social Media Growth',
-      'Social Media Marketing Tips',
+      'Social Media Terminology',
     ],
     ogImage: `${IMG}/social-media-marketing-guide.png`,
   },
@@ -851,9 +860,9 @@ export const SOCIAL_MEDIA_MARKETING_GUIDE_ARTICLE: LearnArticleRecord = {
   contentReviewed: true,
   seoReviewed: true,
   keyTakeaways: [
-    'Successful social media marketing is built on strategy, consistency and audience understanding.',
-    'Businesses that create valuable content, engage with their communities and regularly analyse performance are more likely to achieve sustainable long-term growth than those focused only on increasing follower numbers.',
-    'Rather than trying to be everywhere, concentrate on delivering value where your audience already spends time.',
+    'Social media marketing uses platforms to promote businesses, educate audiences and build relationships.',
+    'Each major platform serves different content formats and discovery systems—learn the basics before scaling activity.',
+    'Master terminology and platform roles first; formal planning and KPIs belong in a dedicated strategy guide.',
   ],
   faqs: [
     {

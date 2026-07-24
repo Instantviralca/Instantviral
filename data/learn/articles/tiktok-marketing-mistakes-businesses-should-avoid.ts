@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'TikTok has become one of the most effective platforms for businesses to build brand awareness and connect with customers. However, simply creating an account and uploading videos is not enough to achieve meaningful results. Many businesses struggle because they repeat the same strategic mistakes that reduce visibility, weaken engagement and limit long-term growth.',
+    text: 'Business TikTok accounts often underperform because of campaign and positioning errors—not because the platform fails brands. Promo-only calendars, weak offers and ignored lead goals waste budget faster than a missing trend sound.',
     order: 1,
   },
   {
@@ -233,7 +233,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 30,
     image: {
       src: `${IMG}/tiktok-business-content-mistakes.png`,
-      alt: 'Illustration showing common business content mistakes on TikTok including inconsistent posting, promotional-only videos, weak hooks and poor content planning.',
+      alt: 'Common business content mistakes on TikTok including inconsistent posting, promotional-only videos, weak hooks and poor.',
       width: 1600,
       height: 900,
     },
@@ -493,7 +493,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 62,
     image: {
       src: `${IMG}/tiktok-business-strategy-improvement.png`,
-      alt: 'Illustration showing an improved TikTok business strategy with educational content, customer engagement, analytics review and consistent publishing.',
+      alt: 'Improved TikTok business strategy with educational content, customer engagement, analytics review and consistent publishing.',
       width: 1600,
       height: 900,
     },
@@ -688,7 +688,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 86,
     image: {
       src: `${IMG}/tiktok-business-performance-dashboard.png`,
-      alt: 'Business analytics dashboard displaying TikTok marketing performance, audience growth, engagement rate, profile visits, website clicks and monthly business insights.',
+      alt: 'Business analytics dashboard displaying TikTok marketing performance, audience growth, engagement rate, profile visits.',
       width: 1600,
       height: 900,
     },
@@ -799,7 +799,7 @@ export const TIKTOK_MARKETING_MISTAKES_BUSINESSES_SHOULD_AVOID_ARTICLE: LearnArt
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/tiktok-marketing-mistakes-businesses-should-avoid.png`,
-      alt: 'Illustration comparing common TikTok marketing mistakes with best practices for businesses, highlighting content strategy, audience engagement, branding, analytics and sustainable business growth.',
+      alt: 'Illustration comparing common TikTok marketing mistakes with best practices for businesses, highlighting content strategy.',
       width: 1920,
       height: 1080,
       priority: true,
@@ -816,11 +816,11 @@ export const TIKTOK_MARKETING_MISTAKES_BUSINESSES_SHOULD_AVOID_ARTICLE: LearnArt
       canonicalPath: `/learn/${SLUG}`,
       keywords: [
         'TikTok Marketing Mistakes Businesses Should Avoid',
-        'TikTok Business Mistakes',
-        'TikTok Marketing Strategy',
-        'TikTok Business Tips',
-        'TikTok Growth Guide',
-        'TikTok Content Strategy',
+        'TikTok Business Campaign Mistakes',
+        'TikTok ROI Mistakes',
+        'TikTok Offer Positioning Mistakes',
+        'Brand TikTok Lead Generation Mistakes',
+        'TikTok Customer Acquisition Mistakes',
       ],
       ogImage: `${IMG}/tiktok-marketing-mistakes-businesses-should-avoid.png`,
     },
@@ -831,10 +831,11 @@ export const TIKTOK_MARKETING_MISTAKES_BUSINESSES_SHOULD_AVOID_ARTICLE: LearnArt
     ],
     relatedArticles: [
       'tiktok-for-business',
+      'tiktok-marketing-for-small-businesses',
       'organic-vs-paid-tiktok-growth',
       'how-to-build-trust-on-tiktok',
-      'tiktok-seo-guide',
       'how-to-create-a-tiktok-content-calendar',
+      'common-tiktok-growth-mistakes',
     ],
     featured: true,
     published: true,
@@ -849,37 +850,37 @@ export const TIKTOK_MARKETING_MISTAKES_BUSINESSES_SHOULD_AVOID_ARTICLE: LearnArt
     faqs: [
       {
         id: 'faq-biggest-mistake',
-        question: 'What is the biggest TikTok marketing mistake?',
+        question: 'What TikTok marketing mistake hurts brand ROI the most?',
         answer:
-          'Treating TikTok like a traditional advertising platform instead of creating valuable, audience-focused content.',
+          'Running TikTok like a TV ad with only product pitches. Brands that teach first and sell second usually earn better enquiry quality.',
         schemaEligible: true,
       },
       {
         id: 'faq-review-strategy',
-        question: 'How often should businesses review their TikTok strategy?',
+        question: 'How often should a brand review TikTok campaigns for lead generation?',
         answer:
-          'A monthly review is a practical approach, with weekly checks for active campaigns.',
+          'Review active offer campaigns weekly and the full content mix monthly so you can connect views to enquiries, not just likes.',
         schemaEligible: true,
       },
       {
         id: 'faq-consistency-vs-viral',
-        question: 'Is consistency more important than going viral?',
+        question: 'Should businesses chase viral TikToks or steady campaign publishing?',
         answer:
-          'For most businesses, consistent quality content delivers better long-term results than relying on occasional viral videos.',
+          'Steady campaign publishing tied to offers and proof usually beats waiting for one viral spike that does not convert.',
         schemaEligible: true,
       },
       {
         id: 'faq-every-video-promote',
-        question: 'Should every TikTok video promote a product?',
+        question: 'Does constant product promotion hurt customer acquisition on TikTok?',
         answer:
-          'No. Educational, entertaining and community-focused videos are essential for building trust and engagement.',
+          'Yes. Over-selling reduces trust. Mix education, social proof and community replies with fewer direct offer videos.',
         schemaEligible: true,
       },
       {
         id: 'faq-improve-results',
-        question: 'How can businesses improve their TikTok results?',
+        question: 'How can brands improve TikTok results for customer acquisition?',
         answer:
-          'Create valuable content, understand your audience, review analytics regularly and maintain a consistent publishing schedule.',
+          'Clarify the offer, publish problem-solving videos, track profile visits and enquiries, and keep a consistent weekly campaign cadence.',
         schemaEligible: true,
       },
     ],

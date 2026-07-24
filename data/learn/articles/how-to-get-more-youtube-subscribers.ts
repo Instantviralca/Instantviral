@@ -199,7 +199,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 25,
     image: {
       src: `${IMG}/youtube-channel-branding.png`,
-      alt: 'Illustration showing YouTube channel branding with banner artwork, profile image, playlists, consistent visual identity and professional channel organization.',
+      alt: 'YouTube channel branding with banner artwork, profile image, playlists, consistent visual identity and professional channel.',
       width: 1600,
       height: 900,
     },
@@ -459,7 +459,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 59,
     image: {
       src: `${IMG}/youtube-community-growth.png`,
-      alt: 'Illustration showing YouTube community growth through audience engagement, comments, subscribers, returning viewers and valuable educational content.',
+      alt: 'YouTube community growth through audience engagement, comments, subscribers, returning viewers and valuable educational.',
       width: 1600,
       height: 900,
     },
@@ -638,7 +638,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 79,
     image: {
       src: `${IMG}/youtube-subscriber-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying YouTube subscriber growth, watch time, audience retention, returning viewers, engagement and overall channel performance.',
+      alt: 'Business analytics dashboard displaying YouTube subscriber growth, watch time, audience retention, returning viewers.',
       width: 1600,
       height: 900,
     },
@@ -742,7 +742,7 @@ export const HOW_TO_GET_MORE_YOUTUBE_SUBSCRIBERS_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-get-more-youtube-subscribers.png`,
-    alt: 'Illustration showing a YouTube creator growing subscribers through valuable content, audience engagement, channel optimization, consistent publishing and long-term community building.',
+    alt: 'YouTube creator growing subscribers through valuable content, audience engagement, channel optimization, consistent.',
     width: 1920,
     height: 1080,
     priority: true,

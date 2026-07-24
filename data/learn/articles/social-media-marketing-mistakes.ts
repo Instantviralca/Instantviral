@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Social media has become one of the most effective ways for businesses to build brand awareness, strengthen customer relationships and generate long-term growth. However, success rarely comes from simply creating accounts and posting content whenever inspiration strikes. Many businesses invest significant time and effort into social media without seeing meaningful results because they unknowingly repeat the same strategic mistakes.',
+    text: 'Busy posting calendars still fail when strategy is missing. The most common social media marketing mistakes waste budget and trust long before algorithms become the real problem.',
     order: 1,
   },
   {
@@ -248,7 +248,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 32,
     image: {
       src: `${IMG}/social-media-brand-consistency.png`,
-      alt: 'Illustration showing consistent social media branding with matching profile visuals, colours, messaging, design elements and brand identity across multiple platforms.',
+      alt: 'Consistent social media branding with matching profile visuals, colours, messaging, design elements and brand identity.',
       width: 1600,
       height: 900,
     },
@@ -285,7 +285,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 36,
     image: {
       src: `${IMG}/inconsistent-social-media-posting.png`,
-      alt: 'Illustration showing inconsistent social media posting compared with a planned publishing schedule using a content calendar and organized workflow.',
+      alt: 'Inconsistent social media posting compared with a planned publishing schedule using a content calendar and organized.',
       width: 1600,
       height: 900,
     },
@@ -747,7 +747,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 95,
     image: {
       src: `${IMG}/social-media-improvement-dashboard.png`,
-      alt: 'Business analytics dashboard displaying engagement improvements, audience growth, website traffic, conversions and social media marketing performance.',
+      alt: 'Business analytics dashboard displaying engagement improvements, audience growth, website traffic, conversions and social.',
       width: 1600,
       height: 900,
     },
@@ -862,7 +862,7 @@ export const SOCIAL_MEDIA_MARKETING_MISTAKES_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/social-media-marketing-mistakes.png`,
-    alt: 'Illustration showing common social media marketing mistakes such as inconsistent posting, poor branding, weak engagement, missing analytics and ineffective content strategy.',
+    alt: 'Common social media marketing mistakes such as inconsistent posting, poor branding, weak engagement, missing analytics and.',
     width: 1920,
     height: 1080,
     priority: true,

@@ -17,7 +17,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: "One of the biggest reasons businesses become inconsistent on Instagram isn't a lack of time—it's running out of ideas. Many business owners know they should post regularly, but after a few weeks they begin asking the same question:",
+    text: "Instagram calendars stall when idea banks run dry—not when teams lack hours. This list gives businesses repeatable post angles so publishing stays consistent after the first few weeks.",
   },
   {
     id: 'b-intro-2',
@@ -91,7 +91,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 11,
     image: {
       src: `${IMG}/instagram-business-content-pillars.png`,
-      alt: 'Instagram business content pillars illustration showing educational posts, customer stories, product highlights, behind-the-scenes content and promotional campaigns.',
+      alt: 'Instagram business content pillars with educational posts, customer stories, product highlights, behind-the-scenes content.',
       width: 1600,
       height: 900,
     },
@@ -189,7 +189,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 23,
     image: {
       src: `${IMG}/instagram-content-brainstorming.png`,
-      alt: 'Instagram content brainstorming illustration showing a marketing team planning posts, campaigns, reels and monthly content ideas.',
+      alt: 'Instagram content brainstorming with a marketing team planning posts, campaigns, reels and monthly content ideas.',
       width: 1600,
       height: 900,
     },
@@ -781,7 +781,7 @@ export const INSTAGRAM_CONTENT_IDEAS_FOR_BUSINESSES_ARTICLE: LearnArticleRecord 
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/instagram-content-ideas-for-businesses.png`,
-      alt: 'Illustration showing creative Instagram content ideas for businesses with a content calendar, post planning, engagement strategy and marketing dashboard.',
+      alt: 'Creative Instagram content ideas for businesses with a content calendar, post planning, engagement strategy and marketing.',
       width: 1920,
       height: 1080,
       priority: true,
@@ -836,9 +836,9 @@ export const INSTAGRAM_CONTENT_IDEAS_FOR_BUSINESSES_ARTICLE: LearnArticleRecord 
       },
       {
         id: 'faq-every-post-product',
-        question: 'Should every post promote a product?',
+        question: 'Is it smart to turn every Instagram idea into a product pitch?',
         answer:
-          'No. Educational, community-focused and trust-building content should make up the majority of your publishing schedule.',
+          'No. Most high-performing idea lists mix education, community prompts and light promotion so the Feed still feels useful.',
         schemaEligible: true,
       },
       {

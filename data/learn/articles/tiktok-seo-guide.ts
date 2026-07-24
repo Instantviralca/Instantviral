@@ -18,7 +18,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'TikTok is no longer just a platform for entertainment. Millions of people now use it as a search engine to find tutorials, product reviews, travel recommendations, recipes and business advice. Instead of opening a traditional search engine, many users search directly inside TikTok to discover creators and answers.',
+    text: 'People search inside TikTok for tutorials, reviews and how-tos the same way they use a search engine. Optimizing captions, on-screen text and spoken keywords helps videos rank beyond the For You feed.',
   },
   {
     id: 'b-intro-2',
@@ -140,7 +140,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 17,
     image: {
       src: `${IMG}/tiktok-keyword-research.png`,
-      alt: 'TikTok keyword research illustration showing search suggestions, keyword planning, audience intent and content topic discovery.',
+      alt: 'TikTok keyword research with search suggestions, keyword planning, audience intent and content topic discovery.',
       width: 1600,
       height: 900,
     },
@@ -257,7 +257,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 33,
     image: {
       src: `${IMG}/tiktok-search-optimization.png`,
-      alt: 'Illustration showing TikTok search optimization with captions, spoken keywords, hashtags, on-screen text and video categorization.',
+      alt: 'TikTok search optimization with captions, spoken keywords, hashtags, on-screen text and video categorization.',
       width: 1600,
       height: 900,
     },
@@ -490,7 +490,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 63,
     image: {
       src: `${IMG}/tiktok-search-performance-dashboard.png`,
-      alt: 'TikTok search performance dashboard displaying search traffic, keyword rankings, audience retention, video views and engagement metrics.',
+      alt: 'TikTok search performance dashboard displaying search traffic, keyword rankings, audience retention, video views and.',
       width: 1600,
       height: 900,
     },
@@ -579,7 +579,7 @@ export const TIKTOK_SEO_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/tiktok-seo-guide.png`,
-    alt: 'Illustration showing TikTok SEO optimization with keyword research, search rankings, video optimization, captions and analytics dashboard.',
+    alt: 'TikTok SEO optimization with keyword research, search rankings, video optimization, captions and analytics dashboard.',
     width: 1920,
     height: 1080,
     priority: true,

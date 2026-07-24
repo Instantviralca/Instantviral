@@ -17,7 +17,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Many businesses believe Facebook randomly decides which posts become popular. In reality, the platform uses an algorithm that evaluates thousands of signals to determine which content users are most likely to find valuable.',
+    text: 'Facebook does not pick winners at random. Ranking systems score relevance, relationships and engagement signals to decide which Page posts earn News Feed distribution.',
     order: 1,
   },
   {
@@ -147,7 +147,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 18,
     image: {
       src: `${IMG}/facebook-algorithm-ranking-signals.png`,
-      alt: 'Illustration showing Facebook algorithm ranking signals including engagement, relevance, content quality, shares, comments, watch time and audience interests.',
+      alt: 'Facebook algorithm ranking signals including engagement, relevance, content quality, shares, comments, watch time and.',
       width: 1600,
       height: 900,
     },
@@ -203,7 +203,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 24,
     image: {
       src: `${IMG}/facebook-meaningful-engagement.png`,
-      alt: 'Illustration showing meaningful Facebook engagement through comments, discussions, reactions, community interaction and audience conversations.',
+      alt: 'Meaningful Facebook engagement through comments, discussions, reactions, community interaction and audience conversations.',
       width: 1600,
       height: 900,
     },
@@ -562,7 +562,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 69,
     image: {
       src: `${IMG}/facebook-algorithm-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying Facebook reach, engagement rate, audience retention, watch time, shares and content performance insights.',
+      alt: 'Business analytics dashboard displaying Facebook reach, engagement rate, audience retention, watch time, shares and content.',
       width: 1600,
       height: 900,
     },
@@ -689,7 +689,7 @@ export const HOW_THE_FACEBOOK_ALGORITHM_WORKS_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-the-facebook-algorithm-works.png`,
-    alt: 'Illustration showing how the Facebook algorithm ranks content using audience engagement, relevance signals, content quality, interactions and performance analytics.',
+    alt: 'How the Facebook algorithm ranks content using audience engagement, relevance signals, content quality, interactions and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -749,16 +749,16 @@ export const HOW_THE_FACEBOOK_ALGORITHM_WORKS_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-comments-vs-reactions',
-      question: 'Are comments more valuable than reactions?',
+      question: 'Do Facebook comments send stronger ranking signals than simple reactions?',
       answer:
-        'Meaningful comments often provide stronger engagement signals because they indicate deeper audience interaction.',
+        'Meaningful comments often weigh more heavily because they show deeper interaction than a one-tap reaction.',
       schemaEligible: true,
     },
     {
       id: 'faq-review-insights',
-      question: 'How often should I review Facebook Insights?',
+      question: 'How frequently should Page owners check Facebook Insights for reach changes?',
       answer:
-        'A monthly review is a good starting point, with weekly reviews for active campaigns.',
+        'A monthly Insights review is a solid baseline; move to weekly checks when you are testing reach-focused posts.',
       schemaEligible: true,
     },
     {

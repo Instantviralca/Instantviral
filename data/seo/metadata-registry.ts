@@ -15,6 +15,7 @@ import { AUTHORS } from '@/data/authors';
 import { getServiceBySlug } from '@/data/services';
 import { getServiceContentBySlug } from '@/data/content/services';
 import { isPublicLiveArticle } from '@/lib/learn/editorial/status';
+import { getOpenGraphImageForSlug } from '@/data/seo/open-graph-images';
 import { descriptions } from '@/seo/descriptions';
 import { titles } from '@/seo/titles';
 import type { MetadataEntry } from '@/types/seo-metadata';
@@ -27,6 +28,8 @@ const SOURCE = 'data/seo/metadata-registry.ts';
 function entry(
   partial: Omit<MetadataEntry, 'locale' | 'updatedAt' | 'sourceFile' | 'openGraphImage'> & {
     openGraphImage?: string;
+    openGraphImageAlt?: string;
+    twitterImageAlt?: string;
     locale?: string;
     updatedAt?: string;
     sourceFile?: string;
@@ -51,6 +54,7 @@ function buildServiceEntries(): MetadataEntry[] {
     const description =
       content?.seo?.description ??
       (service ? descriptions.service(service) : seoSiteConfig.defaultDescription);
+    const og = getOpenGraphImageForSlug(slug);
 
     return entry({
       id: `meta-service-${slug}`,
@@ -61,9 +65,12 @@ function buildServiceEntries(): MetadataEntry[] {
       canonicalPath: route,
       openGraphTitle: title,
       openGraphDescription: description,
+      openGraphImage: og?.path ?? OG,
+      openGraphImageAlt: og?.alt,
       twitterTitle: title,
       twitterDescription: description,
-      twitterImage: OG,
+      twitterImage: og?.path ?? OG,
+      twitterImageAlt: og?.alt,
       robots: { index: true, follow: true },
       keywords: service ? [service.primaryKeyword, ...service.secondaryKeywords] : undefined,
       active: true,
@@ -211,6 +218,8 @@ function buildTagEntries(): MetadataEntry[] {
     .filter((item): item is MetadataEntry => item !== null);
 }
 
+const homepageOg = getOpenGraphImageForSlug('homepage');
+
 export const metadataRegistry: MetadataEntry[] = [
   entry({
     id: 'meta-home',
@@ -219,6 +228,10 @@ export const metadataRegistry: MetadataEntry[] = [
     title: titles.home(),
     description: descriptions.home(),
     canonicalPath: '/',
+    openGraphImage: homepageOg?.path ?? OG,
+    openGraphImageAlt: homepageOg?.alt,
+    twitterImage: homepageOg?.path ?? OG,
+    twitterImageAlt: homepageOg?.alt,
     robots: { index: true, follow: true },
     keywords: [
       'buy instagram followers canada',

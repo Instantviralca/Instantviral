@@ -16,7 +16,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Growing a YouTube channel takes more than uploading videos and hoping they gain traction. While every successful creator follows a different path, many struggling channels share the same avoidable mistakes. These issues often reduce visibility, lower audience retention and make it harder for viewers to return.',
+    text: 'YouTube channels stall for predictable reasons—weak packaging, thin retention and unclear topics—not because creators lack talent. Spotting those patterns early prevents months of wasted uploads.',
     order: 1,
   },
   {
@@ -170,7 +170,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 22,
     image: {
       src: `${IMG}/youtube-thumbnail-mistakes.png`,
-      alt: 'Illustration comparing ineffective and optimized YouTube thumbnails, showing improvements in click-through rate, branding and visual clarity.',
+      alt: 'Illustration comparing ineffective and optimized YouTube thumbnails, showing improvements in click-through rate, branding.',
       width: 1600,
       height: 900,
     },
@@ -306,7 +306,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 39,
     image: {
       src: `${IMG}/youtube-channel-improvement.png`,
-      alt: 'Illustration showing YouTube channel improvements through consistent publishing, organized playlists, audience engagement and better content planning.',
+      alt: 'YouTube channel improvements through consistent publishing, organized playlists, audience engagement and better content.',
       width: 1600,
       height: 900,
     },
@@ -606,7 +606,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 76,
     image: {
       src: `${IMG}/youtube-growth-performance-dashboard.png`,
-      alt: 'Business analytics dashboard displaying YouTube watch time, audience retention, click-through rate, subscriber growth, views and overall channel performance improvements.',
+      alt: 'Business analytics dashboard displaying YouTube watch time, audience retention, click-through rate, subscriber growth, views.',
       width: 1600,
       height: 900,
     },
@@ -716,7 +716,7 @@ export const COMMON_YOUTUBE_GROWTH_MISTAKES_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/common-youtube-growth-mistakes.png`,
-    alt: 'Illustration showing common YouTube growth mistakes including poor thumbnails, inconsistent publishing, weak SEO, low audience retention and missed optimization opportunities.',
+    alt: 'Common YouTube growth mistakes including poor thumbnails, inconsistent publishing, weak SEO, low audience retention and.',
     width: 1920,
     height: 1080,
     priority: true,

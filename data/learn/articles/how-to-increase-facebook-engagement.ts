@@ -16,7 +16,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: 'Building a successful Facebook Page is not just about publishing content regularly. The real measure of success is how your audience responds to what you share. Comments, reactions, shares and meaningful conversations show that your content is connecting with people rather than simply appearing in their News Feed.',
+    text: 'A Facebook Page earns value when people talk back—not when posts simply appear. Comments, shares and meaningful conversations are the engagement signals worth designing for.',
     order: 1,
   },
   {
@@ -179,7 +179,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 22,
     image: {
       src: `${IMG}/facebook-community-conversations.png`,
-      alt: 'Illustration showing meaningful Facebook community conversations with comments, discussions, audience participation and customer interaction.',
+      alt: 'Meaningful Facebook community conversations with comments, discussions, audience participation and customer interaction.',
       width: 1600,
       height: 900,
     },
@@ -357,7 +357,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 44,
     image: {
       src: `${IMG}/facebook-content-engagement-strategy.png`,
-      alt: 'Illustration showing a Facebook engagement strategy using educational posts, videos, polls, community discussions and consistent publishing.',
+      alt: 'Facebook engagement strategy using educational posts, videos, polls, community discussions and consistent publishing.',
       width: 1600,
       height: 900,
     },
@@ -575,7 +575,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 70,
     image: {
       src: `${IMG}/facebook-engagement-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying Facebook engagement rate, comments, shares, reactions, audience growth and monthly content performance.',
+      alt: 'Business analytics dashboard displaying Facebook engagement rate, comments, shares, reactions, audience growth and monthly.',
       width: 1600,
       height: 900,
     },
@@ -702,7 +702,7 @@ export const HOW_TO_INCREASE_FACEBOOK_ENGAGEMENT_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-to-increase-facebook-engagement.png`,
-    alt: 'Illustration showing strategies to increase Facebook engagement through meaningful conversations, reactions, comments, shares, community building and audience interaction.',
+    alt: 'Strategies to increase Facebook engagement through meaningful conversations, reactions, comments, shares, community building.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -756,9 +756,9 @@ export const HOW_TO_INCREASE_FACEBOOK_ENGAGEMENT_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-comments-vs-reactions',
-      question: 'Are comments more valuable than reactions?',
+      question: 'Should I prioritise comments over reactions when improving Facebook engagement?',
       answer:
-        'Comments generally indicate deeper audience participation because they require more effort than simply reacting to a post.',
+        'Yes for conversation quality. Comments and replies usually deepen discussion more than a quick Like or emoji reaction.',
       schemaEligible: true,
     },
     {
@@ -777,9 +777,9 @@ export const HOW_TO_INCREASE_FACEBOOK_ENGAGEMENT_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-review-insights',
-      question: 'How often should I review Facebook Insights?',
+      question: 'When is the best cadence to review Insights during engagement campaigns?',
       answer:
-        'A monthly review is recommended, with more frequent checks during active marketing campaigns.',
+        'Check weekly while testing hooks and formats, then shift to a monthly Insights review once patterns stabilize.',
       schemaEligible: true,
     },
   ],

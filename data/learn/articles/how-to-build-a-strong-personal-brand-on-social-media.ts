@@ -188,7 +188,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 23,
     image: {
       src: `${IMG}/personal-brand-identity.png`,
-      alt: 'Illustration showing the foundation of a personal brand with niche selection, expertise, values, visual identity and consistent messaging.',
+      alt: 'Foundation of a personal brand with niche selection, expertise, values, visual identity and consistent messaging.',
       width: 1600,
       height: 900,
     },
@@ -324,7 +324,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 39,
     image: {
       src: `${IMG}/personal-brand-content-strategy.png`,
-      alt: 'Illustration showing a personal brand content strategy with educational posts, storytelling, audience engagement, publishing workflow and content planning.',
+      alt: 'Personal brand content strategy with educational posts, storytelling, audience engagement, publishing workflow and content.',
       width: 1600,
       height: 900,
     },
@@ -723,7 +723,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 89,
     image: {
       src: `${IMG}/personal-brand-growth-dashboard.png`,
-      alt: 'Business analytics dashboard displaying personal brand growth, audience engagement, profile visits, website clicks, follower growth and content performance.',
+      alt: 'Business analytics dashboard displaying personal brand growth, audience engagement, profile visits, website clicks, follower.',
       width: 1600,
       height: 900,
     },
@@ -839,7 +839,7 @@ export const HOW_TO_BUILD_A_STRONG_PERSONAL_BRAND_ON_SOCIAL_MEDIA_ARTICLE: Learn
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/how-to-build-a-strong-personal-brand-on-social-media.png`,
-      alt: 'Illustration showing a professional building a personal brand on social media through valuable content, audience trust, consistent branding, community engagement and long-term growth.',
+      alt: 'Professional building a personal brand on social media through valuable content, audience trust, consistent branding.',
       width: 1920,
       height: 1080,
       priority: true,

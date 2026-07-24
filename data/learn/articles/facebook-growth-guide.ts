@@ -16,13 +16,13 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: "Facebook has been one of the world's most influential social media platforms for nearly two decades. While many marketers focus heavily on newer platforms, Facebook continues to offer enormous opportunities for businesses, creators and organizations that want to build long-term relationships with their audience. Millions of people still use Facebook every day to discover local businesses, follow brands, join communities, read recommendations and interact with content that matters to them.",
+    text: 'Facebook remains a relationship engine for local businesses, communities and brands even as newer apps take attention. Page growth now depends on useful posts, conversation and Groups—not broadcast spam.',
     order: 1,
   },
   {
     id: 'b-intro-2',
     type: 'paragraph',
-    text: 'Growing on Facebook today requires a different approach than it did years ago. Publishing frequent updates alone is no longer enough. The platform now rewards content that encourages meaningful interactions, provides value and keeps people engaged. Businesses that consistently educate, entertain and communicate with their audience often build stronger communities than those focused only on promotion.',
+    text: 'Meaningful interactions, useful posts and community conversation now matter more than broadcast-style updates. Brands that educate and talk with their audience usually build stronger Facebook communities than those that only promote.',
     order: 2,
   },
   {
@@ -175,7 +175,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 21,
     image: {
       src: `${IMG}/facebook-page-optimization.png`,
-      alt: 'Illustration showing a professionally optimized Facebook Business Page with profile image, cover photo, call-to-action button, business information and branding.',
+      alt: 'Professionally optimized Facebook Business Page with profile image, cover photo, call-to-action button, business information.',
       width: 1600,
       height: 900,
     },
@@ -327,7 +327,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 40,
     image: {
       src: `${IMG}/facebook-content-engagement.png`,
-      alt: 'Illustration showing Facebook content strategy with educational posts, videos, audience discussions, comments, reactions and community engagement.',
+      alt: 'Facebook content strategy with educational posts, videos, audience discussions, comments, reactions and community engagement.',
       width: 1600,
       height: 900,
     },
@@ -641,7 +641,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 78,
     image: {
       src: `${IMG}/facebook-growth-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying Facebook audience growth, page engagement, followers, post reach, profile visits and monthly performance insights.',
+      alt: 'Business analytics dashboard displaying Facebook audience growth, page engagement, followers, post reach, profile visits and.',
       width: 1600,
       height: 900,
     },
@@ -751,7 +751,7 @@ export const FACEBOOK_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/facebook-growth-guide.png`,
-    alt: 'Illustration showing a complete Facebook growth strategy with business page optimization, audience engagement, content planning, analytics and long-term community growth.',
+    alt: 'Complete Facebook growth strategy with business page optimization, audience engagement, content planning, analytics and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -781,11 +781,10 @@ export const FACEBOOK_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
     'buy-facebook-post-likes',
   ],
   relatedArticles: [
-    'facebook-growth-guide',
     'how-to-get-more-facebook-followers',
     'how-the-facebook-algorithm-works',
     'facebook-seo-guide',
-    'how-to-increase-facebook-engagement'
+    'how-to-increase-facebook-engagement',
   ],
   featured: true,
   published: true,

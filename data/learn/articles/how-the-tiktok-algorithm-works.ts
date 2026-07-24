@@ -203,7 +203,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 25,
     image: {
       src: `${IMG}/tiktok-engagement-signals.png`,
-      alt: 'Illustration showing TikTok engagement signals including likes, comments, shares, saves and profile visits.',
+      alt: 'TikTok engagement signals including likes, comments, shares, saves and profile visits.',
       width: 1600,
       height: 900,
     },
@@ -509,7 +509,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 63,
     image: {
       src: `${IMG}/tiktok-recommendation-system.png`,
-      alt: 'TikTok recommendation system illustration showing content categorization, audience matching and For You feed distribution.',
+      alt: 'TikTok recommendation system with content categorization, audience matching and For You feed distribution.',
       width: 1600,
       height: 900,
     },
@@ -593,7 +593,7 @@ export const HOW_THE_TIKTOK_ALGORITHM_WORKS_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/how-the-tiktok-algorithm-works.png`,
-    alt: 'Illustration explaining how the TikTok algorithm recommends videos using watch time, engagement, audience retention and content relevance.',
+    alt: 'Illustration explaining how the TikTok algorithm recommends videos using watch time, engagement, audience retention and.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -648,9 +648,9 @@ export const HOW_THE_TIKTOK_ALGORITHM_WORKS_ARTICLE: LearnArticleRecord = {
   faqs: [
     {
       id: 'faq-new-accounts',
-      question: 'Does TikTok favour new accounts?',
+      question: 'Can brand-new TikTok accounts still reach the For You feed?',
       answer:
-        'New accounts can gain visibility if individual videos perform well, but quality and audience response remain the key factors.',
+        'Yes. TikTok can distribute a strong video from a new account when completion rate, rewatches and engagement signals look promising.',
       schemaEligible: true,
     },
     {

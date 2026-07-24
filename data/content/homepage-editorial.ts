@@ -129,7 +129,7 @@ export const homepageEditorial = {
     ctaPrompt: 'Ready to strengthen your Instagram profile?',
     cta: {
       label: 'Explore Growth Options',
-      href: '/buy-instagram-followers',
+      href: '/buy-instagram-likes',
     },
     entityBox: {
       title: 'Why InstantViral?',
@@ -244,7 +244,7 @@ export const homepageEditorial = {
     ctaPrompt: 'Looking for growth options?',
     cta: {
       label: 'Compare Packages',
-      href: '/buy-instagram-followers',
+      href: '/buy-tiktok-followers',
     },
   },
   instagramHub: {
@@ -622,7 +622,7 @@ export const homepageEditorial = {
       'Choose the Instagram service that matches your goals and compare every package before placing your order.',
     cta: {
       label: 'Compare Instagram Packages',
-      href: '/buy-instagram-followers',
+      href: '/buy-instagram-views',
     },
   },
   trustedReviews: {
@@ -716,7 +716,7 @@ export const homepageEditorial = {
     ctaDescription: 'Compare every Instagram package and choose the option that fits your goals.',
     cta: {
       label: 'Explore Instagram Packages',
-      href: '/buy-instagram-followers',
+      href: '/buy-instagram-likes',
     },
   },
   faqSection: {
@@ -828,7 +828,7 @@ export const homepageEditorial = {
       },
     ],
     resourcesStrip: [
-      { label: 'Compare Packages', href: '/buy-instagram-followers' },
+      { label: 'Compare Packages', href: '/buy-facebook-followers' },
       { label: 'Track Order', href: routes.trackOrder },
       { label: 'FAQ', href: routes.faq },
       { label: 'Contact Support', href: routes.contact },
@@ -838,7 +838,7 @@ export const homepageEditorial = {
       'Our team is here to help you compare Instagram packages, understand the ordering process, and choose the service that best fits your goals.',
     primaryCta: {
       label: 'Compare Instagram Packages',
-      href: '/buy-instagram-followers',
+      href: '/buy-instagram-views',
     },
     secondaryCta: {
       label: 'Contact Support',
@@ -854,7 +854,7 @@ export const homepageEditorial = {
     benefits: [],
     primaryCta: {
       label: 'View Available Packages',
-      href: '/buy-instagram-followers',
+      href: '/buy-instagram-likes',
     },
     secondaryCta: {
       label: 'Instagram Service Comparison',
@@ -871,9 +871,13 @@ export const homepageEditorial = {
         title: 'Popular Services',
         links: [
           { label: 'Buy Instagram Followers', href: '/buy-instagram-followers' },
-          { label: 'Buy Instagram Likes', href: '/buy-instagram-likes' },
           { label: 'Buy Instagram Views', href: '/buy-instagram-views' },
-          { label: 'Buy Instagram Comments', href: '/buy-instagram-comments' },
+          { label: 'Buy TikTok Followers', href: '/buy-tiktok-followers' },
+          { label: 'Buy TikTok Likes', href: '/buy-tiktok-likes' },
+          { label: 'Buy YouTube Subscribers', href: '/buy-youtube-subscribers' },
+          { label: 'Buy YouTube Views', href: '/buy-youtube-views' },
+          { label: 'Buy Facebook Followers', href: '/buy-facebook-followers' },
+          { label: 'Buy Facebook Page Likes', href: '/buy-facebook-page-likes' },
         ],
       },
       {

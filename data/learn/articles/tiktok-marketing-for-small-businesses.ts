@@ -17,7 +17,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'Many small business owners assume TikTok is only useful for influencers, entertainers or large companies with significant marketing budgets. In reality, TikTok has become one of the best platforms for small businesses to reach new customers, build trust and increase brand awareness without spending heavily on advertising.',
+    text: 'Small businesses can use TikTok without influencer budgets or large media teams. Phone videos, local proof and neighborhood offers already help shops reach nearby customers who never see traditional ads.',
   },
   {
     id: 'b-intro-2',
@@ -50,8 +50,8 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-h2-why',
     type: 'heading',
     headingLevel: 2,
-    text: 'Why TikTok Is Valuable for Small Businesses',
-    anchorId: 'why-tiktok-is-valuable-for-small-businesses',
+    text: 'Why Lean TikTok Marketing Works for Local and Neighborhood Brands',
+    anchorId: 'why-lean-tiktok-marketing-works-for-local-and-neighborhood-brands',
     order: 6,
   },
   {
@@ -105,8 +105,8 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-h2-audience',
     type: 'heading',
     headingLevel: 2,
-    text: 'Define Your Target Audience',
-    anchorId: 'define-your-target-audience',
+    text: 'Define Local and Neighborhood Customers First',
+    anchorId: 'define-local-and-neighborhood-customers-first',
     order: 13,
   },
   {
@@ -142,8 +142,8 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-h2-profile',
     type: 'heading',
     headingLevel: 2,
-    text: 'Build a Professional Business Profile',
-    anchorId: 'build-a-professional-business-profile',
+    text: 'Build a Lean Small-Business TikTok Profile',
+    anchorId: 'build-a-lean-small-business-tiktok-profile',
     order: 18,
   },
   {
@@ -192,7 +192,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 24,
     image: {
       src: `${IMG}/small-business-tiktok-profile.png`,
-      alt: 'Illustration showing an optimized TikTok profile for a small business with branding, bio, website link and professional business identity.',
+      alt: 'Optimized TikTok profile for a small business with branding, bio, website link and professional business identity.',
       width: 1600,
       height: 900,
     },
@@ -201,8 +201,8 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-h2-educational',
     type: 'heading',
     headingLevel: 2,
-    text: 'Create Educational Content',
-    anchorId: 'create-educational-content',
+    text: 'Create Low-Cost Educational Clips',
+    anchorId: 'create-low-cost-educational-clips',
     order: 25,
   },
   {
@@ -248,7 +248,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 31,
     image: {
       src: `${IMG}/small-business-content-planning.png`,
-      alt: 'Illustration showing a TikTok content planning workflow for small businesses including educational videos, publishing schedule and audience engagement.',
+      alt: 'TikTok content planning workflow for small businesses including educational videos, publishing schedule and audience.',
       width: 1600,
       height: 900,
     },
@@ -403,8 +403,8 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-h2-analytics',
     type: 'heading',
     headingLevel: 2,
-    text: 'Use Analytics to Improve Your Strategy',
-    anchorId: 'use-analytics-to-improve-your-strategy',
+    text: 'Track Results Without a Big Analytics Team',
+    anchorId: 'track-results-without-a-big-analytics-team',
     order: 51,
   },
   {
@@ -559,8 +559,8 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-h2-monthly',
     type: 'heading',
     headingLevel: 2,
-    text: 'Monthly Business Checklist',
-    anchorId: 'monthly-business-checklist',
+    text: 'Monthly Low-Budget TikTok Checklist for Small Teams',
+    anchorId: 'monthly-low-budget-tiktok-checklist-for-small-teams',
     order: 71,
   },
   {
@@ -590,7 +590,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 74,
     image: {
       src: `${IMG}/small-business-tiktok-analytics.png`,
-      alt: 'TikTok analytics dashboard for a small business displaying audience growth, engagement, website clicks, profile visits and content performance.',
+      alt: 'TikTok analytics dashboard for a small business displaying audience growth, engagement, website clicks, profile visits and.',
       width: 1600,
       height: 900,
     },
@@ -675,7 +675,7 @@ export const TIKTOK_MARKETING_FOR_SMALL_BUSINESSES_ARTICLE: LearnArticleRecord =
     authorId: 'author-instantviral-editorial',
     featuredImage: {
       src: `${IMG}/tiktok-marketing-for-small-businesses.png`,
-      alt: 'Illustration showing a small business using TikTok marketing through educational content, customer engagement, analytics, content planning and brand growth.',
+      alt: 'Small business using TikTok marketing through educational content, customer engagement, analytics, content planning and.',
       width: 1920,
       height: 1080,
       priority: true,
@@ -693,9 +693,9 @@ export const TIKTOK_MARKETING_FOR_SMALL_BUSINESSES_ARTICLE: LearnArticleRecord =
       keywords: [
         'TikTok Marketing for Small Businesses',
         'Small Business TikTok Marketing',
-        'TikTok Business Strategy',
-        'Grow Business on TikTok',
-        'TikTok Marketing Guide',
+        'Local Business TikTok Tips',
+        'Low Cost TikTok Marketing',
+        'Neighborhood Brand TikTok',
         'TikTok for Entrepreneurs',
       ],
       ogImage: `${IMG}/tiktok-marketing-for-small-businesses.png`,
@@ -731,37 +731,37 @@ export const TIKTOK_MARKETING_FOR_SMALL_BUSINESSES_ARTICLE: LearnArticleRecord =
     faqs: [
       {
         id: 'faq-suitable-small-business',
-        question: 'Is TikTok suitable for small businesses?',
+        question: 'Can a neighborhood shop use TikTok with a tiny marketing budget?',
         answer:
-          'Yes. Businesses of all sizes can use TikTok to increase brand awareness and reach new customers.',
+          'Yes. Phone-shot tips, local proof and community replies can reach nearby customers without influencer retainers or heavy ad spend.',
         schemaEligible: true,
       },
       {
         id: 'faq-what-to-post',
-        question: 'What should small businesses post?',
+        question: 'What should a small team post when they only have a few hours each week?',
         answer:
-          'Educational content, tutorials, customer questions, behind-the-scenes videos and product demonstrations are all effective.',
+          'Short how-tos, FAQ answers, behind-the-scenes clips and local customer stories—formats that reuse one idea across multiple videos.',
         schemaEligible: true,
       },
       {
         id: 'faq-need-equipment',
-        question: 'Do I need professional video equipment?',
+        question: 'Do small businesses need studio gear for TikTok marketing?',
         answer:
-          'No. Good lighting, clear audio and valuable content are usually more important than expensive cameras.',
+          'No. A phone, natural light and clear audio are enough for lean local marketing until a format proves it converts.',
         schemaEligible: true,
       },
       {
         id: 'faq-how-often',
-        question: 'How often should a small business post?',
+        question: 'What posting cadence fits a small business with limited staff?',
         answer:
-          'Choose a schedule you can maintain consistently. Three to five quality videos each week is a realistic goal for many businesses.',
+          'Three solid videos a week is realistic for many shops. Protect quality and reply time before adding more volume.',
         schemaEligible: true,
       },
       {
         id: 'faq-generate-sales',
-        question: 'Can TikTok generate sales?',
+        question: 'Can lean TikTok content bring walk-ins or local enquiries?',
         answer:
-          'TikTok can help businesses build trust, attract new audiences and encourage future purchasing decisions.',
+          'Yes when videos show real offers, location proof and clear next steps such as a profile link, map pin or message CTA.',
         schemaEligible: true,
       },
     ],

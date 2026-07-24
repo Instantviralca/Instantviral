@@ -17,7 +17,7 @@ const BLOCKS: ArticleContentBlock[] = [
     id: 'b-intro-1',
     type: 'paragraph',
     order: 1,
-    text: 'One of the most common questions creators and businesses ask is, "When should I post on TikTok?" While there are countless articles claiming to reveal the perfect posting time, the truth is that there isn\'t one universal schedule that guarantees success.',
+    text: 'TikTok posting schedules work best when they match your audience active windows and your production capacity. There is no universal golden minute—only a cadence you can sustain with strong hooks.',
   },
   {
     id: 'b-intro-2',
@@ -289,7 +289,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 37,
     image: {
       src: `${IMG}/tiktok-content-scheduling.png`,
-      alt: 'TikTok content scheduling illustration showing weekly publishing calendar, planned videos, content workflow and posting strategy.',
+      alt: 'TikTok content scheduling with weekly publishing calendar, planned videos, content workflow and posting strategy.',
       width: 1600,
       height: 900,
     },
@@ -500,7 +500,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 65,
     image: {
       src: `${IMG}/tiktok-post-performance-dashboard.png`,
-      alt: 'TikTok analytics dashboard comparing video performance across different posting times with watch time, engagement and audience retention metrics.',
+      alt: 'TikTok analytics dashboard comparing video performance across different posting times with watch time, engagement and.',
       width: 1600,
       height: 900,
     },
@@ -578,7 +578,7 @@ export const BEST_TIME_TO_POST_ON_TIKTOK_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/best-time-to-post-on-tiktok.png`,
-    alt: 'Illustration showing the best time to post on TikTok using audience activity insights, publishing schedule and video performance analytics.',
+    alt: 'Best time to post on TikTok using audience activity insights, publishing schedule and video performance analytics.',
     width: 1920,
     height: 1080,
     priority: true,
@@ -640,9 +640,9 @@ export const BEST_TIME_TO_POST_ON_TIKTOK_ARTICLE: LearnArticleRecord = {
     },
     {
       id: 'faq-post-every-day',
-      question: 'Should I post every day?',
+      question: 'Can posting too frequently hurt TikTok video performance?',
       answer:
-        'Choose a schedule you can maintain consistently while continuing to create quality videos.',
+        'It can, if volume replaces strong hooks and retention. A steady schedule with fewer sharper videos usually beats rushed daily uploads.',
       schemaEligible: true,
     },
     {

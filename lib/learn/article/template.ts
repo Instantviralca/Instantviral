@@ -524,7 +524,7 @@ export function prepareArticleForRender(
     article.blocks,
   );
   const blocksWithAnchors = withHeadingAnchors(sanitized);
-  const { blocks } = applyContextualLinksToBlocks(article, blocksWithAnchors, 8);
+  const { blocks } = applyContextualLinksToBlocks(article, blocksWithAnchors);
   const toc = generateTableOfContents(blocks);
   const issues = [
     ...sanitizeIssues,

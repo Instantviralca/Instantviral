@@ -17,7 +17,7 @@ const BLOCKS: ArticleContentBlock[] = [
   {
     id: 'b-intro-1',
     type: 'paragraph',
-    text: "YouTube is far more than a video-sharing platform. It has become one of the world's largest search engines, a major source of entertainment and education, and an important marketing channel for businesses, creators and personal brands. Every day, millions of people visit YouTube to learn new skills, research products, compare services and discover content that matches their interests.",
+    text: 'YouTube sits at the intersection of search, entertainment and education. Channel growth in 2026 still favors creators who package topics clearly, earn watch time and publish with a repeatable system.',
     order: 1,
   },
   {
@@ -242,7 +242,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 30,
     image: {
       src: `${IMG}/youtube-channel-optimization.png`,
-      alt: 'Illustration showing YouTube channel optimization with professional branding, channel layout, playlists, profile image and content organization.',
+      alt: 'YouTube channel optimization with professional branding, channel layout, playlists, profile image and content organization.',
       width: 1600,
       height: 900,
     },
@@ -342,7 +342,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 41,
     image: {
       src: `${IMG}/youtube-content-strategy.png`,
-      alt: 'Illustration showing a YouTube content strategy with educational videos, publishing calendar, audience engagement, video production workflow and content planning.',
+      alt: 'YouTube content strategy with educational videos, publishing calendar, audience engagement, video production workflow and.',
       width: 1600,
       height: 900,
     },
@@ -617,7 +617,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 74,
     image: {
       src: `${IMG}/youtube-growth-analytics-dashboard.png`,
-      alt: 'Business analytics dashboard displaying YouTube subscribers, views, watch time, audience retention, click-through rate and overall channel performance.',
+      alt: 'Business analytics dashboard displaying YouTube subscribers, views, watch time, audience retention, click-through rate and.',
       width: 1600,
       height: 900,
     },
@@ -727,7 +727,7 @@ export const YOUTUBE_GROWTH_GUIDE_ARTICLE: LearnArticleRecord = {
   authorId: 'author-instantviral-editorial',
   featuredImage: {
     src: `${IMG}/youtube-growth-guide.png`,
-    alt: 'Illustration showing a complete YouTube growth strategy with channel optimization, video publishing, audience engagement, subscriber growth, analytics and long-term success.',
+    alt: 'Complete YouTube growth strategy with channel optimization, video publishing, audience engagement, subscriber growth.',
     width: 1920,
     height: 1080,
     priority: true,
