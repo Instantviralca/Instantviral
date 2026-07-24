@@ -1,5 +1,6 @@
 'use client';
 
+import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import type { CustomerInformation } from '@/types/checkout';
@@ -61,6 +62,24 @@ export function CustomerInformationForm({
             value={value.lastName ?? ''}
             onChange={(e) => onChange({ ...value, lastName: e.target.value })}
           />
+        </div>
+      </div>
+      <div className="flex items-start gap-3 rounded-lg border border-[var(--border-subtle)] p-3">
+        <Checkbox
+          id="checkout-marketing-opt-in"
+          checked={Boolean(value.marketingOptIn)}
+          onCheckedChange={(checked) =>
+            onChange({ ...value, marketingOptIn: checked === true })
+          }
+          className="mt-0.5"
+        />
+        <div className="space-y-1">
+          <Label htmlFor="checkout-marketing-opt-in" className="font-medium leading-snug">
+            Email me offers and discounts
+          </Label>
+          <p className="text-xs text-muted-foreground">
+            Optional. You can unsubscribe anytime. We only send marketing mail if you opt in.
+          </p>
         </div>
       </div>
     </fieldset>

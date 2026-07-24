@@ -12,10 +12,13 @@ import type {
   AnalyticsEventRecord,
   AppPersistence,
   ContactMessageRecord,
+  EmailCampaignRecord,
+  EmailSubscriberRecord,
   WebhookEventRecord,
 } from '@/lib/persistence/types';
 import type { Order, OrderInternalNote } from '@/types/order';
 import type { NotificationRecord } from '@/types/notification';
+import { createEmailMarketingApi } from '@/lib/persistence/email-marketing-memory';
 
 const DATA_DIR = path.join(process.cwd(), '.data');
 const STORE_FILE = path.join(DATA_DIR, 'persistence.json');
@@ -29,6 +32,8 @@ type FileState = {
   sessions: AdminSessionRecord[];
   audits: AdminAuditRecord[];
   analyticsEvents: AnalyticsEventRecord[];
+  emailSubscribers: EmailSubscriberRecord[];
+  emailCampaigns: EmailCampaignRecord[];
   updatedAt: string;
 };
 
@@ -42,6 +47,8 @@ function emptyState(): FileState {
     sessions: [],
     audits: [],
     analyticsEvents: [],
+    emailSubscribers: [],
+    emailCampaigns: [],
     updatedAt: new Date().toISOString(),
   };
 }
@@ -59,6 +66,8 @@ function read(): FileState {
       ...emptyState(),
       ...parsed,
       analyticsEvents: parsed.analyticsEvents ?? [],
+      emailSubscribers: parsed.emailSubscribers ?? [],
+      emailCampaigns: parsed.emailCampaigns ?? [],
     };
   } catch {
     return emptyState();
@@ -191,5 +200,14 @@ export function createFilePersistence(): AppPersistence {
         .analyticsEvents.filter((e) => e.createdAt >= sinceIso)
         .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     },
+    ...createEmailMarketingApi(
+      () => read(),
+      (state) => {
+        const full = read();
+        full.emailSubscribers = state.emailSubscribers;
+        full.emailCampaigns = state.emailCampaigns;
+        write(full);
+      },
+    ),
   };
 }

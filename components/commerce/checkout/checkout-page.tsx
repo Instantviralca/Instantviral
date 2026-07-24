@@ -161,6 +161,7 @@ export function CheckoutPage() {
           totals: cart.totals,
           coupon: cart.coupon,
           termsAccepted,
+          marketingOptIn: Boolean(customer.marketingOptIn),
         }),
       });
       const data = (await response.json()) as {

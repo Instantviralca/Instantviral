@@ -7,11 +7,20 @@ import { and, desc, eq, gte } from 'drizzle-orm';
 import { getDb } from '@/lib/db/client';
 import * as tables from '@/lib/db/schema';
 import type { ContactFormValues } from '@/lib/contact/validation';
+import {
+  createCampaignId,
+  createSubscriberId,
+  createUnsubscribeToken,
+  missingEmailSubscribersTable,
+  normalizeSubscriberEmail,
+} from '@/lib/email/subscriber-utils';
 import type {
   AdminAuditRecord,
   AdminSessionRecord,
   AppPersistence,
   ContactMessageRecord,
+  EmailCampaignRecord,
+  EmailSubscriberRecord,
   WebhookEventRecord,
 } from '@/lib/persistence/types';
 import type { Order, OrderInternalNote, OrderLineItem, OrderPaymentDetails } from '@/types/order';
@@ -23,6 +32,19 @@ import type { PaymentProviderId, PaymentStatus } from '@/types/payment';
 import type { OrderStatus } from '@/types/order-status';
 import type { NotificationChannel, NotificationTemplateId, NotificationTrigger } from '@/types/notification';
 
+function mapSubscriber(row: typeof tables.emailSubscribers.$inferSelect): EmailSubscriberRecord {
+  return {
+    id: row.id,
+    email: row.email,
+    source: 'checkout',
+    marketingOptIn: row.marketingOptIn,
+    optedInAt: row.optedInAt?.toISOString() ?? null,
+    unsubscribedAt: row.unsubscribedAt?.toISOString() ?? null,
+    unsubscribeToken: row.unsubscribeToken,
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
+  };
+}
 function money(amount: number, currency: string) {
   return { amount, currency: currency as CurrencyCode };
 }
@@ -567,6 +589,165 @@ export function createPostgresPersistence(): AppPersistence {
         metadata: row.metadata ?? undefined,
         createdAt: row.createdAt.toISOString(),
       }));
+    },
+    async upsertMarketingSubscriber(input) {
+      if (!input.marketingOptIn) return null;
+      const email = normalizeSubscriberEmail(input.email);
+      if (!email.includes('@')) return null;
+      const db = getDb();
+      const now = new Date();
+      try {
+        const [existing] = await db
+          .select()
+          .from(tables.emailSubscribers)
+          .where(eq(tables.emailSubscribers.email, email))
+          .limit(1);
+        if (existing) {
+          const [updated] = await db
+            .update(tables.emailSubscribers)
+            .set({
+              marketingOptIn: true,
+              optedInAt: existing.optedInAt ?? now,
+              unsubscribedAt: null,
+              updatedAt: now,
+            })
+            .where(eq(tables.emailSubscribers.id, existing.id))
+            .returning();
+          return updated ? mapSubscriber(updated) : mapSubscriber(existing);
+        }
+        const [created] = await db
+          .insert(tables.emailSubscribers)
+          .values({
+            id: createSubscriberId(),
+            email,
+            source: 'checkout',
+            marketingOptIn: true,
+            optedInAt: now,
+            unsubscribedAt: null,
+            unsubscribeToken: createUnsubscribeToken(),
+            createdAt: now,
+            updatedAt: now,
+          })
+          .returning();
+        return created ? mapSubscriber(created) : null;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (missingEmailSubscribersTable(message)) {
+          console.error('[persistence] email_subscribers missing — run drizzle/0004_email_subscribers.sql');
+          return null;
+        }
+        throw error;
+      }
+    },
+    async listOptedInSubscribers() {
+      const db = getDb();
+      try {
+        const rows = await db
+          .select()
+          .from(tables.emailSubscribers)
+          .where(eq(tables.emailSubscribers.marketingOptIn, true))
+          .orderBy(desc(tables.emailSubscribers.updatedAt));
+        return rows
+          .filter((row) => !row.unsubscribedAt)
+          .map(mapSubscriber);
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (missingEmailSubscribersTable(message)) {
+          console.error('[persistence] email_subscribers missing — run drizzle/0004_email_subscribers.sql');
+          return [];
+        }
+        throw error;
+      }
+    },
+    async countOptedInSubscribers() {
+      const list = await this.listOptedInSubscribers();
+      return list.length;
+    },
+    async getSubscriberByUnsubscribeToken(token) {
+      const db = getDb();
+      try {
+        const [row] = await db
+          .select()
+          .from(tables.emailSubscribers)
+          .where(eq(tables.emailSubscribers.unsubscribeToken, token))
+          .limit(1);
+        return row ? mapSubscriber(row) : null;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (missingEmailSubscribersTable(message)) return null;
+        throw error;
+      }
+    },
+    async unsubscribeByToken(token) {
+      const db = getDb();
+      const now = new Date();
+      try {
+        const [updated] = await db
+          .update(tables.emailSubscribers)
+          .set({
+            marketingOptIn: false,
+            unsubscribedAt: now,
+            updatedAt: now,
+          })
+          .where(eq(tables.emailSubscribers.unsubscribeToken, token))
+          .returning();
+        return updated ? mapSubscriber(updated) : null;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (missingEmailSubscribersTable(message)) return null;
+        throw error;
+      }
+    },
+    async saveEmailCampaign(campaign) {
+      const db = getDb();
+      const record: EmailCampaignRecord = {
+        ...campaign,
+        id: campaign.id || createCampaignId(),
+      };
+      try {
+        await db.insert(tables.emailCampaigns).values({
+          id: record.id,
+          subject: record.subject,
+          bodyPreview: record.bodyPreview,
+          couponCode: record.couponCode ?? null,
+          sentCount: record.sentCount,
+          failedCount: record.failedCount,
+          createdAt: new Date(record.createdAt),
+          createdBy: record.createdBy,
+        });
+        return record;
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (missingEmailSubscribersTable(message)) {
+          console.error('[persistence] email_campaigns missing — run drizzle/0004_email_subscribers.sql');
+          return record;
+        }
+        throw error;
+      }
+    },
+    async listEmailCampaigns(limit = 20) {
+      const db = getDb();
+      try {
+        const rows = await db
+          .select()
+          .from(tables.emailCampaigns)
+          .orderBy(desc(tables.emailCampaigns.createdAt))
+          .limit(limit);
+        return rows.map((row) => ({
+          id: row.id,
+          subject: row.subject,
+          bodyPreview: row.bodyPreview,
+          couponCode: row.couponCode,
+          sentCount: row.sentCount,
+          failedCount: row.failedCount,
+          createdAt: row.createdAt.toISOString(),
+          createdBy: row.createdBy,
+        }));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        if (missingEmailSubscribersTable(message)) return [];
+        throw error;
+      }
     },
   };
 }

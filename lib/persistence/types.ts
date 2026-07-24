@@ -95,12 +95,50 @@ export type AnalyticsStore = {
   listAnalyticsEvents(sinceIso: string): Promise<AnalyticsEventRecord[]>;
 };
 
+export type EmailSubscriberRecord = {
+  id: string;
+  email: string;
+  source: 'checkout';
+  marketingOptIn: boolean;
+  optedInAt?: string | null;
+  unsubscribedAt?: string | null;
+  unsubscribeToken: string;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type EmailCampaignRecord = {
+  id: string;
+  subject: string;
+  bodyPreview: string;
+  couponCode?: string | null;
+  sentCount: number;
+  failedCount: number;
+  createdAt: string;
+  createdBy: string;
+};
+
+export type EmailMarketingStore = {
+  upsertMarketingSubscriber(input: {
+    email: string;
+    source?: 'checkout';
+    marketingOptIn: boolean;
+  }): Promise<EmailSubscriberRecord | null>;
+  listOptedInSubscribers(): Promise<EmailSubscriberRecord[]>;
+  countOptedInSubscribers(): Promise<number>;
+  getSubscriberByUnsubscribeToken(token: string): Promise<EmailSubscriberRecord | null>;
+  unsubscribeByToken(token: string): Promise<EmailSubscriberRecord | null>;
+  saveEmailCampaign(campaign: EmailCampaignRecord): Promise<EmailCampaignRecord>;
+  listEmailCampaigns(limit?: number): Promise<EmailCampaignRecord[]>;
+};
+
 export type AppPersistence = OrderStore &
   ContactStore &
   NotificationStore &
   WebhookStore &
   AdminAuthStore &
-  AnalyticsStore & {
+  AnalyticsStore &
+  EmailMarketingStore & {
     driver: PersistenceDriver;
     resetForTests?: () => void;
   };

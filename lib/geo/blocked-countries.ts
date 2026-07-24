@@ -35,6 +35,9 @@ export function isGeoBlockExemptPath(pathname: string): boolean {
   if (pathname === '/unavailable' || pathname.startsWith('/unavailable/')) {
     return true;
   }
+  if (pathname === '/unsubscribe' || pathname.startsWith('/unsubscribe/')) {
+    return true;
+  }
   if (pathname.startsWith('/admin')) return true;
   if (pathname.startsWith('/api/')) return true;
   return false;

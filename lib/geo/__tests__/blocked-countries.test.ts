@@ -25,6 +25,7 @@ describe('geo blocked countries', () => {
     expect(isGeoBlockExemptPath('/admin/login')).toBe(true);
     expect(isGeoBlockExemptPath('/api/analytics/collect')).toBe(true);
     expect(isGeoBlockExemptPath('/unavailable')).toBe(true);
+    expect(isGeoBlockExemptPath('/unsubscribe')).toBe(true);
     expect(isGeoBlockExemptPath('/')).toBe(false);
   });
 
@@ -63,7 +64,7 @@ describe('geo blocked countries', () => {
       shouldBlockRequest({
         pathname: '/',
         headers: headersWithCountry('PK'),
-        env: { IV_GEO_BLOCK_DISABLED: '1' } as NodeJS.ProcessEnv,
+        env: { IV_GEO_BLOCK_DISABLED: '1' } as unknown as NodeJS.ProcessEnv,
       }),
     ).toBe(false);
   });

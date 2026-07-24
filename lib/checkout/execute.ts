@@ -6,6 +6,7 @@ import { allowMockPayments, isProductionRuntime } from '@/lib/config/env';
 import { getCheckoutUrl, getSiteUrlPath } from '@/lib/config/hosts';
 import { notifyOrderPaid, notifyOrderPlaced } from '@/lib/notifications/order-hooks';
 import { placeOrder, type PlaceOrderInput } from '@/lib/orders/create';
+import { getPersistence } from '@/lib/persistence';
 import { saveOrder } from '@/lib/orders/store';
 import { paymentGatewayManager } from '@/lib/payments/manager';
 import { isRemotePaymentConfigured } from '@/lib/settings/site-settings';
@@ -56,6 +57,21 @@ export async function executeCheckout(
     }
 
     const order = await placeOrder(input);
+
+    if (input.marketingOptIn || input.customer.marketingOptIn) {
+      try {
+        await getPersistence().upsertMarketingSubscriber({
+          email: order.guestEmail,
+          source: 'checkout',
+          marketingOptIn: true,
+        });
+      } catch (error) {
+        console.error('[checkout] marketing opt-in save failed', {
+          orderId: order.id,
+          message: error instanceof Error ? error.message : 'unknown',
+        });
+      }
+    }
 
     try {
       await notifyOrderPlaced(order);

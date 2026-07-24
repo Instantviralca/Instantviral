@@ -22,6 +22,8 @@ export type CustomerInformation = {
   lastName?: string;
   phone?: string;
   company?: string;
+  /** CASL marketing consent — only true when checkout checkbox is checked. */
+  marketingOptIn?: boolean;
 };
 
 export type CheckoutFormState = {
@@ -47,4 +49,5 @@ export type PlaceOrderPayload = {
   totals: CartTotals;
   coupon: AppliedCoupon | null;
   termsAccepted: boolean;
+  marketingOptIn?: boolean;
 };

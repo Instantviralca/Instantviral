@@ -34,6 +34,7 @@ export async function POST(request: Request) {
       coupon: body.coupon,
       termsAccepted: body.termsAccepted,
       idempotencyKey: body.idempotencyKey,
+      marketingOptIn: Boolean(body.marketingOptIn || body.customer?.marketingOptIn),
     });
 
     if (!result.ok) {

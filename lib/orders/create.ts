@@ -30,6 +30,8 @@ export type PlaceOrderInput = {
   termsAccepted: boolean;
   /** Client or server-generated key to prevent duplicate orders. */
   idempotencyKey?: string;
+  /** CASL marketing opt-in from checkout checkbox. */
+  marketingOptIn?: boolean;
 };
 
 export function buildIdempotencyKey(input: {

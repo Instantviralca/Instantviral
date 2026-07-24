@@ -219,3 +219,37 @@ export const analyticsEvents = pgTable(
     countryCreatedIdx: index('analytics_events_country_created_idx').on(t.country, t.createdAt),
   }),
 );
+
+/** Marketing email subscribers (checkout opt-in only). */
+export const emailSubscribers = pgTable(
+  'email_subscribers',
+  {
+    id: text('id').primaryKey(),
+    email: text('email').notNull(),
+    source: text('source').notNull().default('checkout'),
+    marketingOptIn: boolean('marketing_opt_in').notNull().default(false),
+    optedInAt: timestamp('opted_in_at', { withTimezone: true }),
+    unsubscribedAt: timestamp('unsubscribed_at', { withTimezone: true }),
+    unsubscribeToken: text('unsubscribe_token').notNull(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull(),
+  },
+  (t) => ({
+    emailUidx: uniqueIndex('email_subscribers_email_uidx').on(t.email),
+    tokenUidx: uniqueIndex('email_subscribers_token_uidx').on(t.unsubscribeToken),
+    optInIdx: index('email_subscribers_opt_in_idx').on(t.marketingOptIn),
+  }),
+);
+
+/** Admin marketing campaign send log. */
+export const emailCampaigns = pgTable('email_campaigns', {
+  id: text('id').primaryKey(),
+  subject: text('subject').notNull(),
+  bodyPreview: text('body_preview').notNull(),
+  couponCode: text('coupon_code'),
+  sentCount: integer('sent_count').notNull().default(0),
+  failedCount: integer('failed_count').notNull().default(0),
+  createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
+  createdBy: text('created_by').notNull().default('admin'),
+});
+

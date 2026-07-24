@@ -11,6 +11,8 @@ import type {
   AppPersistence,
   ContactMessageRecord,
   ContactStore,
+  EmailCampaignRecord,
+  EmailSubscriberRecord,
   NotificationStore,
   OrderStore,
   WebhookEventRecord,
@@ -19,6 +21,9 @@ import type {
 import type { ContactFormValues } from '@/lib/contact/validation';
 import type { Order } from '@/types/order';
 import type { NotificationRecord } from '@/types/notification';
+import {
+  createEmailMarketingApi,
+} from '@/lib/persistence/email-marketing-memory';
 
 function createMemoryState() {
   return {
@@ -30,6 +35,8 @@ function createMemoryState() {
     sessions: [] as AdminSessionRecord[],
     audits: [] as AdminAuditRecord[],
     analyticsEvents: [] as AnalyticsEventRecord[],
+    emailSubscribers: [] as EmailSubscriberRecord[],
+    emailCampaigns: [] as EmailCampaignRecord[],
   };
 }
 
@@ -153,6 +160,8 @@ export function createMemoryPersistence(): AppPersistence {
     },
   };
 
+  const emailApi = createEmailMarketingApi(() => state);
+
   return {
     driver: 'memory',
     ...ordersApi,
@@ -161,6 +170,7 @@ export function createMemoryPersistence(): AppPersistence {
     ...webhooksApi,
     ...adminApi,
     ...analyticsApi,
+    ...emailApi,
     resetForTests() {
       state = createMemoryState();
     },

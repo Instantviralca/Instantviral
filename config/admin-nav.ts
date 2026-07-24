@@ -8,6 +8,7 @@ export type AdminNavItem = {
 export const adminNavItems: AdminNavItem[] = [
   { id: 'dashboard', label: 'Dashboard', href: '/admin' },
   { id: 'analytics', label: 'Analytics', href: '/admin/analytics' },
+  { id: 'email', label: 'Email', href: '/admin/email' },
   { id: 'orders', label: 'Orders', href: '/admin/orders' },
   { id: 'services', label: 'Services', href: '/admin/services' },
   { id: 'pricing', label: 'Pricing', href: '/admin/pricing' },
