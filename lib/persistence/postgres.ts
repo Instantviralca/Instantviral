@@ -528,17 +528,27 @@ export function createPostgresPersistence(): AppPersistence {
     async insertAnalyticsEvents(events) {
       if (!events.length) return;
       const db = getDb();
-      await db.insert(tables.analyticsEvents).values(
-        events.map((event) => ({
-          id: event.id,
-          eventName: event.eventName,
-          sessionId: event.sessionId,
-          pagePath: event.pagePath,
-          country: event.country || 'XX',
-          metadata: event.metadata ?? null,
-          createdAt: new Date(event.createdAt),
-        })),
-      );
+      try {
+        await db.insert(tables.analyticsEvents).values(
+          events.map((event) => ({
+            id: event.id,
+            eventName: event.eventName,
+            sessionId: event.sessionId,
+            pagePath: event.pagePath,
+            country: event.country || 'XX',
+            metadata: event.metadata ?? null,
+            createdAt: new Date(event.createdAt),
+          })),
+        );
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        // Missing migration should not break the public site.
+        if (/relation|does not exist|analytics_events/i.test(message)) {
+          console.error('[persistence] analytics_events missing — run drizzle/0003_analytics_events.sql');
+          return;
+        }
+        throw error;
+      }
     },
     async listAnalyticsEvents(sinceIso) {
       const db = getDb();

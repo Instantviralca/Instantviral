@@ -29,6 +29,14 @@ export function AnalyticsPage({ data }: AnalyticsPageProps) {
         description="Visitor funnel: landings, cart adds, checkout, and completed orders."
       />
 
+      {data.setupNotice ? (
+        <div
+          className="rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-950"
+          role="status"
+        >
+          {data.setupNotice}
+        </div>
+      ) : null}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="inline-flex rounded-lg border p-1" role="group" aria-label="Date range">
           {RANGES.map((range) => (

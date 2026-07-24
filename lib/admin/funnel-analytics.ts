@@ -88,9 +88,22 @@ export async function getFunnelAnalyticsViewModel(
   const range = parseFunnelRange(rangeInput);
   const { sinceIso, untilIso } = getFunnelRangeBounds(range);
   const persistence = getPersistence();
-  const events = (await persistence.listAnalyticsEvents(sinceIso)).filter(
-    (event) => event.createdAt <= untilIso,
-  );
+
+  let events: AnalyticsEventRecord[] = [];
+  let setupNotice: string | undefined;
+  try {
+    events = (await persistence.listAnalyticsEvents(sinceIso)).filter(
+      (event) => event.createdAt <= untilIso,
+    );
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error('[funnel-analytics] listAnalyticsEvents failed:', message);
+    setupNotice =
+      /relation|does not exist|analytics_events/i.test(message)
+        ? 'Analytics table is missing. Run drizzle/0003_analytics_events.sql on the production database, then refresh.'
+        : 'Analytics event store is temporarily unavailable. Order totals below may still be accurate.';
+    events = [];
+  }
 
   const bySession = new Map<string, AnalyticsEventRecord[]>();
   for (const event of events) {
@@ -113,12 +126,20 @@ export async function getFunnelAnalyticsViewModel(
     if (sessionEvents.some(isPurchaseEvent)) purchaseSessions.add(sessionId);
   }
 
-  const paidOrders = (await listOrders()).filter(
-    (order) =>
-      isEligibleForFulfilmentQueue(order) &&
-      order.createdAt >= sinceIso &&
-      order.createdAt <= untilIso,
-  );
+  let paidOrders: Awaited<ReturnType<typeof listOrders>> = [];
+  try {
+    paidOrders = (await listOrders()).filter(
+      (order) =>
+        isEligibleForFulfilmentQueue(order) &&
+        order.createdAt >= sinceIso &&
+        order.createdAt <= untilIso,
+    );
+  } catch (error) {
+    console.error('[funnel-analytics] listOrders failed:', error);
+    if (!setupNotice) {
+      setupNotice = 'Could not load orders for this range.';
+    }
+  }
 
   const orderCount = paidOrders.length;
   // Prefer order store for completion KPI; fall back to purchase events when no orders.
@@ -198,5 +219,6 @@ export async function getFunnelAnalyticsViewModel(
     countries,
     eventCount: events.length,
     storageDriver: persistence.driver,
+    setupNotice,
   };
 }

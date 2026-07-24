@@ -29,4 +29,6 @@ export type FunnelAnalyticsViewModel = {
   countries: FunnelCountryRow[];
   eventCount: number;
   storageDriver: string;
+  /** Present when event store is unavailable (e.g. missing DB migration). */
+  setupNotice?: string;
 };
