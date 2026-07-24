@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import { useAnalyticsOptional } from '@/components/analytics/AnalyticsContext';
 import { CheckoutSummary } from '@/components/commerce/checkout/checkout-summary';
 import { CouponSection } from '@/components/commerce/checkout/coupon-section';
 import { CustomerInformationForm } from '@/components/commerce/checkout/customer-information-form';
@@ -36,6 +37,8 @@ function isValidEmail(email: string): boolean {
 
 export function CheckoutPage() {
   const cart = useCart();
+  const analytics = useAnalyticsOptional();
+  const checkoutViewSent = useRef(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const paymentCancelled = searchParams.get('cancelled') === '1';
@@ -76,6 +79,16 @@ export function CheckoutPage() {
       setPaymentMethodId(enabled[0].id);
     }
   }, [paymentMethods, paymentMethodId]);
+
+  useEffect(() => {
+    if (!analytics?.ready || checkoutViewSent.current) return;
+    checkoutViewSent.current = true;
+    analytics.track({
+      eventName: 'checkout_view',
+      pageType: 'checkout',
+      pagePath: '/checkout',
+    });
+  }, [analytics]);
 
   // Never flash empty cart while transfer/bootstrap is in progress.
   const waitingForCart =

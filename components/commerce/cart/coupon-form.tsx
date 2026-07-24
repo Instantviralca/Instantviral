@@ -42,9 +42,9 @@ export function CouponForm({ className }: CouponFormProps) {
   return (
     <form
       className={cn('space-y-2', className)}
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        const result = applyCode(code);
+        const result = await applyCode(code);
         setMessage(result.ok ? 'Coupon applied.' : result.message);
       }}
     >

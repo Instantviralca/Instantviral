@@ -18,6 +18,8 @@ import {
   assertClientTotalsMatch,
   validateCheckoutPricing,
 } from '@/lib/orders/pricing';
+import { hydrateCoupons } from '@/lib/catalog/coupons-store';
+import { ensureCatalogHydrated } from '@/lib/catalog/package-overrides-store';
 
 export type PlaceOrderInput = {
   customer: CustomerInformation;
@@ -48,6 +50,8 @@ export async function buildOrderFromCheckout(input: PlaceOrderInput): Promise<Or
   if (!input.items.length) {
     throw new Error('Cart is empty.');
   }
+
+  await Promise.all([hydrateCoupons(), ensureCatalogHydrated()]);
   if (!input.customer.email?.includes('@')) {
     throw new Error('Valid email is required.');
   }

@@ -9,6 +9,7 @@ import type { ContactFormValues } from '@/lib/contact/validation';
 import type {
   AdminAuditRecord,
   AdminSessionRecord,
+  AnalyticsEventRecord,
   AppPersistence,
   ContactMessageRecord,
   WebhookEventRecord,
@@ -27,6 +28,7 @@ type FileState = {
   loginAttempts: Array<{ id: string; ipHash: string; success: boolean; createdAt: string }>;
   sessions: AdminSessionRecord[];
   audits: AdminAuditRecord[];
+  analyticsEvents: AnalyticsEventRecord[];
   updatedAt: string;
 };
 
@@ -39,6 +41,7 @@ function emptyState(): FileState {
     loginAttempts: [],
     sessions: [],
     audits: [],
+    analyticsEvents: [],
     updatedAt: new Date().toISOString(),
   };
 }
@@ -51,7 +54,12 @@ function read(): FileState {
     return state;
   }
   try {
-    return JSON.parse(readFileSync(STORE_FILE, 'utf8')) as FileState;
+    const parsed = JSON.parse(readFileSync(STORE_FILE, 'utf8')) as Partial<FileState>;
+    return {
+      ...emptyState(),
+      ...parsed,
+      analyticsEvents: parsed.analyticsEvents ?? [],
+    };
   } catch {
     return emptyState();
   }
@@ -168,6 +176,20 @@ export function createFilePersistence(): AppPersistence {
       const state = read();
       state.audits.push(event);
       write(state);
+    },
+    async insertAnalyticsEvents(events) {
+      if (!events.length) return;
+      const state = read();
+      state.analyticsEvents.push(...events);
+      if (state.analyticsEvents.length > 20_000) {
+        state.analyticsEvents = state.analyticsEvents.slice(-20_000);
+      }
+      write(state);
+    },
+    async listAnalyticsEvents(sinceIso) {
+      return read()
+        .analyticsEvents.filter((e) => e.createdAt >= sinceIso)
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
     },
   };
 }

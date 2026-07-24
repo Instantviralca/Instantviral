@@ -6,6 +6,8 @@ import type {
   AdminAuditRecord,
   AdminAuthStore,
   AdminSessionRecord,
+  AnalyticsEventRecord,
+  AnalyticsStore,
   AppPersistence,
   ContactMessageRecord,
   ContactStore,
@@ -27,6 +29,7 @@ function createMemoryState() {
     loginAttempts: [] as Array<{ ipHash: string; success: boolean; createdAt: string }>,
     sessions: [] as AdminSessionRecord[],
     audits: [] as AdminAuditRecord[],
+    analyticsEvents: [] as AnalyticsEventRecord[],
   };
 }
 
@@ -135,6 +138,21 @@ export function createMemoryPersistence(): AppPersistence {
     },
   };
 
+  const analyticsApi: AnalyticsStore = {
+    async insertAnalyticsEvents(events) {
+      if (!events.length) return;
+      state.analyticsEvents.push(...events);
+      if (state.analyticsEvents.length > 20_000) {
+        state.analyticsEvents = state.analyticsEvents.slice(-20_000);
+      }
+    },
+    async listAnalyticsEvents(sinceIso) {
+      return state.analyticsEvents
+        .filter((e) => e.createdAt >= sinceIso)
+        .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    },
+  };
+
   return {
     driver: 'memory',
     ...ordersApi,
@@ -142,6 +160,7 @@ export function createMemoryPersistence(): AppPersistence {
     ...notificationsApi,
     ...webhooksApi,
     ...adminApi,
+    ...analyticsApi,
     resetForTests() {
       state = createMemoryState();
     },

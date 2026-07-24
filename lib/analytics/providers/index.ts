@@ -2,12 +2,11 @@
  * Enabled analytics provider registry — Document 14.09.
  */
 
-import { analyticsConfig, isAnalyticsDebugEnabled } from '@/config/analytics';
 import { createClarityAdapter } from '@/lib/analytics/providers/clarity';
 import { createDebugAdapter } from '@/lib/analytics/providers/debug';
 import { createGa4Adapter } from '@/lib/analytics/providers/ga4';
 import { createGtmAdapter } from '@/lib/analytics/providers/gtm';
-import { createNoopAdapter } from '@/lib/analytics/providers/types';
+import { createInternalAdapter } from '@/lib/analytics/providers/internal';
 import type { AnalyticsProviderAdapter } from '@/types/analytics';
 
 let cachedAdapters: AnalyticsProviderAdapter[] | null = null;
@@ -37,18 +36,9 @@ export function getEnabledAnalyticsAdapters(
   const debug = createDebugAdapter();
   if (debug) adapters.push(debug);
 
-  // Internal adapter always available for admin-channel events in non-production,
-  // and as a safe sink when analytics is enabled but no vendors are configured.
-  if (
-    analyticsConfig.enabled &&
-    (adapters.length === 0 || analyticsConfig.environment !== 'production')
-  ) {
-    if (!adapters.some((adapter) => adapter.id === 'debug') && isAnalyticsDebugEnabled()) {
-      // already handled
-    } else if (adapters.length === 0) {
-      adapters.push(createNoopAdapter('internal'));
-    }
-  }
+  // First-party funnel sink for Admin → Analytics (always when analytics enabled).
+  const internal = createInternalAdapter();
+  if (internal) adapters.push(internal);
 
   cachedAdapters = adapters;
   return adapters;

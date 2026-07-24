@@ -24,6 +24,21 @@ export function validateCoupon(input: CouponValidateApiRequest): CouponValidateA
     return { valid: false, discountAmount: 0, message: 'Coupon not found or inactive.' };
   }
 
+  const stored = coupon as {
+    startAt?: string;
+    expiresAt?: string;
+  };
+  const now = Date.now();
+  if (stored.startAt && new Date(stored.startAt).getTime() > now) {
+    return { valid: false, discountAmount: 0, message: 'Coupon is not active yet.' };
+  }
+  if (stored.expiresAt && new Date(stored.expiresAt).getTime() < now) {
+    return { valid: false, discountAmount: 0, message: 'Coupon has expired.' };
+  }
+  if (coupon.minSubtotal != null && input.subtotal < coupon.minSubtotal) {
+    return { valid: false, discountAmount: 0, message: 'Order does not meet the coupon minimum.' };
+  }
+
   let discountAmount = 0;
   if (coupon.discountType === 'percentage') {
     discountAmount = Math.round((input.subtotal * coupon.value) / 100);

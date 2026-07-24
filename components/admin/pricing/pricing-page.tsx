@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { AdminEmptyState } from '@/components/admin/common/admin-empty-state';
 import { AdminFilterBar } from '@/components/admin/common/admin-filter-bar';
@@ -26,11 +26,6 @@ import {
 } from '@/components/ui/sheet';
 import { getPackageBadges } from '@/data/pricing/badges';
 import { useDebouncedValue, paginate, totalPages } from '@/lib/admin/list-utils';
-import {
-  getAdminPackageEditor,
-  getAdminPricingRows,
-  getAdminPricingServiceOptions,
-} from '@/lib/admin/pricing';
 import { formatMoney } from '@/lib/pricing/format';
 import type {
   AdminPackageEditorModel,
@@ -39,6 +34,43 @@ import type {
 } from '@/types/admin-pricing';
 import type { PackageBadgeId } from '@/types/pricing';
 import type { PlatformId } from '@/types/platform';
+
+function readCsrfToken(): string | undefined {
+  if (typeof document === 'undefined') return undefined;
+  const match = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('iv_admin_csrf='));
+  if (!match) return undefined;
+  return decodeURIComponent(match.slice('iv_admin_csrf='.length));
+}
+
+type PackageDraft = {
+  id: string;
+  packageName: string;
+  price: string;
+  compareAtPrice: string;
+  quantity: string;
+  deliveryTime: string;
+  active: boolean;
+  badge: PackageBadgeId | 'none';
+  currency: AdminPackageEditorModel['currency'];
+  source: AdminPackageEditorModel['source'];
+};
+
+function draftFromModel(model: AdminPackageEditorModel): PackageDraft {
+  return {
+    id: model.id,
+    packageName: model.packageName,
+    price: (model.price / 100).toFixed(2),
+    compareAtPrice: model.compareAtPrice != null ? (model.compareAtPrice / 100).toFixed(2) : '',
+    quantity: String(model.quantity),
+    deliveryTime: model.deliveryTime ?? '',
+    active: model.active,
+    badge: model.badge ?? 'none',
+    currency: model.currency,
+    source: model.source,
+  };
+}
 
 export function PricingSearch({
   value,
@@ -201,147 +233,167 @@ export function PricingTable({
   );
 }
 
-export function PackageBadgeSelector({
-  value,
-}: {
-  value?: PackageBadgeId;
-}) {
-  return (
-    <Select defaultValue={value ?? 'none'}>
-      <SelectTrigger><SelectValue placeholder="Badge" /></SelectTrigger>
-      <SelectContent>
-        <SelectItem value="none">None</SelectItem>
-        {getPackageBadges().map((badge) => (
-          <SelectItem key={badge.id} value={badge.id}>{badge.label}</SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
-}
-
-export function PackagePricingTab({ model }: { model: AdminPackageEditorModel }) {
-  return (
-    <div className="grid gap-3 sm:grid-cols-2">
-      <div className="space-y-1">
-        <Label>Currency</Label>
-        <Input defaultValue={model.currency} readOnly />
-      </div>
-      <div className="space-y-1">
-        <Label>Quantity</Label>
-        <Input defaultValue={String(model.quantity)} readOnly />
-      </div>
-      <div className="space-y-1">
-        <Label>Regular / current price</Label>
-        <Input defaultValue={formatMoney(model.price, model.currency)} readOnly />
-      </div>
-      <div className="space-y-1">
-        <Label>Compare-at</Label>
-        <Input
-          defaultValue={
-            model.compareAtPrice
-              ? formatMoney(model.compareAtPrice, model.currency)
-              : '—'
-          }
-          readOnly
-        />
-      </div>
-    </div>
-  );
-}
-
-export function PackageDeliveryTab({ model }: { model: AdminPackageEditorModel }) {
-  return (
-    <div className="space-y-1">
-      <Label>Delivery time</Label>
-      <Input defaultValue={model.deliveryTime || '(not set in InstantViral source)'} readOnly />
-    </div>
-  );
-}
-
-export function PackageFeaturesTab({ model }: { model: AdminPackageEditorModel }) {
-  return (
-    <ul className="list-disc space-y-1 pl-5 text-sm">
-      {model.features.length === 0 ? (
-        <li className="text-muted-foreground">No features in InstantViral source data.</li>
-      ) : (
-        model.features.map((feature) => <li key={feature}>{feature}</li>)
-      )}
-    </ul>
-  );
-}
-
-export function PackagePreview({ model }: { model: AdminPackageEditorModel }) {
-  return (
-    <div className="max-w-sm">
-      <PricingCard
-        model={{
-          package: model.source,
-          priceDisplay: formatMoney(model.price, model.currency),
-          compareAtDisplay: model.compareAtPrice
-            ? formatMoney(model.compareAtPrice, model.currency)
-            : undefined,
-          badgeLabel: model.badge,
-          primaryCta: { label: 'Order Now', href: `#${model.id}` },
-        }}
-      />
-    </div>
-  );
-}
-
-type TabId = 'pricing' | 'delivery' | 'features' | 'preview';
-
 export function PackageEditor({
   open,
-  model,
+  draft,
+  onDraftChange,
   onOpenChange,
+  onSave,
+  saving,
+  error,
 }: {
   open: boolean;
-  model: AdminPackageEditorModel | null;
+  draft: PackageDraft | null;
+  onDraftChange: (next: PackageDraft) => void;
   onOpenChange: (open: boolean) => void;
+  onSave: () => void;
+  saving: boolean;
+  error: string | null;
 }) {
-  const [tab, setTab] = useState<TabId>('pricing');
+  if (!draft) return null;
+  const priceMinor = Math.round(Number(draft.price || 0) * 100);
+  const compareMinor = draft.compareAtPrice
+    ? Math.round(Number(draft.compareAtPrice) * 100)
+    : undefined;
+  const previewSource = {
+    ...draft.source,
+    price: priceMinor,
+    regularPrice: priceMinor,
+    compareAtPrice: compareMinor,
+    quantity: Number(draft.quantity) || draft.source.quantity,
+    deliveryTime: draft.deliveryTime,
+    active: draft.active,
+    availability: draft.active ? ('active' as const) : ('hidden' as const),
+    badge: draft.badge === 'none' ? undefined : draft.badge,
+  };
+
   return (
-    <Sheet open={open} onOpenChange={onOpenChange}>
+    <Sheet open={open} onOpenChange={onOpenChange} modal={false}>
       <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-xl">
         <SheetHeader>
-          <SheetTitle>{model?.packageName ?? 'Package editor'}</SheetTitle>
+          <SheetTitle>{draft.packageName}</SheetTitle>
           <SheetDescription>
-            Values come from InstantViral.ca pricing data. CRUD not wired.
+            Edit price, quantity, delivery text, badge, and active status. Changes apply to checkout and service pages.
           </SheetDescription>
         </SheetHeader>
-        {model ? (
-          <div className="mt-4 space-y-4">
+        <div className="mt-4 space-y-4">
+          {error ? (
+            <p className="rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2 text-sm text-destructive" role="alert">
+              {error}
+            </p>
+          ) : null}
+          <div className="grid gap-3 sm:grid-cols-2">
             <div className="space-y-1">
+              <Label htmlFor="pkg-price">Price (USD)</Label>
+              <Input
+                id="pkg-price"
+                type="number"
+                min="0"
+                step="0.01"
+                value={draft.price}
+                onChange={(e) => onDraftChange({ ...draft, price: e.target.value })}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="pkg-compare">Compare-at (USD)</Label>
+              <Input
+                id="pkg-compare"
+                type="number"
+                min="0"
+                step="0.01"
+                value={draft.compareAtPrice}
+                onChange={(e) => onDraftChange({ ...draft, compareAtPrice: e.target.value })}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label htmlFor="pkg-qty">Quantity</Label>
+              <Input
+                id="pkg-qty"
+                type="number"
+                min="1"
+                value={draft.quantity}
+                onChange={(e) => onDraftChange({ ...draft, quantity: e.target.value })}
+              />
+            </div>
+            <div className="space-y-1">
+              <Label>Status</Label>
+              <Select
+                value={draft.active ? 'active' : 'inactive'}
+                onValueChange={(value) =>
+                  onDraftChange({ ...draft, active: value === 'active' })
+                }
+              >
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="active">Active</SelectItem>
+                  <SelectItem value="inactive">Inactive</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-1 sm:col-span-2">
+              <Label htmlFor="pkg-delivery">Delivery time</Label>
+              <Input
+                id="pkg-delivery"
+                value={draft.deliveryTime}
+                onChange={(e) => onDraftChange({ ...draft, deliveryTime: e.target.value })}
+                placeholder="e.g. 0-1 hours"
+              />
+            </div>
+            <div className="space-y-1 sm:col-span-2">
               <Label>Badge</Label>
-              <PackageBadgeSelector value={model.badge} />
+              <Select
+                value={draft.badge}
+                onValueChange={(value) =>
+                  onDraftChange({
+                    ...draft,
+                    badge: value as PackageBadgeId | 'none',
+                  })
+                }
+              >
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="none">None</SelectItem>
+                  {getPackageBadges().map((badge) => (
+                    <SelectItem key={badge.id} value={badge.id}>{badge.label}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {(['pricing', 'delivery', 'features', 'preview'] as TabId[]).map((id) => (
-                <Button
-                  key={id}
-                  type="button"
-                  size="sm"
-                  variant={tab === id ? 'default' : 'outline'}
-                  onClick={() => setTab(id)}
-                >
-                  {id}
-                </Button>
-              ))}
-            </div>
-            {tab === 'pricing' ? <PackagePricingTab model={model} /> : null}
-            {tab === 'delivery' ? <PackageDeliveryTab model={model} /> : null}
-            {tab === 'features' ? <PackageFeaturesTab model={model} /> : null}
-            {tab === 'preview' ? <PackagePreview model={model} /> : null}
           </div>
-        ) : null}
+
+          <div className="max-w-sm">
+            <PricingCard
+              model={{
+                package: previewSource,
+                priceDisplay: formatMoney(previewSource.price, draft.currency),
+                compareAtDisplay: previewSource.compareAtPrice
+                  ? formatMoney(previewSource.compareAtPrice, draft.currency)
+                  : undefined,
+                badgeLabel: previewSource.badge,
+                primaryCta: { label: 'Order Now', href: `#${draft.id}` },
+              }}
+            />
+          </div>
+
+          <div className="flex gap-2">
+            <Button type="button" onClick={onSave} disabled={saving}>
+              {saving ? 'Saving…' : 'Save package'}
+            </Button>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+              Cancel
+            </Button>
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   );
 }
 
 export function PricingPage() {
-  const rows = useMemo(() => getAdminPricingRows(), []);
-  const serviceOptions = useMemo(() => getAdminPricingServiceOptions(), []);
+  const [rows, setRows] = useState<AdminPricingRow[]>([]);
+  const [serviceOptions, setServiceOptions] = useState<Array<{ slug: string; name: string }>>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
   const [query, setQuery] = useState('');
   const [filters, setFilters] = useState<AdminPricingFilters>({
     platform: 'all',
@@ -349,8 +401,37 @@ export function PricingPage() {
     status: 'all',
   });
   const [page, setPage] = useState(1);
-  const [editor, setEditor] = useState<AdminPackageEditorModel | null>(null);
+  const [draft, setDraft] = useState<PackageDraft | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
   const pageSize = 20;
+
+  const load = useCallback(async () => {
+    setLoading(true);
+    setLoadError(null);
+    try {
+      const response = await fetch('/api/admin/pricing');
+      const data = (await response.json()) as {
+        ok?: boolean;
+        packages?: AdminPricingRow[];
+        services?: Array<{ slug: string; name: string }>;
+        error?: string;
+      };
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error ?? 'Unable to load packages.');
+      }
+      setRows(data.packages ?? []);
+      setServiceOptions(data.services ?? []);
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : 'Unable to load packages.');
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void load();
+  }, [load]);
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -371,11 +452,61 @@ export function PricingPage() {
 
   const pages = totalPages(filtered.length, pageSize);
 
+  async function openEdit(id: string) {
+    setSaveError(null);
+    const response = await fetch(`/api/admin/pricing?packageId=${encodeURIComponent(id)}`);
+    const data = (await response.json()) as {
+      ok?: boolean;
+      package?: AdminPackageEditorModel;
+      error?: string;
+    };
+    if (response.ok && data.ok && data.package) {
+      setDraft(draftFromModel(data.package));
+    } else {
+      setSaveError(data.error ?? 'Unable to open package.');
+    }
+  }
+
+  async function saveDraft() {
+    if (!draft) return;
+    setSaving(true);
+    setSaveError(null);
+    try {
+      const csrf = readCsrfToken();
+      const response = await fetch('/api/admin/pricing', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(csrf ? { 'x-csrf-token': csrf } : {}),
+        },
+        body: JSON.stringify({
+          packageId: draft.id,
+          price: draft.price,
+          compareAtPrice: draft.compareAtPrice || null,
+          quantity: draft.quantity,
+          deliveryTime: draft.deliveryTime,
+          active: draft.active,
+          badge: draft.badge === 'none' ? null : draft.badge,
+        }),
+      });
+      const data = (await response.json()) as { ok?: boolean; error?: string };
+      if (!response.ok || !data.ok) {
+        throw new Error(data.error ?? 'Unable to save package.');
+      }
+      setDraft(null);
+      await load();
+    } catch (error) {
+      setSaveError(error instanceof Error ? error.message : 'Unable to save package.');
+    } finally {
+      setSaving(false);
+    }
+  }
+
   return (
     <div className="space-y-4">
       <AdminPageHeader
         title="Pricing"
-        description="Manage InstantViral.ca packages. No placeholder packages."
+        description="Edit InstantViral package prices, quantities, and availability."
       />
       <PricingSearch value={query} onChange={(v) => { setQuery(v); setPage(1); }} />
       <PricingFilters
@@ -383,9 +514,15 @@ export function PricingPage() {
         serviceOptions={serviceOptions}
         onChange={(next) => { setFilters(next); setPage(1); }}
       />
+      {loading ? <p className="text-sm text-muted-foreground">Loading packages…</p> : null}
+      {loadError ? (
+        <p className="text-sm text-destructive" role="alert">{loadError}</p>
+      ) : null}
       <PricingTable
         rows={paginate(filtered, page, pageSize)}
-        onEdit={(id) => setEditor(getAdminPackageEditor(id))}
+        onEdit={(id) => {
+          void openEdit(id);
+        }}
       />
       <div className="flex items-center justify-between">
         <p className="text-sm text-muted-foreground">{filtered.length} packages · Page {page}/{pages}</p>
@@ -394,7 +531,22 @@ export function PricingPage() {
           <Button type="button" size="sm" variant="outline" disabled={page >= pages} onClick={() => setPage((p) => p + 1)}>Next</Button>
         </div>
       </div>
-      <PackageEditor open={Boolean(editor)} model={editor} onOpenChange={(open) => !open && setEditor(null)} />
+      <PackageEditor
+        open={Boolean(draft)}
+        draft={draft}
+        saving={saving}
+        error={saveError}
+        onDraftChange={setDraft}
+        onSave={() => {
+          void saveDraft();
+        }}
+        onOpenChange={(open) => {
+          if (!open) {
+            setDraft(null);
+            setSaveError(null);
+          }
+        }}
+      />
     </div>
   );
 }

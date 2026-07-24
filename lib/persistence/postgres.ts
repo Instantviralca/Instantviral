@@ -525,5 +525,38 @@ export function createPostgresPersistence(): AppPersistence {
         meta: event.meta ?? null,
       });
     },
+    async insertAnalyticsEvents(events) {
+      if (!events.length) return;
+      const db = getDb();
+      await db.insert(tables.analyticsEvents).values(
+        events.map((event) => ({
+          id: event.id,
+          eventName: event.eventName,
+          sessionId: event.sessionId,
+          pagePath: event.pagePath,
+          country: event.country || 'XX',
+          metadata: event.metadata ?? null,
+          createdAt: new Date(event.createdAt),
+        })),
+      );
+    },
+    async listAnalyticsEvents(sinceIso) {
+      const db = getDb();
+      const rows = await db
+        .select()
+        .from(tables.analyticsEvents)
+        .where(gte(tables.analyticsEvents.createdAt, new Date(sinceIso)))
+        .orderBy(desc(tables.analyticsEvents.createdAt))
+        .limit(20_000);
+      return rows.map((row) => ({
+        id: row.id,
+        eventName: row.eventName,
+        sessionId: row.sessionId,
+        pagePath: row.pagePath,
+        country: row.country,
+        metadata: row.metadata ?? undefined,
+        createdAt: row.createdAt.toISOString(),
+      }));
+    },
   };
 }

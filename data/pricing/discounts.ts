@@ -1,27 +1,20 @@
 import type { CouponDefinition, DiscountRule } from '@/types/pricing';
+import { getRuntimeCouponByCode } from '@/lib/catalog/coupons-memory';
 
 /**
- * Discount + coupon registry stubs — Document 10.01.
- * Replace with API/CMS. No fabricated runtime discounts in UI.
+ * Discount registry — Document 10.01.
+ * Coupons are managed in admin (site_settings). Runtime lookup is memory-safe.
  */
 export const discountRules: DiscountRule[] = [];
 
-export const coupons: CouponDefinition[] = [
-  // Example shape only — inactive so UI never invents discounts
-  {
-    id: 'coupon-welcome',
-    code: 'WELCOME10',
-    discountType: 'percentage',
-    value: 10,
-    active: false,
-  },
-];
+/** @deprecated Prefer runtime catalog via getCouponByCode / admin coupons API. */
+export const coupons: CouponDefinition[] = [];
 
 export function getActiveDiscountRules(): DiscountRule[] {
   return discountRules.filter((rule) => rule.active);
 }
 
+/** Active coupon lookup — uses hydrated admin catalog when available. */
 export function getCouponByCode(code: string): CouponDefinition | undefined {
-  const normalized = code.trim().toUpperCase();
-  return coupons.find((c) => c.code.toUpperCase() === normalized && c.active);
+  return getRuntimeCouponByCode(code);
 }

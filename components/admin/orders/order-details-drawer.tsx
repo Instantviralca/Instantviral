@@ -18,8 +18,10 @@ type OrderDetailsDrawerProps = {
   open: boolean;
   order: AdminOrderDetails | null;
   onOpenChange: (open: boolean) => void;
-  onStatusChange?: (status: OrderStatus) => void;
-  onAddNote?: (body: string) => void;
+  onStatusChange?: (status: OrderStatus) => void | Promise<void>;
+  onAddNote?: (body: string) => void | Promise<void>;
+  updating?: boolean;
+  error?: string | null;
 };
 
 export function OrderDetailsDrawer({
@@ -28,9 +30,11 @@ export function OrderDetailsDrawer({
   onOpenChange,
   onStatusChange,
   onAddNote,
+  updating = false,
+  error = null,
 }: OrderDetailsDrawerProps) {
   return (
-    <Sheet open={open} onOpenChange={onOpenChange}>
+    <Sheet open={open} onOpenChange={onOpenChange} modal={false}>
       <SheetContent side="right" className="w-full overflow-y-auto sm:max-w-lg">
         <SheetHeader>
           <SheetTitle>{order ? `Order ${order.id}` : 'Order details'}</SheetTitle>
@@ -39,11 +43,19 @@ export function OrderDetailsDrawer({
 
         {order ? (
           <div className="mt-6 space-y-6">
+            {error ? (
+              <p className="rounded-md border border-destructive/30 bg-destructive/5 px-3 py-2 text-sm text-destructive" role="alert">
+                {error}
+              </p>
+            ) : null}
             <section className="space-y-2">
               <h3 className="text-sm font-semibold">Status</h3>
               <StatusSelector
                 current={order.orderStatus}
-                onChange={(status) => onStatusChange?.(status)}
+                busy={updating}
+                onChange={(status) => {
+                  void onStatusChange?.(status);
+                }}
               />
             </section>
             <section className="space-y-2">
@@ -56,7 +68,12 @@ export function OrderDetailsDrawer({
             </section>
             <section className="space-y-2">
               <h3 className="text-sm font-semibold">Internal notes</h3>
-              <InternalNotes notes={order.internalNotes} onAdd={onAddNote} />
+              <InternalNotes
+                notes={order.internalNotes}
+                onAdd={(body) => {
+                  void onAddNote?.(body);
+                }}
+              />
             </section>
           </div>
         ) : null}

@@ -3,46 +3,56 @@
 import { Button } from '@/components/ui/button';
 import { getAllowedTransitions, getAdminStatusLabel } from '@/lib/orders/status';
 import type { OrderStatus } from '@/types/order-status';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 type StatusSelectorProps = {
   current: OrderStatus;
   onChange: (next: OrderStatus) => void;
   disabled?: boolean;
+  busy?: boolean;
 };
 
-export function StatusSelector({ current, onChange, disabled }: StatusSelectorProps) {
+export function StatusSelector({
+  current,
+  onChange,
+  disabled,
+  busy,
+}: StatusSelectorProps) {
   const allowed = getAllowedTransitions(current);
+  const locked = disabled || busy || allowed.length === 0;
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <Select
-        value={current}
-        disabled={disabled || allowed.length === 0}
-        onValueChange={(value) => onChange(value as OrderStatus)}
-      >
-        <SelectTrigger aria-label="Order status" className="w-[180px]">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value={current}>{getAdminStatusLabel(current)}</SelectItem>
-          {allowed.map((status) => (
-            <SelectItem key={status} value={status}>
-              {getAdminStatusLabel(status)}
-            </SelectItem>
-          ))}
-        </SelectContent>
-      </Select>
+    <div className="space-y-3">
+      <p className="text-sm">
+        Current status:{' '}
+        <span className="font-medium capitalize">{getAdminStatusLabel(current)}</span>
+      </p>
       {allowed.length === 0 ? (
         <Button type="button" size="sm" variant="outline" disabled>
           Terminal status
         </Button>
+      ) : (
+        <div className="flex flex-wrap gap-2">
+          {allowed.map((status) => (
+            <Button
+              key={status}
+              type="button"
+              size="sm"
+              variant={status === 'cancelled' || status === 'refunded' ? 'outline' : 'default'}
+              disabled={locked}
+              onClick={() => onChange(status)}
+            >
+              {getAdminStatusLabel(status)}
+            </Button>
+          ))}
+        </div>
+      )}
+      {busy ? (
+        <p className="text-xs text-muted-foreground">Updating order…</p>
+      ) : null}
+      {current === 'pending' ? (
+        <p className="text-xs text-muted-foreground">
+          Pending orders must move to Processing first, then Completed.
+        </p>
       ) : null}
     </div>
   );

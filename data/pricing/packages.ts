@@ -5,6 +5,7 @@ import {
   type InstantViralProduct,
 } from '@/data/pricing/instantviral-products';
 import { getAllServices, getServiceBySlug } from '@/data/services';
+import { applyPackageOverride } from '@/lib/catalog/package-overrides';
 import type { PricingPackage } from '@/types/pricing';
 import type { Service } from '@/types/service';
 
@@ -70,30 +71,33 @@ const packagesByServiceSlug: Record<string, PricingPackage[]> = Object.fromEntri
   getAllServices().map((service) => [service.slug, packagesForService(service)]),
 );
 
+function withOverrides(packages: PricingPackage[]): PricingPackage[] {
+  return packages.map(applyPackageOverride);
+}
+
 /** Active packages only, ascending by quantity. */
 export function getActivePackagesByServiceSlug(serviceSlug: string): PricingPackage[] {
-  return (packagesByServiceSlug[serviceSlug] ?? []).filter(
+  return withOverrides(packagesByServiceSlug[serviceSlug] ?? []).filter(
     (pkg) => pkg.active && pkg.availability === 'active',
   );
 }
 
 export function getPackagesByServiceSlug(serviceSlug: string): PricingPackage[] {
-  return packagesByServiceSlug[serviceSlug] ?? [];
+  return withOverrides(packagesByServiceSlug[serviceSlug] ?? []);
 }
 
 export function getPackageById(packageId: string): PricingPackage | undefined {
   for (const packages of Object.values(packagesByServiceSlug)) {
     const match = packages.find((pkg) => pkg.id === packageId);
-    if (match) return match;
+    if (match) return applyPackageOverride(match);
   }
 
-  // Fallback: product exists but service mapping missing
   const product = getInstantViralProductById(packageId);
   if (!product) return undefined;
   const service = getAllServices().find(
     (s) => s.platform === product.platform && s.category === product.type,
   );
-  return service ? mapProductToPackage(product, service) : undefined;
+  return service ? applyPackageOverride(mapProductToPackage(product, service)) : undefined;
 }
 
 export function getPackagesByIds(packageIds: string[]): PricingPackage[] {

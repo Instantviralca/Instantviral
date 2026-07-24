@@ -64,6 +64,7 @@ export async function getDashboardViewModel(): Promise<DashboardViewModel> {
     ],
     quickActions: [
       { id: 'orders', label: 'View Orders', href: '/admin/orders' },
+      { id: 'analytics', label: 'View Analytics', href: '/admin/analytics' },
       { id: 'service', label: 'Add Service', href: '/admin/services' },
       { id: 'pricing', label: 'Add Pricing Package', href: '/admin/pricing' },
       { id: 'coupon', label: 'Create Coupon', href: '/admin/coupons' },

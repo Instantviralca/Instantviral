@@ -200,3 +200,22 @@ export const siteSettings = pgTable('site_settings', {
   value: text('value').notNull(),
   updatedAt: timestamp('updated_at', { withTimezone: true }).notNull(),
 });
+
+/** First-party funnel analytics events (admin Analytics page). */
+export const analyticsEvents = pgTable(
+  'analytics_events',
+  {
+    id: text('id').primaryKey(),
+    eventName: text('event_name').notNull(),
+    sessionId: text('session_id').notNull(),
+    pagePath: text('page_path').notNull(),
+    country: text('country').notNull().default('XX'),
+    metadata: jsonb('metadata').$type<Record<string, string | number | boolean | null>>(),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
+  },
+  (t) => ({
+    eventCreatedIdx: index('analytics_events_event_created_idx').on(t.eventName, t.createdAt),
+    sessionCreatedIdx: index('analytics_events_session_created_idx').on(t.sessionId, t.createdAt),
+    countryCreatedIdx: index('analytics_events_country_created_idx').on(t.country, t.createdAt),
+  }),
+);

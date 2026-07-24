@@ -5,20 +5,23 @@ import { useRouter, useSearchParams } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { FormInput } from '@/components/forms/form-input';
-import { isAdminAuthConfigured } from '@/lib/admin/auth-config';
+
+type AdminLoginFormProps = {
+  /** Resolved on the server so SSR and client HTML match. */
+  configured: boolean;
+};
 
 /**
  * Admin login — Document 12.01.
- * Client checks configuration flag via public env; password verified server-side only.
+ * Configuration flag comes from the server; password is verified server-side only.
  */
-export function AdminLoginForm() {
+export function AdminLoginForm({ configured }: AdminLoginFormProps) {
   const router = useRouter();
   const search = useSearchParams();
   const nextPath = search.get('next') || '/admin/dashboard';
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const configured = isAdminAuthConfigured();
 
   async function onSubmit(event: FormEvent) {
     event.preventDefault();

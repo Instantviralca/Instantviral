@@ -1,16 +1,23 @@
+/**
+ * Admin pricing — Document 12.05.
+ * Reads InstantViral packages and applies admin overrides.
+ */
+
 import { getAllServices, getServiceBySlug } from '@/data/services';
 import {
   getActivePackagesByServiceSlug,
   getPackageById,
   getPackagesByServiceSlug,
 } from '@/data/pricing/packages';
+import {
+  ensureCatalogHydrated,
+  upsertPackageOverride,
+} from '@/lib/catalog/package-overrides-store';
 import type { AdminPackageEditorModel, AdminPricingRow } from '@/types/admin-pricing';
+import type { PackageBadgeId } from '@/types/pricing';
 
-/**
- * Admin pricing — Document 12.05.
- * Reads ONLY existing InstantViral.ca packages. Never invents values.
- */
-export function getAdminPricingRows(): AdminPricingRow[] {
+export async function getAdminPricingRows(): Promise<AdminPricingRow[]> {
+  await ensureCatalogHydrated();
   return getAllServices().flatMap((service) => {
     const packages = getPackagesByServiceSlug(service.slug);
     return packages.map((pkg) => ({
@@ -33,7 +40,10 @@ export function getAdminPricingRows(): AdminPricingRow[] {
   });
 }
 
-export function getAdminPackageEditor(packageId: string): AdminPackageEditorModel | null {
+export async function getAdminPackageEditor(
+  packageId: string,
+): Promise<AdminPackageEditorModel | null> {
+  await ensureCatalogHydrated();
   const pkg = getPackageById(packageId);
   if (!pkg) return null;
   const service = getServiceBySlug(pkg.serviceSlug);
@@ -59,7 +69,8 @@ export function getAdminPackageEditor(packageId: string): AdminPackageEditorMode
   };
 }
 
-export function getAdminPricingServiceOptions() {
+export async function getAdminPricingServiceOptions() {
+  await ensureCatalogHydrated();
   return getAllServices()
     .map((s) => ({
       slug: s.slug,
@@ -68,4 +79,20 @@ export function getAdminPricingServiceOptions() {
       count: getActivePackagesByServiceSlug(s.slug).length,
     }))
     .filter((s) => s.count > 0);
+}
+
+export type AdminPackageUpdateInput = {
+  price?: number;
+  compareAtPrice?: number | null;
+  quantity?: number;
+  deliveryTime?: string;
+  active?: boolean;
+  badge?: PackageBadgeId | null;
+};
+
+export async function updateAdminPackage(packageId: string, input: AdminPackageUpdateInput) {
+  const existing = getPackageById(packageId);
+  if (!existing) throw new Error('Package not found.');
+  await upsertPackageOverride(packageId, input);
+  return getAdminPackageEditor(packageId);
 }

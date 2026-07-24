@@ -80,11 +80,27 @@ export type AdminAuthStore = {
   writeAudit(event: AdminAuditRecord): Promise<void>;
 };
 
+export type AnalyticsEventRecord = {
+  id: string;
+  eventName: string;
+  sessionId: string;
+  pagePath: string;
+  country: string;
+  metadata?: Record<string, string | number | boolean | null>;
+  createdAt: string;
+};
+
+export type AnalyticsStore = {
+  insertAnalyticsEvents(events: AnalyticsEventRecord[]): Promise<void>;
+  listAnalyticsEvents(sinceIso: string): Promise<AnalyticsEventRecord[]>;
+};
+
 export type AppPersistence = OrderStore &
   ContactStore &
   NotificationStore &
   WebhookStore &
-  AdminAuthStore & {
+  AdminAuthStore &
+  AnalyticsStore & {
     driver: PersistenceDriver;
     resetForTests?: () => void;
   };

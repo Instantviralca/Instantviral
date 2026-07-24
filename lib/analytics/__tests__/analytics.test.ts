@@ -104,10 +104,20 @@ describe('Analytics & Conversion Event System', () => {
     );
   });
 
-  it('denies tracking when analytics consent is missing', () => {
+  it('routes funnel events to internal adapters when analytics consent is missing', () => {
     const result = trackEvent({
       eventName: 'page_view',
       pagePath: '/',
+    });
+    expect(result.tracked).toBe(true);
+    expect(result.providers).toContain('internal');
+    expect(result.event?.channel).toBe('admin');
+  });
+
+  it('denies non-funnel analytics events when consent is missing', () => {
+    const result = trackEvent({
+      eventName: 'faq_question_open',
+      pagePath: '/faq',
     });
     expect(result.tracked).toBe(false);
     expect(result.consentAllowed).toBe(false);

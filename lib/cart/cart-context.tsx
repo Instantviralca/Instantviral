@@ -11,7 +11,6 @@ import {
   type ReactNode,
 } from 'react';
 
-import { getCouponByCode } from '@/data/pricing/discounts';
 import {
   clearCartLocationTransfer,
   readCartFromLocationTransfer,
@@ -28,7 +27,6 @@ import {
   createEmptyCart,
   serializeCart,
 } from '@/lib/cart/utils';
-import { validateCoupon } from '@/lib/pricing/resolve';
 import type { AppliedCoupon, CartActions, CartItem, CartState, CartTotals } from '@/types/cart';
 
 type CartContextValue = CartState &
@@ -218,29 +216,44 @@ export function useCart(): CartContextValue {
   return ctx;
 }
 
-/** Apply a coupon code via the pricing layer. */
+/** Apply a coupon code via the pricing API (hydrated admin catalog). */
 export function useApplyCouponCode() {
   const cart = useCart();
-  return (code: string) => {
-    const result = validateCoupon({
-      code,
-      currency: cart.currency,
-      packageIds: cart.items.map((i) => i.packageId),
-      subtotal: cart.totals.subtotal.amount,
-    });
-    if (!result.valid || !result.coupon) {
-      return { ok: false as const, message: result.message ?? 'Invalid coupon.' };
+  return async (code: string) => {
+    try {
+      const response = await fetch('/api/coupons/validate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code,
+          currency: cart.currency,
+          packageIds: cart.items.map((i) => i.packageId),
+          subtotal: cart.totals.subtotal.amount,
+        }),
+      });
+      const result = (await response.json()) as {
+        ok?: boolean;
+        valid?: boolean;
+        discountAmount?: number;
+        coupon?: {
+          code: string;
+          discountType: 'percentage' | 'fixed';
+          value: number;
+        };
+        message?: string;
+      };
+      if (!response.ok || !result.valid || !result.coupon) {
+        return { ok: false as const, message: result.message ?? 'Invalid coupon.' };
+      }
+      cart.applyCoupon({
+        code: result.coupon.code,
+        discountType: result.coupon.discountType,
+        value: result.coupon.value,
+        discountAmount: result.discountAmount ?? 0,
+      });
+      return { ok: true as const };
+    } catch {
+      return { ok: false as const, message: 'Unable to validate coupon.' };
     }
-    const definition = getCouponByCode(code);
-    if (!definition) {
-      return { ok: false as const, message: 'Invalid coupon.' };
-    }
-    cart.applyCoupon({
-      code: definition.code,
-      discountType: definition.discountType,
-      value: definition.value,
-      discountAmount: result.discountAmount,
-    });
-    return { ok: true as const };
   };
 }

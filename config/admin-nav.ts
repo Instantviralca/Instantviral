@@ -7,6 +7,7 @@ export type AdminNavItem = {
 /** Admin sidebar navigation — Document 12.01. Auth not wired yet. */
 export const adminNavItems: AdminNavItem[] = [
   { id: 'dashboard', label: 'Dashboard', href: '/admin' },
+  { id: 'analytics', label: 'Analytics', href: '/admin/analytics' },
   { id: 'orders', label: 'Orders', href: '/admin/orders' },
   { id: 'services', label: 'Services', href: '/admin/services' },
   { id: 'pricing', label: 'Pricing', href: '/admin/pricing' },

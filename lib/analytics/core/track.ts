@@ -7,6 +7,7 @@ import {
   getEventRegistryEntry,
   resolveCanonicalEventName,
 } from '@/data/analytics/event-registry';
+import { isFunnelEventName } from '@/lib/analytics/funnel-events';
 import { canTrackEvent, getAnalyticsConsent } from '@/lib/analytics/core/consent';
 import { getAnalyticsContext } from '@/lib/analytics/core/context';
 import { dispatchToProviders } from '@/lib/analytics/core/dispatch';
@@ -131,19 +132,6 @@ export function trackEvent(input: AnalyticsEventInput): AnalyticsTrackResult {
     const consent = getAnalyticsConsent();
     const consentAllowed = canTrackEvent(event, consent, analyticsConfig.consentMode);
 
-    if (!consentAllowed) {
-      return blockedResult(
-        event.eventName,
-        [
-          {
-            code: 'consent_denied',
-            detail: `Consent denied for category ${event.consentCategory}`,
-          },
-        ],
-        { consentAllowed: false, event },
-      );
-    }
-
     const dedupeKey =
       event.idempotencyKey ??
       buildEventDedupeKey(event.eventName, [
@@ -186,6 +174,23 @@ export function trackEvent(input: AnalyticsEventInput): AnalyticsTrackResult {
         : event.eventName === 'purchase'
           ? 'conversion'
           : 'event';
+
+    // First-party admin funnel: still persist allowlisted events without marketing consent.
+    if (!consentAllowed) {
+      if (isFunnelEventName(event.eventName)) {
+        return dispatchToProviders({ ...event, channel: 'admin' }, mode);
+      }
+      return blockedResult(
+        event.eventName,
+        [
+          {
+            code: 'consent_denied',
+            detail: `Consent denied for category ${event.consentCategory}`,
+          },
+        ],
+        { consentAllowed: false, event },
+      );
+    }
 
     return dispatchToProviders(event, mode);
   } catch (error) {

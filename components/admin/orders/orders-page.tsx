@@ -16,6 +16,7 @@ import type {
   AdminOrderRow,
   AdminOrderSort,
 } from '@/types/admin-orders';
+import type { OrderStatus } from '@/types/order-status';
 
 type ServiceOption = {
   slug: string;
@@ -23,6 +24,15 @@ type ServiceOption = {
   platformId: string;
   packageCount: number;
 };
+
+function readCsrfToken(): string | undefined {
+  if (typeof document === 'undefined') return undefined;
+  const match = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith('iv_admin_csrf='));
+  if (!match) return undefined;
+  return decodeURIComponent(match.slice('iv_admin_csrf='.length));
+}
 
 export function OrdersPage() {
   const [allOrders, setAllOrders] = useState<AdminOrderRow[]>([]);
@@ -37,6 +47,8 @@ export function OrdersPage() {
   const [pageSize] = useState(20);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [details, setDetails] = useState<AdminOrderDetails | null>(null);
+  const [updating, setUpdating] = useState(false);
+  const [detailsError, setDetailsError] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -105,6 +117,7 @@ export function OrdersPage() {
   const pageRows = paginate(filtered, page, pageSize);
 
   async function openDetails(id: string) {
+    setDetailsError(null);
     try {
       const response = await fetch(`/api/admin/orders?orderId=${encodeURIComponent(id)}`);
       const data = (await response.json()) as {
@@ -116,6 +129,79 @@ export function OrdersPage() {
       }
     } catch {
       // ignore
+    }
+  }
+
+  function applyUpdatedOrder(order: AdminOrderDetails) {
+    setDetails(order);
+    setAllOrders((prev) =>
+      prev.map((row) =>
+        row.id === order.id
+          ? {
+              ...row,
+              orderStatus: order.orderStatus,
+              paymentStatus: order.paymentStatus,
+              updatedAt: order.updatedAt,
+            }
+          : row,
+      ),
+    );
+  }
+
+  async function patchOrder(body: Record<string, unknown>) {
+    const csrf = readCsrfToken();
+    const response = await fetch('/api/admin/orders', {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(csrf ? { 'x-csrf-token': csrf } : {}),
+      },
+      body: JSON.stringify(body),
+    });
+    const data = (await response.json()) as {
+      ok?: boolean;
+      order?: AdminOrderDetails;
+      error?: string;
+    };
+    if (!response.ok || !data.ok || !data.order) {
+      throw new Error(data.error ?? 'Unable to update order.');
+    }
+    return data.order;
+  }
+
+  async function handleStatusChange(nextStatus: OrderStatus) {
+    if (!details || updating) return;
+    setUpdating(true);
+    setDetailsError(null);
+    try {
+      const order = await patchOrder({
+        orderId: details.id,
+        action: 'status',
+        nextStatus,
+      });
+      applyUpdatedOrder(order);
+    } catch (error) {
+      setDetailsError(error instanceof Error ? error.message : 'Unable to update status.');
+    } finally {
+      setUpdating(false);
+    }
+  }
+
+  async function handleAddNote(body: string) {
+    if (!details || updating) return;
+    setUpdating(true);
+    setDetailsError(null);
+    try {
+      const order = await patchOrder({
+        orderId: details.id,
+        action: 'note',
+        note: body,
+      });
+      applyUpdatedOrder(order);
+    } catch (error) {
+      setDetailsError(error instanceof Error ? error.message : 'Unable to add note.');
+    } finally {
+      setUpdating(false);
     }
   }
 
@@ -175,8 +261,15 @@ export function OrdersPage() {
       <OrderDetailsDrawer
         open={Boolean(details)}
         order={details}
+        updating={updating}
+        error={detailsError}
+        onStatusChange={handleStatusChange}
+        onAddNote={handleAddNote}
         onOpenChange={(open) => {
-          if (!open) setDetails(null);
+          if (!open) {
+            setDetails(null);
+            setDetailsError(null);
+          }
         }}
       />
     </div>

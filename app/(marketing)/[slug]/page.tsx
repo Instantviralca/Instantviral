@@ -7,6 +7,7 @@ import { getServiceContentBySlug } from '@/data/content/services';
 import { APPROVED_SERVICE_SLUGS } from '@/data/linking/approved-services';
 import { getServiceBySlug } from '@/data/services';
 import { mapServiceContent } from '@/lib/content/mappers';
+import { ensureCatalogHydrated } from '@/lib/catalog/package-overrides-store';
 import { getApprovedReviews, getServicePageReviews } from '@/lib/reviews';
 import { buildReviewSchemaBundle } from '@/lib/reviews/schema-engine';
 import { asJsonLdGraph } from '@/lib/seo/schema';
@@ -25,7 +26,7 @@ type ServicePageProps = {
 };
 
 /** Only approved production services — Document 14.07. */
-export const dynamic = 'force-static';
+export const revalidate = 60;
 export const dynamicParams = false;
 
 export function generateStaticParams() {
@@ -48,6 +49,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
+  await ensureCatalogHydrated();
   const content = getServiceContentBySlug(service.slug);
   const vm = content ? mapServiceContent(content) : null;
   const title = content?.seo?.title ?? titles.service(service);
