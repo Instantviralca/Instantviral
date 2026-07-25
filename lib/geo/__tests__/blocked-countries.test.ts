@@ -21,12 +21,24 @@ describe('geo blocked countries', () => {
     expect(isBlockedCountryCode('CA')).toBe(false);
   });
 
-  it('exempts admin api and unavailable', () => {
+  it('exempts admin api seo and unavailable', () => {
     expect(isGeoBlockExemptPath('/admin/login')).toBe(true);
     expect(isGeoBlockExemptPath('/api/analytics/collect')).toBe(true);
     expect(isGeoBlockExemptPath('/unavailable')).toBe(true);
     expect(isGeoBlockExemptPath('/unsubscribe')).toBe(true);
+    expect(isGeoBlockExemptPath('/sitemap.xml')).toBe(true);
+    expect(isGeoBlockExemptPath('/robots.txt')).toBe(true);
+    expect(isGeoBlockExemptPath('/llms.txt')).toBe(true);
     expect(isGeoBlockExemptPath('/')).toBe(false);
+  });
+
+  it('allows sitemap for blocked countries', () => {
+    expect(
+      shouldBlockRequest({
+        pathname: '/sitemap.xml',
+        headers: headersWithCountry('PK'),
+      }),
+    ).toBe(false);
   });
 
   it('blocks public paths for blocked countries', () => {

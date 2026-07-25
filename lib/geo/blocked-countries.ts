@@ -29,13 +29,22 @@ export function resolveRequestCountry(headers: Headers): string {
 
 /**
  * Paths that remain reachable from blocked countries
- * (admin ops, APIs/webhooks, the unavailable page itself).
+ * (admin ops, APIs/webhooks, SEO files, unsubscribe, unavailable page).
  */
 export function isGeoBlockExemptPath(pathname: string): boolean {
   if (pathname === '/unavailable' || pathname.startsWith('/unavailable/')) {
     return true;
   }
   if (pathname === '/unsubscribe' || pathname.startsWith('/unsubscribe/')) {
+    return true;
+  }
+  // Crawlers / Search Console must always reach these.
+  if (
+    pathname === '/sitemap.xml' ||
+    pathname === '/robots.txt' ||
+    pathname === '/llms.txt' ||
+    pathname === '/llms-full.txt'
+  ) {
     return true;
   }
   if (pathname.startsWith('/admin')) return true;
