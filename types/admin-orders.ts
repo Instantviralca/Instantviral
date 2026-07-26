@@ -2,6 +2,7 @@ import type { OrderStatus } from '@/types/order-status';
 import type { PaymentStatus } from '@/types/payment';
 import type { PlatformId } from '@/types/platform';
 import type { OrderInternalNote, OrderTimelineEvent } from '@/types/order';
+import type { OrderConfigurationValues } from '@/types/order-fields';
 
 /** Admin Order Management row — Document 12.03. */
 export type AdminOrderRow = {
@@ -15,9 +16,16 @@ export type AdminOrderRow = {
   totalDisplay: string;
   paymentStatus: PaymentStatus;
   orderStatus: OrderStatus;
+  /** Unmasked delivery target for fulfillment (username or URL). */
   targetDisplay: string;
   createdAt: string;
   updatedAt: string;
+};
+
+export type AdminOrderFulfillmentField = {
+  key: string;
+  label: string;
+  value: string;
 };
 
 export type AdminOrderFilters = {
@@ -41,6 +49,10 @@ export type AdminOrderDetails = AdminOrderRow & {
   internalNotes: OrderInternalNote[];
   paymentMethod?: string;
   customerNotes?: string;
+  /** Full client-submitted order configuration for delivery. */
+  configuration: OrderConfigurationValues;
+  /** Labeled fulfillment fields for admin UI. */
+  fulfillmentFields: AdminOrderFulfillmentField[];
 };
 
 export type AdminOrdersListState = {

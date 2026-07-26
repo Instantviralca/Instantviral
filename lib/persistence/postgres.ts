@@ -52,7 +52,15 @@ function money(amount: number, currency: string) {
 function publicDestinationFromConfig(
   configuration: Record<string, string | number | boolean>,
 ): string | undefined {
-  const candidates = ['username', 'profileUrl', 'url', 'videoUrl', 'channelUrl', 'target'];
+  const candidates = [
+    'username',
+    'targetUrl',
+    'profileUrl',
+    'url',
+    'videoUrl',
+    'channelUrl',
+    'target',
+  ];
   for (const key of candidates) {
     const value = configuration[key];
     if (typeof value === 'string' && value.trim()) return value.trim();

@@ -59,7 +59,7 @@ export function OrderDetailsDrawer({
               />
             </section>
             <section className="space-y-2">
-              <h3 className="text-sm font-semibold">Summary</h3>
+              <h3 className="text-sm font-semibold">Summary & delivery</h3>
               <OrderSummaryCard order={order} />
             </section>
             <section className="space-y-2">

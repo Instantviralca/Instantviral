@@ -41,7 +41,7 @@ export function OrdersTable({
   return (
     <>
       <div className="hidden md:block overflow-x-auto">
-        <table className="w-full min-w-[1100px] border-collapse text-sm">
+        <table className="w-full min-w-[1240px] border-collapse text-sm">
           <thead>
             <tr className="border-b text-left">
               <th className="px-3 py-2" scope="col">
@@ -52,6 +52,7 @@ export function OrdersTable({
               <th className="px-3 py-2 font-medium">Platform</th>
               <th className="px-3 py-2 font-medium">Service</th>
               <th className="px-3 py-2 font-medium">Package</th>
+              <th className="px-3 py-2 font-medium">Target</th>
               <th className="px-3 py-2 font-medium">Qty</th>
               <th className="px-3 py-2 font-medium">Total</th>
               <th className="px-3 py-2 font-medium">Payment</th>

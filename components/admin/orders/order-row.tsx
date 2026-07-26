@@ -28,6 +28,9 @@ export function OrderRow({ order, selected, onSelect, onOpen, className }: Order
       <td className="px-3 py-3 capitalize">{order.platformId}</td>
       <td className="px-3 py-3">{order.serviceName}</td>
       <td className="px-3 py-3">{order.packageTitle}</td>
+      <td className="max-w-[14rem] truncate px-3 py-3" title={order.targetDisplay}>
+        {order.targetDisplay}
+      </td>
       <td className="px-3 py-3">{order.quantityLabel}</td>
       <td className="px-3 py-3">{order.totalDisplay}</td>
       <td className="px-3 py-3">{order.paymentStatus}</td>
@@ -59,6 +62,9 @@ export function OrderRowCard({ order, selected, onSelect, onOpen }: OrderRowProp
       </div>
       <p className="text-sm">
         {order.serviceName} · {order.packageTitle}
+      </p>
+      <p className="break-all text-sm">
+        <span className="text-muted-foreground">Target:</span> {order.targetDisplay}
       </p>
       <p className="text-sm capitalize">
         {order.orderStatus} · {order.totalDisplay}
