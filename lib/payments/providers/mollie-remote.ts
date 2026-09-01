@@ -3,7 +3,12 @@
  * Matches the WooCommerce Mollie Remote Payment client (v2.1.2).
  */
 
-import { createHmac, createHash, randomBytes } from 'node:crypto';
+import { createHash, createHmac, randomBytes } from 'node:crypto';
+
+import {
+  createMollieClientOrderId,
+  isValidMollieClientOrderId,
+} from '@/lib/payments/mollie-client-order-id';
 
 import { getSiteUrlPath } from '@/lib/config/hosts';
 import {
@@ -76,6 +81,12 @@ export const mollieRemoteProvider: PaymentProvider = {
       );
     }
 
+    const clientOrderId =
+      input.metadata?.mollieClientOrderId?.trim() || createMollieClientOrderId();
+    if (!isValidMollieClientOrderId(clientOrderId)) {
+      throw new Error('Mollie client order ID must be a positive integer.');
+    }
+
     const items = buildItems(input);
     const itemsJson = JSON.stringify(items);
     const amount = (input.amount.amount / 100).toFixed(2);
@@ -88,7 +99,7 @@ export const mollieRemoteProvider: PaymentProvider = {
     const requestNonce = randomBytes(10).toString('hex');
 
     const signaturePayload = [
-      input.orderId,
+      clientOrderId,
       String(requestTs),
       requestNonce,
       callbackUrl,
@@ -104,7 +115,7 @@ export const mollieRemoteProvider: PaymentProvider = {
     body.set('callback_url', callbackUrl);
     body.set('return_url', returnUrl);
     body.set('cancel_url', cancelUrl);
-    body.set('order_id', input.orderId);
+    body.set('order_id', clientOrderId);
     body.set('amount', amount);
     body.set('currency', currency);
     body.set('product_name', productName);
@@ -136,7 +147,7 @@ export const mollieRemoteProvider: PaymentProvider = {
     }
 
     return {
-      paymentId: `mollie_${input.orderId}`,
+      paymentId: `mollie_${clientOrderId}`,
       status: 'pending',
       provider: 'mollie-remote',
       redirectUrl,

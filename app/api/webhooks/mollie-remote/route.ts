@@ -3,7 +3,7 @@ import { createHmac } from 'node:crypto';
 import { NextResponse } from 'next/server';
 
 import { markOrderPaymentStatus } from '@/lib/payments/mark-paid';
-import { getOrderById } from '@/lib/orders/store';
+import { getOrderById, getOrderByPaymentId } from '@/lib/orders/store';
 import { getMollieSharedSecret } from '@/lib/settings/site-settings';
 
 export const runtime = 'nodejs';
@@ -15,7 +15,7 @@ export const runtime = 'nodejs';
 export async function POST(request: Request) {
   try {
     const form = await request.formData();
-    const orderId = String(form.get('order_id') ?? '').trim();
+    const callbackClientOrderId = String(form.get('order_id') ?? '').trim();
     const txnId = String(form.get('txn_id') ?? '').trim();
     const priceRaw = form.get('price');
     const price =
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
     const signature = String(form.get('signature') ?? '').trim();
     const secret = await getMollieSharedSecret();
 
-    if (!orderId || !txnId || paymentStatus !== 'paid' || secret.length < 16) {
+    if (!callbackClientOrderId || !txnId || paymentStatus !== 'paid' || secret.length < 16) {
       return new NextResponse('', { status: 400 });
     }
 
@@ -43,14 +43,16 @@ export async function POST(request: Request) {
     }
 
     const expected = createHmac('sha256', secret)
-      .update([orderId, txnId, price, currency, String(callbackTs)].join('|'))
+      .update([callbackClientOrderId, txnId, price, currency, String(callbackTs)].join('|'))
       .digest('hex');
 
     if (!signature || signature !== expected) {
       return new NextResponse('', { status: 403 });
     }
 
-    const order = await getOrderById(orderId);
+    const order =
+      (await getOrderByPaymentId(`mollie_${callbackClientOrderId}`)) ??
+      (await getOrderById(callbackClientOrderId));
     if (!order) {
       return new NextResponse('', { status: 404 });
     }
@@ -68,10 +70,10 @@ export async function POST(request: Request) {
       });
     }
 
-    const paymentId = order.payment?.paymentId || `mollie_${orderId}`;
+    const paymentId = order.payment?.paymentId || `mollie_${callbackClientOrderId}`;
     await markOrderPaymentStatus({
       paymentId,
-      orderId,
+      orderId: order.id,
       status: 'paid',
       providerReference: txnId,
       amountMinor: order.total.amount,

@@ -2,7 +2,7 @@
  * Learn Search & Filters types — Document 15.05.
  */
 
-import type { LearnCategoryId } from '@/types/learn';
+import type { LearnCategoryId, LearnFeaturedImage } from '@/types/learn';
 import type { PlatformId } from '@/types/platform';
 
 export type LearnSearchPlatform = PlatformId | 'general';
@@ -42,6 +42,7 @@ export type ArticleSearchDocument = {
   publishedAt: string;
   updatedAt: string;
   featured: boolean;
+  featuredImage?: LearnFeaturedImage;
   href: string;
 };
 

@@ -45,6 +45,7 @@ export function toArticleSearchDocument(
     publishedAt: article.publishedAt,
     updatedAt: article.updatedAt,
     featured: article.featured,
+    featuredImage: article.featuredImage,
     href: article.href,
   };
 }

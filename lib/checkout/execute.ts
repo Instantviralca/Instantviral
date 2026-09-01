@@ -8,6 +8,7 @@ import { notifyOrderPaid, notifyOrderPlaced } from '@/lib/notifications/order-ho
 import { placeOrder, type PlaceOrderInput } from '@/lib/orders/create';
 import { getPersistence } from '@/lib/persistence';
 import { saveOrder } from '@/lib/orders/store';
+import { createMollieClientOrderId } from '@/lib/payments/mollie-client-order-id';
 import { paymentGatewayManager } from '@/lib/payments/manager';
 import { isMollieRemoteConfigured } from '@/lib/settings/site-settings';
 import type { Order } from '@/types/order';
@@ -94,12 +95,13 @@ export async function executeCheckout(
         total: order.total,
         itemCount: order.items.reduce((sum, item) => sum + item.quantity, 0),
       };
+      const mollieClientOrderId = createMollieClientOrderId();
       const payment = await paymentGatewayManager.createPayment('mollie-remote', {
         orderId: order.id,
         amount: order.total,
         customerEmail: order.guestEmail,
         description: `InstantViral order ${order.id}`,
-        metadata: { orderId: order.id },
+        metadata: { orderId: order.id, mollieClientOrderId },
         successUrl,
         cancelUrl,
         payload: {

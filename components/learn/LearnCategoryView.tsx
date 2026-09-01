@@ -5,7 +5,6 @@ import { FeaturedArticles } from '@/components/learn/FeaturedArticles';
 import { NewsletterCTA } from '@/components/learn/NewsletterCTA';
 import {
   CategoryHero,
-  CategorySidebar,
   EmptyCategoryState,
 } from '@/components/learn/taxonomy';
 import { LearnDiscovery } from '@/components/learn/search/LearnDiscovery';
@@ -24,9 +23,6 @@ import {
 import {
   getArticlesByCategory,
   getCategoryBreadcrumbs,
-  getCategoryRelatedServices,
-  getPopularTags,
-  getRelatedCategories,
   getTags,
   getCategories,
 } from '@/lib/learn/taxonomy';
@@ -76,10 +72,7 @@ export function LearnCategoryView({
   const breadcrumbs = getCategoryBreadcrumbs(category);
   const articles = getArticlesByCategory(category.id);
   const documents = buildArticleSearchIndex(articles);
-  const relatedCategories = getRelatedCategories(category.id);
-  const relatedServices = getCategoryRelatedServices(category.slug);
   const authors = getAuthorsForCategory(category.id);
-  const popularTags = getPopularTags(6);
   const tags = getTags();
   const categories = getCategories();
   const resolvedInitial =
@@ -133,59 +126,49 @@ export function LearnCategoryView({
 
       <Section>
         <Container>
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
-            <div className="min-w-0 space-y-10">
-              <section aria-labelledby="category-articles-heading">
-                <Heading as="h2" id="category-articles-heading">
-                  Articles in {category.name}
+          <div className="space-y-10">
+            <section aria-labelledby="category-articles-heading">
+              <Heading as="h2" id="category-articles-heading">
+                Articles in {category.name}
+              </Heading>
+              {documents.length === 0 ? (
+                <EmptyCategoryState
+                  categoryName={category.name}
+                  className="mt-4"
+                />
+              ) : (
+                <div className="mt-6">
+                  <Suspense fallback={<LearnSearchSkeleton />}>
+                    <LearnDiscovery
+                      documents={documents}
+                      categories={categories}
+                      tags={tags}
+                      basePath={learnCategoryPath(category.slug)}
+                      lockedCategory={category.slug}
+                      initialState={resolvedInitial}
+                    />
+                  </Suspense>
+                </div>
+              )}
+            </section>
+
+            {authors.length > 0 ? (
+              <section aria-labelledby="category-authors-heading">
+                <Heading as="h2" id="category-authors-heading">
+                  Authors in {category.name}
                 </Heading>
-                {documents.length === 0 ? (
-                  <EmptyCategoryState
-                    categoryName={category.name}
-                    className="mt-4"
-                  />
-                ) : (
-                  <div className="mt-6">
-                    <Suspense fallback={<LearnSearchSkeleton />}>
-                      <LearnDiscovery
-                        documents={documents}
-                        categories={categories}
-                        tags={tags}
-                        basePath={learnCategoryPath(category.slug)}
-                        lockedCategory={category.slug}
-                        initialState={resolvedInitial}
-                      />
-                    </Suspense>
-                  </div>
-                )}
+                <MutedText className="mt-2 max-w-2xl">
+                  Contributors with published articles in this category.
+                </MutedText>
+                <ul className="mt-6 grid gap-4 sm:grid-cols-2">
+                  {authors.map((author) => (
+                    <li key={author.id}>
+                      <AuthorCard author={author} showBio={false} />
+                    </li>
+                  ))}
+                </ul>
               </section>
-
-              {authors.length > 0 ? (
-                <section aria-labelledby="category-authors-heading">
-                  <Heading as="h2" id="category-authors-heading">
-                    Authors in {category.name}
-                  </Heading>
-                  <MutedText className="mt-2 max-w-2xl">
-                    Contributors with published articles in this category.
-                  </MutedText>
-                  <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-                    {authors.map((author) => (
-                      <li key={author.id}>
-                        <AuthorCard author={author} showBio={false} />
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              ) : null}
-            </div>
-
-            <CategorySidebar
-              category={category}
-              relatedCategories={relatedCategories}
-              relatedServices={relatedServices}
-              popularTags={popularTags}
-              className="lg:border-l lg:border-neutral-200 lg:pl-8"
-            />
+            ) : null}
           </div>
         </Container>
       </Section>
