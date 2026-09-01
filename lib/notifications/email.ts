@@ -74,7 +74,7 @@ export const resendEmailProvider: NotificationProvider = {
     if (!isEmailConfigured()) {
       throw new Error('Email provider is not configured (RESEND_API_KEY / EMAIL_FROM).');
     }
-    const apiKey = process.env.RESEND_API_KEY!.trim();
+    const apiKey = process.env.RESEND_API_KEY!.trim().replace(/^['"]+|['"]+$/g, '');
     const from = getEmailFrom();
     if (!from) {
       throw new Error('EMAIL_FROM (or RESEND_FROM_EMAIL) is not configured.');
@@ -95,7 +95,14 @@ export const resendEmailProvider: NotificationProvider = {
     });
     if (!response.ok) {
       const body = await response.text();
-      throw new Error(`Resend error ${response.status}: ${body.slice(0, 200)}`);
+      let detail = body.slice(0, 300);
+      try {
+        const parsed = JSON.parse(body) as { message?: string; name?: string };
+        if (parsed.message) detail = parsed.message;
+      } catch {
+        // keep raw body snippet
+      }
+      throw new Error(`Resend ${response.status}: ${detail}`);
     }
     const data = (await response.json()) as { id?: string };
     return { messageId: data.id ?? `resend_${Date.now()}` };
@@ -107,9 +114,16 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
   status: 'sent' | 'failed' | 'skipped';
 }> {
   const store = getPersistence();
-  const existing = await store.findByIdempotencyKey(input.idempotencyKey);
-  if (existing) {
-    return { id: existing.id, status: existing.status === 'sent' ? 'sent' : 'failed' };
+  try {
+    const existing = await store.findByIdempotencyKey(input.idempotencyKey);
+    if (existing) {
+      return { id: existing.id, status: existing.status === 'sent' ? 'sent' : 'failed' };
+    }
+  } catch (error) {
+    console.error('[email] idempotency lookup failed', {
+      key: input.idempotencyKey,
+      message: error instanceof Error ? error.message : 'unknown',
+    });
   }
 
   const template = EXTRA_TEMPLATES[input.templateId];
@@ -147,45 +161,58 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
       html,
       text,
     });
-    await store.saveNotification({
-      id,
-      orderId: input.orderId ?? '',
-      channel: 'email',
-      templateId: storedTemplateId,
-      trigger: 'order_created',
-      recipient: input.to,
-      status: 'sent',
-      subject,
-      bodyPreview: text.slice(0, 180),
-      providerId: 'resend',
-      providerMessageId: result.messageId,
-      createdAt,
-      sentAt: new Date().toISOString(),
-      immutable: true,
-      idempotencyKey: input.idempotencyKey,
-    });
+    try {
+      await store.saveNotification({
+        id,
+        orderId: input.orderId ?? '',
+        channel: 'email',
+        templateId: storedTemplateId,
+        trigger: 'order_created',
+        recipient: input.to,
+        status: 'sent',
+        subject,
+        bodyPreview: text.slice(0, 180),
+        providerId: 'resend',
+        providerMessageId: result.messageId,
+        createdAt,
+        sentAt: new Date().toISOString(),
+        immutable: true,
+        idempotencyKey: input.idempotencyKey,
+      });
+    } catch (persistError) {
+      console.error('[email] sent but log save failed', {
+        templateId: input.templateId,
+        message: persistError instanceof Error ? persistError.message : 'unknown',
+      });
+    }
     return { id, status: 'sent' };
   } catch (error) {
     console.error('[email] send failed', {
       templateId: input.templateId,
       message: error instanceof Error ? error.message : 'unknown',
     });
-    await store.saveNotification({
-      id,
-      orderId: input.orderId ?? '',
-      channel: 'email',
-      templateId: storedTemplateId,
-      trigger: 'order_created',
-      recipient: input.to,
-      status: 'failed',
-      subject,
-      bodyPreview: text.slice(0, 180),
-      errorMessage: error instanceof Error ? error.message : 'Delivery failed',
-      providerId: 'resend',
-      createdAt,
-      immutable: true,
-      idempotencyKey: input.idempotencyKey,
-    });
+    try {
+      await store.saveNotification({
+        id,
+        orderId: input.orderId ?? '',
+        channel: 'email',
+        templateId: storedTemplateId,
+        trigger: 'order_created',
+        recipient: input.to,
+        status: 'failed',
+        subject,
+        bodyPreview: text.slice(0, 180),
+        errorMessage: error instanceof Error ? error.message : 'Delivery failed',
+        providerId: 'resend',
+        createdAt,
+        immutable: true,
+        idempotencyKey: input.idempotencyKey,
+      });
+    } catch (persistError) {
+      console.error('[email] failed-log save failed', {
+        message: persistError instanceof Error ? persistError.message : 'unknown',
+      });
+    }
     return { id, status: 'failed' };
   }
 }

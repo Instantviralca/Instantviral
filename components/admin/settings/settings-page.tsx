@@ -18,13 +18,21 @@ function readCsrfToken(): string | undefined {
 }
 
 export function SettingsPage() {
-  const [paymentWebsite, setPaymentWebsite] = useState('');
+  const [paymentWebsite, setPaymentWebsite] = useState('https://carrycubes.com');
+  const [mollieProductName, setMollieProductName] = useState('Cubes');
+  const [mollieSharedSecret, setMollieSharedSecret] = useState('');
+  const [mollieSharedSecretSet, setMollieSharedSecretSet] = useState(false);
+  const [mollieConfigured, setMollieConfigured] = useState(false);
+  const [mollieServerUrl, setMollieServerUrl] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
   const [emailConfigured, setEmailConfigured] = useState(false);
+  const [emailFrom, setEmailFrom] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [testing, setTesting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [hint, setHint] = useState<string | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -36,7 +44,12 @@ export function SettingsPage() {
           settings?: {
             paymentWebsite?: string;
             adminEmail?: string;
+            mollieServerUrl?: string;
+            mollieProductName?: string;
+            mollieSharedSecretSet?: boolean;
+            mollieConfigured?: boolean;
             emailConfigured?: boolean;
+            emailFrom?: string | null;
           };
           error?: string;
         };
@@ -44,9 +57,14 @@ export function SettingsPage() {
           throw new Error(data.error ?? 'Unable to load settings.');
         }
         if (!cancelled) {
-          setPaymentWebsite(data.settings?.paymentWebsite ?? '');
+          setPaymentWebsite(data.settings?.paymentWebsite ?? data.settings?.mollieServerUrl ?? '');
+          setMollieServerUrl(data.settings?.mollieServerUrl ?? '');
+          setMollieProductName(data.settings?.mollieProductName ?? 'Cubes');
+          setMollieSharedSecretSet(Boolean(data.settings?.mollieSharedSecretSet));
+          setMollieConfigured(Boolean(data.settings?.mollieConfigured));
           setAdminEmail(data.settings?.adminEmail ?? '');
           setEmailConfigured(Boolean(data.settings?.emailConfigured));
+          setEmailFrom(data.settings?.emailFrom ?? null);
         }
       } catch (err) {
         if (!cancelled) {
@@ -65,6 +83,7 @@ export function SettingsPage() {
     setSaving(true);
     setMessage(null);
     setError(null);
+    setHint(null);
     try {
       const csrf = readCsrfToken();
       const response = await fetch('/api/admin/settings', {
@@ -73,14 +92,24 @@ export function SettingsPage() {
           'Content-Type': 'application/json',
           ...(csrf ? { 'x-csrf-token': csrf } : {}),
         },
-        body: JSON.stringify({ paymentWebsite, adminEmail }),
+        body: JSON.stringify({
+          paymentWebsite,
+          adminEmail,
+          mollieSharedSecret: mollieSharedSecret || undefined,
+          mollieProductName,
+        }),
       });
       const data = (await response.json()) as {
         ok?: boolean;
         settings?: {
           paymentWebsite?: string;
           adminEmail?: string;
+          mollieServerUrl?: string;
+          mollieProductName?: string;
+          mollieSharedSecretSet?: boolean;
+          mollieConfigured?: boolean;
           emailConfigured?: boolean;
+          emailFrom?: string | null;
         };
         error?: string;
       };
@@ -88,13 +117,61 @@ export function SettingsPage() {
         throw new Error(data.error ?? 'Unable to save settings.');
       }
       setPaymentWebsite(data.settings?.paymentWebsite ?? paymentWebsite);
+      setMollieServerUrl(data.settings?.mollieServerUrl ?? mollieServerUrl);
+      setMollieProductName(data.settings?.mollieProductName ?? mollieProductName);
+      setMollieSharedSecretSet(Boolean(data.settings?.mollieSharedSecretSet));
+      setMollieConfigured(Boolean(data.settings?.mollieConfigured));
+      setMollieSharedSecret('');
       setAdminEmail(data.settings?.adminEmail ?? adminEmail);
       setEmailConfigured(Boolean(data.settings?.emailConfigured));
+      setEmailFrom(data.settings?.emailFrom ?? null);
       setMessage('Settings saved.');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to save settings.');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleTestEmail = async () => {
+    setTesting(true);
+    setMessage(null);
+    setError(null);
+    setHint(null);
+    try {
+      const csrf = readCsrfToken();
+      const response = await fetch('/api/admin/settings', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(csrf ? { 'x-csrf-token': csrf } : {}),
+        },
+        body: JSON.stringify({
+          action: 'test-email',
+          testTo: adminEmail,
+          adminEmail,
+        }),
+      });
+      const data = (await response.json()) as {
+        ok?: boolean;
+        error?: string;
+        hint?: string;
+        messageId?: string;
+        from?: string;
+      };
+      if (!response.ok || !data.ok) {
+        setError(data.error ?? 'Test email failed.');
+        setHint(data.hint ?? null);
+        return;
+      }
+      setMessage(
+        `Test email sent to ${adminEmail.trim() || 'recipient'}${data.messageId ? ` (${data.messageId})` : ''}. Check inbox + spam.`,
+      );
+      setHint(null);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Test email failed.');
+    } finally {
+      setTesting(false);
     }
   };
 
@@ -104,22 +181,61 @@ export function SettingsPage() {
         title="Settings"
         description="Checkout, payment, and email notification settings."
       />
-      <AdminCard title="Remote Payment">
+      <AdminCard title="Mollie Remote Payment">
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Website URL for Payment Collection (without trailing slash). Checkout posts
-            orders to this site the same way as the WooCommerce Remote Payment client.
+            Checkout uses the Mollie Remote Payment client protocol via{' '}
+            <code className="text-xs">carrycubes.com</code>. Stripe is paused — only
+            Mollie is active.
+          </p>
+          <p
+            className={`text-sm font-medium ${mollieConfigured ? 'text-emerald-700' : 'text-amber-700'}`}
+            role="status"
+          >
+            {mollieConfigured
+              ? `Mollie is configured (${mollieServerUrl || paymentWebsite}) — live checkout enabled.`
+              : 'Mollie is not fully configured — set server URL and shared secret below.'}
           </p>
           <div className="space-y-2">
-            <Label htmlFor="payment-website">Payment website URL</Label>
+            <Label htmlFor="payment-website">Payment server URL</Label>
             <Input
               id="payment-website"
               value={paymentWebsite}
               onChange={(event) => setPaymentWebsite(event.target.value)}
-              placeholder="https://your-payment-collector.com"
-              disabled={loading || saving}
+              placeholder="https://carrycubes.com"
+              disabled={loading || saving || testing}
               autoComplete="off"
             />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="mollie-product-name">Payment description (product name)</Label>
+            <Input
+              id="mollie-product-name"
+              value={mollieProductName}
+              onChange={(event) => setMollieProductName(event.target.value)}
+              placeholder="Cubes"
+              disabled={loading || saving || testing}
+              autoComplete="off"
+            />
+            <p className="text-xs text-muted-foreground">
+              Sent to Mollie as the line-item description (default: Cubes).
+            </p>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="mollie-shared-secret">Shared secret</Label>
+            <Input
+              id="mollie-shared-secret"
+              type="password"
+              value={mollieSharedSecret}
+              onChange={(event) => setMollieSharedSecret(event.target.value)}
+              placeholder={mollieSharedSecretSet ? '••••••••••••••••' : 'Min 16 characters'}
+              disabled={loading || saving || testing}
+              autoComplete="new-password"
+            />
+            <p className="text-xs text-muted-foreground">
+              Must exactly match the shared secret on the Mollie Server plugin at carrycubes.com.
+              {mollieSharedSecretSet ? ' A secret is already saved — leave blank to keep it.' : ''}
+            </p>
           </div>
         </div>
       </AdminCard>
@@ -137,7 +253,7 @@ export function SettingsPage() {
             role="status"
           >
             {emailConfigured
-              ? 'Resend is configured — emails can send.'
+              ? `Resend is configured${emailFrom ? ` (from ${emailFrom})` : ''} — emails can send.`
               : 'Resend is not configured — emails are skipped until RESEND_API_KEY + EMAIL_FROM are set in Vercel.'}
           </p>
           <div className="space-y-2">
@@ -148,13 +264,22 @@ export function SettingsPage() {
               value={adminEmail}
               onChange={(event) => setAdminEmail(event.target.value)}
               placeholder="orders@yourdomain.com"
-              disabled={loading || saving}
+              disabled={loading || saving || testing}
               autoComplete="email"
             />
             <p className="text-xs text-muted-foreground">
-              New orders and contact-form messages are sent here.
+              New orders and contact-form messages are sent here. Use Send test email to
+              see the exact Resend error if delivery fails.
             </p>
           </div>
+          <Button
+            type="button"
+            variant="outline"
+            onClick={handleTestEmail}
+            disabled={loading || saving || testing || !adminEmail.trim()}
+          >
+            {testing ? 'Sending test…' : 'Send test email'}
+          </Button>
         </div>
       </AdminCard>
 
@@ -163,12 +288,17 @@ export function SettingsPage() {
           {error}
         </p>
       ) : null}
+      {hint ? (
+        <p className="text-sm text-amber-800" role="status">
+          {hint}
+        </p>
+      ) : null}
       {message ? (
         <p className="text-sm text-emerald-700" role="status">
           {message}
         </p>
       ) : null}
-      <Button type="button" onClick={handleSave} disabled={loading || saving}>
+      <Button type="button" onClick={handleSave} disabled={loading || saving || testing}>
         {saving ? 'Saving…' : 'Save settings'}
       </Button>
     </div>

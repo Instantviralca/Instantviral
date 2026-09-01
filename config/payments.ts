@@ -7,9 +7,14 @@ import type { PaymentProviderConfig } from '@/types/payment';
  */
 export const paymentProviders: PaymentProviderConfig[] = [
   {
-    id: 'remote-payment',
+    id: 'mollie-remote',
     enabled: true,
     displayName: 'Card Payment',
+  },
+  {
+    id: 'remote-payment',
+    enabled: false,
+    displayName: 'Remote Payment (legacy)',
   },
   {
     id: 'stripe',

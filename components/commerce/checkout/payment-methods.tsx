@@ -62,7 +62,7 @@ export function PaymentMethods({
                 {method.description ? (
                   <p className="mt-1 text-xs text-muted-foreground">{method.description}</p>
                 ) : null}
-                {method.id === 'remote-payment' || method.id === 'stripe' ? (
+                {method.id === 'mollie-remote' || method.id === 'remote-payment' || method.id === 'stripe' ? (
                   <div className="mt-3 space-y-2">
                     <p className="text-xs font-medium text-[var(--text-secondary)]">
                       Card payments are processed securely

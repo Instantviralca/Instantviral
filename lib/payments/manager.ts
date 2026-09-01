@@ -1,5 +1,6 @@
 import { getEnabledPaymentProviders } from '@/config/payments';
 import {
+  mollieRemoteProvider,
   paypalProvider,
   remotePaymentProvider,
   stripeProvider,
@@ -15,6 +16,7 @@ import type {
 } from '@/types/payment';
 
 const registry: Partial<Record<PaymentProviderId, PaymentProvider>> = {
+  'mollie-remote': mollieRemoteProvider,
   'remote-payment': remotePaymentProvider,
   stripe: stripeProvider,
   paypal: paypalProvider,

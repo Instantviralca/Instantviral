@@ -60,8 +60,15 @@ export async function dispatchNotification(
   const provider = getNotificationProvider();
 
   if (request.idempotencyKey) {
-    const existing = await store.findByIdempotencyKey(request.idempotencyKey);
-    if (existing) return existing;
+    try {
+      const existing = await store.findByIdempotencyKey(request.idempotencyKey);
+      if (existing) return existing;
+    } catch (error) {
+      console.error('[notifications] idempotency lookup failed', {
+        key: request.idempotencyKey,
+        message: error instanceof Error ? error.message : 'unknown',
+      });
+    }
   }
 
   if (!isValidEmail(request.recipient)) {
@@ -136,7 +143,14 @@ export async function dispatchNotification(
       providerId: provider.id,
       providerMessageId: result.messageId,
     };
-    await store.saveNotification(sent);
+    try {
+      await store.saveNotification(sent);
+    } catch (persistError) {
+      console.error('[notifications] sent but log save failed', {
+        orderId: request.orderId,
+        message: persistError instanceof Error ? persistError.message : 'unknown',
+      });
+    }
     return sent;
   } catch (error) {
     const failed: NotificationRecord & { idempotencyKey?: string } = {
@@ -150,7 +164,13 @@ export async function dispatchNotification(
       trigger: request.trigger,
       message: failed.errorMessage,
     });
-    await store.saveNotification(failed);
+    try {
+      await store.saveNotification(failed);
+    } catch (persistError) {
+      console.error('[notifications] failed-log save failed', {
+        message: persistError instanceof Error ? persistError.message : 'unknown',
+      });
+    }
     return failed;
   }
 }

@@ -7,6 +7,7 @@ import type { PlaceOrderPayload } from '@/types/checkout';
  */
 
 export type PaymentProviderId =
+  | 'mollie-remote'
   | 'remote-payment'
   | 'stripe'
   | 'paypal'

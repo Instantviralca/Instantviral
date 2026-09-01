@@ -9,7 +9,7 @@ import { placeOrder, type PlaceOrderInput } from '@/lib/orders/create';
 import { getPersistence } from '@/lib/persistence';
 import { saveOrder } from '@/lib/orders/store';
 import { paymentGatewayManager } from '@/lib/payments/manager';
-import { isRemotePaymentConfigured } from '@/lib/settings/site-settings';
+import { isMollieRemoteConfigured } from '@/lib/settings/site-settings';
 import type { Order } from '@/types/order';
 import type { PaymentProviderId } from '@/types/payment';
 
@@ -21,7 +21,7 @@ export type PlaceOrderResult = {
   paymentStatus: string;
   redirectUrl?: string;
   paymentConfigured: boolean;
-  mode: 'remote-payment' | 'mock' | 'disabled';
+  mode: 'mollie-remote' | 'mock' | 'disabled';
   message?: string;
 };
 
@@ -35,23 +35,23 @@ export async function executeCheckout(
   input: PlaceOrderInput,
 ): Promise<PlaceOrderResult | PlaceOrderFailure> {
   try {
-    if (input.paymentMethodId !== 'remote-payment') {
+    if (input.paymentMethodId !== 'mollie-remote') {
       return {
         ok: false,
-        error: 'Only remote card payment is supported at this time.',
+        error: 'Only Mollie card payment is supported at this time.',
         code: 'validation',
       };
     }
 
-    const remoteReady = await isRemotePaymentConfigured();
+    const mollieReady = await isMollieRemoteConfigured();
     const mockOk = allowMockPayments();
 
-    if (!remoteReady && !mockOk) {
+    if (!mollieReady && !mockOk) {
       return {
         ok: false,
         error: isProductionRuntime()
-          ? 'Payments are not configured. Set the payment website URL in Admin → Settings.'
-          : 'Remote payment URL is not set. Configure Admin → Settings, or IV_PAYMENTS_MODE=mock for local testing.',
+          ? 'Payments are not configured. Set the Mollie server URL and shared secret in Admin → Settings.'
+          : 'Mollie payment is not configured. Set shared secret in Admin → Settings, or IV_PAYMENTS_MODE=mock for local testing.',
         code: 'payments_disabled',
       };
     }
@@ -87,14 +87,14 @@ export async function executeCheckout(
     );
     const cancelUrl = `${getCheckoutUrl('/')}?cancelled=1&orderId=${encodeURIComponent(order.id)}`;
 
-    if (remoteReady) {
+    if (mollieReady) {
       const totals = input.totals ?? {
         subtotal: order.subtotal,
         discount: order.discount,
         total: order.total,
         itemCount: order.items.reduce((sum, item) => sum + item.quantity, 0),
       };
-      const payment = await paymentGatewayManager.createPayment('remote-payment', {
+      const payment = await paymentGatewayManager.createPayment('mollie-remote', {
         orderId: order.id,
         amount: order.total,
         customerEmail: order.guestEmail,
@@ -115,7 +115,7 @@ export async function executeCheckout(
       const updated: Order = {
         ...order,
         payment: {
-          provider: 'remote-payment' as PaymentProviderId,
+          provider: 'mollie-remote' as PaymentProviderId,
           paymentId: payment.paymentId,
           status: payment.status,
           amount: order.total,
@@ -132,7 +132,7 @@ export async function executeCheckout(
         paymentStatus: updated.payment?.status ?? 'pending',
         redirectUrl: payment.redirectUrl,
         paymentConfigured: true,
-        mode: 'remote-payment',
+        mode: 'mollie-remote',
       };
     }
 
@@ -141,7 +141,7 @@ export async function executeCheckout(
     const mockPaid: Order = {
       ...order,
       payment: {
-        provider: 'remote-payment',
+        provider: 'mollie-remote',
         paymentId: `mock_${order.id}`,
         status: 'paid',
         amount: order.total,

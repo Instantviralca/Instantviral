@@ -54,7 +54,10 @@ export function getAdminSessionSecret(): string | undefined {
 }
 
 export function getEmailFrom(): string | undefined {
-  return firstPresent('EMAIL_FROM', 'RESEND_FROM_EMAIL');
+  const raw = firstPresent('EMAIL_FROM', 'RESEND_FROM_EMAIL');
+  if (!raw) return undefined;
+  // Strip accidental wrapping quotes from Vercel / .env paste.
+  return raw.replace(/^['"]+|['"]+$/g, '').trim() || undefined;
 }
 
 export function getStripePublishableKey(): string | undefined {
