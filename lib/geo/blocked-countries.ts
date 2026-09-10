@@ -64,3 +64,17 @@ export function shouldBlockRequest(args: {
   if (!country || country === 'XX') return false;
   return isBlockedCountryCode(country);
 }
+
+/**
+ * Canonical /unavailable URL for geo-blocked visitors.
+ * Must use the public site origin (NEXT_PUBLIC_SITE_URL), never request.nextUrl
+ * behind Cloudflare → Nginx HTTPS → Next HTTP (that yields an https URL aimed at
+ * the internal plain-HTTP listen port and SSL EPROTO on rewrite).
+ */
+export function buildGeoBlockUnavailableUrl(siteOrigin: string): URL {
+  const origin = siteOrigin.trim().replace(/\/$/, '');
+  if (!origin) {
+    throw new Error('siteOrigin is required for geo-block unavailable redirect.');
+  }
+  return new URL('/unavailable', `${origin}/`);
+}

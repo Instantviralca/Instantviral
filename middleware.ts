@@ -9,7 +9,7 @@ import {
   isLegacyCheckoutHostname,
   mapLegacyCheckoutPathToMain,
 } from '@/lib/config/hosts';
-import { shouldBlockRequest } from '@/lib/geo/blocked-countries';
+import { shouldBlockRequest, buildGeoBlockUnavailableUrl } from '@/lib/geo/blocked-countries';
 import {
   LEGACY_GONE_HTML,
   buildLegacyRedirectLocation,
@@ -57,11 +57,12 @@ export async function middleware(request: NextRequest) {
   }
 
   // ── Geo availability (public site only) ───────────────────────────
+  // Redirect to the canonical public /unavailable URL. Do NOT rewrite via
+  // request.nextUrl behind Cloudflare→Nginx HTTPS→Next HTTP — that produces
+  // an https:// URL aimed at the internal plain-HTTP listen port and SSL EPROTO.
   if (shouldBlockRequest({ pathname, headers: request.headers })) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/unavailable';
-    url.search = '';
-    const response = NextResponse.rewrite(url);
+    const destination = buildGeoBlockUnavailableUrl(getSiteOrigin());
+    const response = NextResponse.redirect(destination, 307);
     response.headers.set('x-robots-tag', 'noindex, nofollow');
     response.headers.set('cache-control', 'private, no-store');
     return response;
