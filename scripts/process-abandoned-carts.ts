@@ -9,6 +9,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 
 import { processDueAbandonedCartEmails } from '@/lib/abandoned-cart/process-recovery';
+import { closeDb } from '@/lib/db/client';
 
 function loadEnvFile(filename: string) {
   const fullPath = path.join(process.cwd(), filename);
@@ -36,17 +37,31 @@ function loadEnvFile(filename: string) {
 async function main() {
   loadEnvFile('.env');
   loadEnvFile('.env.local');
+  loadEnvFile('.env.production.local');
 
-  const result = await processDueAbandonedCartEmails({
-    triggeredBy: 'cli_worker',
-    runCleanup: true,
-  });
+  let exitCode = 0;
+  try {
+    const result = await processDueAbandonedCartEmails({
+      triggeredBy: 'cli_worker',
+      runCleanup: true,
+    });
 
-  console.log(JSON.stringify(result, null, 2));
-  if (!result.ok && !result.skipped) process.exit(1);
+    console.log(JSON.stringify(result, null, 2));
+    if (!result.ok && !result.skipped) exitCode = 1;
+  } finally {
+    // Release postgres.js pool so the CLI can exit naturally (no hang / timeout 124).
+    await closeDb();
+  }
+
+  if (exitCode !== 0) process.exit(exitCode);
 }
 
-main().catch((error) => {
+main().catch(async (error) => {
   console.error('[abandoned-carts] failed', error instanceof Error ? error.message : error);
+  try {
+    await closeDb();
+  } catch {
+    // ignore cleanup errors on failure path
+  }
   process.exit(1);
 });

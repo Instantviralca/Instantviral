@@ -38,17 +38,23 @@ export const smtpEmailProvider: NotificationProvider = {
       },
     });
 
-    const info = await transporter.sendMail({
-      from,
-      to,
-      subject,
-      html,
-      text,
-    });
+    try {
+      const info = await transporter.sendMail({
+        from,
+        to,
+        subject,
+        html,
+        text,
+      });
 
-    const messageId =
-      (typeof info.messageId === 'string' && info.messageId) ||
-      `smtp_${Date.now()}`;
-    return { messageId };
+      const messageId =
+        (typeof info.messageId === 'string' && info.messageId) ||
+        `smtp_${Date.now()}`;
+      return { messageId };
+    } finally {
+      // Close SMTP sockets so short-lived CLI workers can exit cleanly.
+      transporter.close();
+    }
   },
 };
+
