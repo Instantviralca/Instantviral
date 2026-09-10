@@ -12,7 +12,7 @@ type PlaceOrderButtonProps = {
 };
 
 export function PlaceOrderButton({
-  label = 'Place Order',
+  label = 'Continue to Payment',
   disabled,
   loading,
   onClick,

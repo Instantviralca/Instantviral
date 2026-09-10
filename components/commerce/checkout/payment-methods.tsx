@@ -1,6 +1,6 @@
 'use client';
 
-import { CreditCard, Lock, ShieldCheck } from 'lucide-react';
+import { CreditCard } from 'lucide-react';
 
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -17,8 +17,13 @@ type PaymentMethodsProps = {
   hideLegend?: boolean;
 };
 
+const MOLLIE_HOSTED_PAYMENT_EXPLANATION =
+  "You'll be redirected to Mollie's secure payment page to complete your payment. Card payments, Apple Pay and Google Pay are available where supported.";
+
 /**
- * Payment method picker — accurate security copy only.
+ * Payment method picker — method selection only.
+ * Card / wallet details are entered on Mollie's hosted checkout after redirect.
+ * No card inputs, brand chips, iframes, or Mollie Components are mounted here.
  */
 export function PaymentMethods({
   methods,
@@ -43,6 +48,8 @@ export function PaymentMethods({
       >
         {enabled.map((method) => {
           const selected = value === method.id;
+          const showMollieExplanation =
+            method.id === 'mollie-remote' || method.id === 'remote-payment';
           return (
             <div
               key={method.id}
@@ -62,32 +69,10 @@ export function PaymentMethods({
                 {method.description ? (
                   <p className="mt-1 text-xs text-muted-foreground">{method.description}</p>
                 ) : null}
-                {method.id === 'mollie-remote' || method.id === 'remote-payment' || method.id === 'stripe' ? (
-                  <div className="mt-3 space-y-2">
-                    <p className="text-xs font-medium text-[var(--text-secondary)]">
-                      Card payments are processed securely
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {['Visa', 'Mastercard', 'Amex', 'Discover', 'Google Pay', 'Apple Pay'].map(
-                        (brand) => (
-                          <span
-                            key={brand}
-                            className="rounded-md border border-[var(--border-subtle)] bg-white px-2 py-1 text-[10px] font-semibold text-[var(--text-secondary)]"
-                          >
-                            {brand}
-                          </span>
-                        ),
-                      )}
-                    </div>
-                    <p className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)]">
-                      <Lock className="size-3.5" aria-hidden="true" />
-                      Encrypted payment · we never store full card numbers
-                    </p>
-                    <p className="inline-flex items-center gap-1.5 text-[11px] font-medium text-[var(--text-muted)]">
-                      <ShieldCheck className="size-3.5" aria-hidden="true" />
-                      Secure checkout
-                    </p>
-                  </div>
+                {showMollieExplanation ? (
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
+                    {MOLLIE_HOSTED_PAYMENT_EXPLANATION}
+                  </p>
                 ) : null}
               </div>
             </div>

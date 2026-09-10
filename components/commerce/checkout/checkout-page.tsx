@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 import { useAnalyticsOptional } from '@/components/analytics/AnalyticsContext';
 import { CheckoutSummary } from '@/components/commerce/checkout/checkout-summary';
@@ -57,7 +57,6 @@ export function CheckoutPage() {
   const checkoutViewSent = useRef(false);
   const checkoutStartedSent = useRef(false);
   const emailEnteredSent = useRef(false);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const paymentCancelled = searchParams.get('cancelled') === '1';
   const cartTransferPending = Boolean(
@@ -162,7 +161,7 @@ export function CheckoutPage() {
         id: provider.id as PaymentMethodId,
         label: provider.displayName,
         enabled: provider.enabled,
-        description: 'Secure card payment.',
+        // No on-page card fields — Continue to Payment redirects to Mollie hosted checkout.
       })),
     [],
   );
@@ -306,21 +305,27 @@ export function CheckoutPage() {
         });
         return;
       }
+      // Hosted Mollie only: require absolute checkout URL, then top-level redirect.
+      // Never collect card details on InstantViral; never treat local success as paid.
+      if (!data.redirectUrl || !/^https?:\/\//i.test(data.redirectUrl)) {
+        setErrors({
+          form: 'Unable to start payment. Please try again.',
+        });
+        setSubmitting(false);
+        analytics?.track({
+          eventName: 'payment_failed',
+          pageType: 'checkout',
+          pagePath: '/checkout',
+        });
+        return;
+      }
       analytics?.track({
         eventName: 'payment_started',
         pageType: 'checkout',
         pagePath: '/checkout',
       });
       cart.clearCart();
-      if (data.redirectUrl) {
-        window.location.assign(data.redirectUrl);
-        return;
-      }
-      const qs = new URLSearchParams({
-        orderId: data.orderId,
-        email: data.email ?? customer.email,
-      });
-      router.push(`${routes.orderSuccess}?${qs.toString()}`);
+      window.location.assign(data.redirectUrl);
     } catch {
       setErrors({ form: 'Unable to place order. Please try again.' });
       setSubmitting(false);
@@ -394,7 +399,7 @@ export function CheckoutPage() {
                 <PlaceOrderButton
                   onClick={handlePlaceOrder}
                   disabled={submitting}
-                  label={submitting ? 'Placing order…' : 'Place Order'}
+                  label={submitting ? 'Continuing to payment…' : 'Continue to Payment'}
                   className="min-h-12 w-full rounded-xl bg-[var(--brand-primary)] text-base font-semibold hover:bg-[var(--brand-primary-hover)]"
                 />
                 <PaymentConfidence className="mt-4" />
@@ -418,7 +423,7 @@ export function CheckoutPage() {
           <PlaceOrderButton
             onClick={handlePlaceOrder}
             disabled={submitting}
-            label={submitting ? 'Placing order…' : 'Place Order'}
+            label={submitting ? 'Continuing to payment…' : 'Continue to Payment'}
             className="min-h-12 w-full rounded-xl bg-[var(--brand-primary)] font-semibold hover:bg-[var(--brand-primary-hover)]"
           />
           <p className="text-center text-[11px] text-[var(--text-secondary)]">
