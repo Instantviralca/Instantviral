@@ -11,6 +11,7 @@ import { collectionPageSchema } from '@/schemas/website';
 import { learnIndexMetadata } from '@/seo/metadata';
 import { descriptions } from '@/seo/descriptions';
 import { titles } from '@/seo/titles';
+import type { Metadata } from 'next';
 
 /**
  * Learn Center index — Documents 15.01 + 15.05.
@@ -19,16 +20,26 @@ import { titles } from '@/seo/titles';
  */
 export const dynamic = 'force-static';
 
+function resolveMetadataTitle(title: Metadata['title'], fallback: string): string {
+  if (typeof title === 'string' && title.trim()) return title;
+  if (title && typeof title === 'object') {
+    if ('absolute' in title && typeof title.absolute === 'string' && title.absolute.trim()) {
+      return title.absolute;
+    }
+    if ('default' in title && typeof title.default === 'string' && title.default.trim()) {
+      return title.default;
+    }
+  }
+  return fallback;
+}
+
 export async function generateMetadata() {
   const base = learnIndexMetadata();
-  const title =
-    typeof base.title === 'string'
-      ? base.title
-      : 'Learn Center | InstantViral';
+  const title = resolveMetadataTitle(base.title, titles.learnIndex());
   const description =
-    typeof base.description === 'string'
+    typeof base.description === 'string' && base.description.trim()
       ? base.description
-      : 'Practical InstantViral Learn guides for social growth.';
+      : descriptions.learnIndex();
 
   return buildLearnDiscoveryMetadata({
     title,

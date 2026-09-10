@@ -36,6 +36,15 @@ export { AnalyticsDispatcher } from '@/lib/analytics/core/dispatcher';
 export { emitLegacyAnalyticsEvent } from '@/lib/analytics/core/bridge';
 
 export {
+  CHECKOUT_STARTED_EVENT,
+  buildCheckoutStartedInput,
+  buildCheckoutStartedSignature,
+  canEmitCheckoutStarted,
+  emitCheckoutStarted,
+  type CheckoutStartCartSnapshot,
+} from '@/lib/analytics/checkout-start';
+
+export {
   getEnabledAnalyticsAdapters,
   resetAnalyticsAdaptersForTests,
   setAnalyticsAdaptersForTests,

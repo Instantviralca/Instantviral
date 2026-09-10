@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/lib/cart';
 import { CART_QUERY_PARAM, encodeCartTransfer } from '@/lib/cart/cart-hash';
 import { writeCartCookie } from '@/lib/cart/cookie-store';
-import { getCheckoutUrl } from '@/lib/config/hosts';
+import { getCheckoutPath } from '@/lib/config/hosts';
 import { emitLegacyAnalyticsEvent } from '@/lib/analytics/core/bridge';
 import { cn } from '@/lib/utils';
 
@@ -50,13 +50,14 @@ export function CheckoutButton({
     }
 
     const transfer = encodeCartTransfer(cartState);
-    const url = new URL(getCheckoutUrl('/'));
+    // Same-origin relative path — keeps analytics visitor/session on main domain.
+    const url = new URL(getCheckoutPath('/'), window.location.origin);
 
     if (transfer) {
       url.searchParams.set(CART_QUERY_PARAM, transfer);
-      emitLegacyAnalyticsEvent('checkout_click', { href: url.toString() });
+      emitLegacyAnalyticsEvent('checkout_click', { href: `${url.pathname}${url.search}` });
       // Navigate first so drawer/toast unmount cannot cancel redirect.
-      window.location.assign(url.toString());
+      window.location.assign(`${url.pathname}${url.search}`);
       onNavigate?.();
       return;
     }

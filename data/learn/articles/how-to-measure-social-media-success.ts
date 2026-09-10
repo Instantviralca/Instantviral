@@ -892,10 +892,4 @@ export const HOW_TO_MEASURE_SOCIAL_MEDIA_SUCCESS_ARTICLE: LearnArticleRecord = {
       schemaEligible: true,
     },
   ],
-  serviceCta: {
-    serviceSlug: 'buy-instagram-followers',
-    label: 'Explore Instagram Followers Packages',
-    description:
-      'Compare real follower packages on InstantViral.ca when you are ready to support social growth.',
-  },
 };

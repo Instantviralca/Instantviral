@@ -30,7 +30,11 @@ export const revalidate = 60;
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return APPROVED_SERVICE_SLUGS.map((slug) => ({ slug }));
+  return APPROVED_SERVICE_SLUGS.filter((slug) => {
+    const service = getServiceBySlug(slug);
+    // Consolidated marketing URLs (e.g. IG followers → `/`) are not static service pages.
+    return Boolean(service && service.url === `/${slug}`);
+  }).map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: ServicePageProps): Promise<Metadata> {

@@ -115,10 +115,7 @@ export function OrderConfigurationSection({
       });
     }
 
-    analytics?.checkoutStart({
-      packageId: selectedPackage.id,
-      serviceSlug: service.slug,
-    });
+    // checkout_started fires on /checkout with a valid cart — not on add-to-cart.
 
     cart.addItem({
       packageId: selectedPackage.id,
@@ -129,7 +126,9 @@ export function OrderConfigurationSection({
       packageTitle: selectedPackage.title,
       quantity: selectedPackage.quantity,
       quantityLabel: selectedPackage.quantityLabel,
+      cartQuantity: 1,
       unitPrice: selectedPackage.price,
+      lineTotal: selectedPackage.price,
       currency: selectedPackage.currency,
       deliveryTime: selectedPackage.deliveryTime,
       configuration: normalized,

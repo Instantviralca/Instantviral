@@ -139,14 +139,8 @@ export function validateLastModified(
   const now = Date.now();
 
   for (const entry of entries) {
-    if (!entry.lastModified) {
-      issues.push({
-        kind: 'invalid_last_modified',
-        url: entry.url,
-        detail: `Missing lastModified for ${entry.url}`,
-      });
-      continue;
-    }
+    // Omitting lastmod is valid when no reliable modification date exists.
+    if (!entry.lastModified) continue;
 
     const value =
       entry.lastModified instanceof Date
@@ -171,11 +165,15 @@ export function validateLastModified(
     }
   }
 
-  const stamps = entries.map((entry) =>
-    entry.lastModified instanceof Date
-      ? entry.lastModified.getTime()
-      : new Date(entry.lastModified as string | number | Date).getTime(),
-  );
+  const stamps = entries
+    .map((entry) => {
+      if (!entry.lastModified) return null;
+      return entry.lastModified instanceof Date
+        ? entry.lastModified.getTime()
+        : new Date(entry.lastModified as string | number | Date).getTime();
+    })
+    .filter((stamp): stamp is number => stamp !== null && !Number.isNaN(stamp));
+
   if (
     stamps.length > 3 &&
     stamps.every((stamp) => Math.abs(stamp - now) < 5000)
@@ -213,9 +211,21 @@ export function findDuplicateSitemapUrls(
   return issues;
 }
 
-/** Indexable metadata routes not on the V1 sitemap allowlist (e.g. learn). */
-export function findIndexableRoutesNotInSitemapAllowlist(): string[] {
+/**
+ * Indexable metadata routes missing from the generated sitemap.
+ * Learn/author/tag routes are included via LEARN_SITEMAP_ENABLED helpers,
+ * so compare against the built sitemap — not only the static V1 allowlist.
+ */
+export function findIndexableRoutesNotInSitemapAllowlist(
+  entries: MetadataRoute.Sitemap = buildSitemapEntries(),
+): string[] {
+  const present = new Set(
+    entries.map((entry) =>
+      normalizeCanonicalPath(new URL(entry.url).pathname || '/'),
+    ),
+  );
+
   return getIndexableMetadataEntries()
     .map((entry) => normalizeCanonicalPath(entry.route))
-    .filter((route) => !SITEMAP_PRODUCTION_ROUTES.includes(route));
+    .filter((route) => !present.has(route));
 }

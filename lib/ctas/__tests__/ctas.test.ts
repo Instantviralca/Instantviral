@@ -48,7 +48,9 @@ describe('Global CTA System', () => {
 
   it('validates destinations and rejects external / skipped services', () => {
     expect(isValidCtaDestination('/contact')).toBe(true);
-    expect(isValidCtaDestination('/buy-instagram-followers')).toBe(true);
+    expect(isValidCtaDestination('/')).toBe(true);
+    expect(isValidCtaDestination('/#pricing-packages')).toBe(true);
+    expect(isValidCtaDestination('/buy-instagram-followers')).toBe(false);
     expect(isValidCtaDestination('#service-pricing')).toBe(true);
     expect(isValidCtaDestination('https://example.com')).toBe(false);
     expect(isValidCtaDestination('/buy-instagram-reels-views')).toBe(false);

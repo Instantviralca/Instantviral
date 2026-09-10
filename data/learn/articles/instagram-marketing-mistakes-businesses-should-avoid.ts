@@ -204,6 +204,18 @@ const BLOCKS: ArticleContentBlock[] = [
     text: 'Respond promptly and encourage meaningful interaction.',
   },
   {
+    id: 'b-m3-ctx-comments',
+    type: 'paragraph',
+    order: 25,
+    text: 'If comments are part of your engagement strategy, they should still fit naturally with the post and audience. You can review the available Instagram Comments packages separately from follower services.',
+    inlineLinks: [
+      {
+        href: '/buy-instagram-comments',
+        label: 'Instagram Comments packages',
+      },
+    ],
+  },
+  {
     id: 'b-related-engagement',
     type: 'related_article_card',
     order: 26,

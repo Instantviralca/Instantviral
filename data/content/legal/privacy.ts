@@ -41,23 +41,23 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
   const paymentBlocks: LegalPolicySection['blocks'] = [
     {
       type: 'paragraph',
-      text: `${operatingName} does not store complete payment-card details on its own systems. Payment information is collected and processed by the payment providers that are currently enabled for checkout.`,
+      text: `${operatingName} does not store card numbers, CVC codes, or other complete payment-card credentials on its own systems. Sensitive card details are collected and processed by the payment provider that handles checkout.`,
     },
   ];
 
   if (paymentNames.length > 0) {
     paymentBlocks.push({
       type: 'paragraph',
-      text: `Currently enabled payment providers: ${paymentNames.join(', ')}.`,
+      text: `The payment provider currently enabled for InstantViral checkout is: ${paymentNames.join(', ')}.`,
     });
     paymentBlocks.push({
       type: 'paragraph',
-      text: `${operatingName} may receive payment tokens, transaction identifiers, payer email where provided by the processor, billing details the processor returns, and payment status information needed for accounting, fraud prevention, refunds, and dispute management. Complete card numbers are handled by the payment provider according to that provider’s privacy practices.`,
+      text: `${operatingName} may receive payment tokens, transaction identifiers, payer email where provided by the processor, limited billing details the processor returns, and payment status information needed for accounting, fraud prevention, refunds, and dispute management. Complete card numbers remain with the payment provider under that provider’s privacy practices.`,
     });
   } else {
     paymentBlocks.push({
       type: 'paragraph',
-      text: 'No payment providers are currently enabled in checkout configuration. This section will be updated when a payment provider is enabled.',
+      text: 'No payment providers are currently enabled in checkout configuration.',
     });
   }
 
@@ -77,30 +77,22 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
     },
   ];
 
+  cookieBlocks.push({
+    type: 'subheading',
+    id: 'analytics-technologies',
+    text: 'Analytics Technologies',
+  });
+
   if (analyticsNames.length > 0) {
-    cookieBlocks.push(
-      {
-        type: 'subheading',
-        id: 'analytics-technologies',
-        text: 'Analytics Technologies',
-      },
-      {
-        type: 'paragraph',
-        text: `Analytics tools currently enabled: ${analyticsNames.join(', ')}. These tools may help InstantViral understand page visits, navigation patterns, device categories, conversion events, and website performance.`,
-      },
-    );
+    cookieBlocks.push({
+      type: 'paragraph',
+      text: `Analytics tools currently enabled: ${analyticsNames.join(', ')}. InstantViral’s first-party analytics may record page views, anonymous visitor and session identifiers, referral source, UTM parameters, device category, browser information where collected, checkout funnel events, and order or conversion events. Optional third-party tools are listed only when they are actually enabled in the environment.`,
+    });
   } else {
-    cookieBlocks.push(
-      {
-        type: 'subheading',
-        id: 'analytics-technologies',
-        text: 'Analytics Technologies',
-      },
-      {
-        type: 'paragraph',
-        text: 'No named analytics providers are currently enabled in InstantViral configuration. This policy will be updated if analytics tools are introduced.',
-      },
-    );
+    cookieBlocks.push({
+      type: 'paragraph',
+      text: 'No analytics tools are currently enabled in InstantViral configuration.',
+    });
   }
 
   if (marketingNames.length > 0) {
@@ -166,7 +158,7 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
   } else {
     internationalBlocks.push({
       type: 'paragraph',
-      text: 'A specific hosting location has not been published in InstantViral configuration. InstantViral does not claim Canada-only storage unless and until that arrangement is verified.',
+      text: 'InstantViral uses cloud infrastructure and service providers that may process information outside your province or country. InstantViral does not claim Canada-only storage on this page.',
     });
   }
 
@@ -224,7 +216,7 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
   } else {
     childrenBlocks.push({
       type: 'paragraph',
-      text: 'A specific numeric age threshold will be published only after legal review and alignment with applicable privacy law, payment-provider requirements, and platform terms. InstantViral does not select an arbitrary age for this policy.',
+      text: 'A specific numeric minimum age is not published on this page. InstantViral services are intended for customers who can lawfully enter into a binding agreement and use the relevant social platforms and payment methods.',
     });
   }
 
@@ -323,9 +315,11 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
             'Optional order notes',
             'Coupon code',
             'Selected service and package',
+            'Cart quantity and package configuration',
             'Public social media username',
             'Public profile, page, post, Reel, channel, or video URL',
             'Custom comment text where a supported package requires it',
+            'Optional marketing email preference when offered at checkout',
             'Consent records',
             'Terms acceptance records',
           ],
@@ -356,7 +350,7 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
         },
         {
           type: 'paragraph',
-          text: 'Where actually collected through site operation, security, or enabled tools, InstantViral may process technical information such as IP address, browser type, device type, operating system, referral source, pages visited, approximate location derived from IP, session identifiers, security and error logs, and cookie preferences.',
+          text: 'Where actually collected through site operation, security, or enabled tools, InstantViral may process technical information such as IP address, browser type, device category, operating system, referral source, UTM parameters, pages visited, anonymous visitor and session identifiers, checkout funnel events, order or conversion events, security and error logs, and cookie or similar-storage preferences. InstantViral does not use this information as invasive device fingerprinting, and it does not claim precise GPS geolocation.',
         },
         {
           type: 'subheading',
@@ -411,12 +405,15 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
             'Responding to customer questions',
             'Processing payments through enabled payment providers',
             'Applying valid coupons and calculating totals',
+            'Maintaining checkout continuity for incomplete orders',
+            'Sending abandoned-cart recovery reminders where operationally appropriate',
             'Preventing duplicate, fraudulent, abusive, or unauthorized activity',
             'Troubleshooting technical issues',
             'Maintaining security logs',
+            'Measuring website usage and conversion funnels through first-party analytics',
             'Improving website usability and performance',
             'Meeting legal, accounting, tax, dispute-resolution, and recordkeeping obligations',
-            'Sending marketing communications only where legally permitted and consented to',
+            'Sending marketing communications only where legally permitted and where the customer has opted in',
           ],
         },
         {
@@ -493,6 +490,25 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
       anchor: 'payment-information',
       title: 'Payment Information',
       blocks: paymentBlocks,
+    },
+    {
+      id: 'incomplete-checkout',
+      anchor: 'incomplete-checkout',
+      title: 'Incomplete Checkout and Cart Recovery',
+      blocks: [
+        {
+          type: 'paragraph',
+          text: `If you begin checkout and provide enough information to identify your order (such as an email address) but do not complete payment, ${operatingName} may temporarily retain checkout and cart details to help you continue later, support customer service, and send recovery reminders about the unfinished order.`,
+        },
+        {
+          type: 'paragraph',
+          text: 'Information retained for this purpose may include cart items, package selections, quantities, public destination usernames or URLs, customer contact fields entered at checkout, attribution data linked to the browsing session, and recovery status. InstantViral does not save card numbers, CVC codes, or other complete payment-card credentials for abandoned-cart recovery.',
+        },
+        {
+          type: 'paragraph',
+          text: 'Recovery emails are transactional reminders about an order you started. They are separate from optional promotional marketing messages. InstantViral does not invent a separate marketing-consent flow for these recovery reminders beyond the checkout information you already provided.',
+        },
+      ],
     },
     {
       id: 'cookies-analytics',

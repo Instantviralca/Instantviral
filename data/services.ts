@@ -9,6 +9,11 @@ type ServiceInput = {
   slug: string;
   /** Optional display name override (defaults to `Buy {Platform} {shortName}`). */
   name?: string;
+  /**
+   * Optional public marketing URL when it differs from `/${slug}`.
+   * Instagram Followers consolidates onto `/` while keeping the internal slug.
+   */
+  publicUrl?: string;
   primaryKeyword: string;
   secondaryKeywords: string[];
   category: ServiceCategory;
@@ -29,7 +34,7 @@ const PLATFORM_META: Record<PlatformId, { name: string; slug: string; color: str
 function buildService(input: ServiceInput): Service {
   const platform = PLATFORM_META[input.platform];
   const name = input.name ?? `Buy ${platform.name} ${input.shortName}`;
-  const url = `/${input.slug}`;
+  const url = input.publicUrl ?? `/${input.slug}`;
 
   return {
     id: input.id,
@@ -67,6 +72,7 @@ const SERVICE_INPUTS: ServiceInput[] = [
     shortName: 'Followers',
     slug: 'buy-instagram-followers',
     name: 'Instagram Followers Packages',
+    publicUrl: '/',
     primaryKeyword: 'instagram followers packages',
     secondaryKeywords: [
       'instagram followers',

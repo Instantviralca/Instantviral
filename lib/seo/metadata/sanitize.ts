@@ -19,6 +19,21 @@ export function sanitizeMetadataText(input: string): string {
     .trim();
 }
 
+/**
+ * Soft SERP-oriented description clamp (practical target ~145–155).
+ * Prefer rewriting source copy when possible; this is a safety net for
+ * hand-authored / excerpt-backed descriptions that bypass templates.
+ */
+export function clampMetaDescription(text: string, max = 155): string {
+  const cleaned = sanitizeMetadataText(text);
+  if (cleaned.length <= max) return cleaned;
+  const sliced = cleaned.slice(0, max - 1).trimEnd();
+  const lastSpace = sliced.lastIndexOf(' ');
+  const base =
+    lastSpace > Math.floor(max * 0.6) ? sliced.slice(0, lastSpace).trimEnd() : sliced;
+  return `${base}…`;
+}
+
 const PRIVATE_PATTERNS = [
   EMAIL_PATTERN,
   /\b\d{10,}\b/, // long numeric IDs

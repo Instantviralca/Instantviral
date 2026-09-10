@@ -40,10 +40,12 @@ describe('SEO Metadata & Canonical Engine', () => {
 
   it('builds approved service metadata and rejects skipped services', () => {
     const ig = serviceMetadata('buy-instagram-followers');
-    expect(ig.alternates?.canonical).toBe(
-      'https://instantviral.ca/buy-instagram-followers',
-    );
+    expect(ig.alternates?.canonical).toBe('https://instantviral.ca');
     expect(ig.robots).toMatchObject({ index: true });
+    expect(getMetadataByRoute('/buy-instagram-followers')).toBeUndefined();
+
+    const likes = serviceMetadata('buy-instagram-likes');
+    expect(likes.alternates?.canonical).toBe('https://instantviral.ca/buy-instagram-likes');
 
     const skipped = serviceMetadata('buy-instagram-reels-views');
     expect(skipped.robots).toMatchObject({ index: false });

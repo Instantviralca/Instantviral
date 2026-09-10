@@ -37,13 +37,21 @@ export function CheckoutOrderSummary({
             </p>
             <p className="mt-1 text-lg font-bold">{item.quantityLabel}</p>
             <p className="text-[var(--text-secondary)]">{item.packageTitle}</p>
+            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+              Qty: {item.cartQuantity && item.cartQuantity > 0 ? item.cartQuantity : 1}
+            </p>
             {item.deliveryTime ? (
               <p className="mt-1 text-xs text-[var(--text-secondary)]">
                 Delivery: {item.deliveryTime}
               </p>
             ) : null}
             <p className="mt-2 font-semibold text-[var(--brand-primary)]">
-              {formatMoney(item.unitPrice, item.currency)}
+              {formatMoney(
+                item.lineTotal ??
+                  item.unitPrice *
+                    (item.cartQuantity && item.cartQuantity > 0 ? item.cartQuantity : 1),
+                item.currency,
+              )}
             </p>
           </li>
         ))}

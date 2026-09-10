@@ -22,7 +22,7 @@ function isPlaceholderEmail(email: string | undefined): boolean {
 
 /**
  * Current Disclaimer configuration.
- * Verified today: operating/legal display name InstantViral, domain instantviral.ca.
+ * Verified: InstantViral display name, instantviral.ca, support@instantviral.ca.
  * No verified platform affiliations or endorsements are configured.
  */
 export const disclaimerConfig: DisclaimerConfig = {
@@ -30,14 +30,13 @@ export const disclaimerConfig: DisclaimerConfig = {
   operatingName: brand.name,
   websiteDomain: site.domain,
 
-  // Launch blockers until verified — intentionally unset
-  supportEmail: undefined,
+  supportEmail: site.supportEmail,
   mailingAddress: undefined,
-  effectiveDate: undefined,
-  lastUpdatedDate: undefined,
+  effectiveDate: '2026-09-09',
+  lastUpdatedDate: '2026-09-09',
 
   hasVerifiedPlatformAffiliations: false,
-  publicationStatus: 'draft',
+  publicationStatus: 'published',
   legalReviewCompleted: false,
 };
 
@@ -45,7 +44,7 @@ export const disclaimerConfig: DisclaimerConfig = {
 export function getVerifiedDisclaimerContactEmail(
   config: DisclaimerConfig = disclaimerConfig,
 ): string | undefined {
-  const email = config.supportEmail?.trim();
+  const email = config.supportEmail?.trim() || site.supportEmail;
   if (!email || isPlaceholderEmail(email)) return undefined;
   return email;
 }

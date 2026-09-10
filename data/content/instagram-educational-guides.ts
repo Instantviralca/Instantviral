@@ -351,14 +351,14 @@ export const INSTAGRAM_LIKES_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       id: 'wrap',
       title: 'Before you order likes',
       body:
-        'Keep the target post public and choose a quantity that fits that upload—not every quiet tile. Audience building still belongs with [Instagram followers](/buy-instagram-followers); conversation with [Instagram comments](/buy-instagram-comments).',
+        'Keep the target post public and choose a quantity that fits that upload—not every quiet tile. Audience building still belongs with [Instagram followers](/#pricing-packages); conversation with [Instagram comments](/buy-instagram-comments).',
     },
     {
       type: 'links',
       id: 'related',
       heading: 'Browse related services',
       links: [
-        { label: 'Instagram followers packages', href: '/buy-instagram-followers' },
+        { label: 'Instagram followers packages', href: '/#pricing-packages' },
         { label: 'Instagram views packages', href: '/buy-instagram-views' },
         { label: 'Instagram comments packages', href: '/buy-instagram-comments' },
         { label: 'InstantViral homepage', href: '/' },
@@ -467,14 +467,14 @@ export const INSTAGRAM_VIEWS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       id: 'wrap',
       title: 'When to combine services',
       body:
-        'If the Reel is solid and you also need a larger audience or discussion, look at [Instagram followers](/buy-instagram-followers) and [Instagram comments](/buy-instagram-comments). For reaction volume on stills or the same clip’s heart count, use [Instagram likes](/buy-instagram-likes).',
+        'If the Reel is solid and you also need a larger audience or discussion, look at [Instagram followers](/#pricing-packages) and [Instagram comments](/buy-instagram-comments). For reaction volume on stills or the same clip’s heart count, use [Instagram likes](/buy-instagram-likes).',
     },
     {
       type: 'links',
       id: 'related',
       heading: 'Related InstantViral destinations',
       links: [
-        { label: 'Instagram followers packages', href: '/buy-instagram-followers' },
+        { label: 'Instagram followers packages', href: '/#pricing-packages' },
         { label: 'Instagram likes packages', href: '/buy-instagram-likes' },
         { label: 'Instagram comments packages', href: '/buy-instagram-comments' },
         { label: 'InstantViral homepage', href: '/' },
@@ -657,7 +657,7 @@ export const INSTAGRAM_COMMENTS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       links: [
         { label: 'Instagram likes packages', href: '/buy-instagram-likes' },
         { label: 'Instagram views packages', href: '/buy-instagram-views' },
-        { label: 'Instagram followers packages', href: '/buy-instagram-followers' },
+        { label: 'Instagram followers packages', href: '/#pricing-packages' },
         { label: 'InstantViral homepage', href: '/' },
       ],
     },

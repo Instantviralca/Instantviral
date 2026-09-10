@@ -13,7 +13,7 @@ function buildBuyYouTubeSubscribersContent(): ServiceContent {
     seo: {
       title: 'Buy YouTube Subscribers Canada | InstantViral',
       description:
-        'Buy YouTube subscribers in Canada using your public channel URL. Compare transparent packages, complete secure checkout with no password required, and monitor available order updates.',
+        'Buy YouTube subscribers in Canada with clear packages, public channel URL only, secure checkout, delivery details and order tracking. No password required.',
     },
     hero: {
       eyebrow: 'YOUTUBE SUBSCRIBER PACKAGES FOR CREATORS, BRANDS & BUSINESSES',
@@ -270,7 +270,7 @@ function buildBuyYouTubeViewsContent(): ServiceContent {
     seo: {
       title: 'Buy YouTube Views Canada | InstantViral',
       description:
-        'Buy YouTube views in Canada using your public video URL. Compare transparent packages, complete secure checkout with no password required, and monitor available order updates.',
+        'Buy YouTube views in Canada with clear packages, public video URL only, secure checkout, delivery details and order tracking. No password required.',
     },
     hero: {
       eyebrow: 'YOUTUBE VIDEO VIEW PACKAGES FOR CREATORS, BRANDS & BUSINESSES',

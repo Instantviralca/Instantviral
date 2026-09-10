@@ -4,14 +4,14 @@ import type { Service } from '@/types/service';
 
 /** Title formulas from Document 05 / 09.11. */
 export const titles = {
-  home: () => `Buy Instagram Followers Canada | Real Followers – ${site.name}`,
+  home: () => `Buy Instagram Followers Canada | ${site.name}`,
 
   service: (service: Service) => {
     if (service.slug === 'buy-instagram-followers') {
       return `Instagram Followers Packages & Pricing | ${site.name}`;
     }
     if (service.slug === 'buy-instagram-likes') {
-      return `Buy Instagram Likes | ${site.name}`;
+      return `Buy Instagram Likes Canada | ${site.name}`;
     }
     if (service.slug === 'buy-instagram-views') {
       return `Buy Instagram Views Canada | ${site.name}`;
@@ -46,7 +46,7 @@ export const titles = {
     return `${service.name} | ${site.name}`;
   },
 
-  learnIndex: () => `Learn | ${site.name}`,
+  learnIndex: () => `Social Media Growth Guides | ${site.name} Learn`,
 
   learnArticle: (article: LearnArticle) => `${article.title} | Learn | ${site.name}`,
 
@@ -59,6 +59,9 @@ export const titles = {
     }
     if (pageName === 'FAQ') {
       return 'InstantViral FAQ | Orders, Delivery, Payments & Support';
+    }
+    if (pageName === 'Reviews') {
+      return 'InstantViral Reviews | Creators & Brands';
     }
     return `${pageName} | ${site.name}`;
   },

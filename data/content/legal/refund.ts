@@ -53,12 +53,12 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
   if (config.eligibleMoneyBackWindowLabel) {
     eligibilityBlocks.push({
       type: 'paragraph',
-      text: `Where an eligible money-back window is published for a purchase, the configured window is: ${config.eligibleMoneyBackWindowLabel}. That window remains subject to this Refund Policy, the selected package conditions, order status, and customer actions.`,
+      text: `Eligible purchases are covered by InstantViral’s ${config.eligibleMoneyBackWindowLabel} money-back guarantee, subject to this Refund Policy, the selected package conditions, order status, and customer actions. The guarantee is not unconditional and does not override the non-refundable situations described below.`,
     });
   } else {
     eligibilityBlocks.push({
       type: 'paragraph',
-      text: 'InstantViral does not publish an unconditional money-back promise on this page. Any eligible money-back or refund window must come from verified operational policy and the conditions shown for the selected service and package. InstantViral will not invent a refund timeframe for public display.',
+      text: 'InstantViral does not publish an unconditional money-back promise on this page. Any eligible money-back or refund window must come from verified operational policy and the conditions shown for the selected service and package.',
     });
   }
 

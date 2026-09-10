@@ -27,6 +27,7 @@ import {
   createEmptyCart,
   serializeCart,
 } from '@/lib/cart/utils';
+import { normalizeCartItem } from '@/lib/orders/line-items';
 import type { AppliedCoupon, CartActions, CartItem, CartState, CartTotals } from '@/types/cart';
 
 type CartContextValue = CartState &
@@ -114,18 +115,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
   }, [state, isHydrated]);
 
   const addItem = useCallback((item: Omit<CartItem, 'id' | 'addedAt'>) => {
-    setState((prev) => ({
-      ...prev,
-      items: [
-        ...prev.items,
-        {
-          ...item,
-          id: createCartItemId(),
-          addedAt: new Date().toISOString(),
-        },
-      ],
-      updatedAt: new Date().toISOString(),
-    }));
+    setState((prev) => {
+      const nextItem = normalizeCartItem({
+        ...item,
+        id: createCartItemId(),
+        addedAt: new Date().toISOString(),
+      });
+      return {
+        ...prev,
+        items: [...prev.items, nextItem],
+        updatedAt: new Date().toISOString(),
+      };
+    });
   }, []);
 
   const removeItem = useCallback((itemId: string) => {

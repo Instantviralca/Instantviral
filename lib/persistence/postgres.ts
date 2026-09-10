@@ -4,6 +4,8 @@
 
 import { and, desc, eq, gte } from 'drizzle-orm';
 
+import { normalizeOrderLineItem } from '@/lib/orders/line-items';
+
 import { getDb } from '@/lib/db/client';
 import * as tables from '@/lib/db/schema';
 import type { ContactFormValues } from '@/lib/contact/validation';
@@ -97,21 +99,25 @@ async function hydrateOrder(orderId: string): Promise<Order | null> {
       }
     : undefined;
 
-  const lineItems: OrderLineItem[] = items.map((item) => ({
-    id: item.id,
-    platformId: item.platformId as PlatformId,
-    serviceId: item.serviceId,
-    serviceSlug: item.serviceSlug,
-    serviceName: item.serviceName,
-    packageId: item.packageId,
-    packageTitle: item.packageTitle,
-    quantity: item.quantity,
-    quantityLabel: item.quantityLabel,
-    unitPrice: item.unitPrice,
-    currency: item.currency as CurrencyCode,
-    configuration: item.configuration,
-    deliveryTime: item.deliveryTime ?? undefined,
-  }));
+  const lineItems: OrderLineItem[] = items.map((item) =>
+    normalizeOrderLineItem({
+      id: item.id,
+      platformId: item.platformId as PlatformId,
+      serviceId: item.serviceId,
+      serviceSlug: item.serviceSlug,
+      serviceName: item.serviceName,
+      packageId: item.packageId,
+      packageTitle: item.packageTitle,
+      quantity: item.quantity,
+      quantityLabel: item.quantityLabel,
+      cartQuantity: (item as { cartQuantity?: number | null }).cartQuantity ?? undefined,
+      unitPrice: item.unitPrice,
+      lineTotal: (item as { lineTotal?: number | null }).lineTotal ?? undefined,
+      currency: item.currency as CurrencyCode,
+      configuration: item.configuration,
+      deliveryTime: item.deliveryTime ?? undefined,
+    }),
+  );
 
   const timelineEvents: OrderTimelineEvent[] = timeline
     .map((event) => ({
@@ -239,34 +245,73 @@ export function createPostgresPersistence(): AppPersistence {
           },
         });
 
-      const itemRows = order.items.map((item, index) => ({
-        // Never reuse cart line ids as PK — retries would collide across orders.
-        id: `oli_${order.id}_${index}`,
-        orderId: order.id,
-        platformId: item.platformId,
-        serviceId: item.serviceId,
-        serviceSlug: item.serviceSlug,
-        serviceName: item.serviceName,
-        packageId: item.packageId,
-        packageTitle: item.packageTitle,
-        quantity: item.quantity,
-        quantityLabel: item.quantityLabel,
-        unitPrice: item.unitPrice,
-        currency: item.currency,
-        configuration: item.configuration ?? {},
-        deliveryTime: item.deliveryTime?.trim() ? item.deliveryTime : null,
-        publicDestination: publicDestinationFromConfig(item.configuration ?? {}) ?? null,
-      }));
+      const itemRows = order.items.map((item, index) => {
+        const normalized = normalizeOrderLineItem(item);
+        return {
+          // Never reuse cart line ids as PK — retries would collide across orders.
+          id: `oli_${order.id}_${index}`,
+          orderId: order.id,
+          platformId: normalized.platformId,
+          serviceId: normalized.serviceId,
+          serviceSlug: normalized.serviceSlug,
+          serviceName: normalized.serviceName,
+          packageId: normalized.packageId,
+          packageTitle: normalized.packageTitle,
+          quantity: normalized.quantity,
+          quantityLabel: normalized.quantityLabel,
+          cartQuantity: normalized.cartQuantity ?? 1,
+          unitPrice: normalized.unitPrice,
+          lineTotal: normalized.lineTotal ?? normalized.unitPrice,
+          currency: normalized.currency,
+          configuration: normalized.configuration ?? {},
+          deliveryTime: normalized.deliveryTime?.trim() ? normalized.deliveryTime : null,
+          publicDestination: publicDestinationFromConfig(normalized.configuration ?? {}) ?? null,
+        };
+      });
+
+      async function insertItemRows(
+        rows: typeof itemRows,
+        includeCartEconomics: boolean,
+      ): Promise<void> {
+        if (!rows.length) return;
+        if (includeCartEconomics) {
+          await db.insert(tables.orderItems).values(rows);
+          return;
+        }
+        await db.insert(tables.orderItems).values(
+          rows.map(({ cartQuantity: _cq, lineTotal: _lt, ...rest }) => rest),
+        );
+      }
 
       if (!existing) {
-        if (itemRows.length) {
-          await db.insert(tables.orderItems).values(itemRows);
+        try {
+          await insertItemRows(itemRows, true);
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          if (/cart_quantity|line_total|column/i.test(message)) {
+            console.warn(
+              '[persistence] order_items cart_quantity/line_total missing — run drizzle/0007_order_item_cart_quantity.sql',
+            );
+            await insertItemRows(itemRows, false);
+          } else {
+            throw error;
+          }
         }
       } else {
         // Replace items on update to keep sync simple for v1.
         await db.delete(tables.orderItems).where(eq(tables.orderItems.orderId, order.id));
-        if (itemRows.length) {
-          await db.insert(tables.orderItems).values(itemRows);
+        try {
+          await insertItemRows(itemRows, true);
+        } catch (error) {
+          const message = error instanceof Error ? error.message : String(error);
+          if (/cart_quantity|line_total|column/i.test(message)) {
+            console.warn(
+              '[persistence] order_items cart_quantity/line_total missing — run drizzle/0007_order_item_cart_quantity.sql',
+            );
+            await insertItemRows(itemRows, false);
+          } else {
+            throw error;
+          }
         }
       }
 
@@ -559,22 +604,45 @@ export function createPostgresPersistence(): AppPersistence {
       if (!events.length) return;
       const db = getDb();
       try {
-        await db.insert(tables.analyticsEvents).values(
-          events.map((event) => ({
-            id: event.id,
-            eventName: event.eventName,
-            sessionId: event.sessionId,
-            pagePath: event.pagePath,
-            country: event.country || 'XX',
-            metadata: event.metadata ?? null,
-            createdAt: new Date(event.createdAt),
-          })),
-        );
+        await db
+          .insert(tables.analyticsEvents)
+          .values(
+            events.map((event) => ({
+              id: event.id,
+              eventName: event.eventName,
+              sessionId: event.sessionId,
+              pagePath: event.pagePath,
+              country: event.country || 'XX',
+              metadata: event.metadata ?? null,
+              createdAt: new Date(event.createdAt),
+              visitorId: event.visitorId ?? null,
+              deviceCategory: event.deviceCategory ?? null,
+              channel: event.channel ?? null,
+              referrerHost: event.referrerHost ?? null,
+              source: event.source ?? 'client',
+            })),
+          )
+          .onConflictDoNothing();
       } catch (error) {
         const message = error instanceof Error ? error.message : String(error);
         // Missing migration should not break the public site.
         if (/relation|does not exist|analytics_events/i.test(message)) {
           console.error('[persistence] analytics_events missing — run drizzle/0003_analytics_events.sql');
+          return;
+        }
+        // Older schema without enrichment columns — retry minimal insert.
+        if (/column|visitor_id|device_category|channel|referrer_host|source/i.test(message)) {
+          await db.insert(tables.analyticsEvents).values(
+            events.map((event) => ({
+              id: event.id,
+              eventName: event.eventName,
+              sessionId: event.sessionId,
+              pagePath: event.pagePath,
+              country: event.country || 'XX',
+              metadata: event.metadata ?? null,
+              createdAt: new Date(event.createdAt),
+            })),
+          ).onConflictDoNothing();
           return;
         }
         throw error;
@@ -596,6 +664,11 @@ export function createPostgresPersistence(): AppPersistence {
         country: row.country,
         metadata: row.metadata ?? undefined,
         createdAt: row.createdAt.toISOString(),
+        visitorId: row.visitorId ?? null,
+        deviceCategory: row.deviceCategory ?? null,
+        channel: row.channel ?? null,
+        referrerHost: row.referrerHost ?? null,
+        source: (row.source as 'client' | 'server' | undefined) ?? 'client',
       }));
     },
     async upsertMarketingSubscriber(input) {

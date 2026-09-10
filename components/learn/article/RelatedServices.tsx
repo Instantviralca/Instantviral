@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { resolveServiceMarketingHref } from '@/lib/linking/service-href';
 import type { InternalLink } from '@/types/linking';
 import type { LearnArticleServiceCta } from '@/types/learn';
 
@@ -29,7 +30,9 @@ export function RelatedServices({
 
       {prominentCta ? (
         <Link
-          href={`/${prominentCta.serviceSlug}`}
+          href={resolveServiceMarketingHref(prominentCta.serviceSlug, {
+            label: prominentCta.label,
+          })}
           className="block border border-neutral-900 bg-neutral-900 px-5 py-4 text-white outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
         >
           <p className="font-semibold">{prominentCta.label}</p>

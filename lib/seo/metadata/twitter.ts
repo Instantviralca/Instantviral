@@ -5,7 +5,7 @@
 
 import { seoSiteConfig } from '@/config/seo';
 import { absoluteUrl } from '@/lib/seo/metadata/canonical';
-import { sanitizeMetadataText } from '@/lib/seo/metadata/sanitize';
+import { clampMetaDescription, sanitizeMetadataText } from '@/lib/seo/metadata/sanitize';
 import type { MetadataEntry } from '@/types/seo-metadata';
 import type { Metadata } from 'next';
 
@@ -28,7 +28,7 @@ export function buildTwitterMetadata(
   const base: NonNullable<Metadata['twitter']> = {
     card: seoSiteConfig.twitterCard,
     title: sanitizeMetadataText(input.title),
-    description: sanitizeMetadataText(input.description),
+    description: clampMetaDescription(input.description),
     images: [{ url: imageUrl, alt: imageAlt }],
   };
 

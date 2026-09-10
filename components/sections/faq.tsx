@@ -53,7 +53,13 @@ type FaqAccordionItemProps = {
 };
 
 /** Render FAQ answer text with safe internal markdown links: [label](/path). */
-function FaqAnswerText({ answer }: { answer: string }) {
+export function FaqAnswerText({
+  answer,
+  className,
+}: {
+  answer: string;
+  className?: string;
+}) {
   const parts: ReactNode[] = [];
   const linkRe = /\[([^\]]+)\]\((\/[^)\s]*)\)/g;
   let lastIndex = 0;
@@ -87,7 +93,7 @@ function FaqAnswerText({ answer }: { answer: string }) {
   }
 
   return (
-    <Text className="pb-4 text-muted-foreground whitespace-pre-line">
+    <Text className={cn('pb-4 text-muted-foreground whitespace-pre-line', className)}>
       {parts.length > 0 ? parts : answer}
     </Text>
   );

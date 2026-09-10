@@ -15,7 +15,7 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
     seo: {
       title: 'Instagram Followers Packages & Pricing | InstantViral',
       description:
-        'Compare Instagram follower packages, pricing, delivery details and available plan sizes. Choose an option that matches your account and growth goals.',
+        'Compare Instagram followers packages, pricing, delivery details and available plan sizes. Choose an option that matches your account and growth goals.',
     },
     hero: {
       eyebrow: 'INSTAGRAM FOLLOWERS PRICING',
@@ -171,7 +171,7 @@ function buildBuyInstagramFollowersContent(): ServiceContent {
       serviceSlugs: ['buy-instagram-likes', 'buy-instagram-views', 'buy-instagram-comments'],
       cta: {
         label: 'Explore Instagram Services',
-        href: '/buy-instagram-followers',
+        href: '/#pricing-packages',
       },
     },
     finalCta: {
@@ -200,7 +200,7 @@ function buildBuyInstagramLikesContent(): ServiceContent {
     slug: 'buy-instagram-likes',
     platformId: 'instagram',
     seo: {
-      title: 'Buy Instagram Likes | InstantViral',
+      title: 'Buy Instagram Likes Canada | InstantViral',
       description:
         'Buy Instagram likes through InstantViral with clear package options, delivery details, secure checkout, order tracking and a public post URL only.',
     },
@@ -359,7 +359,7 @@ function buildBuyInstagramLikesContent(): ServiceContent {
       serviceSlugs: ['buy-instagram-followers', 'buy-instagram-views', 'buy-instagram-comments'],
       cta: {
         label: 'Explore More Services',
-        href: '/buy-instagram-followers',
+        href: '/#pricing-packages',
       },
     },
     finalCta: {
@@ -512,7 +512,7 @@ function buildBuyInstagramViewsContent(): ServiceContent {
       serviceSlugs: ['buy-instagram-followers', 'buy-instagram-likes', 'buy-instagram-comments'],
       cta: {
         label: 'Explore More Services',
-        href: '/buy-instagram-followers',
+        href: '/#pricing-packages',
       },
     },
     finalCta: {

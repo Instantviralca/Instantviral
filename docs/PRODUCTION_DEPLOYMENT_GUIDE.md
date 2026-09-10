@@ -28,7 +28,7 @@ These nine variables are **required** for production. The app fails safely at ru
 
 | Variable | Used for |
 |----------|----------|
-| `NEXT_PUBLIC_CHECKOUT_URL` | External checkout origin (`https://checkout.instantviral.ca`) — soft cart hands off here |
+| `NEXT_PUBLIC_LEGACY_CHECKOUT_HOST` | Optional retired host (`checkout.instantviral.ca`) for 308 redirects onto `/checkout` |
 | `EMAIL_ADMIN_TO` | Admin inbox for new paid orders + contact form alerts |
 | `EMAIL_SUPPORT` | Support address shown in customer emails |
 | `EMAIL_COMPANY_NAME` | Brand name in email templates (defaults to InstantViral) |
@@ -198,30 +198,30 @@ Copy it into your password manager / Vercel env UI. Fill real values. Do not ren
 | `NEXT_PUBLIC_*` vars | Must be set **before** a production build/deploy. Changing them requires a **redeploy**. |
 | Secrets | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `IV_ADMIN_*`, `RESEND_API_KEY`, `DATABASE_URL` — Production only; never expose in client code. |
 | Domain | Project → **Settings** → **Domains** → add `instantviral.ca` (+ redirect `www` → apex if desired) |
-| Checkout subdomain | Also add `checkout.instantviral.ca` (same project) — see section 4.C1 below |
+| Legacy checkout host | Optional: keep `checkout.instantviral.ca` on the same project so middleware can 308 → `/checkout` (see C1) |
 | HTTPS | Automatic on Vercel once DNS is pointed correctly |
 
-### C1. External checkout subdomain (`checkout.instantviral.ca`)
+### C1. Legacy checkout subdomain redirects (`checkout.instantviral.ca`)
 
-Buzzoid-style handoff: cart on the main site → checkout UI on a dedicated host → Stripe hosted payment.
+Checkout is served on the **main domain** only: `https://instantviral.ca/checkout`.
 
-1. Vercel → **Settings** → **Domains** → **Add** → `checkout.instantviral.ca`
-2. DNS: create a **CNAME** for `checkout` pointing to the value Vercel shows (usually `cname.vercel-dns.com`)
-3. Set env (Production + redeploy):
-   - `NEXT_PUBLIC_SITE_URL=https://instantviral.ca`
-   - `NEXT_PUBLIC_CHECKOUT_URL=https://checkout.instantviral.ca`
-4. Cart cookie uses `Domain=.instantviral.ca` so the checkout host can read the cart
-5. Stripe cancel returns to `https://checkout.instantviral.ca/?cancelled=1`
-6. Stripe success returns to `https://instantviral.ca/order-success?...`
-7. Keep webhook endpoint on the main site: `https://instantviral.ca/api/webhooks/stripe`
+If old emails, bookmarks, or campaigns still link to `checkout.instantviral.ca`, keep that hostname pointed at this same Next.js app so middleware can permanently redirect:
 
-**Host split (when both env URLs differ):**
-- `checkout.instantviral.ca` → only checkout (`/` / `/checkout` + APIs). Marketing/Learn/admin redirect to the main site.
-- Main site (`instantviral.ca` or Vercel preview URL) → full site. `/checkout` redirects to the checkout subdomain. Soft cart `/cart` stays on main.
+| Old path | Redirects to |
+|----------|--------------|
+| `https://checkout.instantviral.ca/` | `https://instantviral.ca/checkout` |
+| `https://checkout.instantviral.ca/checkout/...` | `https://instantviral.ca/checkout/...` |
+| Recovery tokens / query string | Preserved |
 
-**Local without subdomain:** omit `NEXT_PUBLIC_CHECKOUT_URL` — checkout stays on `/checkout` of the main origin. Dev force: `?checkoutHost=1`.
+1. Keep (or add) `checkout.instantviral.ca` in Vercel Domains **only** for redirects — do not set it as the customer checkout origin.
+2. Optional env: `NEXT_PUBLIC_LEGACY_CHECKOUT_HOST=checkout.instantviral.ca`
+   (`NEXT_PUBLIC_CHECKOUT_URL` is deprecated; if still set to a different host, it is treated as a legacy redirect hint only.)
+3. Mollie return URL → `https://instantviral.ca/order-success?...`
+4. Mollie cancel URL → `https://instantviral.ca/checkout?cancelled=1&orderId=...`
+5. Mollie webhook → `https://instantviral.ca/api/webhooks/mollie-remote`
+6. Abandoned-cart recovery emails → `https://instantviral.ca/checkout/recover/{token}`
 
-**Vercel test before custom main domain:** set `NEXT_PUBLIC_SITE_URL` to your `*.vercel.app` URL and `NEXT_PUBLIC_CHECKOUT_URL=https://checkout.instantviral.ca`, then add only the checkout domain in Vercel Domains.
+**DNS / Contabo:** Do not change DNS in the app deploy itself. If the legacy hostname is not yet on this project, that is a manual follow-up at the DNS/CDN/hosting layer.
 
 ### D. Database migrations on Vercel
 

@@ -15,7 +15,7 @@ function buildBuyFacebookFollowersContent(): ServiceContent {
     seo: {
       title: 'Buy Facebook Followers Canada | Packages & Pricing',
       description:
-        'Buy Facebook Followers Canada with clear package options, public page URL checkout, gradual delivery details and order tracking. No password required.',
+        'Buy Facebook followers in Canada with clear packages, public page URL checkout, gradual delivery where stated, and order tracking. No password required.',
     },
     hero: {
       eyebrow: 'FACEBOOK FOLLOWER PACKAGES FOR BUSINESSES, CREATORS & BRANDS',
@@ -295,7 +295,7 @@ function buildBuyFacebookPageLikesContent(): ServiceContent {
     seo: {
       title: 'Buy Facebook Page Likes Canada | InstantViral',
       description:
-        'Buy Facebook Page Likes Canada with transparent packages for businesses and creators. Public Page URL only, secure checkout and order tracking. No password required.',
+        'Buy Facebook Page Likes in Canada with clear packages, public Page URL checkout, secure payment and order tracking. No password required.',
     },
     hero: {
       eyebrow: 'FACEBOOK PAGE LIKE PACKAGES FOR CANADIAN BUSINESSES, BRANDS & CREATORS',
@@ -552,7 +552,7 @@ function buildBuyFacebookPostLikesContent(): ServiceContent {
     seo: {
       title: 'Buy Facebook Post Likes Canada | InstantViral',
       description:
-        'Buy Facebook Post Likes Canada with transparent packages for businesses, creators and brands. Public Facebook post URL only, secure checkout and order tracking. No password required.',
+        'Buy Facebook Post Likes in Canada with clear packages, public post URL checkout, secure payment and order tracking. No password required.',
     },
     hero: {
       eyebrow: 'FACEBOOK POST LIKE PACKAGES FOR BUSINESSES, CREATORS & BRANDS',

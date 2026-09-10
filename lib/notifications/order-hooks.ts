@@ -5,6 +5,12 @@
 import { getEmailFrom, getSiteUrl, isEmailConfigured } from '@/lib/config/env';
 import { dispatchNotification } from '@/lib/notifications/service';
 import { dispatchTransactionalEmail } from '@/lib/notifications/email';
+import {
+  formatOrderItemsHtml,
+  formatOrderItemsSummary,
+  formatOrderItemsText,
+  resolveCartQuantity,
+} from '@/lib/orders/line-items';
 import { formatMoney } from '@/lib/pricing/format';
 import { getAdminNotificationEmail } from '@/lib/settings/site-settings';
 import type { Order } from '@/types/order';
@@ -27,6 +33,7 @@ function baseVariables(order: Order) {
   const item = order.items[0];
   const meta = ORDER_STATUS_METADATA[order.status];
   const year = new Date().getFullYear();
+  const cartQty = resolveCartQuantity(item);
   return {
     companyName: companyName(),
     customerEmail: order.guestEmail,
@@ -35,8 +42,12 @@ function baseVariables(order: Order) {
     serviceName: item?.serviceName ?? 'Service',
     packageName: item?.packageTitle ?? '',
     quantity: item?.quantityLabel ?? '',
+    cartQuantity: String(cartQty),
     orderTotal: formatMoney(order.total.amount, order.total.currency),
-    itemCount: String(order.items.length),
+    itemCount: String(order.items.reduce((sum, line) => sum + resolveCartQuantity(line), 0)),
+    itemsSummary: formatOrderItemsSummary(order),
+    orderItemsHtml: formatOrderItemsHtml(order),
+    orderItemsText: formatOrderItemsText(order),
     statusLabel: meta?.customerLabel ?? order.status,
     statusMessage: meta?.customerMessage ?? '',
     trackingUrl: trackingUrl(order.id, order.guestEmail),

@@ -35,12 +35,22 @@ type MollieLineItem = {
 function buildItems(input: CreatePaymentInput): MollieLineItem[] {
   const payloadItems = input.payload?.items;
   if (payloadItems && payloadItems.length > 0) {
-    return payloadItems.map((item) => ({
-      product_id: item.packageId || item.serviceId,
-      name: item.packageTitle || item.serviceName,
-      qty: 1,
-      line_total: (item.unitPrice / 100).toFixed(2),
-    }));
+    return payloadItems.map((item) => {
+      const qty =
+        typeof item.cartQuantity === 'number' && item.cartQuantity > 0
+          ? Math.floor(item.cartQuantity)
+          : 1;
+      const lineTotalMinor =
+        typeof item.lineTotal === 'number' && item.lineTotal >= 0
+          ? item.lineTotal
+          : item.unitPrice * qty;
+      return {
+        product_id: item.packageId || item.serviceId,
+        name: item.packageTitle || item.serviceName,
+        qty,
+        line_total: (lineTotalMinor / 100).toFixed(2),
+      };
+    });
   }
 
   return [

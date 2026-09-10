@@ -13,9 +13,9 @@ import {
 import {
   getLinkPageBySlug,
   getLinkRegistry,
-  linkPageHref,
 } from '@/data/linking/registry';
 import { getAllServices, getServiceBySlug } from '@/data/services';
+import { resolveServiceMarketingHref } from '@/lib/linking/service-href';
 import type { InternalLink, LinkPage } from '@/types/linking';
 import type { Service } from '@/types/service';
 
@@ -125,7 +125,7 @@ export function getRelatedServices(
 
   return ordered.slice(0, limit).map((page) => ({
     slug: page.slug,
-    href: linkPageHref(page.slug),
+    href: resolveServiceMarketingHref(page.slug, { label: page.title }),
     label: page.title,
   }));
 }
@@ -152,7 +152,7 @@ export function filterApprovedServiceSlugs(slugs: string[]): string[] {
 export function getAllApprovedServiceLinks(): InternalLink[] {
   return activeServicePages().map((page) => ({
     slug: page.slug,
-    href: linkPageHref(page.slug),
+    href: resolveServiceMarketingHref(page.slug, { label: page.title }),
     label: page.title,
   }));
 }

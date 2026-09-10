@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
+import { ABANDONED_CART_COOKIE } from '@/config/abandoned-cart';
 import { executeCheckout } from '@/lib/checkout/execute';
 import type { PlaceOrderPayload } from '@/types/checkout';
 
@@ -9,6 +11,7 @@ export async function POST(request: Request) {
   try {
     const body = (await request.json()) as PlaceOrderPayload & {
       idempotencyKey?: string;
+      checkoutSessionId?: string;
     };
     if (!body?.termsAccepted) {
       return NextResponse.json(
@@ -26,6 +29,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ ok: false, error: 'Cart is empty.' }, { status: 400 });
     }
 
+    const jar = await cookies();
+    const checkoutSessionId =
+      (typeof body.checkoutSessionId === 'string' && body.checkoutSessionId.trim()) ||
+      jar.get(ABANDONED_CART_COOKIE)?.value?.trim() ||
+      undefined;
+
     const result = await executeCheckout({
       customer: body.customer,
       paymentMethodId: body.paymentMethodId,
@@ -35,6 +44,7 @@ export async function POST(request: Request) {
       termsAccepted: body.termsAccepted,
       idempotencyKey: body.idempotencyKey,
       marketingOptIn: Boolean(body.marketingOptIn || body.customer?.marketingOptIn),
+      checkoutSessionId,
     });
 
     if (!result.ok) {

@@ -9,7 +9,8 @@ type CheckoutShellProps = {
 };
 
 /**
- * Minimal chrome for checkout.instantviral.ca — logo + secure checkout framing.
+ * Minimal checkout chrome (legacy dedicated-host layout).
+ * Main-domain checkout uses SiteLayout; this shell is unused in production routing.
  */
 export function CheckoutShell({ children }: CheckoutShellProps) {
   const siteOrigin = getSiteOrigin();

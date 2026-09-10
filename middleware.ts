@@ -5,25 +5,56 @@ import {
   verifyAdminSessionTokenEdge,
 } from '@/lib/admin/auth-edge';
 import {
-  getCheckoutOrigin,
   getSiteOrigin,
-  isCheckoutHostForced,
-  isCheckoutHostname,
-  isDedicatedCheckoutConfigured,
+  isLegacyCheckoutHostname,
+  mapLegacyCheckoutPathToMain,
 } from '@/lib/config/hosts';
 import { shouldBlockRequest } from '@/lib/geo/blocked-countries';
+import {
+  LEGACY_GONE_HTML,
+  buildLegacyRedirectLocation,
+  resolveLegacySeoPath,
+} from '@/lib/seo/legacy-urls';
 
 /**
  * Middleware:
+ * - Legacy SEO redirects / 410 Gone (before trailing-slash normalization)
+ * - Trailing-slash normalization (replaces default Next strip when skipTrailingSlashRedirect)
  * - Geo block for unsupported countries (public storefront)
+ * - Permanent redirect from retired checkout subdomain → main /checkout
  * - Admin session gate
- * - Host split: checkout subdomain ↔ main marketing site
  */
 export async function middleware(request: NextRequest) {
-  const { pathname, searchParams } = request.nextUrl;
+  const { pathname } = request.nextUrl;
   const host = request.headers.get('host');
-  const checkoutHost =
-    isCheckoutHostname(host) || isCheckoutHostForced(searchParams);
+
+  // ── Legacy SEO (before geo / trailing-slash normalization) ─────────
+  const legacy = resolveLegacySeoPath(pathname);
+  if (legacy.kind === 'gone') {
+    return new NextResponse(LEGACY_GONE_HTML, {
+      status: 410,
+      headers: {
+        'content-type': 'text/html; charset=utf-8',
+        'x-robots-tag': 'noindex',
+      },
+    });
+  }
+  if (legacy.kind === 'redirect') {
+    // Explicit Location path so slash variants never chain through slash-normalization.
+    const location = buildLegacyRedirectLocation(
+      request.nextUrl.origin,
+      legacy.destination,
+      request.nextUrl.search,
+    );
+    return NextResponse.redirect(new URL(location, request.nextUrl.origin), 308);
+  }
+
+  // Restore default Next behavior: /about/ → /about (query preserved).
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname.replace(/\/+$/, '') || '/';
+    return NextResponse.redirect(url, 308);
+  }
 
   // ── Geo availability (public site only) ───────────────────────────
   if (shouldBlockRequest({ pathname, headers: request.headers })) {
@@ -36,68 +67,20 @@ export async function middleware(request: NextRequest) {
     return response;
   }
 
-  // ── Checkout subdomain ────────────────────────────────────────────
-  // Only checkout (+ APIs). Everything else redirects to the main site.
-  if (checkoutHost) {
-    // Never serve admin from checkout host.
-    if (pathname.startsWith('/admin')) {
-      const site = getSiteOrigin();
-      return NextResponse.redirect(new URL(pathname, site));
-    }
-
-    // Allow APIs needed for place-order (and Stripe webhook if pointed here).
-    if (pathname.startsWith('/api/')) {
-      return NextResponse.next();
-    }
-
-    // Success page lives on main site for brand/analytics consistency.
-    if (pathname.startsWith('/order-success')) {
-      const site = getSiteOrigin();
-      const url = new URL('/order-success', site);
-      request.nextUrl.searchParams.forEach((value, key) => {
-        url.searchParams.set(key, value);
-      });
-      return NextResponse.redirect(url);
-    }
-
-    // Checkout experience at / and /checkout
-    if (pathname === '/' || pathname === '/checkout') {
-      const url = request.nextUrl.clone();
-      url.pathname = '/checkout';
-      // Pass flag on the REQUEST so Server Components can read it via headers().
-      const requestHeaders = new Headers(request.headers);
-      requestHeaders.set('x-iv-checkout-host', '1');
-      const response = NextResponse.rewrite(url, {
-        request: { headers: requestHeaders },
-      });
-      // Also expose on the response for debugging / CDN visibility.
-      response.headers.set('x-iv-checkout-host', '1');
-      return response;
-    }
-
-    // Cart on checkout host → checkout root (same host)
-    if (pathname === '/cart') {
-      const url = request.nextUrl.clone();
-      url.pathname = '/';
-      return NextResponse.redirect(url);
-    }
-
-    // Marketing / Learn / legal / etc. → main site only
+  // ── Retired checkout subdomain → main InstantViral checkout ───────
+  // Preserves recovery tokens and query params for in-flight emails/bookmarks.
+  if (isLegacyCheckoutHostname(host)) {
     const site = getSiteOrigin();
-    return NextResponse.redirect(new URL(pathname + request.nextUrl.search, site));
+    const mappedPath = mapLegacyCheckoutPathToMain(pathname);
+    const url = new URL(mappedPath + request.nextUrl.search, site);
+    return NextResponse.redirect(url, 308);
   }
 
-  // ── Main site: checkout lives on subdomain when configured ────────
-  // Soft cart (/cart) stays on the main site; /checkout redirects out.
-  if (
-    isDedicatedCheckoutConfigured() &&
-    (pathname === '/checkout' || pathname.startsWith('/checkout/'))
-  ) {
-    const url = new URL('/', getCheckoutOrigin());
-    request.nextUrl.searchParams.forEach((value, key) => {
-      url.searchParams.set(key, value);
-    });
-    return NextResponse.redirect(url);
+  // Checkout utility routes stay noindex (also set in page metadata).
+  if (pathname === '/checkout' || pathname.startsWith('/checkout/')) {
+    const response = NextResponse.next();
+    response.headers.set('x-robots-tag', 'noindex, nofollow');
+    return response;
   }
 
   // ── Admin gate (main site) ────────────────────────────────────────
@@ -123,7 +106,6 @@ export const config = {
   matcher: [
     /*
      * Run on all paths except static assets / image optimization.
-     * Checkout host routing needs broad coverage.
      */
     '/((?!_next/static|_next/image|favicon.ico|assets/|icons/|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)',
   ],

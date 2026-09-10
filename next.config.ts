@@ -43,6 +43,9 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
+  // Allow middleware/redirects to handle trailing-slash legacy URLs in one hop
+  // (default Next slash-strip would chain: /path/ → /path → destination).
+  skipTrailingSlashRedirect: true,
   images: {
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
@@ -50,14 +53,21 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Legacy contact path (old WordPress-style URL) → current Contact page.
       {
-        source: '/learn/buy-instagram-followers-canada',
-        destination: '/learn',
+        source: '/contact-us',
+        destination: '/contact',
         permanent: true,
       },
       {
-        source: '/buy-tiktok-followers-likes',
-        destination: '/buy-tiktok-followers',
+        source: '/contact-us/',
+        destination: '/contact',
+        permanent: true,
+      },
+      // Combined legacy URLs + Twitter 410 are handled in middleware (one-hop / Gone).
+      {
+        source: '/learn/buy-instagram-followers-canada',
+        destination: '/learn',
         permanent: true,
       },
       {
@@ -102,52 +112,57 @@ const nextConfig: NextConfig = {
       },
       {
         source: '/instagram-services-prices',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-100-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-250-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-500-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-1000-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-2500-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-5000-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-10000-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
         source: '/product/buy-25000-instagram-followers',
-        destination: '/buy-instagram-followers',
+        destination: '/',
         permanent: true,
       },
       {
-        source: '/buy-youtube-subscribers-views',
-        destination: '/buy-youtube-subscribers',
+        source: '/buy-instagram-followers',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/buy-instagram-followers/',
+        destination: '/',
         permanent: true,
       },
       {
@@ -183,11 +198,6 @@ const nextConfig: NextConfig = {
       {
         source: '/product/buy-5000-youtube-subscribers',
         destination: '/buy-youtube-subscribers',
-        permanent: true,
-      },
-      {
-        source: '/buy-facebook-likes-followers',
-        destination: '/buy-facebook-followers',
         permanent: true,
       },
     ];

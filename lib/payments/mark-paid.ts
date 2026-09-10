@@ -3,6 +3,8 @@
  * Only paid orders enter the fulfilment queue.
  */
 
+import { markAbandonedCartRecoveredFromOrder } from '@/lib/abandoned-cart';
+import { recordServerAnalyticsEvent } from '@/lib/analytics/server-track';
 import { getPersistence } from '@/lib/persistence';
 import { getOrderById, getOrderByPaymentId, saveOrder } from '@/lib/orders/store';
 import { notifyOrderPaid } from '@/lib/notifications/order-hooks';
@@ -25,6 +27,14 @@ export async function markOrderPaymentStatus(input: {
   }
 
   if (existing.payment?.status === 'paid' && input.status === 'paid') {
+    try {
+      await markAbandonedCartRecoveredFromOrder({
+        orderId: existing.id,
+        email: existing.guestEmail,
+      });
+    } catch {
+      // best-effort on webhook retries
+    }
     return { order: existing, duplicate: true, applied: false };
   }
 
@@ -91,6 +101,82 @@ export async function markOrderPaymentStatus(input: {
         message: error instanceof Error ? error.message : 'unknown',
       });
     }
+
+    try {
+      const recovered = await markAbandonedCartRecoveredFromOrder({
+        orderId: saved.id,
+        email: saved.guestEmail,
+      });
+      if (recovered) {
+        await recordServerAnalyticsEvent({
+          eventName: 'cart_recovered',
+          eventId: `cart_recovered_${recovered.id}`,
+          pagePath: '/order-success',
+          metadata: {
+            orderId: saved.id,
+            cartId: recovered.id,
+            recoveryStep: recovered.recoveryClickSequence ?? recovered.lastRecoverySequence,
+          },
+        });
+      }
+    } catch (error) {
+      console.error('[payments] abandoned-cart recovery update failed', {
+        orderId: saved.id,
+        message: error instanceof Error ? error.message : 'unknown',
+      });
+    }
+
+    // Idempotent conversion events — event id is stable per order.
+    const provider = saved.payment?.provider ?? 'unknown';
+    const normalizedProvider = provider.startsWith('mollie')
+      ? 'mollie'
+      : provider.startsWith('stripe')
+        ? 'stripe'
+        : provider;
+    await recordServerAnalyticsEvent({
+      eventName: 'payment_completed',
+      eventId: `payment_completed_${saved.id}`,
+      pagePath: '/order-success',
+      metadata: {
+        orderId: saved.id,
+        paymentProvider: normalizedProvider,
+        paymentStatus: 'paid',
+      },
+    });
+    await recordServerAnalyticsEvent({
+      eventName: 'order_completed',
+      eventId: `order_completed_${saved.id}`,
+      pagePath: '/order-success',
+      metadata: {
+        orderId: saved.id,
+        paymentProvider: normalizedProvider,
+      },
+    });
+    await recordServerAnalyticsEvent({
+      eventName: 'purchase',
+      eventId: `purchase_${saved.id}`,
+      pagePath: '/order-success',
+      metadata: {
+        orderId: saved.id,
+        paymentProvider: normalizedProvider,
+      },
+    });
+  }
+
+  if (
+    input.status !== 'paid' &&
+    input.status !== existing.payment?.status &&
+    (input.status === 'failed' || input.status === 'cancelled')
+  ) {
+    await recordServerAnalyticsEvent({
+      eventName: 'payment_failed',
+      eventId: `payment_${input.status}_${saved.id}`.slice(0, 80),
+      pagePath: '/checkout',
+      metadata: {
+        orderId: saved.id,
+        paymentStatus: input.status,
+      },
+    });
   }
 
   return { order: saved, duplicate: false, applied: true };

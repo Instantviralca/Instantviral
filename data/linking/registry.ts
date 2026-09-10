@@ -305,6 +305,8 @@ export function linkPageHref(slug: string): string {
   ) {
     return platformHubPath(slug);
   }
+  const service = getAllServices().find((item) => item.slug === slug);
+  if (service) return service.url;
   return hrefForSlug(slug);
 }
 

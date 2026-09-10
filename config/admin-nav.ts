@@ -10,6 +10,7 @@ export const adminNavItems: AdminNavItem[] = [
   { id: 'analytics', label: 'Analytics', href: '/admin/analytics' },
   { id: 'email', label: 'Email', href: '/admin/email' },
   { id: 'orders', label: 'Orders', href: '/admin/orders' },
+  { id: 'abandoned-carts', label: 'Abandoned Carts', href: '/admin/abandoned-carts' },
   { id: 'services', label: 'Services', href: '/admin/services' },
   { id: 'pricing', label: 'Pricing', href: '/admin/pricing' },
   { id: 'coupons', label: 'Coupons', href: '/admin/coupons' },

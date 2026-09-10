@@ -1,11 +1,14 @@
 /**
  * Notification service — Document 11.04.
- * Persists delivery status; uses Resend when configured.
+ * Persists delivery status; uses shared transactional email transport.
  */
 
 import { getTemplateForTrigger } from '@/data/notifications/templates';
 import { isEmailConfigured } from '@/lib/config/env';
-import { resendEmailProvider } from '@/lib/notifications/email';
+import {
+  getEmailTransportProvider,
+  stubEmailProvider,
+} from '@/lib/notifications/send-email';
 import { getPersistence } from '@/lib/persistence';
 import type {
   NotificationProvider,
@@ -33,17 +36,10 @@ function recordId(): string {
   return `ntf_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
 }
 
-/** Stub provider — used when Resend credentials are missing. */
-export const stubEmailProvider: NotificationProvider = {
-  id: 'stub-email',
-  channel: 'email',
-  async send() {
-    throw new Error('Email provider disabled — set RESEND_API_KEY and EMAIL_FROM.');
-  },
-};
+export { stubEmailProvider };
 
 export function getNotificationProvider(): NotificationProvider {
-  return isEmailConfigured() ? resendEmailProvider : stubEmailProvider;
+  return isEmailConfigured() ? getEmailTransportProvider() : stubEmailProvider;
 }
 
 export function setNotificationProvider(_provider?: NotificationProvider): void {

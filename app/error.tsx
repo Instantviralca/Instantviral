@@ -12,8 +12,37 @@ type ErrorProps = {
   reset: () => void;
 };
 
+/** Next/React sometimes surfaces raw browser Events as errors → "[object Event]". */
+function formatErrorMessage(error: unknown): string | null {
+  if (!error) return null;
+  if (error instanceof Error && error.message && error.message !== '[object Event]') {
+    return error.message;
+  }
+  if (typeof Event !== 'undefined' && error instanceof Event) {
+    const target = error.target;
+    if (target instanceof HTMLScriptElement && target.src) {
+      return `Failed to load script: ${target.src}`;
+    }
+    if (target instanceof HTMLLinkElement && target.href) {
+      return `Failed to load stylesheet: ${target.href}`;
+    }
+    if (target instanceof HTMLImageElement && target.src) {
+      return `Failed to load image: ${target.src}`;
+    }
+    return `Browser ${error.type || 'error'} event (resource load or runtime)`;
+  }
+  if (typeof error === 'object' && error !== null && 'message' in error) {
+    const message = (error as { message?: unknown }).message;
+    if (typeof message === 'string' && message && message !== '[object Event]') {
+      return message;
+    }
+  }
+  return null;
+}
+
 export default function GlobalError({ error, reset }: ErrorProps) {
   const isDev = process.env.NODE_ENV === 'development';
+  const detail = isDev ? formatErrorMessage(error) : null;
 
   return (
     <StatusPageShell>
@@ -22,9 +51,7 @@ export default function GlobalError({ error, reset }: ErrorProps) {
         Something went wrong
       </Heading>
       <MutedText className="mt-3 max-w-lg text-base">
-        {isDev && error.message
-          ? error.message
-          : 'An unexpected error occurred. Please try again.'}
+        {detail ?? 'An unexpected error occurred. Please try again.'}
       </MutedText>
       {error.digest ? (
         <p className="mt-2 text-xs text-muted-foreground">Reference: {error.digest}</p>

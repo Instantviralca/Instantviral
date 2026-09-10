@@ -32,6 +32,8 @@ export type PlaceOrderInput = {
   idempotencyKey?: string;
   /** CASL marketing opt-in from checkout checkbox. */
   marketingOptIn?: boolean;
+  /** Abandoned-cart checkout session cookie / client id. */
+  checkoutSessionId?: string;
 };
 
 export function buildIdempotencyKey(input: {

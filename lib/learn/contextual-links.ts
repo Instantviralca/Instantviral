@@ -13,6 +13,10 @@ import { getLearnCategoryById } from '@/data/learn';
 import { isApprovedServiceSlug } from '@/data/linking/approved-services';
 import { getServiceBySlug } from '@/data/services';
 import {
+  isPackagesOrientedLabel,
+  resolveServiceMarketingHref,
+} from '@/lib/linking/service-href';
+import {
   getPublicLearnArticleBySlug,
   listPublicLearnArticles,
   listPublicLearnArticlesByCategory,
@@ -312,7 +316,7 @@ export function buildContextualLinkTargets(
       ? (SERVICE_PHRASE_BANK[platformId] ?? []).map((item) => item.serviceSlug)
       : []),
   ];
-  for (const slug of serviceSlugs) {
+  for (const slug of [...new Set(serviceSlugs)]) {
     if (!isApprovedServiceSlug(slug)) continue;
     const service = getServiceBySlug(slug);
     if (!service) continue;
@@ -322,13 +326,35 @@ export function buildContextualLinkTargets(
             (item) => item.serviceSlug === slug,
           )
         : undefined;
+    const phrases = [
+      ...(bank?.phrases ?? []),
+      service.navigationLabel,
+      service.name,
+    ].filter(Boolean);
+
+    if (slug === 'buy-instagram-followers') {
+      const buyPhrases = phrases.filter((phrase) => !isPackagesOrientedLabel(phrase));
+      const packagePhrases = phrases.filter((phrase) => isPackagesOrientedLabel(phrase));
+      if (buyPhrases.length > 0) {
+        push({
+          href: resolveServiceMarketingHref(slug),
+          phrases: buyPhrases,
+          group: 'service',
+        });
+      }
+      if (packagePhrases.length > 0) {
+        push({
+          href: resolveServiceMarketingHref(slug, { label: 'Instagram Followers Packages' }),
+          phrases: packagePhrases,
+          group: 'service',
+        });
+      }
+      continue;
+    }
+
     push({
-      href: service.url,
-      phrases: [
-        ...(bank?.phrases ?? []),
-        service.navigationLabel,
-        service.name,
-      ].filter(Boolean),
+      href: resolveServiceMarketingHref(slug, { label: service.name }),
+      phrases,
       group: 'service',
     });
   }
@@ -464,7 +490,10 @@ function collectAuthoredDestinationHrefs(
       if (href !== selfHref) hrefs.add(href);
     }
     if (block.type === 'related_service_card') {
-      hrefs.add(`/${block.serviceSlug}`);
+      hrefs.add(
+        resolveServiceMarketingHref(block.serviceSlug, { label: block.label }).split('#')[0] ||
+          resolveServiceMarketingHref(block.serviceSlug, { label: block.label }),
+      );
     }
     if (block.type === 'internal_cta' && block.href.startsWith('/')) {
       hrefs.add(block.href.split('#')[0] || block.href);
@@ -490,7 +519,10 @@ function collectAuthoredDestinationHrefs(
   // Do not seed the full footer relatedArticles list — that would suppress
   // almost all natural in-body phrase links.
   if (article.serviceCta?.serviceSlug) {
-    hrefs.add(`/${article.serviceCta.serviceSlug}`);
+    const ctaHref = resolveServiceMarketingHref(article.serviceCta.serviceSlug, {
+      label: article.serviceCta.label,
+    });
+    hrefs.add(ctaHref.split('#')[0] || ctaHref);
   }
 
   return hrefs;

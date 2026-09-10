@@ -1,5 +1,10 @@
 /**
  * Robots.txt rules — Document 14.08.
+ *
+ * Single canonical disallow list for production.
+ * Public utility pages (cart, checkout, order-success, track-order result)
+ * rely on page-level / X-Robots-Tag noindex so crawlers can still fetch them.
+ * Tokenized recovery URLs remain Disallow'd specifically under /checkout/recover/.
  */
 
 import { SEO_PRODUCTION_DOMAIN } from '@/config/seo';
@@ -11,18 +16,18 @@ export type RobotsRuleSet = {
   disallow: string[];
 };
 
-/** Required disallow paths for production robots.txt. */
+/**
+ * Canonical robots.txt Disallow paths.
+ * Import this constant everywhere — do not duplicate path arrays.
+ */
 export const ROBOTS_DISALLOW = [
-  '/cart',
-  '/checkout',
-  '/order-success',
-  '/admin/',
-  '/api/',
+  '/admin',
+  '/api',
   '/preview/',
   '/draft/',
-  '/search',
-  '/track-order/result',
   '/learn/preview/',
+  /** Tokenized abandoned-cart recovery — private utility, not a public SEO page. */
+  '/checkout/recover/',
 ] as const;
 
 /**
@@ -77,6 +82,32 @@ export function validateRobotsRules(
         detail: `Missing required disallow rule: ${required}`,
       });
     }
+  }
+
+  // Public noindex utilities must remain crawlable (so noindex can be read).
+  const mustRemainCrawlable = [
+    '/cart',
+    '/checkout',
+    '/order-success',
+    '/search',
+    '/track-order/result',
+  ] as const;
+  for (const path of mustRemainCrawlable) {
+    if (primary.disallow.includes(path)) {
+      issues.push({
+        kind: 'robots_misconfigured',
+        detail: `Public noindex utility ${path} must not be robots-disallowed (prefer page/header noindex)`,
+      });
+    }
+  }
+
+  // Broad /checkout block would hide the main checkout noindex meta from crawlers.
+  if (primary.disallow.includes('/checkout')) {
+    issues.push({
+      kind: 'robots_misconfigured',
+      detail:
+        'Disallow /checkout is too broad; use /checkout/recover/ for tokenized recovery only',
+    });
   }
 
   const blockedAssets = primary.disallow.filter((rule) =>

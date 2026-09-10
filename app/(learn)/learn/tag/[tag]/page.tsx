@@ -41,7 +41,7 @@ export default async function LearnTagPage({ params }: TagPageProps) {
 
   const { tag: tagSlug } = await params;
   const tag = getTagBySlug(tagSlug);
-  if (!tag) {
+  if (!tag || tag.articleCount < 1) {
     notFound();
   }
 

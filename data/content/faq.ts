@@ -8,12 +8,93 @@ import { faqHubItems } from '@/data/content/faq-hub';
  * FAQ hub (/faq): Document 13.03 entries from faq-hub.ts.
  */
 export const faqItems: FAQItem[] = [
+  // Homepage consolidated FAQ (visible + FAQPage schema — same set)
+  {
+    id: 'faq-home-consolidated-buy-canada',
+    question: 'Can I buy Instagram followers in Canada?',
+    answer:
+      'Yes. InstantViral offers Instagram follower packages through its Canadian website. Select a package, provide the public username and complete checkout to place an order. Review package details on [Instagram Followers Packages](/#pricing-packages).',
+    homepageFilter: 'General',
+    order: 1,
+  },
+  {
+    id: 'faq-home-consolidated-password',
+    question: 'Do I need my Instagram password?',
+    answer: 'No. Only your public username is required to place an order.',
+    homepageFilter: 'Safety',
+    order: 2,
+  },
+  {
+    id: 'faq-home-consolidated-choose-package',
+    question: 'How do I choose a package?',
+    answer:
+      'Consider your current audience size, account activity and the reason for placing the order. Smaller quantities are useful for first orders, while larger options may better suit established and active profiles.',
+    homepageFilter: 'Packages',
+    order: 3,
+  },
+  {
+    id: 'faq-home-consolidated-delivery-start',
+    question: 'When does delivery begin?',
+    answer:
+      'Processing begins after the order and payment details have been confirmed. Any available timing estimate will be shown with the selected package or during checkout.',
+    homepageFilter: 'Delivery',
+    order: 4,
+  },
+  {
+    id: 'faq-home-consolidated-gradual',
+    question: 'Will delivery be gradual?',
+    answer:
+      'Gradual delivery may be available for eligible packages. Review the delivery information shown for your selected option before completing payment.',
+    homepageFilter: 'Delivery',
+    order: 5,
+  },
+  {
+    id: 'faq-home-consolidated-track',
+    question: 'How do I track my order?',
+    answer:
+      'Use the order reference and email associated with your purchase to view available status updates through the [Track Order](/track-order) page.',
+    homepageFilter: 'Delivery',
+    order: 6,
+  },
+  {
+    id: 'faq-home-consolidated-refund',
+    question: 'What is the refund policy?',
+    answer:
+      'Eligible purchases are covered by a 30-day money-back guarantee, subject to the Refund Policy and the conditions listed on the service page.',
+    homepageFilter: 'Support',
+    order: 7,
+  },
+  {
+    id: 'faq-home-consolidated-order-again',
+    question: 'Can I place another order later?',
+    answer:
+      'Yes. You can place another order after reviewing the status of your previous one. Waiting until an active order is completed helps prevent overlapping delivery.',
+    homepageFilter: 'Orders',
+    order: 8,
+  },
+  {
+    id: 'faq-home-consolidated-username-change',
+    question: 'Can I change the Instagram username after ordering?',
+    answer:
+      'If you entered the wrong username, contact support as soon as possible with your order details. Changes may not be possible once delivery has started.',
+    homepageFilter: 'Orders',
+    order: 9,
+  },
+  {
+    id: 'faq-home-consolidated-likes-views',
+    question: 'Can I buy Instagram likes and views as well?',
+    answer:
+      'Yes. InstantViral also provides dedicated package pages for [Instagram likes](/buy-instagram-likes) and [Instagram views](/buy-instagram-views).',
+    homepageFilter: 'Platforms',
+    order: 10,
+  },
+
   // Homepage FAQ set — Instagram followers commercial cluster
   {
     id: 'faq-home-buy-canada',
     question: 'Can I buy Instagram followers in Canada?',
     answer:
-      'Yes. InstantViral offers Instagram follower packages through its Canadian website. Select a package, provide the public username and complete checkout to place an order. Review package details on [Instagram Followers Packages](/buy-instagram-followers).',
+      'Yes. InstantViral offers Instagram follower packages through its Canadian website. Select a package, provide the public username and complete checkout to place an order. Review package details on [Instagram Followers Packages](/#pricing-packages).',
     homepageFilter: 'General',
     order: 1,
   },
@@ -21,7 +102,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-home-how-buy-followers',
     question: 'How do I buy Instagram followers?',
     answer:
-      'Choose a follower package, enter the correct public Instagram username, review the order and complete checkout. No Instagram password should be required. Start on the [Instagram Followers Packages](/buy-instagram-followers) page.',
+      'Choose a follower package, enter the correct public Instagram username, review the order and complete checkout. No Instagram password should be required. Start on the [Instagram Followers Packages](/#pricing-packages) page.',
     homepageFilter: 'Orders',
     order: 2,
   },
@@ -29,7 +110,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-home-how-works',
     question: 'How does InstantViral work?',
     answer:
-      'Choose a service for Instagram, TikTok, YouTube or Facebook, compare packages on the service page, enter the public username or content URL required, and complete checkout. After payment is confirmed, monitor available updates on the [Track Order](/track-order) page with your order ID and email. Start with a popular option such as [Instagram Followers Packages](/buy-instagram-followers) when you know which platform to grow first.',
+      'Choose a service for Instagram, TikTok, YouTube or Facebook, compare packages on the service page, enter the public username or content URL required, and complete checkout. After payment is confirmed, monitor available updates on the [Track Order](/track-order) page with your order ID and email. Start with a popular option such as [Instagram Followers Packages](/#pricing-packages) when you know which platform to grow first.',
     homepageFilter: 'General',
     order: 3,
   },
@@ -37,7 +118,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-home-choose-package',
     question: 'How do I choose the right package?',
     answer:
-      'Pick a package that matches your platform, goals and budget. Each service page lists quantities, prices, delivery estimates and eligibility details before you buy. Review refill or gradual delivery terms when they are shown for that package. Compare options on pages such as [Buy Instagram Likes](/buy-instagram-likes) or [Instagram Followers Packages](/buy-instagram-followers), or [Contact](/contact) support if you need help deciding.',
+      'Pick a package that matches your platform, goals and budget. Each service page lists quantities, prices, delivery estimates and eligibility details before you buy. Review refill or gradual delivery terms when they are shown for that package. Compare options on pages such as [Buy Instagram Likes](/buy-instagram-likes) or [Instagram Followers Packages](/#pricing-packages), or [Contact](/contact) support if you need help deciding.',
     homepageFilter: 'General',
     order: 4,
   },
@@ -53,7 +134,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-home-where-buy',
     question: 'Where can I buy Instagram followers?',
     answer:
-      'Instagram follower packages can be purchased from social media service websites such as InstantViral. Compare the package details, policies, delivery information and support before ordering. Review available options on [Instagram Followers Packages](/buy-instagram-followers).',
+      'Instagram follower packages can be purchased from social media service websites such as InstantViral. Compare the package details, policies, delivery information and support before ordering. Review available options on [Instagram Followers Packages](/#pricing-packages).',
     homepageFilter: 'General',
     order: 6,
   },
@@ -141,7 +222,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-home-platforms',
     question: 'Which social media platforms do you support?',
     answer:
-      'InstantViral supports Instagram, TikTok, YouTube and Facebook. Examples include [Instagram Followers Packages](/buy-instagram-followers), [Buy Instagram Likes](/buy-instagram-likes), [Buy TikTok Followers](/buy-tiktok-followers), [Buy TikTok Views](/buy-tiktok-views), [Buy YouTube Subscribers](/buy-youtube-subscribers), [Buy YouTube Views](/buy-youtube-views), [Buy Facebook Followers](/buy-facebook-followers) and [Buy Facebook Page Likes](/buy-facebook-page-likes). YouTube packages currently focus on subscribers and views.',
+      'InstantViral supports Instagram, TikTok, YouTube and Facebook. Examples include [Instagram Followers Packages](/#pricing-packages), [Buy Instagram Likes](/buy-instagram-likes), [Buy TikTok Followers](/buy-tiktok-followers), [Buy TikTok Views](/buy-tiktok-views), [Buy YouTube Subscribers](/buy-youtube-subscribers), [Buy YouTube Views](/buy-youtube-views), [Buy Facebook Followers](/buy-facebook-followers) and [Buy Facebook Page Likes](/buy-facebook-page-likes). YouTube packages currently focus on subscribers and views.',
     homepageFilter: 'Platforms',
     order: 17,
   },

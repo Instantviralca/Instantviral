@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
  * Hidden while the hero CTAs are in view; hidden again near the final CTA.
  */
 export function HomepageStickyCta({
-  href = '/buy-instagram-followers',
+  href = '#pricing-packages',
   label = 'Compare Packages',
   className,
 }: {

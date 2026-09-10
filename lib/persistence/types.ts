@@ -88,6 +88,11 @@ export type AnalyticsEventRecord = {
   country: string;
   metadata?: Record<string, string | number | boolean | null>;
   createdAt: string;
+  visitorId?: string | null;
+  deviceCategory?: string | null;
+  channel?: string | null;
+  referrerHost?: string | null;
+  source?: 'client' | 'server';
 };
 
 export type AnalyticsStore = {

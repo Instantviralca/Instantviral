@@ -37,7 +37,7 @@ function loginErrorHint(error: unknown): string {
     lower.includes('admin_login_attempts') ||
     lower.includes('schema')
   ) {
-    return 'Database tables missing. Run SQL migrations (drizzle/0001_init.sql) on your Neon DB, then retry.';
+    return 'Database tables missing. Run SQL migrations in drizzle/ against DATABASE_URL, then retry.';
   }
 
   if (
@@ -49,7 +49,7 @@ function loginErrorHint(error: unknown): string {
     lower.includes('ssl') ||
     lower.includes('password authentication')
   ) {
-    return 'DATABASE_URL connection failed. Check the Neon connection string in Vercel.';
+    return 'DATABASE_URL connection failed. Check the PostgreSQL connection string and that the database is reachable.';
   }
 
   // Safe short detail for operators (no secrets in typical Drizzle/Postgres messages).

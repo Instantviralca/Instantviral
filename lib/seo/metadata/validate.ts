@@ -100,6 +100,45 @@ export function validateMetadataEntry(entry: MetadataEntry): MetadataIssue[] {
     }
   }
 
+  if (entry.indexable && entry.active) {
+    const titleLen = entry.title.trim().length;
+    const descLen = entry.description.trim().length;
+    if (titleLen > 0 && titleLen < 30) {
+      issues.push({
+        kind: 'soft_length_warning',
+        route: entry.route,
+        entryId: entry.id,
+        sourceFile: entry.sourceFile,
+        detail: `Title is unusually short (${titleLen} chars) for ${entry.route}`,
+      });
+    } else if (titleLen > 65) {
+      issues.push({
+        kind: 'soft_length_warning',
+        route: entry.route,
+        entryId: entry.id,
+        sourceFile: entry.sourceFile,
+        detail: `Title is long for SERP display (${titleLen} chars) on ${entry.route}`,
+      });
+    }
+    if (descLen > 0 && descLen < 70) {
+      issues.push({
+        kind: 'soft_length_warning',
+        route: entry.route,
+        entryId: entry.id,
+        sourceFile: entry.sourceFile,
+        detail: `Description is unusually short (${descLen} chars) for ${entry.route}`,
+      });
+    } else if (descLen > 160) {
+      issues.push({
+        kind: 'soft_length_warning',
+        route: entry.route,
+        entryId: entry.id,
+        sourceFile: entry.sourceFile,
+        detail: `Description is long for SERP display (${descLen} chars) on ${entry.route}`,
+      });
+    }
+  }
+
   // Indexable pages should exist in the link registry when applicable
   if (entry.indexable && entry.pageType !== 'error') {
     const slug = route === '/' ? 'home' : route.replace(/^\//, '');

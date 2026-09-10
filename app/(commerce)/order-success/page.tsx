@@ -9,8 +9,16 @@ import { MutedText } from '@/components/typography/muted-text';
 import { Button } from '@/components/ui/button';
 import { routes } from '@/config/routes';
 import { allowMockPayments } from '@/lib/config/env';
+import {
+  normalizeOrderLineItem,
+  resolveCartQuantity,
+  resolveLineTotal,
+  resolveTargetFromConfig,
+} from '@/lib/orders/line-items';
 import { getOrderById } from '@/lib/orders/store';
+import { formatMoney } from '@/lib/pricing/format';
 import { buildPageMetadataForRoute } from '@/lib/seo/metadata';
+import type { Order } from '@/types/order';
 
 export const metadata: Metadata = buildPageMetadataForRoute(routes.orderSuccess);
 
@@ -31,23 +39,24 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
 
   let verified = false;
   let paymentPending = false;
-  let orderTotal: number | undefined;
-  let currency = 'USD';
+  let order: Order | null = null;
 
   if (orderId) {
-    const order = await getOrderById(orderId);
+    const found = await getOrderById(orderId);
 
-    if (order && email && order.guestEmail.toLowerCase() === email.toLowerCase()) {
-      verified = order.payment?.status === 'paid';
-      paymentPending = order.payment?.status === 'pending' || order.payment?.status === 'processing';
-      orderTotal = order.total.amount;
-      currency = order.total.currency;
-    } else if (allowMockPayments() && params.verified === '1' && order) {
-      verified = order.payment?.status === 'paid';
-      orderTotal = order.total.amount;
-      currency = order.total.currency;
+    if (found && email && found.guestEmail.toLowerCase() === email.toLowerCase()) {
+      order = found;
+      verified = found.payment?.status === 'paid';
+      paymentPending =
+        found.payment?.status === 'pending' || found.payment?.status === 'processing';
+    } else if (allowMockPayments() && params.verified === '1' && found) {
+      order = found;
+      verified = found.payment?.status === 'paid';
     }
   }
+
+  const orderTotal = order?.total.amount;
+  const currency = order?.total.currency ?? 'USD';
 
   return (
     <Section aria-label="Order success">
@@ -59,7 +68,7 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
           {verified
             ? 'Thanks — your payment was verified and your order is in the fulfilment queue.'
             : paymentPending
-              ? 'We are confirming your payment. This page will show success once Stripe verifies the charge.'
+              ? 'We are confirming your payment. This page will show success once payment is verified.'
               : 'We could not verify this order yet. Use your order ID and email to track status.'}
         </MutedText>
         {orderId ? (
@@ -74,6 +83,34 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
             ) : null}
           </div>
         ) : null}
+
+        {order ? (
+          <div className="rounded-lg border bg-card p-4 text-sm">
+            <h2 className="mb-3 font-semibold">Order items</h2>
+            <ul className="space-y-3">
+              {order.items.map((raw) => {
+                const item = normalizeOrderLineItem(raw);
+                const target = resolveTargetFromConfig(item.configuration);
+                return (
+                  <li key={item.id} className="rounded-md border p-3">
+                    <p className="font-medium">{item.serviceName}</p>
+                    <p className="text-muted-foreground">
+                      Package: {item.packageTitle} ({item.quantityLabel})
+                    </p>
+                    <p>Qty: {resolveCartQuantity(item)}</p>
+                    <p>Unit price: {formatMoney(item.unitPrice, order.currency)}</p>
+                    <p>Line total: {formatMoney(resolveLineTotal(item), order.currency)}</p>
+                    {target ? <p className="break-all">Profile / URL: {target}</p> : null}
+                  </li>
+                );
+              })}
+            </ul>
+            <p className="mt-4 font-semibold">
+              Order total: {formatMoney(order.total.amount, order.currency)}
+            </p>
+          </div>
+        ) : null}
+
         {verified && orderId ? (
           <ConversionTracker
             enabled

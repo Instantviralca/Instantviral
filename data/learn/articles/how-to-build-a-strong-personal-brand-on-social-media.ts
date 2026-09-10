@@ -926,10 +926,4 @@ export const HOW_TO_BUILD_A_STRONG_PERSONAL_BRAND_ON_SOCIAL_MEDIA_ARTICLE: Learn
         schemaEligible: true,
       },
     ],
-    serviceCta: {
-      serviceSlug: 'buy-instagram-followers',
-      label: 'Explore Instagram Followers Packages',
-      description:
-        'Compare real follower packages on InstantViral.ca when you are ready to support social growth.',
-    },
   };

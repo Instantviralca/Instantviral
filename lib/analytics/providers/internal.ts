@@ -3,7 +3,13 @@
  */
 
 import { analyticsConfig } from '@/config/analytics';
+import { captureBrowserAttribution } from '@/lib/analytics/attribution';
 import { isFunnelEventName } from '@/lib/analytics/funnel-events';
+import {
+  getAnalyticsSessionId,
+  getAnalyticsVisitorId,
+  touchAnalyticsSession,
+} from '@/lib/analytics/core/session';
 import type {
   AnalyticsEvent,
   AnalyticsProviderAdapter,
@@ -12,19 +18,46 @@ import type {
 type QueuedEvent = {
   eventName: string;
   sessionId: string;
+  visitorId: string;
   pagePath: string;
   eventId: string;
   timestamp: string;
+  referrer?: string | null;
+  landingPath?: string | null;
+  utmSource?: string | null;
+  utmMedium?: string | null;
+  utmCampaign?: string | null;
+  utmContent?: string | null;
+  utmTerm?: string | null;
+  gclid?: string | null;
+  fbclid?: string | null;
+  ttclid?: string | null;
+  channel?: string | null;
   metadata?: Record<string, string | number | boolean | null>;
 };
 
 const queue: QueuedEvent[] = [];
 let flushTimer: ReturnType<typeof setTimeout> | null = null;
 let pagehideBound = false;
+let attributionSeeded = false;
+let cachedAttribution: ReturnType<typeof captureBrowserAttribution> | null = null;
+
+function getAttribution(pagePath: string) {
+  if (!attributionSeeded || !cachedAttribution) {
+    cachedAttribution = captureBrowserAttribution(pagePath);
+    attributionSeeded = true;
+  }
+  return cachedAttribution;
+}
 
 function enqueue(event: AnalyticsEvent): void {
   if (!isFunnelEventName(event.eventName)) return;
   if (!event.sessionId || !event.pagePath) return;
+
+  touchAnalyticsSession();
+  const visitorId = getAnalyticsVisitorId();
+  const sessionId = event.sessionId || getAnalyticsSessionId();
+  const attribution = getAttribution(event.pagePath);
 
   const metadata: Record<string, string | number | boolean | null> = {
     pageType: event.pageType,
@@ -36,10 +69,22 @@ function enqueue(event: AnalyticsEvent): void {
 
   queue.push({
     eventName: event.eventName,
-    sessionId: event.sessionId,
+    sessionId,
+    visitorId,
     pagePath: event.pagePath,
     eventId: event.eventId,
     timestamp: event.timestamp,
+    referrer: attribution.referrer,
+    landingPath: attribution.landingPath,
+    utmSource: attribution.utmSource,
+    utmMedium: attribution.utmMedium,
+    utmCampaign: attribution.utmCampaign,
+    utmContent: attribution.utmContent,
+    utmTerm: attribution.utmTerm,
+    gclid: attribution.gclid,
+    fbclid: attribution.fbclid,
+    ttclid: attribution.ttclid,
+    channel: attribution.channel,
     metadata,
   });
 
@@ -100,6 +145,8 @@ export function createInternalAdapter(): AnalyticsProviderAdapter | null {
     id: 'internal',
     initialize: () => {
       bindPagehide();
+      getAnalyticsVisitorId();
+      getAnalyticsSessionId();
     },
     trackPageView: (event: AnalyticsEvent) => {
       enqueue(event);
@@ -113,6 +160,8 @@ export function createInternalAdapter(): AnalyticsProviderAdapter | null {
     setConsent: () => undefined,
     reset: () => {
       queue.length = 0;
+      attributionSeeded = false;
+      cachedAttribution = null;
       if (flushTimer) {
         clearTimeout(flushTimer);
         flushTimer = null;

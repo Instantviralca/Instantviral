@@ -3,11 +3,11 @@
  * Never logs secret values.
  *
  * Canonical keys (preferred):
- * - DATABASE_URL
+ * - DATABASE_URL (any standard PostgreSQL — Contabo local Postgres later)
  * - NEXT_PUBLIC_SITE_URL
  * - STRIPE_SECRET_KEY / NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY / STRIPE_WEBHOOK_SECRET
  * - IV_ADMIN_PASSWORD / IV_ADMIN_SESSION_SECRET
- * - RESEND_API_KEY / EMAIL_FROM
+ * - EMAIL_FROM (+ SMTP_* preferred, or temporary RESEND_API_KEY on Vercel)
  *
  * Accepted aliases (for operator convenience):
  * - SITE_URL → NEXT_PUBLIC_SITE_URL
@@ -21,6 +21,16 @@ export type EnvIssue = {
   key: string;
   level: 'error' | 'warning';
   message: string;
+};
+
+export type EmailTransportKind = 'smtp' | 'resend' | 'none';
+
+export type SmtpConfig = {
+  host: string;
+  port: number;
+  secure: boolean;
+  user: string;
+  pass: string;
 };
 
 function present(key: string): boolean {
@@ -60,6 +70,67 @@ export function getEmailFrom(): string | undefined {
   return raw.replace(/^['"]+|['"]+$/g, '').trim() || undefined;
 }
 
+export function getEmailFromName(): string | undefined {
+  const raw = firstPresent('EMAIL_FROM_NAME', 'EMAIL_COMPANY_NAME');
+  if (!raw) return undefined;
+  return raw.replace(/^['"]+|['"]+$/g, '').trim() || undefined;
+}
+
+/** RFC-ish From header: `Name <email@domain>` when EMAIL_FROM_NAME is set. */
+export function getFormattedEmailFrom(): string | undefined {
+  const from = getEmailFrom();
+  if (!from) return undefined;
+  const name = getEmailFromName();
+  if (!name) return from;
+  if (from.includes('<')) return from;
+  return `${name} <${from}>`;
+}
+
+export function getSmtpConfig(): SmtpConfig | null {
+  const host = process.env.SMTP_HOST?.trim();
+  const user = process.env.SMTP_USER?.trim();
+  const pass = process.env.SMTP_PASS?.trim();
+  if (!host || !user || !pass) return null;
+
+  const portRaw = process.env.SMTP_PORT?.trim();
+  const port = portRaw ? Number.parseInt(portRaw, 10) : 587;
+  if (!Number.isFinite(port) || port <= 0) return null;
+
+  const secureRaw = process.env.SMTP_SECURE?.trim().toLowerCase();
+  const secure =
+    secureRaw === '1' ||
+    secureRaw === 'true' ||
+    secureRaw === 'yes' ||
+    port === 465;
+
+  return { host, port, secure, user, pass };
+}
+
+/** Preferred Contabo / self-hosted transport. */
+export function isSmtpConfigured(): boolean {
+  return Boolean(getSmtpConfig()) && Boolean(getEmailFrom());
+}
+
+/** Temporary Vercel-period Resend adapter. */
+export function isResendConfigured(): boolean {
+  return present('RESEND_API_KEY') && Boolean(getEmailFrom());
+}
+
+/**
+ * Active email transport.
+ * SMTP wins when configured so Contabo cutover is env-only.
+ */
+export function getEmailTransportKind(): EmailTransportKind {
+  if (isSmtpConfigured()) return 'smtp';
+  if (isResendConfigured()) return 'resend';
+  return 'none';
+}
+
+/** True when any supported transactional email transport is ready. */
+export function isEmailConfigured(): boolean {
+  return getEmailTransportKind() !== 'none';
+}
+
 export function getStripePublishableKey(): string | undefined {
   return firstPresent('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', 'STRIPE_PUBLISHABLE_KEY');
 }
@@ -70,10 +141,6 @@ export function isStripeConfigured(): boolean {
     Boolean(getStripePublishableKey()) &&
     present('STRIPE_WEBHOOK_SECRET')
   );
-}
-
-export function isEmailConfigured(): boolean {
-  return present('RESEND_API_KEY') && Boolean(getEmailFrom());
 }
 
 export function isDatabaseConfigured(): boolean {
@@ -98,7 +165,7 @@ export function getSiteUrl(): string {
   );
 }
 
-/** Dedicated checkout origin — see lib/config/hosts.ts for client-safe helpers. */
+/** @deprecated Unused for customer URLs. Leftover checkout URL env only (legacy redirect hint). */
 export function getCheckoutUrlFromEnv(): string | undefined {
   return firstPresent('NEXT_PUBLIC_CHECKOUT_URL')?.replace(/\/$/, '');
 }
@@ -180,7 +247,6 @@ export function validateEnv(options: {
   }
 
   if (!isStripeConfigured()) {
-    // Stripe is disabled for checkout; keep as warning only if keys are partially present.
     if (
       present('STRIPE_SECRET_KEY') ||
       present('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY') ||
@@ -204,10 +270,10 @@ export function validateEnv(options: {
 
   if (!isEmailConfigured()) {
     issues.push({
-      key: 'RESEND_API_KEY',
+      key: 'EMAIL_FROM',
       level: 'warning',
       message:
-        'Email requires RESEND_API_KEY and EMAIL_FROM (or RESEND_FROM_EMAIL). Order emails will be skipped until set.',
+        'Email requires SMTP_* + EMAIL_FROM (preferred) or temporary RESEND_API_KEY + EMAIL_FROM. Transactional mail will be skipped until set.',
     });
   }
 

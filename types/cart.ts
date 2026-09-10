@@ -16,9 +16,14 @@ export type CartItem = {
   serviceName: string;
   platformId: string;
   packageTitle: string;
+  /** Package size from catalog (e.g. 1000 followers) — not cart buy count. */
   quantity: number;
   quantityLabel: string;
+  /** How many of this package were added (defaults to 1). */
+  cartQuantity?: number;
   unitPrice: number;
+  /** unitPrice × cartQuantity in minor units. */
+  lineTotal?: number;
   currency: CurrencyCode;
   deliveryTime: string;
   configuration: OrderConfigurationValues;

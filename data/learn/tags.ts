@@ -10,91 +10,104 @@ export const LEARN_TAGS: readonly LearnTag[] = [
     id: 'tag-followers',
     slug: 'followers',
     name: 'Followers',
-    description: 'Guides about growing and retaining followers.',
+    description:
+      'Browse InstantViral Learn guides on growing and retaining followers with practical audience-building tips across major platforms.',
     active: true,
   },
   {
     id: 'tag-likes',
     slug: 'likes',
     name: 'Likes',
-    description: 'Guides about likes, reactions, and social proof.',
+    description:
+      'Browse InstantViral Learn guides on likes, reactions, and social proof that help posts make a stronger first impression.',
     active: true,
   },
   {
     id: 'tag-views',
     slug: 'views',
     name: 'Views',
-    description: 'Guides about video and content views.',
+    description:
+      'Browse InstantViral Learn guides on video and content views, reach, and practical ways to improve watch performance.',
     active: true,
   },
   {
     id: 'tag-comments',
     slug: 'comments',
     name: 'Comments',
-    description: 'Guides about comments and conversation.',
+    description:
+      'Browse InstantViral Learn guides on comments, conversation, and community interaction that supports healthier engagement.',
     active: true,
   },
   {
     id: 'tag-subscribers',
     slug: 'subscribers',
     name: 'Subscribers',
-    description: 'Guides about channel and page subscribers.',
+    description:
+      'Browse InstantViral Learn guides on growing channel and page subscribers with clearer positioning and content habits.',
     active: true,
   },
   {
     id: 'tag-reels',
     slug: 'reels',
     name: 'Reels',
-    description: 'Guides about Instagram Reels and short video.',
+    description:
+      'Browse InstantViral Learn guides on Instagram Reels and short video tactics that support discovery and engagement.',
     active: true,
   },
   {
     id: 'tag-shorts',
     slug: 'shorts',
     name: 'Shorts',
-    description: 'Guides about YouTube Shorts and short-form video.',
+    description:
+      'Browse InstantViral Learn guides on YouTube Shorts and short-form video strategy for channel discovery and retention.',
     active: true,
   },
   {
     id: 'tag-algorithm',
     slug: 'algorithm',
     name: 'Algorithm',
-    description: 'Guides about platform algorithms and distribution.',
+    description:
+      'Browse InstantViral Learn guides explaining platform algorithms, distribution signals, and what creators can control.',
     active: true,
   },
   {
     id: 'tag-engagement',
     slug: 'engagement',
     name: 'Engagement',
-    description: 'Guides about engagement rate and audience interaction.',
+    description:
+      'Browse InstantViral Learn guides on engagement rate, audience interaction, and habits that support stronger content response.',
     active: true,
   },
   {
     id: 'tag-creator',
     slug: 'creator',
     name: 'Creator',
-    description: 'Guides for creators and personal brands.',
+    description:
+      'Browse InstantViral Learn guides for creators and personal brands covering content, consistency, and audience growth.',
     active: true,
   },
   {
     id: 'tag-business',
     slug: 'business',
     name: 'Business',
-    description: 'Guides for business accounts and brands.',
+    description:
+      'Browse InstantViral Learn guides for business accounts and brands covering presence, content planning, and social strategy.',
     active: true,
   },
   {
     id: 'tag-marketing',
     slug: 'marketing',
     name: 'Marketing',
-    description: 'Guides about marketing strategy and campaigns.',
+    description:
+      'Browse InstantViral Learn guides on marketing strategy, campaigns, and cross-platform tactics for social growth.',
     active: true,
   },
   {
     id: 'tag-analytics',
     slug: 'analytics',
     name: 'Analytics',
-    description: 'Guides about analytics, metrics, and measurement.',
+    description:
+      'Browse InstantViral Learn guides on analytics, metrics, and measurement so you can track what growth work is working.',
     active: true,
   },
 ];

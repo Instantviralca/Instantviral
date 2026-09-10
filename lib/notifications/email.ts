@@ -1,9 +1,13 @@
 /**
- * Resend email provider + transactional templates (orders + contact).
- * Disabled until RESEND_API_KEY and EMAIL_FROM are set.
+ * Transactional email templates (orders + contact).
+ * Delivery goes through the shared sendEmail() abstraction (SMTP / temporary Resend).
  */
 
-import { getEmailFrom, isEmailConfigured } from '@/lib/config/env';
+import { getEmailTransportKind, isEmailConfigured } from '@/lib/config/env';
+import {
+  getEmailTransportProvider,
+  sendEmail,
+} from '@/lib/notifications/send-email';
 import { getPersistence } from '@/lib/persistence';
 import type { NotificationProvider } from '@/types/notification';
 
@@ -33,23 +37,23 @@ const EXTRA_TEMPLATES: Record<
   admin_new_order: {
     subject: 'New order — {{orderId}}',
     bodyHtml:
-      '<p>New order <strong>{{orderId}}</strong>.</p><p><strong>Service:</strong> {{serviceName}} ({{packageName}})</p><p><strong>Total:</strong> {{orderTotal}}</p><p><strong>Customer:</strong> {{customerEmail}}</p><p>Open Admin → Orders to review.</p>',
+      '<p>New order <strong>{{orderId}}</strong>.</p><p><strong>Customer:</strong> {{customerEmail}}</p><p><strong>Summary:</strong> {{itemsSummary}}</p>{{orderItemsHtml}}<p>Open Admin → Orders to review.</p>',
     bodyText:
-      'New order {{orderId}}.\nService: {{serviceName}} ({{packageName}})\nTotal: {{orderTotal}}\nCustomer: {{customerEmail}}\nReview in Admin → Orders.',
+      'New order {{orderId}}.\nCustomer: {{customerEmail}}\nSummary: {{itemsSummary}}\n\n{{orderItemsText}}\n\nReview in Admin → Orders.',
   },
   admin_order_paid: {
     subject: 'Order paid — {{orderId}}',
     bodyHtml:
-      '<p>Payment confirmed for <strong>{{orderId}}</strong>.</p><p><strong>Service:</strong> {{serviceName}} ({{packageName}})</p><p><strong>Total:</strong> {{orderTotal}}</p><p><strong>Customer:</strong> {{customerEmail}}</p><p>Ready for fulfilment — open Admin → Orders.</p>',
+      '<p>Payment confirmed for <strong>{{orderId}}</strong>.</p><p><strong>Customer:</strong> {{customerEmail}}</p><p><strong>Summary:</strong> {{itemsSummary}}</p>{{orderItemsHtml}}<p>Ready for fulfilment — open Admin → Orders.</p>',
     bodyText:
-      'Payment confirmed for {{orderId}}.\nService: {{serviceName}} ({{packageName}})\nTotal: {{orderTotal}}\nCustomer: {{customerEmail}}\nReady for fulfilment.',
+      'Payment confirmed for {{orderId}}.\nCustomer: {{customerEmail}}\nSummary: {{itemsSummary}}\n\n{{orderItemsText}}\n\nReady for fulfilment.',
   },
   payment_confirmed: {
     subject: 'Payment confirmed — {{orderId}}',
     bodyHtml:
-      '<p>Hi {{customerName}},</p><p>We confirmed payment for order <strong>{{orderId}}</strong> ({{serviceName}}).</p><p><strong>Total:</strong> {{orderTotal}}</p><p><a href="{{trackingUrl}}">Track your order</a></p><p>Need help? {{supportEmail}}</p>',
+      '<p>Hi {{customerName}},</p><p>We confirmed payment for order <strong>{{orderId}}</strong>.</p>{{orderItemsHtml}}<p><a href="{{trackingUrl}}">Track your order</a></p><p>Need help? {{supportEmail}}</p>',
     bodyText:
-      'Hi {{customerName}},\n\nWe confirmed payment for order {{orderId}} ({{serviceName}}).\nTotal: {{orderTotal}}\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
+      'Hi {{customerName}},\n\nWe confirmed payment for order {{orderId}}.\n\n{{orderItemsText}}\n\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
   },
   contact_admin: {
     subject: 'Contact form — {{subject}}',
@@ -67,45 +71,18 @@ const EXTRA_TEMPLATES: Record<
   },
 };
 
+/**
+ * @deprecated Prefer sendEmail() from '@/lib/notifications/send-email'.
+ * Compatibility export for older call sites that expect a NotificationProvider.
+ */
+export { getEmailTransportProvider };
+
+/** @deprecated Use sendEmail() — temporary alias that resolves the active transport. */
 export const resendEmailProvider: NotificationProvider = {
-  id: 'resend',
+  id: 'email-transport',
   channel: 'email',
-  async send({ to, subject, html, text }) {
-    if (!isEmailConfigured()) {
-      throw new Error('Email provider is not configured (RESEND_API_KEY / EMAIL_FROM).');
-    }
-    const apiKey = process.env.RESEND_API_KEY!.trim().replace(/^['"]+|['"]+$/g, '');
-    const from = getEmailFrom();
-    if (!from) {
-      throw new Error('EMAIL_FROM (or RESEND_FROM_EMAIL) is not configured.');
-    }
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        from,
-        to: [to],
-        subject,
-        html,
-        text,
-      }),
-    });
-    if (!response.ok) {
-      const body = await response.text();
-      let detail = body.slice(0, 300);
-      try {
-        const parsed = JSON.parse(body) as { message?: string; name?: string };
-        if (parsed.message) detail = parsed.message;
-      } catch {
-        // keep raw body snippet
-      }
-      throw new Error(`Resend ${response.status}: ${detail}`);
-    }
-    const data = (await response.json()) as { id?: string };
-    return { messageId: data.id ?? `resend_${Date.now()}` };
+  async send(input) {
+    return getEmailTransportProvider().send(input);
   },
 };
 
@@ -132,8 +109,8 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
   const text = render(template.bodyText, input.variables);
   const id = `ntf_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 8)}`;
   const createdAt = new Date().toISOString();
-  // Persist a known customer template id for DB typing; real template is in subject/body.
   const storedTemplateId = 'order_confirmation' as const;
+  const transport = getEmailTransportKind();
 
   if (!isEmailConfigured()) {
     await store.saveNotification({
@@ -146,7 +123,8 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
       status: 'failed',
       subject,
       bodyPreview: text.slice(0, 180),
-      errorMessage: 'Email provider disabled — missing RESEND_API_KEY or EMAIL_FROM.',
+      errorMessage:
+        'Email provider disabled — set SMTP_* + EMAIL_FROM (preferred) or temporary RESEND_API_KEY + EMAIL_FROM.',
       createdAt,
       immutable: true,
       idempotencyKey: input.idempotencyKey,
@@ -155,7 +133,7 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
   }
 
   try {
-    const result = await resendEmailProvider.send({
+    const result = await sendEmail({
       to: input.to,
       subject,
       html,
@@ -172,7 +150,7 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
         status: 'sent',
         subject,
         bodyPreview: text.slice(0, 180),
-        providerId: 'resend',
+        providerId: result.providerId || transport,
         providerMessageId: result.messageId,
         createdAt,
         sentAt: new Date().toISOString(),
@@ -203,7 +181,7 @@ export async function dispatchTransactionalEmail(input: ExtraSendInput): Promise
         subject,
         bodyPreview: text.slice(0, 180),
         errorMessage: error instanceof Error ? error.message : 'Delivery failed',
-        providerId: 'resend',
+        providerId: transport === 'none' ? undefined : transport,
         createdAt,
         immutable: true,
         idempotencyKey: input.idempotencyKey,

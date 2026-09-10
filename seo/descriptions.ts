@@ -1,14 +1,10 @@
 import { site } from '@/config/site';
+import { clampMetaDescription } from '@/lib/seo/metadata/sanitize';
 import type { LearnArticle } from '@/types/blog';
 import type { Service } from '@/types/service';
 
-function clampDescription(text: string, min = 140, max = 160): string {
-  const cleaned = text.replace(/\s+/g, ' ').trim();
-  if (cleaned.length <= max) {
-    if (cleaned.length >= min) return cleaned;
-    return cleaned;
-  }
-  return `${cleaned.slice(0, max - 1).trimEnd()}…`;
+function clampDescription(text: string, max = 155): string {
+  return clampMetaDescription(text, max);
 }
 
 /**
@@ -24,7 +20,7 @@ export const descriptions = {
   service: (service: Service) => {
     if (service.slug === 'buy-instagram-followers') {
       return clampDescription(
-        'Compare Instagram follower packages, pricing, delivery details and available plan sizes. Choose an option that matches your account and growth goals.',
+        'Compare Instagram followers packages, pricing, delivery details and available plan sizes. Choose an option that matches your account and growth goals.',
       );
     }
     if (service.slug === 'buy-instagram-likes') {
@@ -44,42 +40,42 @@ export const descriptions = {
     }
     if (service.slug === 'buy-tiktok-followers') {
       return clampDescription(
-        'Buy TikTok followers in Canada using real package options from InstantViral.ca, with no password required, clear delivery details, 24/7 support, and eligible refill coverage.',
+        'Buy TikTok followers in Canada with clear packages, secure checkout, no password required, delivery details and order tracking.',
       );
     }
     if (service.slug === 'buy-tiktok-likes') {
       return clampDescription(
-        'Buy TikTok likes Canada with real packages for creators and businesses. Public video URL only, secure checkout, gradual delivery options, and order tracking.',
+        'Buy TikTok likes in Canada with clear packages for creators and businesses. Public video URL only, secure checkout, gradual delivery, and order tracking.',
       );
     }
     if (service.slug === 'buy-tiktok-views') {
       return clampDescription(
-        'Buy TikTok Views Canada with real video views packages. Public video URL only, secure checkout, gradual delivery and order tracking for creators and businesses.',
+        'Buy TikTok views in Canada with clear packages for public videos. Public video URL only, secure checkout, delivery details and order tracking.',
       );
     }
     if (service.slug === 'buy-facebook-followers') {
       return clampDescription(
-        'Buy Facebook Followers Canada with clear package options, public page URL checkout, gradual delivery details and order tracking. No password required.',
+        'Buy Facebook followers in Canada with clear packages, public page URL checkout, gradual delivery where stated, and order tracking. No password required.',
       );
     }
     if (service.slug === 'buy-facebook-page-likes') {
       return clampDescription(
-        'Buy Facebook page likes in Canada with InstantViral.ca packages. Public page URL only, clear delivery details, 24/7 support, secure checkout, and order tracking.',
+        'Buy Facebook Page Likes in Canada with clear packages, public Page URL checkout, secure payment and order tracking. No password required.',
       );
     }
     if (service.slug === 'buy-facebook-post-likes') {
       return clampDescription(
-        'Buy Facebook post likes in Canada with InstantViral.ca packages. Public post URL only, clear delivery details, 24/7 support, secure checkout, and order tracking.',
+        'Buy Facebook Post Likes in Canada with clear packages, public post URL checkout, secure payment and order tracking. No password required.',
       );
     }
     if (service.slug === 'buy-youtube-subscribers') {
       return clampDescription(
-        'Buy YouTube subscribers in Canada with clear package options, delivery information, secure checkout and order tracking using your public channel URL.',
+        'Buy YouTube subscribers in Canada with clear packages, public channel URL only, secure checkout, delivery details and order tracking. No password required.',
       );
     }
     if (service.slug === 'buy-youtube-views') {
       return clampDescription(
-        'Buy YouTube Views Canada with clear package options, public video URL checkout, gradual delivery details and order tracking. No password required.',
+        'Buy YouTube views in Canada with clear packages, public video URL only, secure checkout, delivery details and order tracking. No password required.',
       );
     }
     return clampDescription(
@@ -94,7 +90,7 @@ export const descriptions = {
 
   learnArticle: (article: LearnArticle) =>
     clampDescription(
-      `${article.title} — practical InstantViral Learn guide covering social media growth tactics, platform strategy, and safe ordering basics.`,
+      `${article.title} — InstantViral Learn guide with practical social media growth tips, platform strategy, and actionable takeaways.`,
     ),
 
   about: () =>

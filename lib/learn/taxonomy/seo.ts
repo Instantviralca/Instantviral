@@ -49,6 +49,17 @@ export function getTagMetadata(slug: string): Metadata {
     });
   }
 
+  // Empty tag archives are thin — keep them out of the index (sitemap already omits them).
+  if (tag.articleCount < 1) {
+    return buildPageMetadata({
+      title: `${tag.name} Guides | Learn | InstantViral`,
+      description: tag.description,
+      path: tagPath(tag.slug),
+      type: 'website',
+      robots: { index: false, follow: false },
+    });
+  }
+
   return buildPageMetadata({
     title: `${tag.name} Guides | Learn | InstantViral`,
     description: tag.description,

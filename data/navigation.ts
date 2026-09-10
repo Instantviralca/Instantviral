@@ -34,7 +34,7 @@ export const mainNavigation: NavItem[] = [
 ];
 
 const defaultCtaHref =
-  getServiceBySlug('buy-instagram-followers')?.url ?? '/buy-instagram-followers';
+  getServiceBySlug('buy-instagram-followers')?.url ?? '/';
 
 const primary = getPrimaryCTA(defaultCtaHref);
 const secondary = getSecondaryCTA(1, defaultCtaHref);

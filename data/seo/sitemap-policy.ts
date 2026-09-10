@@ -9,6 +9,7 @@ import {
   SITEMAP_EXCLUSION_PREFIXES,
   SITEMAP_PRODUCTION_ROUTES,
 } from '@/data/seo/sitemap-routes';
+import { ROBOTS_DISALLOW } from '@/lib/seo/sitemap/robots';
 
 /** Absolute production host for sitemap / robots (Document 14.08). */
 export const SITEMAP_PRODUCTION_HOST = 'instantviral.ca' as const;
@@ -30,18 +31,8 @@ export function isSitemapAllowedPath(path: string): boolean {
 /** Paths that must never appear in the sitemap. */
 export const SITEMAP_EXCLUDED_PATH_PREFIXES = SITEMAP_EXCLUSION_PREFIXES;
 
-export const ROBOTS_DISALLOW_PATHS = [
-  '/cart',
-  '/checkout',
-  '/order-success',
-  '/admin/',
-  '/api/',
-  '/preview/',
-  '/draft/',
-  '/search',
-  '/track-order/result',
-  '/learn/preview/',
-] as const;
+/** Re-export canonical robots disallow list (single source: lib/seo/sitemap/robots). */
+export const ROBOTS_DISALLOW_PATHS = ROBOTS_DISALLOW;
 
 /**
  * Legacy Learn readiness helper.

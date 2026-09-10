@@ -7,7 +7,7 @@ import { getSiteOrigin } from '@/lib/config/hosts';
 import { isEmailConfigured, getEmailFrom } from '@/lib/config/env';
 import { createCampaignId } from '@/lib/email/subscriber-utils';
 import { getPersistence } from '@/lib/persistence';
-import { resendEmailProvider } from '@/lib/notifications/email';
+import { sendEmail } from '@/lib/notifications/send-email';
 
 export type MarketingCampaignInput = {
   subject: string;
@@ -87,7 +87,7 @@ export async function sendMarketingCampaign(input: MarketingCampaignInput): Prom
   if (!isEmailConfigured() || !getEmailFrom()) {
     return {
       ok: false,
-      error: 'Email is not configured. Set RESEND_API_KEY and EMAIL_FROM.',
+      error: 'Email is not configured. Set SMTP_* + EMAIL_FROM (preferred) or temporary RESEND_API_KEY + EMAIL_FROM.',
       sentCount: 0,
       failedCount: 0,
       skippedCount: 0,
@@ -151,7 +151,7 @@ export async function sendMarketingCampaign(input: MarketingCampaignInput): Prom
       unsubscribeUrl,
     });
     try {
-      await resendEmailProvider.send({
+      await sendEmail({
         to: subscriber.email,
         subject: content.subject,
         html: content.html,
@@ -165,7 +165,7 @@ export async function sendMarketingCampaign(input: MarketingCampaignInput): Prom
       });
       failedCount += 1;
     }
-    // Gentle pacing for Resend rate limits
+    // Gentle pacing for shared SMTP / temporary provider rate limits
     await delay(120);
   }
 

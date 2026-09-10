@@ -47,7 +47,7 @@ export const homepageEditorial = {
     ctaPrompt: 'Ready to grow your creator profile?',
     cta: {
       label: 'Compare Follower Packages',
-      href: '/buy-instagram-followers',
+      href: '#pricing-packages',
     },
   },
   commercial: {
@@ -128,8 +128,8 @@ export const homepageEditorial = {
     },
     ctaPrompt: 'Ready to strengthen your Instagram profile?',
     cta: {
-      label: 'Explore Growth Options',
-      href: '/buy-instagram-likes',
+      label: 'View Instagram Followers Packages',
+      href: '#pricing-packages',
     },
     entityBox: {
       title: 'Why InstantViral?',
@@ -258,7 +258,7 @@ export const homepageEditorial = {
       description:
         'Increase visible follower count with audience packages designed for creators, brands, businesses, and agencies.',
       ctaLabel: 'Compare Follower Packages',
-      href: '/buy-instagram-followers',
+      href: '#pricing-packages',
       imageKey: 'instagramFollowersService' as const,
     },
     cards: [
@@ -309,7 +309,7 @@ export const homepageEditorial = {
       { goal: 'Add conversation to posts', service: 'Comments' },
     ],
     links: [
-      { label: 'Compare follower packages', href: '/buy-instagram-followers' },
+      { label: 'Compare follower packages', href: '/#pricing-packages' },
       { label: 'Explore like packages', href: '/buy-instagram-likes' },
       { label: 'View Reel view packages', href: '/buy-instagram-views' },
       { label: 'Browse comment options', href: '/buy-instagram-comments' },
@@ -496,7 +496,7 @@ export const homepageEditorial = {
     links: [
       {
         label: 'Compare Instagram Followers Packages',
-        href: '/buy-instagram-followers',
+        href: '/#pricing-packages',
       },
       { label: 'Order Tracking', href: routes.trackOrder },
       { label: 'Contact Support', href: routes.contact },
@@ -504,7 +504,7 @@ export const homepageEditorial = {
     ctaPrompt: 'Ready to start your order?',
     cta: {
       label: 'Compare Packages',
-      href: '/buy-instagram-followers',
+      href: '/#pricing-packages',
     },
   },
   entityTrust: {
@@ -707,7 +707,7 @@ export const homepageEditorial = {
       'Public Username Only',
     ],
     links: [
-      { label: 'Instagram Followers', href: '/buy-instagram-followers' },
+      { label: 'Instagram Followers', href: '/' },
       { label: 'Instagram Likes', href: '/buy-instagram-likes' },
       { label: 'Instagram Views', href: '/buy-instagram-views' },
       { label: 'Instagram Comments', href: '/buy-instagram-comments' },
@@ -723,7 +723,7 @@ export const homepageEditorial = {
     id: 'instagram-followers-faq',
     title: 'Frequently Asked Questions',
     intro:
-      'Quick answers about passwords, support, where to compare packages, and where to check order status. One note on how to buy Instagram followers is included for first-time visitors.',
+      'Find answers about choosing an Instagram followers package, delivery, account details, order tracking, refunds, and related Instagram services. You only need your public Instagram username to place an order. Your Instagram password is never required.',
     featured: [
       {
         id: 'feat-password',
@@ -793,7 +793,7 @@ export const homepageEditorial = {
       {
         id: 'know-followers',
         label: 'Instagram Followers',
-        href: '/buy-instagram-followers',
+        href: '/#pricing-packages',
         anchor: 'Learn more about Instagram follower packages',
       },
       {
@@ -847,17 +847,17 @@ export const homepageEditorial = {
   },
   finalCtaSection: {
     id: 'home-final-cta',
-    title: 'Ready to Grow Your Instagram Presence?',
+    title: 'Ready to Choose Your Instagram Followers Package?',
     copy: [
-      'Compare growth options for your creator profile or brand presence, then place your order when you are ready.',
+      'Compare the available follower packages, choose the size that fits your account, and continue to secure checkout using your public Instagram username. No Instagram password is required.',
     ],
     benefits: [],
     primaryCta: {
-      label: 'View Available Packages',
-      href: '/buy-instagram-likes',
+      label: 'View Instagram Followers Packages',
+      href: '#pricing-packages',
     },
     secondaryCta: {
-      label: 'Instagram Service Comparison',
+      label: 'Explore Other Instagram Services',
       href: '#instagram-growth-services',
     },
     trustStrip: [],
@@ -870,7 +870,7 @@ export const homepageEditorial = {
         id: 'services',
         title: 'Popular Services',
         links: [
-          { label: 'Buy Instagram Followers', href: '/buy-instagram-followers' },
+          { label: 'Buy Instagram Followers', href: '/' },
           { label: 'Buy Instagram Views', href: '/buy-instagram-views' },
           { label: 'Buy TikTok Followers', href: '/buy-tiktok-followers' },
           { label: 'Buy TikTok Likes', href: '/buy-tiktok-likes' },

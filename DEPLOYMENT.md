@@ -6,7 +6,12 @@ Safe launch runbook for instantviral.ca. Does not change product UI, SEO, pricin
 > [`docs/PRODUCTION_DEPLOYMENT_GUIDE.md`](docs/PRODUCTION_DEPLOYMENT_GUIDE.md)  
 > **Template:** [`.env.production.example`](.env.production.example)
 
-> **External checkout subdomain:** set `NEXT_PUBLIC_CHECKOUT_URL=https://checkout.instantviral.ca` and add the domain in Vercel (same project). Soft cart on the main site hands off to that host; Stripe cancel returns there; success stays on the main site. When configured, main-site `/checkout` redirects to the subdomain; the subdomain redirects all non-checkout pages to the main site.
+> **Checkout:** Customer checkout is always on the main domain at `/checkout`
+> (`https://instantviral.ca/checkout`). Do not set a separate checkout origin for traffic.
+> Optionally keep `checkout.instantviral.ca` pointed at this app so middleware can **308**
+> old subdomain URLs onto the equivalent main-domain `/checkout` route (recovery tokens preserved).
+> Optional env: `NEXT_PUBLIC_LEGACY_CHECKOUT_HOST=checkout.instantviral.ca`.
+> Mollie return/webhook URLs use `NEXT_PUBLIC_SITE_URL` (main domain).
 
 ## Required environment variables
 

@@ -148,7 +148,12 @@ export function createMemoryPersistence(): AppPersistence {
   const analyticsApi: AnalyticsStore = {
     async insertAnalyticsEvents(events) {
       if (!events.length) return;
-      state.analyticsEvents.push(...events);
+      const existing = new Set(state.analyticsEvents.map((e) => e.id));
+      for (const event of events) {
+        if (existing.has(event.id)) continue;
+        state.analyticsEvents.push(event);
+        existing.add(event.id);
+      }
       if (state.analyticsEvents.length > 20_000) {
         state.analyticsEvents = state.analyticsEvents.slice(-20_000);
       }

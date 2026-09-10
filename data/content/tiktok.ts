@@ -14,7 +14,7 @@ function buildBuyTikTokFollowersContent(): ServiceContent {
     seo: {
       title: 'Buy TikTok Followers Canada | InstantViral',
       description:
-        'Buy TikTok followers in Canada using real package options from InstantViral.ca, with no password required, clear delivery details, 24/7 support, and eligible refill coverage.',
+        'Buy TikTok followers in Canada with clear packages, secure checkout, no password required, delivery details and order tracking.',
     },
     hero: {
       eyebrow:
@@ -254,7 +254,7 @@ function buildBuyTikTokLikesContent(): ServiceContent {
     seo: {
       title: 'Buy TikTok Likes Canada | InstantViral',
       description:
-        'Buy TikTok likes Canada with real packages for creators and businesses. Public video URL only, secure checkout, gradual delivery options, and order tracking.',
+        'Buy TikTok likes in Canada with clear packages for creators and businesses. Public video URL only, secure checkout, gradual delivery, and order tracking.',
     },
     hero: {
       eyebrow: 'TIKTOK LIKE PACKAGES FOR CREATORS, BRANDS & BUSINESSES',
@@ -505,7 +505,7 @@ function buildBuyTikTokViewsContent(): ServiceContent {
     seo: {
       title: 'Buy TikTok Views Canada | InstantViral',
       description:
-        'Buy TikTok views Canada with clear package pricing for public videos. Public video URL only, secure checkout and order tracking for creators and businesses.',
+        'Buy TikTok views in Canada with clear packages for public videos. Public video URL only, secure checkout, delivery details and order tracking.',
     },
     hero: {
       eyebrow: 'TIKTOK VIEW PACKAGES FOR CREATORS, BRANDS & BUSINESSES',

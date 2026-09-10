@@ -9,7 +9,7 @@ import { validateSitemapUrl } from '@/lib/seo/sitemap/validate-url';
 
 /**
  * Production sitemap entries from the shared indexable route registry.
- * lastModified comes from registry timestamps (not build time).
+ * lastModified is included only when a real content timestamp exists.
  */
 export function buildSitemapEntries(): MetadataRoute.Sitemap {
   const routes = getIndexableRoutes();
@@ -24,7 +24,7 @@ export function buildSitemapEntries(): MetadataRoute.Sitemap {
 
     entries.push({
       url: route.canonicalUrl,
-      lastModified: route.lastModified,
+      ...(route.lastModified ? { lastModified: route.lastModified } : {}),
       changeFrequency: route.changeFrequency,
       priority: route.priority,
     });

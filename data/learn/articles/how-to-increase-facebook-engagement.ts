@@ -81,6 +81,18 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 9,
   },
   {
+    id: 'b-why-ctx-post-likes',
+    type: 'paragraph',
+    text: 'Likes are only one part of Facebook engagement, but they can help a post show visible activity alongside comments and shares. If that is the specific metric you want to support, see the available Facebook Post Likes packages.',
+    order: 9,
+    inlineLinks: [
+      {
+        href: '/buy-facebook-post-likes',
+        label: 'Facebook Post Likes packages',
+      },
+    ],
+  },
+  {
     id: 'b-related-algorithm',
     type: 'related_article_card',
     articleSlug: 'how-the-facebook-algorithm-works',

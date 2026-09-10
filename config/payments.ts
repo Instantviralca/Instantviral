@@ -9,7 +9,7 @@ export const paymentProviders: PaymentProviderConfig[] = [
   {
     id: 'mollie-remote',
     enabled: true,
-    displayName: 'Card Payment',
+    displayName: 'Card payment (Mollie)',
   },
   {
     id: 'remote-payment',

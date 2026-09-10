@@ -1,11 +1,19 @@
 import { NextResponse } from 'next/server';
 import { createHash } from 'node:crypto';
 
+import { isFirstPartyAnalyticsEnabled } from '@/lib/analytics/analytics-runtime-config';
 import {
-  isAdminPath,
-  isFunnelEventName,
+  buildAttributionFromSearchParams,
+  normalizePath,
+  type AttributionSnapshot,
+} from '@/lib/analytics/attribution';
+import { parseUserAgent } from '@/lib/analytics/device';
+import {
+  isAnalyticsEventName,
+  isNoisePath,
   resolveCountryFromHeaders,
 } from '@/lib/analytics/funnel-events';
+import { upsertAnalyticsIdentity } from '@/lib/analytics/identity-store';
 import { getPersistence } from '@/lib/persistence';
 import type { AnalyticsEventRecord } from '@/lib/persistence/types';
 
@@ -14,15 +22,28 @@ export const runtime = 'nodejs';
 const MAX_BATCH = 25;
 const MAX_PATH_LEN = 200;
 const MAX_SESSION_LEN = 80;
+const MAX_VISITOR_LEN = 80;
 const WINDOW_MS = 60_000;
 const MAX_BATCHES_PER_WINDOW = 60;
 
 type IngestEvent = {
   eventName?: string;
   sessionId?: string;
+  visitorId?: string;
   pagePath?: string;
   eventId?: string;
   timestamp?: string;
+  referrer?: string;
+  landingPath?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmContent?: string;
+  utmTerm?: string;
+  gclid?: string;
+  fbclid?: string;
+  ttclid?: string;
+  channel?: string;
   metadata?: Record<string, unknown>;
 };
 
@@ -48,6 +69,25 @@ function allowRequest(key: string): boolean {
   return true;
 }
 
+const FORBIDDEN_META_KEYS = new Set([
+  'email',
+  'customerEmail',
+  'name',
+  'customerName',
+  'firstName',
+  'lastName',
+  'phone',
+  'whatsapp',
+  'password',
+  'card',
+  'cvc',
+  'revenue',
+  'amount',
+  'total',
+  'orderTotal',
+  'paidAmount',
+]);
+
 function sanitizeMetadata(
   input: Record<string, unknown> | undefined,
 ): Record<string, string | number | boolean | null> | undefined {
@@ -57,12 +97,15 @@ function sanitizeMetadata(
   for (const [key, value] of Object.entries(input)) {
     if (count >= 12) break;
     if (!/^[a-zA-Z0-9_]{1,40}$/.test(key)) continue;
+    if (FORBIDDEN_META_KEYS.has(key)) continue;
     if (value === null || typeof value === 'boolean') {
       out[key] = value;
       count += 1;
       continue;
     }
     if (typeof value === 'number' && Number.isFinite(value)) {
+      // Never accept client-submitted money fields.
+      if (/amount|revenue|total|price|value/i.test(key)) continue;
       out[key] = value;
       count += 1;
       continue;
@@ -82,7 +125,32 @@ function makeId(): string {
   return `ae_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
 }
 
+function attributionFromEvent(raw: IngestEvent, pagePath: string): AttributionSnapshot {
+  const params: Record<string, string> = {};
+  if (raw.utmSource) params.utm_source = raw.utmSource;
+  if (raw.utmMedium) params.utm_medium = raw.utmMedium;
+  if (raw.utmCampaign) params.utm_campaign = raw.utmCampaign;
+  if (raw.utmContent) params.utm_content = raw.utmContent;
+  if (raw.utmTerm) params.utm_term = raw.utmTerm;
+  if (raw.gclid) params.gclid = raw.gclid;
+  if (raw.fbclid) params.fbclid = raw.fbclid;
+  if (raw.ttclid) params.ttclid = raw.ttclid;
+  const snap = buildAttributionFromSearchParams(
+    raw.landingPath || pagePath,
+    params,
+    raw.referrer,
+  );
+  if (raw.channel && typeof raw.channel === 'string' && raw.channel.trim()) {
+    snap.channel = raw.channel.trim().slice(0, 40);
+  }
+  return snap;
+}
+
 export async function POST(request: Request) {
+  if (!isFirstPartyAnalyticsEnabled()) {
+    return NextResponse.json({ ok: true, accepted: 0, disabled: true });
+  }
+
   const key = clientKey(request);
   if (!allowRequest(key)) {
     return NextResponse.json({ ok: false, error: 'Rate limited' }, { status: 429 });
@@ -100,17 +168,24 @@ export async function POST(request: Request) {
   }
 
   const country = resolveCountryFromHeaders(request.headers);
+  const device = parseUserAgent(request.headers.get('user-agent'));
   const nowIso = new Date().toISOString();
   const records: AnalyticsEventRecord[] = [];
 
   for (const raw of body.events.slice(0, MAX_BATCH)) {
     const eventName = typeof raw.eventName === 'string' ? raw.eventName.trim() : '';
     const sessionId = typeof raw.sessionId === 'string' ? raw.sessionId.trim() : '';
-    const pagePath = typeof raw.pagePath === 'string' ? raw.pagePath.trim() : '';
-    if (!isFunnelEventName(eventName)) continue;
+    const visitorId =
+      typeof raw.visitorId === 'string' ? raw.visitorId.trim().slice(0, MAX_VISITOR_LEN) : '';
+    const pagePathRaw = typeof raw.pagePath === 'string' ? raw.pagePath.trim() : '';
+    const pagePath = normalizePath(pagePathRaw);
+
+    if (!isAnalyticsEventName(eventName)) continue;
     if (!sessionId || sessionId.length > MAX_SESSION_LEN) continue;
-    if (!pagePath || pagePath.length > MAX_PATH_LEN || !pagePath.startsWith('/')) continue;
-    if (isAdminPath(pagePath)) continue;
+    if (!pagePathRaw || pagePathRaw.length > MAX_PATH_LEN || !pagePathRaw.startsWith('/')) {
+      continue;
+    }
+    if (isNoisePath(pagePath)) continue;
 
     let createdAt = nowIso;
     if (typeof raw.timestamp === 'string') {
@@ -128,6 +203,20 @@ export async function POST(request: Request) {
         ? raw.eventId.trim()
         : makeId();
 
+    const attribution = attributionFromEvent(raw, pagePath);
+
+    if (visitorId) {
+      await upsertAnalyticsIdentity({
+        visitorId,
+        sessionId,
+        pagePath,
+        country,
+        attribution,
+        device,
+        at: new Date(createdAt),
+      });
+    }
+
     records.push({
       id,
       eventName,
@@ -136,6 +225,11 @@ export async function POST(request: Request) {
       country,
       metadata: sanitizeMetadata(raw.metadata),
       createdAt,
+      visitorId: visitorId || null,
+      deviceCategory: device.deviceCategory,
+      channel: attribution.channel,
+      referrerHost: attribution.referrerHost,
+      source: 'client',
     });
   }
 

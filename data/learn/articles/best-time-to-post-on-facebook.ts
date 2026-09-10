@@ -62,6 +62,18 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 7,
   },
   {
+    id: 'b-matter-ctx-post-likes',
+    type: 'paragraph',
+    text: 'Timing can help a post earn its first reactions, but the content still has to give people a reason to engage. For campaigns where you want to support visible post activity, you can also compare Facebook Post Likes packages.',
+    order: 7,
+    inlineLinks: [
+      {
+        href: '/buy-facebook-post-likes',
+        label: 'Facebook Post Likes packages',
+      },
+    ],
+  },
+  {
     id: 'b-matter-3',
     type: 'paragraph',
     text: 'However, timing cannot replace quality. A well-written educational post published at a reasonable time will usually outperform low-quality content published at a "perfect" time.',

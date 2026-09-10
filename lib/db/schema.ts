@@ -1,5 +1,5 @@
 /**
- * Drizzle schema — PostgreSQL (Neon/Supabase compatible via DATABASE_URL).
+ * Drizzle schema — standard PostgreSQL via DATABASE_URL.
  */
 
 import {
@@ -49,7 +49,11 @@ export const orderItems = pgTable('order_items', {
   packageTitle: text('package_title').notNull(),
   quantity: integer('quantity').notNull(),
   quantityLabel: text('quantity_label').notNull(),
+  /** How many of this package were purchased (defaults to 1). */
+  cartQuantity: integer('cart_quantity').notNull().default(1),
   unitPrice: integer('unit_price').notNull(),
+  /** unit_price × cart_quantity (minor units). */
+  lineTotal: integer('line_total'),
   currency: text('currency').notNull(),
   configuration: jsonb('configuration').notNull().$type<Record<string, string | number | boolean>>(),
   deliveryTime: text('delivery_time'),
@@ -212,16 +216,77 @@ export const analyticsEvents = pgTable(
     country: text('country').notNull().default('XX'),
     metadata: jsonb('metadata').$type<Record<string, string | number | boolean | null>>(),
     createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
+    visitorId: text('visitor_id'),
+    deviceCategory: text('device_category'),
+    channel: text('channel'),
+    referrerHost: text('referrer_host'),
+    source: text('source').notNull().default('client'),
   },
   (t) => ({
     eventCreatedIdx: index('analytics_events_event_created_idx').on(t.eventName, t.createdAt),
     sessionCreatedIdx: index('analytics_events_session_created_idx').on(t.sessionId, t.createdAt),
     countryCreatedIdx: index('analytics_events_country_created_idx').on(t.country, t.createdAt),
+    visitorCreatedIdx: index('analytics_events_visitor_created_idx').on(t.visitorId, t.createdAt),
+    channelCreatedIdx: index('analytics_events_channel_created_idx').on(t.channel, t.createdAt),
   }),
 );
 
-/** Marketing email subscribers (checkout opt-in only). */
-export const emailSubscribers = pgTable(
+/** Durable anonymous visitor (first-party). */
+export const analyticsVisitors = pgTable(
+  'analytics_visitors',
+  {
+    id: text('id').primaryKey(),
+    firstSeenAt: timestamp('first_seen_at', { withTimezone: true }).notNull(),
+    lastSeenAt: timestamp('last_seen_at', { withTimezone: true }).notNull(),
+    firstLandingPath: text('first_landing_path'),
+    firstReferrer: text('first_referrer'),
+    firstUtmSource: text('first_utm_source'),
+    firstUtmMedium: text('first_utm_medium'),
+    firstUtmCampaign: text('first_utm_campaign'),
+    firstChannel: text('first_channel'),
+  },
+  (t) => ({
+    lastSeenIdx: index('analytics_visitors_last_seen_idx').on(t.lastSeenAt),
+  }),
+);
+
+/** First-party browsing sessions (30m inactivity default). */
+export const analyticsSessions = pgTable(
+  'analytics_sessions',
+  {
+    id: text('id').primaryKey(),
+    visitorId: text('visitor_id')
+      .notNull()
+      .references(() => analyticsVisitors.id, { onDelete: 'cascade' }),
+    startedAt: timestamp('started_at', { withTimezone: true }).notNull(),
+    lastActivityAt: timestamp('last_activity_at', { withTimezone: true }).notNull(),
+    landingPath: text('landing_path'),
+    exitPath: text('exit_path'),
+    referrer: text('referrer'),
+    referrerHost: text('referrer_host'),
+    utmSource: text('utm_source'),
+    utmMedium: text('utm_medium'),
+    utmCampaign: text('utm_campaign'),
+    utmContent: text('utm_content'),
+    utmTerm: text('utm_term'),
+    gclid: text('gclid'),
+    fbclid: text('fbclid'),
+    ttclid: text('ttclid'),
+    channel: text('channel'),
+    deviceCategory: text('device_category'),
+    browser: text('browser'),
+    os: text('os'),
+    country: text('country').notNull().default('XX'),
+  },
+  (t) => ({
+    visitorIdx: index('analytics_sessions_visitor_idx').on(t.visitorId),
+    startedIdx: index('analytics_sessions_started_idx').on(t.startedAt),
+    channelIdx: index('analytics_sessions_channel_idx').on(t.channel, t.startedAt),
+    landingIdx: index('analytics_sessions_landing_idx').on(t.landingPath, t.startedAt),
+  }),
+);
+
+/** Marketing email subscribers (checkout opt-in only). */export const emailSubscribers = pgTable(
   'email_subscribers',
   {
     id: text('id').primaryKey(),
@@ -252,4 +317,95 @@ export const emailCampaigns = pgTable('email_campaigns', {
   createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
   createdBy: text('created_by').notNull().default('admin'),
 });
+
+/**
+ * Abandoned checkout tracking — PostgreSQL source of truth for recovery scheduling.
+ * Contabo-ready: no in-memory timers; workers only read/update these rows.
+ */
+export const abandonedCarts = pgTable(
+  'abandoned_carts',
+  {
+    id: text('id').primaryKey(),
+    checkoutSessionId: text('checkout_session_id').notNull(),
+    email: text('email').notNull(),
+    customerName: text('customer_name'),
+    status: text('status').notNull().default('active'),
+    currency: text('currency').notNull().default('USD'),
+    subtotalAmount: integer('subtotal_amount').notNull().default(0),
+    discountAmount: integer('discount_amount').notNull().default(0),
+    totalAmount: integer('total_amount').notNull().default(0),
+    platformId: text('platform_id'),
+    serviceId: text('service_id'),
+    serviceSlug: text('service_slug'),
+    serviceName: text('service_name'),
+    packageId: text('package_id'),
+    packageTitle: text('package_title'),
+    quantity: integer('quantity'),
+    quantityLabel: text('quantity_label'),
+    publicDestination: text('public_destination'),
+    /** Cart snapshot + checkout metadata (no payment card data). */
+    checkoutData: jsonb('checkout_data')
+      .notNull()
+      .$type<Record<string, unknown>>()
+      .default({}),
+    recoveryTokenHash: text('recovery_token_hash').notNull(),
+    tokenExpiresAt: timestamp('token_expires_at', { withTimezone: true }).notNull(),
+    recoveryEmailsStopped: boolean('recovery_emails_stopped').notNull().default(false),
+    lastRecoverySequence: integer('last_recovery_sequence').notNull().default(0),
+    recoveryClickedAt: timestamp('recovery_clicked_at', { withTimezone: true }),
+    recoveryClickSequence: integer('recovery_click_sequence'),
+    abandonedAt: timestamp('abandoned_at', { withTimezone: true }),
+    recoveredAt: timestamp('recovered_at', { withTimezone: true }),
+    recoveredOrderId: text('recovered_order_id').references(() => orders.id, {
+      onDelete: 'set null',
+    }),
+    linkedOrderId: text('linked_order_id').references(() => orders.id, {
+      onDelete: 'set null',
+    }),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull(),
+    lastActivityAt: timestamp('last_activity_at', { withTimezone: true }).notNull(),
+  },
+  (t) => ({
+    sessionUidx: uniqueIndex('abandoned_carts_session_uidx').on(t.checkoutSessionId),
+    tokenHashUidx: uniqueIndex('abandoned_carts_token_hash_uidx').on(t.recoveryTokenHash),
+    statusIdx: index('abandoned_carts_status_idx').on(t.status),
+    emailIdx: index('abandoned_carts_email_idx').on(t.email),
+    lastActivityIdx: index('abandoned_carts_last_activity_idx').on(t.lastActivityAt),
+    abandonedAtIdx: index('abandoned_carts_abandoned_at_idx').on(t.abandonedAt),
+    recoveredOrderIdx: index('abandoned_carts_recovered_order_idx').on(t.recoveredOrderId),
+    linkedOrderIdx: index('abandoned_carts_linked_order_idx').on(t.linkedOrderId),
+  }),
+);
+
+/** Idempotent recovery email send log — unique (cart_id, sequence_number). */
+export const abandonedCartRecoveryEmails = pgTable(
+  'abandoned_cart_recovery_emails',
+  {
+    id: text('id').primaryKey(),
+    cartId: text('cart_id')
+      .notNull()
+      .references(() => abandonedCarts.id, { onDelete: 'cascade' }),
+    sequenceNumber: integer('sequence_number').notNull(),
+    scheduledAt: timestamp('scheduled_at', { withTimezone: true }).notNull(),
+    processingStartedAt: timestamp('processing_started_at', { withTimezone: true }),
+    sentAt: timestamp('sent_at', { withTimezone: true }),
+    status: text('status').notNull().default('pending'),
+    providerMessageId: text('provider_message_id'),
+    error: text('error'),
+    triggeredBy: text('triggered_by').notNull().default('scheduler'),
+    createdAt: timestamp('created_at', { withTimezone: true }).notNull(),
+    updatedAt: timestamp('updated_at', { withTimezone: true }).notNull(),
+  },
+  (t) => ({
+    cartSequenceUidx: uniqueIndex('abandoned_cart_recovery_emails_cart_seq_uidx').on(
+      t.cartId,
+      t.sequenceNumber,
+    ),
+    statusScheduledIdx: index('abandoned_cart_recovery_emails_status_sched_idx').on(
+      t.status,
+      t.scheduledAt,
+    ),
+  }),
+);
 

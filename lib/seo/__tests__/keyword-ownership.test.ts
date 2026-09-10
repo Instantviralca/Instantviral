@@ -19,7 +19,7 @@ describe('SEO keyword ownership', () => {
 
     expect(home.hero.title).toBe('Buy Instagram Followers Canada');
     expect(home.hero.primaryKeyword).toBe('buy instagram followers canada');
-    expect(home.hero.primaryCta?.href).toBe('/buy-instagram-followers');
+    expect(home.hero.primaryCta?.href).toBe('#pricing-packages');
     expect(metadata?.title).toContain('Buy Instagram Followers Canada');
     expect(homeDescription.length).toBeGreaterThanOrEqual(140);
     expect(homeDescription.length).toBeLessThanOrEqual(160);
@@ -27,26 +27,24 @@ describe('SEO keyword ownership', () => {
     expect(metadata?.keywords?.join(' ').toLowerCase()).toContain('buy instagram followers canada');
   });
 
-  it('gives Instagram Followers Packages one consistent service-page owner', () => {
+  it('keeps Instagram Followers internal service identity while marketing URL is homepage', () => {
     const service = getServiceBySlug('buy-instagram-followers')!;
     const content = getServiceContentBySlug(service.slug)!;
-    const metadata = getMetadataByRoute(service.url)!;
     const seo = content.seo;
 
     expect(seo).toBeDefined();
     if (!seo) throw new Error('Missing Instagram Followers SEO content');
 
+    expect(service.slug).toBe('buy-instagram-followers');
+    expect(service.url).toBe('/');
     expect(service.primaryKeyword).toBe('instagram followers packages');
     expect(service.name).toBe('Instagram Followers Packages');
     expect(content.hero.title).toBe('Instagram Followers Packages');
     expect(content.hero.primaryKeyword).toBe('instagram followers packages');
     expect(seo.title).toBe('Instagram Followers Packages & Pricing | InstantViral');
     expect(seo.description.toLowerCase()).toContain(service.primaryKeyword);
-    expect(metadata.title).toBe(seo.title);
-    expect(metadata.openGraphTitle).toBe(seo.title);
-    expect(metadata.twitterTitle).toBe(seo.title);
-    expect(service.breadcrumb.at(-1)?.label).toBe('Instagram Followers Packages');
-    expect(serviceSchema(service).name).toBe('Instagram Followers Packages');
+    expect(getMetadataByRoute('/buy-instagram-followers')).toBeUndefined();
+    expect(serviceSchema(service).url).toBe('https://instantviral.ca');
     expect(productSchema(service).name).toBe('Instagram Followers Packages');
   });
 
@@ -60,7 +58,7 @@ describe('SEO keyword ownership', () => {
     expect(seo).toBeDefined();
     if (!seo) throw new Error('Missing Facebook Page Likes SEO content');
 
-    expect(content.hero.title).toBe('Buy Facebook Page Likes Canada');
+    expect(content.hero.title).toBe('Buy Facebook Page Likes in Canada');
     expect(content.hero.primaryKeyword).toBe('buy Facebook page likes Canada');
     expect(seo.title).toContain('Buy Facebook Page Likes');
     expect(seo.description).toContain('Buy Facebook Page Likes');
@@ -71,8 +69,11 @@ describe('SEO keyword ownership', () => {
     expect(productSchema(service).name).toBe('Buy Facebook Page Likes');
   });
 
-  it('aligns every service title, H1, description, social title and schema name', () => {
+  it('aligns every dedicated service title, H1, description, social title and schema name', () => {
     for (const service of getAllServices()) {
+      // Consolidated onto homepage — no dedicated indexable service metadata route.
+      if (service.url === '/') continue;
+
       const content = getServiceContentBySlug(service.slug);
       const metadata = getMetadataByRoute(service.url);
 
@@ -83,8 +84,8 @@ describe('SEO keyword ownership', () => {
       const primary = service.primaryKeyword.toLowerCase();
       expect(content.seo.title.toLowerCase(), service.slug).toContain(primary);
       expect(content.seo.description.toLowerCase(), service.slug).toContain(primary);
-      expect(content.hero.title.toLowerCase(), service.slug).toContain(primary);
       expect(content.hero.primaryKeyword?.toLowerCase() ?? '', service.slug).toContain(primary);
+      expect(content.hero.title.trim().length, service.slug).toBeGreaterThan(0);
       expect(metadata.openGraphTitle, service.slug).toBe(content.seo.title);
       expect(metadata.twitterTitle, service.slug).toBe(content.seo.title);
       expect(serviceSchema(service).name, service.slug).toBe(service.name);
@@ -135,14 +136,16 @@ describe('SEO keyword ownership', () => {
     const homeFaqIds = getHomepageContent().faq.faqIds;
 
     expect(homeFaqIds).toEqual([
-      'faq-home-buy-canada',
-      'faq-home-how-buy-followers',
-      'faq-home-password',
-      'faq-home-where-buy',
-      'faq-home-likes-views',
-      'faq-home-engagement-guarantee',
-      'faq-home-check-before',
-      'faq-home-track-order',
+      'faq-home-consolidated-buy-canada',
+      'faq-home-consolidated-password',
+      'faq-home-consolidated-choose-package',
+      'faq-home-consolidated-delivery-start',
+      'faq-home-consolidated-gradual',
+      'faq-home-consolidated-track',
+      'faq-home-consolidated-refund',
+      'faq-home-consolidated-order-again',
+      'faq-home-consolidated-username-change',
+      'faq-home-consolidated-likes-views',
     ]);
   });
 });

@@ -13,7 +13,7 @@ import {
 import { getMetadataByRoute } from '@/lib/seo/metadata/getters';
 import { buildOpenGraphFromEntry, buildOpenGraphMetadata } from '@/lib/seo/metadata/open-graph';
 import { buildRobotsMetadata } from '@/lib/seo/metadata/robots';
-import { sanitizeMetadataText } from '@/lib/seo/metadata/sanitize';
+import { sanitizeMetadataText, clampMetaDescription } from '@/lib/seo/metadata/sanitize';
 import { buildTwitterFromEntry, buildTwitterMetadata } from '@/lib/seo/metadata/twitter';
 import type { MetadataEntry, SeoRobotsPolicy } from '@/types/seo-metadata';
 
@@ -33,7 +33,7 @@ export type BuildPageMetadataInput = {
 export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
   const path = normalizeCanonicalPath(input.path);
   const title = sanitizeMetadataText(input.title);
-  const description = sanitizeMetadataText(input.description);
+  const description = clampMetaDescription(input.description);
   const robots = input.robots ?? { index: true, follow: true };
   const canonical = buildCanonicalUrl(path);
   const image = input.images?.[0] ?? seoSiteConfig.defaultOpenGraphImage;
@@ -66,7 +66,7 @@ export function buildPageMetadata(input: BuildPageMetadataInput): Metadata {
 
 export function buildMetadataFromEntry(entry: MetadataEntry): Metadata {
   const title = sanitizeMetadataText(entry.title);
-  const description = sanitizeMetadataText(entry.description);
+  const description = clampMetaDescription(entry.description);
   const path = normalizeCanonicalPath(entry.canonicalPath);
 
   return {

@@ -28,6 +28,8 @@ type ServiceCommerceBlocksProps = {
   summaryBenefits?: readonly string[];
   infoPills?: readonly string[];
   stickyCtaLabel?: string;
+  /** When false, hides the mobile sticky order bar (e.g. homepage uses HomepageStickyCta). */
+  showStickyOrderBar?: boolean;
 };
 
 const USERNAME_ONLY_SLUGS = new Set(['buy-instagram-followers', 'buy-tiktok-followers']);
@@ -54,6 +56,7 @@ export function ServiceCommerceBlocks({
   summaryBenefits,
   infoPills,
   stickyCtaLabel = 'Order Now',
+  showStickyOrderBar = true,
 }: ServiceCommerceBlocksProps) {
   const [selectedPackage, setSelectedPackage] = useState<PricingPackage | null>(null);
   const [orderOpen, setOrderOpen] = useState(false);
@@ -117,20 +120,22 @@ export function ServiceCommerceBlocks({
         onContinuePackage={handleContinue}
         selectedPackageId={selectedPackage?.id ?? null}
       />
-      <ServiceStickyOrderBar
-        pricingSectionId={pricingSectionId}
-        ctaLabel={stickyCtaLabel}
-        priceLabel={stickyPrice}
-        onOrder={() => {
-          if (selectedPackage) {
-            handleContinue(selectedPackage.id);
-            return;
-          }
-          document
-            .getElementById(pricingSectionId)
-            ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }}
-      />
+      {showStickyOrderBar ? (
+        <ServiceStickyOrderBar
+          pricingSectionId={pricingSectionId}
+          ctaLabel={stickyCtaLabel}
+          priceLabel={stickyPrice}
+          onOrder={() => {
+            if (selectedPackage) {
+              handleContinue(selectedPackage.id);
+              return;
+            }
+            document
+              .getElementById(pricingSectionId)
+              ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }}
+        />
+      ) : null}
       <PackageOrderDialog
         open={orderOpen}
         onOpenChange={setOrderOpen}

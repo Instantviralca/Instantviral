@@ -126,7 +126,7 @@ export const homepageExtendedSections = {
     ],
     cta: {
       label: 'Explore Instagram Followers Packages',
-      href: '/buy-instagram-followers',
+      href: '/#pricing-packages',
     },
     mediaKey: 'socialProofMatters' as const,
   },
@@ -209,7 +209,7 @@ export const homepageExtendedSections = {
     supporting:
       'Each Instagram service supports a different objective. Understanding the role of followers, likes, views, and comments helps you choose the package that best aligns with your current marketing goals.',
     miniCards: [
-      { label: 'Followers', focus: 'Profile', href: '/buy-instagram-followers' },
+      { label: 'Followers', focus: 'Profile', href: '/#pricing-packages' },
       { label: 'Likes', focus: 'Posts', href: '/buy-instagram-likes' },
       { label: 'Views', focus: 'Videos', href: '/buy-instagram-views' },
       { label: 'Comments', focus: 'Community', href: '/buy-instagram-comments' },

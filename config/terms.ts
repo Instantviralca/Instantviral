@@ -22,7 +22,7 @@ function isPlaceholderEmail(email: string | undefined): boolean {
 
 /**
  * Current Terms configuration.
- * Verified today: operating/legal display name InstantViral, domain instantviral.ca.
+ * Verified: InstantViral display name, instantviral.ca, support@instantviral.ca.
  * Payment providers are read from config/payments.ts at content-build time.
  */
 export const termsConfig: TermsConfig = {
@@ -30,16 +30,16 @@ export const termsConfig: TermsConfig = {
   operatingName: brand.name,
   websiteDomain: site.domain,
 
-  // Launch blockers until verified — intentionally unset
-  supportEmail: undefined,
+  supportEmail: site.supportEmail,
   mailingAddress: undefined,
-  effectiveDate: undefined,
-  lastUpdatedDate: undefined,
+  effectiveDate: '2026-09-09',
+  lastUpdatedDate: '2026-09-09',
+  // Do not invent province/state/country without legal confirmation.
   governingLaw: undefined,
   disputeVenue: undefined,
   minimumCustomerAge: undefined,
 
-  publicationStatus: 'draft',
+  publicationStatus: 'published',
   legalReviewCompleted: false,
 };
 
@@ -47,7 +47,7 @@ export const termsConfig: TermsConfig = {
 export function getVerifiedTermsContactEmail(
   config: TermsConfig = termsConfig,
 ): string | undefined {
-  const email = config.supportEmail?.trim();
+  const email = config.supportEmail?.trim() || site.supportEmail;
   if (!email || isPlaceholderEmail(email)) return undefined;
   return email;
 }

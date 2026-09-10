@@ -31,6 +31,18 @@ const BLOCKS: ArticleContentBlock[] = [
     text: 'For cross-platform budget allocation and marketing mix decisions, start with Organic vs Paid Social Media Growth. This article focuses on Instagram algorithm behaviour, Reels distribution and ad formats.',
   },
   {
+    id: 'b-intro-ctx-views',
+    type: 'paragraph',
+    order: 3,
+    text: 'If video reach is the metric you are focusing on, you can separately compare Instagram Views packages for public Reels and videos.',
+    inlineLinks: [
+      {
+        href: '/buy-instagram-views',
+        label: 'Instagram Views packages',
+      },
+    ],
+  },
+  {
     id: 'b-related-hub',
     type: 'related_article_card',
     order: 4,

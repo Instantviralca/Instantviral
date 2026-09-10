@@ -48,7 +48,7 @@ const services = [
   {
     platform: 'Instagram',
     title: 'Buy Instagram Followers',
-    path: '/buy-instagram-followers',
+    path: '/',
     description:
       'Compare Instagram follower packages with public username checkout, no password required.',
     audience: 'Creators, businesses, brands, and agencies building Instagram profile presence.',

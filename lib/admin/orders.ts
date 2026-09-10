@@ -1,11 +1,19 @@
 import { formatMoney } from '@/lib/pricing/format';
 import { getAllServices } from '@/data/services';
 import { getActivePackagesByServiceSlug } from '@/data/pricing/packages';
+import {
+  formatOrderItemsSummary,
+  normalizeOrderLineItem,
+  resolveCartQuantity,
+  resolveLineTotal,
+  resolveTargetFromConfig,
+} from '@/lib/orders/line-items';
 import { listOrders, getOrderById } from '@/lib/orders/store';
 import { isEligibleForFulfilmentQueue } from '@/lib/payments/mark-paid';
 import type {
   AdminOrderDetails,
   AdminOrderFulfillmentField,
+  AdminOrderLineItem,
   AdminOrderRow,
 } from '@/types/admin-orders';
 import type { Order, OrderLineItem } from '@/types/order';
@@ -29,19 +37,6 @@ const FIELD_LABELS: Record<string, string> = {
   notes: 'Order notes',
   customComments: 'Custom comments',
 };
-
-function resolveTarget(configuration: OrderConfigurationValues | undefined): string {
-  if (!configuration) return '';
-  const value =
-    configuration.username ??
-    configuration.targetUrl ??
-    configuration.url ??
-    configuration.profileUrl ??
-    configuration.videoUrl ??
-    configuration.channelUrl ??
-    '';
-  return typeof value === 'string' ? value.trim() : String(value ?? '');
-}
 
 function buildFulfillmentFields(
   configuration: OrderConfigurationValues | undefined,
@@ -87,6 +82,29 @@ function buildFulfillmentFields(
   return fields;
 }
 
+function toAdminLineItem(item: OrderLineItem, currency: CurrencyCode): AdminOrderLineItem {
+  const normalized = normalizeOrderLineItem(item);
+  const cartQuantity = resolveCartQuantity(normalized);
+  const lineTotal = resolveLineTotal(normalized);
+  const configuration = (normalized.configuration ?? {}) as OrderConfigurationValues;
+  return {
+    id: normalized.id,
+    platformId: normalized.platformId,
+    serviceName: normalized.serviceName,
+    packageTitle: normalized.packageTitle,
+    packageQuantityLabel: normalized.quantityLabel,
+    cartQuantity,
+    unitPrice: normalized.unitPrice,
+    lineTotal,
+    currency,
+    unitPriceDisplay: formatMoney(normalized.unitPrice, currency, 'en-CA'),
+    lineTotalDisplay: formatMoney(lineTotal, currency, 'en-CA'),
+    targetDisplay: resolveTargetFromConfig(configuration) || '—',
+    fulfillmentFields: buildFulfillmentFields(configuration),
+    deliveryTime: normalized.deliveryTime,
+  };
+}
+
 function toRow(order: Order): AdminOrderRow {
   const item = order.items[0] as OrderLineItem | undefined;
   const configuration = (item?.configuration ?? {}) as OrderConfigurationValues;
@@ -98,6 +116,8 @@ function toRow(order: Order): AdminOrderRow {
     packageTitle: item?.packageTitle ?? 'Package',
     quantity: item?.quantity ?? 0,
     quantityLabel: item?.quantityLabel ?? String(item?.quantity ?? 0),
+    itemsSummary: formatOrderItemsSummary(order),
+    itemCount: order.items.reduce((sum, line) => sum + resolveCartQuantity(line), 0),
     totalDisplay: formatMoney(
       order.total.amount,
       order.total.currency as CurrencyCode,
@@ -105,7 +125,7 @@ function toRow(order: Order): AdminOrderRow {
     ),
     paymentStatus: order.payment?.status ?? 'pending',
     orderStatus: order.status,
-    targetDisplay: resolveTarget(configuration) || '—',
+    targetDisplay: resolveTargetFromConfig(configuration) || '—',
     createdAt: order.createdAt,
     updatedAt: order.updatedAt,
   };
@@ -126,6 +146,7 @@ export async function getAdminOrderById(orderId: string): Promise<AdminOrderDeta
   if (!order) return null;
   const item = order.items[0];
   const configuration = (item?.configuration ?? {}) as OrderConfigurationValues;
+  const currency = order.total.currency as CurrencyCode;
   return {
     ...toRow(order),
     timeline: order.timeline,
@@ -134,6 +155,9 @@ export async function getAdminOrderById(orderId: string): Promise<AdminOrderDeta
     customerNotes: order.customerNotes,
     configuration,
     fulfillmentFields: buildFulfillmentFields(configuration),
+    lineItems: order.items.map((line) => toAdminLineItem(line, currency)),
+    subtotalDisplay: formatMoney(order.subtotal.amount, currency, 'en-CA'),
+    discountDisplay: formatMoney(order.discount.amount, currency, 'en-CA'),
   };
 }
 

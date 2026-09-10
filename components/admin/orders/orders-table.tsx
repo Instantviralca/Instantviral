@@ -53,7 +53,7 @@ export function OrdersTable({
               <th className="px-3 py-2 font-medium">Service</th>
               <th className="px-3 py-2 font-medium">Package</th>
               <th className="px-3 py-2 font-medium">Target</th>
-              <th className="px-3 py-2 font-medium">Qty</th>
+              <th className="px-3 py-2 font-medium">Items</th>
               <th className="px-3 py-2 font-medium">Total</th>
               <th className="px-3 py-2 font-medium">Payment</th>
               <th className="px-3 py-2 font-medium">Status</th>

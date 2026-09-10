@@ -1,6 +1,11 @@
 import type { CurrencyCode } from '@/types/pricing';
 import type { AppliedCoupon, CartItem, CartState, CartTotals } from '@/types/cart';
 import { getDefaultCurrency } from '@/data/pricing/currencies';
+import {
+  normalizeCartItem,
+  resolveCartQuantity,
+  resolveLineTotal,
+} from '@/lib/orders/line-items';
 
 export const CART_STORAGE_KEY = 'instantviral.cart.v1';
 
@@ -22,7 +27,8 @@ export function calculateCartTotals(
   coupon: AppliedCoupon | null,
   currency: CurrencyCode,
 ): CartTotals {
-  const subtotalAmount = items.reduce((sum, item) => sum + item.unitPrice, 0);
+  const normalized = items.map(normalizeCartItem);
+  const subtotalAmount = normalized.reduce((sum, item) => sum + resolveLineTotal(item), 0);
   const discountAmount = coupon
     ? Math.min(coupon.discountAmount, subtotalAmount)
     : 0;
@@ -31,7 +37,7 @@ export function calculateCartTotals(
     subtotal: { amount: subtotalAmount, currency },
     discount: { amount: discountAmount, currency },
     total: { amount: Math.max(subtotalAmount - discountAmount, 0), currency },
-    itemCount: items.length,
+    itemCount: normalized.reduce((sum, item) => sum + resolveCartQuantity(item), 0),
   };
 }
 
@@ -44,7 +50,10 @@ export function deserializeCart(raw: string | null): CartState | null {
   try {
     const parsed = JSON.parse(raw) as CartState;
     if (!parsed || !Array.isArray(parsed.items)) return null;
-    return parsed;
+    return {
+      ...parsed,
+      items: parsed.items.map((item) => normalizeCartItem(item)),
+    };
   } catch {
     return null;
   }

@@ -139,7 +139,7 @@ export function EmailMarketingPage() {
         <AdminStatCard
           label="Email provider"
           value={emailConfigured ? 'Configured' : 'Not configured'}
-          trend={emailConfigured ? 'Resend ready' : 'Set RESEND_API_KEY + EMAIL_FROM'}
+          trend={emailConfigured ? 'SMTP or temporary provider ready' : 'Set SMTP_* + EMAIL_FROM'}
         />
       </div>
 

@@ -5,6 +5,7 @@ import type { ReactNode } from 'react';
 import { learnArticlePath } from '@/config/routes';
 import { isApprovedServiceSlug } from '@/data/linking/approved-services';
 import { getServiceBySlug } from '@/data/services';
+import { resolveServiceMarketingHref } from '@/lib/linking/service-href';
 import { cn } from '@/lib/utils';
 import type {
   ArticleContentBlock,
@@ -339,7 +340,9 @@ export function ArticleContentBlockView({ block }: ArticleContentBlockProps) {
       if (!service) return null;
       return (
         <Link
-          href={`/${block.serviceSlug}`}
+          href={resolveServiceMarketingHref(block.serviceSlug, {
+            label: service.name,
+          })}
           className="block border border-neutral-200 p-4 outline-none hover:border-neutral-400 focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
         >
           <p className="font-medium text-neutral-900">{block.label}</p>

@@ -5,6 +5,7 @@
 import { routes } from '@/config/routes';
 import { isApprovedServiceSlug } from '@/data/linking/approved-services';
 import { getLinkPageBySlug } from '@/data/linking/registry';
+import { getServiceBySlug } from '@/data/services';
 import type { CtaDestinationValidation } from '@/types/cta';
 
 const STATIC_INTERNAL = new Set<string>(Object.values(routes));
@@ -65,6 +66,15 @@ export function validateCtaDestination(destination: string): CtaDestinationValid
         destination: trimmed,
         valid: false,
         reason: `Inactive service destination "${slug}"`,
+      };
+    }
+    // Consolidated services keep the slug but public marketing URL differs (e.g. `/`).
+    const service = getServiceBySlug(slug);
+    if (service && service.url !== path) {
+      return {
+        destination: trimmed,
+        valid: false,
+        reason: `Service "${slug}" public URL is "${service.url}" — do not link the retired path`,
       };
     }
     return { destination: trimmed, valid: true };

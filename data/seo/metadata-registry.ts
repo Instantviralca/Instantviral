@@ -18,15 +18,15 @@ import { isPublicLiveArticle } from '@/lib/learn/editorial/status';
 import { getOpenGraphImageForSlug } from '@/data/seo/open-graph-images';
 import { descriptions } from '@/seo/descriptions';
 import { titles } from '@/seo/titles';
+import { clampMetaDescription } from '@/lib/seo/metadata/sanitize';
 import type { MetadataEntry } from '@/types/seo-metadata';
 
-const UPDATED = '2026-07-12T00:00:00.000Z';
 const OG = seoSiteConfig.defaultOpenGraphImage;
 const LOCALE = seoSiteConfig.defaultLocale;
 const SOURCE = 'data/seo/metadata-registry.ts';
 
 function entry(
-  partial: Omit<MetadataEntry, 'locale' | 'updatedAt' | 'sourceFile' | 'openGraphImage'> & {
+  partial: Omit<MetadataEntry, 'locale' | 'sourceFile' | 'openGraphImage'> & {
     openGraphImage?: string;
     openGraphImageAlt?: string;
     twitterImageAlt?: string;
@@ -38,15 +38,18 @@ function entry(
   return {
     openGraphImage: OG,
     locale: LOCALE,
-    updatedAt: UPDATED,
     sourceFile: SOURCE,
     ...partial,
   };
 }
 
 function buildServiceEntries(): MetadataEntry[] {
-  return APPROVED_SERVICE_SLUGS.map((slug) => {
+  return APPROVED_SERVICE_SLUGS.flatMap((slug) => {
     const service = getServiceBySlug(slug);
+    // Consolidated onto homepage — do not emit a separate indexable service route.
+    if (!service || service.url === routes.home || service.url === '/') {
+      return [];
+    }
     const content = getServiceContentBySlug(slug);
     const route = `/${slug}`;
     const title =
@@ -56,26 +59,28 @@ function buildServiceEntries(): MetadataEntry[] {
       (service ? descriptions.service(service) : seoSiteConfig.defaultDescription);
     const og = getOpenGraphImageForSlug(slug);
 
-    return entry({
-      id: `meta-service-${slug}`,
-      route,
-      pageType: 'service',
-      title,
-      description,
-      canonicalPath: route,
-      openGraphTitle: title,
-      openGraphDescription: description,
-      openGraphImage: og?.path ?? OG,
-      openGraphImageAlt: og?.alt,
-      twitterTitle: title,
-      twitterDescription: description,
-      twitterImage: og?.path ?? OG,
-      twitterImageAlt: og?.alt,
-      robots: { index: true, follow: true },
-      keywords: service ? [service.primaryKeyword, ...service.secondaryKeywords] : undefined,
-      active: true,
-      indexable: true,
-    });
+    return [
+      entry({
+        id: `meta-service-${slug}`,
+        route,
+        pageType: 'service',
+        title,
+        description,
+        canonicalPath: route,
+        openGraphTitle: title,
+        openGraphDescription: description,
+        openGraphImage: og?.path ?? OG,
+        openGraphImageAlt: og?.alt,
+        twitterTitle: title,
+        twitterDescription: description,
+        twitterImage: og?.path ?? OG,
+        twitterImageAlt: og?.alt,
+        robots: { index: true, follow: true },
+        keywords: service ? [service.primaryKeyword, ...service.secondaryKeywords] : undefined,
+        active: true,
+        indexable: true,
+      }),
+    ];
   });
 }
 
@@ -122,13 +127,14 @@ function buildLearnEntries(): MetadataEntry[] {
         title: article.title,
         relatedServiceSlugs: [...article.relatedServices],
       });
-    const description =
+    const description = clampMetaDescription(
       article.seo.description ||
-      descriptions.learnArticle({
-        slug: article.slug,
-        title: article.title,
-        relatedServiceSlugs: [...article.relatedServices],
-      });
+        descriptions.learnArticle({
+          slug: article.slug,
+          title: article.title,
+          relatedServiceSlugs: [...article.relatedServices],
+        }),
+    );
     return entry({
       id: `meta-learn-${article.slug}`,
       route,
@@ -195,10 +201,11 @@ function buildTagEntries(): MetadataEntry[] {
       const articleCount = liveArticles.filter((article) => article.tags.includes(tag.slug)).length;
       if (articleCount < 1) return null;
       const route = `${LEARN_TAG_PATH_PREFIX}/${tag.slug}`;
-      const title = `${tag.name} Guides | InstantViral Learn`;
-      const description =
+      const title = `${tag.name} Guides | Learn | InstantViral`;
+      const description = clampMetaDescription(
         tag.description ||
-        `Browse InstantViral Learn guides tagged ${tag.name} for social media growth tips.`;
+          `Browse InstantViral Learn guides tagged ${tag.name} for practical social media growth tips and platform strategy.`,
+      );
       return entry({
         id: `meta-learn-tag-${tag.slug}`,
         route,
@@ -246,6 +253,7 @@ export const metadataRegistry: MetadataEntry[] = [
     ],
     active: true,
     indexable: true,
+    updatedAt: '2026-09-09',
   }),
 
   ...buildServiceEntries(),
@@ -300,7 +308,7 @@ export const metadataRegistry: MetadataEntry[] = [
     pageType: 'support',
     title: 'Track Your Order | InstantViral',
     description:
-      'Track your InstantViral order using your order ID and the email address used at checkout. View customer-safe status updates without sharing private account details.',
+      'Track your InstantViral order with your order ID and checkout email. View customer-safe status updates without sharing private account details.',
     canonicalPath: routes.trackOrder,
     robots: { index: true, follow: true },
     active: true,

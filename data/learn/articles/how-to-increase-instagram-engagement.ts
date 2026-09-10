@@ -219,6 +219,18 @@ const BLOCKS: ArticleContentBlock[] = [
     text: 'When people comment, respond thoughtfully to continue the conversation.',
   },
   {
+    id: 'b-conversations-ctx-comments',
+    type: 'paragraph',
+    order: 26,
+    text: 'Comments are especially useful when you want a post to look conversational rather than simply collect passive engagement. If comments are the metric you want to support, you can compare Instagram Comments packages.',
+    inlineLinks: [
+      {
+        href: '/buy-instagram-comments',
+        label: 'Instagram Comments packages',
+      },
+    ],
+  },
+  {
     id: 'b-fig-community-engagement',
     type: 'figure',
     order: 27,

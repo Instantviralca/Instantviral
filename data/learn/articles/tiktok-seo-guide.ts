@@ -516,6 +516,18 @@ const BLOCKS: ArticleContentBlock[] = [
     text: 'When you consistently publish videos around topics your audience actively searches for, you increase the likelihood of long-term visibility.',
   },
   {
+    id: 'b-takeaways-ctx-views',
+    type: 'paragraph',
+    order: 66,
+    text: 'Search visibility can bring new viewers over time, while view-count services address a different goal. If you need that option, compare the available TikTok Views packages.',
+    inlineLinks: [
+      {
+        href: '/buy-tiktok-views',
+        label: 'TikTok Views packages',
+      },
+    ],
+  },
+  {
     id: 'b-takeaways-3',
     type: 'paragraph',
     order: 67,

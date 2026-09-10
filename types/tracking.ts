@@ -32,6 +32,16 @@ export type PublicOrderTimelineStep = {
   message?: string;
 };
 
+export type PublicTrackedOrderItem = {
+  serviceName: string;
+  packageTitle: string;
+  packageQuantityLabel: string;
+  cartQuantity: number;
+  lineTotalDisplay: string;
+  /** Masked username / URL when appropriate. */
+  targetDisplay: string;
+};
+
 export type PublicTrackedOrder = {
   orderId: string;
   status: OrderStatus;
@@ -42,6 +52,9 @@ export type PublicTrackedOrder = {
   quantityLabel: string;
   /** Masked username / URL when appropriate. */
   targetDisplay: string;
+  items: PublicTrackedOrderItem[];
+  itemsSummary: string;
+  orderTotalDisplay?: string;
   createdAt: string;
   updatedAt: string;
   estimatedDelivery?: string;

@@ -188,10 +188,17 @@ describe('Phase 19.01 analytics privacy + events', () => {
       'cart_item_add',
       'cart_view_click',
       'checkout_click',
+      'checkout_started',
     ]) {
       expect(isApprovedEventName(name)).toBe(true);
       expect(getEventRegistryEntry(name)?.eventName).toBe(name);
     }
+  });
+
+  it('maps ig_followers_checkout_start to shared checkout_started (not add-to-cart)', () => {
+    expect(resolveCanonicalEventName('ig_followers_checkout_start')).toBe(
+      'checkout_started',
+    );
   });
 
   it('never keeps username or URL in sanitized analytics payloads', () => {

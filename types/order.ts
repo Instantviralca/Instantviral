@@ -33,9 +33,14 @@ export type OrderLineItem = {
   serviceName: string;
   packageId: string;
   packageTitle: string;
+  /** Package size from catalog (e.g. 1000 followers) — not cart buy count. */
   quantity: number;
   quantityLabel: string;
+  /** How many of this package were purchased (defaults to 1 for legacy rows). */
+  cartQuantity?: number;
   unitPrice: number;
+  /** unitPrice × cartQuantity in minor units. */
+  lineTotal?: number;
   currency: CurrencyCode;
   /** Username, URL, and other fulfillment inputs from order configuration. */
   configuration: OrderConfigurationValues;

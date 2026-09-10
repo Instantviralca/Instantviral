@@ -44,7 +44,8 @@ export type MetadataEntry = {
   locale: string;
   active: boolean;
   indexable: boolean;
-  updatedAt: string;
+  /** ISO content modification time when known; omit rather than inventing freshness. */
+  updatedAt?: string;
   /** Source module for audit reports. */
   sourceFile: string;
 };
@@ -66,7 +67,8 @@ export type MetadataIssueKind =
   | 'unsupported_claim'
   | 'private_data'
   | 'canonical_mismatch'
-  | 'schema_url_mismatch';
+  | 'schema_url_mismatch'
+  | 'soft_length_warning';
 
 export type MetadataIssue = {
   kind: MetadataIssueKind;

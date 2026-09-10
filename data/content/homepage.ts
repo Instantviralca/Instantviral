@@ -29,7 +29,7 @@ export const homepageContent: HomepageContent = {
     suggestedWordCount: 120,
     primaryCta: resolveCta('getStarted', {
       label: 'View Instagram Followers Packages',
-      href: '/buy-instagram-followers',
+      href: '#pricing-packages',
     }),
     secondaryCta: resolveCta('browseServices', {
       label: 'Explore Growth Options',
@@ -88,7 +88,7 @@ export const homepageContent: HomepageContent = {
     suggestedWordCount: 50,
     platformIds: ['instagram', 'tiktok', 'youtube', 'facebook'],
     internalLinks: [
-      { label: 'Instagram', href: '/buy-instagram-followers' },
+      { label: 'Instagram', href: '#instagram-growth-services' },
       { label: 'TikTok', href: '/buy-tiktok-followers' },
       { label: 'YouTube', href: '/buy-youtube-subscribers' },
       { label: 'Facebook', href: '/buy-facebook-followers' },
@@ -177,7 +177,7 @@ export const homepageContent: HomepageContent = {
     suggestedWordCount: 200,
     cta: {
       label: 'View Instagram Followers Packages',
-      href: '/buy-instagram-followers',
+      href: '#pricing-packages',
     },
     items: [
       {
@@ -228,7 +228,7 @@ export const homepageContent: HomepageContent = {
     suggestedWordCount: 150,
     cta: resolveCta('getStarted', {
       label: 'Compare Packages',
-      href: '/buy-instagram-followers',
+      href: '#pricing-packages',
     }),
     steps: [
       {
@@ -277,25 +277,27 @@ export const homepageContent: HomepageContent = {
     purpose: 'Answer Instagram follower buying questions',
     primaryKeyword: 'buy instagram followers canada',
     faqIds: [
-      'faq-home-buy-canada',
-      'faq-home-how-buy-followers',
-      'faq-home-password',
-      'faq-home-where-buy',
-      'faq-home-likes-views',
-      'faq-home-engagement-guarantee',
-      'faq-home-check-before',
-      'faq-home-track-order',
+      'faq-home-consolidated-buy-canada',
+      'faq-home-consolidated-password',
+      'faq-home-consolidated-choose-package',
+      'faq-home-consolidated-delivery-start',
+      'faq-home-consolidated-gradual',
+      'faq-home-consolidated-track',
+      'faq-home-consolidated-refund',
+      'faq-home-consolidated-order-again',
+      'faq-home-consolidated-username-change',
+      'faq-home-consolidated-likes-views',
     ],
   },
   finalCta: {
     id: 'home-final-cta',
-    title: 'Ready to Grow Your Instagram Presence?',
+    title: 'Ready to Choose Your Instagram Followers Package?',
     description:
-      "Whether you're building a personal brand, launching a new business, promoting an online store, or growing a creator account, InstantViral makes it easy to compare Instagram growth services and choose the package that matches your goals. Browse our Instagram Followers, Likes, Views, and Comments packages, complete your order through a secure checkout, and track your order every step of the way.",
+      'Compare the available follower packages, choose the size that fits your account, and continue to secure checkout using your public Instagram username. No Instagram password is required.',
     purpose: 'Drive conversions to Instagram follower packages',
     primaryCta: {
-      label: 'Compare Instagram Followers Packages',
-      href: '/buy-instagram-followers',
+      label: 'View Instagram Followers Packages',
+      href: '#pricing-packages',
     },
     secondaryCta: {
       label: 'Explore All Instagram Services',

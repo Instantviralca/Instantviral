@@ -31,7 +31,12 @@ export function OrderRow({ order, selected, onSelect, onOpen, className }: Order
       <td className="max-w-[14rem] truncate px-3 py-3" title={order.targetDisplay}>
         {order.targetDisplay}
       </td>
-      <td className="px-3 py-3">{order.quantityLabel}</td>
+      <td className="px-3 py-3" title={order.itemsSummary}>
+        <span className="block font-medium">{order.itemCount} item{order.itemCount === 1 ? '' : 's'}</span>
+        <span className="block max-w-[10rem] truncate text-xs text-muted-foreground">
+          {order.itemsSummary}
+        </span>
+      </td>
       <td className="px-3 py-3">{order.totalDisplay}</td>
       <td className="px-3 py-3">{order.paymentStatus}</td>
       <td className="px-3 py-3 capitalize">{order.orderStatus}</td>
@@ -61,7 +66,7 @@ export function OrderRowCard({ order, selected, onSelect, onOpen }: OrderRowProp
         />
       </div>
       <p className="text-sm">
-        {order.serviceName} · {order.packageTitle}
+        {order.itemsSummary}
       </p>
       <p className="break-all text-sm">
         <span className="text-muted-foreground">Target:</span> {order.targetDisplay}

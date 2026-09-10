@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 
 import { routes } from '@/config/routes';
 import { isApprovedServiceSlug } from '@/data/linking/approved-services';
+import { getServiceBySlug } from '@/data/services';
 import {
   buildMetadataFromEntry,
   buildPageMetadata,
@@ -43,6 +44,12 @@ export function serviceMetadata(slug: string): Metadata {
       path: `/${slug}`,
       robots: { index: false, follow: false },
     });
+  }
+
+  const service = getServiceBySlug(slug);
+  // Consolidated marketing URLs (Instagram Followers → `/`) use homepage metadata.
+  if (service && (service.url === '/' || service.url === routes.home)) {
+    return homeMetadata();
   }
 
   return buildPageMetadataForRoute(`/${slug}`);

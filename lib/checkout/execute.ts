@@ -2,6 +2,8 @@
  * Checkout orchestration — validate → persist pending order → remote payment redirect.
  */
 
+import { markAbandonedCartRecoveredFromOrder } from '@/lib/abandoned-cart';
+import { linkCartToOrder } from '@/lib/abandoned-cart/repository';
 import { allowMockPayments, isProductionRuntime } from '@/lib/config/env';
 import { getCheckoutUrl, getSiteUrlPath } from '@/lib/config/hosts';
 import { notifyOrderPaid, notifyOrderPlaced } from '@/lib/notifications/order-hooks';
@@ -59,6 +61,17 @@ export async function executeCheckout(
 
     const order = await placeOrder(input);
 
+    if (input.checkoutSessionId) {
+      try {
+        await linkCartToOrder(input.checkoutSessionId, order.id);
+      } catch (error) {
+        console.error('[checkout] abandoned-cart link failed', {
+          orderId: order.id,
+          message: error instanceof Error ? error.message : 'unknown',
+        });
+      }
+    }
+
     if (input.marketingOptIn || input.customer.marketingOptIn) {
       try {
         await getPersistence().upsertMarketingSubscriber({
@@ -93,7 +106,10 @@ export async function executeCheckout(
         subtotal: order.subtotal,
         discount: order.discount,
         total: order.total,
-        itemCount: order.items.reduce((sum, item) => sum + item.quantity, 0),
+        itemCount: order.items.reduce(
+          (sum, item) => sum + (item.cartQuantity && item.cartQuantity > 0 ? item.cartQuantity : 1),
+          0,
+        ),
       };
       const mollieClientOrderId = createMollieClientOrderId();
       const payment = await paymentGatewayManager.createPayment('mollie-remote', {
@@ -107,7 +123,25 @@ export async function executeCheckout(
         payload: {
           customer: input.customer,
           paymentMethodId: input.paymentMethodId,
-          items: input.items,
+          // Prefer server-validated line items (trusted prices + cartQuantity).
+          items: order.items.map((item) => ({
+            id: item.id,
+            packageId: item.packageId,
+            serviceId: item.serviceId,
+            serviceSlug: item.serviceSlug,
+            serviceName: item.serviceName,
+            platformId: item.platformId,
+            packageTitle: item.packageTitle,
+            quantity: item.quantity,
+            quantityLabel: item.quantityLabel,
+            cartQuantity: item.cartQuantity ?? 1,
+            unitPrice: item.unitPrice,
+            lineTotal: item.lineTotal ?? item.unitPrice * (item.cartQuantity ?? 1),
+            currency: item.currency,
+            deliveryTime: item.deliveryTime ?? '',
+            configuration: item.configuration,
+            addedAt: order.createdAt,
+          })),
           totals,
           coupon: input.coupon,
           termsAccepted: input.termsAccepted,
@@ -169,6 +203,19 @@ export async function executeCheckout(
       await notifyOrderPaid(mockPaid);
     } catch (error) {
       console.error('[checkout] mock paid notification failed', {
+        orderId: mockPaid.id,
+        message: error instanceof Error ? error.message : 'unknown',
+      });
+    }
+
+    try {
+      await markAbandonedCartRecoveredFromOrder({
+        orderId: mockPaid.id,
+        email: mockPaid.guestEmail,
+        checkoutSessionId: input.checkoutSessionId,
+      });
+    } catch (error) {
+      console.error('[checkout] mock abandoned-cart recovery failed', {
         orderId: mockPaid.id,
         message: error instanceof Error ? error.message : 'unknown',
       });

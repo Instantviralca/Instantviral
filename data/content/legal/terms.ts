@@ -74,14 +74,14 @@ function buildSections(config: TermsConfig): LegalPolicySection[] {
   } else {
     eligibilityBlocks.push({
       type: 'paragraph',
-      text: 'A specific numeric age threshold will be published only after legal review and alignment with applicable law and platform requirements. InstantViral does not invent an arbitrary age for these Terms.',
+      text: 'A specific numeric minimum age is not published on this page. You must be able to lawfully enter into these Terms and use the relevant social platforms and payment methods.',
     });
   }
 
   const governingBlocks: LegalPolicySection['blocks'] = [
     {
       type: 'paragraph',
-      text: 'These Terms are intended to be interpreted under the laws that apply to InstantViral’s operations and customers, subject to professional legal review before publication.',
+      text: 'These Terms are intended to be interpreted under the laws that apply to InstantViral’s operations and customers.',
     },
   ];
 
@@ -93,7 +93,7 @@ function buildSections(config: TermsConfig): LegalPolicySection[] {
   } else {
     governingBlocks.push({
       type: 'paragraph',
-      text: 'A specific governing-law jurisdiction has not been published in InstantViral configuration. InstantViral will not invent a province, state, or country for these Terms.',
+      text: 'A specific governing-law jurisdiction has not been published on this page. InstantViral does not invent a province, state, or country for these Terms.',
     });
   }
 

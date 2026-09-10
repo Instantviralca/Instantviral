@@ -63,7 +63,7 @@ export {
   findUnsupportedMetadataClaims,
   youtubeMetadataIsSafe,
 } from '@/lib/seo/metadata/claims';
-export { sanitizeMetadataText } from '@/lib/seo/metadata/sanitize';
+export { sanitizeMetadataText, clampMetaDescription } from '@/lib/seo/metadata/sanitize';
 
 export { getMetadataRegistry, metadataRegistry } from '@/data/seo';
 export { seoSiteConfig, SEO_PRODUCTION_DOMAIN } from '@/config/seo';

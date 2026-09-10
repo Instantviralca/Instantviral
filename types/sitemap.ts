@@ -11,7 +11,8 @@ export type SitemapChangeFrequency = NonNullable<
 export type IndexableRoute = {
   route: string;
   canonicalUrl: string;
-  lastModified: Date;
+  /** Present only when a real content/modification date is known. */
+  lastModified?: Date;
   changeFrequency: SitemapChangeFrequency;
   priority: number;
   pageType: string;

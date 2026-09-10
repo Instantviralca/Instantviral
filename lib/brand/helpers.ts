@@ -30,7 +30,7 @@ export function getSecondaryCTA(
   const label = brand.ctaLabels.secondary[index];
   const defaultHref =
     index === 1
-      ? '/buy-instagram-followers'
+      ? '/'
       : index === 2
         ? routes.contact
         : routes.learn;

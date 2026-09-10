@@ -246,5 +246,7 @@ export function getActiveCategorySlugsForStaticParams(): { slug: string }[] {
 }
 
 export function getActiveTagSlugsForStaticParams(): { tag: string }[] {
-  return getTags().map((tag) => ({ tag: tag.slug }));
+  return getTags()
+    .filter((tag) => tag.articleCount > 0)
+    .map((tag) => ({ tag: tag.slug }));
 }

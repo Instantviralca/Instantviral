@@ -66,15 +66,15 @@ function buildSections(config: CookieConfig): LegalPolicySection[] {
     });
   }
 
-  essentialBlocks.push({
-    type: 'paragraph',
-    text: 'InstantViral does not invent named third-party cookie identifiers on this page. A detailed named-cookie inventory will be published only after it is verified.',
-  });
+    essentialBlocks.push({
+      type: 'paragraph',
+      text: 'Where InstantViral names a cookie or storage key above, the description reflects the current implementation. InstantViral does not invent unused third-party cookie identifiers.',
+    });
 
   const analyticsBlocks: LegalPolicySection['blocks'] = [
     {
       type: 'paragraph',
-      text: 'Analytics cookies and similar technologies are optional. They are used only when an analytics provider is actually enabled, to help InstantViral understand page visits, navigation patterns, device categories, conversion events, and website performance.',
+      text: 'Analytics technologies help InstantViral understand page visits, navigation patterns, device categories, conversion events, and website performance. InstantViral distinguishes first-party measurement from optional third-party tools.',
     },
   ];
 
@@ -82,6 +82,10 @@ function buildSections(config: CookieConfig): LegalPolicySection[] {
     analyticsBlocks.push({
       type: 'paragraph',
       text: `Analytics providers currently enabled: ${analytics.map((provider) => provider.displayName).join(', ')}.`,
+    });
+    analyticsBlocks.push({
+      type: 'paragraph',
+      text: 'InstantViral first-party analytics typically uses browser local storage (and related session storage) for anonymous visitor and session identifiers, rather than relying only on cookies. Optional tools such as Google Analytics 4, Google Tag Manager, or Microsoft Clarity are listed only when they are actually enabled.',
     });
   } else {
     analyticsBlocks.push({
@@ -132,7 +136,7 @@ function buildSections(config: CookieConfig): LegalPolicySection[] {
   } else {
     preferenceBlocks.push({
       type: 'paragraph',
-      text: 'A dedicated cookie-consent banner or preference manager is not currently configured on InstantViral.ca. Until a consent manager is enabled, InstantViral keeps this wording generic: use your browser controls to manage optional cookies, and review this Cookie Policy and the Privacy Policy for updates when a preference tool is added.',
+      text: 'A dedicated cookie-consent banner or preference manager is not currently configured on InstantViral.ca. You can still manage optional cookies through your browser settings, and InstantViral will update this Cookie Policy if a preference tool is added.',
     });
   }
 
@@ -202,8 +206,8 @@ function buildSections(config: CookieConfig): LegalPolicySection[] {
         {
           type: 'list',
           items: [
-            'Essential: required for core website and ordering functionality such as cart, checkout, session continuity, and security',
-            'Analytics: optional; used only when an analytics provider is enabled',
+            'Essential: required for core website and ordering functionality such as cart cookies, checkout continuity, abandoned-checkout session linking, and security',
+            'Analytics: InstantViral first-party measurement (local storage / session storage) and optional third-party tools only when enabled',
             'Marketing: optional; used only when advertising or remarketing technologies are enabled',
           ],
         },

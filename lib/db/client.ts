@@ -1,5 +1,7 @@
 /**
- * Database client — PostgreSQL via DATABASE_URL (Neon/Supabase compatible).
+ * Database client — PostgreSQL via standard DATABASE_URL.
+ * Works with any Postgres server (current managed host now; Contabo localhost later).
+ * No Neon-specific SDKs or HTTP drivers.
  */
 
 import { drizzle } from 'drizzle-orm/postgres-js';

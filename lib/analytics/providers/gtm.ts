@@ -26,6 +26,8 @@ function ensureGtm(containerId: string): void {
   const script = document.createElement('script');
   script.id = scriptId;
   script.async = true;
+  // Swallow load failures — never throw the browser Error Event into React/Next overlay.
+  script.onerror = () => undefined;
   script.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(containerId)}`;
   document.head.appendChild(script);
 }

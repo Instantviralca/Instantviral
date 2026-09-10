@@ -1,7 +1,7 @@
 import { seoSiteConfig } from '@/config/seo';
 import { getActiveLearnCategories } from '@/data/learn/categories';
 import { absoluteUrl, buildCanonicalUrl } from '@/lib/seo/metadata/canonical';
-import { sanitizeMetadataText } from '@/lib/seo/metadata/sanitize';
+import { sanitizeMetadataText, clampMetaDescription } from '@/lib/seo/metadata/sanitize';
 import type { MetadataEntry } from '@/types/seo-metadata';
 import type { Metadata } from 'next';
 
@@ -30,7 +30,7 @@ export function buildOpenGraphMetadata(
   input: OpenGraphBuildInput,
 ): NonNullable<Metadata['openGraph']> {
   const title = sanitizeMetadataText(input.title);
-  const description = sanitizeMetadataText(input.description);
+  const description = clampMetaDescription(input.description);
   const imagePath = input.image ?? seoSiteConfig.defaultOpenGraphImage;
   const imageUrl = imagePath.startsWith('http')
     ? imagePath

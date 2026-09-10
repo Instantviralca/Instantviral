@@ -24,7 +24,7 @@ const STATIC_INTERNAL_PATHS = new Set<string>([
   '/learn/tiktok',
   '/learn/youtube',
   '/learn/facebook',
-  '/buy-instagram-followers',
+  '/',
   '/buy-tiktok-followers',
   '/buy-youtube-subscribers',
   '/buy-facebook-followers',

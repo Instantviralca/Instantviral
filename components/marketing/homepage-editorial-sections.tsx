@@ -26,6 +26,7 @@ import {
 import { Container } from '@/components/layout/container';
 import { Section } from '@/components/layout/section';
 import { FadeUp } from '@/components/motion/fade-up';
+import { FaqAnswerText } from '@/components/sections/faq';
 import { Heading } from '@/components/typography/heading';
 import { MutedText } from '@/components/typography/muted-text';
 import { Text } from '@/components/typography/text';
@@ -33,6 +34,8 @@ import { Button } from '@/components/ui/button';
 import { routes } from '@/config/routes';
 import { homepageEditorial } from '@/data/content/homepage-editorial';
 import { homepageMediaAssets } from '@/data/content/homepage-media';
+import { getHomepageContent } from '@/data/content/homepage';
+import { getFaqItemsByIds } from '@/data/content/faq';
 import { cn } from '@/lib/utils';
 
 function SectionIllustration({
@@ -1080,6 +1083,9 @@ export function HomepageTrustedReviewsSection({
 export function HomepageFaqSection() {
   const { faqSection } = homepageEditorial;
   const media = homepageMediaAssets.faq;
+  const faqItems = getFaqItemsByIds(getHomepageContent().faq.faqIds);
+  const featured = faqItems.slice(0, 4);
+  const accordion = faqItems.slice(4);
 
   return (
     <Section
@@ -1113,7 +1119,7 @@ export function HomepageFaqSection() {
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          {faqSection.featured.map((item, index) => (
+          {featured.map((item, index) => (
             <FadeUp key={item.id} delay={0.03 * index} className="h-full">
               <article className="flex h-full flex-col rounded-2xl border border-[color-mix(in_srgb,var(--brand-primary)_22%,var(--border-subtle))] bg-white p-5 shadow-[var(--shadow-sm)]">
                 <p className="text-xs font-semibold tracking-[0.12em] text-[var(--brand-primary)] uppercase">
@@ -1122,49 +1128,54 @@ export function HomepageFaqSection() {
                 <h3 className="mt-2 text-sm font-semibold text-[var(--text-primary)] sm:text-base">
                   {item.question}
                 </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-[var(--text-secondary)]">
-                  {item.answer}
-                </p>
+                <FaqAnswerText
+                  answer={item.answer}
+                  className="mt-2 flex-1 pb-0 text-sm leading-relaxed text-[var(--text-secondary)]"
+                />
               </article>
             </FadeUp>
           ))}
         </div>
 
-        <FadeUp className="space-y-3">
-          <Heading as="h3" size="h3">
-            More questions
-          </Heading>
-          <div className="space-y-3">
-            {faqSection.accordion.map((item) => (
-              <details
-                key={item.id}
-                className="group rounded-2xl border border-[var(--border-subtle)] bg-white p-4 shadow-[var(--shadow-sm)] open:border-[color-mix(in_srgb,var(--brand-primary)_25%,var(--border-subtle))]"
-              >
-                <summary className="cursor-pointer list-none text-sm font-semibold text-[var(--text-primary)] marker:content-none [&::-webkit-details-marker]:hidden sm:text-base">
-                  <span className="flex items-start justify-between gap-3">
-                    <span className="flex items-start gap-2">
-                      <HelpCircle
-                        className="mt-0.5 size-4 shrink-0 text-[var(--brand-primary)]"
+        {accordion.length > 0 ? (
+          <FadeUp className="space-y-3">
+            <Heading as="h3" size="h3">
+              More questions
+            </Heading>
+            <div className="space-y-3">
+              {accordion.map((item) => (
+                <details
+                  key={item.id}
+                  className="group rounded-2xl border border-[var(--border-subtle)] bg-white p-4 shadow-[var(--shadow-sm)] open:border-[color-mix(in_srgb,var(--brand-primary)_25%,var(--border-subtle))]"
+                >
+                  <summary className="cursor-pointer list-none text-sm font-semibold text-[var(--text-primary)] marker:content-none [&::-webkit-details-marker]:hidden sm:text-base">
+                    <span className="flex items-start justify-between gap-3">
+                      <span className="flex items-start gap-2">
+                        <HelpCircle
+                          className="mt-0.5 size-4 shrink-0 text-[var(--brand-primary)]"
+                          aria-hidden
+                        />
+                        {item.question}
+                      </span>
+                      <span
+                        className="mt-0.5 text-[var(--brand-primary)] transition-transform group-open:rotate-45"
                         aria-hidden
-                      />
-                      {item.question}
+                      >
+                        +
+                      </span>
                     </span>
-                    <span
-                      className="mt-0.5 text-[var(--brand-primary)] transition-transform group-open:rotate-45"
-                      aria-hidden
-                    >
-                      +
-                    </span>
-                  </span>
-                </summary>
-                <p className="mt-3 pl-6 text-sm leading-relaxed text-[var(--text-secondary)]">
-                  {item.answer}
-                </p>
-              </details>
-            ))}
-          </div>
-        </FadeUp>
-
+                  </summary>
+                  <div className="mt-3 pl-6">
+                    <FaqAnswerText
+                      answer={item.answer}
+                      className="pb-0 text-sm leading-relaxed text-[var(--text-secondary)]"
+                    />
+                  </div>
+                </details>
+              ))}
+            </div>
+          </FadeUp>
+        ) : null}
       </Container>
     </Section>
   );

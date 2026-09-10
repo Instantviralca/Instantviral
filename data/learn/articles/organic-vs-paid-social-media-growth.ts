@@ -893,10 +893,4 @@ export const ORGANIC_VS_PAID_SOCIAL_MEDIA_GROWTH_ARTICLE: LearnArticleRecord = {
       schemaEligible: true,
     },
   ],
-  serviceCta: {
-    serviceSlug: 'buy-instagram-followers',
-    label: 'Explore Instagram Followers Packages',
-    description:
-      'Compare real follower packages on InstantViral.ca when you are ready to support social growth.',
-  },
 };

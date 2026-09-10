@@ -22,7 +22,9 @@ function isPlaceholderEmail(email: string | undefined): boolean {
 
 /**
  * Current Refund Policy configuration.
- * Verified today: operating/legal display name InstantViral, domain instantviral.ca.
+ * Verified: InstantViral display name, instantviral.ca, support@instantviral.ca,
+ * and the site-wide 30-day money-back guarantee already published in FAQ, trust
+ * strips, and checkout (subject to this policy and package conditions).
  * Refill durations come from real package data on service pages — not from this file.
  */
 export const refundConfig: RefundConfig = {
@@ -30,16 +32,16 @@ export const refundConfig: RefundConfig = {
   operatingName: brand.name,
   websiteDomain: site.domain,
 
-  // Launch blockers until verified — intentionally unset
-  supportEmail: undefined,
+  supportEmail: site.supportEmail,
   mailingAddress: undefined,
-  effectiveDate: undefined,
-  lastUpdatedDate: undefined,
-  processingTimeDescription: undefined,
-  eligibleMoneyBackWindowLabel: undefined,
+  effectiveDate: '2026-09-09',
+  lastUpdatedDate: '2026-09-09',
+  processingTimeDescription:
+    'Eligible refund and refill requests are reviewed after InstantViral receives the order ID, checkout email, and a clear description of the issue. Timing can vary with order status and operational workload. InstantViral does not promise a fixed approval timeframe on this page.',
+  eligibleMoneyBackWindowLabel: '30 days',
 
-  operationalPolicyVerified: false,
-  publicationStatus: 'draft',
+  operationalPolicyVerified: true,
+  publicationStatus: 'published',
   legalReviewCompleted: false,
 };
 
@@ -47,7 +49,7 @@ export const refundConfig: RefundConfig = {
 export function getVerifiedRefundContactEmail(
   config: RefundConfig = refundConfig,
 ): string | undefined {
-  const email = config.supportEmail?.trim();
+  const email = config.supportEmail?.trim() || site.supportEmail;
   if (!email || isPlaceholderEmail(email)) return undefined;
   return email;
 }

@@ -246,7 +246,7 @@ export async function ServicePageView({ service }: ServicePageViewProps) {
               { label: 'TikTok Views Packages', href: '/buy-tiktok-views' },
               {
                 label: 'Instagram Followers Packages',
-                href: '/buy-instagram-followers',
+                href: '/#pricing-packages',
               },
               { label: 'Instagram Likes Packages', href: '/buy-instagram-likes' },
               { label: 'Support Page', href: routes.contact },

@@ -17,10 +17,10 @@ export const NOTIFICATION_TEMPLATES: NotificationTemplateDefinition[] = [
     subject: 'Order confirmation — {{orderId}}',
     bodyHtml: defaultHtml(
       'Order confirmation',
-      'We received your order <strong>{{orderId}}</strong> for {{serviceName}}.',
+      'We received your order <strong>{{orderId}}</strong>.',
     ),
     bodyText:
-      'Order confirmation\n\nHi {{customerName}},\nWe received your order {{orderId}} for {{serviceName}}.\nStatus: {{statusLabel}}\n{{statusMessage}}\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
+      'Order confirmation\n\nHi {{customerName}},\nWe received your order {{orderId}}.\n\n{{orderItemsText}}\n\nStatus: {{statusLabel}}\n{{statusMessage}}\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
     active: true,
   },
   {
@@ -102,9 +102,7 @@ function defaultHtml(title: string, summary: string): string {
     <h1 style="font-size: 20px;">${title}</h1>
     <p>Hi {{customerName}},</p>
     <p>${summary}</p>
-    <p><strong>Package:</strong> {{packageName}}</p>
-    <p><strong>Quantity:</strong> {{quantity}}</p>
-    <p><strong>Total:</strong> {{orderTotal}}</p>
+    {{orderItemsHtml}}
     <p><strong>Status:</strong> {{statusLabel}}</p>
     <p>{{statusMessage}}</p>
     <p><a href="{{trackingUrl}}">Track your order</a></p>

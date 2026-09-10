@@ -106,6 +106,18 @@ const BLOCKS: ArticleContentBlock[] = [
     text: 'Instagram uses different recommendation systems for Feed, Reels, Stories and Explore. Each surface evaluates signals such as engagement, user interests and content quality to decide what appears first.',
   },
   {
+    id: 'b-algorithm-ctx-views',
+    type: 'paragraph',
+    order: 11,
+    text: 'Reels and video posts have different visibility signals from static content. If your goal is specifically to support video view counts, you can compare Instagram Views packages separately.',
+    inlineLinks: [
+      {
+        href: '/buy-instagram-views',
+        label: 'Instagram Views packages',
+      },
+    ],
+  },
+  {
     id: 'b-algorithm-2',
     type: 'paragraph',
     order: 12,

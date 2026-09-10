@@ -62,7 +62,7 @@ for (const [category, name, pathname, notes] of staticPages) {
 }
 
 const services = [
-  ['Instagram', 'Buy Instagram Followers', '/buy-instagram-followers'],
+  ['Instagram', 'Buy Instagram Followers', '/'],
   ['Instagram', 'Buy Instagram Likes', '/buy-instagram-likes'],
   ['Instagram', 'Buy Instagram Views', '/buy-instagram-views'],
   ['Instagram', 'Buy Instagram Comments', '/buy-instagram-comments'],

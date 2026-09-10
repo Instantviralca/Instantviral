@@ -127,6 +127,18 @@ const BLOCKS: ArticleContentBlock[] = [
     text: 'Videos that keep viewers interested until the end often have a better chance of reaching larger audiences.',
   },
   {
+    id: 'b-watch-ctx-views',
+    type: 'paragraph',
+    order: 16,
+    text: 'Watch time, completion rate and repeat views can all influence how a video performs. If you are specifically comparing paid view options, you can review TikTok Views packages for public videos.',
+    inlineLinks: [
+      {
+        href: '/buy-tiktok-views',
+        label: 'TikTok Views packages',
+      },
+    ],
+  },
+  {
     id: 'b-watch-4',
     type: 'paragraph',
     order: 17,

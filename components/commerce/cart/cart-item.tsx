@@ -56,10 +56,22 @@ export function CartItemRow({ item, onRemove, className }: CartItemProps) {
               {item.quantityLabel}
             </p>
             <p className="mt-1 text-sm text-[var(--text-secondary)]">{item.packageTitle}</p>
+            <p className="mt-1 text-sm text-[var(--text-secondary)]">
+              Qty: {item.cartQuantity && item.cartQuantity > 0 ? item.cartQuantity : 1}
+            </p>
           </div>
           <p className="text-2xl font-bold text-[var(--brand-primary)]">
-            {formatMoney(item.unitPrice, item.currency)}
+            {formatMoney(
+              item.lineTotal ??
+                item.unitPrice * (item.cartQuantity && item.cartQuantity > 0 ? item.cartQuantity : 1),
+              item.currency,
+            )}
           </p>
+          {(item.cartQuantity ?? 1) > 1 ? (
+            <p className="text-xs text-[var(--text-secondary)]">
+              Unit: {formatMoney(item.unitPrice, item.currency)}
+            </p>
+          ) : null}
           {item.deliveryTime ? (
             <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--surface-muted)] px-2.5 py-1 text-xs font-medium text-[var(--text-secondary)]">
               <Clock3 className="size-3.5 text-[var(--brand-primary)]" aria-hidden="true" />

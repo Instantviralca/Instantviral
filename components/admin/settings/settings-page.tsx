@@ -243,18 +243,18 @@ export function SettingsPage() {
       <AdminCard title="Email notifications">
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">
-            Order confirmations, paid alerts, and contact-form messages use Resend.
-            Set <code className="text-xs">RESEND_API_KEY</code> and{' '}
-            <code className="text-xs">EMAIL_FROM</code> in Vercel env, then choose where
-            admin alerts go below.
+            Order confirmations, paid alerts, and contact-form messages use the shared
+            transactional email service. Prefer <code className="text-xs">SMTP_*</code> +{' '}
+            <code className="text-xs">EMAIL_FROM</code> (Contabo-ready). Temporary{' '}
+            <code className="text-xs">RESEND_API_KEY</code> still works on Vercel while SMTP is unset.
           </p>
           <p
             className={`text-sm font-medium ${emailConfigured ? 'text-emerald-700' : 'text-amber-700'}`}
             role="status"
           >
             {emailConfigured
-              ? `Resend is configured${emailFrom ? ` (from ${emailFrom})` : ''} — emails can send.`
-              : 'Resend is not configured — emails are skipped until RESEND_API_KEY + EMAIL_FROM are set in Vercel.'}
+              ? `Email is configured${emailFrom ? ` (from ${emailFrom})` : ''} — messages can send.`
+              : 'Email is not configured — set SMTP_* + EMAIL_FROM (preferred) or temporary RESEND_API_KEY + EMAIL_FROM.'}
           </p>
           <div className="space-y-2">
             <Label htmlFor="admin-email">Admin notification email</Label>
@@ -269,7 +269,7 @@ export function SettingsPage() {
             />
             <p className="text-xs text-muted-foreground">
               New orders and contact-form messages are sent here. Use Send test email to
-              see the exact Resend error if delivery fails.
+              see the exact delivery error if sending fails.
             </p>
           </div>
           <Button

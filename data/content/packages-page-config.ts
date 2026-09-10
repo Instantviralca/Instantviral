@@ -117,8 +117,9 @@ export type PackagesPageConfig = {
 export const INSTAGRAM_FOLLOWERS_PACKAGES_CONFIG: PackagesPageConfig = {
   metric: 'followers',
   fit: {
-    title: 'Which Package Is Right for You?',
-    description: 'Match quantity to your current account size and goal.',
+    title: 'Which Instagram Followers Package Is Right for You?',
+    description:
+      'The right package depends on your current audience, profile activity and what you want to support. Smaller packages can suit newer or more gradual growth, while larger options may make more sense for established profiles or broader campaigns. Compare the available sizes before ordering rather than choosing by quantity alone.',
     layout: 'compact',
     cards: [
       {
@@ -164,9 +165,9 @@ export const INSTAGRAM_FOLLOWERS_PACKAGES_CONFIG: PackagesPageConfig = {
     ],
   },
   timeline: {
-    title: 'Package Delivery Process',
+    title: 'What Happens After You Place Your Order',
     description:
-      'After checkout, each order moves through review and delivery. Timing depends on the selected package.',
+      'Once your order is confirmed, InstantViral uses the public Instagram username you provided to begin processing the selected package. Delivery information and any applicable package details are shown before checkout, and you can use order tracking to follow your order without sharing your Instagram password.',
     steps: [
       {
         id: 'place',

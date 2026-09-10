@@ -33,6 +33,11 @@ export type NotificationTemplateVariableMap = {
   serviceName: string;
   packageName?: string;
   quantity?: string;
+  cartQuantity?: string;
+  itemCount?: string;
+  itemsSummary?: string;
+  orderItemsHtml?: string;
+  orderItemsText?: string;
   orderTotal?: string;
   statusLabel: string;
   statusMessage: string;
@@ -86,7 +91,7 @@ export type NotificationRecord = {
 
 /**
  * Provider-independent delivery contract.
- * Concrete adapters (Resend, SES, etc.) implement this later.
+ * Concrete adapters (SMTP, temporary Resend, etc.) implement this.
  */
 export type NotificationProvider = {
   id: string;

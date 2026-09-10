@@ -1,6 +1,7 @@
 /**
- * Cross-subdomain cart cookie — Domain=.instantviral.ca when on brand hosts.
- * sessionStorage remains a local cache; cookie is the handoff to checkout host.
+ * Cart cookie on the main InstantViral domain.
+ * Parent Domain=.instantviral.ca is kept so any leftover subdomain cookies still clear/migrate cleanly.
+ * sessionStorage remains a local cache for the same-origin checkout.
  */
 
 import { getCartCookieDomain } from '@/lib/config/hosts';

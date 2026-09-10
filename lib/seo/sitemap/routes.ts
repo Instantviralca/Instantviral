@@ -34,12 +34,14 @@ function isExcludedRoute(route: string): boolean {
   );
 }
 
-function parseLastModified(iso: string | undefined): Date {
-  if (!iso) return new Date('2026-07-12T00:00:00.000Z');
+/**
+ * Parse a real content timestamp for sitemap lastmod.
+ * Returns undefined when unknown — omitting lastmod is preferred over fake dates.
+ */
+function parseLastModified(iso: string | undefined): Date | undefined {
+  if (!iso?.trim()) return undefined;
   const date = new Date(iso);
-  return Number.isNaN(date.getTime())
-    ? new Date('2026-07-12T00:00:00.000Z')
-    : date;
+  return Number.isNaN(date.getTime()) ? undefined : date;
 }
 
 function changeFrequencyFor(route: string, pageType: string): SitemapChangeFrequency {

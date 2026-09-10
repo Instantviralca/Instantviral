@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -10,6 +10,7 @@ import { CouponSection } from '@/components/commerce/checkout/coupon-section';
 import { CustomerInformationForm } from '@/components/commerce/checkout/customer-information-form';
 import { PaymentMethods } from '@/components/commerce/checkout/payment-methods';
 import { PlaceOrderButton } from '@/components/commerce/checkout/place-order-button';
+import { RECOVERY_CUSTOMER_STORAGE_KEY } from '@/lib/abandoned-cart/client-constants';
 import { TermsAgreement } from '@/components/commerce/checkout/terms-agreement';
 import { CheckoutProgress } from '@/components/design-system/checkout-progress';
 import { PaymentConfidence } from '@/components/design-system/payment-confidence';
@@ -21,6 +22,7 @@ import { MutedText } from '@/components/typography/muted-text';
 import { Button } from '@/components/ui/button';
 import { getEnabledPaymentProviders } from '@/config/payments';
 import { routes } from '@/config/routes';
+import { emitCheckoutStarted } from '@/lib/analytics/checkout-start';
 import { useCart } from '@/lib/cart';
 import { CART_QUERY_PARAM, locationHasCartTransfer } from '@/lib/cart/cart-hash';
 import { getSiteUrlPath } from '@/lib/config/hosts';
@@ -35,10 +37,26 @@ function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
+function readRecoveredCustomer(): CustomerInformation | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const raw = window.sessionStorage.getItem(RECOVERY_CUSTOMER_STORAGE_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw) as CustomerInformation;
+    window.sessionStorage.removeItem(RECOVERY_CUSTOMER_STORAGE_KEY);
+    if (parsed?.email && isValidEmail(parsed.email)) return parsed;
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
 export function CheckoutPage() {
   const cart = useCart();
   const analytics = useAnalyticsOptional();
   const checkoutViewSent = useRef(false);
+  const checkoutStartedSent = useRef(false);
+  const emailEnteredSent = useRef(false);
   const router = useRouter();
   const searchParams = useSearchParams();
   const paymentCancelled = searchParams.get('cancelled') === '1';
@@ -59,6 +77,84 @@ export function CheckoutPage() {
     form?: string;
   }>({});
   const [submitting, setSubmitting] = useState(false);
+  const trackTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastTrackedSignature = useRef<string>('');
+
+  useEffect(() => {
+    const recovered = readRecoveredCustomer();
+    if (recovered) setCustomer(recovered);
+  }, []);
+
+  const trackCheckout = useCallback(
+    (nextCustomer: CustomerInformation) => {
+      if (!isValidEmail(nextCustomer.email) || cart.items.length === 0 || !cart.isHydrated) {
+        return;
+      }
+      const signature = JSON.stringify({
+        email: nextCustomer.email.trim().toLowerCase(),
+        firstName: nextCustomer.firstName ?? '',
+        lastName: nextCustomer.lastName ?? '',
+        items: cart.items.map((item) => ({
+          id: item.id,
+          packageId: item.packageId,
+          configuration: item.configuration,
+        })),
+        total: cart.totals.total.amount,
+        coupon: cart.coupon?.code ?? null,
+      });
+      if (signature === lastTrackedSignature.current) return;
+      lastTrackedSignature.current = signature;
+
+      void fetch('/api/checkout/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customer: nextCustomer,
+          items: cart.items,
+          coupon: cart.coupon,
+          currency: cart.currency,
+          totals: cart.totals,
+        }),
+      }).catch(() => {
+        // Tracking must never block checkout.
+      });
+    },
+    [cart.coupon, cart.currency, cart.isHydrated, cart.items, cart.totals],
+  );
+
+  const handleCustomerChange = useCallback(
+    (next: CustomerInformation) => {
+      setCustomer(next);
+      if (
+        analytics?.ready &&
+        !emailEnteredSent.current &&
+        isValidEmail(next.email)
+      ) {
+        emailEnteredSent.current = true;
+        analytics.track({
+          eventName: 'checkout_email_entered',
+          pageType: 'checkout',
+          pagePath: '/checkout',
+        });
+      }
+      if (trackTimer.current) clearTimeout(trackTimer.current);
+      trackTimer.current = setTimeout(() => trackCheckout(next), 600);
+    },
+    [analytics, trackCheckout],
+  );
+
+  useEffect(() => {
+    return () => {
+      if (trackTimer.current) clearTimeout(trackTimer.current);
+    };
+  }, []);
+
+  // Keep tracked cart in sync when items/totals change after email is known.
+  useEffect(() => {
+    if (!isValidEmail(customer.email)) return;
+    if (trackTimer.current) clearTimeout(trackTimer.current);
+    trackTimer.current = setTimeout(() => trackCheckout(customer), 800);
+  }, [cart.items, cart.totals.total.amount, cart.coupon, customer, trackCheckout]);
 
   const paymentMethods: PaymentMethodOption[] = useMemo(
     () =>
@@ -80,15 +176,34 @@ export function CheckoutPage() {
     }
   }, [paymentMethods, paymentMethodId]);
 
+  // Checkout start = entered /checkout with a non-empty valid cart (not add-to-cart).
   useEffect(() => {
-    if (!analytics?.ready || checkoutViewSent.current) return;
+    if (!analytics?.ready) return;
+    if (!cart.isHydrated || cart.isBootstrapping || cart.items.length === 0) return;
+    if (checkoutViewSent.current) return;
     checkoutViewSent.current = true;
     analytics.track({
       eventName: 'checkout_view',
       pageType: 'checkout',
       pagePath: '/checkout',
     });
-  }, [analytics]);
+    if (!checkoutStartedSent.current) {
+      checkoutStartedSent.current = true;
+      emitCheckoutStarted(
+        {
+          isHydrated: cart.isHydrated,
+          isBootstrapping: cart.isBootstrapping,
+          items: cart.items,
+        },
+        analytics.track,
+      );
+    }
+  }, [
+    analytics,
+    cart.isBootstrapping,
+    cart.isHydrated,
+    cart.items,
+  ]);
 
   // Never flash empty cart while transfer/bootstrap is in progress.
   const waitingForCart =
@@ -150,6 +265,16 @@ export function CheckoutPage() {
 
     setErrors({});
     setSubmitting(true);
+    analytics?.track({
+      eventName: 'place_order_clicked',
+      pageType: 'checkout',
+      pagePath: '/checkout',
+    });
+    analytics?.track({
+      eventName: 'checkout_submit',
+      pageType: 'checkout',
+      pagePath: '/checkout',
+    });
     try {
       const response = await fetch('/api/checkout/place-order', {
         method: 'POST',
@@ -174,8 +299,18 @@ export function CheckoutPage() {
       if (!response.ok || !data.ok || !data.orderId) {
         setErrors({ form: data.error ?? 'Unable to place order.' });
         setSubmitting(false);
+        analytics?.track({
+          eventName: 'payment_failed',
+          pageType: 'checkout',
+          pagePath: '/checkout',
+        });
         return;
       }
+      analytics?.track({
+        eventName: 'payment_started',
+        pageType: 'checkout',
+        pagePath: '/checkout',
+      });
       cart.clearCart();
       if (data.redirectUrl) {
         window.location.assign(data.redirectUrl);
@@ -189,6 +324,11 @@ export function CheckoutPage() {
     } catch {
       setErrors({ form: 'Unable to place order. Please try again.' });
       setSubmitting(false);
+      analytics?.track({
+        eventName: 'payment_failed',
+        pageType: 'checkout',
+        pagePath: '/checkout',
+      });
     }
   };
 
@@ -222,7 +362,7 @@ export function CheckoutPage() {
               <CustomerInformationForm
                 value={customer}
                 errors={{ email: errors.email }}
-                onChange={setCustomer}
+                onChange={handleCustomerChange}
                 hideLegend
               />
             </div>

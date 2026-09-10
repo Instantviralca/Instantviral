@@ -1,4 +1,4 @@
-import { allowMockPayments, isEmailConfigured } from '@/lib/config/env';
+import { allowMockPayments, getEmailTransportKind, isEmailConfigured } from '@/lib/config/env';
 import { listOrders } from '@/lib/orders/store';
 import { isEligibleForFulfilmentQueue } from '@/lib/payments/mark-paid';
 import { formatMoney } from '@/lib/pricing/format';
@@ -33,11 +33,12 @@ export async function getDashboardViewModel(): Promise<DashboardViewModel> {
 
   const toOrderRow = (o: (typeof orders)[number]) => {
     const item = o.items[0];
+    const more = o.items.length > 1 ? ` + ${o.items.length - 1} more` : '';
     return {
       id: o.id,
       customer: o.guestEmail,
       service: item?.serviceName ?? 'Service',
-      packageTitle: item?.packageTitle ?? 'Package',
+      packageTitle: `${item?.packageTitle ?? 'Package'}${more}`,
       status: o.status,
       total: money(o.total.amount),
       createdAt: o.createdAt,
@@ -107,8 +108,8 @@ export async function getDashboardViewModel(): Promise<DashboardViewModel> {
         label: 'Email Delivery',
         status: isEmailConfigured() ? 'operational' : 'degraded',
         detail: isEmailConfigured()
-          ? 'Resend configured'
-          : 'RESEND_API_KEY / EMAIL_FROM missing',
+          ? `Transport: ${getEmailTransportKind()}`
+          : 'SMTP_* + EMAIL_FROM (or temporary RESEND_API_KEY) missing',
       },
     ],
   };

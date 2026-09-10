@@ -25,7 +25,7 @@ export const LEARN_CATEGORIES: readonly LearnCategory[] = [
     seo: {
       title: 'Instagram Guides | Learn | InstantViral',
       description:
-        'Learn Instagram growth strategies, content tips, and engagement best practices.',
+        'Explore InstantViral Learn Instagram guides covering growth strategy, content ideas, engagement tips, and profile best practices for Canadian creators.',
       canonicalPath: '/learn/instagram',
       keywords: ['instagram', 'instagram growth', 'instagram guides'],
     },
@@ -46,7 +46,7 @@ export const LEARN_CATEGORIES: readonly LearnCategory[] = [
     seo: {
       title: 'TikTok Guides | Learn | InstantViral',
       description:
-        'Learn TikTok growth strategies, short-form tips, and audience building.',
+        'Explore InstantViral Learn TikTok guides covering short-form strategy, audience growth, content tips, and practical advice for Canadian creators.',
       canonicalPath: '/learn/tiktok',
       keywords: ['tiktok', 'tiktok growth', 'tiktok guides'],
     },
@@ -67,7 +67,7 @@ export const LEARN_CATEGORIES: readonly LearnCategory[] = [
     seo: {
       title: 'Facebook Guides | Learn | InstantViral',
       description:
-        'Learn Facebook page growth, engagement, and content strategies.',
+        'Explore InstantViral Learn Facebook guides covering page growth, engagement tactics, content strategy, and practical tips for Canadian businesses.',
       canonicalPath: '/learn/facebook',
       keywords: ['facebook', 'facebook growth', 'facebook guides'],
     },
@@ -88,7 +88,7 @@ export const LEARN_CATEGORIES: readonly LearnCategory[] = [
     seo: {
       title: 'YouTube Guides | Learn | InstantViral',
       description:
-        'Learn YouTube channel growth, watch-time tips, and content planning.',
+        'Explore InstantViral Learn YouTube guides covering channel growth, watch-time habits, content planning, and practical tips for Canadian creators.',
       canonicalPath: '/learn/youtube',
       keywords: ['youtube', 'youtube growth', 'youtube guides'],
     },
@@ -108,7 +108,7 @@ export const LEARN_CATEGORIES: readonly LearnCategory[] = [
     seo: {
       title: 'Social Media Marketing | Learn | InstantViral',
       description:
-        'Learn social media marketing fundamentals across major platforms.',
+        'Explore InstantViral Learn marketing guides covering cross-platform strategy, content planning, analytics basics, and growth fundamentals.',
       canonicalPath: '/learn/social-media-marketing',
       keywords: ['social media marketing', 'marketing strategy'],
     },
@@ -126,8 +126,9 @@ export const LEARN_CATEGORIES: readonly LearnCategory[] = [
     updatedAt: UPDATED,
     icon: 'guides',
     seo: {
-      title: 'Guides | Learn | InstantViral',
-      description: 'Practical how-to guides for social growth and InstantViral.',
+      title: 'How-To Growth Guides | Learn | InstantViral',
+      description:
+        'Browse practical InstantViral Learn how-to guides covering social media growth, platform strategy, and creator-focused tips.',
       canonicalPath: '/learn/guides',
       keywords: ['guides', 'how to', 'social growth'],
     },

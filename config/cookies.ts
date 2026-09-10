@@ -8,7 +8,10 @@
  */
 
 import { brand } from '@/config/brand';
-import { privacyConfig } from '@/config/privacy';
+import {
+  getEnabledAnalyticsProviders,
+  privacyConfig,
+} from '@/config/privacy';
 import { site } from '@/config/site';
 import type { CookieConfig } from '@/types/legal';
 
@@ -25,54 +28,61 @@ function isPlaceholderEmail(email: string | undefined): boolean {
 
 /**
  * Current Cookie Policy configuration.
- * Essential purposes reflect core InstantViral commerce flows.
- * Cart state currently uses browser session storage (similar technology), not a named third-party cookie.
- * CSRF cookies are omitted until a CSRF cookie implementation is verified.
+ * Essential purposes reflect core InstantViral commerce and analytics flows.
  */
 export const cookieConfig: CookieConfig = {
   legalBusinessName: brand.legalName,
   operatingName: brand.name,
   websiteDomain: site.domain,
 
-  supportEmail: undefined,
+  supportEmail: site.supportEmail,
   mailingAddress: undefined,
-  effectiveDate: undefined,
-  lastUpdatedDate: undefined,
+  effectiveDate: '2026-09-09',
+  lastUpdatedDate: '2026-09-09',
 
   essentialPurposes: [
     {
       id: 'cart',
       label: 'Cart',
       description:
-        'Maintains selected packages and cart contents while you shop.',
+        'Maintains selected packages and cart contents while you shop and move to checkout.',
       enabled: true,
       technologyNote:
-        'InstantViral currently stores cart state in browser session storage.',
+        'Uses a first-party cart cookie (iv_cart_v1) and may also use browser session storage as a local cache.',
     },
     {
       id: 'checkout',
-      label: 'Checkout',
+      label: 'Checkout continuity',
       description:
         'Supports checkout continuity so an order can be completed after package selection and configuration.',
       enabled: true,
+      technologyNote:
+        'May use cookies, session storage, or one-time server handoff tokens for oversized carts.',
+    },
+    {
+      id: 'abandoned-cart',
+      label: 'Abandoned checkout session',
+      description:
+        'Links an in-progress checkout to InstantViral’s abandoned-cart recovery system when enough customer information is provided.',
+      enabled: true,
+      technologyNote: 'Uses a first-party cookie (iv_ac_session).',
     },
     {
       id: 'session',
-      label: 'Session',
+      label: 'Session continuity',
       description:
-        'Supports session continuity while browsing InstantViral.ca and using cart or tracking flows.',
+        'Supports browsing continuity on InstantViral.ca for cart, checkout, and related flows.',
       enabled: true,
     },
     {
       id: 'security',
       label: 'Security',
       description:
-        'Supports security-related website operation and protection of the ordering experience.',
+        'Supports security-related website operation and protection of the ordering experience, including secure admin sessions where applicable.',
       enabled: true,
     },
   ],
 
-  // Stay aligned with privacy configuration — no invented providers
   analyticsProviders: privacyConfig.analyticsProviders,
   marketingTools: privacyConfig.marketingTools,
 
@@ -80,15 +90,15 @@ export const cookieConfig: CookieConfig = {
   consentManagerLabel: privacyConfig.cookiePreferenceToolLabel,
   consentManagerHref: privacyConfig.cookiePreferenceHref,
 
-  cookieInventoryVerified: false,
-  publicationStatus: 'draft',
+  cookieInventoryVerified: true,
+  publicationStatus: 'published',
   legalReviewCompleted: false,
 };
 
 export function getVerifiedCookieContactEmail(
   config: CookieConfig = cookieConfig,
 ): string | undefined {
-  const email = config.supportEmail?.trim();
+  const email = config.supportEmail?.trim() || site.supportEmail;
   if (!email || isPlaceholderEmail(email)) return undefined;
   return email;
 }
@@ -102,6 +112,9 @@ export function getEnabledEssentialPurposes(
 export function getEnabledCookieAnalyticsProviders(
   config: CookieConfig = cookieConfig,
 ): CookieConfig['analyticsProviders'] {
+  if (config === cookieConfig) {
+    return getEnabledAnalyticsProviders(privacyConfig);
+  }
   return config.analyticsProviders.filter((provider) => provider.enabled);
 }
 

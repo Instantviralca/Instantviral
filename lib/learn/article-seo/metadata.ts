@@ -17,7 +17,7 @@ import {
   sanitizeArticleSocialFields,
 } from '@/lib/learn/article-seo/social';
 import { buildRobotsMetadata } from '@/lib/seo/metadata/robots';
-import { sanitizeMetadataText } from '@/lib/seo/metadata/sanitize';
+import { clampMetaDescription, sanitizeMetadataText } from '@/lib/seo/metadata/sanitize';
 import { absoluteUrl } from '@/lib/seo/metadata/canonical';
 import { seoSiteConfig } from '@/config/seo';
 import type { LearnArticleRecord, PublicLearnArticle } from '@/types/learn';
@@ -56,10 +56,11 @@ export function buildArticleMetadata(
     ...(safe.primaryKeyword ? [safe.primaryKeyword] : []),
     ...safe.secondaryKeywords,
   ];
+  const description = clampMetaDescription(safe.metaDescription);
 
   return {
     title: { absolute: sanitizeMetadataText(safe.metaTitle) },
-    description: sanitizeMetadataText(safe.metaDescription),
+    description,
     metadataBase: new URL(seoSiteConfig.productionDomain),
     keywords: keywords.length ? keywords : undefined,
     alternates: {
@@ -70,11 +71,18 @@ export function buildArticleMetadata(
         ? { index: true, follow: true }
         : { index: false, follow: false },
     ),
-    openGraph: buildArticleOpenGraph(safe, {
-      authorUrl: author ? absoluteUrl(author.profilePath) : undefined,
-      articleSection: section,
+    openGraph: buildArticleOpenGraph(
+      { ...safe, metaDescription: description, openGraphDescription: description },
+      {
+        authorUrl: author ? absoluteUrl(author.profilePath) : undefined,
+        articleSection: section,
+      },
+    ),
+    twitter: buildArticleTwitter({
+      ...safe,
+      metaDescription: description,
+      openGraphDescription: description,
     }),
-    twitter: buildArticleTwitter(safe),
   };
 }
 

@@ -1,4 +1,12 @@
 import { getCustomerStatusMessage, getAdminStatusLabel, ORDER_STATUSES } from '@/lib/orders/status';
+import {
+  formatOrderItemsSummary,
+  normalizeOrderLineItem,
+  resolveCartQuantity,
+  resolveLineTotal,
+  resolveTargetFromConfig,
+} from '@/lib/orders/line-items';
+import { formatMoney } from '@/lib/pricing/format';
 import type { Order } from '@/types/order';
 import type { OrderStatus } from '@/types/order-status';
 import type {
@@ -42,9 +50,7 @@ export function maskTarget(raw: string): string {
 
 function extractTarget(order: Order): string {
   const config = order.items[0]?.configuration ?? {};
-  const preferred =
-    config.username ?? config.targetUrl ?? config.url ?? Object.values(config)[0];
-  return preferred === undefined ? '' : String(preferred);
+  return resolveTargetFromConfig(config);
 }
 
 const MILESTONE_ORDER: Array<{ status: OrderStatus; label: string }> = [
@@ -96,6 +102,18 @@ export function buildPublicTimeline(
 
 export function toPublicTrackedOrder(order: Order): PublicTrackedOrder {
   const item = order.items[0];
+  const items = order.items.map((line) => {
+    const normalized = normalizeOrderLineItem(line);
+    const target = resolveTargetFromConfig(normalized.configuration);
+    return {
+      serviceName: normalized.serviceName,
+      packageTitle: normalized.packageTitle,
+      packageQuantityLabel: normalized.quantityLabel,
+      cartQuantity: resolveCartQuantity(normalized),
+      lineTotalDisplay: formatMoney(resolveLineTotal(normalized), order.currency),
+      targetDisplay: maskTarget(target),
+    };
+  });
   return {
     orderId: order.id,
     status: order.status,
@@ -105,6 +123,9 @@ export function toPublicTrackedOrder(order: Order): PublicTrackedOrder {
     packageTitle: item?.packageTitle ?? 'Package',
     quantityLabel: item?.quantityLabel ?? String(item?.quantity ?? ''),
     targetDisplay: maskTarget(extractTarget(order)),
+    items,
+    itemsSummary: formatOrderItemsSummary(order),
+    orderTotalDisplay: formatMoney(order.total.amount, order.currency),
     createdAt: order.createdAt,
     updatedAt: order.updatedAt,
     estimatedDelivery: item?.deliveryTime || undefined,

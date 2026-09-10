@@ -29,7 +29,7 @@ export const ctaCatalog: SharedCtaCatalog = {
   }),
   browseServices: fromRegistry('cta-browse-services', {
     label: 'Browse Services',
-    href: '/buy-instagram-followers',
+    href: '/',
   }),
   readLearn: fromRegistry('cta-learn-more', {
     label: brand.ctaLabels.secondary[0],

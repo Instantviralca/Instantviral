@@ -198,6 +198,18 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 23,
   },
   {
+    id: 'b-engage-ctx-post-likes',
+    type: 'paragraph',
+    text: 'Reactions can also shape how active a post appears. If you are comparing paid engagement options, you can review our Facebook Post Likes packages for public Facebook posts.',
+    order: 23,
+    inlineLinks: [
+      {
+        href: '/buy-facebook-post-likes',
+        label: 'Facebook Post Likes packages',
+      },
+    ],
+  },
+  {
     id: 'b-fig-meaningful-engagement',
     type: 'figure',
     order: 24,

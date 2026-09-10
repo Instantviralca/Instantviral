@@ -7,6 +7,10 @@ import {
   normalizeOrderConfigurationValues,
   validateOrderConfiguration,
 } from '@/lib/order/validation';
+import {
+  computeLineTotal,
+  resolveCartQuantity,
+} from '@/lib/orders/line-items';
 import { findPackage, validateCoupon } from '@/lib/pricing/resolve';
 import type { CartItem } from '@/types/cart';
 import type { OrderConfigurationValues } from '@/types/order-fields';
@@ -47,13 +51,20 @@ export function validateCheckoutPricing(input: {
     if (pkg.currency !== currency && item.currency !== pkg.currency) {
       throw new Error('Mixed currencies are not supported.');
     }
+    // Package catalog size must match — this is NOT cart buy quantity.
     if (item.quantity !== pkg.quantity) {
       throw new Error(`Quantity mismatch for package ${item.packageId}.`);
     }
 
-    // Never trust client unitPrice — use catalog minor units.
+    const cartQuantity = resolveCartQuantity(item);
+    if (cartQuantity < 1 || cartQuantity > 99) {
+      throw new Error(`Invalid cart quantity for package ${item.packageId}.`);
+    }
+
+    // Never trust client unitPrice / lineTotal — use catalog minor units.
     const unitPrice = pkg.price;
-    subtotalAmount += unitPrice;
+    const lineTotal = computeLineTotal(unitPrice, cartQuantity);
+    subtotalAmount += lineTotal;
 
     // Re-validate username / URL configuration server-side (never trust client-only checks).
     const fields = getOrderFieldsForServiceSlug(pkg.serviceSlug, pkg);
@@ -76,7 +87,9 @@ export function validateCheckoutPricing(input: {
       packageTitle: pkg.title,
       quantity: pkg.quantity,
       quantityLabel: pkg.quantityLabel,
+      cartQuantity,
       unitPrice,
+      lineTotal,
       currency: pkg.currency,
       configuration,
       deliveryTime: item.deliveryTime ?? pkg.deliveryTime,
