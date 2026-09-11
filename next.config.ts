@@ -18,7 +18,7 @@ import type { NextConfig } from 'next';
  * - font-src — self + data fonts
  * - style-src — self + unsafe-inline (Next.js / Tailwind runtime)
  * - script-src — self, inline/eval for Next, GTM/GA, Clarity
- * - connect-src — APIs for GA, Clarity, Vercel vitals
+ * - connect-src — APIs for GA, Clarity
  * - frame-src — same-origin frames
  * - worker-src — self + blob workers
  * - manifest-src 'self' — PWA manifest
@@ -33,7 +33,7 @@ const CONTENT_SECURITY_POLICY_REPORT_ONLY = [
   "font-src 'self' data:",
   "style-src 'self' 'unsafe-inline'",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms",
-  "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://vitals.vercel-insights.com",
+  "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com https://region1.google-analytics.com https://www.clarity.ms https://*.clarity.ms",
   "frame-src 'self'",
   "worker-src 'self' blob:",
   "manifest-src 'self'",

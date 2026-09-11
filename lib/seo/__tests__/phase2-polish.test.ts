@@ -22,6 +22,7 @@ describe('Phase 2 technical SEO polish', () => {
     expect(csp?.value).toContain("default-src 'self'");
     expect(csp?.value).toContain('https://www.googletagmanager.com');
     expect(csp?.value).not.toContain('stripe.com');
+    expect(csp?.value).not.toContain('vitals.vercel-insights.com');
     expect(csp?.value).not.toContain('report-uri');
     expect(csp?.value).not.toContain('report-to');
   });
