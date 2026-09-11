@@ -24,6 +24,7 @@ import {
   getTokenExpiryDate,
   createRecoveryLinkToken,
 } from '@/lib/abandoned-cart/tokens';
+import { RECOVERY_PROCESSING_STALE_MS } from '@/lib/abandoned-cart/recovery-reservation';
 
 function requireDb() {
   if (!isDbReady()) {
@@ -318,6 +319,13 @@ export async function markInactiveCartsAbandoned(
 /**
  * Atomically reserve a recovery email slot.
  * Unique (cart_id, sequence_number) prevents duplicate sends across workers.
+ *
+ * Algorithm (no Error.message parsing):
+ * 1. INSERT … ON CONFLICT (cart_id, sequence_number) DO NOTHING RETURNING
+ * 2. If a row was inserted → reserved
+ * 3. Else atomic UPDATE reclaim with eligibility in WHERE:
+ *    failed | skipped | (processing AND processing_started_at < now-10m)
+ * 4. If UPDATE returned a row → reserved; else not reserved (sent/fresh processing/etc.)
  */
 export async function reserveRecoveryEmail(input: {
   cartId: string;
@@ -328,77 +336,83 @@ export async function reserveRecoveryEmail(input: {
   const db = requireDb();
   const now = new Date();
   const id = generateRecoveryEmailLogId();
+  const triggeredBy = input.triggeredBy ?? 'scheduler';
+  const staleBefore = new Date(now.getTime() - RECOVERY_PROCESSING_STALE_MS);
 
-  try {
-    const [inserted] = await db
-      .insert(abandonedCartRecoveryEmails)
-      .values({
-        id,
-        cartId: input.cartId,
-        sequenceNumber: input.sequenceNumber,
-        scheduledAt: input.scheduledAt,
-        processingStartedAt: now,
-        status: 'processing',
-        triggeredBy: input.triggeredBy ?? 'scheduler',
-        createdAt: now,
-        updatedAt: now,
-      })
-      .returning();
-    return { reserved: true, log: mapEmailLog(inserted!) };
-  } catch (error) {
-    const message = error instanceof Error ? error.message : String(error);
-    if (!/unique|duplicate/i.test(message)) throw error;
+  const inserted = await db
+    .insert(abandonedCartRecoveryEmails)
+    .values({
+      id,
+      cartId: input.cartId,
+      sequenceNumber: input.sequenceNumber,
+      scheduledAt: input.scheduledAt,
+      processingStartedAt: now,
+      status: 'processing',
+      triggeredBy,
+      createdAt: now,
+      updatedAt: now,
+    })
+    .onConflictDoNothing({
+      target: [
+        abandonedCartRecoveryEmails.cartId,
+        abandonedCartRecoveryEmails.sequenceNumber,
+      ],
+    })
+    .returning();
 
-    const existing = await db
-      .select()
-      .from(abandonedCartRecoveryEmails)
-      .where(
-        and(
-          eq(abandonedCartRecoveryEmails.cartId, input.cartId),
-          eq(abandonedCartRecoveryEmails.sequenceNumber, input.sequenceNumber),
-        ),
-      )
-      .limit(1);
-
-    const row = existing[0];
-    if (!row) return { reserved: false, log: null };
-
-    // Allow retry after failure, and reclaim stale processing locks (>10 minutes).
-    const staleMs = 10 * 60 * 1000;
-    const canReclaimFailed = row.status === 'failed' || row.status === 'skipped';
-    const canReclaimStale =
-      row.status === 'processing' &&
-      row.processingStartedAt &&
-      now.getTime() - row.processingStartedAt.getTime() > staleMs;
-
-    if (canReclaimFailed || canReclaimStale) {
-      const [reclaimed] = await db
-        .update(abandonedCartRecoveryEmails)
-        .set({
-          processingStartedAt: now,
-          updatedAt: now,
-          status: 'processing',
-          error: null,
-          sentAt: null,
-          providerMessageId: null,
-          triggeredBy: input.triggeredBy ?? 'scheduler',
-        })
-        .where(
-          and(
-            eq(abandonedCartRecoveryEmails.id, row.id),
-            inArray(abandonedCartRecoveryEmails.status, [
-              'failed',
-              'skipped',
-              'processing',
-            ]),
-          ),
-        )
-        .returning();
-      if (reclaimed) return { reserved: true, log: mapEmailLog(reclaimed) };
-    }
-
-    return { reserved: false, log: mapEmailLog(row) };
+  if (inserted[0]) {
+    return { reserved: true, log: mapEmailLog(inserted[0]) };
   }
+
+  // Conflict: try to reclaim only if the existing row is eligible — eligibility is
+  // enforced in the UPDATE WHERE so two workers cannot both claim a failed/skipped/
+  // stale-processing row (fresh processing / sent never match).
+  const reclaimed = await db
+    .update(abandonedCartRecoveryEmails)
+    .set({
+      processingStartedAt: now,
+      updatedAt: now,
+      status: 'processing',
+      error: null,
+      sentAt: null,
+      providerMessageId: null,
+      triggeredBy,
+    })
+    .where(
+      and(
+        eq(abandonedCartRecoveryEmails.cartId, input.cartId),
+        eq(abandonedCartRecoveryEmails.sequenceNumber, input.sequenceNumber),
+        or(
+          eq(abandonedCartRecoveryEmails.status, 'failed'),
+          eq(abandonedCartRecoveryEmails.status, 'skipped'),
+          and(
+            eq(abandonedCartRecoveryEmails.status, 'processing'),
+            lt(abandonedCartRecoveryEmails.processingStartedAt, staleBefore),
+          ),
+        ),
+      ),
+    )
+    .returning();
+
+  if (reclaimed[0]) {
+    return { reserved: true, log: mapEmailLog(reclaimed[0]) };
+  }
+
+  const existing = await db
+    .select()
+    .from(abandonedCartRecoveryEmails)
+    .where(
+      and(
+        eq(abandonedCartRecoveryEmails.cartId, input.cartId),
+        eq(abandonedCartRecoveryEmails.sequenceNumber, input.sequenceNumber),
+      ),
+    )
+    .limit(1);
+
+  return {
+    reserved: false,
+    log: existing[0] ? mapEmailLog(existing[0]) : null,
+  };
 }
 
 export async function completeRecoveryEmail(input: {
