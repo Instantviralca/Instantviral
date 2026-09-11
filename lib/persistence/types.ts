@@ -46,6 +46,7 @@ export type PersistenceDriver = 'postgres' | 'memory' | 'file';
 export type OrderStore = {
   listOrders(): Promise<Order[]>;
   getOrderById(orderId: string): Promise<Order | null>;
+  getOrderByOrderNumber(orderNumber: number): Promise<Order | null>;
   getOrderByIdempotencyKey(key: string): Promise<Order | null>;
   getOrderByPaymentId(paymentId: string): Promise<Order | null>;
   saveOrder(order: Order): Promise<Order>;

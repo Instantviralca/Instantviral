@@ -8,6 +8,7 @@ import {
   resolveLineTotal,
   resolveTargetFromConfig,
 } from '@/lib/orders/line-items';
+import { formatCustomerOrderRef } from '@/lib/orders/order-number';
 import { listOrders, getOrderById } from '@/lib/orders/store';
 import { isEligibleForFulfilmentQueue } from '@/lib/payments/mark-paid';
 import type {
@@ -110,6 +111,8 @@ function toRow(order: Order): AdminOrderRow {
   const configuration = (item?.configuration ?? {}) as OrderConfigurationValues;
   return {
     id: order.id,
+    orderNumber: order.orderNumber,
+    orderNumberDisplay: formatCustomerOrderRef(order),
     customerEmail: order.guestEmail,
     platformId: (item?.platformId ?? 'instagram') as PlatformId,
     serviceName: item?.serviceName ?? 'Service',

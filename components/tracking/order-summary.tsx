@@ -24,7 +24,7 @@ export function OrderSummary({ order, className }: OrderSummaryProps) {
     <div className={cn('space-y-4 rounded-lg border p-6 text-sm', className)}>
       <dl className="grid gap-3 sm:grid-cols-2">
         <div>
-          <dt className="text-muted-foreground">Order ID</dt>
+          <dt className="text-muted-foreground">Order number</dt>
           <dd className="font-medium">{order.orderId}</dd>
         </div>
         <div>

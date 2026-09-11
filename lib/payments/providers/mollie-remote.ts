@@ -3,12 +3,16 @@
  * Matches the WooCommerce Mollie Remote Payment client (v2.1.2).
  */
 
-import { createHash, createHmac, randomBytes } from 'node:crypto';
+import { randomBytes } from 'node:crypto';
 
 import {
   createMollieClientOrderId,
   isValidMollieClientOrderId,
 } from '@/lib/payments/mollie-client-order-id';
+import {
+  normalizeMerchantOrderNumber,
+  signMollieRemoteRequest,
+} from '@/lib/payments/merchant-order-number';
 
 import { getSiteUrlPath } from '@/lib/config/hosts';
 import {
@@ -68,10 +72,6 @@ function serverEndpoint(serverUrl: string): string {
   return `${base}/?ro=1`;
 }
 
-function signPayload(payload: string, secret: string): string {
-  return createHmac('sha256', secret).update(payload).digest('hex');
-}
-
 export const mollieRemoteProvider: PaymentProvider = {
   id: 'mollie-remote',
   displayName: 'Card Payment',
@@ -97,6 +97,12 @@ export const mollieRemoteProvider: PaymentProvider = {
       throw new Error('Mollie client order ID must be a positive integer.');
     }
 
+    // Customer-facing InstantViral order number for Mollie description.
+    // When sent, it is included in the HMAC (CarryCubes rejects unsigned/tampered values).
+    const merchantOrderNumber = normalizeMerchantOrderNumber(
+      input.metadata?.merchantOrderNumber,
+    );
+
     const items = buildItems(input);
     const itemsJson = JSON.stringify(items);
     const amount = (input.amount.amount / 100).toFixed(2);
@@ -108,18 +114,22 @@ export const mollieRemoteProvider: PaymentProvider = {
     const requestTs = Math.floor(Date.now() / 1000);
     const requestNonce = randomBytes(10).toString('hex');
 
-    const signaturePayload = [
-      clientOrderId,
-      String(requestTs),
-      requestNonce,
-      callbackUrl,
-      returnUrl,
-      cancelUrl,
-      amount,
-      currency,
-      productName,
-      createHash('sha256').update(itemsJson).digest('hex'),
-    ].join('|');
+    const signature = signMollieRemoteRequest(
+      {
+        orderId: clientOrderId,
+        requestTs: String(requestTs),
+        requestNonce,
+        callbackUrl,
+        returnUrl,
+        cancelUrl,
+        amount,
+        currency,
+        productName,
+        merchantOrderNumber,
+        itemsJson,
+      },
+      secret,
+    );
 
     const body = new URLSearchParams();
     body.set('callback_url', callbackUrl);
@@ -132,7 +142,10 @@ export const mollieRemoteProvider: PaymentProvider = {
     body.set('items_json', itemsJson);
     body.set('request_ts', String(requestTs));
     body.set('request_nonce', requestNonce);
-    body.set('signature', signPayload(signaturePayload, secret));
+    body.set('signature', signature);
+    if (merchantOrderNumber) {
+      body.set('merchant_order_number', merchantOrderNumber);
+    }
 
     const response = await fetch(serverEndpoint(serverUrl), {
       method: 'POST',

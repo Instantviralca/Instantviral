@@ -8,6 +8,7 @@ import { allowMockPayments, isProductionRuntime } from '@/lib/config/env';
 import { getCheckoutUrl, getSiteUrlPath } from '@/lib/config/hosts';
 import { notifyOrderPaid, notifyOrderPlaced } from '@/lib/notifications/order-hooks';
 import { placeOrder, type PlaceOrderInput } from '@/lib/orders/create';
+import { formatCustomerOrderRef } from '@/lib/orders/order-number';
 import { getPersistence } from '@/lib/persistence';
 import { saveOrder } from '@/lib/orders/store';
 import { createMollieClientOrderId } from '@/lib/payments/mollie-client-order-id';
@@ -19,6 +20,8 @@ import type { PaymentProviderId } from '@/types/payment';
 export type PlaceOrderResult = {
   ok: true;
   orderId: string;
+  /** Customer-facing sequential number when assigned. */
+  orderNumber?: number;
   email: string;
   status: Order['status'];
   paymentStatus: string;
@@ -112,12 +115,22 @@ export async function executeCheckout(
         ),
       };
       const mollieClientOrderId = createMollieClientOrderId();
+      const customerRef = formatCustomerOrderRef(order);
+      const merchantOrderNumber =
+        typeof order.orderNumber === 'number' && Number.isInteger(order.orderNumber)
+          ? String(order.orderNumber)
+          : undefined;
       const payment = await paymentGatewayManager.createPayment('mollie-remote', {
         orderId: order.id,
         amount: order.total,
         customerEmail: order.guestEmail,
-        description: `InstantViral order ${order.id}`,
-        metadata: { orderId: order.id, mollieClientOrderId },
+        description: `InstantViral order ${customerRef}`,
+        metadata: {
+          orderId: order.id,
+          mollieClientOrderId,
+          // CarryCubes uses this only for Mollie hosted description; order_id stays numeric.
+          ...(merchantOrderNumber ? { merchantOrderNumber } : {}),
+        },
         successUrl,
         cancelUrl,
         payload: {
@@ -163,6 +176,7 @@ export async function executeCheckout(
       return {
         ok: true,
         orderId: updated.id,
+        orderNumber: updated.orderNumber,
         email: updated.guestEmail,
         status: updated.status,
         paymentStatus: updated.payment?.status ?? 'pending',
@@ -224,6 +238,7 @@ export async function executeCheckout(
     return {
       ok: true,
       orderId: mockPaid.id,
+      orderNumber: mockPaid.orderNumber,
       email: mockPaid.guestEmail,
       status: mockPaid.status,
       paymentStatus: 'paid',

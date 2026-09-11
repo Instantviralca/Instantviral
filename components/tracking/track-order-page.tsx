@@ -27,7 +27,7 @@ export function TrackOrderPage() {
             Track your order
           </Heading>
           <MutedText>
-            Enter your Order ID and the email used at checkout. No account required.
+            Enter your Order number and the email used at checkout. No account required.
           </MutedText>
           <ol className="grid gap-3 sm:grid-cols-3">
             {[

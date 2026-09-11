@@ -51,8 +51,8 @@ export function OrderSummaryCard({ order }: OrderSummaryCardProps) {
     <div className="space-y-4">
       <dl className="grid gap-3 text-sm sm:grid-cols-2">
         <div>
-          <dt className="text-muted-foreground">Order ID</dt>
-          <dd className="font-medium">{order.id}</dd>
+          <dt className="text-muted-foreground">Order number</dt>
+          <dd className="font-medium">{order.orderNumberDisplay}</dd>
         </div>
         <div>
           <dt className="text-muted-foreground">Customer</dt>

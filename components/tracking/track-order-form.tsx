@@ -26,7 +26,7 @@ export function TrackOrderForm({ onSubmit, loading }: TrackOrderFormProps) {
       noValidate
     >
       <div className="space-y-2">
-        <Label htmlFor="track-order-id">Order ID</Label>
+        <Label htmlFor="track-order-id">Order number</Label>
         <Input
           id="track-order-id"
           name="orderId"
@@ -34,7 +34,7 @@ export function TrackOrderForm({ onSubmit, loading }: TrackOrderFormProps) {
           required
           value={orderId}
           onChange={(e) => setOrderId(e.target.value)}
-          placeholder="e.g. IV-1001"
+          placeholder="e.g. 1000"
         />
       </div>
       <div className="space-y-2">

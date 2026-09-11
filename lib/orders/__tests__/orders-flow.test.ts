@@ -67,16 +67,16 @@ describe('Launch checklist — orders + auth', () => {
     });
 
     expect(order.id.startsWith('IV-')).toBe(true);
+    expect(order.orderNumber).toBe(1000);
     expect(order.total.amount).toBe(999);
     expect((await getOrderById(order.id))?.guestEmail).toBe('buyer@example.com');
 
     const tracked = await lookupTrackedOrder(
-      { orderId: order.id, email: 'buyer@example.com' },
-      async (id) => getOrderById(id),
+      { orderId: String(order.orderNumber), email: 'buyer@example.com' },
     );
     expect(tracked.ok).toBe(true);
     if (tracked.ok) {
-      expect(tracked.order.orderId).toBe(order.id);
+      expect(tracked.order.orderId).toBe('#1000');
       expect(tracked.order.targetDisplay).toContain('***');
     }
   });

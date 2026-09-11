@@ -27,6 +27,10 @@ export type AdminOrderLineItem = {
 /** Admin Order Management row — Document 12.03. */
 export type AdminOrderRow = {
   id: string;
+  /** Customer-facing sequential number (1000+). */
+  orderNumber?: number;
+  /** Display label e.g. "#1000". */
+  orderNumberDisplay: string;
   customerEmail: string;
   platformId: PlatformId;
   serviceName: string;

@@ -35,25 +35,19 @@ const EXTRA_TEMPLATES: Record<
   { subject: string; bodyHtml: string; bodyText: string }
 > = {
   admin_new_order: {
-    subject: 'New order — {{orderId}}',
-    bodyHtml:
-      '<p>New order <strong>{{orderId}}</strong>.</p><p><strong>Customer:</strong> {{customerEmail}}</p><p><strong>Summary:</strong> {{itemsSummary}}</p>{{orderItemsHtml}}<p>Open Admin → Orders to review.</p>',
-    bodyText:
-      'New order {{orderId}}.\nCustomer: {{customerEmail}}\nSummary: {{itemsSummary}}\n\n{{orderItemsText}}\n\nReview in Admin → Orders.',
+    subject: '{{emailSubject}}',
+    bodyHtml: '{{emailHtml}}',
+    bodyText: '{{emailText}}',
   },
   admin_order_paid: {
-    subject: 'Order paid — {{orderId}}',
-    bodyHtml:
-      '<p>Payment confirmed for <strong>{{orderId}}</strong>.</p><p><strong>Customer:</strong> {{customerEmail}}</p><p><strong>Summary:</strong> {{itemsSummary}}</p>{{orderItemsHtml}}<p>Ready for fulfilment — open Admin → Orders.</p>',
-    bodyText:
-      'Payment confirmed for {{orderId}}.\nCustomer: {{customerEmail}}\nSummary: {{itemsSummary}}\n\n{{orderItemsText}}\n\nReady for fulfilment.',
+    subject: '{{emailSubject}}',
+    bodyHtml: '{{emailHtml}}',
+    bodyText: '{{emailText}}',
   },
   payment_confirmed: {
-    subject: 'Payment confirmed — {{orderId}}',
-    bodyHtml:
-      '<p>Hi {{customerName}},</p><p>We confirmed payment for order <strong>{{orderId}}</strong>.</p>{{orderItemsHtml}}<p><a href="{{trackingUrl}}">Track your order</a></p><p>Need help? {{supportEmail}}</p>',
-    bodyText:
-      'Hi {{customerName}},\n\nWe confirmed payment for order {{orderId}}.\n\n{{orderItemsText}}\n\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
+    subject: '{{emailSubject}}',
+    bodyHtml: '{{emailHtml}}',
+    bodyText: '{{emailText}}',
   },
   contact_admin: {
     subject: 'Contact form — {{subject}}',

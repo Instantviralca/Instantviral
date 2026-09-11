@@ -47,7 +47,7 @@ export function OrdersTable({
               <th className="px-3 py-2" scope="col">
                 <span className="sr-only">Select</span>
               </th>
-              <th className="px-3 py-2 font-medium">Order ID</th>
+              <th className="px-3 py-2 font-medium">Order #</th>
               <th className="px-3 py-2 font-medium">Customer</th>
               <th className="px-3 py-2 font-medium">Platform</th>
               <th className="px-3 py-2 font-medium">Service</th>

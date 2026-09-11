@@ -6,115 +6,65 @@ import type {
 
 /**
  * Data-driven email templates — Document 11.04.
- * Customer-specific values come from NotificationTemplateVariableMap at send time.
+ * Order bodies/subjects are built by lib/notifications/order-email.ts
+ * and injected as emailSubject / emailHtml / emailText.
  */
+
+const brandedBody = {
+  bodyHtml: '{{emailHtml}}',
+  bodyText: '{{emailText}}',
+} as const;
 
 export const NOTIFICATION_TEMPLATES: NotificationTemplateDefinition[] = [
   {
     id: 'order_confirmation',
     channel: 'email',
     trigger: 'order_created',
-    subject: 'Order confirmation — {{orderId}}',
-    bodyHtml: defaultHtml(
-      'Order confirmation',
-      'We received your order <strong>{{orderId}}</strong>.',
-    ),
-    bodyText:
-      'Order confirmation\n\nHi {{customerName}},\nWe received your order {{orderId}}.\n\n{{orderItemsText}}\n\nStatus: {{statusLabel}}\n{{statusMessage}}\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
+    subject: '{{emailSubject}}',
+    ...brandedBody,
     active: true,
   },
   {
     id: 'processing_update',
     channel: 'email',
     trigger: 'processing_started',
-    subject: 'Your order is processing — {{orderId}}',
-    bodyHtml: defaultHtml(
-      'Order processing',
-      'Your order <strong>{{orderId}}</strong> is now being processed.',
-    ),
-    bodyText:
-      'Order processing\n\nHi {{customerName}},\nYour order {{orderId}} is now being processed.\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
+    subject: '{{emailSubject}}',
+    ...brandedBody,
     active: true,
   },
   {
     id: 'order_completed',
     channel: 'email',
     trigger: 'order_completed',
-    subject: 'Order completed — {{orderId}}',
-    bodyHtml: defaultHtml(
-      'Order completed',
-      'Your order <strong>{{orderId}}</strong> has been completed successfully.',
-    ),
-    bodyText:
-      'Order completed\n\nHi {{customerName}},\nYour order {{orderId}} has been completed.\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
+    subject: '{{emailSubject}}',
+    ...brandedBody,
     active: true,
   },
   {
     id: 'partial_completion',
     channel: 'email',
     trigger: 'order_partial',
-    subject: 'Order partially completed — {{orderId}}',
-    bodyHtml: defaultHtml(
-      'Partial completion',
-      'Your order <strong>{{orderId}}</strong> was partially completed. Contact support if you have questions.',
-    ),
-    bodyText:
-      'Partial completion\n\nHi {{customerName}},\nYour order {{orderId}} was partially completed.\nTrack: {{trackingUrl}}\nSupport: {{supportEmail}}',
+    subject: '{{emailSubject}}',
+    ...brandedBody,
     active: true,
   },
   {
     id: 'order_cancelled',
     channel: 'email',
     trigger: 'order_cancelled',
-    subject: 'Order cancelled — {{orderId}}',
-    bodyHtml: defaultHtml(
-      'Order cancelled',
-      'Your order <strong>{{orderId}}</strong> has been cancelled.',
-    ),
-    bodyText:
-      'Order cancelled\n\nHi {{customerName}},\nYour order {{orderId}} has been cancelled.\nSupport: {{supportEmail}}',
+    subject: '{{emailSubject}}',
+    ...brandedBody,
     active: true,
   },
   {
     id: 'refund_confirmation',
     channel: 'email',
     trigger: 'order_refunded',
-    subject: 'Refund confirmation — {{orderId}}',
-    bodyHtml: defaultHtml(
-      'Refund confirmation',
-      'A refund for order <strong>{{orderId}}</strong> has been processed.',
-    ),
-    bodyText:
-      'Refund confirmation\n\nHi {{customerName}},\nA refund for order {{orderId}} has been processed.\nSupport: {{supportEmail}}',
+    subject: '{{emailSubject}}',
+    ...brandedBody,
     active: true,
   },
 ];
-
-function defaultHtml(title: string, summary: string): string {
-  return `<!DOCTYPE html>
-<html lang="en">
-<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>${title}</title></head>
-<body style="font-family: system-ui, sans-serif; line-height: 1.5; color: #111; max-width: 560px; margin: 0 auto; padding: 24px;">
-  <header style="margin-bottom: 16px;">
-    <div style="font-size: 18px; font-weight: 700;">{{companyName}}</div>
-  </header>
-  <main>
-    <h1 style="font-size: 20px;">${title}</h1>
-    <p>Hi {{customerName}},</p>
-    <p>${summary}</p>
-    {{orderItemsHtml}}
-    <p><strong>Status:</strong> {{statusLabel}}</p>
-    <p>{{statusMessage}}</p>
-    <p><a href="{{trackingUrl}}">Track your order</a></p>
-    <p>Need help? <a href="mailto:{{supportEmail}}">{{supportEmail}}</a></p>
-  </main>
-  <footer style="margin-top: 32px; font-size: 12px; color: #666;">
-    <p>{{footerText}}</p>
-    <p>{{companyName}}</p>
-  </footer>
-</body>
-</html>`;
-}
 
 export function getTemplateById(
   id: NotificationTemplateId,

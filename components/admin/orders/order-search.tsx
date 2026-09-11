@@ -28,7 +28,7 @@ export function OrderSearch({ value, onChange }: OrderSearchProps) {
       value={local}
       onChange={setLocal}
       label="Search orders"
-      placeholder="Order ID, email, service, username…"
+      placeholder="Order #, email, service, username…"
     />
   );
 }

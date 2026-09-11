@@ -29,7 +29,14 @@ export type NotificationTemplateVariableMap = {
   companyLogoUrl?: string;
   customerName?: string;
   customerEmail: string;
+  /** Customer-facing order ref, e.g. "#1000" (legacy may be IV-*). */
   orderId: string;
+  /** Full subject line when using branded order emails. */
+  emailSubject?: string;
+  /** Full HTML document / body for branded order emails. */
+  emailHtml?: string;
+  /** Full plain-text body for branded order emails. */
+  emailText?: string;
   serviceName: string;
   packageName?: string;
   quantity?: string;

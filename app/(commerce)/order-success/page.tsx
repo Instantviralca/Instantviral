@@ -15,6 +15,7 @@ import {
   resolveLineTotal,
   resolveTargetFromConfig,
 } from '@/lib/orders/line-items';
+import { formatCustomerOrderRef } from '@/lib/orders/order-number';
 import { getOrderById } from '@/lib/orders/store';
 import { formatMoney } from '@/lib/pricing/format';
 import { buildPageMetadataForRoute } from '@/lib/seo/metadata';
@@ -57,6 +58,11 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
 
   const orderTotal = order?.total.amount;
   const currency = order?.total.currency ?? 'USD';
+  const customerOrderRef = order ? formatCustomerOrderRef(order) : orderId;
+  const trackToken =
+    order && typeof order.orderNumber === 'number'
+      ? String(order.orderNumber)
+      : orderId;
 
   return (
     <Section aria-label="Order success">
@@ -69,12 +75,12 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
             ? 'Thanks — your payment was verified and your order is in the fulfilment queue.'
             : paymentPending
               ? 'We are confirming your payment. This page will show success once payment is verified.'
-              : 'We could not verify this order yet. Use your order ID and email to track status.'}
+              : 'We could not verify this order yet. Use your order number and email to track status.'}
         </MutedText>
-        {orderId ? (
+        {customerOrderRef ? (
           <div className="rounded-lg border bg-card p-4 text-sm">
             <p>
-              <span className="font-medium">Order ID:</span> {orderId}
+              <span className="font-medium">Order number:</span> {customerOrderRef}
             </p>
             {email ? (
               <p className="mt-1">
@@ -130,8 +136,8 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
           <Button asChild>
             <Link
               href={
-                orderId && email
-                  ? `${routes.trackOrder}?orderId=${encodeURIComponent(orderId)}&email=${encodeURIComponent(email)}`
+                trackToken && email
+                  ? `${routes.trackOrder}?orderId=${encodeURIComponent(trackToken)}&email=${encodeURIComponent(email)}`
                   : routes.trackOrder
               }
             >

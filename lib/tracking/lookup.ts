@@ -6,6 +6,11 @@ import {
   resolveLineTotal,
   resolveTargetFromConfig,
 } from '@/lib/orders/line-items';
+import {
+  formatCustomerOrderRef,
+  parseOrderLookupToken,
+} from '@/lib/orders/order-number';
+import { getOrderById, getOrderByOrderNumber } from '@/lib/orders/store';
 import { formatMoney } from '@/lib/pricing/format';
 import type { Order } from '@/types/order';
 import type { OrderStatus } from '@/types/order-status';
@@ -18,17 +23,17 @@ import type {
 
 /**
  * Order Tracking lookup — Document 11.05.
- * Architecture: verification + public projection. No real order store yet.
+ * Accepts customer order number (#1000) or legacy internal IV-* id.
  */
 
 const GENERIC_NOT_FOUND =
-  'We could not find an order with those details. Check your Order ID and email, then try again.';
+  'We could not find an order with those details. Check your Order number and email, then try again.';
 
 function normalizeEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
-function normalizeOrderId(orderId: string): string {
+function normalizeOrderToken(orderId: string): string {
   return orderId.trim();
 }
 
@@ -115,7 +120,7 @@ export function toPublicTrackedOrder(order: Order): PublicTrackedOrder {
     };
   });
   return {
-    orderId: order.id,
+    orderId: formatCustomerOrderRef(order),
     status: order.status,
     statusLabel: getAdminStatusLabel(order.status),
     statusMessage: getCustomerStatusMessage(order.status),
@@ -133,29 +138,52 @@ export function toPublicTrackedOrder(order: Order): PublicTrackedOrder {
   };
 }
 
+/** Resolve an order from #1000 / 1000 / IV-* token. */
+export async function findOrderForTrackingToken(
+  rawToken: string,
+  findOrderById: (orderId: string) => Promise<Order | null> = getOrderById,
+  findOrderByNumber: (n: number) => Promise<Order | null> = getOrderByOrderNumber,
+): Promise<Order | null> {
+  const parsed = parseOrderLookupToken(rawToken);
+  if (parsed.kind === 'order_number' && parsed.orderNumber != null) {
+    return findOrderByNumber(parsed.orderNumber);
+  }
+  if (parsed.orderId) {
+    return findOrderById(parsed.orderId);
+  }
+  return null;
+}
+
 /**
- * Verify Order ID + Email. Returns a generic error when unmatched.
- * Persistence is not wired — returns not_found until order store exists.
+ * Verify Order number/ID + Email. Returns a generic error when unmatched.
  */
 export async function lookupTrackedOrder(
   input: TrackOrderLookupInput,
   findOrder?: (orderId: string) => Promise<Order | null>,
 ): Promise<TrackOrderLookupResult> {
-  const orderId = normalizeOrderId(input.orderId);
+  const token = normalizeOrderToken(input.orderId);
   const email = normalizeEmail(input.email);
 
-  if (!orderId || !email || !email.includes('@')) {
+  if (!token || !email || !email.includes('@')) {
     return {
       ok: false,
       error: {
         code: 'invalid_input',
-        message: 'Enter a valid Order ID and email address.',
+        message: 'Enter a valid Order number and email address.',
       },
     };
   }
 
   try {
-    const order = findOrder ? await findOrder(orderId) : null;
+    const order = findOrder
+      ? await findOrderForTrackingToken(token, findOrder, async (n) => {
+          // When a custom findOrder is injected (tests), still try numeric via store if available.
+          const byId = await findOrder(String(n));
+          if (byId) return byId;
+          return getOrderByOrderNumber(n);
+        })
+      : await findOrderForTrackingToken(token);
+
     if (!order || normalizeEmail(order.guestEmail) !== email) {
       return {
         ok: false,

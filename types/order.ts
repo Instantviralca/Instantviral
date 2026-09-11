@@ -80,6 +80,11 @@ export type OrderInternalNote = {
  */
 export type Order = {
   id: string;
+  /**
+   * Customer-facing sequential InstantViral order number (1000, 1001, …).
+   * Assigned at persist time. Distinct from Mollie/CarryCubes payment ids.
+   */
+  orderNumber?: number;
   customerId?: string;
   guestEmail: string;
   status: OrderStatus;

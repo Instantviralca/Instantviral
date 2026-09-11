@@ -12,11 +12,16 @@ import {
   uniqueIndex,
   index,
 } from 'drizzle-orm/pg-core';
+import { sql } from 'drizzle-orm';
 
 export const orders = pgTable(
   'orders',
   {
     id: text('id').primaryKey(),
+    /** Customer-facing sequential number (#1000+). Not the Mollie/CarryCubes id. */
+    orderNumber: integer('order_number')
+      .notNull()
+      .default(sql`nextval('orders_order_number_seq')`),
     guestEmail: text('guest_email').notNull(),
     status: text('status').notNull(),
     fulfillmentMode: text('fulfillment_mode').notNull().default('manual'),
@@ -33,6 +38,7 @@ export const orders = pgTable(
   (t) => ({
     emailIdx: index('orders_guest_email_idx').on(t.guestEmail),
     idempotencyIdx: uniqueIndex('orders_idempotency_key_uidx').on(t.idempotencyKey),
+    orderNumberIdx: uniqueIndex('orders_order_number_uidx').on(t.orderNumber),
   }),
 );
 

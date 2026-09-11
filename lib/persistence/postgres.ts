@@ -5,6 +5,7 @@
 import { and, desc, eq, gte } from 'drizzle-orm';
 
 import { normalizeOrderLineItem } from '@/lib/orders/line-items';
+import { allocateOrderNumber } from '@/lib/orders/order-number';
 
 import { getDb } from '@/lib/db/client';
 import * as tables from '@/lib/db/schema';
@@ -153,6 +154,7 @@ async function hydrateOrder(orderId: string): Promise<Order | null> {
 
   return {
     id: row.id,
+    orderNumber: row.orderNumber,
     guestEmail: row.guestEmail,
     status: row.status as OrderStatus,
     fulfillmentMode: row.fulfillmentMode as Order['fulfillmentMode'],
@@ -188,6 +190,15 @@ export function createPostgresPersistence(): AppPersistence {
     async getOrderById(orderId) {
       return hydrateOrder(orderId);
     },
+    async getOrderByOrderNumber(orderNumber) {
+      const db = getDb();
+      const [row] = await db
+        .select({ id: tables.orders.id })
+        .from(tables.orders)
+        .where(eq(tables.orders.orderNumber, orderNumber))
+        .limit(1);
+      return row ? hydrateOrder(row.id) : null;
+    },
     async getOrderByIdempotencyKey(key) {
       const db = getDb();
       const [row] = await db
@@ -210,11 +221,15 @@ export function createPostgresPersistence(): AppPersistence {
       const db = getDb();
       const withKey = order as Order & { idempotencyKey?: string };
       const existing = await hydrateOrder(order.id);
+      const orderNumber =
+        existing?.orderNumber ??
+        (typeof order.orderNumber === 'number' ? order.orderNumber : await allocateOrderNumber());
 
       await db
         .insert(tables.orders)
         .values({
           id: order.id,
+          orderNumber,
           guestEmail: order.guestEmail,
           status: order.status,
           fulfillmentMode: order.fulfillmentMode,
@@ -242,6 +257,7 @@ export function createPostgresPersistence(): AppPersistence {
             customerNotes: order.customerNotes ?? null,
             idempotencyKey: withKey.idempotencyKey ?? null,
             updatedAt: new Date(order.updatedAt),
+            // order_number intentionally omitted — never reassigned on update/retry
           },
         });
 
@@ -381,7 +397,8 @@ export function createPostgresPersistence(): AppPersistence {
         });
       }
 
-      return withKey;
+      const saved = await hydrateOrder(order.id);
+      return saved ?? { ...withKey, orderNumber };
     },
     async addInternalNote(orderId, note) {
       const db = getDb();

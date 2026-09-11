@@ -13,6 +13,10 @@ export async function getOrderById(orderId: string): Promise<Order | null> {
   return getPersistence().getOrderById(orderId);
 }
 
+export async function getOrderByOrderNumber(orderNumber: number): Promise<Order | null> {
+  return getPersistence().getOrderByOrderNumber(orderNumber);
+}
+
 export async function getOrderByIdempotencyKey(key: string): Promise<Order | null> {
   return getPersistence().getOrderByIdempotencyKey(key);
 }

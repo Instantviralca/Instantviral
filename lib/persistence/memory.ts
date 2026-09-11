@@ -24,6 +24,10 @@ import type { NotificationRecord } from '@/types/notification';
 import {
   createEmailMarketingApi,
 } from '@/lib/persistence/email-marketing-memory';
+import {
+  allocateOrderNumber,
+  resetOrderNumberAllocatorForTests,
+} from '@/lib/orders/order-number';
 
 function createMemoryState() {
   return {
@@ -50,6 +54,9 @@ export function createMemoryPersistence(): AppPersistence {
     async getOrderById(orderId) {
       return state.orders.find((o) => o.id === orderId) ?? null;
     },
+    async getOrderByOrderNumber(orderNumber) {
+      return state.orders.find((o) => o.orderNumber === orderNumber) ?? null;
+    },
     async getOrderByIdempotencyKey(key) {
       return (
         state.orders.find((o) => (o as Order & { idempotencyKey?: string }).idempotencyKey === key) ??
@@ -62,9 +69,22 @@ export function createMemoryPersistence(): AppPersistence {
     async saveOrder(order) {
       const withKey = order as Order & { idempotencyKey?: string };
       const index = state.orders.findIndex((o) => o.id === order.id);
-      if (index >= 0) state.orders[index] = withKey;
-      else state.orders.unshift(withKey);
-      return withKey;
+      if (index >= 0) {
+        const existing = state.orders[index]!;
+        const merged = {
+          ...withKey,
+          orderNumber: existing.orderNumber ?? withKey.orderNumber,
+        };
+        state.orders[index] = merged;
+        return merged;
+      }
+      const orderNumber =
+        typeof withKey.orderNumber === 'number'
+          ? withKey.orderNumber
+          : await allocateOrderNumber();
+      const created = { ...withKey, orderNumber };
+      state.orders.unshift(created);
+      return created;
     },
     async addInternalNote(orderId, note) {
       const order = await this.getOrderById(orderId);
@@ -178,6 +198,7 @@ export function createMemoryPersistence(): AppPersistence {
     ...emailApi,
     resetForTests() {
       state = createMemoryState();
+      resetOrderNumberAllocatorForTests();
     },
   };
 }

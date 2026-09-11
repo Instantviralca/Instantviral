@@ -19,6 +19,7 @@ import type {
 import type { Order, OrderInternalNote } from '@/types/order';
 import type { NotificationRecord } from '@/types/notification';
 import { createEmailMarketingApi } from '@/lib/persistence/email-marketing-memory';
+import { allocateOrderNumber } from '@/lib/orders/order-number';
 
 const DATA_DIR = path.join(process.cwd(), '.data');
 const STORE_FILE = path.join(DATA_DIR, 'persistence.json');
@@ -89,6 +90,9 @@ export function createFilePersistence(): AppPersistence {
     async getOrderById(orderId) {
       return read().orders.find((o) => o.id === orderId) ?? null;
     },
+    async getOrderByOrderNumber(orderNumber) {
+      return read().orders.find((o) => o.orderNumber === orderNumber) ?? null;
+    },
     async getOrderByIdempotencyKey(key) {
       return read().orders.find((o) => o.idempotencyKey === key) ?? null;
     },
@@ -99,10 +103,24 @@ export function createFilePersistence(): AppPersistence {
       const state = read();
       const withKey = order as Order & { idempotencyKey?: string };
       const index = state.orders.findIndex((o) => o.id === order.id);
-      if (index >= 0) state.orders[index] = withKey;
-      else state.orders.unshift(withKey);
+      if (index >= 0) {
+        const existing = state.orders[index]!;
+        const merged = {
+          ...withKey,
+          orderNumber: existing.orderNumber ?? withKey.orderNumber,
+        };
+        state.orders[index] = merged;
+        write(state);
+        return merged;
+      }
+      const orderNumber =
+        typeof withKey.orderNumber === 'number'
+          ? withKey.orderNumber
+          : await allocateOrderNumber();
+      const created = { ...withKey, orderNumber };
+      state.orders.unshift(created);
       write(state);
-      return withKey;
+      return created;
     },
     async addInternalNote(orderId, note: OrderInternalNote) {
       const order = await this.getOrderById(orderId);
