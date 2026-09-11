@@ -1,6 +1,6 @@
 /**
  * Mark abandoned carts recovered after successful payment.
- * Idempotent — safe for Stripe/Mollie webhook retries.
+ * Idempotent — safe for Mollie (and other) webhook retries.
  */
 
 import {

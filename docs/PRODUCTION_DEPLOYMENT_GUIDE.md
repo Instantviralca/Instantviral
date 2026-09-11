@@ -1,28 +1,27 @@
 # InstantViral — Production Deployment Guide
 
-**Site:** https://instantviral.ca  
+**Site:** https://instantviral.ca
 **Status:** Codebase is production-ready. Remaining blockers are missing production secrets.
 
-This guide covers environment variables, Vercel setup, Stripe webhooks, and post-launch verification.  
+This guide covers environment variables, host setup, Mollie Remote payments, and post-launch verification.
 **Do not commit real secrets.** Never put live keys in git.
 
 ---
 
 ## 1. Required environment variables
 
-These nine variables are **required** for production. The app fails safely at runtime if they are missing.
+These variables are **required** for production. The app fails safely at runtime if critical ones are missing.
 
 | Variable | Required | Used for |
 |----------|----------|----------|
 | `DATABASE_URL` | Yes | PostgreSQL connection for orders, contacts, sessions, webhooks |
-| `NEXT_PUBLIC_SITE_URL` | Yes | Canonical site URL, Stripe success/cancel redirects, email links |
-| `STRIPE_SECRET_KEY` | Yes | Server-side Stripe Checkout Sessions |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Yes | Client-exposed Stripe publishable key |
-| `STRIPE_WEBHOOK_SECRET` | Yes | Verify Stripe webhook signatures |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Canonical site URL, Mollie return/cancel URLs, email links |
 | `IV_ADMIN_PASSWORD` | Yes | Admin panel login password |
 | `IV_ADMIN_SESSION_SECRET` | Yes | Sign admin session cookies (HMAC) |
-| `RESEND_API_KEY` | Yes | Send transactional email via Resend |
 | `EMAIL_FROM` | Yes | From-address on order/contact emails |
+| SMTP (`SMTP_HOST` / `SMTP_USER` / `SMTP_PASS` / …) **or** temporary `RESEND_API_KEY` | Yes | Transactional email transport |
+
+Live checkout uses **Mollie Remote** (CarryCubes). Configure Mollie server URL + shared secret in Admin → Settings (and matching env if used). **Stripe is not used** — do not set Stripe keys.
 
 ### Strongly recommended
 
@@ -62,7 +61,6 @@ You may use these instead of the canonical names if preferred:
 | `ADMIN_PASSWORD` | `IV_ADMIN_PASSWORD` |
 | `SESSION_SECRET` | `IV_ADMIN_SESSION_SECRET` |
 | `RESEND_FROM_EMAIL` | `EMAIL_FROM` |
-| `STRIPE_PUBLISHABLE_KEY` | Server-only alias — **still set** `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` for the browser |
 
 ---
 
@@ -73,49 +71,27 @@ You may use these instead of the canonical names if preferred:
 - **Purpose:** PostgreSQL connection string for orders, order items, payments, contact messages, notification records, webhook idempotency, admin sessions, and login rate limits.
 - **Format:** `postgresql://USER:PASSWORD@HOST:5432/DATABASE?sslmode=require`
 - **Where to get it:**
-  - [Neon](https://console.neon.tech) → Project → Connection string  
-  - [Supabase](https://supabase.com/dashboard) → Project Settings → Database → Connection string (URI)  
-  - Any managed Postgres provider’s connection panel  
+  - [Neon](https://console.neon.tech) → Project → Connection string
+  - [Supabase](https://supabase.com/dashboard) → Project Settings → Database → Connection string (URI)
+  - Any managed Postgres provider’s connection panel
 - **After setting:** Run migrations once: `npm run db:migrate:sql`
 
 ---
 
 ### `NEXT_PUBLIC_SITE_URL`
 
-- **Purpose:** Public site origin used for Stripe success/cancel URLs, order tracking links in emails, canonical/metadata helpers, and absolute redirects.
+- **Purpose:** Public site origin used for Mollie return/cancel URLs, order tracking links in emails, canonical/metadata helpers, and absolute redirects.
 - **Value:** `https://instantviral.ca` (no trailing slash)
 - **Where to get it:** Your production domain (must be HTTPS)
 - **Note:** Variables prefixed with `NEXT_PUBLIC_` are embedded in the client bundle. This value is not secret.
 
 ---
 
-### `STRIPE_SECRET_KEY`
+### Mollie Remote payment (live checkout)
 
-- **Purpose:** Server-only key to create Checkout Sessions and retrieve session status.
-- **Format:** Live mode starts with `sk_live_…` (use `sk_test_…` only for staging)
-- **Where to get it:**  
-  [Stripe Dashboard](https://dashboard.stripe.com) → **Developers** → **API keys** → Secret key  
-  Ensure the toggle is set to **Live** for production.
-
----
-
-### `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
-
-- **Purpose:** Public Stripe key available to the browser (safe to expose).
-- **Format:** Live mode starts with `pk_live_…`
-- **Where to get it:**  
-  Stripe Dashboard → **Developers** → **API keys** → Publishable key  
-- **Important:** Must be the `NEXT_PUBLIC_` variant so Next.js exposes it to the client.
-
----
-
-### `STRIPE_WEBHOOK_SECRET`
-
-- **Purpose:** Verifies that webhook requests to `/api/webhooks/stripe` were signed by Stripe (`constructEvent`). Prevents forged payment events.
-- **Format:** Starts with `whsec_…`
-- **Where to get it:**  
-  Stripe Dashboard → **Developers** → **Webhooks** → select (or create) the endpoint → **Signing secret** → Reveal  
-  See [Section 6](#6-configure-stripe-webhooks) below.
+- **Purpose:** Hosted Mollie checkout via CarryCubes remote payment protocol (`mollie-remote`).
+- **Configure:** Admin → Settings (server URL + shared secret). Webhook endpoint: `https://instantviral.ca/api/webhooks/mollie-remote`
+- **Do not configure Stripe** — the Stripe provider/SDK/webhook route have been removed.
 
 ---
 
@@ -151,8 +127,8 @@ Never reuse the admin password as the session secret in production.
 
 - **Purpose:** Authenticates API calls to Resend for order confirmation, contact acknowledgements, and admin notifications.
 - **Format:** Starts with `re_…`
-- **Where to get it:**  
-  [Resend Dashboard](https://resend.com/api-keys) → **API Keys** → Create API key  
+- **Where to get it:**
+  [Resend Dashboard](https://resend.com/api-keys) → **API Keys** → Create API key
 
 ---
 
@@ -160,8 +136,8 @@ Never reuse the admin password as the session secret in production.
 
 - **Purpose:** The From address on transactional emails (must be on a domain verified in Resend).
 - **Example:** `orders@instantviral.ca` or `InstantViral <orders@instantviral.ca>`
-- **Where to get it:**  
-  Resend Dashboard → **Domains** → add & verify `instantviral.ca` (DNS records) → use an address on that domain  
+- **Where to get it:**
+  Resend Dashboard → **Domains** → add & verify `instantviral.ca` (DNS records) → use an address on that domain
 
 ---
 
@@ -196,7 +172,7 @@ Copy it into your password manager / Vercel env UI. Fill real values. Do not ren
 | Topic | Guidance |
 |-------|----------|
 | `NEXT_PUBLIC_*` vars | Must be set **before** a production build/deploy. Changing them requires a **redeploy**. |
-| Secrets | `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `IV_ADMIN_*`, `RESEND_API_KEY`, `DATABASE_URL` — Production only; never expose in client code. |
+| Secrets | `IV_ADMIN_*`, SMTP/`RESEND_API_KEY`, Mollie shared secret, `DATABASE_URL` — Production only; never expose in client code. |
 | Domain | Project → **Settings** → **Domains** → add `instantviral.ca` (+ redirect `www` → apex if desired) |
 | Legacy checkout host | Optional: keep `checkout.instantviral.ca` on the same project so middleware can 308 → `/checkout` (see C1) |
 | HTTPS | Automatic on Vercel once DNS is pointed correctly |
@@ -260,56 +236,38 @@ Expect: `[env] READY — critical production variables are present.`
 
 ---
 
-## 5. Configure Stripe Webhooks
+## 5. Configure Mollie Remote webhooks
 
 ### Endpoint URL
 
 ```
-https://instantviral.ca/api/webhooks/stripe
+https://instantviral.ca/api/webhooks/mollie-remote
 ```
 
 ### Steps
 
-1. Open [Stripe Dashboard](https://dashboard.stripe.com) → switch to **Live** mode  
-2. **Developers** → **Webhooks** → **Add endpoint**  
-3. **Endpoint URL:** `https://instantviral.ca/api/webhooks/stripe`  
-4. **Events to send** — select at least:
-   - `checkout.session.completed` — mark order paid / fulfilment gate  
-   - `checkout.session.expired` — cancelled session  
-   - `payment_intent.payment_failed` — failed payment signal  
-5. Create the endpoint  
-6. Open the endpoint → **Signing secret** → **Reveal** → copy `whsec_…`  
-7. Paste into Vercel as `STRIPE_WEBHOOK_SECRET`  
-8. **Redeploy** Production so the secret is live  
+1. Confirm CarryCubes / Mollie Remote server URL + shared secret in Admin → Settings
+2. Ensure the remote plugin posts callbacks to the InstantViral webhook URL above
+3. Place a small live checkout and confirm webhook delivery / order paid in Admin → Orders
+4. Confirm return URL reaches `/order-success` and cancel returns to `/checkout?cancelled=1`
 
 ### Checkout URLs (already coded)
 
 | Flow | URL pattern |
 |------|-------------|
-| Success | `https://instantviral.ca/order-success?orderId=…&email=…&session_id={CHECKOUT_SESSION_ID}` |
+| Success | `https://instantviral.ca/order-success?orderId=…&email=…` |
 | Cancel | `https://instantviral.ca/checkout?cancelled=1&orderId=…` |
-
-Sessions also set `client_reference_id` and `metadata.orderId` for order binding.
-
-### Verify webhooks
-
-1. Place a small live (or test-mode staging) checkout  
-2. Stripe → Webhooks → endpoint → **Recent deliveries**  
-3. Expect **HTTP 2xx** for `checkout.session.completed`  
-4. Confirm order shows paid in Admin → Orders and/or Track Order  
-
-If deliveries show `400`, the signing secret is wrong. If `503`, Stripe env vars are incomplete.
 
 ---
 
 ## 6. Resend email setup (quick)
 
-1. Resend → **Domains** → add `instantviral.ca`  
-2. Add the DNS records Resend shows (SPF/DKIM)  
-3. Wait until domain status is **Verified**  
-4. Create API key → `RESEND_API_KEY`  
-5. Set `EMAIL_FROM` to an address on that domain (e.g. `orders@instantviral.ca`)  
-6. Set `EMAIL_ADMIN_TO` to the ops inbox that should receive order/contact alerts  
+1. Resend → **Domains** → add `instantviral.ca`
+2. Add the DNS records Resend shows (SPF/DKIM)
+3. Wait until domain status is **Verified**
+4. Create API key → `RESEND_API_KEY`
+5. Set `EMAIL_FROM` to an address on that domain (e.g. `orders@instantviral.ca`)
+6. Set `EMAIL_ADMIN_TO` to the ops inbox that should receive order/contact alerts
 
 ---
 
@@ -331,10 +289,10 @@ curl -s https://instantviral.ca/sitemap.xml | head
 | 1 | Homepage | Opens at `https://instantviral.ca` — no error page |
 | 2 | Service page | Open `/buy-instagram-followers` — packages load |
 | 3 | Cart | Add a package → `/cart` shows line item |
-| 4 | Checkout | `/checkout` → Place Order redirects to Stripe Checkout |
-| 5 | Stripe Success | Complete payment → `/order-success` shows confirmed / confirming |
-| 6 | Stripe Cancel | Cancel on Stripe → returns to `/checkout?cancelled=1` with cancel message |
-| 7 | Webhook | Stripe Dashboard shows 2xx for `checkout.session.completed` |
+| 4 | Checkout | `/checkout` → Place Order redirects to Mollie hosted payment |
+| 5 | Mollie Success | Complete payment → `/order-success` shows confirmed / confirming |
+| 6 | Mollie Cancel | Cancel on Mollie → returns to `/checkout?cancelled=1` with cancel message |
+| 7 | Webhook | Mollie Remote webhook marks order paid (Admin / track-order) |
 | 8 | Email | Customer receives order confirmation; admin gets new-order mail |
 | 9 | Track order | `/track-order` with order ID + email shows status |
 | 10 | Contact form | Submit `/contact` — success UI; admin email received |
@@ -345,33 +303,33 @@ curl -s https://instantviral.ca/sitemap.xml | head
 
 ### C. Security quick checks
 
-- Site loads over **HTTPS** only  
-- Admin cookie is set after login (HttpOnly; Secure in production)  
-- Checkout refuses to run if Stripe keys are removed (503)  
-- Do not leave `IV_SKIP_ENV_GUARD=1` set in Production  
+- Site loads over **HTTPS** only
+- Admin cookie is set after login (HttpOnly; Secure in production)
+- Checkout uses Mollie Remote only (no Stripe SDK/keys required)
+- Do not leave `IV_SKIP_ENV_GUARD=1` set in Production
 
 ### D. First 24 hours monitoring
 
-- Stripe webhook delivery success rate  
-- Vercel → Logs for `[stripe webhook]`, `[env]`, `[payments]`  
-- Resend → bounces / failed sends  
-- Admin login lockouts (rate limit after repeated failures)  
+- Mollie Remote webhook delivery / paid-order success rate
+- Host logs for `[env]`, `[payments]`, Mollie webhook
+- Email bounces / failed sends
+- Admin login lockouts (rate limit after repeated failures)
 
 ---
 
 ## 8. Launch command summary
 
 ```bash
-# 1. Set all Production env vars in Vercel (see Section 4)
+# 1. Set all Production env vars on the host (see Section 4)
 
 # 2. Apply DB schema (once, with production DATABASE_URL)
 npm run db:migrate:sql
 
 # 3. Deploy
-vercel --prod
-# or: push to the production Git branch
+# Contabo/VPS: pull + build + restart process manager
+# or: push to the production Git branch / host pipeline
 
-# 4. Create Stripe webhook + set STRIPE_WEBHOOK_SECRET + redeploy
+# 4. Confirm Mollie Remote webhook URL + Admin Settings secrets
 
 # 5. Smoke test (Section 7)
 ```
@@ -380,9 +338,9 @@ vercel --prod
 
 ## 9. Rollback (if needed)
 
-1. Vercel → **Deployments** → previous successful Production deployment → **Promote to Production**  
-2. Stripe → temporarily disable the webhook endpoint if it is failing repeatedly  
-3. Do not reverse additive SQL migrations; prefer forward-fix  
+1. Redeploy the previous successful Production release
+2. If Mollie/CarryCubes webhook is failing repeatedly, pause the remote endpoint, fix secret/URL, re-enable
+3. Do not reverse additive SQL migrations; prefer forward-fix
 
 ---
 
@@ -392,10 +350,7 @@ vercel --prod
 |----------|-------------|
 | `DATABASE_URL` | Neon / Supabase / Postgres → connection string (`sslmode=require`) |
 | `NEXT_PUBLIC_SITE_URL` | `https://instantviral.ca` |
-| `STRIPE_SECRET_KEY` | Stripe → Developers → API keys → Secret key (Live) |
-| `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | Stripe → Developers → API keys → Publishable key (Live) |
-| `STRIPE_WEBHOOK_SECRET` | Stripe → Developers → Webhooks → endpoint signing secret |
-| `RESEND_API_KEY` | Resend → API Keys |
-| `EMAIL_FROM` | Address on a domain verified in Resend |
-| `IV_ADMIN_PASSWORD` | Generate strong password (`openssl rand -base64 32`) |
-| `IV_ADMIN_SESSION_SECRET` | Generate random secret (`openssl rand -hex 64`) |
+| Mollie Remote server URL + secret | CarryCubes / Admin → Settings |
+| `IV_ADMIN_PASSWORD` | Generate a strong unique password (`openssl rand -base64 32`) |
+| `IV_ADMIN_SESSION_SECRET` | Generate a long random secret (`openssl rand -hex 64`) |
+| `EMAIL_FROM` + SMTP or `RESEND_API_KEY` | Mail host / Resend dashboard |

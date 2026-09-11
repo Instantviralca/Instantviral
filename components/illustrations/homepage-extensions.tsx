@@ -191,7 +191,7 @@ export function PaymentsIllustration({ className }: IllustProps) {
       <rect x="56" y="62" width="48" height="32" rx="8" fill="#FF6B00" opacity="0.9" />
       <rect x="56" y="110" width="160" height="10" rx="5" fill="#e7e5e4" />
       <rect x="56" y="128" width="108" height="10" rx="5" fill="#f5f5f4" />
-      {['Visa', 'MC', 'PayPal', 'Stripe'].map((label, i) => (
+      {['Visa', 'MC', 'PayPal'].map((label, i) => (
         <g key={label}>
           <rect x={340} y={34 + i * 38} width="140" height="30" rx="10" fill="#fff" stroke="#f0e4d8" />
           <text

@@ -20,7 +20,8 @@ describe('Phase 2 technical SEO polish', () => {
       (header) => header.key === 'Content-Security-Policy-Report-Only',
     );
     expect(csp?.value).toContain("default-src 'self'");
-    expect(csp?.value).toContain('https://js.stripe.com');
+    expect(csp?.value).toContain('https://www.googletagmanager.com');
+    expect(csp?.value).not.toContain('stripe.com');
     expect(csp?.value).not.toContain('report-uri');
     expect(csp?.value).not.toContain('report-to');
   });

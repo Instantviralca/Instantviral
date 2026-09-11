@@ -31,7 +31,7 @@ import { AUTHORS } from '@/data/authors/registry';
 import { LEARN_SITEMAP_ENABLED } from '@/data/seo/sitemap-routes';
 import { getPublishedLearnArticleSlugs } from '@/data/learn';
 import { buildSitemapEntries } from '@/lib/seo/sitemap/build';
-import { isStripeConfigured, isEmailConfigured, validateEnv } from '@/lib/config/env';
+import { isEmailConfigured, validateEnv } from '@/lib/config/env';
 
 const prev = { ...process.env };
 
@@ -40,9 +40,6 @@ beforeEach(() => {
   process.env.IV_ADMIN_PASSWORD = 'test-admin-password';
   process.env.IV_ADMIN_SESSION_SECRET = 'test-session-secret-32chars!!';
   process.env.IV_ENV = 'test';
-  delete process.env.STRIPE_SECRET_KEY;
-  delete process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
-  delete process.env.STRIPE_WEBHOOK_SECRET;
   delete process.env.RESEND_API_KEY;
   delete process.env.EMAIL_FROM;
   clearPersistenceSingletonForTests();
@@ -78,7 +75,7 @@ describe('Database persistence (memory driver)', () => {
   it('persists orders and contact messages', async () => {
     const order = await placeOrder({
       customer: { email: 'buyer@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [cartItem()],
@@ -100,7 +97,7 @@ describe('Database persistence (memory driver)', () => {
   it('prevents duplicate orders via idempotency key', async () => {
     const input = {
       customer: { email: 'dup@example.com' },
-      paymentMethodId: 'stripe' as const,
+      paymentMethodId: 'mollie-remote' as const,
       termsAccepted: true,
       coupon: null,
       items: [cartItem()],
@@ -143,17 +140,17 @@ describe('Server-side price validation', () => {
   it('rejects payment binding mismatch when marking paid', async () => {
     const order = await placeOrder({
       customer: { email: 'bind@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [cartItem()],
       idempotencyKey: 'bind-1',
     });
-    // Simulate Stripe session already attached.
+    // Simulate provider payment already attached.
     const withSession = {
       ...order,
       payment: {
-        provider: 'stripe' as const,
+        provider: 'mollie-remote' as const,
         paymentId: 'cs_order_a',
         status: 'pending' as const,
         amount: order.total,
@@ -176,7 +173,7 @@ describe('Payment verification + fulfilment gate', () => {
   it('marks paid once and blocks unpaid fulfilment eligibility', async () => {
     const order = await placeOrder({
       customer: { email: 'pay@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [cartItem()],
@@ -206,7 +203,7 @@ describe('Payment verification + fulfilment gate', () => {
   it('rejects paid amount mismatch', async () => {
     const order = await placeOrder({
       customer: { email: 'badpay@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [cartItem()],
@@ -225,7 +222,7 @@ describe('Payment verification + fulfilment gate', () => {
   it('records failed payment without entering fulfilment queue', async () => {
     const order = await placeOrder({
       customer: { email: 'fail@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [cartItem()],
@@ -244,19 +241,15 @@ describe('Payment verification + fulfilment gate', () => {
 describe('Webhook duplicate + signature gate', () => {
   it('dedupes webhook event ids', async () => {
     const store = getPersistence();
-    expect(await store.hasProcessed('stripe', 'evt_1')).toBe(false);
+    expect(await store.hasProcessed('mollie-remote', 'evt_1')).toBe(false);
     await store.markProcessed({
       id: 'wh_1',
-      provider: 'stripe',
+      provider: 'mollie-remote',
       eventId: 'evt_1',
       eventType: 'checkout.session.completed',
       processedAt: new Date().toISOString(),
     });
-    expect(await store.hasProcessed('stripe', 'evt_1')).toBe(true);
-  });
-
-  it('reports Stripe as disabled without secrets', () => {
-    expect(isStripeConfigured()).toBe(false);
+    expect(await store.hasProcessed('mollie-remote', 'evt_1')).toBe(true);
   });
 });
 
@@ -610,7 +603,7 @@ describe('Learn Center production content', () => {
 });
 
 describe('Env validation', () => {
-  it('never requires printing secrets and does not require Stripe keys', () => {
+  it('never requires printing secrets and does not require unused payment SDK keys', () => {
     const result = validateEnv();
     expect(result.issues.some((i) => i.key === 'STRIPE_SECRET_KEY' && i.level === 'error')).toBe(
       false,
@@ -640,7 +633,6 @@ describe('Env validation', () => {
     delete process.env.ADMIN_PASSWORD;
     delete process.env.IV_ADMIN_SESSION_SECRET;
     delete process.env.SESSION_SECRET;
-    delete process.env.STRIPE_SECRET_KEY;
     delete process.env.RESEND_API_KEY;
     delete process.env.EMAIL_FROM;
     delete process.env.RESEND_FROM_EMAIL;

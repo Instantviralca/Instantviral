@@ -17,12 +17,6 @@ export const paymentProviders: PaymentProviderConfig[] = [
     displayName: 'Remote Payment (legacy)',
   },
   {
-    id: 'stripe',
-    enabled: false,
-    publicKeyEnv: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
-    displayName: 'Stripe',
-  },
-  {
     id: 'paypal',
     enabled: false,
     publicKeyEnv: 'NEXT_PUBLIC_PAYPAL_CLIENT_ID',

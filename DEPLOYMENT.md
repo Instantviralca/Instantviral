@@ -2,8 +2,8 @@
 
 Safe launch runbook for instantviral.ca. Does not change product UI, SEO, pricing, or content.
 
-> **Operator guide (env vars, Vercel, Stripe webhooks, smoke tests):**  
-> [`docs/PRODUCTION_DEPLOYMENT_GUIDE.md`](docs/PRODUCTION_DEPLOYMENT_GUIDE.md)  
+> **Operator guide (env vars, host setup, smoke tests):**
+> [`docs/PRODUCTION_DEPLOYMENT_GUIDE.md`](docs/PRODUCTION_DEPLOYMENT_GUIDE.md)
 > **Template:** [`.env.production.example`](.env.production.example)
 
 > **Checkout:** Customer checkout is always on the main domain at `/checkout`
@@ -21,13 +21,14 @@ Set these in the production host (Vercel / Railway / VPS). Never commit secrets.
 |----------|---------------|----------------|
 | Database | `DATABASE_URL` | — |
 | Site URL (HTTPS) | `NEXT_PUBLIC_SITE_URL` | `SITE_URL` |
-| Stripe secret | `STRIPE_SECRET_KEY` | — |
-| Stripe publishable (browser) | `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY` | server-only alias: `STRIPE_PUBLISHABLE_KEY` |
-| Stripe webhook | `STRIPE_WEBHOOK_SECRET` | — |
 | Admin password | `IV_ADMIN_PASSWORD` | `ADMIN_PASSWORD` |
 | Session secret | `IV_ADMIN_SESSION_SECRET` | `SESSION_SECRET` |
-| Resend API | `RESEND_API_KEY` | — |
-| From email | `EMAIL_FROM` | `RESEND_FROM_EMAIL` |
+| Email from | `EMAIL_FROM` | `RESEND_FROM_EMAIL` |
+| Email transport | `SMTP_*` (preferred) or temporary `RESEND_API_KEY` | — |
+
+### Mollie Remote (live checkout)
+
+Configure via Admin → Settings and/or env (see operator guide). Checkout uses **mollie-remote** only — there is no Stripe runtime.
 
 ### Strongly recommended
 
@@ -82,30 +83,25 @@ npm test
 ## Manual configuration (outside the codebase)
 
 1. **DNS / HTTPS** — Point `instantviral.ca` (+ `www` redirect) to the host with a valid TLS certificate.
-2. **PostgreSQL** — Provision managed Postgres (Neon/Supabase/etc.) and set `DATABASE_URL` with `sslmode=require`.
-3. **Stripe Dashboard**
-   - Live mode keys (`sk_live_…`, `pk_live_…`)
-   - Webhook endpoint: `https://instantviral.ca/api/webhooks/stripe`
-   - Events: `checkout.session.completed`, `checkout.session.expired`, `payment_intent.payment_failed`
-   - Copy signing secret → `STRIPE_WEBHOOK_SECRET`
-4. **Resend** — Verify sending domain; set `EMAIL_FROM` to an address on that domain.
+2. **PostgreSQL** — Provision Postgres and set `DATABASE_URL` (use TLS/`sslmode=require` when required by the host).
+3. **Mollie Remote / CarryCubes** — Configure remote payment server URL + shared secret (Admin → Settings). Webhook: `https://instantviral.ca/api/webhooks/mollie-remote`.
+4. **Email** — Prefer SMTP on Contabo; temporary Resend is OK on Vercel. Verify sending domain; set `EMAIL_FROM`.
 5. **Host env panel** — Paste all secrets; redeploy after changes.
 6. **Search Console** — Submit `https://instantviral.ca/sitemap.xml` after go-live.
 
 ---
 
-## Stripe verification map
+## Mollie verification map
 
 | Check | Status in code |
 |-------|----------------|
-| Checkout Session create | `lib/payments/providers/stripe.ts` |
-| `client_reference_id` + `metadata.orderId` | Set on session create |
-| Success URL | `/order-success?orderId&email&session_id={CHECKOUT_SESSION_ID}` |
+| Hosted checkout create | `lib/payments/providers/mollie-remote.ts` |
+| Merchant order number (optional) | Signed `merchant_order_number` when present |
+| Success URL | `/order-success?...` |
 | Cancel URL | `/checkout?cancelled=1&orderId=` |
-| Webhook signature | `constructEvent` + `STRIPE_WEBHOOK_SECRET` |
+| Webhook | `POST /api/webhooks/mollie-remote` |
 | Replay protection | `webhook_events` unique (provider, event_id) |
-| Order paid binding | Session must match order / metadata |
-| Success page verify | Bound session only |
+| Order paid binding | Authoritative paid webhook path |
 | Cancel UX | Checkout banner when `cancelled=1` |
 
 ---
@@ -116,15 +112,15 @@ npm test
 - [ ] Deploy host release
 - [ ] Run migrations (`npm run db:migrate:sql`)
 - [ ] Verify environment variables (`IV_VERIFY_AS_PRODUCTION=1 npm run env:verify`)
-- [ ] Verify Stripe webhook endpoint (Dashboard → recent deliveries 2xx)
-- [ ] Verify emails (paid order + contact form)
+- [ ] Verify Mollie Remote webhook deliveries
+- [ ] Verify emails (order received / paid + contact form)
 - [ ] Verify admin login (`/admin/login`)
 - [ ] Verify homepage
 - [ ] Verify service pages (at least IG followers + one URL service)
-- [ ] Verify checkout (redirects to Stripe)
+- [ ] Verify checkout (redirects to Mollie hosted payment)
 - [ ] Verify order success (paid)
 - [ ] Verify order tracking (`/track-order`)
-- [ ] Verify Stripe cancel return
+- [ ] Verify Mollie cancel return
 - [ ] Verify reviews + Learn Center
 - [ ] Verify `robots.txt` + `sitemap.xml`
 
@@ -146,23 +142,23 @@ npm test
 | Admin | `/admin/login` |
 | robots | `/robots.txt` |
 | sitemap | `/sitemap.xml` |
-| Stripe webhook | `POST /api/webhooks/stripe` |
+| Mollie webhook | `POST /api/webhooks/mollie-remote` |
 
 ---
 
 ## Rollback
 
-1. **Host rollback** — Redeploy the previous immutable deployment/release in the host UI (Vercel Instant Rollback / prior image tag).
-2. **Do not reverse migrations** unless a bad migration was applied; `0001_init.sql` is additive (`IF NOT EXISTS`). Prefer forward-fix.
-3. **Stripe** — If webhook misconfigured, disable the endpoint in Stripe Dashboard to stop retries, fix secret, re-enable.
-4. **Feature kill switches** — Unset Stripe keys only as last resort (checkout returns 503). Prefer host rollback.
+1. **Host rollback** — Redeploy the previous immutable deployment/release in the host UI (prior image/tag).
+2. **Do not reverse migrations** unless a bad migration was applied; prefer forward-fix.
+3. **Mollie / CarryCubes** — If webhook misconfigured, pause the remote endpoint, fix secret/URL, re-enable.
+4. Prefer host rollback over disabling live payment configuration.
 
 ---
 
 ## Post-deploy monitoring (first 24h)
 
-- Stripe webhook delivery success rate
+- Mollie Remote webhook delivery success rate
 - `/api/checkout/place-order` 4xx/5xx
 - Admin login failures / lockouts
-- Resend bounce/complaint
-- Server error logs (`[env]`, `[stripe webhook]`, `[payments]`)
+- Email bounce/complaint
+- Server error logs (`[env]`, `[payments]`, Mollie webhook logs)

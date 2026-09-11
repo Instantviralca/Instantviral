@@ -154,7 +154,7 @@ describe('placeOrder itemization', () => {
   it('persists all items with explicit cartQuantity', async () => {
     const order = await placeOrder({
       customer: { email: 'buyer@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [
@@ -200,7 +200,7 @@ describe('analytics revenue allocation safety', () => {
   it('does not invent double overall revenue from multi-item orders', async () => {
     const order = await placeOrder({
       customer: { email: 'buyer2@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [

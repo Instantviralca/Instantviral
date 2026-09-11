@@ -9,6 +9,7 @@ import type { PlaceOrderPayload } from '@/types/checkout';
 export type PaymentProviderId =
   | 'mollie-remote'
   | 'remote-payment'
+  /** Historical id — no runtime Stripe provider; retained for typed records only. */
   | 'stripe'
   | 'paypal'
   | 'jazzcash'
@@ -71,7 +72,7 @@ export type VerifyPaymentResult = {
   status: PaymentStatus;
   amount?: MoneyAmount;
   providerReference?: string;
-  /** Bound order id from Stripe client_reference_id / metadata (when present). */
+  /** Bound order id from provider metadata / client reference (when present). */
   orderId?: string;
 };
 

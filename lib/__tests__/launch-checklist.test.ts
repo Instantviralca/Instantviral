@@ -46,7 +46,7 @@ describe('Launch checklist surfaces', () => {
     expect(pageExists('app/api/checkout/place-order/route.ts')).toBe(true);
     expect(pageExists('app/api/contact/route.ts')).toBe(true);
     expect(pageExists('app/api/orders/track/route.ts')).toBe(true);
-    expect(pageExists('app/api/webhooks/stripe/route.ts')).toBe(true);
+    expect(pageExists('app/api/webhooks/mollie-remote/route.ts')).toBe(true);
     expect(pageExists('instrumentation.ts')).toBe(true);
     expect(pageExists('drizzle/0001_init.sql')).toBe(true);
     expect(pageExists('app/sitemap.ts')).toBe(true);

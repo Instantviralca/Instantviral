@@ -145,7 +145,6 @@ export const paymentsSection = {
     { id: 'visa', label: 'Visa' },
     { id: 'mastercard', label: 'Mastercard' },
     { id: 'paypal', label: 'PayPal' },
-    { id: 'stripe', label: 'Stripe' },
     { id: 'ssl', label: 'SSL Secure' },
   ],
 } as const;

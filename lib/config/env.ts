@@ -5,13 +5,11 @@
  * Canonical keys (preferred):
  * - DATABASE_URL (any standard PostgreSQL — Contabo local Postgres later)
  * - NEXT_PUBLIC_SITE_URL
- * - STRIPE_SECRET_KEY / NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY / STRIPE_WEBHOOK_SECRET
  * - IV_ADMIN_PASSWORD / IV_ADMIN_SESSION_SECRET
  * - EMAIL_FROM (+ SMTP_* preferred, or temporary RESEND_API_KEY on Vercel)
  *
  * Accepted aliases (for operator convenience):
  * - SITE_URL → NEXT_PUBLIC_SITE_URL
- * - STRIPE_PUBLISHABLE_KEY → NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY (server checks only)
  * - ADMIN_PASSWORD → IV_ADMIN_PASSWORD
  * - SESSION_SECRET → IV_ADMIN_SESSION_SECRET
  * - RESEND_FROM_EMAIL → EMAIL_FROM
@@ -131,18 +129,6 @@ export function isEmailConfigured(): boolean {
   return getEmailTransportKind() !== 'none';
 }
 
-export function getStripePublishableKey(): string | undefined {
-  return firstPresent('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY', 'STRIPE_PUBLISHABLE_KEY');
-}
-
-export function isStripeConfigured(): boolean {
-  return (
-    present('STRIPE_SECRET_KEY') &&
-    Boolean(getStripePublishableKey()) &&
-    present('STRIPE_WEBHOOK_SECRET')
-  );
-}
-
 export function isDatabaseConfigured(): boolean {
   return present('DATABASE_URL');
 }
@@ -243,28 +229,6 @@ export function validateEnv(options: {
       key: 'NEXT_PUBLIC_SITE_URL',
       level: 'error',
       message: 'NEXT_PUBLIC_SITE_URL must use HTTPS in production.',
-    });
-  }
-
-  if (!isStripeConfigured()) {
-    if (
-      present('STRIPE_SECRET_KEY') ||
-      present('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY') ||
-      present('STRIPE_WEBHOOK_SECRET')
-    ) {
-      issues.push({
-        key: 'STRIPE_SECRET_KEY',
-        level: 'warning',
-        message:
-          'Stripe keys are incomplete or unused. Checkout uses remote payment (Admin → Settings).',
-      });
-    }
-  } else if (production && !present('NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY')) {
-    issues.push({
-      key: 'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY',
-      level: 'warning',
-      message:
-        'Stripe publishable key missing — ignored while remote payment is the checkout provider.',
     });
   }
 

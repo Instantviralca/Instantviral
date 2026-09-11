@@ -43,7 +43,7 @@ describe('Launch checklist — orders + auth', () => {
   it('creates a pending order and allows track lookup', async () => {
     const order = await placeOrder({
       customer: { email: 'buyer@example.com' },
-      paymentMethodId: 'stripe',
+      paymentMethodId: 'mollie-remote',
       termsAccepted: true,
       coupon: null,
       items: [

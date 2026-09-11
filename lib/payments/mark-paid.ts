@@ -1,5 +1,5 @@
 /**
- * Mark orders paid after verified Stripe (or mock) payment.
+ * Mark orders paid after verified provider payment (Mollie Remote / mock).
  * Only paid orders enter the fulfilment queue.
  */
 
@@ -38,7 +38,7 @@ export async function markOrderPaymentStatus(input: {
     return { order: existing, duplicate: true, applied: false };
   }
 
-  // Reject cross-order binding once a real Stripe session is attached.
+  // Reject cross-order binding once a real provider payment id is attached.
   // Pending placeholder ids (`pending_*`) / mock ids may be replaced by the Checkout Session id.
   const storedPaymentId = existing.payment?.paymentId;
   const hasBoundCheckoutSession =
@@ -130,9 +130,7 @@ export async function markOrderPaymentStatus(input: {
     const provider = saved.payment?.provider ?? 'unknown';
     const normalizedProvider = provider.startsWith('mollie')
       ? 'mollie'
-      : provider.startsWith('stripe')
-        ? 'stripe'
-        : provider;
+      : provider;
     await recordServerAnalyticsEvent({
       eventName: 'payment_completed',
       eventId: `payment_completed_${saved.id}`,

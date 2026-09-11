@@ -3,7 +3,6 @@ import {
   mollieRemoteProvider,
   paypalProvider,
   remotePaymentProvider,
-  stripeProvider,
 } from '@/lib/payments/providers';
 import type {
   CancelPaymentInput,
@@ -18,7 +17,6 @@ import type {
 const registry: Partial<Record<PaymentProviderId, PaymentProvider>> = {
   'mollie-remote': mollieRemoteProvider,
   'remote-payment': remotePaymentProvider,
-  stripe: stripeProvider,
   paypal: paypalProvider,
 };
 

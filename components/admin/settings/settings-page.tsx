@@ -185,8 +185,8 @@ export function SettingsPage() {
         <div className="space-y-4">
           <p className="text-sm text-muted-foreground">
             Checkout uses the Mollie Remote Payment client protocol via{' '}
-            <code className="text-xs">carrycubes.com</code>. Stripe is paused — only
-            Mollie is active.
+            <code className="text-xs">carrycubes.com</code>. Mollie is the only
+            active checkout payment provider.
           </p>
           <p
             className={`text-sm font-medium ${mollieConfigured ? 'text-emerald-700' : 'text-amber-700'}`}
