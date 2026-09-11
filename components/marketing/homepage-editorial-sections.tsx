@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
 import {
-  Building2,
   CheckCircle2,
   ClipboardList,
   CreditCard,
@@ -18,7 +17,6 @@ import {
   Sparkles,
   Truck,
   UserRound,
-  Users,
   XCircle,
   type LucideIcon,
 } from 'lucide-react';
@@ -37,42 +35,6 @@ import { homepageMediaAssets } from '@/data/content/homepage-media';
 import { getHomepageContent } from '@/data/content/homepage';
 import { getFaqItemsByIds } from '@/data/content/faq';
 import { cn } from '@/lib/utils';
-
-function SectionIllustration({
-  src,
-  alt,
-  title,
-  width,
-  height,
-  className,
-}: {
-  src: string;
-  alt: string;
-  title?: string;
-  width: number;
-  height: number;
-  className?: string;
-}) {
-  return (
-    <figure
-      className={cn(
-        'overflow-hidden rounded-2xl border border-[var(--border-subtle)] bg-white shadow-[var(--shadow-sm)]',
-        className,
-      )}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        title={title}
-        width={width}
-        height={height}
-        className="h-auto max-h-[12rem] w-full object-cover sm:max-h-[14rem] lg:max-h-[16rem]"
-        sizes="(max-width: 1024px) 100vw, 720px"
-        loading="lazy"
-      />
-    </figure>
-  );
-}
 
 function ProseBlock({
   id,

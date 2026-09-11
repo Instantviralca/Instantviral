@@ -245,8 +245,8 @@ export function SettingsPage() {
           <p className="text-sm text-muted-foreground">
             Order confirmations, paid alerts, and contact-form messages use the shared
             transactional email service. Prefer <code className="text-xs">SMTP_*</code> +{' '}
-            <code className="text-xs">EMAIL_FROM</code> (Contabo-ready). Temporary{' '}
-            <code className="text-xs">RESEND_API_KEY</code> still works on Vercel while SMTP is unset.
+            <code className="text-xs">EMAIL_FROM</code> on Contabo. Optional{' '}
+            <code className="text-xs">RESEND_API_KEY</code> works when SMTP is unset.
           </p>
           <p
             className={`text-sm font-medium ${emailConfigured ? 'text-emerald-700' : 'text-amber-700'}`}

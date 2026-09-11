@@ -1,5 +1,5 @@
 /**
- * Temporary Resend HTTP adapter for the current Vercel period.
+ * Optional Resend HTTP adapter (used when SMTP is unset).
  * Abandoned-cart / order business logic must not import this directly —
  * use sendEmail() from lib/notifications/send-email.ts instead.
  */

@@ -27,7 +27,7 @@ function loginErrorHint(error: unknown): string {
   const lower = message.toLowerCase();
 
   if (lower.includes('session_secret') || lower.includes('admin_session_secret')) {
-    return 'Set IV_ADMIN_SESSION_SECRET in Vercel and redeploy.';
+    return 'Set IV_ADMIN_SESSION_SECRET on the host and restart the app.';
   }
 
   if (
@@ -56,7 +56,7 @@ function loginErrorHint(error: unknown): string {
   const short = message.replace(/\s+/g, ' ').trim().slice(0, 160);
   return short
     ? `Login server error: ${short}`
-    : 'Server error during login. Check Vercel logs.';
+    : 'Server error during login. Check PM2 / server logs.';
 }
 
 export async function POST(request: Request) {

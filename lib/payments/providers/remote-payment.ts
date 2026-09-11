@@ -120,7 +120,8 @@ export const remotePaymentProvider: PaymentProvider = {
     };
   },
 
-  async cancelPayment(_input: CancelPaymentInput) {
+  async cancelPayment(input: CancelPaymentInput) {
+    void input;
     return { status: 'cancelled' as const };
   },
 };

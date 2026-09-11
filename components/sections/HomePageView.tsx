@@ -44,7 +44,8 @@ const HOMEPAGE_FOLLOWERS_PRICING_DESCRIPTION =
  * Delivery → Hub → Who We Help → Reviews → Articles → Educational → FAQ → Final CTA.
  * Footer is global (SiteLayout).
  */
-export function HomePageView({ content: _content = getHomepageContent() }: HomePageViewProps) {
+export function HomePageView({ content = getHomepageContent() }: HomePageViewProps) {
+  void content;
   const hasPublishedGuides = getPublishedLearnArticleRecords().length > 0;
   const featuredReviews = getHomepageReviews(7);
 

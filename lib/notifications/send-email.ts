@@ -5,8 +5,8 @@
  * and never import Resend/SMTP adapters directly.
  *
  * Resolution order:
- * 1. SMTP_*  (Contabo / self-hosted — preferred long-term)
- * 2. RESEND_API_KEY (temporary Vercel compatibility)
+ * 1. SMTP_*  (Contabo / self-hosted — preferred)
+ * 2. RESEND_API_KEY (optional fallback when SMTP is unset)
  */
 
 import {

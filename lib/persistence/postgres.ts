@@ -295,7 +295,12 @@ export function createPostgresPersistence(): AppPersistence {
           return;
         }
         await db.insert(tables.orderItems).values(
-          rows.map(({ cartQuantity: _cq, lineTotal: _lt, ...rest }) => rest),
+          rows.map((row) => {
+            const { cartQuantity, lineTotal, ...rest } = row;
+            void cartQuantity;
+            void lineTotal;
+            return rest;
+          }),
         );
       }
 

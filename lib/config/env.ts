@@ -3,10 +3,10 @@
  * Never logs secret values.
  *
  * Canonical keys (preferred):
- * - DATABASE_URL (any standard PostgreSQL — Contabo local Postgres later)
+ * - DATABASE_URL (Contabo local Postgres, e.g. 127.0.0.1:5433)
  * - NEXT_PUBLIC_SITE_URL
  * - IV_ADMIN_PASSWORD / IV_ADMIN_SESSION_SECRET
- * - EMAIL_FROM (+ SMTP_* preferred, or temporary RESEND_API_KEY on Vercel)
+ * - EMAIL_FROM (+ SMTP_* preferred, or optional RESEND_API_KEY fallback)
  *
  * Accepted aliases (for operator convenience):
  * - SITE_URL → NEXT_PUBLIC_SITE_URL
@@ -64,7 +64,7 @@ export function getAdminSessionSecret(): string | undefined {
 export function getEmailFrom(): string | undefined {
   const raw = firstPresent('EMAIL_FROM', 'RESEND_FROM_EMAIL');
   if (!raw) return undefined;
-  // Strip accidental wrapping quotes from Vercel / .env paste.
+  // Strip accidental wrapping quotes from host / .env paste.
   return raw.replace(/^['"]+|['"]+$/g, '').trim() || undefined;
 }
 
@@ -109,7 +109,7 @@ export function isSmtpConfigured(): boolean {
   return Boolean(getSmtpConfig()) && Boolean(getEmailFrom());
 }
 
-/** Temporary Vercel-period Resend adapter. */
+/** Optional Resend adapter when SMTP is unset. */
 export function isResendConfigured(): boolean {
   return present('RESEND_API_KEY') && Boolean(getEmailFrom());
 }

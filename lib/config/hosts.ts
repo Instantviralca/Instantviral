@@ -176,7 +176,8 @@ export function isCheckoutHostname(host: string | null | undefined): boolean {
 }
 
 /** @deprecated Dev force flag removed with dedicated checkout host. */
-export function isCheckoutHostForced(_searchParams: URLSearchParams | string): boolean {
+export function isCheckoutHostForced(searchParams: URLSearchParams | string): boolean {
+  void searchParams;
   return false;
 }
 

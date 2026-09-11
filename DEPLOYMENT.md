@@ -2,9 +2,13 @@
 
 Safe launch runbook for instantviral.ca. Does not change product UI, SEO, pricing, or content.
 
-> **Operator guide (env vars, host setup, smoke tests):**
+> **Operator guide (env vars, Contabo/PM2, smoke tests):**
 > [`docs/PRODUCTION_DEPLOYMENT_GUIDE.md`](docs/PRODUCTION_DEPLOYMENT_GUIDE.md)
 > **Template:** [`.env.production.example`](.env.production.example)
+
+> **Production stack:** Contabo VPS + Nginx + PM2 + Cloudflare + PostgreSQL (typically `127.0.0.1:5433`).
+> **App:** Next.js 15.5.25 / React 19.
+> **Payments:** Mollie Remote via CarryCubes only (`mollie-remote`).
 
 > **Checkout:** Customer checkout is always on the main domain at `/checkout`
 > (`https://instantviral.ca/checkout`). Do not set a separate checkout origin for traffic.
@@ -15,7 +19,7 @@ Safe launch runbook for instantviral.ca. Does not change product UI, SEO, pricin
 
 ## Required environment variables
 
-Set these in the production host (Vercel / Railway / VPS). Never commit secrets.
+Set these in the production host env file used by PM2. Never commit secrets.
 
 | Required | Canonical key | Alias accepted |
 |----------|---------------|----------------|
@@ -28,7 +32,7 @@ Set these in the production host (Vercel / Railway / VPS). Never commit secrets.
 
 ### Mollie Remote (live checkout)
 
-Configure via Admin → Settings and/or env (see operator guide). Checkout uses **mollie-remote** only — there is no Stripe runtime.
+Configure via Admin → Settings and/or env. Checkout uses **mollie-remote** only.
 
 ### Strongly recommended
 
@@ -38,6 +42,7 @@ Configure via Admin → Settings and/or env (see operator guide). Checkout uses 
 | `EMAIL_SUPPORT` | Shown in customer emails |
 | `EMAIL_COMPANY_NAME` | Defaults to InstantViral |
 | `NEXT_PUBLIC_ADMIN_AUTH_CONFIGURED=true` | Shows admin login availability |
+| `ABANDONED_CART_CRON_SECRET` | Protect `/api/jobs/abandoned-carts` / CLI job |
 
 ### Forbidden in production
 
@@ -49,7 +54,7 @@ Production process **fails safely** at runtime if critical variables are missing
 
 ---
 
-## Deployment commands
+## Deployment commands (Contabo / PM2)
 
 ```bash
 # 1) Install
@@ -64,8 +69,9 @@ npx tsx scripts/apply-migrations.ts
 # 4) Build
 npm run build
 
-# 5) Start (Node host)
-npm run start
+# 5) Restart app process (example)
+pm2 restart instantviral
+# or: npm run start behind PM2
 ```
 
 ### npm scripts
@@ -76,18 +82,20 @@ npm run db:migrate:sql      # apply drizzle/*.sql with schema_migrations trackin
 npm run build
 npm run start
 npm test
+npm run abandoned-carts:process
 ```
 
 ---
 
 ## Manual configuration (outside the codebase)
 
-1. **DNS / HTTPS** — Point `instantviral.ca` (+ `www` redirect) to the host with a valid TLS certificate.
-2. **PostgreSQL** — Provision Postgres and set `DATABASE_URL` (use TLS/`sslmode=require` when required by the host).
-3. **Mollie Remote / CarryCubes** — Configure remote payment server URL + shared secret (Admin → Settings). Webhook: `https://instantviral.ca/api/webhooks/mollie-remote`.
-4. **Email** — Prefer SMTP on Contabo; temporary Resend is OK on Vercel. Verify sending domain; set `EMAIL_FROM`.
-5. **Host env panel** — Paste all secrets; redeploy after changes.
-6. **Search Console** — Submit `https://instantviral.ca/sitemap.xml` after go-live.
+1. **DNS / Cloudflare / HTTPS** — Point `instantviral.ca` (+ `www` redirect) through Cloudflare to Contabo; terminate TLS at Nginx/Cloudflare as designed.
+2. **PostgreSQL** — Local Contabo Postgres (example port **5433**); set `DATABASE_URL`.
+3. **Nginx** — Reverse-proxy to the Next.js PM2 listen port.
+4. **Mollie Remote / CarryCubes** — Configure remote payment server URL + shared secret (Admin → Settings). Webhook: `https://instantviral.ca/api/webhooks/mollie-remote`.
+5. **Email** — Prefer SMTP on Contabo. Verify sending domain; set `EMAIL_FROM`.
+6. **Cron / PM2** — Schedule abandoned-cart processing (`npm run abandoned-carts:process` or secured job URL).
+7. **Search Console** — Submit `https://instantviral.ca/sitemap.xml` after go-live.
 
 ---
 
@@ -109,7 +117,7 @@ npm test
 ## Launch checklist
 
 - [ ] Build (`npm run build`)
-- [ ] Deploy host release
+- [ ] Restart PM2 / Nginx healthy
 - [ ] Run migrations (`npm run db:migrate:sql`)
 - [ ] Verify environment variables (`IV_VERIFY_AS_PRODUCTION=1 npm run env:verify`)
 - [ ] Verify Mollie Remote webhook deliveries
@@ -123,6 +131,7 @@ npm test
 - [ ] Verify Mollie cancel return
 - [ ] Verify reviews + Learn Center
 - [ ] Verify `robots.txt` + `sitemap.xml`
+- [ ] Verify abandoned-cart cron schedule
 
 ---
 
@@ -148,7 +157,7 @@ npm test
 
 ## Rollback
 
-1. **Host rollback** — Redeploy the previous immutable deployment/release in the host UI (prior image/tag).
+1. **Host rollback** — Redeploy/restart the previous known-good release under PM2.
 2. **Do not reverse migrations** unless a bad migration was applied; prefer forward-fix.
 3. **Mollie / CarryCubes** — If webhook misconfigured, pause the remote endpoint, fix secret/URL, re-enable.
 4. Prefer host rollback over disabling live payment configuration.
@@ -161,4 +170,5 @@ npm test
 - `/api/checkout/place-order` 4xx/5xx
 - Admin login failures / lockouts
 - Email bounce/complaint
+- PM2 / Nginx / Postgres health
 - Server error logs (`[env]`, `[payments]`, Mollie webhook logs)

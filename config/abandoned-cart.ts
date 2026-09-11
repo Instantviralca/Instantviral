@@ -3,7 +3,7 @@
  * Timings live here (and optional env overrides), not scattered across components.
  *
  * Contabo-ready: the same values drive the Node recovery processor whether
- * invoked by Vercel Cron, Linux cron, or a long-running worker.
+ * invoked by protected API cron, Linux cron, or a long-running worker.
  */
 
 export type AbandonedCartStatus = 'active' | 'abandoned' | 'recovered' | 'lost';

@@ -2,7 +2,7 @@ import type { PaymentProviderConfig } from '@/types/payment';
 
 /**
  * Public payment method configuration — Document 10.06.
- * Remote Payment (Woo-style collector URL) is the live checkout path.
+ * Mollie Remote (CarryCubes) is the sole enabled live checkout provider.
  * Secret keys never appear here.
  */
 export const paymentProviders: PaymentProviderConfig[] = [

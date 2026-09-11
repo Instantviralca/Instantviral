@@ -3,8 +3,10 @@
 **Site:** https://instantviral.ca
 **Status:** Codebase is production-ready. Remaining blockers are missing production secrets.
 
-This guide covers environment variables, host setup, Mollie Remote payments, and post-launch verification.
+This guide covers environment variables, Contabo/PM2/Nginx/Cloudflare setup, Mollie Remote payments, and post-launch verification.
 **Do not commit real secrets.** Never put live keys in git.
+
+**Current production stack:** Contabo VPS · Nginx · PM2 · Cloudflare · PostgreSQL (commonly `127.0.0.1:5433`) · Next.js 15.5.25 · Mollie Remote / CarryCubes.
 
 ---
 
@@ -69,11 +71,8 @@ You may use these instead of the canonical names if preferred:
 ### `DATABASE_URL`
 
 - **Purpose:** PostgreSQL connection string for orders, order items, payments, contact messages, notification records, webhook idempotency, admin sessions, and login rate limits.
-- **Format:** `postgresql://USER:PASSWORD@HOST:5432/DATABASE?sslmode=require`
-- **Where to get it:**
-  - [Neon](https://console.neon.tech) → Project → Connection string
-  - [Supabase](https://supabase.com/dashboard) → Project Settings → Database → Connection string (URI)
-  - Any managed Postgres provider’s connection panel
+- **Format (Contabo local):** `postgresql://USER:PASSWORD@127.0.0.1:5433/instantviral`
+- **Where to get it:** Credentials for Postgres on the Contabo VPS (production commonly uses port **5433**).
 - **After setting:** Run migrations once: `npm run db:migrate:sql`
 
 ---
@@ -123,21 +122,18 @@ Never reuse the admin password as the session secret in production.
 
 ---
 
-### `RESEND_API_KEY`
+### SMTP (preferred) / `RESEND_API_KEY` (optional fallback)
 
-- **Purpose:** Authenticates API calls to Resend for order confirmation, contact acknowledgements, and admin notifications.
-- **Format:** Starts with `re_…`
-- **Where to get it:**
-  [Resend Dashboard](https://resend.com/api-keys) → **API Keys** → Create API key
+- **Preferred:** Contabo / self-hosted SMTP via `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `SMTP_SECURE`.
+- **Optional fallback:** `RESEND_API_KEY` when SMTP is unset (SMTP wins when both are set).
+- Resend keys start with `re_…` — [Resend Dashboard](https://resend.com/api-keys).
 
 ---
 
 ### `EMAIL_FROM`
 
-- **Purpose:** The From address on transactional emails (must be on a domain verified in Resend).
+- **Purpose:** The From address on transactional emails (must be allowed by your SMTP provider or verified in Resend).
 - **Example:** `orders@instantviral.ca` or `InstantViral <orders@instantviral.ca>`
-- **Where to get it:**
-  Resend Dashboard → **Domains** → add & verify `instantviral.ca` (DNS records) → use an address on that domain
 
 ---
 
@@ -145,37 +141,31 @@ Never reuse the admin password as the session secret in production.
 
 See **[`.env.production.example`](.env.production.example)** in the repo root.
 
-Copy it into your password manager / Vercel env UI. Fill real values. Do not rename it to `.env.production` and commit it with secrets.
+Copy values into the Contabo host env file used by PM2 (or your password manager). Do not commit secrets.
 
 ---
 
-## 4. Configure variables on Vercel
+## 4. Configure Contabo (Nginx + PM2 + Cloudflare)
 
-### A. Create / open the project
+### A. Host layout
 
-1. Go to [Vercel Dashboard](https://vercel.com/dashboard)
-2. Open the InstantViral project (or **Add New** → import the Git repository)
-3. Framework: **Next.js** (auto-detected)
+1. Contabo VPS runs Next.js under **PM2** (`npm run start` after `npm run build`).
+2. **Nginx** reverse-proxies HTTPS traffic to the Node listen port.
+3. **Cloudflare** sits in front for DNS/CDN/WAF as configured.
+4. **PostgreSQL** on localhost (production commonly **5433**).
 
-### B. Add environment variables
+### B. Environment variables on the VPS
 
-1. Project → **Settings** → **Environment Variables**
-2. For each required key:
-   - **Key:** exact name (e.g. `DATABASE_URL`)
-   - **Value:** production secret
-   - **Environments:** enable **Production** (and Preview only if you intentionally want staging secrets)
-3. Add all nine required variables plus recommended email fields
-4. Click **Save**
-
-### C. Important Vercel notes
+1. Put secrets in the env file / PM2 ecosystem env (never in git).
+2. Set all required keys plus recommended email fields.
+3. After changing `NEXT_PUBLIC_*`, rebuild (`npm run build`) and restart PM2.
 
 | Topic | Guidance |
 |-------|----------|
-| `NEXT_PUBLIC_*` vars | Must be set **before** a production build/deploy. Changing them requires a **redeploy**. |
-| Secrets | `IV_ADMIN_*`, SMTP/`RESEND_API_KEY`, Mollie shared secret, `DATABASE_URL` — Production only; never expose in client code. |
-| Domain | Project → **Settings** → **Domains** → add `instantviral.ca` (+ redirect `www` → apex if desired) |
-| Legacy checkout host | Optional: keep `checkout.instantviral.ca` on the same project so middleware can 308 → `/checkout` (see C1) |
-| HTTPS | Automatic on Vercel once DNS is pointed correctly |
+| Secrets | `IV_ADMIN_*`, SMTP/`RESEND_API_KEY`, Mollie shared secret, `DATABASE_URL` — never expose in client code |
+| Domain | Cloudflare → Contabo; apex `instantviral.ca` (+ `www` redirect if desired) |
+| Legacy checkout host | Optional: point `checkout.instantviral.ca` at the same app for 308 → `/checkout` (see C1) |
+| HTTPS | Cloudflare / Nginx TLS as designed |
 
 ### C1. Legacy checkout subdomain redirects (`checkout.instantviral.ca`)
 
@@ -189,7 +179,7 @@ If old emails, bookmarks, or campaigns still link to `checkout.instantviral.ca`,
 | `https://checkout.instantviral.ca/checkout/...` | `https://instantviral.ca/checkout/...` |
 | Recovery tokens / query string | Preserved |
 
-1. Keep (or add) `checkout.instantviral.ca` in Vercel Domains **only** for redirects — do not set it as the customer checkout origin.
+1. Point `checkout.instantviral.ca` at this app **only** for redirects — do not set it as the customer checkout origin.
 2. Optional env: `NEXT_PUBLIC_LEGACY_CHECKOUT_HOST=checkout.instantviral.ca`
    (`NEXT_PUBLIC_CHECKOUT_URL` is deprecated; if still set to a different host, it is treated as a legacy redirect hint only.)
 3. Mollie return URL → `https://instantviral.ca/order-success?...`
@@ -197,43 +187,31 @@ If old emails, bookmarks, or campaigns still link to `checkout.instantviral.ca`,
 5. Mollie webhook → `https://instantviral.ca/api/webhooks/mollie-remote`
 6. Abandoned-cart recovery emails → `https://instantviral.ca/checkout/recover/{token}`
 
-**DNS / Contabo:** Do not change DNS in the app deploy itself. If the legacy hostname is not yet on this project, that is a manual follow-up at the DNS/CDN/hosting layer.
+### D. Database migrations
 
-### D. Database migrations on Vercel
-
-Vercel does not automatically run SQL migrations. After `DATABASE_URL` is set:
-
-**Option 1 — Local one-time (recommended for first launch):**
+Run after `DATABASE_URL` is set (on the VPS or any shell with production DB access):
 
 ```bash
-# With production DATABASE_URL in your shell or .env.local (do not commit)
 npm run db:migrate:sql
 ```
 
-**Option 2 — Vercel CLI / one-off job:** run the same command in an environment that has production `DATABASE_URL`.
-
-### E. Deploy
+### E. Deploy / restart
 
 ```bash
-# From connected Git: push to main (or your production branch)
-git push origin main
-
-# Or Vercel CLI
-vercel --prod
+npm ci
+npm run build
+pm2 restart instantviral
 ```
 
-After first deploy with new `NEXT_PUBLIC_*` values, confirm a fresh Production deployment completed.
+### F. Preflight check
 
-### F. Preflight check (optional, from your machine)
-
-With production values loaded locally (never commit them):
+With production values loaded (never commit them):
 
 ```bash
 IV_VERIFY_AS_PRODUCTION=1 npm run env:verify
 ```
 
 Expect: `[env] READY — critical production variables are present.`
-
 ---
 
 ## 5. Configure Mollie Remote webhooks
@@ -338,7 +316,7 @@ npm run db:migrate:sql
 
 ## 9. Rollback (if needed)
 
-1. Redeploy the previous successful Production release
+1. Restart/redeploy the previous known-good release under PM2
 2. If Mollie/CarryCubes webhook is failing repeatedly, pause the remote endpoint, fix secret/URL, re-enable
 3. Do not reverse additive SQL migrations; prefer forward-fix
 
@@ -348,9 +326,9 @@ npm run db:migrate:sql
 
 | Variable | Obtain from |
 |----------|-------------|
-| `DATABASE_URL` | Neon / Supabase / Postgres → connection string (`sslmode=require`) |
+| `DATABASE_URL` | Contabo local Postgres (e.g. `127.0.0.1:5433`) |
 | `NEXT_PUBLIC_SITE_URL` | `https://instantviral.ca` |
 | Mollie Remote server URL + secret | CarryCubes / Admin → Settings |
 | `IV_ADMIN_PASSWORD` | Generate a strong unique password (`openssl rand -base64 32`) |
 | `IV_ADMIN_SESSION_SECRET` | Generate a long random secret (`openssl rand -hex 64`) |
-| `EMAIL_FROM` + SMTP or `RESEND_API_KEY` | Mail host / Resend dashboard |
+| `EMAIL_FROM` + SMTP or `RESEND_API_KEY` | Contabo SMTP preferred / Resend as optional fallback |

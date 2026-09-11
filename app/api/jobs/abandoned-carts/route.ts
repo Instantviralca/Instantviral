@@ -34,8 +34,8 @@ function authorize(request: Request): boolean {
 
 /**
  * Hosting-neutral job entrypoint.
- * Temporary Vercel Cron can hit this; Contabo Linux cron can call the same URL or
- * `npx tsx scripts/process-abandoned-carts.ts`.
+ * Contabo: Linux cron / PM2 can call this URL or `npm run abandoned-carts:process`.
+ * Optional `vercel.json` cron schedule is historical/compat only — production uses Contabo.
  */
 async function run(request: Request) {
   if (!authorize(request)) {

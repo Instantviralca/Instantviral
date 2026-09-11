@@ -2,8 +2,8 @@
  * Hosting-independent abandoned cart recovery processor.
  *
  * Call `processDueAbandonedCartEmails()` from:
- * - Vercel Cron / protected API (temporary while on Vercel)
- * - Linux cron hitting the same endpoint or a Node script
+ * - Protected API `/api/jobs/abandoned-carts`
+ * - Linux cron / `npm run abandoned-carts:process`
  * - PM2 / systemd worker
  *
  * All due-state lives in PostgreSQL — safe across restarts and providers.
