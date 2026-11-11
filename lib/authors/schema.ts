@@ -14,10 +14,15 @@ import { breadcrumbSchema } from '@/schemas/breadcrumb';
 
 function sameAsFromAuthor(author: PublicAuthor): string[] {
   const links: string[] = [];
-  if (author.website) links.push(author.website);
+  const push = (value?: string) => {
+    const trimmed = value?.trim();
+    if (trimmed) links.push(trimmed);
+  };
+
+  push(author.website);
   if (author.socialLinks) {
     for (const value of Object.values(author.socialLinks)) {
-      if (value) links.push(value);
+      push(value);
     }
   }
   return links;
@@ -39,7 +44,7 @@ export function getAuthorSchema(author: PublicAuthor): JsonLd {
     url: absoluteUrl(author.profilePath || authorPath(author.slug)),
     image: author.avatar ? absoluteUrl(author.avatar) : undefined,
     knowsAbout: author.expertise.length ? [...author.expertise] : undefined,
-    sameAs: sameAs.length ? sameAs : undefined,
+    ...(sameAs.length > 0 ? { sameAs } : {}),
     worksFor: {
       '@type': 'Organization',
       name: brand.name,

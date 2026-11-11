@@ -183,7 +183,12 @@ describe('Author System — Document 15.03', () => {
   });
 
   it('builds Person schema without private email or notes', () => {
-    mockAuthors.push(makeAuthor({ website: 'https://example.com/jordan' }));
+    mockAuthors.push(
+      makeAuthor({
+        website: 'https://example.com/jordan',
+        socialLinks: { linkedin: 'https://www.linkedin.com/in/example' },
+      }),
+    );
     const author = getAuthorBySlug('jordan-lee')!;
     const person = getAuthorSchema(author);
     const pageLd = getAuthorPageJsonLd(author);
@@ -191,11 +196,21 @@ describe('Author System — Document 15.03', () => {
 
     expect(person['@type']).toBe('Person');
     expect(person.name).toBe('Jordan Lee');
+    expect(person.sameAs).toEqual([
+      'https://example.com/jordan',
+      'https://www.linkedin.com/in/example',
+    ]);
     expect(person).not.toHaveProperty('email');
     expect(serialized).not.toContain('private@example.com');
     expect(serialized).not.toContain('Do not expose');
     expect(serialized).toContain('Organization');
     expect(serialized).toContain('BreadcrumbList');
+  });
+
+  it('omits Person sameAs when no website or social URLs are set', () => {
+    mockAuthors.push(makeAuthor({ socialLinks: { linkedin: '' } }));
+    const person = getAuthorSchema(getAuthorBySlug('jordan-lee')!);
+    expect(person).not.toHaveProperty('sameAs');
   });
 
   it('handles missing avatar without inventing imagery', () => {

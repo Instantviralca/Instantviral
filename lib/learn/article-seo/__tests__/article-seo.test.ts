@@ -25,6 +25,7 @@ const mockAuthor: PublicAuthor = {
   },
   articleCount: 1,
   profilePath: '/authors/jordan-lee',
+  socialLinks: { linkedin: 'https://www.linkedin.com/in/example' },
 };
 
 vi.mock('@/lib/authors/getters', () => ({
@@ -209,6 +210,8 @@ describe('Article SEO & Schema Engine — Document 15.07', () => {
     expect(article?.author).toMatchObject({
       '@type': 'Person',
       name: 'Jordan Lee',
+      url: 'https://instantviral.ca/authors/jordan-lee',
+      sameAs: ['https://www.linkedin.com/in/example'],
     });
     expect(JSON.stringify(article?.author)).not.toContain('email');
     expect(article?.publisher).toMatchObject({
@@ -221,6 +224,8 @@ describe('Article SEO & Schema Engine — Document 15.07', () => {
   it('builds Person author schema without private email', () => {
     const person = buildArticleAuthorSchema('author-1');
     expect(person?.['@type']).toBe('Person');
+    expect(person?.name).toBe('Jordan Lee');
+    expect(person?.sameAs).toEqual(['https://www.linkedin.com/in/example']);
     expect(person).not.toHaveProperty('email');
     expect(buildArticleAuthorSchema('missing')).toBeNull();
   });
