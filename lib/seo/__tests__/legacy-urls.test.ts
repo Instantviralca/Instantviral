@@ -157,6 +157,51 @@ describe('legacy Twitter 410 Gone', () => {
   });
 });
 
+describe('legacy shop, terms, and remaining product keyword redirects', () => {
+  it('maps /shop (slash + non-slash) to homepage in one hop', () => {
+    expect(resolveLegacySeoPath('/shop')).toEqual({ kind: 'redirect', destination: '/' });
+    expect(resolveLegacySeoPath('/shop/')).toEqual({ kind: 'redirect', destination: '/' });
+  });
+
+  it('maps /terms-conditions (slash + non-slash) to /terms-and-conditions', () => {
+    expect(resolveLegacySeoPath('/terms-conditions')).toEqual({
+      kind: 'redirect',
+      destination: '/terms-and-conditions',
+    });
+    expect(resolveLegacySeoPath('/terms-conditions/')).toEqual({
+      kind: 'redirect',
+      destination: '/terms-and-conditions',
+    });
+  });
+
+  it('maps remaining /product slugs by keywords when not in the exact map', () => {
+    expect(resolveLegacySeoPath('/product/buy-1000-facebook-page-likes/')).toEqual({
+      kind: 'redirect',
+      destination: '/buy-facebook-page-likes',
+    });
+    expect(resolveLegacySeoPath('/product/buy-1000-facebook-post-likes/')).toEqual({
+      kind: 'redirect',
+      destination: '/buy-facebook-post-likes',
+    });
+    expect(resolveLegacySeoPath('/product/buy-500-instagram-likes/')).toEqual({
+      kind: 'redirect',
+      destination: '/buy-instagram-likes',
+    });
+  });
+
+  it('returns gone for unmatched /product slugs such as Spotify', () => {
+    expect(resolveLegacySeoPath('/product/buy-100-spotify-plays/')).toEqual({
+      kind: 'gone',
+    });
+  });
+
+  it('keeps Twitter/X product URLs as gone, not keyword redirects', () => {
+    expect(resolveLegacySeoPath('/product/buy-10000-twitter-followers/')).toEqual({
+      kind: 'gone',
+    });
+  });
+});
+
 describe('legacy URLs absent from sitemap + destinations indexable', () => {
   const urls = buildSitemapEntries().map((entry) => entry.url);
 

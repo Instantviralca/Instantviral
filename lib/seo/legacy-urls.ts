@@ -32,6 +32,8 @@ export const LEGACY_SEO_REDIRECTS: Readonly<Record<string, string>> = {
   '/buy-youtube-subscribers-views': '/buy-youtube-subscribers',
   '/buy-youtube-subscribers-views/': '/buy-youtube-subscribers',
   ...withSlashVariants({
+    '/shop': '/',
+    '/terms-conditions': '/terms-and-conditions',
     '/learn/buy-instagram-followers-canada': '/learn',
     '/instagram-services-prices': '/',
     '/product/buy-100-tiktok-followers': '/buy-tiktok-followers',
@@ -100,6 +102,57 @@ export type LegacySeoResolution =
   | { kind: 'gone' }
   | { kind: 'none' };
 
+/**
+ * Fallback for /product/<slug> not already in LEGACY_SEO_REDIRECTS.
+ * Twitter/X is handled earlier as 410. More specific Facebook matches first.
+ */
+function resolveProductKeywordRedirect(pathname: string): LegacySeoResolution | null {
+  const normalized = stripTrailingSlashes(pathname).toLowerCase();
+  if (!normalized.startsWith('/product/')) return null;
+
+  const slug = normalized.slice('/product/'.length);
+  if (!slug) return { kind: 'gone' };
+
+  if (slug.includes('facebook') && slug.includes('page') && slug.includes('likes')) {
+    return { kind: 'redirect', destination: '/buy-facebook-page-likes' };
+  }
+  if (slug.includes('facebook') && slug.includes('post') && slug.includes('likes')) {
+    return { kind: 'redirect', destination: '/buy-facebook-post-likes' };
+  }
+  if (slug.includes('facebook') && slug.includes('followers')) {
+    return { kind: 'redirect', destination: '/buy-facebook-followers' };
+  }
+  if (slug.includes('instagram') && slug.includes('followers')) {
+    return { kind: 'redirect', destination: '/' };
+  }
+  if (slug.includes('instagram') && slug.includes('likes')) {
+    return { kind: 'redirect', destination: '/buy-instagram-likes' };
+  }
+  if (slug.includes('instagram') && slug.includes('views')) {
+    return { kind: 'redirect', destination: '/buy-instagram-views' };
+  }
+  if (slug.includes('instagram') && slug.includes('comments')) {
+    return { kind: 'redirect', destination: '/buy-instagram-comments' };
+  }
+  if (slug.includes('tiktok') && slug.includes('followers')) {
+    return { kind: 'redirect', destination: '/buy-tiktok-followers' };
+  }
+  if (slug.includes('tiktok') && slug.includes('likes')) {
+    return { kind: 'redirect', destination: '/buy-tiktok-likes' };
+  }
+  if (slug.includes('tiktok') && slug.includes('views')) {
+    return { kind: 'redirect', destination: '/buy-tiktok-views' };
+  }
+  if (slug.includes('youtube') && slug.includes('subscribers')) {
+    return { kind: 'redirect', destination: '/buy-youtube-subscribers' };
+  }
+  if (slug.includes('youtube') && slug.includes('views')) {
+    return { kind: 'redirect', destination: '/buy-youtube-views' };
+  }
+
+  return { kind: 'gone' };
+}
+
 export function resolveLegacySeoPath(pathname: string): LegacySeoResolution {
   if (isRetiredTwitterOrXPath(pathname) || LEGACY_GONE_PATHS.has(pathname)) {
     return { kind: 'gone' };
@@ -108,7 +161,7 @@ export function resolveLegacySeoPath(pathname: string): LegacySeoResolution {
   if (destination) {
     return { kind: 'redirect', destination };
   }
-  return { kind: 'none' };
+  return resolveProductKeywordRedirect(pathname) ?? { kind: 'none' };
 }
 
 /**
