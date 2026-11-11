@@ -1018,7 +1018,7 @@ export function HomepageTrustedReviewsSection({
                       </p>
                       {index === 0 && !hasRealReviews ? (
                         <p className="mt-2 text-[11px] text-[var(--text-muted)]">
-                          Placeholder — replace with approved authentic reviews before launch.
+                          Placeholder: replace with approved authentic reviews before launch.
                         </p>
                       ) : null}
                     </article>

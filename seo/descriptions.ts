@@ -14,7 +14,7 @@ function clampDescription(text: string, max = 155): string {
 export const descriptions = {
   home: () =>
     clampDescription(
-      'Buy Instagram followers in Canada with secure checkout, no password required, gradual delivery and clear packages. Explore likes and views — InstantViral.',
+      'Buy Instagram followers in Canada with secure checkout, no password required, gradual delivery and clear packages. Explore likes and views, InstantViral.',
     ),
 
   service: (service: Service) => {

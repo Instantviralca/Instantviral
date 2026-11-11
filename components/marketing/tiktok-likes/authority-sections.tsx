@@ -44,7 +44,7 @@ export function TikTokLikesLivePreview({ className }: { className?: string }) {
             </Heading>
             <MutedText className="text-base leading-relaxed sm:text-[1.05rem]">
               A visual illustration of how like counts can appear on a TikTok-style video frame.
-              Decorative sample numbers only — not a performance claim.
+              Decorative sample numbers only, not a performance claim.
             </MutedText>
             <p className="inline-flex rounded-full border border-[color-mix(in_srgb,var(--brand-primary)_22%,var(--border-subtle))] bg-white px-3 py-1.5 text-[11px] font-semibold text-[var(--brand-primary)]">
               Illustration preview

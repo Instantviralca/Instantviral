@@ -277,7 +277,7 @@ export function HomepageBuyingResponsiblySection() {
             Buying Instagram Followers Responsibly
           </Heading>
           <Text className="leading-relaxed text-[var(--text-secondary)]">
-            Pre-purchase education only—how audience packages work, red flags to avoid, and what to
+            Pre-purchase education only: how audience packages work, red flags to avoid, and what to
             verify before checkout.
           </Text>
         </FadeUp>

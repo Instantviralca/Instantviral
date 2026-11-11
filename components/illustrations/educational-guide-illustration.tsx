@@ -218,7 +218,7 @@ function renderIllustration(id: EducationalIllustrationId) {
             </span>
           </p>
           <p className="text-[12px] leading-snug text-stone-800">
-            Yes — reply same day and pin FAQs.
+            Yes, reply same day and pin FAQs.
           </p>
           <div className="mt-1.5 flex items-center gap-1.5">
             <span className="rounded-full bg-white/70 px-1.5 py-0.5 text-[9px] font-semibold">
