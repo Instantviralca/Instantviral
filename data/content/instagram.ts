@@ -202,13 +202,13 @@ function buildBuyInstagramLikesContent(): ServiceContent {
     seo: {
       title: 'Buy Instagram Likes Canada | InstantViral',
       description:
-        'Buy Instagram likes through InstantViral with clear package options, delivery details, secure checkout, order tracking and a public post URL only.',
+        'Buy Instagram likes in Canada for posts and Reels. Clear package prices, public post link only, secure checkout and order tracking. No password needed.',
     },
     hero: {
       eyebrow: 'INSTAGRAM LIKES PRICING',
       title: 'Instagram Likes Packages',
       description:
-        'Pick a Likes package that supports stronger first impressions on posts or Reels. Compare pricing, check delivery, and order with a public Instagram post URL only.',
+        'Give a post or Reel a stronger first impression when it matters, like a product launch, an event in your city or a portfolio piece. Pick a package, paste the public post link and check delivery timing before you pay. We never ask for your Instagram password.',
       purpose: 'Convert visitors looking to buy Instagram likes',
       primaryKeyword: 'buy instagram likes',
       supportingKeywords: [
@@ -246,7 +246,7 @@ function buildBuyInstagramLikesContent(): ServiceContent {
       id: 'pricing-packages',
       title: 'Instagram Likes Pricing',
       description:
-        'Select a real likes package quantity and price. Delivery timing is confirmed before checkout for the option you choose.',
+        'Select a likes package by quantity and price. Delivery timing is confirmed before checkout for the option you choose.',
       purpose: 'Present real InstantViral.ca likes packages',
       primaryKeyword: 'Instagram Likes Pricing',
       suggestedWordCount: 40,
@@ -385,13 +385,13 @@ function buildBuyInstagramViewsContent(): ServiceContent {
     seo: {
       title: 'Buy Instagram Views Canada | InstantViral',
       description:
-        'Buy Instagram views in Canada with clear Reel and video package options, delivery estimates, secure checkout, order tracking and no password required.',
+        'Buy Instagram views in Canada for Reels and videos. See package prices and delivery times up front, order with a public link and track progress.',
     },
     hero: {
       eyebrow: 'INSTAGRAM VIDEO GROWTH SERVICES FOR CANADA',
       title: 'Buy Instagram Views Canada',
       description:
-        'Help Reels and videos get started more often with real Views packages. Compare the InstantViral.ca options, confirm delivery timing, and order with a public video URL—no Instagram password required.',
+        'Give a Reel or video a stronger start with a views package. Compare the InstantViral options, check the delivery timing and order with a public video URL. No Instagram password is needed.',
       purpose: 'Convert for Instagram views packages in Canada',
       primaryKeyword: 'buy Instagram views Canada',
       supportingKeywords: [
@@ -502,6 +502,11 @@ function buildBuyInstagramViewsContent(): ServiceContent {
         'faq-ig-views-refill',
         'faq-ig-views-money-back',
         'faq-ig-views-track',
+        'faq-ig-views-how-counted',
+        'faq-ig-views-which-videos',
+        'faq-ig-views-followers',
+        'faq-ig-views-best-time',
+        'faq-ig-views-private',
       ],
     },
     relatedServices: {
@@ -543,13 +548,13 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
     seo: {
       title: 'Buy Instagram Comments Canada | InstantViral',
       description:
-        'Buy Instagram comments in Canada with clear package options, a public post URL, secure checkout, delivery details and order tracking through InstantViral.',
+        'Buy Instagram comments in Canada for launches, offers and how to posts. Public post link only, clear packages, secure checkout and order tracking.',
     },
     hero: {
       eyebrow: 'INSTAGRAM COMMENT SERVICE FOR CANADA',
       title: 'Buy Instagram Comments Canada',
       description:
-        'Increase meaningful engagement with comments that help your posts look more active and encourage genuine conversations. Choose a package, place your order using only your public post URL, and monitor delivery through secure order tracking.',
+        'Comments make a post look like a conversation instead of an announcement. Canadian creators and local businesses use comment packages on launches, offers and how to posts, then keep the thread going with their own replies. Choose a package, add the public post link and follow delivery from your order page.',
       purpose: 'Convert visitors searching for Instagram comments packages',
       primaryKeyword: 'buy Instagram comments Canada',
       supportingKeywords: [
@@ -598,7 +603,7 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
       id: 'why-buy-instagram-comments',
       title: 'Support the Conversation Around Important Content',
       description:
-        'Comments create conversations. Active discussion under a post helps new visitors see credibility, not a quiet grid. Visible engagement also makes it easier for more people to join in.\n\nCreators, businesses, and brands use comments packages when a launch, announcement, or educational post needs a stronger first impression—without replacing real replies, captions, or community management.',
+        'Comments create conversation. An active discussion under a post shows new visitors that people care about it, and makes it easier for others to join in.\n\nCreators, businesses and brands across Canada use comment packages when a launch, announcement or how to post needs a stronger first impression. They work best alongside your own replies, captions and community management.',
       purpose: 'Explain how comments support credibility and conversation',
       primaryKeyword: 'Instagram comments',
       suggestedWordCount: 160,
@@ -607,7 +612,7 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
           id: 'ig-c-benefit-conversation',
           title: 'Comments create conversations',
           description:
-            'A thread gives people something to read, ask about, and respond to—so the post feels like a discussion, not a monologue.',
+            'A thread gives people something to read, ask about and respond to, so the post feels like a discussion instead of a monologue.',
         },
         {
           id: 'ig-c-benefit-credibility',
@@ -691,7 +696,7 @@ function buildBuyInstagramCommentsContent(): ServiceContent {
       id: 'how-it-works',
       title: 'How to Buy Instagram Comments',
       description:
-        'Five clear steps from package selection to delivery—built for desktop and mobile checkout.',
+        'Five clear steps from choosing a package to delivery, on desktop or mobile.',
       purpose: 'Explain the comments ordering process',
       primaryKeyword: 'buy Instagram comments',
       suggestedWordCount: 120,

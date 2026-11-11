@@ -153,7 +153,7 @@ export const YOUTUBE_SUBSCRIBERS_PAGE_CONFIG: YouTubeSubscribersPageConfig = {
     id: 'can-you-buy-youtube-subscribers',
     title: 'Can You Buy YouTube Subscribers?',
     description:
-      'Yes. YouTube subscriber packages can be purchased by selecting a package, providing your public YouTube channel URL and completing secure checkout. Your YouTube password is not required. Subscriber packages increase the visible subscriber count on your channel, but they do not guarantee additional views, watch time, monetization approval or algorithmic promotion.',
+      'Yes. Choose a package, add your public YouTube channel URL and pay through secure checkout. We never ask for your YouTube password. Subscriber packages raise the subscriber count on your channel. Views, watch time and monetization still depend on your videos and YouTube\'s own rules.',
     cards: [
       {
         id: 'yt-s-can-url',
@@ -189,7 +189,7 @@ export const YOUTUBE_SUBSCRIBERS_PAGE_CONFIG: YouTubeSubscribersPageConfig = {
     id: 'does-buying-youtube-subscribers-help',
     title: 'Does Buying YouTube Subscribers Help?',
     description:
-      'Buying YouTube subscribers increases the visible subscriber count displayed on your channel, which may help create a stronger first impression for new visitors. However, subscriber packages do not guarantee additional video views, watch time, audience retention, monetization approval or higher visibility in YouTube recommendations.',
+      'It raises the subscriber count shown on your channel, which can help a new visitor decide to watch. It does not affect monetization approval or how YouTube recommends your videos. Watch time and retention still come from the videos you publish.',
     helpTitle: 'What Subscriber Packages Can Help With',
     helpItems: [
       'Improve visible channel credibility',

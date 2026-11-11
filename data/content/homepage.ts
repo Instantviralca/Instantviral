@@ -11,7 +11,7 @@ export const homepageContent: HomepageContent = {
     eyebrow: 'Instagram Growth Platform in Canada',
     title: 'Buy Instagram Followers Canada',
     description:
-      'Build stronger social proof for your Instagram profile with package-based growth for Canadian creators, businesses, and brands. Compare real audience packages, likes, and views—then buy IG followers or buy followers for Instagram when you are ready.',
+      'Build stronger social proof for your Instagram profile with packages made for Canadian creators, businesses and brands. Compare follower, like and view packages, then order when you are ready.',
     primaryMessage:
       'The clear path to buy Instagram followers and grow brand presence across Canada.',
     purpose: 'Convert visitors searching to buy Instagram followers in Canada',
@@ -172,7 +172,7 @@ export const homepageContent: HomepageContent = {
     id: 'home-why',
     title: 'Why Canadian Customers Choose InstantViral',
     description:
-      'InstantViral keeps Instagram ordering clear for Canadian customers — from package selection through checkout and delivery tracking.',
+      'InstantViral keeps Instagram ordering simple for Canadian customers, from choosing a package to checkout and delivery tracking.',
     purpose: 'Explain practical ordering features',
     suggestedWordCount: 200,
     cta: {

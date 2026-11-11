@@ -248,14 +248,14 @@ export const INSTAGRAM_LIKES_EDUCATIONAL_GUIDE: EducationalGuideContent = {
   serviceSlug: 'buy-instagram-likes',
   title: 'How Instagram Likes Improve Engagement',
   description:
-    'How likes shape first impressions and post performance—without confusing them with long-term audience growth.',
+    'How likes shape first impressions and post performance, and why they are not the same as long term audience growth.',
   blocks: [
     {
       type: 'intro',
       paragraphs: [
         'Instagram likes are a fast signal that a post earned a reaction. In the first few hours, that counter often decides whether strangers pause or keep scrolling.',
         'Likes support post performance. Followers grow who can see future work. Mixing those goals is how people buy the wrong package.',
-        'Treat likes as help for launches, portfolio posts, and clips that already have a clear hook—not as a substitute for the creative.',
+        'Use likes for launches, portfolio posts and clips that already have a clear hook. They support the creative, they do not replace it.',
         'If you sell to Canadian customers, package clarity still matters: public post URL only, visible delivery expectations, and tracking after payment.',
       ],
     },
@@ -319,7 +319,7 @@ export const INSTAGRAM_LIKES_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       items: [
         'Keep the post or Reel public while delivery runs',
         'Reply to genuine comments so engagement does not stop at a counter',
-        'Review saves and profile visits—not only the like total',
+        'Review saves and profile visits, not only the like total',
         'Note which hooks earned honest replies for the next upload',
       ],
     },
@@ -330,7 +330,7 @@ export const INSTAGRAM_LIKES_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       illustration: 'likes-analytics',
       reverse: true,
       paragraphs: [
-        'Lead captions with one concrete hook. Ask a specific question instead of “thoughts?” Formats that earn time spent—carousels or tight Reels—usually outperform vague grids.',
+        'Lead captions with one concrete hook. Ask a specific question instead of “thoughts?” Formats that hold attention, such as carousels or tight Reels, usually beat a vague grid.',
         'Match package size to the post’s likely organic reach. Ordering far more than the audience can explain often looks odd next to quiet historical posts.',
         'When a Reel needs watching more than liking, compare [Instagram views](/buy-instagram-views). For discussion under the same post, see [Instagram comments](/buy-instagram-comments).',
       ],
@@ -351,7 +351,7 @@ export const INSTAGRAM_LIKES_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       id: 'wrap',
       title: 'Before you order likes',
       body:
-        'Keep the target post public and choose a quantity that fits that upload—not every quiet tile. Audience building still belongs with [Instagram followers](/#pricing-packages); conversation with [Instagram comments](/buy-instagram-comments).',
+        'Keep the target post public and choose a quantity that suits that upload, not every quiet tile. Audience building belongs with [Instagram followers](/#pricing-packages), and conversation with [Instagram comments](/buy-instagram-comments).',
     },
     {
       type: 'links',
@@ -372,14 +372,14 @@ export const INSTAGRAM_VIEWS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
   serviceSlug: 'buy-instagram-views',
   title: 'How Instagram Views Help Videos Reach More People',
   description:
-    'Reel visibility, watch time habits, and how to pick a views package for a specific clip—not a generic growth pitch.',
+    'Reel visibility, watch time habits and how to pick a views package for a specific clip.',
   blocks: [
     {
       type: 'intro',
       paragraphs: [
         'Instagram views count how often a video or Reel was started. For many creators, that number is what makes a clip feel worth pressing play.',
         'Views support discoverability. Hooks, pacing, captions, and ending CTAs still decide whether people stay past second two.',
-        'Order views when you have a clip worth circulating—product demos, tutorials, and story-led Reels—not every casual dump from the week.',
+        'Order views for clips worth circulating, such as product demos, tutorials and story led Reels, rather than every casual post from the week.',
         'If watch-through is weak, fix the first three seconds before increasing volume. Extra starts cannot repair a confusing opener.',
       ],
     },
@@ -394,7 +394,7 @@ export const INSTAGRAM_VIEWS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
         'Agencies often test two creative angles with similar view packages, then put budget behind the cut that holds retention longer.',
       ],
       bullets: [
-        'Public video or Reel URL only—no password',
+        'Public video or Reel URL only, no password',
         'Confirm delivery timing on the package card',
         'Leave the clip public while the order runs',
       ],
@@ -494,7 +494,7 @@ export const INSTAGRAM_COMMENTS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       type: 'intro',
       paragraphs: [
         'Comments turn a post into a discussion. Visitors read threads for questions, tone, and proof before they like, message, or buy.',
-        'A quiet post feels unfinished. A short, on-topic thread shows that someone else found the content worth engaging—and that you show up to reply.',
+        'A quiet post can feel unfinished. A short, on topic thread shows that people found the content worth talking about, and that you show up to reply.',
         'Use comments where conversation helps: launches, FAQ posts, offer creatives, and education content you can answer the same day.',
       ],
     },
@@ -504,7 +504,7 @@ export const INSTAGRAM_COMMENTS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
       heading: 'Why comments matter more than silent reactions',
       illustration: 'comments-conversation',
       paragraphs: [
-        'Hearts show interest. Comments show effort. Written replies carry context—price, timing, fit—that likes cannot.',
+        'Hearts show interest. Comments show effort. Written replies carry context, such as price, timing and fit, that likes cannot.',
         'Public answers also help the next visitor. One pinned FAQ can replace the same DM dozens of times.',
         'For creators and brands, that visible discussion is social proof: the post belongs in a living feed, not a brochure.',
       ],
@@ -517,7 +517,7 @@ export const INSTAGRAM_COMMENTS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
         'Keep threads short, specific, and easy to skim. Newcomers should understand the offer in three comments or less.',
       items: [
         { id: '1', name: 'alex', text: 'Does this fit a small studio schedule?' },
-        { id: '2', name: 'you', text: 'Yes—start with one offer post weekly and reply same day.' },
+        { id: '2', name: 'you', text: 'Yes. Start with one offer post a week and reply the same day.' },
         { id: '3', name: 'sam', text: 'The thread answered my booking question. DMing now.' },
       ],
     },
@@ -598,7 +598,7 @@ export const INSTAGRAM_COMMENTS_EDUCATIONAL_GUIDE: EducationalGuideContent = {
         {
           id: 'pace',
           title: 'Match quantity to the post',
-          description: 'Support launches and FAQ creatives—not every archival tile in the grid.',
+          description: 'Use them for launches and FAQ posts, not every old tile in the grid.',
         },
         {
           id: 'moderate',

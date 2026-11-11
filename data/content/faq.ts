@@ -60,7 +60,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-home-consolidated-refund',
     question: 'What is the refund policy?',
     answer:
-      'Eligible purchases are covered by a 30-day money-back guarantee, subject to the Refund Policy and the conditions listed on the service page.',
+      'Eligible purchases are covered by our 30-day money-back policy, subject to the Refund Policy and the conditions listed on the service page.',
     homepageFilter: 'Support',
     order: 7,
   },
@@ -148,9 +148,9 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-home-engagement-guarantee',
-    question: 'Will buying followers guarantee engagement or sales?',
+    question: 'Will buying followers bring engagement or sales?',
     answer:
-      'No. Follower count alone cannot guarantee engagement, reach, leads or sales. Content quality and genuine audience interaction remain important.',
+      'Not on its own. A follower count does not create engagement, reach, leads or sales. Good content and real conversations with your audience still matter most.',
     homepageFilter: 'General',
     order: 8,
   },
@@ -204,7 +204,7 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-home-refill',
-    question: 'Do you offer a refill guarantee?',
+    question: 'Do you offer refills?',
     answer:
       'Selected services include refill protection where it is stated on the service page. Eligibility, the refill window and other conditions vary by package. If you believe an eligible drop occurred, contact support with your order ID and checkout email so the team can review the request against the package terms.',
     homepageFilter: 'Delivery',
@@ -212,9 +212,9 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-home-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Can I get my money back?',
     answer:
-      "Eligible purchases are covered by InstantViral's 30-day money-back guarantee under the [refund policy](/refund-policy) and the terms shown for the selected service. Review those conditions before checkout. Contact support with your order ID and checkout email if you need help with an eligible purchase.",
+      "Eligible purchases are covered by InstantViral's 30-day money-back policy under the [refund policy](/refund-policy) and the terms shown for the selected service. Review those conditions before checkout, and contact support with your order ID and checkout email if you need help.",
     homepageFilter: 'Delivery',
     order: 16,
   },
@@ -254,15 +254,15 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-refill',
-    question: 'Do you offer a refill guarantee?',
+    question: 'Do you offer refills?',
     answer:
       'Eligible services include refill coverage. Refill periods and conditions vary by service, so the applicable terms should be shown clearly on the relevant service page before checkout.',
   },
   {
     id: 'faq-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Can I get my money back?',
     answer:
-      'Eligible purchases are covered by a 30-day money-back guarantee, subject to the Refund Policy and the conditions listed on the service page. Customers should review the applicable terms before ordering.',
+      'Eligible purchases are covered by our 30-day money-back policy, subject to the Refund Policy and the conditions listed on the service page. Please review the terms before ordering.',
   },
   {
     id: 'faq-track-order',
@@ -311,7 +311,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-refunds',
     question: 'What is the refund policy?',
     answer:
-      'Eligible purchases are covered by a 30-day money-back guarantee, subject to the Refund Policy and the conditions listed on the service page.',
+      'Eligible purchases are covered by our 30-day money-back policy, subject to the Refund Policy and the conditions listed on the service page.',
   },
   {
     id: 'faq-support',
@@ -352,7 +352,7 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-ig-followers-refill',
-    question: 'Do the packages include a refill guarantee?',
+    question: 'Do the packages include refills?',
     answer:
       'Eligible packages include refill protection. The refill period, eligibility rules, and limitations can vary, so the applicable terms must be displayed on the package or service page before purchase.',
   },
@@ -370,9 +370,9 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-ig-followers-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Can I get my money back?',
     answer:
-      "Eligible purchases are covered by InstantViral's 30-day money-back guarantee, subject to the Refund Policy and the service conditions displayed before checkout. Customers should review those terms before placing an order.",
+      "Eligible purchases are covered by InstantViral's 30-day money-back policy, subject to the Refund Policy and the service conditions shown before checkout. Please review those terms before placing an order.",
   },
   {
     id: 'faq-ig-followers-track',
@@ -541,9 +541,9 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-ig-likes-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Can I get my money back?',
     answer:
-      'Eligible purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service-specific conditions.',
+      'Eligible purchases are covered by our 30-day money-back policy, subject to the Refund Policy and service conditions.',
   },
   {
     id: 'faq-ig-likes-track',
@@ -590,15 +590,45 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-ig-views-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Can I get my money back?',
     answer:
-      'Eligible purchases follow the 30-day money-back guarantee under the Refund Policy and service-specific conditions.',
+      'Eligible purchases follow our 30-day money-back policy under the Refund Policy and service conditions.',
   },
   {
     id: 'faq-ig-views-track',
     question: 'How do I track my order?',
     answer:
       'Use your order ID and checkout email on the [Track Order](/track-order) page to view available status updates.',
+  },
+  {
+    id: 'faq-ig-views-how-counted',
+    question: 'How does Instagram count Reel views?',
+    answer:
+      'Instagram counts a view each time a Reel starts to play or replays, so one person can add more than one view. Your Insights also show accounts reached, which counts each person only once. That is why the view number is usually higher than reach.',
+  },
+  {
+    id: 'faq-ig-views-which-videos',
+    question: 'Which Reels are worth ordering views for?',
+    answer:
+      'Use views on clips you would happily show a new customer, such as a product demo, a tutorial, a before and after or a video from a local event. A strong opening and a clear topic make the most of the extra attention.',
+  },
+  {
+    id: 'faq-ig-views-followers',
+    question: 'Will more views bring me followers?',
+    answer:
+      'Views and follows are separate decisions. More people may notice the Reel, but they follow when your profile shows more of what they liked. Pin your best Reels and keep your recent posts on topic.',
+  },
+  {
+    id: 'faq-ig-views-best-time',
+    question: 'When should I post Reels for a Canadian audience?',
+    answer:
+      'Canada spans six time zones, so there is no single best time. Check when your followers are most active in Instagram Insights and post an hour or two before that peak in their main time zone.',
+  },
+  {
+    id: 'faq-ig-views-private',
+    question: 'Can I order views for a private account?',
+    answer:
+      'No. The video and the account must be public so the views can be delivered. Keep the Reel public until the order shows as completed.',
   },
   // Buy Instagram Comments — community, conversation, trust intent
   {
@@ -727,7 +757,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-tt-likes-does-help',
     question: 'Does buying TikTok likes help?',
     answer:
-      'TikTok likes increase the visible engagement count on a selected video, which may improve its presentation to new viewers. They do not guarantee additional views, followers or viral reach.',
+      'TikTok likes raise the like count on a selected video, which can help it look more active to new viewers. Views, follows and reach still depend on how people respond to the video.',
   },
   {
     id: 'faq-tt-likes-any-video',
@@ -749,7 +779,7 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-tt-likes-instant',
-    question: 'Are TikTok likes delivered instantly?',
+    question: 'How fast are TikTok likes delivered?',
     answer:
       'Delivery times vary depending on the selected package. Review the delivery information before completing your purchase.',
   },
@@ -807,9 +837,9 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-tt-likes-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Can I get my money back?',
     answer:
-      'Eligible purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service-specific conditions.',
+      'Eligible purchases are covered by our 30-day money-back policy, subject to the Refund Policy and service conditions.',
   },
   // Buy TikTok Views Canada — production FAQ (authority page)
   {
@@ -828,7 +858,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-tt-views-does-work',
     question: 'Does buying TikTok views work?',
     answer:
-      "Buying TikTok views increases the visible watch count on a selected public video. It can improve the video's presentation but does not guarantee additional likes, followers, engagement or viral reach.",
+      "It raises the view count on a public video, which can help it look more established. Likes, follows and reach still depend on how people respond to the video itself.",
   },
   {
     id: 'faq-tt-views-can-people-see',
@@ -852,7 +882,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-tt-views-what-happens',
     question: 'What happens when you buy TikTok views?',
     answer:
-      "When you buy TikTok views, the selected public video receives the purchased view package according to the provider's delivery process. The visible watch count increases, but likes, comments, followers and viral reach are not guaranteed. Available tracking updates help you monitor order progress after checkout.",
+      "The video you select receives the views in your package, following the delivery time shown before checkout. The view count goes up. Likes, comments and follows still depend on the video. You can follow progress from your order page.",
   },
   {
     id: 'faq-tt-views-password',
@@ -864,7 +894,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-tt-views-should-buy',
     question: 'Should you buy TikTok views?',
     answer:
-      'Buy TikTok views when a higher visible watch count supports your campaign goal and you plan to keep publishing strong content. Avoid packages if you expect guaranteed followers, sales or viral reach — views are a support tool for first impressions, not a replacement for hooks and consistency.',
+      'Buy TikTok views when a higher view count suits your campaign and you plan to keep posting good content. Views help first impressions, but they do not replace a strong hook or regular posting.',
   },
   {
     id: 'faq-tt-views-which-package',
@@ -914,9 +944,9 @@ export const faqItems: FAQItem[] = [
   },
   {
     id: 'faq-tt-views-money-back',
-    question: 'Is there a money-back guarantee?',
+    question: 'Can I get my money back?',
     answer:
-      'Eligible purchases are covered by the 30-day money-back guarantee, subject to the Refund Policy and service-specific conditions.',
+      'Eligible purchases are covered by our 30-day money-back policy, subject to the Refund Policy and service conditions.',
   },
   // Buy Facebook Followers Canada — production FAQ (authority page)
   {
@@ -935,13 +965,13 @@ export const faqItems: FAQItem[] = [
     id: 'faq-fb-followers-does-help',
     question: 'Does buying Facebook followers help?',
     answer:
-      'Follower packages increase the visible audience displayed on your page, but they do not guarantee engagement, leads, sales or improved organic reach.',
+      'Follower packages raise the audience number shown on your Page. Engagement, leads and sales still depend on your posts, your offer and how quickly you reply.',
   },
   {
     id: 'faq-fb-followers-can-people-tell',
     question: 'Can people tell if you buy Facebook followers?',
     answer:
-      'Visitors can see the public follower count on a Facebook page, but Facebook does not label whether followers were obtained through a purchased package. No provider can guarantee how Facebook evaluates account activity.',
+      'Visitors can see the public follower count on a Facebook Page, but Facebook does not label where followers came from. Nobody outside Facebook can say exactly how it reviews account activity, so follow Facebook\'s Community Standards.',
   },
   {
     id: 'faq-fb-followers-are-real',
@@ -959,7 +989,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-fb-followers-monetization',
     question: 'Does buying Facebook followers affect monetization?',
     answer:
-      "Facebook's monetization programs are based on multiple eligibility requirements. Purchasing follower packages does not guarantee approval or automatically affect monetization outcomes.",
+      "Facebook's monetization programs have their own eligibility requirements. Buying followers does not count toward approval and does not change monetization decisions.",
   },
   {
     id: 'faq-fb-followers-password',
@@ -1055,7 +1085,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-fb-page-likes-does-help',
     question: 'Does buying Facebook Page Likes help?',
     answer:
-      'Page Likes can strengthen the visible popularity of a Facebook page and improve first impressions for visitors, but they do not guarantee engagement, sales or organic reach.',
+      'Page Likes can strengthen the visible popularity of a Facebook Page and improve first impressions. Engagement, sales and reach still depend on your posts and service.',
   },
   {
     id: 'faq-fb-page-likes-businesses',
@@ -1115,7 +1145,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-fb-post-likes-does-help',
     question: 'Does buying Facebook Post Likes help?',
     answer:
-      'Post Likes can strengthen the visible engagement on a specific Facebook post, but they do not guarantee additional reach, comments or sales.',
+      'Post Likes make a specific post look more active. Reach, comments and sales still depend on the post itself.',
   },
   {
     id: 'faq-fb-post-likes-old-post',
@@ -1150,7 +1180,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-fb-post-likes-comments-shares',
     question: 'Will buying Post Likes increase comments or shares?',
     answer:
-      'No. Post Like packages increase the visible Like count on the selected post. They do not guarantee additional comments, shares, reach or sales.',
+      'No. Post Like packages raise the Like count on the selected post. Comments, shares, reach and sales still depend on the post.',
   },
   {
     id: 'faq-fb-post-likes-track',
@@ -1187,7 +1217,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-yt-subscribers-does-help',
     question: 'Does buying YouTube subscribers help?',
     answer:
-      'Subscriber packages can strengthen the visible audience of your channel, but they do not guarantee more views, watch time or revenue.',
+      'Subscriber packages strengthen the visible audience of your channel. Views, watch time and revenue still depend on your videos.',
     homepageFilter: 'Packages',
   },
   {
@@ -1271,7 +1301,7 @@ export const faqItems: FAQItem[] = [
     id: 'faq-yt-views-does-help',
     question: 'Does buying YouTube views help?',
     answer:
-      'View packages increase the public view count on your video, which may strengthen social proof and improve first impressions. They do not guarantee more subscribers, watch time or higher rankings in YouTube recommendations.',
+      'View packages raise the public view count on your video, which can support first impressions. Subscribers, watch time and recommendations still depend on the video itself.',
     homepageFilter: 'Packages',
   },
   {

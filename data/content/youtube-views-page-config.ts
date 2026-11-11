@@ -153,7 +153,7 @@ export const YOUTUBE_VIEWS_PAGE_CONFIG: YouTubeViewsPageConfig = {
     id: 'can-you-buy-youtube-views',
     title: 'Can You Buy YouTube Views?',
     description:
-      'Yes. YouTube View packages can be purchased by selecting a package, providing your public YouTube video URL and completing secure checkout. Your YouTube password is not required. View packages increase the public view count on eligible videos, but they do not guarantee subscriber growth, watch time, audience retention or higher rankings in YouTube recommendations.',
+      'Yes. Choose a package, add the public URL of the video and pay through secure checkout. No YouTube password is needed. View packages raise the public view count on that video. Subscribers, watch time and recommendations still depend on the video itself.',
     cards: [
       {
         id: 'yt-v-can-url',
@@ -188,7 +188,7 @@ export const YOUTUBE_VIEWS_PAGE_CONFIG: YouTubeViewsPageConfig = {
     id: 'does-buying-youtube-views-help',
     title: 'Does Buying YouTube Views Help?',
     description:
-      'Buying YouTube views increases the public view count on a specific video, which may strengthen social proof and improve first impressions for new viewers. However, View packages do not guarantee more subscribers, higher watch time, stronger audience retention, increased revenue or better placement in YouTube recommendations.',
+      'It raises the public view count on one video, which can make it look more established to people who find it. It does not change watch time, retention or how YouTube ranks the video. Those come from the title, thumbnail and the content itself.',
     helpTitle: 'What YouTube View Packages Can Help With',
     helpItems: [
       'Increase video exposure',

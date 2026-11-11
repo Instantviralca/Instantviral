@@ -86,7 +86,7 @@ export const TIKTOK_LIKES_PAGE_CONFIG: TikTokLikesPageConfig = {
     id: 'does-buying-tiktok-likes-work',
     title: 'Does Buying TikTok Likes Work?',
     description:
-      'Buying TikTok likes increases the visible like count on a selected public video and may improve how active the post appears to new viewers. It does not guarantee additional views, followers, comments, sales or TikTok algorithm promotion.',
+      'It raises the like count on one public video, which can make it look more active to new viewers. It does not decide how TikTok recommends the video. Views, follows and comments still depend on how people respond to the content.',
     helpTitle: 'What It Can Help With',
     helpItems: [
       'Strengthen the visible engagement on a selected video',
@@ -131,7 +131,7 @@ export const TIKTOK_LIKES_PAGE_CONFIG: TikTokLikesPageConfig = {
       ctaLabel: 'View TikTok Followers Packages',
     },
     combinedNote:
-      'Some campaigns use likes and views together, but each service should be selected separately according to the video and account goal. A package cannot guarantee organic engagement or long-term growth.',
+      'Some campaigns use likes and views together, but choose each one for what the video needs. Long term engagement still comes from the content and how often you post.',
   },
   beforeBuying: {
     id: 'what-to-check-before-buying-tiktok-likes',

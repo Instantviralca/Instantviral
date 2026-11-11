@@ -124,7 +124,7 @@ export const INSTAGRAM_FOLLOWERS_PACKAGES_CONFIG: PackagesPageConfig = {
     cards: [
       {
         id: '100-250',
-        quantity: '100–250',
+        quantity: '100 to 250',
         title: 'First order',
         description: 'First order or small profile',
         bestFor: 'First order or small profile',
@@ -340,8 +340,8 @@ export const INSTAGRAM_LIKES_PACKAGES_CONFIG: PackagesPageConfig = {
     title: 'Compare Your Options',
     description: 'Pick the scale that fits your post.',
     cards: [
-      { id: 'starter', name: 'Starter', quantity: '100–250', detail: 'First tests and lighter posts' },
-      { id: 'growing', name: 'Growing', quantity: '500–1,000', detail: 'Steady support for active feeds' },
+      { id: 'starter', name: 'Starter', quantity: '100 to 250', detail: 'First tests and lighter posts' },
+      { id: 'growing', name: 'Growing', quantity: '500 to 1,000', detail: 'Steady support for active feeds' },
       {
         id: 'business',
         name: 'Business',

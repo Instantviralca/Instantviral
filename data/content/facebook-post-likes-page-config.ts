@@ -142,7 +142,7 @@ export const FACEBOOK_POST_LIKES_PAGE_CONFIG: FacebookPostLikesPageConfig = {
     id: 'can-you-buy-facebook-post-likes',
     title: 'Can You Buy Facebook Post Likes?',
     description:
-      'Yes. Facebook Post Like packages can be purchased by selecting a package, entering the public URL of the Facebook post and completing secure checkout. Your Facebook password is not required. Purchased Post Likes increase the visible Like count on the selected post, but they do not guarantee additional comments, shares, sales or higher organic reach.',
+      'Yes. Pick a package, paste the public URL of the post and pay through secure checkout. No Facebook password is needed. Post Likes raise the Like count on that post. Comments, shares and sales still depend on the post itself.',
     cards: [
       {
         id: 'fb-post-can-url',
@@ -178,7 +178,7 @@ export const FACEBOOK_POST_LIKES_PAGE_CONFIG: FacebookPostLikesPageConfig = {
     id: 'does-buying-facebook-post-likes-help',
     title: 'Does Buying Facebook Post Likes Help?',
     description:
-      'Buying Facebook Post Likes increases the visible Like count on a specific Facebook post, which may help create stronger social proof and encourage more people to view the content. However, Post Like packages do not guarantee additional comments, shares, sales or increased organic reach.',
+      'It raises the Like count on one post, which can make an announcement or offer look active when people scroll past it. Comments, shares and reach still depend on how interesting the post is to the people who see it.',
     helpTitle: 'What Post Likes Can Help With',
     helpItems: [
       'Improve post activity',

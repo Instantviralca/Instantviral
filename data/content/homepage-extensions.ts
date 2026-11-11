@@ -18,7 +18,7 @@ export const comparisonSection = {
     {
       id: 'public-profile',
       title: 'Public profile only',
-      description: 'Orders use a public username or content URL — never a social login.',
+      description: 'Orders use a public username or content URL, never a social login.',
     },
     {
       id: 'secure-checkout',
@@ -153,7 +153,7 @@ export const paymentsSection = {
 export const extensionIllustrations = {
   comparison: {
     src: '/assets/images/illustrations/extensions/comparison-dashboard.webp',
-    alt: 'InstantViral compared with typical providers — checklist cards with secure ordering highlights',
+    alt: 'InstantViral compared with typical providers, checklist cards with secure ordering highlights',
     width: 1536,
     height: 1024,
   },

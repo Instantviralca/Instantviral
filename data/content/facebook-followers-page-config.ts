@@ -117,7 +117,7 @@ export const FACEBOOK_FOLLOWERS_PAGE_CONFIG: FacebookFollowersPageConfig = {
     id: 'can-you-buy-facebook-followers',
     title: 'Can You Buy Facebook Followers?',
     description:
-      "Yes. Facebook follower packages allow you to increase the visible follower count on a public Facebook page by selecting a package, providing your public Page URL and completing checkout. Your Facebook password is not required. While follower packages can strengthen a page's visible audience, they do not guarantee engagement, sales or increased organic reach.",
+      "Yes. Choose a package, add the public URL of your Facebook Page and complete checkout. We never ask for your Facebook password. A follower package raises the audience number on your Page. Engagement, reach and sales still come from what you post and how you run the Page.",
     cards: [
       {
         id: 'fb-f-can-page',
@@ -153,7 +153,7 @@ export const FACEBOOK_FOLLOWERS_PAGE_CONFIG: FacebookFollowersPageConfig = {
     id: 'does-buying-facebook-followers-help',
     title: 'Does Buying Facebook Followers Help?',
     description:
-      "Buying Facebook followers increases the visible follower count on a Facebook page, which may help create a stronger first impression for visitors. However, follower packages do not guarantee more engagement, higher organic reach, additional sales or better rankings within Facebook's recommendation systems.",
+      "It raises the follower count shown on your Page, which can help a new visitor take your business more seriously at first glance. It does not change how Facebook ranks your posts. Reach still depends on posting things your audience reacts to and shares.",
     helpTitle: 'What It Can Help With',
     helpItems: [
       "Strengthen your page's visible audience",
@@ -230,7 +230,7 @@ export const FACEBOOK_FOLLOWERS_PAGE_CONFIG: FacebookFollowersPageConfig = {
       ctaLabel: 'View Facebook Post Likes',
     },
     combinedNote:
-      'Many businesses combine follower, Page Like and Post Like packages depending on the objective of each campaign. While these services can improve visible social proof, they do not guarantee higher organic reach or business results.',
+      'Many businesses use followers, Page Likes and Post Likes for different jobs: followers for the Page audience, Page Likes for the overall impression and Post Likes for a specific announcement. None of them replaces useful posts and quick replies to customers.',
   },
   beforeBuying: {
     id: 'what-to-check-before-buying-facebook-followers',
@@ -458,9 +458,9 @@ export const FACEBOOK_FOLLOWERS_PAGE_CONFIG: FacebookFollowersPageConfig = {
       },
       {
         id: 'fb-f-mistake-results',
-        title: 'Expecting Instant Business Results',
+        title: 'Expecting Overnight Business Results',
         description:
-          "Follower packages may strengthen your page's visible audience, but they do not guarantee sales, leads or increased organic reach.",
+          "Followers help your Page look established. Leads and sales still come from your offer, your posts and how quickly you answer messages.",
         icon: 'briefcase',
       },
     ],

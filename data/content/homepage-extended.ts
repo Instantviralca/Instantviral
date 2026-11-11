@@ -109,7 +109,7 @@ export const homepageExtendedSections = {
     title: 'Why Social Proof Matters on Instagram',
     intro: [
       'When someone visits an Instagram profile, they often make a decision within seconds. Profile presentation, consistent content, and visible audience activity all contribute to that first impression.',
-      "Social proof isn't a replacement for quality content—it complements a long-term content strategy by helping profiles appear more established.",
+      "Social proof does not replace good content. It works alongside a long term content plan by helping your profile look established.",
     ],
     timeline: [
       'Visitor',
@@ -265,7 +265,7 @@ export const homepageExtendedMedia = {
     alt: 'Instagram growth statistics dashboard',
     title: 'Instagram by the Numbers',
     caption:
-      'Educational context for Instagram growth — verify any numeric claims before publishing.',
+      'Educational context for Instagram growth, verify any numeric claims before publishing.',
     width: 1536,
     height: 1024,
   },

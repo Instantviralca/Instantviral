@@ -9,8 +9,8 @@ export const homepageEditorial = {
     id: 'where-buy-instagram-followers',
     title: 'Where Can You Buy Instagram Followers in Canada?',
     intro: [
-      'Looking for the best place to buy Instagram followers in Canada? Start with the provider—not the package size. Prefer a Canada-focused growth platform that publishes clear options, public policies, and enough detail to compare before you commit.',
-      'Built for Canadian creators, businesses, influencers, and brands who want one place to evaluate growth options—and buy real Instagram followers when the fit is right.',
+      'Looking for the best place to buy Instagram followers in Canada? Start with the provider, not the package size. Choose a Canada focused service that shows its prices, publishes its policies and gives you enough detail to compare before you pay.',
+      'Built for Canadian creators, businesses, influencers and brands who want to compare growth options in one place and order Instagram followers when the fit is right.',
     ],
     quickAnswer: {
       label: 'Quick Answer',
@@ -23,7 +23,7 @@ export const homepageEditorial = {
         id: 'canada-focus',
         title: 'Canada-Focused Platform',
         description:
-          'Choose a growth platform designed for Canadian creators, businesses, and brands—not a generic offshore storefront.',
+          'A service built for Canadian creators, businesses and brands, not a generic offshore storefront.',
       },
       {
         id: 'clear-packages',
@@ -54,7 +54,7 @@ export const homepageEditorial = {
     id: 'buy-instagram-followers-social-proof',
     title: 'Build Stronger Social Proof for Your Instagram Profile',
     intro: [
-      'Visible social proof shapes first impressions. Strong content still drives long-term audience growth—follower count and brand presentation help a creator profile look established from the first visit. The same cues support Instagram marketing when you are building an Instagram account for a business.',
+      'First impressions count on Instagram. Good content drives long term growth, while a follower count that matches your effort helps a profile look established from the first visit. The same applies when you build an Instagram account for a business.',
     ],
     highlight: {
       title: 'Why Instagram Audience Growth Matters',
@@ -147,13 +147,13 @@ export const homepageEditorial = {
     id: 'why-instantviral-instagram-growth',
     title: 'Why Thousands Choose InstantViral for Instagram Growth',
     intro: [
-      'A growth platform built for Canadian creators and brands—clear packages, username-only ordering, protected checkout, and help before and after you buy.',
+      'A service built for Canadian creators and brands: clear packages, username only ordering, protected checkout and help before and after you buy.',
     ],
     features: [
       {
         id: 'no-password',
         title: 'No Instagram Password Required',
-        description: 'Order with your public username only—login credentials are never requested.',
+        description: 'Order with your public username only. We never ask for your login details.',
       },
       {
         id: 'secure-checkout',
@@ -163,7 +163,7 @@ export const homepageEditorial = {
       {
         id: 'gradual-delivery',
         title: 'Gradual Delivery',
-        description: 'Delivery follows the selected package—not one unexplained bulk drop.',
+        description: 'Delivery follows the package you choose, not one unexplained bulk drop.',
       },
       {
         id: 'human-support',
@@ -188,7 +188,7 @@ export const homepageEditorial = {
       {
         id: 'multiple-services',
         title: 'Multiple Growth Options',
-        description: 'Audience packages for profile growth, engagement, and conversation—in one place.',
+        description: 'Packages for followers, engagement and conversation, all in one place.',
       },
     ],
     trustStrip: [
@@ -377,7 +377,7 @@ export const homepageEditorial = {
     title: 'Can You Buy Followers on Instagram?',
     body: [
       'Yes. Shoppers looking to buy followers Instagram often use third-party growth services that offer audience packages for public profiles. You select a quantity and supply the public username for delivery. The app itself does not sell these packages.',
-      'Purchased growth can strengthen social proof and profile presentation, but it does not replace content quality or organic strategy. Treat audience packages as presentation support—not a guarantee of sales or reach.',
+      'Packages can strengthen social proof and how your profile looks to new visitors. They do not replace good content or a posting plan, and they are not a shortcut to sales or reach.',
     ],
   },
   canada: {
@@ -411,7 +411,7 @@ export const homepageEditorial = {
     id: 'what-to-know-before-ordering',
     title: 'What to Check Before Ordering',
     body: [
-      'Confirm the package details, delivery expectations, and refund terms on the service page. Enter the correct public username, and treat packages as social-proof support—not a guarantee of sales or organic reach.',
+      'Check the package details, delivery time and refund terms on the service page, and enter the correct public username. Use packages to support how your profile looks, not as a replacement for sales or organic reach.',
     ],
     links: [
       { label: 'Refund Policy', href: routes.refundPolicy },
@@ -435,7 +435,7 @@ export const homepageEditorial = {
         title: 'Choose Your Package',
         shortTitle: 'Choose Package',
         description:
-          'Select the audience package that matches your goals—personal brand, business presence, or creator page. Each option shows what you will receive before checkout.',
+          'Choose the package that matches your goal, whether that is a personal brand, a business profile or a creator page. Each option shows what you will receive before checkout.',
       },
       {
         id: 'enter-username',
@@ -630,7 +630,7 @@ export const homepageEditorial = {
     title: 'Customer Experiences Across Canada',
     intro: [
       'See how people describe their overall experience.',
-      'Real feedback—so you can decide with confidence.',
+      'Customer feedback to help you decide with confidence.',
     ],
     /** Placeholder until replaced with an approved authentic review. */
     featuredPlaceholder: {
@@ -741,7 +741,7 @@ export const homepageEditorial = {
         id: 'feat-which',
         question: 'Where do I compare Instagram packages?',
         answer:
-          'Use the growth options section on this page—the comparison table shows which service fits each goal.',
+          'Use the growth options section on this page. The comparison table shows which service fits each goal.',
       },
       {
         id: 'feat-track',
@@ -785,7 +785,7 @@ export const homepageEditorial = {
         id: 'acc-package-change',
         question: 'Can I change my package after placing an order?',
         answer:
-          'Package changes depend on order status. Contact support promptly with your order ID—adjustments are easiest before delivery begins.',
+          'Changes depend on order status. Contact support quickly with your order ID, because adjustments are easiest before delivery begins.',
       },
     ],
     knowledgeTitle: 'Learn More About Instagram Growth',

@@ -142,20 +142,20 @@ export const FACEBOOK_PAGE_LIKES_PAGE_CONFIG: FacebookPageLikesPageConfig = {
     ],
   },
   whyBuyNote:
-    'Motivations differ by page type and campaign stage, but Page Likes are typically chosen as visible social proof — not as a substitute for content, ads or customer engagement.',
+    'Reasons differ by page and campaign, but most owners choose Page Likes as visible social proof that sits alongside their content, ads and customer service.',
   orderNotice:
     'InstantViral processes Page Like orders using only your public Facebook Page URL. Your Facebook password is never required during checkout.',
   canYouBuy: {
     id: 'can-you-buy-facebook-page-likes',
     title: 'Can You Buy Facebook Page Likes?',
     description:
-      'Yes. You can buy Facebook Page Likes for a publicly accessible Facebook page. Your Facebook password is not required. Purchased Page Likes can increase the visible Like count on the page, but they do not guarantee engagement, sales, organic reach or algorithmic promotion.',
+      'Yes, for any public Facebook Page. We only need the Page URL, never your password. Page Likes raise the Like count shown on the Page. Engagement and reach still depend on the posts you publish.',
     cards: [
       {
         id: 'fb-pl-can-url',
         title: 'Public Page URL',
         description:
-          'Orders use the public URL of the Facebook page receiving the selected package — no private account access.',
+          'Orders use the public URL of the Facebook Page that receives the package. We never need access to your account.',
         icon: 'users',
       },
       {
@@ -178,7 +178,7 @@ export const FACEBOOK_PAGE_LIKES_PAGE_CONFIG: FacebookPageLikesPageConfig = {
     id: 'does-buying-facebook-page-likes-help',
     title: 'Does Buying Facebook Page Likes Help?',
     description:
-      "Buying Facebook Page Likes increases the visible Like count displayed on a Facebook page, which may help create a stronger first impression for visitors. However, Page Like packages do not guarantee more engagement, increased organic reach, additional sales or better visibility in Facebook's recommendation systems.",
+      "It raises the Like count shown on your Page, which can make a first visit feel more reassuring. It does not change how Facebook distributes your posts, so keep posting content your local audience wants to see.",
     helpTitle: 'What Page Likes Can Help With',
     helpItems: [
       'A higher visible Page Like count',
@@ -257,7 +257,7 @@ export const FACEBOOK_PAGE_LIKES_PAGE_CONFIG: FacebookPageLikesPageConfig = {
       ctaLabel: 'View Facebook Post Likes',
     },
     combinedNote:
-      'Many businesses combine Page Likes, Followers and Post Likes to support different marketing campaigns. While these services strengthen visible social proof, they do not guarantee higher engagement or business results.',
+      'Many businesses combine Page Likes, followers and Post Likes for different campaigns. Each one improves a visible number. Results still come from the offer, the posts and the service behind them.',
   },
   beforeBuying: {
     id: 'what-to-check-before-buying-facebook-page-likes',
@@ -451,7 +451,7 @@ export const FACEBOOK_PAGE_LIKES_PAGE_CONFIG: FacebookPageLikesPageConfig = {
       },
       {
         id: 'fb-pl-mistake-results',
-        title: 'Expecting Instant Business Results',
+        title: 'Expecting Overnight Business Results',
         description:
           'Page Likes strengthen visible social proof, but they do not automatically generate leads, sales, customer enquiries or organic reach.',
         icon: 'briefcase',
