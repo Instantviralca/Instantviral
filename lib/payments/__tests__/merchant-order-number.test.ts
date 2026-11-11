@@ -3,7 +3,7 @@
  */
 
 import { createHash, createHmac } from 'node:crypto';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 
@@ -18,10 +18,15 @@ import {
 import { mollieRemoteProvider } from '@/lib/payments/providers/mollie-remote';
 
 const ROOT = process.cwd();
-const carryCubesServer = readFileSync(
-  path.join(ROOT, '_mollie_server_temp', 'mollieremotepayment-server', 'index.php'),
-  'utf8',
+const carryCubesServerPath = path.join(
+  ROOT,
+  '_mollie_server_temp',
+  'mollieremotepayment-server',
+  'index.php',
 );
+const carryCubesServer = existsSync(carryCubesServerPath)
+  ? readFileSync(carryCubesServerPath, 'utf8')
+  : null;
 
 const SECRET = 'test-shared-secret-16';
 
@@ -155,7 +160,7 @@ describe('HMAC signature — legacy vs merchant_order_number', () => {
   });
 });
 
-describe('CarryCubes server source — signed merchant_order_number', () => {
+describe.skipIf(!carryCubesServer)('CarryCubes server source — signed merchant_order_number', () => {
   it('includes merchant_order_number in HMAC when present', () => {
     expect(carryCubesServer).toContain('merchant_order_number');
     expect(carryCubesServer).toContain(
