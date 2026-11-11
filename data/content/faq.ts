@@ -654,61 +654,61 @@ export const faqItems: FAQItem[] = [
     id: 'faq-tt-followers-can-buy',
     question: 'Can you buy TikTok followers?',
     answer:
-      "Yes. TikTok follower packages are available through online providers that allow you to choose a package size, enter your public TikTok username, and complete your order. Before purchasing, review the provider's pricing, delivery information, support options, and service policies so you understand exactly what is included.",
+      'Yes. You choose a package, enter your public TikTok username and pay at checkout. Before you order from any provider, check that prices are shown up front, that they never ask for your password, and that you can reach support and track your order.',
   },
   {
     id: 'faq-tt-followers-how-buy',
     question: 'How do you buy TikTok followers?',
     answer:
-      'The process is simple. Choose a follower package, enter your public TikTok username, review your order details, complete secure checkout, and track your order as it progresses. Your TikTok password is not required.',
+      'Pick a package, enter your public username, review the order, pay through secure checkout and follow progress on your order page. It takes a couple of minutes, and your TikTok password is never needed.',
   },
   {
     id: 'faq-tt-followers-does-work',
     question: 'Does buying TikTok followers work?',
     answer:
-      'Buying TikTok followers increases the visible follower count on your profile, which may improve how your account appears to new visitors. However, follower packages do not guarantee viral videos, higher engagement, or business growth. Consistent content remains the most important factor for long-term success.',
+      'It raises the follower count on your profile, which can make a new visitor more likely to take your account seriously. It does not change how TikTok ranks your videos. The For You feed is driven by how people respond to each video, so keep posting content your audience wants to watch.',
   },
   {
     id: 'faq-tt-followers-are-real',
     question: 'Are bought TikTok followers real?',
     answer:
-      'Different providers offer different types of follower packages. Before ordering, review the package description, delivery details, and published policies so you understand exactly what is being offered. Look for clear information rather than vague claims about real, genuine, or legit followers.',
+      'Read the package description before you order so you know exactly what is delivered. Be careful with any provider that promises "real" or "active" followers without explaining what that means, or that hides its delivery details.',
   },
   {
     id: 'faq-tt-followers-safe',
     question: 'Is it safe to buy TikTok followers?',
     answer:
-      "A safer ordering process starts with choosing a provider that does not request your TikTok password, clearly explains its pricing and delivery process, and provides customer support if questions arise. Always review the provider's policies before placing an order.",
+      'Use a provider that never asks for your password, explains its prices and delivery before you pay, and has support you can contact. With InstantViral you only share your public username, and you can track your order the whole way.',
   },
   {
     id: 'faq-tt-followers-banned',
     question: 'Will buying TikTok followers get my account banned?',
     answer:
-      "No provider can guarantee how TikTok may evaluate account activity. Follow TikTok's policies, avoid sharing your password, and choose services that clearly explain how their ordering process works rather than making unrealistic promises.",
+      'Nobody outside TikTok can promise how TikTok will treat an account. Follow TikTok\'s Community Guidelines, never share your password, and be wary of any service that claims there is zero risk.',
   },
   {
     id: 'faq-tt-followers-delivery-begin',
     question: 'How quickly does delivery begin?',
     answer:
-      'Delivery timing depends on the package you choose. Estimated delivery information is displayed before checkout so you know what to expect before placing your order.',
+      'It depends on the package size. The estimated delivery time is shown on each package before you pay, and your order page shows progress once it starts.',
   },
   {
     id: 'faq-tt-followers-password',
     question: 'Do I need to provide my TikTok password?',
     answer:
-      'No. InstantViral only requires your public TikTok username to process an order. Your password and login credentials are never requested.',
+      'No. We only need your public TikTok username. We never ask for your password, login code or access to your account.',
   },
   {
     id: 'faq-tt-followers-another-order',
     question: 'Can I order another package later?',
     answer:
-      'Yes. Many customers place additional orders after their previous order has been completed. Reviewing your order status before placing another package helps keep the process organized.',
+      'Yes. Many customers add a second package once the first one has finished. Wait until your current order shows as completed before placing the next one.',
   },
   {
     id: 'faq-tt-followers-which-package',
     question: 'Which package should I choose?',
     answer:
-      'The best package depends on your current follower count, content activity, and overall goals. Smaller packages are suitable for testing the service. Many customers choose to buy 500 TikTok followers or buy 1,000 TikTok followers for steady growth, while larger campaigns may buy 10,000 TikTok followers or more.',
+      'Start with a package close to your current audience. A new account might begin with 100 or 500, an active creator or local business often picks 1,000, and brands with an established following look at 5,000 or more. Prices for every size are shown before checkout, in US dollars.',
   },
   // Buy TikTok Likes Canada — production FAQ (authority page)
   {
