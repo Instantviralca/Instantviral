@@ -46,8 +46,38 @@ describe('Review & Aggregate Rating Schema Engine (14.03)', () => {
       author: { name: 'Alex Rivera' },
       reviewBody: review.reviewText,
     });
+    expect(node?.itemReviewed).toEqual({
+      '@type': 'Product',
+      name: serviceEntity.name,
+      url: serviceEntity.url,
+    });
+    expect(JSON.stringify(node)).not.toContain('"Service"');
     expect(JSON.stringify(node)).not.toContain('orderIdReference');
     expect(JSON.stringify(node)).not.toContain('moderationNotes');
+  });
+
+  it('does not emit Review or AggregateRating JSON-LD for organization entities', () => {
+    const review = makeReview();
+    const orgEntity = {
+      kind: 'organization' as const,
+      name: 'InstantViral',
+      url: 'https://instantviral.ca',
+    };
+    const { eligible } = getSchemaEligibleReviews([review], { entity: orgEntity });
+    expect(eligible.length).toBeGreaterThan(0);
+
+    expect(canGenerateReviewSchema([review], { entity: orgEntity })).toBe(false);
+    expect(canGenerateAggregateRating([review], { entity: orgEntity })).toBe(false);
+    expect(buildReviewSchema(review, orgEntity)).toBeNull();
+
+    const bundle = buildReviewSchemaBundle([review], {
+      entity: orgEntity,
+      visibleReviewIds: [review.id],
+      reviewSectionVisible: true,
+    });
+    expect(bundle.reviews).toEqual([]);
+    expect(bundle.aggregate).toBeNull();
+    expect(bundle.generated).toBe(false);
   });
 
   it('rejects a hidden review', () => {

@@ -15,6 +15,7 @@ import {
   buildLegacyRedirectLocation,
   resolveLegacySeoPath,
 } from '@/lib/seo/legacy-urls';
+import { buildPublicRedirectUrl, getPublicOrigin } from '@/lib/seo/public-origin';
 
 /**
  * Middleware:
@@ -41,19 +42,23 @@ export async function middleware(request: NextRequest) {
   }
   if (legacy.kind === 'redirect') {
     // Explicit Location path so slash variants never chain through slash-normalization.
+    // Public origin — never request.nextUrl.origin (internal listen address behind nginx).
+    const origin = getPublicOrigin(request);
     const location = buildLegacyRedirectLocation(
-      request.nextUrl.origin,
+      origin,
       legacy.destination,
       request.nextUrl.search,
     );
-    return NextResponse.redirect(new URL(location, request.nextUrl.origin), 308);
+    return NextResponse.redirect(new URL(location, origin), 308);
   }
 
   // Restore default Next behavior: /about/ → /about (query preserved).
   if (pathname.length > 1 && pathname.endsWith('/')) {
-    const url = request.nextUrl.clone();
-    url.pathname = pathname.replace(/\/+$/, '') || '/';
-    return NextResponse.redirect(url, 308);
+    const stripped = pathname.replace(/\/+$/, '') || '/';
+    return NextResponse.redirect(
+      buildPublicRedirectUrl(request, stripped, request.nextUrl.search),
+      308,
+    );
   }
 
   // ── Geo availability (public site only) ───────────────────────────
@@ -97,8 +102,11 @@ export async function middleware(request: NextRequest) {
   const valid = await verifyAdminSessionTokenEdge(token);
   if (valid) return NextResponse.next();
 
-  const loginUrl = request.nextUrl.clone();
-  loginUrl.pathname = '/admin/login';
+  const loginUrl = buildPublicRedirectUrl(
+    request,
+    '/admin/login',
+    request.nextUrl.search,
+  );
   loginUrl.searchParams.set('next', pathname);
   return NextResponse.redirect(loginUrl);
 }

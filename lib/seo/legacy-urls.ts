@@ -3,7 +3,21 @@
  * Used by middleware before trailing-slash normalization.
  */
 
-/** Permanent 308 targets (slash + non-slash keys). Query string is preserved by caller. */
+function withSlashVariants(map: Record<string, string>): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [source, dest] of Object.entries(map)) {
+    const base = source.replace(/\/+$/, '') || '/';
+    out[base] = dest;
+    out[`${base}/`] = dest;
+  }
+  return out;
+}
+
+/**
+ * Permanent 308 targets (slash + non-slash keys). Query string is preserved by caller.
+ * Includes next.config product redirects so Location uses the public origin, not the
+ * internal listen address Next would put on those 308s.
+ */
 export const LEGACY_SEO_REDIRECTS: Readonly<Record<string, string>> = {
   '/contact-us': '/contact',
   '/contact-us/': '/contact',
@@ -17,13 +31,69 @@ export const LEGACY_SEO_REDIRECTS: Readonly<Record<string, string>> = {
   '/buy-facebook-likes-followers/': '/buy-facebook-followers',
   '/buy-youtube-subscribers-views': '/buy-youtube-subscribers',
   '/buy-youtube-subscribers-views/': '/buy-youtube-subscribers',
+  ...withSlashVariants({
+    '/learn/buy-instagram-followers-canada': '/learn',
+    '/instagram-services-prices': '/',
+    '/product/buy-100-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-250-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-500-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-1000-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-3000-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-5000-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-10000-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-15000-tiktok-followers': '/buy-tiktok-followers',
+    '/product/buy-100-instagram-followers': '/',
+    '/product/buy-250-instagram-followers': '/',
+    '/product/buy-500-instagram-followers': '/',
+    '/product/buy-1000-instagram-followers': '/',
+    '/product/buy-2500-instagram-followers': '/',
+    '/product/buy-5000-instagram-followers': '/',
+    '/product/buy-10000-instagram-followers': '/',
+    '/product/buy-25000-instagram-followers': '/',
+    '/product/buy-100-youtube-subscribers': '/buy-youtube-subscribers',
+    '/product/buy-200-youtube-subscribers': '/buy-youtube-subscribers',
+    '/product/buy-500-youtube-subscribers': '/buy-youtube-subscribers',
+    '/product/buy-1000-youtube-subscribers': '/buy-youtube-subscribers',
+    '/product/buy-2000-youtube-subscribers': '/buy-youtube-subscribers',
+    '/product/buy-3000-youtube-subscribers': '/buy-youtube-subscribers',
+    '/product/buy-5000-youtube-subscribers': '/buy-youtube-subscribers',
+  }),
 };
 
 /** Retired paths with no replacement service — HTTP 410 Gone (not a redirect). */
 export const LEGACY_GONE_PATHS = new Set<string>([
   '/buy-twitter-followers',
   '/buy-twitter-followers/',
+  '/buy-twitter-likes',
+  '/buy-twitter-likes/',
+  '/buy-twitter-retweets',
+  '/buy-twitter-retweets/',
+  '/buy-twitter-views',
+  '/buy-twitter-views/',
 ]);
+
+function stripTrailingSlashes(pathname: string): string {
+  if (pathname.length > 1 && pathname.endsWith('/')) {
+    return pathname.replace(/\/+$/, '') || '/';
+  }
+  return pathname;
+}
+
+/**
+ * Retired Twitter / X inventory — 410 with or without a trailing slash.
+ * Exact-set lookup missed /product/buy-10000-twitter-followers/ because that
+ * path was never listed; match by prefix / substring instead.
+ */
+export function isRetiredTwitterOrXPath(pathname: string): boolean {
+  const normalized = stripTrailingSlashes(pathname).toLowerCase();
+  if (normalized.startsWith('/product/') && normalized.includes('twitter')) {
+    return true;
+  }
+  if (normalized.startsWith('/buy-twitter-') || normalized.startsWith('/buy-x-')) {
+    return true;
+  }
+  return LEGACY_GONE_PATHS.has(pathname) || LEGACY_GONE_PATHS.has(normalized);
+}
 
 export type LegacySeoResolution =
   | { kind: 'redirect'; destination: string }
@@ -31,7 +101,7 @@ export type LegacySeoResolution =
   | { kind: 'none' };
 
 export function resolveLegacySeoPath(pathname: string): LegacySeoResolution {
-  if (LEGACY_GONE_PATHS.has(pathname)) {
+  if (isRetiredTwitterOrXPath(pathname) || LEGACY_GONE_PATHS.has(pathname)) {
     return { kind: 'gone' };
   }
   const destination = LEGACY_SEO_REDIRECTS[pathname];

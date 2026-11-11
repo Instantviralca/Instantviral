@@ -234,10 +234,16 @@ export function calculateAggregateRating(
   return result;
 }
 
+function shouldEmitReviewJsonLd(entity: ReviewedEntity): boolean {
+  // Google ignores self-serving Organization reviews and rejects them as snippets.
+  return entity.kind !== 'organization';
+}
+
 export function canGenerateReviewSchema(
   reviews: Review[],
   options: ReviewSchemaEngineOptions,
 ): boolean {
+  if (!shouldEmitReviewJsonLd(options.entity)) return false;
   if (options.reviewSchemaEnabled === false) return false;
   if (options.reviewSectionVisible === false) return false;
   if (!validateReviewedEntity(options.entity)) return false;
@@ -252,6 +258,7 @@ export function canGenerateAggregateRating(
   reviews: Review[],
   options: ReviewSchemaEngineOptions,
 ): boolean {
+  if (!shouldEmitReviewJsonLd(options.entity)) return false;
   if (options.aggregateSchemaEnabled === false) return false;
   if (options.reviewSectionVisible === false) return false;
   if (!validateReviewedEntity(options.entity)) return false;
@@ -267,8 +274,10 @@ export function canGenerateAggregateRating(
 
 function itemReviewedNode(entity: ReviewedEntity): JsonLd {
   if (entity.kind === 'service') {
+    // Google review snippets reject Service for itemReviewed.
+    // Use Product with the same name + url as productSchema() in schemas/service.ts.
     return {
-      '@type': 'Service',
+      '@type': 'Product',
       name: entity.name,
       ...(entity.url ? { url: entity.url } : {}),
     };
@@ -291,6 +300,7 @@ export function buildReviewSchema(
   review: Review,
   entity: ReviewedEntity,
 ): JsonLd | null {
+  if (!shouldEmitReviewJsonLd(entity)) return null;
   const sanitized = sanitizeReviewForSchema(review);
   if (!sanitized) return null;
   if (!matchesReviewedEntity(review, entity)) return null;

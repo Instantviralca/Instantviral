@@ -124,6 +124,25 @@ describe('legacy Twitter 410 Gone', () => {
     expect(LEGACY_GONE_PATHS.has('/buy-twitter-followers/')).toBe(true);
   });
 
+  it('returns gone for /product URLs whose slug contains twitter, with or without slash', () => {
+    expect(resolveLegacySeoPath('/product/buy-10000-twitter-followers/')).toEqual({
+      kind: 'gone',
+    });
+    expect(resolveLegacySeoPath('/product/buy-250-twitter-followers')).toEqual({
+      kind: 'gone',
+    });
+  });
+
+  it('does not mark Instagram product URLs as gone', () => {
+    expect(resolveLegacySeoPath('/product/buy-100-instagram-followers/')).toEqual({
+      kind: 'redirect',
+      destination: '/',
+    });
+    expect(resolveLegacySeoPath('/product/buy-100-instagram-followers/').kind).not.toBe(
+      'gone',
+    );
+  });
+
   it('does not redirect Twitter to /services or homepage', () => {
     expect(LEGACY_SEO_REDIRECTS['/buy-twitter-followers']).toBeUndefined();
     expect(LEGACY_SEO_REDIRECTS['/buy-twitter-followers/']).toBeUndefined();
