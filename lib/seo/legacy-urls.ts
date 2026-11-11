@@ -34,6 +34,7 @@ export const LEGACY_SEO_REDIRECTS: Readonly<Record<string, string>> = {
   ...withSlashVariants({
     '/shop': '/',
     '/terms-conditions': '/terms-and-conditions',
+    '/authors/instantviral-editorial-team': '/authors/tayyab',
     '/learn/buy-instagram-followers-canada': '/learn',
     '/instagram-services-prices': '/',
     '/product/buy-100-tiktok-followers': '/buy-tiktok-followers',

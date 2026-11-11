@@ -174,6 +174,17 @@ describe('legacy shop, terms, and remaining product keyword redirects', () => {
     });
   });
 
+  it('maps /authors/instantviral-editorial-team (slash + non-slash) to /authors/tayyab', () => {
+    expect(resolveLegacySeoPath('/authors/instantviral-editorial-team')).toEqual({
+      kind: 'redirect',
+      destination: '/authors/tayyab',
+    });
+    expect(resolveLegacySeoPath('/authors/instantviral-editorial-team/')).toEqual({
+      kind: 'redirect',
+      destination: '/authors/tayyab',
+    });
+  });
+
   it('maps remaining /product slugs by keywords when not in the exact map', () => {
     expect(resolveLegacySeoPath('/product/buy-1000-facebook-page-likes/')).toEqual({
       kind: 'redirect',
