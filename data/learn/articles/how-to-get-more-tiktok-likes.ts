@@ -289,7 +289,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 35,
     text: "TikTok's Community Guidelines do not allow artificially boosting engagement through schemes like these, and breaking them can put your account at risk.",
     inlineLinks: [
-      { href: "https://www.tiktok.com/community-guidelines/en", label: "Community Guidelines", external: true },
+      { href: "https://www.tiktok.com/community-guidelines/en/integrity-authenticity", label: "Community Guidelines", external: true },
     ],
   },
   {

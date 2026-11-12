@@ -320,7 +320,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 40,
     text: "TikTok, for example, says in its explanation of how TikTok recommends videos that follower count is not a direct factor in recommendations. Instagram Reels has moved in a similar direction, which is why smaller accounts can now reach large audiences on both apps.",
     inlineLinks: [
-      { href: "https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you", label: "how TikTok recommends videos", external: true },
+      { href: "https://newsroom.tiktok.com/how-tiktok-recommends-videos-for-you?lang=en", label: "how TikTok recommends videos", external: true },
     ],
   },
   {

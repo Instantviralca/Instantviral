@@ -39,7 +39,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 4,
     text: "TikTok's For You feed shows videos based on what each viewer is likely to enjoy, not on who they already follow. In its explanation of how TikTok recommends videos, TikTok says follower count is not a direct factor in recommendations. That is good news for new accounts, because anyone can reach people.",
     inlineLinks: [
-      { href: "https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you", label: "how TikTok recommends videos", external: true },
+      { href: "https://newsroom.tiktok.com/how-tiktok-recommends-videos-for-you?lang=en", label: "how TikTok recommends videos", external: true },
     ],
   },
   {
@@ -249,7 +249,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 31,
     text: "Staying within TikTok's Community Guidelines matters too. Videos that break the rules can be removed or made ineligible for the For You feed, which cuts off the main source of new followers.",
     inlineLinks: [
-      { href: "https://www.tiktok.com/community-guidelines/en", label: "Community Guidelines", external: true },
+      { href: "https://www.tiktok.com/community-guidelines/en/community-principles", label: "Community Guidelines", external: true },
     ],
   },
   {

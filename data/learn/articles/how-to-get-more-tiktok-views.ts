@@ -40,7 +40,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 4,
     text: "In its explanation of how TikTok recommends videos, TikTok describes three main groups of signals:",
     inlineLinks: [
-      { href: "https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you", label: "how TikTok recommends videos", external: true },
+      { href: "https://newsroom.tiktok.com/how-tiktok-recommends-videos-for-you?lang=en", label: "how TikTok recommends videos", external: true },
     ],
   },
   {
@@ -259,7 +259,7 @@ const BLOCKS: ArticleContentBlock[] = [
     order: 32,
     text: "Views naturally go up and down between videos, so one weak result is not a sign of a problem. A sharp drop across many videos at once is worth investigating. Videos that break TikTok's Community Guidelines can be made ineligible for the For You feed, so start with these checks:",
     inlineLinks: [
-      { href: "https://www.tiktok.com/community-guidelines/en", label: "Community Guidelines", external: true },
+      { href: "https://www.tiktok.com/community-guidelines/en/community-principles", label: "Community Guidelines", external: true },
     ],
   },
   {
