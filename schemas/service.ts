@@ -24,7 +24,7 @@ export function serviceSchema(service: Service): JsonLd {
 }
 
 /** Product schema — offers only when real package pricing exists. No fabricated AggregateRating. */
-export function productSchema(service: Service): JsonLd {
+export function productSchema(service: Service, reviews?: JsonLd[]): JsonLd {
   const packages = getActivePackagesByServiceSlug(service.slug);
   const schema: JsonLd = {
     '@context': 'https://schema.org',
@@ -55,6 +55,14 @@ export function productSchema(service: Service): JsonLd {
         availability: 'https://schema.org/InStock',
       };
     }
+  }
+
+  if (reviews && reviews.length > 0) {
+    schema.review = reviews.map((node) => {
+      const { '@context': _context, ...rest } = node;
+      void _context;
+      return rest;
+    });
   }
 
   return schema;

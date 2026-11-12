@@ -391,7 +391,7 @@ const COMMENTS_STEPS: Array<{
     id: 'correct-post',
     icon: CheckCircle2,
     title: 'Correct Post Selection',
-    description: 'Choose the exact upload where you want conversation, not a private archive item.',
+    description: 'Choose the exact public post where you want conversation, not an archived or private one.',
   },
   {
     id: 'public-account',

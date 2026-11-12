@@ -50,7 +50,7 @@ function buildService(input: ServiceInput): Service {
     pageType: 'service',
     icon: input.icon,
     themeColor: platform.color,
-    description: `Order ${platform.name} ${input.shortName.toLowerCase()} securely with public profile or content details only — no password required.`,
+    description: `Order ${platform.name} ${input.shortName.toLowerCase()} securely with only your public profile or post link. No password required.`,
     breadcrumb: [
       { label: 'Home', href: '/' },
       { label: platform.name },

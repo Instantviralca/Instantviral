@@ -16,7 +16,7 @@ const THREAD = [
   },
   {
     name: 'you',
-    text: 'Yes, reply same day and pin FAQs.',
+    text: 'Yes. Reply the same day and pin your FAQs.',
     hearts: 8,
     reactions: ['❤️'],
     isOwner: true,

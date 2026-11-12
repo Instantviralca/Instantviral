@@ -306,6 +306,10 @@ export function buildReviewSchema(
   if (!matchesReviewedEntity(review, entity)) return null;
   if (isPlaceholderReview(review)) return null;
 
+  // Nested Product.review entries must not re-declare itemReviewed (Search Console
+  // treats that nested Product as a separate item without offers/review).
+  const includeItemReviewed = entity.kind !== 'service';
+
   return {
     ...reviewSchema({
       author: sanitized.author,
@@ -313,7 +317,7 @@ export function buildReviewSchema(
       ratingValue: sanitized.ratingValue,
       bestRating: reviewSchemaEngineConfig.bestRating,
       ...(sanitized.datePublished ? { datePublished: sanitized.datePublished } : {}),
-      itemReviewed: itemReviewedNode(entity),
+      ...(includeItemReviewed ? { itemReviewed: itemReviewedNode(entity) } : {}),
     }),
   };
 }

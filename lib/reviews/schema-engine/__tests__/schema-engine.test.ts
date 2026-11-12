@@ -15,6 +15,9 @@ import {
   validateReviewedEntity,
 } from '@/lib/reviews/schema-engine';
 import { makeReview } from '@/lib/reviews/schema-engine/__tests__/fixtures';
+import { getServiceBySlug } from '@/data/services';
+import { productSchema } from '@/schemas/service';
+import { asJsonLdGraph } from '@/lib/seo/schema';
 import type { Review } from '@/types/reviews';
 
 const serviceEntity = {
@@ -46,14 +49,34 @@ describe('Review & Aggregate Rating Schema Engine (14.03)', () => {
       author: { name: 'Alex Rivera' },
       reviewBody: review.reviewText,
     });
-    expect(node?.itemReviewed).toEqual({
-      '@type': 'Product',
-      name: serviceEntity.name,
-      url: serviceEntity.url,
-    });
+    expect(node).not.toHaveProperty('itemReviewed');
     expect(JSON.stringify(node)).not.toContain('"Service"');
     expect(JSON.stringify(node)).not.toContain('orderIdReference');
     expect(JSON.stringify(node)).not.toContain('moderationNotes');
+  });
+
+  it('nests service reviews on Product and emits no top-level Review nodes', () => {
+    const review = makeReview();
+    const bundle = buildReviewSchemaBundle([review], {
+      entity: serviceEntity,
+      visibleReviewIds: [review.id],
+      reviewSectionVisible: true,
+    });
+    expect(bundle.reviews.length).toBeGreaterThan(0);
+
+    const service = getServiceBySlug('buy-instagram-followers')!;
+    const graph = asJsonLdGraph([productSchema(service, bundle.reviews)]);
+    const nodes = (graph['@graph'] as Array<Record<string, unknown>>) ?? [];
+
+    expect(nodes.some((node) => node['@type'] === 'Review')).toBe(false);
+    const product = nodes.find((node) => node['@type'] === 'Product');
+    expect(product).toBeDefined();
+    expect(product).not.toHaveProperty('aggregateRating');
+    const nested = product?.review as Array<Record<string, unknown>>;
+    expect(Array.isArray(nested) && nested.length > 0).toBe(true);
+    expect(nested[0]?.['@type']).toBe('Review');
+    expect(nested[0]).not.toHaveProperty('itemReviewed');
+    expect(nested[0]).not.toHaveProperty('@context');
   });
 
   it('does not emit Review or AggregateRating JSON-LD for organization entities', () => {

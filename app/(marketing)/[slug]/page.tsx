@@ -99,10 +99,9 @@ export default async function ServicePage({ params }: ServicePageProps) {
       url: canonical,
     }),
     serviceNode,
-    productSchema(service),
+    productSchema(service, reviewBundle.reviews),
     breadcrumbSchema(buildBreadcrumb(service.slug)),
     ...(vm && vm.faq.items.length > 0 ? [faqPageSchema(vm.faq.items)] : []),
-    ...reviewBundle.reviews,
   ]);
 
   return (
