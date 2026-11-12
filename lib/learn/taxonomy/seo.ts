@@ -38,33 +38,41 @@ export function getCategoryMetadata(slug: string): Metadata {
   });
 }
 
+function buildTagArchiveMetadata(input: {
+  title: string;
+  description: string;
+  path: string;
+}): Metadata {
+  const metadata = buildPageMetadata({
+    ...input,
+    type: 'website',
+    robots: { index: false, follow: true },
+  });
+  delete metadata.alternates;
+  return metadata;
+}
+
 export function getTagMetadata(slug: string): Metadata {
   const tag = getTagBySlug(slug);
   if (!tag || !LEARN_TAG_PAGES_ENABLED) {
-    return buildPageMetadata({
+    return buildTagArchiveMetadata({
       title: 'Learn | InstantViral',
       description: 'InstantViral Learn Center.',
       path: tagPath(slug),
-      robots: { index: false, follow: false },
     });
   }
 
-  // Empty tag archives are thin — keep them out of the index (sitemap already omits them).
   if (tag.articleCount < 1) {
-    return buildPageMetadata({
+    return buildTagArchiveMetadata({
       title: `${tag.name} Guides | Learn | InstantViral`,
       description: tag.description,
       path: tagPath(tag.slug),
-      type: 'website',
-      robots: { index: false, follow: false },
     });
   }
 
-  return buildPageMetadata({
+  return buildTagArchiveMetadata({
     title: `${tag.name} Guides | Learn | InstantViral`,
     description: tag.description,
     path: tagPath(tag.slug),
-    type: 'website',
-    robots: { index: true, follow: true },
   });
 }

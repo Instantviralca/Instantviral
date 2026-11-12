@@ -188,12 +188,13 @@ describe('Sitemap & Robots Finalization', () => {
     ).toBe(true);
   });
 
-  it('keeps about 59 indexable sitemap URLs after Learn consolidation', () => {
+  it('keeps about 49 indexable sitemap URLs after Learn consolidation (no tag archives)', () => {
     expect(findMissingSitemapEntries(entries)).toHaveLength(0);
     const indexable = getIndexableRoutes();
     expect(indexable.length).toBeGreaterThanOrEqual(SITEMAP_PRODUCTION_ROUTES.length);
     expect(entries.length).toBe(indexable.length);
-    expect(entries.length).toBe(59);
+    expect(entries.length).toBe(49);
+    expect(urls.some((url) => url.includes('/learn/tag/'))).toBe(false);
   });
 
   it('uses a single canonical robots disallow source', () => {

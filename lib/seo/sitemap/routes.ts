@@ -11,15 +11,12 @@ import {
 import { isApprovedServiceSlug } from '@/data/linking/approved-services';
 import { getActiveLearnCategories } from '@/data/learn';
 import { getServiceBySlug } from '@/data/services';
-import { LEARN_TAG_PAGES_ENABLED } from '@/config/learn-taxonomy';
 import { getActiveAuthors } from '@/lib/authors/getters';
 import { authorPath, authorsIndexPath } from '@/lib/authors/paths';
 import {
   buildArticleCanonical,
   getIndexableArticles,
 } from '@/lib/learn/article-seo';
-import { getTags } from '@/lib/learn/taxonomy/getters';
-import { tagPath } from '@/lib/learn/taxonomy/paths';
 import { getMetadataByRoute } from '@/lib/seo/metadata/getters';
 import {
   buildCanonicalUrl,
@@ -134,21 +131,9 @@ export function getAuthorSitemapRoutes(): IndexableRoute[] {
   return [index, ...profiles];
 }
 
-/** Indexable Learn tag archives when tag pages are enabled. */
+/** Tag archives stay crawlable but are excluded from the sitemap (noindex on page). */
 export function getTagSitemapRoutes(): IndexableRoute[] {
-  if (!LEARN_TAG_PAGES_ENABLED) return [];
-
-  return getTags()
-    .filter((tag) => tag.articleCount > 0)
-    .map((tag) => ({
-      route: normalizeCanonicalPath(tagPath(tag.slug)),
-      canonicalUrl: buildCanonicalUrl(tagPath(tag.slug)),
-      lastModified: parseLastModified(undefined),
-      changeFrequency: 'weekly' as SitemapChangeFrequency,
-      priority: 0.45,
-      pageType: 'learn' as const,
-      sourceFile: 'data/learn/tags.ts',
-    }));
+  return [];
 }
 
 /** Learn article + category sitemap candidates — Document 15.07 / 14.08. */
