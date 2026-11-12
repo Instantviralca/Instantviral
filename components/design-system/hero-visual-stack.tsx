@@ -1,43 +1,23 @@
-import dynamic from 'next/dynamic';
-
-import type {
-  FacebookDashboardVariant,
-  InstagramDashboardVariant,
-  TikTokDashboardVariant,
-  YouTubeDashboardVariant,
-} from '@/components/illustrations/dashboards';
-import { cn } from '@/lib/utils';
+import { DeferredHeroVisual } from '@/components/design-system/deferred-hero-visual';
+import {
+  getHeroVisualFrameClassName,
+  type HeroVisualFrameProps,
+} from '@/components/design-system/hero-visual-frame';
 import type { PlatformId } from '@/types/platform';
 
-const PlatformDashboard = dynamic(
-  () =>
-    import('@/components/illustrations/dashboards').then((mod) => ({
-      default: mod.PlatformDashboard,
-    })),
-  {
-    ssr: true,
-    loading: () => <div className="min-h-[18.5rem] w-full" aria-hidden />,
-  },
-);
-
-type HeroVisualStackProps = {
+type HeroVisualStackProps = HeroVisualFrameProps & {
   src: string;
   alt: string;
   width: number;
   height: number;
   platform?: PlatformId;
   priority?: boolean;
-  className?: string;
   badges?: Array<{ id: string; label: string }>;
   packagePreview?: { title: string; priceLabel: string } | null;
-  instagramVariant?: InstagramDashboardVariant;
-  tiktokVariant?: TikTokDashboardVariant;
-  youtubeVariant?: YouTubeDashboardVariant;
-  facebookVariant?: FacebookDashboardVariant;
 };
 
 /**
- * Layered hero visual — platform dashboard illustration.
+ * Layered hero visual — defers client dashboard until after idle (see DeferredHeroVisual).
  */
 export function HeroVisualStack({
   alt,
@@ -49,47 +29,18 @@ export function HeroVisualStack({
   youtubeVariant,
   facebookVariant,
 }: HeroVisualStackProps) {
-  const isCompactInstagram =
-    instagramVariant === 'likes' ||
-    instagramVariant === 'views' ||
-    instagramVariant === 'comments';
-  const isTikTokPhoneHero =
-    platform === 'tiktok' &&
-    (tiktokVariant === 'followers' ||
-      tiktokVariant === 'likes' ||
-      tiktokVariant === 'views');
-  const isYouTubeHero =
-    platform === 'youtube' &&
-    (youtubeVariant === 'subscribers' || youtubeVariant === 'views');
-  const isFacebookHero =
-    platform === 'facebook' &&
-    (facebookVariant === 'followers' || facebookVariant === 'page-likes' || facebookVariant === 'post-likes');
-
   return (
-    <div
-      className={cn(
-        'relative mx-auto flex w-full items-center justify-center overflow-visible',
-        isCompactInstagram
-          ? instagramVariant === 'comments'
-            ? 'min-h-[20rem] px-2 py-3 sm:min-h-[22.5rem] sm:px-4 sm:py-4 lg:min-h-[24rem]'
-            : 'min-h-[18rem] px-4 py-4 sm:min-h-[20.5rem] sm:px-6 sm:py-5 lg:min-h-[22rem] lg:px-8'
-          : isTikTokPhoneHero
-            ? 'min-h-[18.5rem] px-3 py-2 sm:min-h-[21rem] sm:px-4 sm:py-3 lg:min-h-[22.5rem] lg:px-5'
-            : isYouTubeHero || isFacebookHero
-              ? 'min-h-[20rem] px-3 py-2 sm:min-h-[22.5rem] sm:px-4 sm:py-3 lg:min-h-[24rem] lg:px-5'
-              : 'min-h-[22rem] sm:min-h-[24rem]',
-        className,
-      )}
-    >
-      <span className="sr-only">{alt}</span>
-      <PlatformDashboard
-        platform={platform}
-        packagePreview={packagePreview}
-        instagramVariant={instagramVariant}
-        tiktokVariant={tiktokVariant}
-        youtubeVariant={youtubeVariant}
-        facebookVariant={facebookVariant}
-      />
-    </div>
+    <DeferredHeroVisual
+      alt={alt}
+      platform={platform}
+      className={className}
+      packagePreview={packagePreview}
+      instagramVariant={instagramVariant}
+      tiktokVariant={tiktokVariant}
+      youtubeVariant={youtubeVariant}
+      facebookVariant={facebookVariant}
+    />
   );
 }
+
+export { getHeroVisualFrameClassName };

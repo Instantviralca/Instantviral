@@ -58,6 +58,7 @@ export function TikTokFollowersHeroDashboard({
   }, []);
 
   useEffect(() => {
+    if (!heroMotionReady) return;
     if (reduceMotion) {
       setFollowers(FOLLOWER_KEYS[FOLLOWER_KEYS.length - 1]);
       return;
@@ -77,19 +78,21 @@ export function TikTokFollowersHeroDashboard({
     };
     frame = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(frame);
-  }, [reduceMotion]);
+  }, [heroMotionReady, reduceMotion]);
 
   useEffect(() => {
-    if (reduceMotion) return;
+    if (!heroMotionReady || reduceMotion) return;
     const timer = window.setInterval(() => {
       setToastIndex((i) => (i + 1) % LIVE_TOASTS.length);
     }, 2400);
     return () => window.clearInterval(timer);
-  }, [reduceMotion]);
+  }, [heroMotionReady, reduceMotion]);
 
   const bars = [36, 48, 42, 58, 70, 64, 88] as const;
   const toast = LIVE_TOASTS[toastIndex];
   const heroMotion = heroMotionReady && !reduceMotion;
+  const floatCard = (duration: string) =>
+    heroMotion ? `motion-safe:animate-[iv-float-card_${duration}_ease-in-out_infinite]` : '';
 
   return (
     <div
@@ -109,23 +112,48 @@ export function TikTokFollowersHeroDashboard({
       <div className="pointer-events-none absolute top-[42%] -right-2 size-20 rounded-full bg-[#FE2C55]/12 blur-2xl" />
 
       {/* Floating UI cards — InstantViral trust + growth signals */}
-      <div className="pointer-events-none absolute top-[4%] -left-1 z-[5] max-w-[9.5rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_18px_36px_-16px_rgba(28,25,23,0.5)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.2s_ease-in-out_infinite] sm:left-0">
+      <div
+        className={cn(
+          'pointer-events-none absolute top-[4%] -left-1 z-[5] max-w-[9.5rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_18px_36px_-16px_rgba(28,25,23,0.5)] backdrop-blur-md sm:left-0',
+          floatCard('5.2s'),
+        )}
+      >
         <p className="text-[8px] font-semibold tracking-wide text-emerald-600 uppercase">Growth</p>
         <p className="text-[11px] font-bold text-stone-800">+1K Followers</p>
       </div>
-      <div className="pointer-events-none absolute top-[22%] -right-1 z-[5] max-w-[9rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.2s_ease-in-out_infinite] sm:right-0">
+      <div
+        className={cn(
+          'pointer-events-none absolute top-[22%] -right-1 z-[5] max-w-[9rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md sm:right-0',
+          floatCard('6.2s'),
+        )}
+      >
         <p className="text-[8px] font-semibold text-stone-400 uppercase">Status</p>
         <p className="text-[11px] font-bold text-stone-800">Order Tracking</p>
       </div>
-      <div className="pointer-events-none absolute top-[44%] -left-2 z-[5] hidden max-w-[9.25rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_6.9s_ease-in-out_infinite] sm:block">
+      <div
+        className={cn(
+          'pointer-events-none absolute top-[44%] -left-2 z-[5] hidden max-w-[9.25rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md sm:block',
+          floatCard('6.9s'),
+        )}
+      >
         <p className="text-[8px] font-semibold text-[var(--brand-primary)] uppercase">Package</p>
         <p className="text-[11px] font-bold text-stone-800">Package Confirmed</p>
       </div>
-      <div className="pointer-events-none absolute bottom-[28%] -right-1 z-[5] max-w-[8.75rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_7.4s_ease-in-out_infinite] sm:right-0">
+      <div
+        className={cn(
+          'pointer-events-none absolute bottom-[28%] -right-1 z-[5] max-w-[8.75rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md sm:right-0',
+          floatCard('7.4s'),
+        )}
+      >
         <p className="text-[8px] font-semibold text-sky-600 uppercase">Verified</p>
         <p className="text-[11px] font-bold text-stone-800">Profile Verified</p>
       </div>
-      <div className="pointer-events-none absolute bottom-[8%] left-[2%] z-[5] hidden max-w-[8rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.8s_ease-in-out_infinite] sm:block">
+      <div
+        className={cn(
+          'pointer-events-none absolute bottom-[8%] left-[2%] z-[5] hidden max-w-[8rem] rounded-xl border border-white/95 bg-white/95 px-2.5 py-1.5 shadow-[0_16px_32px_-16px_rgba(28,25,23,0.48)] backdrop-blur-md sm:block',
+          floatCard('5.8s'),
+        )}
+      >
         <p className="text-[8px] font-semibold text-stone-400 uppercase">Analytics</p>
         <p className="text-[11px] font-bold tabular-nums text-stone-800">
           {toast.name.replace('@', '')} {toast.delta}
@@ -136,7 +164,7 @@ export function TikTokFollowersHeroDashboard({
       <div
         className={cn(
           'relative mx-auto w-[72%] max-w-[16.5rem] sm:max-w-[17.5rem]',
-          !reduceMotion && 'motion-safe:animate-iv-float-card',
+          heroMotion && 'motion-safe:animate-iv-float-card',
         )}
       >
         <div className="overflow-hidden rounded-[1.85rem] border-[3px] border-stone-900 bg-stone-900 shadow-[0_32px_64px_-24px_rgba(28,25,23,0.55),0_14px_28px_-16px_rgba(249,115,22,0.35)]">
@@ -292,7 +320,12 @@ export function TikTokFollowersHeroDashboard({
       </div>
 
       {packagePreview ? (
-        <div className="absolute -bottom-1 left-1/2 z-[6] hidden w-[min(100%,11.5rem)] -translate-x-1/2 rounded-xl border border-[var(--border-subtle)] bg-white px-2.5 py-1.5 shadow-[0_14px_28px_-16px_rgba(28,25,23,0.4)] motion-safe:animate-[iv-float-card_5.8s_ease-in-out_infinite] sm:block">
+        <div
+          className={cn(
+            'absolute -bottom-1 left-1/2 z-[6] hidden w-[min(100%,11.5rem)] -translate-x-1/2 rounded-xl border border-[var(--border-subtle)] bg-white px-2.5 py-1.5 shadow-[0_14px_28px_-16px_rgba(28,25,23,0.4)] sm:block',
+            floatCard('5.8s'),
+          )}
+        >
           <p className="text-[9px] font-semibold text-[var(--text-muted)] uppercase">Selected</p>
           <p className="truncate text-[11px] font-bold text-[var(--text-primary)]">
             {packagePreview.title}
