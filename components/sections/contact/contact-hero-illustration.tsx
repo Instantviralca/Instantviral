@@ -10,7 +10,7 @@ const TICKETS = [
   { id: 't3', subject: 'Delivery update', status: 'Resolved', color: '#10B981' },
 ] as const;
 
-const CHAT_LINES = ['Hi! How can we help?', 'Track my order', 'Thanks — on it!'] as const;
+const CHAT_LINES = ['Hi! How can we help?', 'Track my order', 'Thanks, on it!'] as const;
 
 /**
  * Contact hero — customer support SaaS dashboard (decorative).
@@ -57,7 +57,7 @@ export function ContactHeroIllustration({ className }: { className?: string }) {
       {/* Email notification */}
       <div className="pointer-events-none absolute -top-1 right-0 z-[8] max-w-[11rem] rounded-xl border border-white/90 bg-white/95 px-2.5 py-2 shadow-[0_16px_32px_-14px_rgba(249,115,22,0.35)] backdrop-blur-md motion-safe:animate-[iv-float-card_5.2s_ease-in-out_infinite] sm:-right-2">
         <p className="text-[8px] font-semibold tracking-wide text-orange-600 uppercase">Email</p>
-        <p className="text-[11px] font-bold text-stone-800">Reply sent — 2 min ago</p>
+        <p className="text-[11px] font-bold text-stone-800">Reply sent 2 min ago</p>
       </div>
 
       <div className="relative overflow-hidden rounded-2xl border border-white/60 bg-white/90 p-3 shadow-[0_24px_48px_-28px_rgba(28,25,23,0.45)] backdrop-blur-sm sm:p-3.5">

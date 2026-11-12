@@ -40,7 +40,7 @@ function normalizeOrderToken(orderId: string): string {
 /** Mask username/URL for public display. */
 export function maskTarget(raw: string): string {
   const value = raw.trim();
-  if (!value) return '—';
+  if (!value) return 'Not available';
   if (value.startsWith('http')) {
     try {
       const url = new URL(value);

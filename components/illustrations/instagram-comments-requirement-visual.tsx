@@ -68,7 +68,7 @@ export function InstagramCommentsRequirementVisual({ className }: { className?: 
           {[
             {
               name: 'mia',
-              text: 'Love this tip — trying it today.',
+              text: 'Love this tip, trying it today.',
               emoji: '❤️',
               pinned: true,
             },

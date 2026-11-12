@@ -141,7 +141,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
         },
         {
           type: 'paragraph',
-          text: `This policy works together with the Terms & Conditions (${domainHost}${termsPath}) and the Privacy Policy (${domainHost}${privacyPath}). Package-specific delivery estimates, features, and refill eligibility shown on service pages come from InstantViral’s real package pricing data.`,
+          text: `This policy works together with the Terms & Conditions (${domainHost}${termsPath}) and the Privacy Policy (${domainHost}${privacyPath}). Package-specific delivery estimates, features, and refill eligibility shown on service pages come from InstantViral’s package pricing data.`,
         },
       ],
     },
@@ -184,7 +184,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
       blocks: [
         {
           type: 'paragraph',
-          text: 'A partial refund may be considered when InstantViral’s operational process supports it — for example, when only part of an order was completed, when an order is marked partial, or when a reviewed request otherwise warrants limited credit.',
+          text: 'A partial refund may be considered when InstantViral’s operational process supports it, for example when only part of an order was completed, when an order is marked partial, or when a reviewed request otherwise warrants limited credit.',
         },
         {
           type: 'paragraph',

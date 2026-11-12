@@ -50,7 +50,7 @@ const EXTRA_TEMPLATES: Record<
     bodyText: '{{emailText}}',
   },
   contact_admin: {
-    subject: 'Contact form — {{subject}}',
+    subject: 'Contact form: {{subject}}',
     bodyHtml:
       '<p>New contact message from <strong>{{fullName}}</strong> ({{email}}).</p><p>Subject: {{subject}}</p><p>Order ID: {{orderId}}</p><pre>{{message}}</pre>',
     bodyText:

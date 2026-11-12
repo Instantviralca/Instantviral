@@ -39,8 +39,8 @@ export const LEARN_READING_TIME_OPTIONS: readonly {
   label: string;
 }[] = [
   { value: 'under-5', label: 'Under 5 minutes' },
-  { value: '5-10', label: '5–10 minutes' },
-  { value: '10-15', label: '10–15 minutes' },
+  { value: '5-10', label: '5 to 10 minutes' },
+  { value: '10-15', label: '10 to 15 minutes' },
   { value: 'over-15', label: 'Over 15 minutes' },
 ] as const;
 

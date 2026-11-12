@@ -22,7 +22,7 @@ export const aboutContent: AboutPageContent = {
   hero: {
     title: 'About InstantViral',
     description:
-      'InstantViral helps creators, businesses, agencies, and brands purchase social media growth services through a transparent ordering experience backed by real package data, secure checkout, and customer support.',
+      'InstantViral helps creators, businesses, agencies, and brands purchase social media growth services through a transparent ordering experience backed by clear package details, secure checkout and customer support.',
     purpose: 'Introduce InstantViral as a trusted Canadian growth provider',
     primaryKeyword: 'About InstantViral',
     primaryCta: {
@@ -39,7 +39,7 @@ export const aboutContent: AboutPageContent = {
     title: 'Our Story',
     description: 'A clearer way to buy social media growth services.',
     purpose: 'Share company journey without unverifiable historical claims',
-    body: 'InstantViral was built to make social media growth services easier to understand and order. Creators, businesses, agencies, and brands often need a straightforward way to compare packages, submit the required public URL, complete secure checkout, and track progress — without sharing account passwords.\n\nWe focus on transparency in how packages are presented, clarity in what is required to place an order, and continuous improvement of the ordering experience. Our goal is a customer-focused process that stays honest about what we provide and what we do not invent.',
+    body: 'InstantViral was built to make social media growth services easier to understand and order. Creators, businesses, agencies, and brands often need a straightforward way to compare packages, submit the required public URL, complete secure checkout, and track progress, all without sharing account passwords.\n\nWe focus on transparency in how packages are presented, clarity in what is required to place an order, and continuous improvement of the ordering experience. Our goal is a customer-focused process that stays honest about what we provide and what we do not invent.',
   },
   mission: {
     id: 'mission-and-values',
@@ -52,7 +52,7 @@ export const aboutContent: AboutPageContent = {
         id: 'about-value-transparency',
         title: 'Transparency',
         description:
-          'We present real package options and clear order requirements so customers can make informed decisions.',
+          'We show every package option and its order requirements clearly, so customers can make informed decisions.',
       },
       {
         id: 'about-value-ordering',
@@ -95,9 +95,9 @@ export const aboutContent: AboutPageContent = {
       },
       {
         id: 'about-why-catalog',
-        title: 'Real Package Catalog',
+        title: 'Clear Package Catalog',
         description:
-          'Quantities and prices come from the real InstantViral.ca package data — not invented frontend placeholders.',
+          'The quantities and prices you see are the exact packages available at checkout.',
       },
       {
         id: 'about-why-checkout',
@@ -115,7 +115,7 @@ export const aboutContent: AboutPageContent = {
         id: 'about-why-delivery',
         title: 'Clear Delivery Information',
         description:
-          'Delivery estimates shown on packages come from the real pricing data associated with each option.',
+          'Each package shows its own delivery estimate before you order.',
       },
       {
         id: 'about-why-refund',
@@ -147,7 +147,7 @@ export const aboutContent: AboutPageContent = {
       {
         id: 'about-process-2',
         title: 'Select a Package',
-        description: 'Review real quantities, prices, and package details before you continue.',
+        description: 'Review quantities, prices and package details before you continue.',
       },
       {
         id: 'about-process-3',
@@ -170,7 +170,7 @@ export const aboutContent: AboutPageContent = {
     id: 'trust-and-security',
     title: 'Trust & Security',
     description:
-      'We keep trust signals grounded in how the product actually works — not in unverifiable claims.',
+      'We build trust through how the service works day to day, not through claims we cannot back up.',
     purpose: 'Reinforce trust without inventing awards or guarantees',
     disclaimer:
       'InstantViral does not invent awards, certifications, partnerships, customer counts, or guarantees on this page. Trust is built through clear package data, secure checkout, transparent policies, and responsive support.',
@@ -205,7 +205,7 @@ export const aboutContent: AboutPageContent = {
     id: 'about-final-cta',
     title: 'Ready to Explore InstantViral Services?',
     description:
-      'Browse available growth services, review real package options, and place an order with a clear, password-free process.',
+      'Browse available growth services, compare package options and place an order with a clear, password-free process.',
     purpose: 'Drive visitors to services or contact',
     primaryCta: {
       label: 'Browse Services',
@@ -291,7 +291,7 @@ export const contactContent: ContactPageContent = {
       subjectLabel: 'Subject',
       subjectPlaceholder: 'How can we help?',
       orderIdLabel: 'Order ID',
-      orderIdPlaceholder: 'Optional — e.g. IV-1001',
+      orderIdPlaceholder: 'Optional, for example IV-1001',
       orderIdHelper: 'Optional. Include this if your message relates to an existing order.',
       messageLabel: 'Message',
       messagePlaceholder: 'Tell us what you need help with…',
@@ -353,13 +353,13 @@ export const faqPageContent: FaqPageContent = {
   seo: {
     title: 'InstantViral FAQ | Orders, Delivery, Payments & Support',
     description:
-      'Find answers about InstantViral services, real packages, delivery times, payments, refunds, refill eligibility, order tracking, and customer support.',
+      'Find answers about InstantViral services, packages, delivery times, payments, refunds, refill eligibility, order tracking, and customer support.',
   },
   hero: {
     eyebrow: 'HELP CENTER',
     title: 'Frequently Asked Questions',
     description:
-      'Find clear answers about InstantViral services, real package options, delivery estimates, payments, refunds, refill eligibility, order tracking, and customer support. Use the search field or choose a category to quickly find the information you need.',
+      'Find clear answers about InstantViral services, package options, delivery estimates, payments, refunds, refill eligibility, order tracking, and customer support. Use the search field or choose a category to quickly find the information you need.',
     purpose: 'Help customers find answers before contacting support',
     primaryKeyword: 'InstantViral FAQ',
     primaryCta: {

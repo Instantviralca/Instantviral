@@ -247,7 +247,7 @@ function buildSections(config: PrivacyConfig): LegalPolicySection[] {
   if (config.privacyContactRole || config.privacyContactName) {
     contactBlocks.push({
       type: 'paragraph',
-      text: `Privacy contact: ${[config.privacyContactRole, config.privacyContactName].filter(Boolean).join(' — ')}`,
+      text: `Privacy contact: ${[config.privacyContactRole, config.privacyContactName].filter(Boolean).join(', ')}`,
     });
   }
 

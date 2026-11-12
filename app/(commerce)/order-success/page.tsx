@@ -72,7 +72,7 @@ export default async function OrderSuccessPage({ searchParams }: OrderSuccessPag
         </Heading>
         <MutedText>
           {verified
-            ? 'Thanks — your payment was verified and your order is in the fulfilment queue.'
+            ? 'Thanks. Your payment was verified and your order is now in the queue for fulfilment.'
             : paymentPending
               ? 'We are confirming your payment. This page will show success once payment is verified.'
               : 'We could not verify this order yet. Use your order number and email to track status.'}

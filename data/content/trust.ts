@@ -38,7 +38,7 @@ const trustBadges: TrustBadgeContent[] = [
     id: 'refill-protection',
     label: 'Refill Protection',
     enabled: trustBadgeFlags['refill-protection'],
-    note: 'Eligible packages only. Refill duration and conditions come from the real package data on the service page.',
+    note: 'Eligible packages only. Refill duration and conditions are shown on each service page.',
   },
   {
     id: 'money-back-guarantee',
@@ -57,19 +57,19 @@ export const trustCenterContent: TrustCenterContent = {
   header: {
     title: 'Why Customers Trust InstantViral',
     subtitle:
-      'Clear package data, password-free ordering, secure checkout, published policies, and support when you need help — without unsupported guarantees.',
+      'Clear packages, password-free ordering, secure checkout, published policies and support whenever you need help.',
   },
   badges: trustBadges,
   whyChoose: {
     title: 'Why Choose InstantViral',
     description:
-      'InstantViral focuses on transparent ordering, real package options, and practical support across Instagram, TikTok, Facebook, and YouTube services.',
+      'InstantViral focuses on transparent ordering, clear package options and practical support across Instagram, TikTok, Facebook, and YouTube services.',
     items: [
       {
         id: 'trust-why-transparency',
         title: 'Transparent Packages',
         description:
-          'Compare real quantities, prices, and delivery estimates from InstantViral.ca before you checkout.',
+          'Compare quantities, prices and delivery estimates before you check out.',
       },
       {
         id: 'trust-why-password-free',
@@ -107,7 +107,7 @@ export const trustCenterContent: TrustCenterContent = {
     id: 'trust-refund-refill',
     title: 'Refund & Refill Information',
     description:
-      'Not every order is automatically refundable. Eligible purchases may be covered under the Refund Policy and the conditions shown for the selected service and package. Refill protection applies only to eligible packages, and refill duration or limits must come from the real package data — InstantViral does not invent refill periods here.',
+      'Not every order is automatically refundable. Eligible purchases may be covered under the Refund Policy and the conditions shown for the selected service and package. Refill protection applies only to eligible packages, and the refill period and limits are shown on the package itself. If a package does not list a refill period, it does not include one.',
     refundPolicyCta: {
       label: 'Read the Refund Policy',
       href: routes.refundPolicy,
@@ -126,7 +126,7 @@ export const trustCenterContent: TrustCenterContent = {
   finalCta: {
     title: 'Ready to Choose a Package?',
     description:
-      'Browse InstantViral services, review real package options, and place an order with a clear, password-free process.',
+      'Browse InstantViral services, compare package options and place an order with a clear, password-free process.',
     primaryCta: {
       label: 'Browse Services',
       href: routes.home,

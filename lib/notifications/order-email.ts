@@ -114,7 +114,7 @@ function renderTargetCell(target: { display: string; href: string | null }): {
   html: string;
   text: string;
 } {
-  if (!target.display) return { html: '—', text: '—' };
+  if (!target.display) return { html: 'Not provided', text: 'Not provided' };
   if (target.href) {
     return {
       html: renderSafeLink(target.display, target.href),
@@ -244,7 +244,7 @@ const CUSTOMER_COPY: Record<
   payment_confirmed: {
     title: 'Payment confirmed',
     intro:
-      'Thanks — your payment was confirmed and your order is in the fulfilment queue.',
+      'Thanks. Your payment was confirmed and your order is now in the queue for fulfilment.',
     subjectSuffix: 'Confirmed',
   },
   processing: {

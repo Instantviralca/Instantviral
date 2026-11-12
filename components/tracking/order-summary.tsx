@@ -15,7 +15,7 @@ export function OrderSummary({ order, className }: OrderSummaryProps) {
           packageTitle: order.packageTitle,
           packageQuantityLabel: order.quantityLabel,
           cartQuantity: 1,
-          lineTotalDisplay: order.orderTotalDisplay ?? '—',
+          lineTotalDisplay: order.orderTotalDisplay ?? 'Not available',
           targetDisplay: order.targetDisplay,
         },
       ];

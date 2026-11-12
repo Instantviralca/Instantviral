@@ -90,7 +90,7 @@ export const descriptions = {
 
   learnArticle: (article: LearnArticle) =>
     clampDescription(
-      `${article.title} — InstantViral Learn guide with practical social media growth tips, platform strategy, and actionable takeaways.`,
+      `Read ${article.title} in the InstantViral Learn Center, with practical tips on social media growth and platform strategy.`,
     ),
 
   about: () =>

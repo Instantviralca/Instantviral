@@ -7,7 +7,7 @@ export function buildImageAlt(input: {
 }): string {
   const base = input.subject.trim();
   if (!input.context) return base || site.name;
-  return `${base} — ${input.context.trim()}`;
+  return `${base}, ${input.context.trim()}`;
 }
 
 /** Prefer SEO-friendly filenames (lowercase, hyphenated). */

@@ -33,7 +33,7 @@ function greetingName(cart: AbandonedCartRecord): string {
 function serviceLine(cart: AbandonedCartRecord): string {
   const parts = [cart.serviceName, cart.packageTitle].filter(Boolean);
   if (parts.length === 0) return 'your selected package';
-  return parts.join(' — ');
+  return parts.join(', ');
 }
 
 function amountLine(cart: AbandonedCartRecord): string {
@@ -116,8 +116,8 @@ export function buildRecoveryEmailContent(input: {
       cart: input.cart,
       ctaUrl: input.recoveryUrl,
       headline: 'You left something behind',
-      bodyHtml: `<p>Hi ${name},</p><p>You started a checkout on ${brand} but did not finish your order. Your selections are still available — you can complete checkout whenever you are ready.</p>`,
-      bodyText: `Hi ${name},\n\nYou started a checkout on ${brand} but did not finish your order. Your selections are still available — you can complete checkout whenever you are ready.`,
+      bodyHtml: `<p>Hi ${name},</p><p>You started a checkout on ${brand} but did not finish your order. Your selections are still saved, and you can complete checkout whenever you are ready.</p>`,
+      bodyText: `Hi ${name},\n\nYou started a checkout on ${brand} but did not finish your order. Your selections are still saved, and you can complete checkout whenever you are ready.`,
     });
     return { ...shell, subject: `You left something behind at ${brand}` };
   }
@@ -127,8 +127,8 @@ export function buildRecoveryEmailContent(input: {
       cart: input.cart,
       ctaUrl: input.recoveryUrl,
       headline: 'Still thinking it over?',
-      bodyHtml: `<p>Hi ${name},</p><p>Just a friendly follow-up — your unfinished order is still saved. If you ran into a question at checkout, our support team is happy to help before you complete payment.</p>`,
-      bodyText: `Hi ${name},\n\nJust a friendly follow-up — your unfinished order is still saved. If you ran into a question at checkout, our support team is happy to help before you complete payment.`,
+      bodyHtml: `<p>Hi ${name},</p><p>Just a friendly follow up: your unfinished order is still saved. If you ran into a question at checkout, our support team is happy to help before you complete payment.</p>`,
+      bodyText: `Hi ${name},\n\nJust a friendly follow up: your unfinished order is still saved. If you ran into a question at checkout, our support team is happy to help before you complete payment.`,
     });
     return { ...shell, subject: `Your ${brand} order is still waiting` };
   }
@@ -137,8 +137,8 @@ export function buildRecoveryEmailContent(input: {
     cart: input.cart,
     ctaUrl: input.recoveryUrl,
     headline: 'Last reminder about your order',
-    bodyHtml: `<p>Hi ${name},</p><p>This is our final reminder about the order you started. If you still want it, you can complete checkout using the button below. If not, you can ignore this email — no further reminders will be sent.</p>`,
-    bodyText: `Hi ${name},\n\nThis is our final reminder about the order you started. If you still want it, you can complete checkout using the button below. If not, you can ignore this email — no further reminders will be sent.`,
+    bodyHtml: `<p>Hi ${name},</p><p>This is our final reminder about the order you started. If you still want it, you can complete checkout using the button below. If not, you can ignore this email. We will not send any more reminders.</p>`,
+    bodyText: `Hi ${name},\n\nThis is our final reminder about the order you started. If you still want it, you can complete checkout using the button below. If not, you can ignore this email. We will not send any more reminders.`,
   });
   return { ...shell, subject: `Final reminder from ${brand}` };
 }

@@ -66,7 +66,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       id: saved.id,
-      message: 'Thanks — your message was received.',
+      message: 'Thanks, we have received your message.',
     });
   } catch {
     return NextResponse.json(

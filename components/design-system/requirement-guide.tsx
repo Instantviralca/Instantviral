@@ -450,7 +450,7 @@ export function RequirementGuide({
   title = 'What we need from you',
   description = 'Orders run on public details only. No login access, no password, no account takeover.',
   imageSrc = '/assets/images/illustrations/trust-secure.svg',
-  imageAlt = 'Public profile requirements — no password needed',
+  imageAlt = 'Public profile requirements, no password needed',
   visual,
   visualVariant = 'default',
   reverse = false,
