@@ -31,6 +31,7 @@ import { getServiceContentBySlug } from '@/data/content/services';
 import { mapServiceContent } from '@/lib/content/mappers';
 import { resolveRelatedServices } from '@/lib/content/linking';
 import { buildBreadcrumb } from '@/lib/linking';
+import { mergeMoneyPageGuideLinks } from '@/lib/linking/money-page-guides';
 import { getRelatedArticles } from '@/lib/linking/related-articles';
 import type { Service } from '@/types/service';
 
@@ -73,14 +74,17 @@ export function FacebookPostLikesAuthorityView({
   const config = FACEBOOK_POST_LIKES_PAGE_CONFIG;
   const related = resolveRelatedServices(service, content.relatedServices.serviceSlugs, 2);
   const relatedArticles = enrichRelatedArticles(
-    getRelatedArticles(service.slug, {
-      platform: service.platform,
-      limit: 4,
-      preferredSlugs: [
-        'how-to-increase-facebook-engagement',
-        'how-to-get-more-facebook-followers',
-      ],
-    }),
+    mergeMoneyPageGuideLinks(
+      service.slug,
+      getRelatedArticles(service.slug, {
+        platform: service.platform,
+        limit: 4,
+        preferredSlugs: [
+          'how-to-increase-facebook-engagement',
+          'how-to-get-more-facebook-followers',
+        ],
+      }),
+    ),
   );
   const breadcrumbs = buildBreadcrumb(service.slug);
   const previewPackageId =

@@ -30,6 +30,7 @@ import { getServiceContentBySlug } from '@/data/content/services';
 import { mapServiceContent } from '@/lib/content/mappers';
 import { resolveRelatedServices } from '@/lib/content/linking';
 import { buildBreadcrumb } from '@/lib/linking';
+import { mergeMoneyPageGuideLinks } from '@/lib/linking/money-page-guides';
 import { getRelatedArticles } from '@/lib/linking/related-articles';
 import type { Service } from '@/types/service';
 
@@ -71,10 +72,13 @@ export function TikTokViewsAuthorityView({ service }: TikTokViewsAuthorityViewPr
   const config = TIKTOK_VIEWS_PAGE_CONFIG;
   const related = resolveRelatedServices(service, content.relatedServices.serviceSlugs, 2);
   const relatedArticles = enrichRelatedArticles(
-    getRelatedArticles(service.slug, {
-      platform: service.platform,
-      limit: 4,
-    }),
+    mergeMoneyPageGuideLinks(
+      service.slug,
+      getRelatedArticles(service.slug, {
+        platform: service.platform,
+        limit: 4,
+      }),
+    ),
   );
   const breadcrumbs = buildBreadcrumb(service.slug);
   const previewPackageId =

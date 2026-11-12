@@ -13,6 +13,8 @@ export type ServiceRelatedArticlesProps = {
   description?: string;
   articles: InternalLink[];
   className?: string;
+  /** Simple one-link-per-line list — no card grid (Guides on this topic). */
+  layout?: 'grid' | 'stack';
 };
 
 /**
@@ -25,13 +27,14 @@ export function ServiceRelatedArticles({
   description = 'Guides from the InstantViral Learn Center that pair with this service.',
   articles,
   className,
+  layout = 'grid',
 }: ServiceRelatedArticlesProps) {
   if (articles.length === 0) return null;
 
   return (
     <Section id={id} className={cn('border-t border-neutral-200', className)}>
       <Container>
-        <div className="mx-auto max-w-3xl text-center">
+        <div className={cn(layout === 'stack' ? 'max-w-3xl' : 'mx-auto max-w-3xl text-center')}>
           <Heading as="h2" className="text-2xl font-semibold text-neutral-900 sm:text-3xl">
             {title}
           </Heading>
@@ -41,18 +44,33 @@ export function ServiceRelatedArticles({
             </MutedText>
           ) : null}
         </div>
-        <ul className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2">
-          {articles.map((article) => (
-            <li key={article.slug}>
-              <Link
-                href={article.href}
-                className="block border border-neutral-200 p-4 outline-none transition-colors hover:border-neutral-400 focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
-              >
-                <p className="font-medium text-neutral-900">{article.label}</p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {layout === 'stack' ? (
+          <ul className="mt-6 max-w-3xl space-y-2">
+            {articles.map((article) => (
+              <li key={article.slug}>
+                <Link
+                  href={article.href}
+                  className="font-medium text-neutral-900 underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
+                >
+                  {article.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <ul className="mx-auto mt-8 grid max-w-4xl gap-3 sm:grid-cols-2">
+            {articles.map((article) => (
+              <li key={article.slug}>
+                <Link
+                  href={article.href}
+                  className="block border border-neutral-200 p-4 outline-none transition-colors hover:border-neutral-400 focus-visible:ring-2 focus-visible:ring-neutral-900 focus-visible:ring-offset-2"
+                >
+                  <p className="font-medium text-neutral-900">{article.label}</p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </Container>
     </Section>
   );

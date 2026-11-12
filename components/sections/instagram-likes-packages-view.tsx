@@ -17,6 +17,7 @@ import { getServiceContentBySlug } from '@/data/content/services';
 import { mapServiceContent } from '@/lib/content/mappers';
 import { resolveRelatedServices } from '@/lib/content/linking';
 import { buildBreadcrumb } from '@/lib/linking';
+import { mergeMoneyPageGuideLinks } from '@/lib/linking/money-page-guides';
 import { getRelatedArticles } from '@/lib/linking/related-articles';
 import type { Service } from '@/types/service';
 
@@ -35,10 +36,13 @@ export function InstagramLikesPackagesView({ service }: InstagramLikesPackagesVi
   const vm = mapServiceContent(content);
   const config = INSTAGRAM_LIKES_PACKAGES_CONFIG;
   const related = resolveRelatedServices(service, content.relatedServices.serviceSlugs, 3);
-  const relatedArticles = getRelatedArticles(service.slug, {
-    platform: service.platform,
-    limit: 4,
-  });
+  const relatedArticles = mergeMoneyPageGuideLinks(
+    service.slug,
+    getRelatedArticles(service.slug, {
+      platform: service.platform,
+      limit: 4,
+    }),
+  );
   const breadcrumbs = buildBreadcrumb(service.slug);
   const previewPackageId =
     vm.pricing.packages.find((p) => p.package.badge)?.package.id ??

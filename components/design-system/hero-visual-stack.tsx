@@ -1,12 +1,24 @@
-import {
-  PlatformDashboard,
-  type FacebookDashboardVariant,
-  type InstagramDashboardVariant,
-  type TikTokDashboardVariant,
-  type YouTubeDashboardVariant,
+import dynamic from 'next/dynamic';
+
+import type {
+  FacebookDashboardVariant,
+  InstagramDashboardVariant,
+  TikTokDashboardVariant,
+  YouTubeDashboardVariant,
 } from '@/components/illustrations/dashboards';
 import { cn } from '@/lib/utils';
 import type { PlatformId } from '@/types/platform';
+
+const PlatformDashboard = dynamic(
+  () =>
+    import('@/components/illustrations/dashboards').then((mod) => ({
+      default: mod.PlatformDashboard,
+    })),
+  {
+    ssr: true,
+    loading: () => <div className="min-h-[18.5rem] w-full" aria-hidden />,
+  },
+);
 
 type HeroVisualStackProps = {
   src: string;

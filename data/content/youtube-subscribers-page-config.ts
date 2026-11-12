@@ -264,7 +264,7 @@ export const YOUTUBE_SUBSCRIBERS_PAGE_CONFIG: YouTubeSubscribersPageConfig = {
       title: 'Watch Time',
       description:
         'Watch Time measures total viewing duration across your videos and is one of the important performance metrics available inside YouTube Studio.',
-      href: '/learn/how-the-youtube-algorithm-works',
+      href: '/learn/how-to-get-more-youtube-views',
       ctaLabel: 'Learn About Watch Time',
     },
     combinedNote:
@@ -436,7 +436,7 @@ export const YOUTUBE_SUBSCRIBERS_PAGE_CONFIG: YouTubeSubscribersPageConfig = {
         title: 'YouTube Watch Time',
         description:
           'Explore resources related to YouTube Watch Time and channel performance.',
-        href: '/learn/how-the-youtube-algorithm-works',
+        href: '/learn/how-to-get-more-youtube-views',
         ctaLabel: 'Explore Service',
       },
     ],

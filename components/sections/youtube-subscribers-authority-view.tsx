@@ -28,6 +28,7 @@ import { getPublishedLearnArticleBySlug } from '@/data/learn/articles';
 import { getServiceContentBySlug } from '@/data/content/services';
 import { mapServiceContent } from '@/lib/content/mappers';
 import { buildBreadcrumb } from '@/lib/linking';
+import { mergeMoneyPageGuideLinks } from '@/lib/linking/money-page-guides';
 import { getRelatedArticles } from '@/lib/linking/related-articles';
 import type { Service } from '@/types/service';
 
@@ -69,16 +70,19 @@ export function YouTubeSubscribersAuthorityView({
   const vm = mapServiceContent(content);
   const config = YOUTUBE_SUBSCRIBERS_PAGE_CONFIG;
   const relatedArticles = enrichRelatedArticles(
-    getRelatedArticles(service.slug, {
-      platform: service.platform,
-      limit: 6,
-      preferredSlugs: [
-        'how-to-get-more-youtube-subscribers',
-        'how-to-get-more-youtube-views',
-        'social-media-marketing-mistakes',
-        'organic-vs-paid-social-media-growth',
-      ],
-    }),
+    mergeMoneyPageGuideLinks(
+      service.slug,
+      getRelatedArticles(service.slug, {
+        platform: service.platform,
+        limit: 6,
+        preferredSlugs: [
+          'how-to-get-more-youtube-subscribers',
+          'how-to-get-more-youtube-views',
+          'social-media-marketing-mistakes',
+          'organic-vs-paid-social-media-growth',
+        ],
+      }),
+    ),
   );
   const breadcrumbs = buildBreadcrumb(service.slug);
   const previewPackageId =

@@ -42,6 +42,12 @@ export function TikTokFollowersHeroDashboard({
   const [followers, setFollowers] = useState<number>(FOLLOWER_KEYS[0]);
   const [toastIndex, setToastIndex] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
+  const [heroMotionReady, setHeroMotionReady] = useState(false);
+
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setHeroMotionReady(true));
+    return () => cancelAnimationFrame(id);
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -83,6 +89,7 @@ export function TikTokFollowersHeroDashboard({
 
   const bars = [36, 48, 42, 58, 70, 64, 88] as const;
   const toast = LIVE_TOASTS[toastIndex];
+  const heroMotion = heroMotionReady && !reduceMotion;
 
   return (
     <div
@@ -95,7 +102,7 @@ export function TikTokFollowersHeroDashboard({
       <div
         className={cn(
           'pointer-events-none absolute top-[10%] right-[6%] size-48 rounded-full bg-[var(--brand-primary)]/28 blur-3xl sm:size-56',
-          !reduceMotion && 'animate-iv-glow-pulse',
+          heroMotion && 'animate-iv-glow-pulse',
         )}
       />
       <div className="pointer-events-none absolute bottom-[18%] left-[4%] size-28 rounded-full bg-[#25F4EE]/18 blur-3xl" />

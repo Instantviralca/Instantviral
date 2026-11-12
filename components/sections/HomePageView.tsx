@@ -17,7 +17,9 @@ import { HomepageLearnSections } from '@/components/marketing/homepage-learn-sec
 import { HomepageStickyCta } from '@/components/marketing/homepage-sticky-cta';
 import { DeliveryProcessTimeline } from '@/components/marketing/packages/delivery-process-timeline';
 import { PackageFitGuide } from '@/components/marketing/packages/package-fit-guide';
+import { ServiceRelatedArticles } from '@/components/sections/service';
 import { ServiceCommerceBlocks } from '@/components/sections/service/service-commerce-blocks';
+import { mergeMoneyPageGuideLinks } from '@/lib/linking/money-page-guides';
 import { INSTAGRAM_FOLLOWERS_PACKAGES_CONFIG } from '@/data/content/packages-page-config';
 import { getHomepageContent } from '@/data/content/homepage';
 import { getServiceContentBySlug } from '@/data/content/services';
@@ -57,6 +59,7 @@ export function HomePageView({ content = getHomepageContent() }: HomePageViewPro
     followersVm?.pricing.packages[0]?.primaryCta.label ??
     followersContent?.pricing.primaryCtaLabel ??
     'Continue with This Package';
+  const homepageGuides = mergeMoneyPageGuideLinks(IG_FOLLOWERS_SLUG);
 
   return (
     <div className="pb-[4.75rem] lg:pb-0">
@@ -90,6 +93,15 @@ export function HomePageView({ content = getHomepageContent() }: HomePageViewPro
       <HomepageInstagramHubSection />
       <HomepageWhoWeHelpSection />
       <HomepageTrustedReviewsSection reviews={featuredReviews} />
+      {homepageGuides.length > 0 ? (
+        <ServiceRelatedArticles
+          id="guides-on-this-topic"
+          title="Guides on this topic"
+          description=""
+          articles={homepageGuides}
+          layout="stack"
+        />
+      ) : null}
       {hasPublishedGuides ? <HomepageLearnSections /> : null}
       <HomepageBuyingResponsiblySection />
       <HomepageFaqSection />

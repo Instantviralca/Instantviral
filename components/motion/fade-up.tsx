@@ -32,15 +32,7 @@ export function FadeUp({
   }
 
   if (immediate) {
-    return (
-      <motion.div
-        className={cn(className)}
-        initial={{ opacity: 1, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={transition}
-        {...props}
-      />
-    );
+    return <div className={cn(className)} {...(props as React.HTMLAttributes<HTMLDivElement>)} />;
   }
 
   return (

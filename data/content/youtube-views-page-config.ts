@@ -263,7 +263,7 @@ export const YOUTUBE_VIEWS_PAGE_CONFIG: YouTubeViewsPageConfig = {
       title: 'Watch Time',
       description:
         'Watch Time measures total viewing duration and helps creators understand how long audiences stay engaged with their videos.',
-      href: '/learn/how-the-youtube-algorithm-works',
+      href: '/learn/how-to-get-more-youtube-views',
       ctaLabel: 'Learn About Watch Time',
     },
     combinedNote:
@@ -436,7 +436,7 @@ export const YOUTUBE_VIEWS_PAGE_CONFIG: YouTubeViewsPageConfig = {
         title: 'YouTube Watch Time',
         description:
           'Learn how Watch Time contributes to overall YouTube channel performance.',
-        href: '/learn/how-the-youtube-algorithm-works',
+        href: '/learn/how-to-get-more-youtube-views',
         ctaLabel: 'Learn More',
       },
       {
@@ -444,7 +444,7 @@ export const YOUTUBE_VIEWS_PAGE_CONFIG: YouTubeViewsPageConfig = {
         title: 'YouTube SEO Guide',
         description:
           'Discover practical ways to improve video visibility through YouTube SEO best practices.',
-        href: '/learn/youtube-seo-guide',
+        href: '/learn/how-to-get-more-youtube-views',
         ctaLabel: 'Read Guide',
       },
     ],
