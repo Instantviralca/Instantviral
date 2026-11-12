@@ -43,7 +43,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
       items: [
         'Order status',
         'Service type',
-        'Package terms shown with the real package data',
+        'Package terms shown on the service page before checkout',
         'Operational review of the request',
         'Customer compliance with order instructions and these policy terms',
       ],
@@ -53,7 +53,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
   if (config.eligibleMoneyBackWindowLabel) {
     eligibilityBlocks.push({
       type: 'paragraph',
-      text: `Eligible purchases are covered by InstantViral’s ${config.eligibleMoneyBackWindowLabel} money-back guarantee, subject to this Refund Policy, the selected package conditions, order status, and customer actions. The guarantee is not unconditional and does not override the non-refundable situations described below.`,
+      text: `Eligible purchases are covered by InstantViral’s ${config.eligibleMoneyBackWindowLabel} money-back policy, subject to this Refund Policy, the selected package conditions, order status, and customer actions. This policy is not unconditional and does not override the non-refundable situations described below.`,
     });
   } else {
     eligibilityBlocks.push({
@@ -64,7 +64,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
 
   eligibilityBlocks.push({
     type: 'paragraph',
-    text: `Submitting a refund request does not guarantee approval or any particular outcome. Related questions are also covered in the FAQ at ${domainHost}${faqPath}.`,
+    text: `Submitting a refund request does not mean it will be approved or lead to any particular outcome. Related questions are also covered in the FAQ at ${domainHost}${faqPath}.`,
   });
 
   const processingBlocks: LegalPolicySection['blocks'] = [
@@ -82,7 +82,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
   } else {
     processingBlocks.push({
       type: 'paragraph',
-      text: 'A specific public processing-time SLA has not been configured. InstantViral will communicate about eligible requests through support after reviewing the order ID, checkout email, and issue description. Do not treat unpublished timeframes as guarantees.',
+      text: 'InstantViral does not publish a fixed processing time for refund requests. Support will reply about eligible requests after reviewing your order ID, checkout email and description of the issue.',
     });
   }
 
@@ -113,7 +113,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
   } else {
     contactBlocks.push({
       type: 'paragraph',
-      text: `A verified support email has not been published in Refund Policy configuration. Submit refund requests through the Contact page at ${domainHost}${contactPath}. Do not treat placeholder or example email addresses as official contacts.`,
+      text: `Submit refund requests through the Contact page at ${domainHost}${contactPath}. Only use contact details shown on InstantViral.ca.`,
     });
   }
 
@@ -214,7 +214,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
       blocks: [
         {
           type: 'paragraph',
-          text: 'Only eligible packages include refill protection. Refill availability, duration, limits, and conditions must come from the real package data shown on the relevant service page before checkout.',
+          text: 'Only eligible packages include refill protection. Refill availability, duration, limits and conditions are shown on the relevant service page before checkout.',
         },
         {
           type: 'paragraph',
@@ -270,7 +270,7 @@ function buildSections(config: RefundConfig): LegalPolicySection[] {
         },
         {
           type: 'paragraph',
-          text: 'InstantViral will verify the order details and review the request against the applicable package terms and operational policy. A request does not guarantee approval, a refund amount, a refill, or any other specific outcome.',
+          text: 'InstantViral will verify the order details and review the request against the applicable package terms and operational policy. Submitting a request does not mean it will be approved, or that a refund amount, refill or any other specific outcome will follow.',
         },
       ],
     },
