@@ -78,9 +78,7 @@ export function FacebookPostLikesAuthorityView({
       limit: 4,
       preferredSlugs: [
         'how-to-increase-facebook-engagement',
-        'best-time-to-post-on-facebook',
-        'facebook-growth-guide',
-        'how-the-facebook-algorithm-works',
+        'how-to-get-more-facebook-followers',
       ],
     }),
   );

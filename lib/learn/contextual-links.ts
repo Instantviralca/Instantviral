@@ -33,12 +33,12 @@ export type ContextualLinkTarget = {
 };
 
 const PILLAR_BY_CATEGORY: Record<string, string> = {
-  instagram: 'complete-instagram-growth-guide',
-  tiktok: 'complete-tiktok-growth-guide',
-  facebook: 'facebook-growth-guide',
-  youtube: 'youtube-growth-guide',
-  'social-media-marketing': 'social-media-marketing-guide',
-  guides: 'beginners-guide-to-social-media-growth',
+  instagram: 'how-to-grow-instagram-followers-organically',
+  tiktok: 'how-to-get-more-tiktok-followers',
+  facebook: 'how-to-get-more-facebook-followers',
+  youtube: 'how-to-get-more-youtube-views',
+  'social-media-marketing': 'social-media-marketing-mistakes',
+  guides: 'organic-vs-paid-social-media-growth',
 };
 
 const PLATFORM_PHRASE_BANK: Record<
@@ -52,11 +52,11 @@ const PLATFORM_PHRASE_BANK: Record<
     },
     {
       phrases: ['Instagram SEO', 'Instagram search'],
-      articleSlug: 'instagram-seo-guide',
+      articleSlug: 'how-to-grow-instagram-followers-organically',
     },
     {
       phrases: ['Instagram engagement', 'increase engagement', 'more engagement'],
-      articleSlug: 'how-to-increase-instagram-engagement',
+      articleSlug: 'how-to-get-more-instagram-likes',
     },
     {
       phrases: [
@@ -69,11 +69,11 @@ const PLATFORM_PHRASE_BANK: Record<
     },
     {
       phrases: ['Instagram hashtags', 'hashtag strategy', 'hashtags'],
-      articleSlug: 'how-to-use-instagram-hashtags-effectively',
+      articleSlug: 'how-to-grow-instagram-followers-organically',
     },
     {
       phrases: ['content calendar', 'Instagram content calendar'],
-      articleSlug: 'how-to-create-an-instagram-content-calendar',
+      articleSlug: 'how-to-create-a-tiktok-content-calendar',
     },
     {
       phrases: ['Instagram likes', 'more likes'],
@@ -81,13 +81,13 @@ const PLATFORM_PHRASE_BANK: Record<
     },
     {
       phrases: ['common mistakes', 'growth mistakes'],
-      articleSlug: 'common-instagram-growth-mistakes',
+      articleSlug: 'how-to-grow-instagram-followers-organically',
     },
   ],
   tiktok: [
     {
       phrases: ['TikTok algorithm', 'For You Page', 'the algorithm'],
-      articleSlug: 'how-the-tiktok-algorithm-works',
+      articleSlug: 'how-to-get-more-tiktok-views',
     },
     {
       phrases: ['TikTok SEO', 'TikTok search'],
@@ -95,7 +95,7 @@ const PLATFORM_PHRASE_BANK: Record<
     },
     {
       phrases: ['TikTok engagement', 'increase engagement'],
-      articleSlug: 'how-to-increase-tiktok-engagement',
+      articleSlug: 'how-to-get-more-tiktok-likes',
     },
     {
       phrases: ['TikTok followers', 'more TikTok followers'],
@@ -111,17 +111,17 @@ const PLATFORM_PHRASE_BANK: Record<
     },
     {
       phrases: ['common mistakes', 'growth mistakes'],
-      articleSlug: 'common-tiktok-growth-mistakes',
+      articleSlug: 'how-to-get-more-tiktok-followers',
     },
   ],
   facebook: [
     {
       phrases: ['Facebook algorithm', 'the algorithm'],
-      articleSlug: 'how-the-facebook-algorithm-works',
+      articleSlug: 'how-to-increase-facebook-engagement',
     },
     {
       phrases: ['Facebook SEO', 'Page SEO'],
-      articleSlug: 'facebook-seo-guide',
+      articleSlug: 'how-to-get-more-facebook-followers',
     },
     {
       phrases: ['Facebook engagement', 'increase engagement'],
@@ -133,21 +133,21 @@ const PLATFORM_PHRASE_BANK: Record<
     },
     {
       phrases: ['Page Likes', 'Facebook Page Likes'],
-      articleSlug: 'how-to-get-more-facebook-page-likes',
+      articleSlug: 'how-to-get-more-facebook-followers',
     },
     {
       phrases: ['best time to post', 'posting times'],
-      articleSlug: 'best-time-to-post-on-facebook',
+      articleSlug: 'how-to-increase-facebook-engagement',
     },
   ],
   youtube: [
     {
       phrases: ['YouTube algorithm', 'the algorithm'],
-      articleSlug: 'how-the-youtube-algorithm-works',
+      articleSlug: 'how-to-get-more-youtube-views',
     },
     {
       phrases: ['YouTube SEO', 'video SEO'],
-      articleSlug: 'youtube-seo-guide',
+      articleSlug: 'how-to-get-more-youtube-views',
     },
     {
       phrases: ['YouTube subscribers', 'more subscribers'],
@@ -159,7 +159,7 @@ const PLATFORM_PHRASE_BANK: Record<
     },
     {
       phrases: ['common mistakes', 'growth mistakes'],
-      articleSlug: 'common-youtube-growth-mistakes',
+      articleSlug: 'how-to-get-more-youtube-views',
     },
   ],
 };
@@ -394,10 +394,9 @@ export function buildContextualLinkTargets(
 
   // Cross-cluster guides for sparse categories
   for (const slug of [
-    'beginners-guide-to-social-media-growth',
-    'social-media-marketing-guide',
-    'how-social-media-algorithms-work',
-    'social-media-trends-2026',
+    'organic-vs-paid-social-media-growth',
+    'social-media-marketing-mistakes',
+    'instagram-algorithm-explained',
   ]) {
     if (slug === article.slug) continue;
     const item = getPublicLearnArticleBySlug(slug);

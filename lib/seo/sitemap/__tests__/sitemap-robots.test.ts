@@ -128,7 +128,7 @@ describe('Sitemap & Robots Finalization', () => {
     );
     expect(urls).toContain('https://instantviral.ca/learn/instagram-algorithm-explained');
     expect(urls).toContain(
-      'https://instantviral.ca/learn/how-to-get-more-instagram-followers-without-ads',
+      'https://instantviral.ca/learn/how-to-get-more-instagram-likes',
     );
     expect(urls.some((url) => url.includes('/learn/buy-instagram-followers-canada'))).toBe(false);
   });
@@ -188,12 +188,12 @@ describe('Sitemap & Robots Finalization', () => {
     ).toBe(true);
   });
 
-  it('keeps about 97 indexable sitemap URLs after followers consolidation', () => {
+  it('keeps about 59 indexable sitemap URLs after Learn consolidation', () => {
     expect(findMissingSitemapEntries(entries)).toHaveLength(0);
     const indexable = getIndexableRoutes();
     expect(indexable.length).toBeGreaterThanOrEqual(SITEMAP_PRODUCTION_ROUTES.length);
     expect(entries.length).toBe(indexable.length);
-    expect(entries.length).toBe(97);
+    expect(entries.length).toBe(59);
   });
 
   it('uses a single canonical robots disallow source', () => {

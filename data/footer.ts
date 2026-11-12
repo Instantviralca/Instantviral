@@ -67,11 +67,11 @@ export function getFooterColumns(): FooterColumn[] {
         },
         {
           label: 'Increase Engagement',
-          href: learnArticlePath('how-to-increase-instagram-engagement'),
+          href: learnArticlePath('how-to-get-more-instagram-likes'),
         },
         {
           label: 'Complete Growth Guide',
-          href: learnArticlePath('complete-instagram-growth-guide'),
+          href: learnArticlePath('how-to-grow-instagram-followers-organically'),
         },
         ...(instagramGuides
           ? [instagramGuides]

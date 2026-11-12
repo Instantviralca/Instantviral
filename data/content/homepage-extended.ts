@@ -153,20 +153,20 @@ export const homepageExtendedSections = {
         id: 'views-guide',
         title: 'Instagram Views Guide',
         description: 'Discover how video views fit into an Instagram strategy.',
-        href: learnArticlePath('how-to-increase-instagram-engagement'),
+        href: learnArticlePath('how-to-get-more-instagram-likes'),
       },
       {
         id: 'comments-guide',
         title: 'Instagram Comments Guide',
         description:
           'Learn how visible conversations contribute to profile activity.',
-        href: learnArticlePath('how-to-increase-instagram-engagement'),
+        href: learnArticlePath('instagram-marketing-for-small-businesses'),
       },
       {
         id: 'growth-tips',
         title: 'Instagram Growth Tips',
         description: 'Educational content focused on long-term account growth.',
-        href: learnArticlePath('complete-instagram-growth-guide'),
+        href: learnArticlePath('how-to-grow-instagram-followers-organically'),
       },
       {
         id: 'creator-resources',

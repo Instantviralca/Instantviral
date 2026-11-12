@@ -13,8 +13,8 @@ export const TOPIC_CLUSTERS: readonly TopicCluster[] = [
       'Follower growth, profile setup, organic vs paid growth, and measurement on Instagram.',
     primaryCategory: 'instagram',
     pillarArticleSlugs: [
-      'how-to-get-more-instagram-followers',
-      'how-the-instagram-algorithm-works',
+      'how-to-grow-instagram-followers-organically',
+      'instagram-algorithm-explained',
     ],
   },
   {
@@ -25,8 +25,8 @@ export const TOPIC_CLUSTERS: readonly TopicCluster[] = [
       'Likes, comments, views, posting cadence, and engagement quality on Instagram.',
     primaryCategory: 'instagram',
     pillarArticleSlugs: [
-      'how-to-increase-instagram-engagement',
-      'how-to-get-more-likes-on-instagram',
+      'how-to-get-more-instagram-likes',
+      'best-time-to-post-on-instagram',
     ],
   },
   {
@@ -49,7 +49,7 @@ export const TOPIC_CLUSTERS: readonly TopicCluster[] = [
       'Algorithm, TikTok SEO, timing, and troubleshooting low reach.',
     primaryCategory: 'tiktok',
     pillarArticleSlugs: [
-      'how-the-tiktok-algorithm-works',
+      'how-to-get-more-tiktok-views',
       'tiktok-seo-guide',
     ],
   },

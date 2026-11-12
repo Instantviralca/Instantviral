@@ -69,7 +69,7 @@ function makeSeo(overrides: Partial<ArticleSeoRecord> = {}): ArticleSeoRecord {
     metaTitle: 'YouTube Growth Guide | InstantViral Learn',
     metaDescription:
       'Practical YouTube growth habits for creators who want sustainable channel progress.',
-    canonicalPath: '/learn/youtube-growth-guide',
+    canonicalPath: '/learn/how-to-get-more-youtube-views',
     openGraphTitle: 'YouTube Growth Guide | InstantViral Learn',
     openGraphDescription:
       'Practical YouTube growth habits for creators who want sustainable channel progress.',
@@ -97,12 +97,12 @@ function makeSeo(overrides: Partial<ArticleSeoRecord> = {}): ArticleSeoRecord {
     active: true,
     published: true,
     noindex: false,
-    slug: 'youtube-growth-guide',
+    slug: 'how-to-get-more-youtube-views',
     articleId: 'yt-1',
     categoryId: 'youtube',
     tags: ['subscribers', 'analytics'],
     excerpt: 'A practical overview of YouTube growth fundamentals.',
-    href: '/learn/youtube-growth-guide',
+    href: '/learn/how-to-get-more-youtube-views',
     ...overrides,
   };
 }
@@ -112,7 +112,7 @@ function makeRecord(
 ): LearnArticleRecord {
   return {
     id: 'yt-1',
-    slug: 'youtube-growth-guide',
+    slug: 'how-to-get-more-youtube-views',
     title: 'YouTube Growth Guide',
     excerpt: 'A practical overview of YouTube growth fundamentals.',
     content: 'Body',
@@ -141,7 +141,7 @@ function makeRecord(
       title: 'YouTube Growth Guide | InstantViral Learn',
       description:
         'Practical YouTube growth habits for creators who want sustainable channel progress.',
-      canonicalPath: '/learn/youtube-growth-guide',
+      canonicalPath: '/learn/how-to-get-more-youtube-views',
       keywords: ['youtube growth', 'youtube'],
       ogImage: '/og-default.png',
     },
@@ -170,14 +170,14 @@ describe('Article SEO & Schema Engine — Document 15.07', () => {
   });
 
   it('uses a unique self-referencing canonical', () => {
-    expect(buildArticleCanonical('YouTube-Growth-Guide')).toBe(
-      'https://instantviral.ca/learn/youtube-growth-guide',
+    expect(buildArticleCanonical('How-To-Get-More-YouTube-Views')).toBe(
+      'https://instantviral.ca/learn/how-to-get-more-youtube-views',
     );
     const metadata = buildArticleMetadata(makeSeo());
     expect(metadata.alternates?.canonical).toBe(
-      'https://instantviral.ca/learn/youtube-growth-guide',
+      'https://instantviral.ca/learn/how-to-get-more-youtube-views',
     );
-    expect(validateArticleCanonical('youtube-growth-guide', '/learn')).toEqual(
+    expect(validateArticleCanonical('how-to-get-more-youtube-views', '/learn')).toEqual(
       expect.arrayContaining([
         expect.objectContaining({ code: 'canonical_not_self' }),
       ]),
@@ -190,7 +190,7 @@ describe('Article SEO & Schema Engine — Document 15.07', () => {
       articleSection: 'YouTube',
     }) as Record<string, unknown>;
     expect(og.type).toBe('article');
-    expect(og.url).toBe('https://instantviral.ca/learn/youtube-growth-guide');
+    expect(og.url).toBe('https://instantviral.ca/learn/how-to-get-more-youtube-views');
     expect(og.publishedTime).toBe('2024-06-01T00:00:00.000Z');
     const images = og.images as Array<{ width: number; height: number }>;
     expect(images[0]?.width).toBe(1200);
@@ -315,12 +315,12 @@ describe('Article SEO & Schema Engine — Document 15.07', () => {
       makeRecord(),
       makeRecord({
         id: 'yt-2',
-        slug: 'youtube-growth-guide-copy',
+        slug: 'how-to-get-more-youtube-views-copy',
         seo: {
           title: 'YouTube Growth Guide | InstantViral Learn',
           description:
             'Practical YouTube growth habits for creators who want sustainable channel progress.',
-          canonicalPath: '/learn/youtube-growth-guide',
+          canonicalPath: '/learn/how-to-get-more-youtube-views',
           keywords: ['youtube growth'],
         },
       }),
@@ -375,7 +375,7 @@ describe('Article SEO & Schema Engine — Document 15.07', () => {
     const seo = toArticleSeoRecord(makeRecord());
     expect(seo.metaTitle).toContain('YouTube Growth Guide');
     expect(seo.primaryKeyword).toBe('youtube growth');
-    expect(seo.canonicalPath).toBe('/learn/youtube-growth-guide');
+    expect(seo.canonicalPath).toBe('/learn/how-to-get-more-youtube-views');
   });
 
   it('reports SEO validation for a complete published article', () => {

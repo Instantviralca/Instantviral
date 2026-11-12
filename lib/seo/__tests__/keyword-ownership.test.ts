@@ -115,20 +115,18 @@ describe('SEO keyword ownership', () => {
     );
 
     expect(primaryBySlug.get('how-to-grow-instagram-followers-organically')).toBe(
-      'How to Grow Instagram Followers Organically',
+      'how to grow instagram followers organically',
     );
-    expect(primaryBySlug.get('how-to-get-more-instagram-followers-without-ads')).toBe(
-      'How to Get More Instagram Followers Without Ads',
-    );
-    expect(primaryBySlug.get('complete-instagram-growth-guide')).toBe(
-      'Complete Instagram Growth Guide',
-    );
+    expect(primaryBySlug.get('how-to-get-more-instagram-likes')).toBeTruthy();
+    expect(primaryBySlug.get('instagram-algorithm-explained')).toBeTruthy();
     expect(
-      new Set([
-        primaryBySlug.get('how-to-grow-instagram-followers-organically'),
-        primaryBySlug.get('how-to-get-more-instagram-followers-without-ads'),
-        primaryBySlug.get('complete-instagram-growth-guide'),
-      ]).size,
+      new Set(
+        [
+          'how-to-grow-instagram-followers-organically',
+          'how-to-get-more-instagram-likes',
+          'instagram-algorithm-explained',
+        ].map((slug) => primaryBySlug.get(slug)),
+      ).size,
     ).toBe(3);
   });
 

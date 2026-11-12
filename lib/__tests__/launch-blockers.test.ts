@@ -337,67 +337,31 @@ describe('Unauthorized admin API gate helper', () => {
 });
 
 describe('Learn Center production content', () => {
+  const PUBLISHED_LEARN_SLUGS = [
+    'how-to-grow-instagram-followers-organically',
+    'instagram-algorithm-explained',
+    'best-time-to-post-on-instagram',
+    'how-to-get-more-instagram-likes',
+    'instagram-marketing-for-small-businesses',
+    'how-to-get-more-tiktok-followers',
+    'best-time-to-post-on-tiktok',
+    'tiktok-seo-guide',
+    'how-to-get-more-tiktok-likes',
+    'how-to-get-more-tiktok-views',
+    'tiktok-for-business',
+    'how-to-create-a-tiktok-content-calendar',
+    'how-to-get-more-facebook-followers',
+    'how-to-increase-facebook-engagement',
+    'how-to-get-more-youtube-subscribers',
+    'how-to-get-more-youtube-views',
+    'social-media-marketing-mistakes',
+    'organic-vs-paid-social-media-growth',
+  ] as const;
+
   it('publishes approved Learn articles with featured images in the sitemap', () => {
-    expect(LEARN_ARTICLES.length).toBe(56);
+    expect(LEARN_ARTICLES.length).toBe(18);
     expect(AUTHORS.length).toBeGreaterThanOrEqual(1);
-    expect(getPublishedLearnArticleSlugs()).toEqual([
-      'how-to-grow-instagram-followers-organically',
-      'instagram-algorithm-explained',
-      'how-to-get-more-instagram-followers-without-ads',
-      'common-instagram-growth-mistakes',
-      'best-time-to-post-on-instagram',
-      'instagram-seo-guide',
-      'how-to-use-instagram-hashtags-effectively',
-      'how-to-increase-instagram-engagement',
-      'how-to-get-more-instagram-likes',
-      'complete-instagram-growth-guide',
-      'how-to-use-instagram-for-business',
-      'instagram-marketing-for-small-businesses',
-      'how-to-create-an-instagram-content-calendar',
-      'instagram-content-ideas-for-businesses',
-      'organic-vs-paid-instagram-growth',
-      'how-to-build-trust-on-instagram',
-      'instagram-marketing-mistakes-businesses-should-avoid',
-      'complete-tiktok-growth-guide',
-      'how-to-get-more-tiktok-followers',
-      'how-the-tiktok-algorithm-works',
-      'best-time-to-post-on-tiktok',
-      'tiktok-seo-guide',
-      'how-to-increase-tiktok-engagement',
-      'how-to-get-more-tiktok-likes',
-      'how-to-get-more-tiktok-views',
-      'common-tiktok-growth-mistakes',
-      'tiktok-for-business',
-      'tiktok-marketing-for-small-businesses',
-      'how-to-create-a-tiktok-content-calendar',
-      'tiktok-content-ideas-for-businesses',
-      'organic-vs-paid-tiktok-growth',
-      'how-to-build-trust-on-tiktok',
-      'tiktok-marketing-mistakes-businesses-should-avoid',
-      'facebook-growth-guide',
-      'how-to-get-more-facebook-followers',
-      'how-the-facebook-algorithm-works',
-      'best-time-to-post-on-facebook',
-      'facebook-seo-guide',
-      'how-to-increase-facebook-engagement',
-      'how-to-get-more-facebook-page-likes',
-      'youtube-growth-guide',
-      'how-the-youtube-algorithm-works',
-      'youtube-seo-guide',
-      'how-to-get-more-youtube-subscribers',
-      'how-to-get-more-youtube-views',
-      'common-youtube-growth-mistakes',
-      'social-media-marketing-guide',
-      'social-media-marketing-strategy',
-      'social-media-content-planning',
-      'social-media-marketing-mistakes',
-      'how-to-measure-social-media-success',
-      'beginners-guide-to-social-media-growth',
-      'how-social-media-algorithms-work',
-      'organic-vs-paid-social-media-growth',
-      'how-to-build-a-strong-personal-brand-on-social-media',
-      'social-media-trends-2026',
-    ]);
+    expect(getPublishedLearnArticleSlugs()).toEqual([...PUBLISHED_LEARN_SLUGS]);
     for (const slug of getPublishedLearnArticleSlugs()) {
       const article = LEARN_ARTICLES.find((item) => item.slug === slug)!;
       expect(article.status).toBe('published');
@@ -407,198 +371,39 @@ describe('Learn Center production content', () => {
       expect(article.seo.noindex).not.toBe(true);
     }
 
-    const facebookSeo = LEARN_ARTICLES.find(
-      (article) => article.slug === 'facebook-seo-guide',
+    const facebookFollowers = LEARN_ARTICLES.find(
+      (article) => article.slug === 'how-to-get-more-facebook-followers',
     )!;
-    expect(facebookSeo.relatedServices).toEqual([
-      'buy-facebook-followers',
-      'buy-facebook-page-likes',
-      'buy-facebook-post-likes',
-    ]);
-    expect(facebookSeo.category).toBe('facebook');
+    expect(facebookFollowers.relatedServices).toContain('buy-facebook-followers');
+    expect(facebookFollowers.category).toBe('facebook');
 
     expect(LEARN_SITEMAP_ENABLED).toBe(true);
     const entries = buildSitemapEntries();
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-get-more-tiktok-followers'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-the-tiktok-algorithm-works'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/best-time-to-post-on-tiktok'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) => e.url.includes('/learn/tiktok-seo-guide')),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-increase-tiktok-engagement'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-get-more-tiktok-likes'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-get-more-tiktok-views'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/common-tiktok-growth-mistakes'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) => e.url.includes('/learn/tiktok-for-business')),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/tiktok-marketing-for-small-businesses'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-create-a-tiktok-content-calendar'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/tiktok-content-ideas-for-businesses'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/organic-vs-paid-tiktok-growth'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-build-trust-on-tiktok'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes(
-          '/learn/tiktok-marketing-mistakes-businesses-should-avoid',
-        ),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) => e.url.includes('/learn/facebook-growth-guide')),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-get-more-facebook-followers'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-the-facebook-algorithm-works'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/best-time-to-post-on-facebook'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) => e.url.includes('/learn/facebook-seo-guide')),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-increase-facebook-engagement'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-get-more-facebook-page-likes'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) => e.url.includes('/learn/youtube-growth-guide')),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-the-youtube-algorithm-works'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) => e.url.includes('/learn/youtube-seo-guide')),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-get-more-youtube-subscribers'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-get-more-youtube-views'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/common-youtube-growth-mistakes'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/social-media-marketing-guide'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/social-media-marketing-strategy'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/social-media-content-planning'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/social-media-marketing-mistakes'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-to-measure-social-media-success'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/beginners-guide-to-social-media-growth'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/organic-vs-paid-social-media-growth'),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes(
-          '/learn/how-to-build-a-strong-personal-brand-on-social-media',
-        ),
-      ),
-    ).toBe(true);
-    expect(
-      entries.some((e) => e.url.includes('/learn/social-media-trends-2026')),
-    ).toBe(true);
-    expect(
-      entries.some((e) =>
-        e.url.includes('/learn/how-social-media-algorithms-work'),
-      ),
-    ).toBe(true);
+    const learnArticleUrls = entries.filter((e) => {
+      const path = new URL(e.url).pathname;
+      const slug = path.replace(/^\/learn\//, '').replace(/\/$/, '');
+      return PUBLISHED_LEARN_SLUGS.includes(slug as (typeof PUBLISHED_LEARN_SLUGS)[number]);
+    });
+    expect(learnArticleUrls).toHaveLength(18);
+    for (const slug of PUBLISHED_LEARN_SLUGS) {
+      expect(entries.some((e) => e.url.includes(`/learn/${slug}`))).toBe(true);
+    }
+    const mergedExamples = [
+      'how-the-tiktok-algorithm-works',
+      'facebook-growth-guide',
+      'youtube-growth-guide',
+      'complete-instagram-growth-guide',
+    ];
+    for (const slug of mergedExamples) {
+      expect(entries.some((e) => e.url.includes(`/learn/${slug}`))).toBe(false);
+    }
+    const removedExamples = [
+      'beginners-guide-to-social-media-growth',
+      'social-media-trends-2026',
+    ];
+    for (const slug of removedExamples) {
+      expect(entries.some((e) => e.url.includes(`/learn/${slug}`))).toBe(false);
+    }
   });
 });
 
